@@ -14,13 +14,16 @@ export function RestaurantIndex() {
             <Link to="/" className="text-sm font-bold text-coffee-700 hover:text-coffee-800">
               Back to Home
             </Link>
+            <div className="mt-8 inline-flex rounded-full bg-emerald-100 px-4 py-2 text-sm font-black text-emerald-800">
+              {completedCount} / {restaurantWebsites.length} Completed
+            </div>
             <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-coffee-700">Restaurant collection</p>
             <h1 className="mt-4 text-4xl font-black leading-tight md:text-6xl">
-              Ten restaurant and cafe homepage concepts.
+              Restaurant Website Collection
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-              Browse the dining-focused section of Umair 100 Website Designs. Completed concepts link to full responsive pages,
-              while planned concepts remain visible as the roadmap for the category.
+              This finished category includes 10 homepage concepts for cafes, bakeries, grills, pizza,
+              healthy food, steakhouse, tea, burgers, and seafood. Every concept has a complete responsive design.
             </p>
             <div className="mt-8 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
               {[
@@ -43,7 +46,7 @@ export function RestaurantIndex() {
           <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-coffee-700">All concepts</p>
-              <h2 className="mt-3 text-3xl font-black md:text-5xl">Completed and upcoming restaurant designs.</h2>
+              <h2 className="mt-3 text-3xl font-black md:text-5xl">All restaurant designs are ready to view.</h2>
             </div>
             <CTAButton href="/#featured" variant="outline">
               Recently Completed

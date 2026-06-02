@@ -10,7 +10,7 @@ export type WebsiteCategory =
   | 'Portfolio'
   | 'SaaS'
 
-export type WebsiteStatus = 'completed' | 'planned' | 'in-progress'
+export type WebsiteStatus = 'completed' | 'live' | 'planned' | 'in-progress' | 'coming-soon'
 
 export interface WebsiteDesign {
   id: string
@@ -33,6 +33,7 @@ export interface CategoryInfo {
   description: string
   icon: string
   color: string
+  href?: string
 }
 
 export const categories: CategoryInfo[] = [
@@ -41,12 +42,14 @@ export const categories: CategoryInfo[] = [
     description: 'Coffee shops, cafes, restaurants, and dining experiences',
     icon: '🍽️',
     color: 'from-orange-500 to-red-500',
+    href: '/restaurant',
   },
   {
     name: 'Beauty',
     description: 'Salons, spas, cosmetics, and beauty services',
     icon: '💄',
     color: 'from-pink-500 to-rose-500',
+    href: '/beauty',
   },
   {
     name: 'Real Estate',
@@ -208,51 +211,205 @@ export const restaurantWebsites: WebsiteDesign[] = [
     id: 'morningleaf-tea',
     title: 'MorningLeaf Tea',
     category: 'Restaurant',
-    style: 'zen, calm, elegant, serene',
-    shortDescription: 'Premium tea house with meditation lounge',
+    style: 'calm, natural, elegant, wellness-focused',
+    shortDescription: 'Peaceful tea house with herbal blends, quiet rituals, and mindful cafe moments',
     slug: 'morningleaf-tea',
     colors: {
-      primary: '#047857',
-      secondary: '#f0fdf4',
-      accent: '#fbbf24',
-      dark: '#064e3b',
+      primary: '#8fa37a',
+      secondary: '#fbf7ea',
+      accent: '#c0a15a',
+      dark: '#4b3d2f',
     },
-    status: 'planned',
+    status: 'completed',
   },
   {
     id: 'burgercraft',
     title: 'BurgerCraft',
     category: 'Restaurant',
-    style: 'casual, fun, retro, approachable',
-    shortDescription: 'Gourmet burger joint with artisanal craft sodas',
+    style: 'bold, fun, modern, energetic',
+    shortDescription: 'Gourmet burger restaurant with handcrafted stacks and street-food energy',
     slug: 'burgercraft',
     colors: {
-      primary: '#dc2626',
-      secondary: '#fef2f2',
-      accent: '#fbbf24',
-      dark: '#7f1d1d',
+      primary: '#f3b53f',
+      secondary: '#fff3d7',
+      accent: '#d92d20',
+      dark: '#202020',
     },
-    status: 'planned',
+    status: 'completed',
   },
   {
     id: 'oceanplate-seafood',
     title: 'OceanPlate Seafood',
     category: 'Restaurant',
-    style: 'coastal, fresh, upscale, maritime',
-    shortDescription: 'Fresh seafood restaurant with ocean views',
+    style: 'fresh, coastal, premium, clean',
+    shortDescription: 'Coastal seafood restaurant with fresh catch, premium plates, and relaxed dining',
     slug: 'oceanplate-seafood',
     colors: {
-      primary: '#0369a1',
-      secondary: '#f0f9ff',
-      accent: '#0ea5e9',
-      dark: '#082f49',
+      primary: '#075985',
+      secondary: '#f4ead5',
+      accent: '#39b6c8',
+      dark: '#063047',
     },
-    status: 'planned',
+    status: 'completed',
+  },
+]
+
+export const beautyWebsites: WebsiteDesign[] = [
+  {
+    id: 'glowhaus-salon',
+    title: 'GlowHaus Salon',
+    category: 'Beauty',
+    style: 'stylish, modern, elegant, social-media friendly',
+    shortDescription: 'Modern hair salon with premium styling, confident beauty, and clean branding',
+    slug: 'glowhaus-salon',
+    colors: {
+      primary: '#f5b6c8',
+      secondary: '#fbf4ef',
+      accent: '#b76e79',
+      dark: '#2b2b2d',
+    },
+    status: 'completed',
+  },
+  {
+    id: 'luxe-nail-studio',
+    title: 'Luxe Nail Studio',
+    category: 'Beauty',
+    style: 'luxury, feminine, clean, polished',
+    shortDescription: 'Elegant nail studio for manicures, nail art, and luxury self-care',
+    slug: 'luxe-nail-studio',
+    colors: {
+      primary: '#e9c7c4',
+      secondary: '#fffdf9',
+      accent: '#d7b56d',
+      dark: '#191919',
+    },
+    status: 'completed',
+  },
+  {
+    id: 'serenity-spa',
+    title: 'Serenity Spa',
+    category: 'Beauty',
+    style: 'calm, peaceful, natural, relaxing',
+    shortDescription: 'Spa and massage wellness retreat with calming treatments and natural textures',
+    slug: 'serenity-spa',
+    colors: {
+      primary: '#8fa37a',
+      secondary: '#fbf7ea',
+      accent: '#c0a15a',
+      dark: '#5f4d3d',
+    },
+    status: 'completed',
+  },
+  {
+    id: 'blush-beauty-bar',
+    title: 'Blush Beauty Bar',
+    category: 'Beauty',
+    style: 'bold, glam, trendy, youthful',
+    shortDescription: 'Makeup and beauty bar for glam sessions, events, and social-ready looks',
+    slug: 'blush-beauty-bar',
+    colors: {
+      primary: '#ff3d9a',
+      secondary: '#fff0f6',
+      accent: '#c9c9d1',
+      dark: '#111111',
+    },
+    status: 'completed',
+  },
+  {
+    id: 'velvet-skin-clinic',
+    title: 'Velvet Skin Clinic',
+    category: 'Beauty',
+    style: 'clinical, soft, premium, refined',
+    shortDescription: 'Skincare clinic for facials, treatments, and confident glowing skin',
+    slug: 'velvet-skin-clinic',
+    colors: {
+      primary: '#b98f8f',
+      secondary: '#fff7f5',
+      accent: '#e8c7bb',
+      dark: '#3d3030',
+    },
+    status: 'coming-soon',
+  },
+  {
+    id: 'crown-comb-barber',
+    title: 'Crown & Comb Barber',
+    category: 'Beauty',
+    style: 'classic, sharp, masculine, modern',
+    shortDescription: 'Barber shop concept for precision cuts, grooming, and confident style',
+    slug: 'crown-comb-barber',
+    colors: {
+      primary: '#222222',
+      secondary: '#f4ead8',
+      accent: '#b98b43',
+      dark: '#0f0f0f',
+    },
+    status: 'coming-soon',
+  },
+  {
+    id: 'pureglow-aesthetics',
+    title: 'PureGlow Aesthetics',
+    category: 'Beauty',
+    style: 'minimal, clean, soft, expert',
+    shortDescription: 'Aesthetic care concept for injectables, glow treatments, and skin confidence',
+    slug: 'pureglow-aesthetics',
+    colors: {
+      primary: '#d7b9a7',
+      secondary: '#fbfaf7',
+      accent: '#9fb8ad',
+      dark: '#343434',
+    },
+    status: 'coming-soon',
+  },
+  {
+    id: 'bloom-bridal-studio',
+    title: 'Bloom Bridal Studio',
+    category: 'Beauty',
+    style: 'romantic, editorial, soft, premium',
+    shortDescription: 'Bridal beauty studio for hair, makeup, trials, and wedding-day styling',
+    slug: 'bloom-bridal-studio',
+    colors: {
+      primary: '#e8aeb7',
+      secondary: '#fff8f3',
+      accent: '#bfa46b',
+      dark: '#4a3b3f',
+    },
+    status: 'coming-soon',
+  },
+  {
+    id: 'silk-style-hair',
+    title: 'Silk & Style Hair',
+    category: 'Beauty',
+    style: 'sleek, fashionable, polished, modern',
+    shortDescription: 'Hair styling concept for color, blowouts, treatments, and trend-forward cuts',
+    slug: 'silk-style-hair',
+    colors: {
+      primary: '#7a5c65',
+      secondary: '#fbf3f0',
+      accent: '#d9a7b0',
+      dark: '#2b2024',
+    },
+    status: 'coming-soon',
+  },
+  {
+    id: 'aura-wellness-spa',
+    title: 'Aura Wellness Spa',
+    category: 'Beauty',
+    style: 'holistic, serene, premium, restorative',
+    shortDescription: 'Wellness spa concept for body treatments, rituals, and restorative care',
+    slug: 'aura-wellness-spa',
+    colors: {
+      primary: '#9c8f72',
+      secondary: '#f7f1e6',
+      accent: '#b8c7a3',
+      dark: '#4a4034',
+    },
+    status: 'coming-soon',
   },
 ]
 
 export const allWebsites: WebsiteDesign[] = [
   ...restaurantWebsites,
+  ...beautyWebsites,
   // Other categories will be added later
 ]
 

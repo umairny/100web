@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton } from '../../components'
+import { Container, CTAButton, RestaurantSubNav } from '../../components'
 
 const dishes = [
   { name: 'Saffron Seekh Skewers', detail: 'Char-grilled beef, herbs, onion chutney' },
@@ -10,17 +10,22 @@ const dishes = [
 export function SpiceRouteGrill() {
   return (
     <main className="bg-[#fff4dd] text-[#1f1b18]">
-      <nav className="fixed left-0 right-0 top-16 z-40 border-b border-[#f4a11a]/20 bg-[#1f1b18]/95 text-[#fff4dd] backdrop-blur">
-        <Container className="flex h-14 items-center justify-between">
-          <Link to="/" className="font-black uppercase tracking-[0.2em]">SpiceRoute</Link>
-          <div className="hidden gap-6 text-sm font-bold md:flex">
-            <a href="#dishes" className="hover:text-[#f4a11a]">Dishes</a>
-            <a href="#journey" className="hover:text-[#f4a11a]">Journey</a>
-            <a href="#platters" className="hover:text-[#f4a11a]">Platters</a>
-          </div>
-          <a href="#order" className="rounded-full bg-[#f4a11a] px-4 py-2 text-sm font-black text-[#1f1b18]">Order</a>
-        </Container>
-      </nav>
+      <RestaurantSubNav
+        brand="SpiceRoute"
+        links={[
+          { label: 'Dishes', href: '#dishes' },
+          { label: 'Journey', href: '#journey' },
+          { label: 'Platters', href: '#platters' },
+        ]}
+        ctaLabel="Order"
+        ctaHref="#order"
+        className="border-b border-[#f4a11a]/20 bg-[#1f1b18]/95 text-[#fff4dd]"
+        brandClassName="uppercase tracking-[0.2em] text-[#fff4dd]"
+        linkClassName="text-[#fff4dd]/85 transition hover:bg-white/10 hover:text-[#f4a11a]"
+        ctaClassName="bg-[#f4a11a] text-[#1f1b18] hover:bg-[#d98c11]"
+        menuButtonClassName="border-[#f4a11a]/30 text-[#fff4dd] hover:bg-white/10"
+        mobilePanelClassName="border border-[#f4a11a]/20 bg-[#1f1b18]"
+      />
 
       <section className="relative overflow-hidden bg-[#1f1b18] pt-28 text-[#fff4dd] md:pt-36">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_24%,rgba(143,29,27,0.45),transparent_28%),radial-gradient(circle_at_86%_10%,rgba(244,161,26,0.24),transparent_22%)]" />

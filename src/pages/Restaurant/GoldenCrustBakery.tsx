@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton } from '../../components'
+import { Container, CTAButton, RestaurantSubNav } from '../../components'
 
 const goods = [
   { name: 'Sourdough Country Loaf', note: 'Slow-fermented, crackly crust, soft center' },
@@ -10,17 +10,22 @@ const goods = [
 export function GoldenCrustBakery() {
   return (
     <main className="bg-[#fff7df] text-[#3a2418]">
-      <nav className="fixed left-0 right-0 top-16 z-40 border-b border-[#ead6aa] bg-[#fff7df]/95 backdrop-blur">
-        <Container className="flex h-14 items-center justify-between">
-          <Link to="/" className="font-black text-[#6f3f22]">Golden Crust Bakery</Link>
-          <div className="hidden gap-6 text-sm font-bold md:flex">
-            <a href="#goods" className="hover:text-[#d99a22]">Baked Goods</a>
-            <a href="#process" className="hover:text-[#d99a22]">Process</a>
-            <a href="#visit" className="hover:text-[#d99a22]">Visit</a>
-          </div>
-          <a href="#visit" className="rounded-full bg-[#6f3f22] px-4 py-2 text-sm font-bold text-white">Morning Hours</a>
-        </Container>
-      </nav>
+      <RestaurantSubNav
+        brand="Golden Crust Bakery"
+        links={[
+          { label: 'Baked Goods', href: '#goods' },
+          { label: 'Process', href: '#process' },
+          { label: 'Visit', href: '#visit' },
+        ]}
+        ctaLabel="Morning Hours"
+        ctaHref="#visit"
+        className="border-b border-[#ead6aa] bg-[#fff7df]/95"
+        brandClassName="text-[#6f3f22]"
+        linkClassName="text-[#6f3f22] transition hover:bg-[#f5e6bd] hover:text-[#d99a22]"
+        ctaClassName="bg-[#6f3f22] text-white hover:bg-[#4d2b18]"
+        menuButtonClassName="border-[#ead6aa] text-[#6f3f22] hover:bg-[#f5e6bd]"
+        mobilePanelClassName="border border-[#ead6aa] bg-[#fff7df]"
+      />
 
       <section className="relative overflow-hidden pt-28 md:pt-36">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_22%,rgba(217,154,34,0.22),transparent_28%),radial-gradient(circle_at_82%_16%,rgba(111,63,34,0.12),transparent_24%)]" />

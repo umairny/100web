@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom'
 import { Container, CategoryCard, WebsiteCard, CTAButton } from '../components'
-import { categories, restaurantWebsites } from '../data/websites'
+import { beautyWebsites, categories, restaurantWebsites } from '../data/websites'
 
 const roadmapSteps = [
   {
     label: 'Current focus',
     title: 'Restaurant collection',
-    text: 'Seven complete dining concepts are live, each with a different brand voice and visual system.',
+    text: 'Ten complete dining concepts are live, each with a different brand voice and visual system.',
   },
   {
     label: 'Next batch',
-    title: 'Complete the final restaurants',
-    text: 'MorningLeaf Tea, BurgerCraft, and OceanPlate Seafood are queued to finish the first category.',
+    title: 'Start the Beauty category',
+    text: 'The restaurant category is complete, so the next batch can begin salons, spas, skincare, and beauty brands.',
   },
   {
     label: 'Portfolio expansion',
@@ -21,10 +21,9 @@ const roadmapSteps = [
 ]
 
 export function Home() {
-  const completedWebsites = restaurantWebsites.filter((website) => website.status === 'completed')
-  const plannedWebsites = restaurantWebsites.filter((website) => website.status !== 'completed')
-  const recentlyCompletedWebsites = completedWebsites.slice(0, 7)
-  const featuredWebsites = [...completedWebsites, ...plannedWebsites].slice(0, 6)
+  const completedRestaurantWebsites = restaurantWebsites.filter((website) => website.status === 'completed' || website.status === 'live')
+  const completedBeautyWebsites = beautyWebsites.filter((website) => website.status === 'completed' || website.status === 'live')
+  const completedDesignCount = completedRestaurantWebsites.length + completedBeautyWebsites.length
 
   return (
     <main className="bg-white text-gray-950">
@@ -55,7 +54,7 @@ export function Home() {
                 {[
                   { value: categories.length, label: 'Categories' },
                   { value: 100, label: 'Planned concepts' },
-                  { value: completedWebsites.length, label: 'Restaurant designs completed' },
+                  { value: completedDesignCount, label: 'Completed designs' },
                 ].map((stat) => (
                   <div key={stat.label} className="rounded-2xl border border-white bg-white/70 p-4 shadow-sm">
                     <p className="text-3xl font-black text-gray-950">{stat.value}</p>
@@ -66,7 +65,7 @@ export function Home() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              {completedWebsites.map((website, index) => (
+              {completedRestaurantWebsites.slice(0, 4).map((website, index) => (
                 <Link
                   key={website.id}
                   to={`/restaurant/${website.slug}`}
@@ -98,23 +97,50 @@ export function Home() {
         <Container>
           <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-coffee-700">Recently Completed Designs</p>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-coffee-700">Completed Restaurant Designs</p>
               <h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight md:text-5xl">
-                Seven restaurant websites ready to view.
+                Ten restaurant websites ready to view.
               </h2>
             </div>
             <p className="max-w-md text-base leading-7 text-gray-600">
-              BrewNest, UrbanBite, Golden Crust, SpiceRoute, Luna, FreshBowl, and Ember now have complete responsive homepages.
+              The restaurant category is now complete: cafes, bakeries, grills, pizza, healthy bowls, steakhouse,
+              tea, burgers, and seafood.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {recentlyCompletedWebsites.map((website) => (
+            {completedRestaurantWebsites.map((website) => (
               <WebsiteCard key={website.id} website={website} />
             ))}
           </div>
           <div className="mt-10 text-center">
             <CTAButton href="/restaurant" variant="secondary" size="lg">
               View Restaurant Collection
+            </CTAButton>
+          </div>
+        </Container>
+      </section>
+
+      <section id="beauty" className="bg-[#fff0f6] py-20 md:py-28">
+        <Container>
+          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-pink-700">New Beauty Designs</p>
+              <h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight md:text-5xl">
+                Four beauty and salon websites are now live.
+              </h2>
+            </div>
+            <p className="max-w-md text-base leading-7 text-gray-600">
+              GlowHaus Salon, Luxe Nail Studio, Serenity Spa, and Blush Beauty Bar start the second category.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {completedBeautyWebsites.map((website) => (
+              <WebsiteCard key={website.id} website={website} />
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <CTAButton href="/beauty" variant="secondary" size="lg">
+              View Beauty Collection
             </CTAButton>
           </div>
         </Container>
@@ -168,27 +194,6 @@ export function Home() {
         </Container>
       </section>
 
-      <section className="bg-gray-50 py-20 md:py-28">
-        <Container>
-          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-coffee-700">Restaurant roadmap</p>
-              <h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight md:text-5xl">
-                All ten dining concepts in one place.
-              </h2>
-            </div>
-            <p className="max-w-md leading-7 text-gray-600">
-              The first seven are live. The remaining three stay visible as coming-soon cards.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredWebsites.map((website) => (
-              <WebsiteCard key={website.id} website={website} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
       <section id="roadmap" className="bg-[#f7f2e8] py-20 md:py-28">
         <Container>
           <div className="mb-12 text-center">
@@ -218,23 +223,18 @@ export function Home() {
                   Keep building the restaurant collection.
                 </h2>
                 <p className="mt-5 max-w-2xl text-lg leading-8 text-gray-300">
-                  The strongest next move is to finish the remaining restaurant concepts and then start the next category.
+                  The restaurant category is complete. The strongest next move is to start the Beauty and Salon category.
                 </p>
               </div>
               <div className="rounded-3xl bg-white p-6 text-gray-950">
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-gray-500">Queued concepts</p>
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-gray-500">Next category ideas</p>
                 <div className="mt-6 space-y-4">
-                  {plannedWebsites.slice(0, 3).map((website) => (
-                    <div key={website.id} className="flex items-center gap-4 rounded-2xl bg-gray-100 p-4">
-                      <span
-                        className="h-12 w-12 rounded-xl"
-                        style={{
-                          backgroundImage: `linear-gradient(135deg, ${website.colors.primary}, ${website.colors.accent})`,
-                        }}
-                      />
+                  {['LuxeGlow Salon', 'Rose & Ritual Spa', 'Velvet Nail Studio'].map((idea) => (
+                    <div key={idea} className="flex items-center gap-4 rounded-2xl bg-gray-100 p-4">
+                      <span className="h-12 w-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500" />
                       <div>
-                        <p className="font-black">{website.title}</p>
-                        <p className="text-sm text-gray-500">{website.style}</p>
+                        <p className="font-black">{idea}</p>
+                        <p className="text-sm text-gray-500">Beauty and salon concept</p>
                       </div>
                     </div>
                   ))}

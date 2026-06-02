@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton } from '../../components'
+import { Container, CTAButton, RestaurantSubNav } from '../../components'
 
 const steaks = [
   { name: 'Prime Ribeye', detail: '16 oz, ember butter, charred rosemary', price: '$58' },
@@ -10,17 +10,22 @@ const steaks = [
 export function EmberSteakhouse() {
   return (
     <main className="bg-[#0f0f10] text-[#f4ead7]">
-      <nav className="fixed left-0 right-0 top-16 z-40 border-b border-[#f4ead7]/10 bg-[#0f0f10]/95 backdrop-blur">
-        <Container className="flex h-14 items-center justify-between">
-          <Link to="/restaurant" className="font-black uppercase tracking-[0.2em] text-[#e6b66d]">Ember</Link>
-          <div className="hidden gap-6 text-sm font-bold md:flex">
-            <a href="#steaks" className="hover:text-[#e36a2c]">Steaks</a>
-            <a href="#private" className="hover:text-[#e36a2c]">Private Dining</a>
-            <a href="#wine" className="hover:text-[#e36a2c]">Wine</a>
-          </div>
-          <a href="#reserve" className="rounded-full bg-[#e36a2c] px-4 py-2 text-sm font-black text-white">Reserve</a>
-        </Container>
-      </nav>
+      <RestaurantSubNav
+        brand="Ember"
+        links={[
+          { label: 'Steaks', href: '#steaks' },
+          { label: 'Private Dining', href: '#private' },
+          { label: 'Wine', href: '#wine' },
+        ]}
+        ctaLabel="Reserve"
+        ctaHref="#reserve"
+        className="border-b border-[#f4ead7]/10 bg-[#0f0f10]/95"
+        brandClassName="uppercase tracking-[0.2em] text-[#e6b66d]"
+        linkClassName="text-[#f4ead7]/85 transition hover:bg-white/10 hover:text-[#e36a2c]"
+        ctaClassName="bg-[#e36a2c] text-white hover:bg-[#c95a22]"
+        menuButtonClassName="border-[#f4ead7]/20 text-[#e6b66d] hover:bg-white/10"
+        mobilePanelClassName="border border-[#f4ead7]/10 bg-[#0f0f10]"
+      />
 
       <section className="relative overflow-hidden pt-28 md:pt-36">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_26%,rgba(227,106,44,0.28),transparent_24%),radial-gradient(circle_at_82%_14%,rgba(230,182,109,0.16),transparent_22%),linear-gradient(135deg,#0f0f10,#26211d)]" />

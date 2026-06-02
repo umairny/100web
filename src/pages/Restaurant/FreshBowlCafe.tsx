@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton } from '../../components'
+import { Container, CTAButton, RestaurantSubNav } from '../../components'
 
 const bowls = [
   { name: 'Avocado Garden Bowl', detail: 'Quinoa, avocado, cucumber, herbs, lemon tahini' },
@@ -10,17 +10,22 @@ const bowls = [
 export function FreshBowlCafe() {
   return (
     <main className="bg-[#fbf7ed] text-[#26332a]">
-      <nav className="fixed left-0 right-0 top-16 z-40 border-b border-[#dce8c2] bg-[#fbf7ed]/95 backdrop-blur">
-        <Container className="flex h-14 items-center justify-between">
-          <Link to="/restaurant" className="font-black text-[#2f8f46]">FreshBowl Cafe</Link>
-          <div className="hidden gap-6 text-sm font-bold md:flex">
-            <a href="#bowls" className="hover:text-[#2f8f46]">Bowls</a>
-            <a href="#nutrition" className="hover:text-[#2f8f46]">Nutrition</a>
-            <a href="#build" className="hover:text-[#2f8f46]">Build Yours</a>
-          </div>
-          <a href="#order" className="rounded-full bg-[#2f8f46] px-4 py-2 text-sm font-black text-white">Start Order</a>
-        </Container>
-      </nav>
+      <RestaurantSubNav
+        brand="FreshBowl Cafe"
+        links={[
+          { label: 'Bowls', href: '#bowls' },
+          { label: 'Nutrition', href: '#nutrition' },
+          { label: 'Build Yours', href: '#build' },
+        ]}
+        ctaLabel="Start Order"
+        ctaHref="#order"
+        className="border-b border-[#dce8c2] bg-[#fbf7ed]/95"
+        brandClassName="text-[#2f8f46]"
+        linkClassName="text-[#5f6d61] transition hover:bg-[#eef6dc] hover:text-[#2f8f46]"
+        ctaClassName="bg-[#2f8f46] text-white hover:bg-[#287a3d]"
+        menuButtonClassName="border-[#dce8c2] text-[#2f8f46] hover:bg-[#eef6dc]"
+        mobilePanelClassName="border border-[#dce8c2] bg-[#fbf7ed]"
+      />
 
       <section className="relative overflow-hidden pt-28 md:pt-36">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(47,143,70,0.08)_1px,transparent_1px),linear-gradient(rgba(159,190,90,0.12)_1px,transparent_1px)] bg-[size:42px_42px]" />

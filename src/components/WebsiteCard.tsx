@@ -6,7 +6,7 @@ interface WebsiteCardProps {
 }
 
 export function WebsiteCard({ website }: WebsiteCardProps) {
-  const isCompleted = website.status === 'completed'
+  const isCompleted = website.status === 'completed' || website.status === 'live'
   const categoryPath = website.category.toLowerCase()
   const routePath = `/${categoryPath}/${website.slug}`
 
@@ -22,7 +22,7 @@ export function WebsiteCard({ website }: WebsiteCardProps) {
             ? 'bg-white text-emerald-700 shadow-sm'
             : 'bg-white/85 text-gray-500'
         }`}>
-          {isCompleted ? 'Completed' : 'Planned'}
+          {isCompleted ? 'Completed' : 'Coming Soon'}
         </span>
       </div>
 
