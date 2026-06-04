@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Container } from './Container'
 
 interface RestaurantSubNavLink {
@@ -35,12 +35,18 @@ export function RestaurantSubNav({
   collectionPath = '/restaurant',
 }: RestaurantSubNavProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const { pathname } = useLocation()
+
+  const handleBrandClick = () => {
+    setIsOpen(false)
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }
 
   return (
-    <nav className={`fixed left-0 right-0 top-16 z-40 backdrop-blur fade-in-down ${className}`}>
+    <nav className={`restaurant-subnav fixed left-0 right-0 top-16 z-40 backdrop-blur fade-in-down ${className}`}>
       <Container>
         <div className="flex h-14 items-center justify-between gap-4">
-          <Link to={collectionPath} onClick={() => setIsOpen(false)} className={`truncate font-black ${brandClassName}`}>
+          <Link to={pathname} onClick={handleBrandClick} className={`truncate font-black ${brandClassName}`}>
             {brand}
           </Link>
 

@@ -215,6 +215,10 @@ blockquote {
   backface-visibility: hidden;
 }
 
+.demo-mode .restaurant-subnav {
+  top: 0;
+}
+
 .brand-motion > section:first-of-type {
   position: relative;
 }

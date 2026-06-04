@@ -10,6 +10,12 @@ const homeImages = {
     fallbackStyle:
       'bg-[radial-gradient(circle_at_20%_20%,rgba(139,111,82,0.25),transparent_28%),radial-gradient(circle_at_82%_24%,rgba(239,59,45,0.2),transparent_24%),linear-gradient(135deg,#f7f2e8,#ffffff_48%,#111827)]',
   },
+  heroAbstract: {
+    src: '/images/home/hero-abstract-bg.png',
+    alt: 'Abstract homepage background for the Umair 100 website design portfolio',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_18%_22%,rgba(139,111,82,0.2),transparent_28%),radial-gradient(circle_at_84%_28%,rgba(239,59,45,0.14),transparent_24%),linear-gradient(135deg,#f7f2e8,#ffffff)]',
+  },
   websiteCollection: {
     src: '/images/home/website-collection.png',
     alt: 'A growing collection of polished website concepts',
@@ -27,6 +33,72 @@ const homeImages = {
     alt: 'Website design workflow from brand direction to client-ready responsive homepage',
     fallbackStyle:
       'bg-[radial-gradient(circle_at_22%_28%,rgba(244,161,26,0.24),transparent_24%),radial-gradient(circle_at_80%_70%,rgba(239,59,45,0.18),transparent_24%),linear-gradient(135deg,#f7f2e8,#ffffff)]',
+  },
+  restaurantCollection: {
+    src: '/images/home/restaurant-collection-collage.png',
+    alt: 'Restaurant website design collection preview collage',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_18%_22%,rgba(239,59,45,0.22),transparent_24%),radial-gradient(circle_at_80%_78%,rgba(244,161,26,0.22),transparent_26%),linear-gradient(135deg,#fff7e8,#ffffff)]',
+  },
+  beautyCollection: {
+    src: '/images/home/beauty-collection-collage.png',
+    alt: 'Beauty and salon website design collection preview collage',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_20%_24%,rgba(236,72,153,0.22),transparent_24%),radial-gradient(circle_at_78%_72%,rgba(215,181,109,0.2),transparent_24%),linear-gradient(135deg,#fff0f6,#ffffff)]',
+  },
+  aboutProject: {
+    src: '/images/home/about-project.png',
+    alt: 'Project overview showing complete homepage design directions',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_20%_24%,rgba(255,255,255,0.16),transparent_24%),linear-gradient(135deg,#111827,#374151)]',
+  },
+  categoriesOverview: {
+    src: '/images/home/categories-overview.png',
+    alt: 'Overview of website categories in the 100 website design project',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_20%_22%,rgba(139,111,82,0.2),transparent_24%),radial-gradient(circle_at_80%_72%,rgba(14,165,233,0.16),transparent_24%),linear-gradient(135deg,#ffffff,#f7f2e8)]',
+  },
+  responsiveDesign: {
+    src: '/images/home/responsive-design.png',
+    alt: 'Responsive website design preview across mobile tablet and desktop screens',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_18%_24%,rgba(14,165,233,0.2),transparent_24%),linear-gradient(135deg,#ffffff,#e0f2fe)]',
+  },
+  designToCode: {
+    src: '/images/home/design-to-code.png',
+    alt: 'Design to code workflow preview for React and Tailwind website pages',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_20%_24%,rgba(47,143,70,0.18),transparent_24%),linear-gradient(135deg,#111827,#1f2937)]',
+  },
+  uiComponentsCloseup: {
+    src: '/images/home/ui-components-closeup.png',
+    alt: 'Close-up of reusable UI components for website concepts',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_28%_28%,rgba(139,111,82,0.2),transparent_24%),linear-gradient(135deg,#ffffff,#f3f4f6)]',
+  },
+  businessBrands: {
+    src: '/images/home/business-brands.png',
+    alt: 'Business brand directions across website categories',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_22%_26%,rgba(239,59,45,0.18),transparent_24%),linear-gradient(135deg,#ffffff,#f7f2e8)]',
+  },
+  caseStudyPreview: {
+    src: '/images/home/case-study-preview.png',
+    alt: 'Case study style preview for completed website concepts',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_20%_24%,rgba(139,111,82,0.2),transparent_24%),linear-gradient(135deg,#111827,#ffffff)]',
+  },
+  clientReadyWebsites: {
+    src: '/images/home/client-ready-websites.png',
+    alt: 'Client-ready website designs preview',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_20%_24%,rgba(47,143,70,0.2),transparent_24%),radial-gradient(circle_at_78%_72%,rgba(239,59,45,0.16),transparent_24%),linear-gradient(135deg,#ffffff,#f7f2e8)]',
+  },
+  portfolioShowcase: {
+    src: '/images/home/portfolio-showcase.png',
+    alt: 'Portfolio showcase preview for the Umair 100 website designs project',
+    fallbackStyle:
+      'bg-[radial-gradient(circle_at_22%_24%,rgba(99,102,241,0.18),transparent_24%),linear-gradient(135deg,#ffffff,#e5e7eb)]',
   },
 }
 
@@ -103,6 +175,14 @@ export function Home() {
     <main className="bg-white text-gray-950">
       <section className="relative overflow-hidden bg-[#f7f2e8] py-16 md:py-24">
         <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(255,255,255,0.9),rgba(255,255,255,0.42)),radial-gradient(circle_at_12%_18%,rgba(139,111,82,0.18),transparent_26%),radial-gradient(circle_at_86%_20%,rgba(239,59,45,0.12),transparent_24%),radial-gradient(circle_at_70%_86%,rgba(244,161,26,0.14),transparent_26%)]" />
+        <HomeImage
+          src={homeImages.heroAbstract.src}
+          alt={homeImages.heroAbstract.alt}
+          fallbackStyle={homeImages.heroAbstract.fallbackStyle}
+          className="absolute inset-0 opacity-35"
+        >
+          <div className="absolute inset-0 bg-white/50" />
+        </HomeImage>
         <Container>
           <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_0.95fr]">
             <AnimatedSection animation="slide-left">
@@ -199,6 +279,31 @@ export function Home() {
                   </div>
                 ))}
               </div>
+              <div className="mt-6 grid max-w-xl gap-4 sm:grid-cols-2">
+                {[
+                  {
+                    image: homeImages.businessBrands,
+                    label: 'Business brands',
+                  },
+                  {
+                    image: homeImages.responsiveDesign,
+                    label: 'Responsive screens',
+                  },
+                ].map((item, index) => (
+                  <HomeImage
+                    key={item.label}
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    fallbackStyle={item.image.fallbackStyle}
+                    className={`reveal-card min-h-[180px] rounded-2xl border border-gray-100 shadow-lg shadow-gray-950/5 ${index === 1 ? 'delay-100' : ''}`}
+                  >
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(17,24,39,0.68))]" />
+                    <p className="absolute bottom-4 left-4 right-4 text-sm font-black uppercase tracking-[0.16em] text-white">
+                      {item.label}
+                    </p>
+                  </HomeImage>
+                ))}
+              </div>
             </AnimatedSection>
             <AnimatedSection animation="scale-in" delay="delay-200">
               <div className="rounded-[2rem] border border-gray-100 bg-[#f7f2e8] p-3 shadow-2xl shadow-gray-950/10">
@@ -238,6 +343,26 @@ export function Home() {
               tea, burgers, and seafood.
             </p>
           </AnimatedSection>
+          <AnimatedSection animation="scale-in" className="mb-10">
+            <div className="rounded-[2rem] border border-gray-100 bg-[#f7f2e8] p-3 shadow-2xl shadow-gray-950/8">
+              <HomeImage
+                src={homeImages.restaurantCollection.src}
+                alt={homeImages.restaurantCollection.alt}
+                fallbackStyle={homeImages.restaurantCollection.fallbackStyle}
+                className="min-h-[300px] rounded-[1.5rem] md:min-h-[420px]"
+              >
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_54%,rgba(17,24,39,0.72))]" />
+                <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/90 p-5 shadow-xl backdrop-blur md:max-w-xl">
+                  <p className="text-sm font-black uppercase tracking-[0.18em] text-coffee-700">
+                    Restaurant collection
+                  </p>
+                  <p className="mt-1 text-2xl font-black text-gray-950">
+                    Ten dining concepts with distinct atmosphere, color, and menu direction.
+                  </p>
+                </div>
+              </HomeImage>
+            </div>
+          </AnimatedSection>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {completedRestaurantWebsites.map((website, index) => (
               <div key={website.id} className={index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : ''}>
@@ -265,6 +390,26 @@ export function Home() {
             <p className="max-w-md text-base leading-7 text-gray-600">
               GlowHaus Salon, Luxe Nail Studio, Serenity Spa, and Blush Beauty Bar start the second category.
             </p>
+          </AnimatedSection>
+          <AnimatedSection animation="scale-in" className="mb-10">
+            <div className="rounded-[2rem] border border-pink-100 bg-white/75 p-3 shadow-2xl shadow-pink-900/8">
+              <HomeImage
+                src={homeImages.beautyCollection.src}
+                alt={homeImages.beautyCollection.alt}
+                fallbackStyle={homeImages.beautyCollection.fallbackStyle}
+                className="min-h-[300px] rounded-[1.5rem] md:min-h-[420px]"
+              >
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_52%,rgba(17,24,39,0.62))]" />
+                <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/90 p-5 shadow-xl backdrop-blur md:max-w-xl">
+                  <p className="text-sm font-black uppercase tracking-[0.18em] text-pink-700">
+                    Beauty collection
+                  </p>
+                  <p className="mt-1 text-2xl font-black text-gray-950">
+                    Salon, spa, nail, and beauty-bar directions with polished visual style.
+                  </p>
+                </div>
+              </HomeImage>
+            </div>
           </AnimatedSection>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {completedBeautyWebsites.map((website, index) => (
@@ -306,6 +451,29 @@ export function Home() {
                   <h3 className="text-2xl font-black">{item}</h3>
                   <p className="mt-3 leading-7 text-gray-400">Built to be easy to scan, extend, and present.</p>
                 </div>
+              ))}
+              {[
+                {
+                  image: homeImages.aboutProject,
+                  label: 'Complete page systems',
+                },
+                {
+                  image: homeImages.uiComponentsCloseup,
+                  label: 'Reusable UI details',
+                },
+              ].map((item, index) => (
+                <HomeImage
+                  key={item.label}
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  fallbackStyle={item.image.fallbackStyle}
+                  className={`reveal-card min-h-[220px] rounded-2xl border border-white/10 shadow-xl shadow-black/20 ${index === 1 ? 'delay-150' : ''}`}
+                >
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(0,0,0,0.72))]" />
+                  <p className="absolute bottom-4 left-4 right-4 text-sm font-black uppercase tracking-[0.16em] text-white">
+                    {item.label}
+                  </p>
+                </HomeImage>
               ))}
             </div>
           </div>
@@ -360,6 +528,22 @@ export function Home() {
                   </div>
                 ))}
               </div>
+              <HomeImage
+                src={homeImages.designToCode.src}
+                alt={homeImages.designToCode.alt}
+                fallbackStyle={homeImages.designToCode.fallbackStyle}
+                className="reveal-card mt-6 min-h-[220px] rounded-2xl border border-white shadow-xl shadow-gray-950/8"
+              >
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(17,24,39,0.7))]" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <p className="text-sm font-black uppercase tracking-[0.18em] text-white/85">
+                    Design to code
+                  </p>
+                  <p className="mt-1 text-xl font-black text-white">
+                    React, TypeScript, Tailwind, and reusable patterns.
+                  </p>
+                </div>
+              </HomeImage>
             </AnimatedSection>
           </div>
         </Container>
@@ -373,6 +557,26 @@ export function Home() {
             <p className="mt-5 text-lg leading-8 text-gray-600">
               The project is structured as a broad website design portfolio, with restaurants leading the first set.
             </p>
+          </AnimatedSection>
+          <AnimatedSection animation="scale-in" className="mb-10">
+            <div className="rounded-[2rem] border border-gray-100 bg-[#f7f2e8] p-3 shadow-2xl shadow-gray-950/8">
+              <HomeImage
+                src={homeImages.categoriesOverview.src}
+                alt={homeImages.categoriesOverview.alt}
+                fallbackStyle={homeImages.categoriesOverview.fallbackStyle}
+                className="min-h-[260px] rounded-[1.5rem] md:min-h-[360px]"
+              >
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_52%,rgba(17,24,39,0.62))]" />
+                <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/90 p-5 shadow-xl backdrop-blur md:max-w-xl">
+                  <p className="text-sm font-black uppercase tracking-[0.18em] text-coffee-700">
+                    Category map
+                  </p>
+                  <p className="mt-1 text-2xl font-black text-gray-950">
+                    A broad plan across practical business website types.
+                  </p>
+                </div>
+              </HomeImage>
+            </div>
           </AnimatedSection>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
             {categories.map((category, index) => (
@@ -452,6 +656,61 @@ export function Home() {
                 <p className="mt-8 text-5xl font-black text-gray-950">0{index + 1}</p>
                 <h3 className="mt-5 text-2xl font-black">{step.title}</h3>
                 <p className="mt-3 leading-7 text-gray-600">{step.text}</p>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-white py-20 md:py-28">
+        <Container>
+          <AnimatedSection className="mb-12 max-w-3xl">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-coffee-700">
+              Portfolio proof
+            </p>
+            <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+              Visuals for case studies, finished pages, and portfolio presentation.
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-gray-600">
+              The project can grow from individual homepage concepts into a
+              fuller portfolio with client-ready previews and case-study style
+              presentation.
+            </p>
+          </AnimatedSection>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                image: homeImages.caseStudyPreview,
+                label: 'Case study preview',
+                text: 'Show the design thinking behind each finished concept.',
+              },
+              {
+                image: homeImages.clientReadyWebsites,
+                label: 'Client-ready websites',
+                text: 'Present polished homepages with realistic content and sections.',
+              },
+              {
+                image: homeImages.portfolioShowcase,
+                label: 'Portfolio showcase',
+                text: 'Turn the collection into a strong visual presentation.',
+              },
+            ].map((item, index) => (
+              <article
+                key={item.label}
+                className={`reveal-card overflow-hidden rounded-3xl border border-gray-100 bg-[#f7f2e8] shadow-xl shadow-gray-950/6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : ''}`}
+              >
+                <HomeImage
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  fallbackStyle={item.image.fallbackStyle}
+                  className="min-h-[240px]"
+                />
+                <div className="p-6">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-coffee-700">
+                    {item.label}
+                  </p>
+                  <p className="mt-3 leading-7 text-gray-600">{item.text}</p>
+                </div>
               </article>
             ))}
           </div>

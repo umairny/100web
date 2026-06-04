@@ -1,170 +1,170 @@
-import { useState, type ReactNode } from 'react'
-import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { Container, CTAButton, RestaurantSubNav } from "../../components";
 
 const imageAssets = {
   hero: {
-    src: '/images/luna-pizza/hero-pizza.jpg',
-    alt: 'Handmade wood-fired pizza with melted mozzarella and basil on a rustic table',
+    src: "/images/luna-pizza/hero-pizza.png",
+    alt: "Handmade wood-fired pizza with melted mozzarella and basil on a rustic table",
     fallbackStyle:
-      'bg-[radial-gradient(circle_at_50%_46%,#f7cf7d_0_24%,transparent_25%),radial-gradient(circle_at_45%_42%,#f9f2df_0_6%,transparent_7%),radial-gradient(circle_at_58%_54%,#c92a22_0_5%,transparent_6%),radial-gradient(circle_at_38%_61%,#2f8f46_0_4%,transparent_5%),linear-gradient(135deg,#fff7e8,#f6d48b_45%,#c92a22)]',
+      "bg-[radial-gradient(circle_at_50%_46%,#f7cf7d_0_24%,transparent_25%),radial-gradient(circle_at_45%_42%,#f9f2df_0_6%,transparent_7%),radial-gradient(circle_at_58%_54%,#c92a22_0_5%,transparent_6%),radial-gradient(circle_at_38%_61%,#2f8f46_0_4%,transparent_5%),linear-gradient(135deg,#fff7e8,#f6d48b_45%,#c92a22)]",
     imagePrompt:
-      'Premium modern pizza restaurant hero image, handmade wood-fired pizza on a rustic table, melted mozzarella, basil leaves, tomato sauce, warm Italian restaurant lighting, playful family-friendly atmosphere, cinematic food photography, no text, no logo, no watermark.',
+      "Premium modern pizza restaurant hero image, handmade wood-fired pizza on a rustic table, melted mozzarella, basil leaves, tomato sauce, warm Italian restaurant lighting, playful family-friendly atmosphere, cinematic food photography, no text, no logo, no watermark.",
   },
   margherita: {
-    src: '/images/luna-pizza/margherita.jpg',
-    alt: 'Classic Margherita pizza with fresh mozzarella, basil, and tomato sauce',
+    src: "/images/luna-pizza/margherita.png",
+    alt: "Classic Margherita pizza with fresh mozzarella, basil, and tomato sauce",
     fallbackStyle:
-      'bg-[radial-gradient(circle_at_50%_52%,#f6d48b_0_31%,transparent_32%),radial-gradient(circle_at_42%_42%,#f9f2df_0_7%,transparent_8%),radial-gradient(circle_at_58%_60%,#2f8f46_0_5%,transparent_6%),radial-gradient(circle_at_61%_39%,#c92a22_0_6%,transparent_7%),linear-gradient(135deg,#fff7e8,#f2bc5b)]',
+      "bg-[radial-gradient(circle_at_50%_52%,#f6d48b_0_31%,transparent_32%),radial-gradient(circle_at_42%_42%,#f9f2df_0_7%,transparent_8%),radial-gradient(circle_at_58%_60%,#2f8f46_0_5%,transparent_6%),radial-gradient(circle_at_61%_39%,#c92a22_0_6%,transparent_7%),linear-gradient(135deg,#fff7e8,#f2bc5b)]",
     imagePrompt:
-      'Close-up of classic Margherita pizza with fresh mozzarella, basil leaves, rich tomato sauce, slightly charred crust, warm natural light, premium food photography, no text, no logo, no watermark.',
+      "Close-up of classic Margherita pizza with fresh mozzarella, basil leaves, rich tomato sauce, slightly charred crust, warm natural light, premium food photography, no text, no logo, no watermark.",
   },
   pepperoni: {
-    src: '/images/luna-pizza/pepperoni.jpg',
-    alt: 'Pepperoni pizza with crispy edges, melted cheese, and golden crust',
+    src: "/images/luna-pizza/pepperoni.png",
+    alt: "Pepperoni pizza with crispy edges, melted cheese, and golden crust",
     fallbackStyle:
-      'bg-[radial-gradient(circle_at_51%_50%,#f0bf63_0_31%,transparent_32%),radial-gradient(circle_at_42%_40%,#a91f18_0_6%,transparent_7%),radial-gradient(circle_at_58%_48%,#c92a22_0_6%,transparent_7%),radial-gradient(circle_at_48%_64%,#a91f18_0_7%,transparent_8%),linear-gradient(135deg,#fff7e8,#d83b2e)]',
+      "bg-[radial-gradient(circle_at_51%_50%,#f0bf63_0_31%,transparent_32%),radial-gradient(circle_at_42%_40%,#a91f18_0_6%,transparent_7%),radial-gradient(circle_at_58%_48%,#c92a22_0_6%,transparent_7%),radial-gradient(circle_at_48%_64%,#a91f18_0_7%,transparent_8%),linear-gradient(135deg,#fff7e8,#d83b2e)]",
     imagePrompt:
-      'Modern pepperoni pizza with crispy edges, melted cheese, tomato sauce, golden crust, rustic Italian table, warm restaurant lighting, appetizing premium food photography, no text, no logo, no watermark.',
+      "Modern pepperoni pizza with crispy edges, melted cheese, tomato sauce, golden crust, rustic Italian table, warm restaurant lighting, appetizing premium food photography, no text, no logo, no watermark.",
   },
   veggie: {
-    src: '/images/luna-pizza/veggie.jpg',
-    alt: 'Vegetable pizza with peppers, mushrooms, olives, basil, and mozzarella',
+    src: "/images/luna-pizza/veggie.png",
+    alt: "Vegetable pizza with peppers, mushrooms, olives, basil, and mozzarella",
     fallbackStyle:
-      'bg-[radial-gradient(circle_at_50%_50%,#f6d48b_0_31%,transparent_32%),radial-gradient(circle_at_39%_43%,#2f8f46_0_5%,transparent_6%),radial-gradient(circle_at_57%_38%,#7b3f98_0_4%,transparent_5%),radial-gradient(circle_at_62%_61%,#f36b2d_0_5%,transparent_6%),radial-gradient(circle_at_45%_63%,#f9f2df_0_6%,transparent_7%),linear-gradient(135deg,#fff7e8,#b7d879)]',
+      "bg-[radial-gradient(circle_at_50%_50%,#f6d48b_0_31%,transparent_32%),radial-gradient(circle_at_39%_43%,#2f8f46_0_5%,transparent_6%),radial-gradient(circle_at_57%_38%,#7b3f98_0_4%,transparent_5%),radial-gradient(circle_at_62%_61%,#f36b2d_0_5%,transparent_6%),radial-gradient(circle_at_45%_63%,#f9f2df_0_6%,transparent_7%),linear-gradient(135deg,#fff7e8,#b7d879)]",
     imagePrompt:
-      'Fresh vegetable pizza with colorful peppers, mushrooms, olives, basil, mozzarella, golden crust, bright modern pizza restaurant style, clean food photography, no text, no logo, no watermark.',
+      "Fresh vegetable pizza with colorful peppers, mushrooms, olives, basil, mozzarella, golden crust, bright modern pizza restaurant style, clean food photography, no text, no logo, no watermark.",
   },
   interior: {
-    src: '/images/luna-pizza/interior.jpg',
-    alt: 'Modern family-friendly pizza restaurant interior with warm lights and red and green accents',
+    src: "/images/luna-pizza/interior.png",
+    alt: "Modern family-friendly pizza restaurant interior with warm lights and red and green accents",
     fallbackStyle:
-      'bg-[linear-gradient(90deg,rgba(201,42,34,0.18)_1px,transparent_1px),linear-gradient(180deg,#fff7e8,#f3dfbc_45%,#2f8f46)] [background-size:38px_38px]',
+      "bg-[linear-gradient(90deg,rgba(201,42,34,0.18)_1px,transparent_1px),linear-gradient(180deg,#fff7e8,#f3dfbc_45%,#2f8f46)] [background-size:38px_38px]",
     imagePrompt:
-      'Modern family-friendly pizza restaurant interior, warm lights, red and green Italian accents, cozy booths, open kitchen feeling, casual premium atmosphere, cinematic interior photography, no people, no text, no logo, no watermark.',
+      "Modern family-friendly pizza restaurant interior, warm lights, red and green Italian accents, cozy booths, open kitchen feeling, casual premium atmosphere, cinematic interior photography, no people, no text, no logo, no watermark.",
   },
-}
+};
 
 const featuredPizzas = [
   {
-    name: 'Classic Luna Margherita',
-    label: 'Best Seller',
-    price: '$16',
+    name: "Classic Luna Margherita",
+    label: "Best Seller",
+    price: "$16",
     detail:
-      'San Marzano-style tomato sauce, fresh mozzarella, basil, olive oil, and a lightly blistered crust.',
+      "San Marzano-style tomato sauce, fresh mozzarella, basil, olive oil, and a lightly blistered crust.",
     image: imageAssets.margherita,
   },
   {
-    name: 'Spicy Pepperoni Moon',
-    label: 'Spicy',
-    price: '$19',
+    name: "Spicy Pepperoni Moon",
+    label: "Spicy",
+    price: "$19",
     detail:
-      'Crispy pepperoni cups, mozzarella, tomato sauce, chili flakes, and a drizzle of hot honey.',
+      "Crispy pepperoni cups, mozzarella, tomato sauce, chili flakes, and a drizzle of hot honey.",
     image: imageAssets.pepperoni,
   },
   {
-    name: 'Garden Basil Veggie',
-    label: 'Fresh Pick',
-    price: '$18',
+    name: "Garden Basil Veggie",
+    label: "Fresh Pick",
+    price: "$18",
     detail:
-      'Roasted peppers, mushrooms, olives, basil pesto, mozzarella, and a bright tomato base.',
+      "Roasted peppers, mushrooms, olives, basil pesto, mozzarella, and a bright tomato base.",
     image: imageAssets.veggie,
   },
   {
-    name: 'Four Cheese White Pizza',
-    label: 'Family Favorite',
-    price: '$20',
+    name: "Four Cheese White Pizza",
+    label: "Family Favorite",
+    price: "$20",
     detail:
-      'Mozzarella, ricotta, parmesan, provolone, garlic cream, cracked pepper, and fresh herbs.',
+      "Mozzarella, ricotta, parmesan, provolone, garlic cream, cracked pepper, and fresh herbs.",
     image: imageAssets.hero,
   },
-]
+];
 
 const menuPreview = [
-  'Margherita Pizza',
-  'Pepperoni Pizza',
-  'BBQ Chicken Pizza',
-  'Veggie Supreme',
-  'Garlic Knots',
-  'Caesar Salad',
-  'Mozzarella Sticks',
-  'Family Pizza Bundle',
-]
+  "Margherita Pizza",
+  "Pepperoni Pizza",
+  "BBQ Chicken Pizza",
+  "Veggie Supreme",
+  "Garlic Knots",
+  "Caesar Salad",
+  "Mozzarella Sticks",
+  "Family Pizza Bundle",
+];
 
 const ingredientHighlights = [
   {
-    title: 'Fresh dough daily',
-    text: 'Our dough is mixed in-house, rested for flavor, and stretched by hand for a crisp, chewy bite.',
+    title: "Fresh dough daily",
+    text: "Our dough is mixed in-house, rested for flavor, and stretched by hand for a crisp, chewy bite.",
   },
   {
-    title: 'Bright tomato sauce',
-    text: 'A simple red sauce keeps the pizzas lively: tomato, garlic, herbs, olive oil, and just enough sweetness.',
+    title: "Bright tomato sauce",
+    text: "A simple red sauce keeps the pizzas lively: tomato, garlic, herbs, olive oil, and just enough sweetness.",
   },
   {
-    title: 'Real mozzarella pull',
-    text: 'Creamy mozzarella melts into every slice, with ricotta, parmesan, and provolone layered into select pies.',
+    title: "Real mozzarella pull",
+    text: "Creamy mozzarella melts into every slice, with ricotta, parmesan, and provolone layered into select pies.",
   },
   {
-    title: 'Basil and garden toppings',
-    text: 'Fresh basil, peppers, mushrooms, olives, onions, and greens bring color and balance to the board.',
+    title: "Basil and garden toppings",
+    text: "Fresh basil, peppers, mushrooms, olives, onions, and greens bring color and balance to the board.",
   },
-]
+];
 
 const familyDeals = [
   {
-    name: 'Two Large Pizzas + Garlic Knots',
-    price: '$34',
+    name: "Two Large Pizzas + Garlic Knots",
+    price: "$34",
     detail:
-      'Choose any two large classics and add a warm tray of garlic knots with marinara for dipping.',
+      "Choose any two large classics and add a warm tray of garlic knots with marinara for dipping.",
   },
   {
-    name: 'Family Night Bundle',
-    price: '$48',
+    name: "Family Night Bundle",
+    price: "$48",
     detail:
-      'Two large pizzas, Caesar salad, mozzarella sticks, and four fountain drinks for a full table.',
+      "Two large pizzas, Caesar salad, mozzarella sticks, and four fountain drinks for a full table.",
   },
   {
-    name: 'Kids Slice Combo',
-    price: '$9',
+    name: "Kids Slice Combo",
+    price: "$9",
     detail:
-      'Cheese or pepperoni slice, a small drink, and a side of fruit or garlic knots.',
+      "Cheese or pepperoni slice, a small drink, and a side of fruit or garlic knots.",
   },
   {
-    name: 'Weekend Party Box',
-    price: '$72',
+    name: "Weekend Party Box",
+    price: "$72",
     detail:
-      'Three large pizzas, garlic knots, salad, and dipping sauces for birthdays, game nights, and easy hosting.',
+      "Three large pizzas, garlic knots, salad, and dipping sauces for birthdays, game nights, and easy hosting.",
   },
-]
+];
 
 const testimonials = [
   {
     quote:
-      'Luna feels like the pizza place every neighborhood wants. The Margherita is simple, fresh, and so good with the garlic knots.',
-    name: 'Mia Hernandez',
+      "Luna feels like the pizza place every neighborhood wants. The Margherita is simple, fresh, and so good with the garlic knots.",
+    name: "Mia Hernandez",
   },
   {
     quote:
-      'We bring the kids after soccer practice and everyone finds something. Fast, warm, friendly, and the crust is perfect.',
-    name: 'Daniel Brooks',
+      "We bring the kids after soccer practice and everyone finds something. Fast, warm, friendly, and the crust is perfect.",
+    name: "Daniel Brooks",
   },
   {
     quote:
-      'The Spicy Pepperoni Moon is our Friday ritual now. Crispy pepperoni, hot honey, and a really fun dining room.',
-    name: 'Priya Shah',
+      "The Spicy Pepperoni Moon is our Friday ritual now. Crispy pepperoni, hot honey, and a really fun dining room.",
+    name: "Priya Shah",
   },
-]
+];
 
 const ImageWithFallback = ({
   image,
-  className = '',
+  className = "",
   children,
 }: {
-  image: (typeof imageAssets)[keyof typeof imageAssets]
-  className?: string
-  children?: ReactNode
+  image: (typeof imageAssets)[keyof typeof imageAssets];
+  className?: string;
+  children?: ReactNode;
 }) => {
-  const [isLoaded, setIsLoaded] = useState(true)
+  const [isLoaded, setIsLoaded] = useState(true);
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -180,12 +180,12 @@ const ImageWithFallback = ({
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,transparent,rgba(36,33,29,0.06)_58%,rgba(36,33,29,0.2))]" />
       {children}
     </div>
-  )
-}
+  );
+};
 
 const IngredientDots = () => (
   <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:radial-gradient(#c92a22_1.4px,transparent_1.4px),radial-gradient(#2f8f46_1.2px,transparent_1.2px)] [background-position:0_0,15px_15px] [background-size:30px_30px]" />
-)
+);
 
 const FloatingIngredients = () => (
   <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -194,7 +194,7 @@ const FloatingIngredients = () => (
     <span className="float-slow delay-300 absolute bottom-[14%] left-[18%] h-8 w-14 rounded-full bg-[#f6d48b]/55 -rotate-12" />
     <span className="pulse-soft absolute bottom-[20%] right-[18%] h-12 w-12 rounded-full border-4 border-[#c92a22]/18" />
   </div>
-)
+);
 
 export function LunaPizzaHouse() {
   return (
@@ -202,10 +202,10 @@ export function LunaPizzaHouse() {
       <RestaurantSubNav
         brand="Luna Pizza House"
         links={[
-          { label: 'Pizzas', href: '#pizzas' },
-          { label: 'Ingredients', href: '#ingredients' },
-          { label: 'Deals', href: '#deals' },
-          { label: 'Reviews', href: '#reviews' },
+          { label: "Pizzas", href: "#pizzas" },
+          { label: "Ingredients", href: "#ingredients" },
+          { label: "Deals", href: "#deals" },
+          { label: "Reviews", href: "#reviews" },
         ]}
         ctaLabel="Order Online"
         ctaHref="#order"
@@ -260,13 +260,13 @@ export function LunaPizzaHouse() {
 
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
               {[
-                ['14+', 'Signature Pizzas'],
-                ['Fresh', 'Dough Daily'],
-                ['Family', 'Combos'],
+                ["14+", "Signature Pizzas"],
+                ["Fresh", "Dough Daily"],
+                ["Family", "Combos"],
               ].map(([value, label], index) => (
                 <div
                   key={label}
-                  className={`reveal-card rounded-3xl border border-white bg-white/72 p-5 shadow-sm backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#c92a22]/20 hover:shadow-xl ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : ''}`}
+                  className={`reveal-card rounded-3xl border border-white bg-white/72 p-5 shadow-sm backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#c92a22]/20 hover:shadow-xl ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : ""}`}
                 >
                   <p className="text-2xl font-black text-[#c92a22] md:text-3xl">
                     {value}
@@ -300,7 +300,7 @@ export function LunaPizzaHouse() {
                   Tonight's favorite: Margherita, pepperoni, veggie.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {['Garlic knots', 'Basil pesto', 'Hot honey'].map((item) => (
+                  {["Garlic knots", "Basil pesto", "Hot honey"].map((item) => (
                     <span
                       key={item}
                       className="rounded-full bg-[#fff7e8] px-3 py-1 text-xs font-bold text-[#6a5044]"
@@ -315,7 +315,10 @@ export function LunaPizzaHouse() {
         </Container>
       </section>
 
-      <section id="about" className="relative overflow-hidden bg-white py-20 md:py-28">
+      <section
+        id="about"
+        className="relative overflow-hidden bg-white py-20 md:py-28"
+      >
         <IngredientDots />
         <Container className="relative grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center">
           <div className="scale-in rounded-[2rem] border border-[#f0d8b0] bg-[#c92a22] p-8 text-white shadow-2xl shadow-[#c92a22]/15">
@@ -366,7 +369,7 @@ export function LunaPizzaHouse() {
             {featuredPizzas.map((pizza, index) => (
               <article
                 key={pizza.name}
-                className={`group overflow-hidden rounded-[1.75rem] border border-[#f0d8b0] bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#c92a22]/25 hover:shadow-2xl hover:shadow-[#c92a22]/10 ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : index === 3 ? 'delay-300' : ''}`}
+                className={`group overflow-hidden rounded-[1.75rem] border border-[#f0d8b0] bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#c92a22]/25 hover:shadow-2xl hover:shadow-[#c92a22]/10 ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : index === 3 ? "delay-300" : ""}`}
               >
                 <ImageWithFallback image={pizza.image} className="aspect-[4/3]">
                   <span className="absolute right-4 top-4 rounded-full bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#c92a22] shadow-md">
@@ -382,7 +385,9 @@ export function LunaPizzaHouse() {
                       {pizza.price}
                     </p>
                   </div>
-                  <p className="mt-3 leading-7 text-[#6a5044]">{pizza.detail}</p>
+                  <p className="mt-3 leading-7 text-[#6a5044]">
+                    {pizza.detail}
+                  </p>
                 </div>
               </article>
             ))}
@@ -407,7 +412,7 @@ export function LunaPizzaHouse() {
               {menuPreview.map((item, index) => (
                 <div
                   key={item}
-                  className={`reveal-card rounded-2xl border border-[#f0d8b0] bg-[#fff7e8] px-4 py-3 font-bold text-[#24211d] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#c92a22]/25 hover:bg-white ${index % 4 === 1 ? 'delay-100' : index % 4 === 2 ? 'delay-200' : index % 4 === 3 ? 'delay-300' : ''}`}
+                  className={`reveal-card rounded-2xl border border-[#f0d8b0] bg-[#fff7e8] px-4 py-3 font-bold text-[#24211d] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#c92a22]/25 hover:bg-white ${index % 4 === 1 ? "delay-100" : index % 4 === 2 ? "delay-200" : index % 4 === 3 ? "delay-300" : ""}`}
                 >
                   {item}
                 </div>
@@ -417,7 +422,10 @@ export function LunaPizzaHouse() {
         </Container>
       </section>
 
-      <section id="ingredients" className="relative overflow-hidden bg-[#2f8f46] py-20 text-white md:py-28">
+      <section
+        id="ingredients"
+        className="relative overflow-hidden bg-[#2f8f46] py-20 text-white md:py-28"
+      >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_22%,rgba(255,247,232,0.16),transparent_25%),radial-gradient(circle_at_88%_72%,rgba(201,42,34,0.2),transparent_26%)]" />
         <Container className="relative grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
           <div>
@@ -436,7 +444,7 @@ export function LunaPizzaHouse() {
             {ingredientHighlights.map((item, index) => (
               <article
                 key={item.title}
-                className={`rounded-[1.5rem] border border-white/15 bg-white/12 p-6 shadow-lg shadow-black/5 backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-white/16 ${index % 2 === 1 ? 'delay-100' : ''}`}
+                className={`rounded-[1.5rem] border border-white/15 bg-white/12 p-6 shadow-lg shadow-black/5 backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-white/16 ${index % 2 === 1 ? "delay-100" : ""}`}
               >
                 <div className="mb-6 h-10 w-16 rounded-full bg-[#fff7e8]/22" />
                 <h3 className="text-2xl font-black">{item.title}</h3>
@@ -461,7 +469,7 @@ export function LunaPizzaHouse() {
             {familyDeals.map((deal, index) => (
               <article
                 key={deal.name}
-                className={`rounded-[1.75rem] border-2 border-[#c92a22]/16 bg-white p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#c92a22]/40 hover:shadow-xl ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : index === 3 ? 'delay-300' : ''}`}
+                className={`rounded-[1.75rem] border-2 border-[#c92a22]/16 bg-white p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#c92a22]/40 hover:shadow-xl ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : index === 3 ? "delay-300" : ""}`}
               >
                 <p className="text-sm font-black uppercase tracking-[0.18em] text-[#2f8f46]">
                   Family deal
@@ -490,7 +498,8 @@ export function LunaPizzaHouse() {
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#6a5044]">
               Warm lights, cozy booths, a busy open-kitchen feeling, and a menu
-              built for sharing make Luna feel like a real neighborhood favorite.
+              built for sharing make Luna feel like a real neighborhood
+              favorite.
             </p>
           </div>
           <ImageWithFallback
@@ -523,7 +532,7 @@ export function LunaPizzaHouse() {
             {testimonials.map((item, index) => (
               <blockquote
                 key={item.name}
-                className={`rounded-[2rem] border border-[#f0d8b0] bg-white p-8 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : ''}`}
+                className={`rounded-[2rem] border border-[#f0d8b0] bg-white p-8 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : ""}`}
               >
                 <p className="text-xl font-bold leading-8">"{item.quote}"</p>
                 <footer className="mt-6 border-t border-[#f0d8b0] pt-5 text-sm font-black uppercase tracking-[0.18em] text-[#c92a22]">
@@ -535,7 +544,10 @@ export function LunaPizzaHouse() {
         </Container>
       </section>
 
-      <section id="order" className="relative overflow-hidden bg-[#c92a22] py-20 text-white md:py-28">
+      <section
+        id="order"
+        className="relative overflow-hidden bg-[#c92a22] py-20 text-white md:py-28"
+      >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,247,232,0.18),transparent_24%),radial-gradient(circle_at_82%_78%,rgba(47,143,70,0.22),transparent_26%)]" />
         <Container className="relative">
           <div className="grid gap-6 rounded-[2rem] border border-white/20 bg-white/10 p-6 shadow-2xl shadow-[#24211d]/15 backdrop-blur md:grid-cols-[1.1fr_0.9fr] md:p-10">
@@ -564,9 +576,7 @@ export function LunaPizzaHouse() {
                 <p className="text-sm font-black uppercase tracking-[0.18em] text-[#2f8f46]">
                   Opening hours
                 </p>
-                <p className="mt-4 text-2xl font-black">
-                  Daily, 12 PM - 10 PM
-                </p>
+                <p className="mt-4 text-2xl font-black">Daily, 12 PM - 10 PM</p>
                 <p className="mt-2 leading-7 text-[#6a5044]">
                   Lunch slices, dinner pies, pickup, and weekend party boxes.
                 </p>
@@ -640,5 +650,5 @@ export function LunaPizzaHouse() {
         </Container>
       </footer>
     </main>
-  )
+  );
 }
