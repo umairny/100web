@@ -106,7 +106,7 @@ const PastrySwirl = ({ className }: { className: string }) => (
 
 export function GoldenCrustBakery() {
   return (
-    <main className="bg-[#fff8e8] text-[#332015]">
+    <main className="brand-motion motion-goldencrust bg-[#fff8e8] text-[#332015]">
       <RestaurantSubNav
         brand="Golden Crust Bakery"
         links={[

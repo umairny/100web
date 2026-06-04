@@ -37,7 +37,7 @@ export function RestaurantSubNav({
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className={`fixed left-0 right-0 top-16 z-40 backdrop-blur ${className}`}>
+    <nav className={`fixed left-0 right-0 top-16 z-40 backdrop-blur fade-in-down ${className}`}>
       <Container>
         <div className="flex h-14 items-center justify-between gap-4">
           <Link to={collectionPath} onClick={() => setIsOpen(false)} className={`truncate font-black ${brandClassName}`}>
@@ -52,7 +52,7 @@ export function RestaurantSubNav({
             ))}
           </div>
 
-          <a href={ctaHref} className={`hidden rounded-full px-4 py-2 text-sm font-black transition md:inline-flex ${ctaClassName}`}>
+          <a href={ctaHref} className={`hidden rounded-full px-4 py-2 text-sm font-black transition-all duration-300 ease-out hover:-translate-y-0.5 md:inline-flex ${ctaClassName}`}>
             {ctaLabel}
           </a>
 

@@ -9,7 +9,7 @@ const teas = [
 
 export function MorningLeafTea() {
   return (
-    <main className="bg-[#fbf7ea] text-[#4b3d2f]">
+    <main className="brand-motion motion-morningleaf bg-[#fbf7ea] text-[#4b3d2f]">
       <RestaurantSubNav
         brand="MorningLeaf Tea"
         links={[

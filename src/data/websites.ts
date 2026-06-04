@@ -33,6 +33,7 @@ export interface CategoryInfo {
   description: string
   icon: string
   color: string
+  image?: string
   href?: string
 }
 
@@ -42,6 +43,7 @@ export const categories: CategoryInfo[] = [
     description: 'Coffee shops, cafes, restaurants, and dining experiences',
     icon: '🍽️',
     color: 'from-orange-500 to-red-500',
+    image: '/images/home/restaurant-preview.png',
     href: '/restaurant',
   },
   {
@@ -49,6 +51,7 @@ export const categories: CategoryInfo[] = [
     description: 'Salons, spas, cosmetics, and beauty services',
     icon: '💄',
     color: 'from-pink-500 to-rose-500',
+    image: '/images/home/beauty-preview.png',
     href: '/beauty',
   },
   {
@@ -56,6 +59,7 @@ export const categories: CategoryInfo[] = [
     description: 'Property agents, real estate agencies, and developers',
     icon: '🏠',
     color: 'from-blue-500 to-cyan-500',
+    image: '/images/home/real-estate-preview.png',
   },
   {
     name: 'Fitness',
@@ -86,18 +90,21 @@ export const categories: CategoryInfo[] = [
     description: 'Online stores, marketplaces, and retail shops',
     icon: '🛍️',
     color: 'from-violet-500 to-fuchsia-500',
+    image: '/images/home/ecommerce-preview.png',
   },
   {
     name: 'Portfolio',
     description: 'Creative portfolios, freelancers, and agencies',
     icon: '✨',
     color: 'from-slate-600 to-gray-600',
+    image: '/images/home/portfolio-preview.png',
   },
   {
     name: 'SaaS',
     description: 'Software services, apps, and digital platforms',
     icon: '💻',
     color: 'from-sky-500 to-blue-500',
+    image: '/images/home/saas-preview.png',
   },
 ]
 

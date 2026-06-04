@@ -3,7 +3,7 @@ import { Container, CTAButton, RestaurantSubNav } from '../../components'
 
 export function SerenitySpa() {
   return (
-    <main className="bg-[#fbf7ea] text-[#5f4d3d]">
+    <main className="brand-motion motion-serenity bg-[#fbf7ea] text-[#5f4d3d]">
       <RestaurantSubNav
         brand="Serenity Spa"
         collectionPath="/beauty"

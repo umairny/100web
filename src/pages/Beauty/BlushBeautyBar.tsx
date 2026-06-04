@@ -3,7 +3,7 @@ import { Container, CTAButton, RestaurantSubNav } from '../../components'
 
 export function BlushBeautyBar() {
   return (
-    <main className="bg-[#fff0f6] text-[#111111]">
+    <main className="brand-motion motion-blush bg-[#fff0f6] text-[#111111]">
       <RestaurantSubNav
         brand="Blush Beauty Bar"
         collectionPath="/beauty"

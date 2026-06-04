@@ -9,7 +9,7 @@ const burgers = [
 
 export function BurgerCraft() {
   return (
-    <main className="bg-[#fff3d7] text-[#202020]">
+    <main className="brand-motion motion-burgercraft bg-[#fff3d7] text-[#202020]">
       <RestaurantSubNav
         brand="BurgerCraft"
         links={[

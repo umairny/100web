@@ -17,12 +17,12 @@ export function CTAButton({
   size = 'md',
   className = '',
 }: CTAButtonProps) {
-  const baseStyles = 'font-semibold rounded-lg transition-all duration-200 inline-flex items-center justify-center'
+  const baseStyles = 'font-semibold rounded-lg transition-all duration-300 ease-out inline-flex items-center justify-center hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-coffee-300/35'
   
   const variantStyles = {
-    primary: 'bg-coffee-700 text-white hover:bg-coffee-800 shadow-lg hover:shadow-xl',
-    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
-    outline: 'border-2 border-coffee-700 text-coffee-700 hover:bg-coffee-50',
+    primary: 'bg-coffee-700 text-white shadow-lg shadow-coffee-700/20 hover:bg-coffee-800 hover:shadow-xl hover:shadow-coffee-700/25',
+    secondary: 'bg-gray-200 text-gray-900 shadow-sm hover:bg-gray-300 hover:shadow-lg',
+    outline: 'border-2 border-coffee-700 text-coffee-700 hover:border-coffee-800 hover:bg-coffee-50 hover:shadow-lg hover:shadow-coffee-700/10',
   }
   
   const sizeStyles = {

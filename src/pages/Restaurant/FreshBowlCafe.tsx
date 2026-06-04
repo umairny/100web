@@ -9,7 +9,7 @@ const bowls = [
 
 export function FreshBowlCafe() {
   return (
-    <main className="bg-[#fbf7ed] text-[#26332a]">
+    <main className="brand-motion motion-freshbowl bg-[#fbf7ed] text-[#26332a]">
       <RestaurantSubNav
         brand="FreshBowl Cafe"
         links={[

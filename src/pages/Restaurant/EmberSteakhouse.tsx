@@ -9,7 +9,7 @@ const steaks = [
 
 export function EmberSteakhouse() {
   return (
-    <main className="bg-[#0f0f10] text-[#f4ead7]">
+    <main className="brand-motion motion-ember bg-[#0f0f10] text-[#f4ead7]">
       <RestaurantSubNav
         brand="Ember"
         links={[

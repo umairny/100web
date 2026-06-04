@@ -5,7 +5,7 @@ const services = ['Signature cut and style', 'Dimensional color', 'Gloss and blo
 
 export function GlowHausSalon() {
   return (
-    <main className="bg-[#fbf4ef] text-[#2b2b2d]">
+    <main className="brand-motion motion-glowhaus bg-[#fbf4ef] text-[#2b2b2d]">
       <RestaurantSubNav
         brand="GlowHaus Salon"
         collectionPath="/beauty"

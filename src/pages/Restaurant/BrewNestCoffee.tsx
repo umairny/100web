@@ -88,7 +88,7 @@ const testimonials = [
 
 export function BrewNestCoffee() {
   return (
-    <main className="bg-[#f6efe5] text-[#251c16]">
+    <main className="brand-motion motion-brewnest bg-[#f6efe5] text-[#251c16]">
       <RestaurantSubNav
         brand="BrewNest Coffee"
         links={[

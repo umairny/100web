@@ -5,7 +5,7 @@ const styles = ['Pearl chrome', 'Soft french', 'Gold line art']
 
 export function LuxeNailStudio() {
   return (
-    <main className="bg-[#fffdf9] text-[#191919]">
+    <main className="brand-motion motion-luxenail bg-[#fffdf9] text-[#191919]">
       <RestaurantSubNav
         brand="Luxe Nail Studio"
         collectionPath="/beauty"

@@ -11,9 +11,9 @@ export function WebsiteCard({ website }: WebsiteCardProps) {
   const routePath = `/${categoryPath}/${website.slug}`
 
   return (
-    <div className={`group relative overflow-hidden rounded-xl border bg-white transition-all duration-300 ${
+    <div className={`group reveal-card relative overflow-hidden rounded-xl border bg-white transition-all duration-300 ease-out ${
       isCompleted
-        ? 'border-gray-200 shadow-md hover:-translate-y-1 hover:shadow-2xl'
+        ? 'border-gray-200 shadow-md hover:-translate-y-1 hover:border-coffee-200 hover:shadow-2xl'
         : 'border-gray-100 shadow-sm opacity-80'
     }`}>
       <div className="absolute right-4 top-4 z-10">
@@ -57,7 +57,7 @@ export function WebsiteCard({ website }: WebsiteCardProps) {
         {isCompleted ? (
           <Link
             to={routePath}
-            className="inline-flex w-full items-center justify-center rounded-lg bg-gray-950 px-4 py-3 text-sm font-bold text-white transition hover:bg-coffee-700"
+            className="inline-flex w-full items-center justify-center rounded-lg bg-gray-950 px-4 py-3 text-sm font-bold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-coffee-700 hover:shadow-lg hover:shadow-coffee-700/20"
           >
             View Design
           </Link>

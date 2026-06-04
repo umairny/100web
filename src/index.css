@@ -1,1 +1,326 @@
 @import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-22px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(22px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes pulseSoft {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.025);
+  }
+}
+
+@keyframes shimmerSoft {
+  from {
+    transform: translateX(-120%) skewX(-14deg);
+  }
+  to {
+    transform: translateX(220%) skewX(-14deg);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.72s ease-out both;
+}
+
+.fade-in-up,
+.fade-up {
+  animation: fadeInUp 0.78s ease-out both;
+}
+
+.fade-in-down,
+.fade-down {
+  animation: fadeInDown 0.68s ease-out both;
+}
+
+.scale-in {
+  animation: scaleIn 0.72s ease-out both;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.78s ease-out both;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.78s ease-out both;
+}
+
+.float-slow {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+.pulse-soft {
+  animation: pulseSoft 4.5s ease-in-out infinite;
+}
+
+.shimmer-soft {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-soft::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.26) 46%, transparent 72%);
+  transform: translateX(-120%) skewX(-14deg);
+  animation: shimmerSoft 4.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.reveal-card {
+  animation: fadeInUp 0.74s ease-out both;
+}
+
+.hover-lift {
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease,
+    background-color 300ms ease;
+}
+
+.hover-lift:hover {
+  transform: translate3d(0, -4px, 0);
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-150 {
+  animation-delay: 150ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+main {
+  animation: fadeIn 0.55s ease-out both;
+}
+
+main > section:first-child h1 {
+  animation: fadeInUp 0.78s ease-out 120ms both;
+}
+
+main > section:first-child h1 + p,
+main > section:first-child h1 ~ p {
+  animation: fadeInUp 0.78s ease-out 220ms both;
+}
+
+main > section h2 {
+  animation: fadeInUp 0.72s ease-out both;
+}
+
+article,
+blockquote {
+  backface-visibility: hidden;
+}
+
+.brand-motion > section:first-of-type {
+  position: relative;
+}
+
+.brand-motion > section:first-of-type > div,
+.brand-motion > section:first-of-type a,
+.brand-motion > section:first-of-type p,
+.brand-motion > section:first-of-type h1 {
+  backface-visibility: hidden;
+}
+
+.brand-motion > section:first-of-type a:first-of-type,
+.brand-motion > section:first-of-type p:first-of-type {
+  animation: fadeInDown 0.68s ease-out both;
+}
+
+.brand-motion > section:first-of-type h1 {
+  animation: fadeInUp 0.82s ease-out 120ms both;
+}
+
+.brand-motion > section:first-of-type h1 ~ p {
+  animation: fadeInUp 0.78s ease-out 220ms both;
+}
+
+.brand-motion > section:first-of-type img,
+.brand-motion > section:first-of-type [class*="min-h-"],
+.brand-motion > section:first-of-type [class*="aspect-"] {
+  animation: scaleIn 0.86s ease-out 260ms both;
+}
+
+.brand-motion section article,
+.brand-motion section blockquote {
+  animation: fadeInUp 0.76s ease-out both;
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease,
+    background-color 300ms ease;
+}
+
+.brand-motion section article:nth-child(2),
+.brand-motion section blockquote:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.brand-motion section article:nth-child(3),
+.brand-motion section blockquote:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.brand-motion section article:nth-child(4),
+.brand-motion section blockquote:nth-child(4) {
+  animation-delay: 260ms;
+}
+
+.brand-motion section article:hover,
+.brand-motion section blockquote:hover {
+  transform: translate3d(0, -4px, 0);
+}
+
+.brand-motion .float-slow,
+.motion-brewnest > section:first-of-type [class*="rounded-full"],
+.motion-spiceroute > section:first-of-type [class*="blur"],
+.motion-freshbowl > section:first-of-type [class*="rounded-full"],
+.motion-morningleaf > section:first-of-type [class*="rounded-full"],
+.motion-oceanplate > section:first-of-type [class*="rounded-full"],
+.motion-serenity > section:first-of-type [class*="rounded-full"] {
+  animation: floatSlow 7.5s ease-in-out infinite;
+}
+
+.motion-urbanbite section article,
+.motion-burgercraft section article,
+.motion-blush section article {
+  animation-name: scaleIn;
+}
+
+.motion-ember section article:hover,
+.motion-ember section blockquote:hover,
+.motion-spiceroute section article:hover,
+.motion-spiceroute section blockquote:hover {
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.26);
+}
+
+.motion-luna section article:hover,
+.motion-burgercraft section article:hover {
+  transform: translate3d(0, -6px, 0) scale(1.01);
+}
+
+.motion-glowhaus section article:hover,
+.motion-luxenail section article:hover,
+.motion-serenity section article:hover {
+  box-shadow: 0 22px 55px rgba(190, 88, 130, 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .float-slow,
+  .pulse-soft {
+    animation: none !important;
+  }
+}

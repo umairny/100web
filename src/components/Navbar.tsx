@@ -13,11 +13,11 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur">
+    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur fade-in-down">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center gap-3 group" onClick={() => setIsOpen(false)}>
-            <div className="w-9 h-9 bg-gray-950 rounded-xl flex items-center justify-center group-hover:bg-coffee-700 transition">
+          <Link to="/" className="group flex items-center gap-3" onClick={() => setIsOpen(false)}>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gray-950 transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:bg-coffee-700 group-hover:shadow-lg group-hover:shadow-coffee-700/20">
               <span className="text-white font-black text-sm">100</span>
             </div>
             <div>
@@ -33,7 +33,7 @@ export function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                className="rounded-full px-4 py-2 text-sm font-bold text-gray-600 transition hover:bg-gray-100 hover:text-gray-950"
+                className="rounded-full px-4 py-2 text-sm font-bold text-gray-600 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-gray-100 hover:text-gray-950"
               >
                 {link.label}
               </a>
@@ -45,7 +45,7 @@ export function Navbar() {
               href="https://github.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="rounded-full border border-gray-200 px-4 py-2 text-sm font-bold text-gray-700 transition hover:border-gray-950 hover:text-gray-950"
+              className="rounded-full border border-gray-200 px-4 py-2 text-sm font-bold text-gray-700 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-gray-950 hover:shadow-md hover:text-gray-950"
             >
               GitHub
             </a>

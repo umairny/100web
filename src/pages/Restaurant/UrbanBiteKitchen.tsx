@@ -78,7 +78,7 @@ const testimonials = [
 
 export function UrbanBiteKitchen() {
   return (
-    <main className="bg-[#f4efe8] text-[#161616]">
+    <main className="brand-motion motion-urbanbite bg-[#f4efe8] text-[#161616]">
       <RestaurantSubNav
         brand="UrbanBite"
         links={[

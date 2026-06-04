@@ -9,7 +9,7 @@ const catches = [
 
 export function OceanPlateSeafood() {
   return (
-    <main className="bg-white text-[#063047]">
+    <main className="brand-motion motion-oceanplate bg-white text-[#063047]">
       <RestaurantSubNav
         brand="OceanPlate Seafood"
         links={[
