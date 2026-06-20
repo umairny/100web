@@ -187,15 +187,6 @@ const IngredientDots = () => (
   <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:radial-gradient(#c92a22_1.4px,transparent_1.4px),radial-gradient(#2f8f46_1.2px,transparent_1.2px)] [background-position:0_0,15px_15px] [background-size:30px_30px]" />
 );
 
-const FloatingIngredients = () => (
-  <div className="pointer-events-none absolute inset-0 overflow-hidden">
-    <span className="float-slow absolute left-[8%] top-[18%] h-10 w-10 rounded-full bg-[#c92a22]/18" />
-    <span className="float-slow delay-200 absolute right-[10%] top-[22%] h-14 w-8 rounded-full bg-[#2f8f46]/20 rotate-12" />
-    <span className="float-slow delay-300 absolute bottom-[14%] left-[18%] h-8 w-14 rounded-full bg-[#f6d48b]/55 -rotate-12" />
-    <span className="pulse-soft absolute bottom-[20%] right-[18%] h-12 w-12 rounded-full border-4 border-[#c92a22]/18" />
-  </div>
-);
-
 export function LunaPizzaHouse() {
   return (
     <main className="brand-motion motion-luna bg-[#fff7e8] text-[#24211d]">
@@ -217,11 +208,12 @@ export function LunaPizzaHouse() {
         mobilePanelClassName="border border-[#c92a22]/15 bg-[#fff7e8]"
       />
 
-      <section className="relative overflow-hidden pt-28 md:pt-36">
-        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,247,232,0.95),rgba(255,247,232,0.68)),radial-gradient(circle_at_14%_22%,rgba(201,42,34,0.2),transparent_25%),radial-gradient(circle_at_86%_16%,rgba(47,143,70,0.18),transparent_23%),radial-gradient(circle_at_72%_86%,rgba(246,212,139,0.5),transparent_28%)]" />
-        <IngredientDots />
-        <FloatingIngredients />
-        <Container className="relative grid items-center gap-12 pb-20 md:grid-cols-[0.94fr_1.06fr] md:pb-28">
+      <section className="relative overflow-hidden bg-[#fff7e8] pt-28 md:pt-36">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(201,42,34,0.08)_1px,transparent_1px),linear-gradient(180deg,rgba(47,143,70,0.08)_1px,transparent_1px)] bg-[size:46px_46px]" />
+        <div className="absolute left-0 top-0 h-full w-7 bg-[#c92a22]" />
+        <div className="absolute right-0 top-0 h-full w-7 bg-[#2f8f46]" />
+        <div className="absolute inset-x-0 top-28 hidden h-4 bg-[repeating-linear-gradient(90deg,#c92a22_0_42px,#fff7e8_42px_84px,#2f8f46_84px_126px)] md:block" />
+        <Container className="relative grid items-center gap-12 pb-20 pt-8 md:grid-cols-[0.9fr_1.1fr] md:pb-28">
           <div>
             <Link
               to="/restaurant"
@@ -230,15 +222,15 @@ export function LunaPizzaHouse() {
               Back to Restaurant Collection
             </Link>
             <p className="inline-flex rounded-full bg-[#2f8f46] px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-white shadow-xl shadow-[#2f8f46]/20">
-              Handmade Pizza &bull; Fresh Ingredients &bull; Family Nights
+              Moon pies, table slices, late-night glow
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[1.02] text-[#24211d] md:text-7xl">
-              Fresh From the Oven, Made for Sharing
+            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.94] text-[#24211d] md:text-7xl">
+              Pizza night with its own orbit.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[#6a5044]">
-              Luna Pizza House serves handcrafted pizzas with bubbly crusts,
-              bright tomato sauce, fresh basil, and a dining room made for
-              family-style meals. Come for one slice, stay for the whole table.
+              Luna Pizza House pulls the table into motion: blistered crusts,
+              bright sauce, basil, hot honey, and shareable pies that pass from
+              hand to hand until the last slice disappears.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row fade-in-up delay-300">
               <CTAButton
@@ -246,7 +238,7 @@ export function LunaPizzaHouse() {
                 size="lg"
                 className="rounded-full bg-[#c92a22] text-white shadow-xl shadow-[#c92a22]/20 hover:bg-[#aa211b] hover:shadow-[#c92a22]/30"
               >
-                View Pizza Menu
+                Choose A Pie
               </CTAButton>
               <CTAButton
                 href="#order"
@@ -254,19 +246,19 @@ export function LunaPizzaHouse() {
                 size="lg"
                 className="rounded-full border-[#2f8f46] bg-white/65 text-[#2f8f46] hover:bg-[#eaf4dc] hover:shadow-[#2f8f46]/15"
               >
-                Order Online
+                Start Pizza Night
               </CTAButton>
             </div>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            <div className="mt-10 grid max-w-xl gap-3 sm:grid-cols-3">
               {[
-                ["14+", "Signature Pizzas"],
-                ["Fresh", "Dough Daily"],
-                ["Family", "Combos"],
+                ["18in", "Table pie"],
+                ["72hr", "Dough rest"],
+                ["9 PM", "Late slices"],
               ].map(([value, label], index) => (
                 <div
                   key={label}
-                  className={`reveal-card rounded-3xl border border-white bg-white/72 p-5 shadow-sm backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#c92a22]/20 hover:shadow-xl ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : ""}`}
+                  className={`reveal-card border-2 border-[#24211d] bg-white p-4 shadow-[5px_5px_0_#24211d] transition-all duration-300 ease-out hover:-translate-y-1 ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : ""}`}
                 >
                   <p className="text-2xl font-black text-[#c92a22] md:text-3xl">
                     {value}
@@ -279,38 +271,42 @@ export function LunaPizzaHouse() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl">
-            <div className="float-slow absolute -left-5 top-10 h-28 w-28 rounded-full bg-[#c92a22]/18 blur-xl" />
-            <div className="pulse-soft absolute -right-4 bottom-16 h-32 w-32 rounded-[2rem] bg-[#2f8f46]/18 blur-sm" />
+          <div className="relative mx-auto min-h-[570px] w-full max-w-xl">
+            <div className="absolute left-1/2 top-8 h-[31rem] w-[31rem] -translate-x-1/2 rounded-full border-[18px] border-[#24211d] bg-[#f6d48b] shadow-[14px_14px_0_#c92a22]" />
             <ImageWithFallback
               image={imageAssets.hero}
-              className="shimmer-soft relative min-h-[460px] rounded-[2rem] border border-white/80 shadow-2xl shadow-[#c92a22]/15"
+              className="absolute left-1/2 top-20 h-[24rem] w-[24rem] -translate-x-1/2 rounded-full border-[22px] border-[#b87536] shadow-inner"
             >
-              <div className="absolute left-8 top-8 rounded-full bg-white/88 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#c92a22] shadow-lg">
-                Oven-fresh tonight
-              </div>
-              <div className="absolute right-8 top-16 grid h-32 w-32 place-items-center rounded-full border-[12px] border-[#f6d48b] bg-[#c92a22] shadow-xl">
-                <div className="h-14 w-14 rounded-full bg-[#f9f2df]" />
-              </div>
-              <div className="absolute bottom-8 left-6 right-6 rounded-[1.5rem] border border-white/70 bg-white/90 p-5 shadow-xl backdrop-blur">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#2f8f46]">
-                  Menu ticket
-                </p>
-                <p className="mt-2 text-2xl font-black text-[#24211d]">
-                  Tonight's favorite: Margherita, pepperoni, veggie.
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {["Garlic knots", "Basil pesto", "Hot honey"].map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full bg-[#fff7e8] px-3 py-1 text-xs font-bold text-[#6a5044]"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_45%_35%,transparent_0_42%,rgba(36,33,29,0.08)_68%,rgba(36,33,29,0.28)_100%)]" />
             </ImageWithFallback>
+            <div className="absolute right-0 top-12 w-48 rotate-[6deg] border-4 border-[#24211d] bg-white p-5 shadow-[7px_7px_0_#24211d]">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#2f8f46]">
+                Table ticket
+              </p>
+              <p className="mt-2 text-2xl font-black text-[#24211d]">
+                Margherita, pepperoni, veggie.
+              </p>
+            </div>
+
+            <div className="absolute bottom-16 left-0 w-52 rotate-[-5deg] border-4 border-[#24211d] bg-[#2f8f46] p-5 text-white shadow-[7px_7px_0_#24211d]">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#f6d48b]">
+                Add-ons
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {["Garlic knots", "Basil pesto", "Hot honey"].map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="absolute bottom-0 right-8 rounded-full bg-[#c92a22] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white shadow-xl">
+              Oven-fresh tonight
+            </div>
           </div>
         </Container>
       </section>

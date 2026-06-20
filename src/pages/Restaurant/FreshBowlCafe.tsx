@@ -27,32 +27,71 @@ export function FreshBowlCafe() {
         mobilePanelClassName="border border-[#dce8c2] bg-[#fbf7ed]"
       />
 
-      <section className="relative overflow-hidden pt-28 md:pt-36">
+      <section className="relative overflow-hidden bg-[#fbf7ed] pt-28 md:pt-36">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(47,143,70,0.08)_1px,transparent_1px),linear-gradient(rgba(159,190,90,0.12)_1px,transparent_1px)] bg-[size:42px_42px]" />
-        <Container className="relative grid items-center gap-12 pb-20 md:grid-cols-2 md:pb-28">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.26em] text-[#2f8f46]">Healthy bowl cafe</p>
-            <h1 className="mt-4 text-5xl font-black leading-tight md:text-7xl">Fresh meals that fit your rhythm.</h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#5f6d61]">
-              Salads, smoothie bowls, and nourishing grain bowls built for bright lunches and everyday wellness.
-            </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <CTAButton href="#order" size="lg" className="bg-[#2f8f46] hover:bg-[#287a3d]">Start Your Order</CTAButton>
-              <CTAButton href="#build" variant="outline" size="lg" className="border-[#2f8f46] text-[#2f8f46] hover:bg-[#eef6dc]">Build a Bowl</CTAButton>
+        <div className="absolute right-0 top-0 h-full w-24 bg-[#eef6dc] md:w-40" />
+        <div className="absolute left-0 bottom-0 h-40 w-40 rounded-full bg-[#9fbe5a]/20" />
+        <Container className="relative grid items-center gap-12 pb-20 pt-8 md:grid-cols-[1.08fr_0.92fr] md:pb-28">
+          <div className="relative mx-auto min-h-[560px] w-full max-w-xl md:order-1">
+            <div className="absolute left-1/2 top-4 h-[30rem] w-[30rem] -translate-x-1/2 rounded-[4rem] bg-white shadow-2xl shadow-[#2f8f46]/10 md:left-0 md:translate-x-0" />
+            <div className="absolute left-1/2 top-14 h-80 w-80 -translate-x-1/2 rounded-full bg-[#eef6dc] md:left-12 md:translate-x-0" />
+            <div className="absolute left-1/2 top-24 h-64 w-64 -translate-x-1/2 overflow-hidden rounded-full border-[18px] border-white bg-[#eef6dc] shadow-inner md:left-20 md:translate-x-0">
+              <img
+                src="/images/freshbowl-cafe/hero-bowl.png"
+                alt="Top-down fresh grain bowl with avocado, greens, chickpeas, herbs, and tahini"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_30%,rgba(255,255,255,0.18),transparent_32%),radial-gradient(circle_at_50%_70%,transparent_52%,rgba(38,51,42,0.18)_100%)]" />
+            </div>
+
+            <div className="absolute left-1/2 top-80 grid w-72 -translate-x-1/2 rotate-[-3deg] grid-cols-2 gap-3 rounded-[2rem] border border-[#dce8c2] bg-white p-4 shadow-xl md:left-2 md:translate-x-0">
+              {[
+                ['Base', 'quinoa'],
+                ['Green', 'kale'],
+                ['Protein', 'chickpea'],
+                ['Sauce', 'tahini'],
+              ].map(([label, value]) => (
+                <div key={label} className="rounded-2xl bg-[#fbf7ed] p-3">
+                  <p className="text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#2f8f46]">{label}</p>
+                  <p className="mt-1 font-black text-[#26332a]">{value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full bg-[#26332a] px-5 py-3 text-center text-sm font-black uppercase tracking-[0.16em] text-white shadow-xl md:left-auto md:right-0 md:translate-x-0 md:text-left">
+              Greens, grains, protein, crunch
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-lg">
-            <div className="aspect-square rounded-[3rem] bg-white p-8 shadow-2xl">
-              <div className="grid h-full grid-cols-2 gap-5">
-                <div className="rounded-full bg-[#2f8f46]" />
-                <div className="rounded-full bg-[#9fbe5a]" />
-                <div className="rounded-full bg-[#f5d37a]" />
-                <div className="rounded-full bg-[#fbf7ed] ring-8 ring-[#dce8c2]" />
-              </div>
+
+          <div className="text-center md:order-2 md:text-right">
+            <p className="text-sm font-black uppercase tracking-[0.26em] text-[#2f8f46]">Healthy bowl cafe</p>
+            <h1 className="mx-auto mt-4 max-w-4xl text-5xl font-black leading-[0.96] md:ml-auto md:mr-0 md:text-7xl">
+              Fresh meals that move at your pace.
+            </h1>
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-[#5f6d61] md:ml-auto md:mr-0">
+              Salads, smoothie bowls, and nourishing grain bowls built for bright lunches, fast pickup,
+              and everyday wellness without the overthinking.
+            </p>
+            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-end">
+              <CTAButton href="#order" size="lg" className="bg-[#2f8f46] hover:bg-[#287a3d]">
+                Start Your Order
+              </CTAButton>
+              <CTAButton href="#build" variant="outline" size="lg" className="border-[#2f8f46] bg-white/65 text-[#2f8f46] hover:bg-[#eef6dc]">
+                Build a Bowl
+              </CTAButton>
             </div>
-            <div className="absolute -bottom-6 left-6 right-6 rounded-3xl bg-[#26332a] p-5 text-white shadow-xl">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#9fbe5a]">Balanced bowls</p>
-              <p className="mt-1 text-2xl font-black">Greens, grains, protein, crunch.</p>
+
+            <div className="mx-auto mt-10 grid max-w-xl gap-3 sm:grid-cols-3 md:ml-auto md:mr-0">
+              {[
+                { value: '15+', label: 'toppings' },
+                { value: '6', label: 'house sauces' },
+                { value: '10m', label: 'pickup window' },
+              ].map((item) => (
+                <div key={item.label} className="border border-[#dce8c2] bg-white/80 p-4 text-center shadow-sm md:text-right">
+                  <p className="text-2xl font-black text-[#2f8f46]">{item.value}</p>
+                  <p className="mt-1 text-xs font-black uppercase tracking-[0.14em] text-[#5f6d61]">{item.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </Container>

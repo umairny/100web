@@ -81,29 +81,6 @@ const testimonials = [
   },
 ]
 
-const StatCard = ({ value, label }: { value: string; label: string }) => (
-  <div className="rounded-3xl border border-[#efd9a8] bg-[#fffaf0]/90 p-5 shadow-sm">
-    <p className="text-2xl font-black text-[#6d3f22] md:text-3xl">{value}</p>
-    <p className="mt-1 text-sm font-bold uppercase tracking-[0.16em] text-[#b3772e]">{label}</p>
-  </div>
-)
-
-const BreadShape = ({ className }: { className: string }) => (
-  <div className={`relative overflow-hidden shadow-lg shadow-[#7a4524]/20 ${className}`}>
-    <span className="absolute left-1/2 top-3 h-12 w-1 -translate-x-1/2 rotate-12 rounded-full bg-white/35" />
-    <span className="absolute left-1/3 top-5 h-10 w-1 rotate-12 rounded-full bg-white/30" />
-    <span className="absolute right-1/3 top-5 h-10 w-1 rotate-12 rounded-full bg-white/30" />
-  </div>
-)
-
-const PastrySwirl = ({ className }: { className: string }) => (
-  <div className={`relative rounded-full shadow-lg shadow-[#7a4524]/20 ${className}`}>
-    <span className="absolute inset-3 rounded-full border-[10px] border-[#8f5429]/35" />
-    <span className="absolute inset-7 rounded-full border-[8px] border-[#fff2cd]/70" />
-    <span className="absolute inset-[46%] rounded-full bg-[#7a4524]" />
-  </div>
-)
-
 export function GoldenCrustBakery() {
   return (
     <main className="brand-motion motion-goldencrust bg-[#fff8e8] text-[#332015]">
@@ -125,10 +102,13 @@ export function GoldenCrustBakery() {
         mobilePanelClassName="border border-[#efd9a8] bg-[#fff8e8]"
       />
 
-      <section className="relative overflow-hidden pt-28 md:pt-36">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_16%,rgba(229,169,57,0.25),transparent_24%),radial-gradient(circle_at_88%_18%,rgba(109,63,34,0.12),transparent_26%),linear-gradient(180deg,#fff8e8_0%,#fff3d6_100%)]" />
-        <div className="absolute inset-0 opacity-45 [background-image:radial-gradient(#d9a545_1px,transparent_1px)] [background-size:26px_26px]" />
-        <Container className="relative grid items-center gap-12 pb-20 md:grid-cols-[0.92fr_1.08fr] md:pb-28">
+      <section className="relative overflow-hidden bg-[#fff8e8] pt-28 md:pt-36">
+        <div className="absolute inset-x-0 top-0 h-24 bg-[#4b2b19]" />
+        <div className="absolute inset-x-0 top-24 h-14 bg-[repeating-linear-gradient(90deg,#e5a939_0_72px,#fff3d6_72px_144px)] shadow-[0_12px_30px_rgba(75,43,25,0.16)]" />
+        <div className="absolute inset-0 top-36 bg-[linear-gradient(180deg,#fff8e8_0%,#fff3d6_54%,#fffaf0_100%)]" />
+        <div className="absolute left-8 top-56 hidden h-72 w-10 rounded-full bg-[#4b2b19]/10 lg:block" />
+        <div className="absolute bottom-16 right-10 hidden h-56 w-56 rounded-full border-[26px] border-[#e5a939]/20 lg:block" />
+        <Container className="relative grid items-center gap-12 pb-20 pt-8 md:grid-cols-[0.9fr_1.1fr] md:pb-28">
           <div>
             <Link
               to="/restaurant"
@@ -139,13 +119,12 @@ export function GoldenCrustBakery() {
             <p className="inline-flex rounded-full bg-[#6d3f22] px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[#ffe7a4] shadow-lg shadow-[#6d3f22]/15">
               Fresh Baked Daily • Artisan Bakery
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[1.02] text-[#332015] md:text-7xl">
-              Golden Bakes, Warm Mornings, Handmade Joy
+            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.94] text-[#332015] md:text-7xl">
+              Follow the butter trail before the city wakes.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[#6d3f22]">
-              Step into the scent of slow-fermented bread, buttery pastries, and just-pulled morning trays.
-              Golden Crust is a neighborhood bakery built for warm hellos, family treats, and handmade quality
-              you can taste in every crumb.
+              Golden Crust turns the first hours of the day into a ritual: scored sourdough, laminated pastry,
+              honey-brushed croissants, and a warm counter that sells out by scent before signage.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <CTAButton
@@ -153,7 +132,7 @@ export function GoldenCrustBakery() {
                 size="lg"
                 className="rounded-full bg-[#e5a939] text-[#332015] shadow-xl shadow-[#b3772e]/20 hover:-translate-y-0.5 hover:bg-[#f1bd55]"
               >
-                View Today's Bakes
+                See The Case
               </CTAButton>
               <CTAButton
                 href="#visit"
@@ -161,64 +140,50 @@ export function GoldenCrustBakery() {
                 size="lg"
                 className="rounded-full border-[#6d3f22] bg-[#fffaf0]/80 text-[#6d3f22] hover:-translate-y-0.5 hover:bg-[#f4dfad]"
               >
-                Visit Bakery
+                Catch First Tray
               </CTAButton>
             </div>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              <StatCard value="30+" label="Daily Bakes" />
-              <StatCard value="5:30 AM" label="Before Sunrise" />
-              <StatCard value="Local" label="Ingredients" />
+            <div className="mt-10 max-w-xl border-y border-[#d8b764] py-5">
+              {[
+                { time: '4:40', label: 'Ovens lit' },
+                { time: '5:30', label: 'First loaves scored' },
+                { time: '7:00', label: 'Croissants hit the window' },
+              ].map((item) => (
+                <div key={item.label} className="grid grid-cols-[4.5rem_1fr] gap-4 border-b border-[#e8cf91] py-3 last:border-b-0">
+                  <p className="font-black text-[#4b2b19]">{item.time}</p>
+                  <p className="text-sm font-black uppercase tracking-[0.16em] text-[#b3772e]">{item.label}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl">
-            <div className="absolute -left-4 top-16 h-28 w-28 rounded-[2rem] bg-[#f2c45d]/45 blur-sm" />
-            <div className="absolute -right-2 bottom-12 h-36 w-36 rounded-full bg-[#6d3f22]/10" />
+          <div className="relative mx-auto min-h-[560px] w-full max-w-xl">
+            <div className="absolute inset-x-6 bottom-4 top-10 rounded-t-[9rem] rounded-b-[2.5rem] bg-[#4b2b19] shadow-2xl shadow-[#6d3f22]/20" />
+            <div className="absolute inset-x-14 top-20 h-72 rounded-t-[7rem] rounded-b-[2rem] border-[10px] border-[#2d1b12] bg-[radial-gradient(circle_at_50%_70%,#f3b24b_0_18%,#8f5429_48%,#3b2115_100%)]" />
+            <div className="absolute inset-x-20 top-40 h-20 rounded-full bg-[#ffe7a4]/25 blur-xl" />
 
-            <div className="relative rounded-[2rem] border border-[#e5c782] bg-[#fffaf0] p-5 shadow-2xl shadow-[#6d3f22]/15 md:p-7">
-              <div className="rounded-[1.5rem] bg-[linear-gradient(135deg,#f9d77c,#fff2cf_46%,#d99a35)] p-4">
-                <div className="rounded-[1.25rem] border border-white/70 bg-[#fff8e8]/85 p-4 shadow-inner">
-                  <div className="mb-4 flex items-center justify-between gap-3">
-                    <div>
-                      <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b3772e]">Bakery Display</p>
-                      <p className="mt-1 text-2xl font-black text-[#4b2b19]">Morning case</p>
-                    </div>
-                    <span className="rounded-full bg-[#4b2b19] px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#ffe7a4]">
-                      Fresh from oven
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="rounded-3xl bg-[#f7dfad] p-4">
-                      <BreadShape className="h-32 rounded-t-[4rem] rounded-b-3xl bg-gradient-to-br from-[#b87536] via-[#d99a35] to-[#fff0bf]" />
-                      <div className="mt-4 h-2 rounded-full bg-[#9f661f]/25" />
-                      <div className="mt-2 h-2 w-2/3 rounded-full bg-[#9f661f]/20" />
-                    </div>
-                    <div className="space-y-4">
-                      <PastrySwirl className="h-24 bg-gradient-to-br from-[#f7c75f] via-[#d89131] to-[#7a4524]" />
-                      <div className="rounded-3xl bg-[#6d3f22] p-4 text-[#fff8e8]">
-                        <p className="text-xs font-black uppercase tracking-[0.18em] text-[#f7c75f]">Recipe note</p>
-                        <p className="mt-2 text-sm font-bold leading-6">
-                          Butter folded cold. Honey brushed warm. Shelves restocked by 9.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="col-span-2 rounded-[1.25rem] bg-[#4b2b19] p-3">
-                      <div className="grid grid-cols-4 gap-3 rounded-2xl bg-[#2d1b12] p-3">
-                        {[1, 2, 3, 4].map((item) => (
-                          <div key={item} className="aspect-square rounded-full bg-gradient-to-br from-[#ffe3a3] via-[#d99a35] to-[#8f5429]" />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="absolute left-12 right-12 top-80 rotate-[-2deg] rounded-[1.25rem] border-4 border-[#2d1b12] bg-[#d8a04a] p-4 shadow-[10px_10px_0_#4b2b19]">
+              <div className="grid grid-cols-4 gap-3">
+                {[1, 2, 3, 4].map((item) => (
+                  <div key={item} className="aspect-square rounded-full bg-gradient-to-br from-[#fff0bf] via-[#d99a35] to-[#8f5429] shadow-inner" />
+                ))}
               </div>
+            </div>
 
-              <div className="absolute -bottom-8 left-6 right-6 rounded-3xl border border-[#efd9a8] bg-white p-5 shadow-xl shadow-[#6d3f22]/15 md:left-auto md:right-8 md:w-72">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b3772e]">Today's first tray</p>
-                <p className="mt-2 text-2xl font-black text-[#332015]">Honey croissants at 7:00 AM</p>
-              </div>
+            <div className="absolute left-2 top-16 w-48 rotate-[-7deg] rounded-[1.5rem] border border-[#efd9a8] bg-[#fffaf0] p-5 shadow-xl">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#b3772e]">Proofing now</p>
+              <p className="mt-2 text-3xl font-black text-[#332015]">Country loaf</p>
+              <p className="mt-2 text-sm leading-6 text-[#6d3f22]">24-hour starter, deep crust, soft center.</p>
+            </div>
+
+            <div className="absolute bottom-14 right-0 w-56 rotate-[5deg] rounded-[1.5rem] bg-[#fffaf0] p-5 shadow-xl">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#b3772e]">First tray</p>
+              <p className="mt-2 text-2xl font-black text-[#332015]">Honey croissants at 7:00 AM</p>
+            </div>
+
+            <div className="absolute bottom-0 left-8 rounded-full bg-[#e5a939] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-[#332015] shadow-lg">
+              Warm case, small batches
             </div>
           </div>
         </Container>

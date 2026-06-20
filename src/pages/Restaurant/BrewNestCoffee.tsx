@@ -108,112 +108,79 @@ export function BrewNestCoffee() {
         mobilePanelClassName="border border-[#d7c7b3] bg-[#fbf6ef]"
       />
 
-      <section className="relative overflow-hidden border-b border-[#e2d4c3] bg-[linear-gradient(180deg,#fbf6ef_0%,#f3e7d7_55%,#f6efe5_100%)] pt-28 md:pt-36">
-        <div className="absolute left-0 top-0 h-72 w-72 rounded-full bg-[#d3b18b]/20 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-[#7f5b43]/10 blur-3xl" />
-        <div className="absolute right-10 top-20 hidden gap-3 md:grid">
-          {Array.from({ length: 12 }).map((_, index) => (
-            <span
-              key={index}
-              className={`h-3 w-5 rounded-full border border-[#8d6748]/20 ${
-                index % 2 === 0 ? 'rotate-12 bg-[#c9ab86]/30' : '-rotate-12 bg-[#a77f5a]/20'
-              }`}
-            />
-          ))}
-        </div>
+      <section className="relative overflow-hidden border-b border-[#e2d4c3] bg-[#f6efe5] pt-28 md:pt-36">
+        <div className="absolute inset-x-0 top-0 h-28 bg-[#2d211a]" />
+        <div className="absolute left-0 top-28 hidden h-full w-24 border-r border-[#dac8b4] bg-[repeating-linear-gradient(180deg,#efe0cd_0_18px,#f8efe4_18px_36px)] lg:block" />
+        <div className="absolute right-0 top-28 hidden h-full w-24 border-l border-[#dac8b4] bg-[repeating-linear-gradient(180deg,#f8efe4_0_18px,#efe0cd_18px_36px)] lg:block" />
 
         <Container className="relative pb-20 md:pb-28">
-          <div className="grid gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+          <div className="rounded-b-[2.5rem] bg-[#2d211a] px-5 pb-6 pt-5 text-[#f6efe5] shadow-[0_26px_70px_rgba(45,33,26,0.2)] md:px-8">
+            <div className="grid gap-4 text-xs font-black uppercase tracking-[0.18em] sm:grid-cols-3">
+              <span className="border-b border-white/15 pb-3 sm:border-b-0 sm:border-r sm:pb-0">BrewNest Coffee</span>
+              <span className="border-b border-white/15 pb-3 text-[#d9b274] sm:border-b-0 sm:border-r sm:pb-0 sm:text-center">Slow bar open daily</span>
+              <span className="sm:text-right">6:30 AM - 7 PM</span>
+            </div>
+          </div>
+
+          <div className="grid gap-12 pt-12 lg:grid-cols-[1.03fr_0.97fr] lg:items-center">
             <div>
               <div className="inline-flex rounded-full border border-[#d9c7b0] bg-white/70 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#8d6748] shadow-sm">
-                Artisan Coffee • Fresh Daily
+                Slow coffee, fresh daily
               </div>
-              <h1 className="mt-6 max-w-3xl text-5xl font-black leading-[1.02] md:text-7xl">
-                BrewNest Coffee
-                <span className="mt-3 block text-[0.72em] leading-[1.08] text-[#6c4a34]">
-                  Crafted Coffee for Slow Mornings & Inspired Days
-                </span>
+              <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.95] text-[#2d211a] md:text-7xl">
+                Coffee that makes the room feel slower.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5f4a3d] md:text-xl">
-                BrewNest is a neighborhood coffee house built around careful roasting, warm hospitality, and the kind of room
-                that invites you to stay for one more cup.
+                BrewNest is designed around the pause: hand-pulled espresso, warm pastry shelves, soft seating, and mornings
+                that do not need to rush themselves out the door.
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <CTAButton href="#menu" size="lg" className="bg-[#2d211a] hover:bg-[#6c4a34]">
-                  Explore Menu
+                  See Today's Menu
                 </CTAButton>
                 <CTAButton
                   href="#visit"
                   variant="outline"
                   size="lg"
-                  className="border-[#8d6748] text-[#6c4a34] hover:bg-white/70"
+                  className="border-[#8d6748] bg-white/50 text-[#6c4a34] hover:bg-white"
                 >
-                  Visit Our Cafe
+                  Plan A Visit
                 </CTAButton>
-              </div>
-              <div className="mt-10 grid gap-3 sm:grid-cols-3">
-                {[
-                  { value: '12+', label: 'Signature Drinks' },
-                  { value: 'Fresh', label: 'Beans Daily' },
-                  { value: 'Local', label: 'Roasters' },
-                ].map((stat) => (
-                  <div key={stat.label} className="rounded-2xl border border-[#e4d6c5] bg-white/75 p-4 shadow-sm">
-                    <p className="text-3xl font-black text-[#2d211a]">{stat.value}</p>
-                    <p className="mt-1 text-xs font-black uppercase tracking-[0.16em] text-[#8d6748]">{stat.label}</p>
-                  </div>
-                ))}
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-2xl">
-              <div className="grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
-                <div className="rounded-[2rem] border border-[#dccbb7] bg-white/80 p-5 shadow-[0_28px_60px_rgba(77,55,38,0.12)] backdrop-blur">
-                  <div className="rounded-[1.6rem] bg-[linear-gradient(145deg,#6c4a34,#9d7451_38%,#e9dccd_39%,#f7efe5_100%)] p-6">
-                    <div className="mx-auto flex aspect-square max-w-[17rem] items-center justify-center rounded-full bg-[#f5ede4] shadow-inner">
-                      <div className="flex h-44 w-44 items-center justify-center rounded-full border-[18px] border-[#4b3528] bg-[#7d583f] shadow-xl">
-                        <div className="h-20 w-24 rounded-b-[3rem] rounded-t-[2rem] border-4 border-[#f0dfc7] bg-[#f5ede4]" />
-                      </div>
-                    </div>
-                    <div className="mt-6 rounded-2xl bg-white/75 p-4">
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8d6748]">House Pour</p>
-                      <p className="mt-2 text-2xl font-black text-[#2d211a]">Velvet Roast Latte</p>
-                      <p className="mt-2 text-sm leading-6 text-[#5f4a3d]">Soft caramel sweetness, balanced espresso, and a silky finish.</p>
-                    </div>
-                  </div>
+            <div className="relative mx-auto min-h-[540px] w-full max-w-xl">
+              <div className="absolute left-1/2 top-8 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-[#efe0cd]" />
+              <div className="absolute left-1/2 top-16 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full border border-[#d8c4ac] bg-[#fbf6ef] shadow-[0_26px_60px_rgba(77,55,38,0.12)]" />
+              <div className="absolute left-1/2 top-24 h-[16rem] w-[16rem] -translate-x-1/2 rounded-full bg-[#6c4a34] p-8 shadow-inner">
+                <div className="h-full rounded-full border-[18px] border-[#2d211a] bg-[#8d6748]">
+                  <div className="mx-auto mt-16 h-20 w-28 rounded-b-[4rem] rounded-t-[2rem] bg-[#f5eadb]" />
                 </div>
+              </div>
 
-                <div className="space-y-4">
-                  <div className="rounded-[2rem] border border-[#dccbb7] bg-[#2d211a] p-5 text-white shadow-xl">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#d9b274]">Morning Menu</p>
-                    <div className="mt-5 space-y-4 text-sm">
-                      <div className="flex justify-between gap-4 border-b border-white/10 pb-3">
-                        <span>Espresso</span>
-                        <span>$4</span>
-                      </div>
-                      <div className="flex justify-between gap-4 border-b border-white/10 pb-3">
-                        <span>Flat White</span>
-                        <span>$5.75</span>
-                      </div>
-                      <div className="flex justify-between gap-4">
-                        <span>Croissant</span>
-                        <span>$4.50</span>
-                      </div>
-                    </div>
+              <div className="absolute left-6 top-3 w-44 rotate-[-7deg] border border-[#dac8b4] bg-white p-4 shadow-lg">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8d6748]">Today</p>
+                <p className="mt-2 text-2xl font-black text-[#2d211a]">Velvet Roast</p>
+                <p className="mt-2 text-sm leading-6 text-[#5f4a3d]">Caramel, cocoa, low acidity</p>
+              </div>
+
+              <div className="absolute right-2 top-64 w-48 rotate-[5deg] rounded-t-[2rem] border border-[#dac8b4] bg-[#2d211a] p-5 text-white shadow-xl">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#d9b274]">Queue</p>
+                <p className="mt-2 text-4xl font-black">07</p>
+                <p className="mt-2 text-sm text-white/70">cups ahead, worth the wait</p>
+              </div>
+
+              <div className="absolute bottom-0 left-1/2 grid w-[92%] -translate-x-1/2 gap-3 rounded-[2rem] border border-[#dac8b4] bg-white/88 p-4 shadow-xl backdrop-blur sm:grid-cols-3">
+                {[
+                  { value: '12+', label: 'Signature drinks' },
+                  { value: 'Fresh', label: 'Beans daily' },
+                  { value: 'Local', label: 'Roasters' },
+                ].map((stat) => (
+                  <div key={stat.label} className="rounded-2xl bg-[#f6efe5] p-4">
+                    <p className="text-2xl font-black text-[#2d211a]">{stat.value}</p>
+                    <p className="mt-1 text-[0.68rem] font-black uppercase tracking-[0.14em] text-[#8d6748]">{stat.label}</p>
                   </div>
-                  <div className="rounded-[2rem] border border-[#dccbb7] bg-white/85 p-5 shadow-lg">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8d6748]">Opening Hours</p>
-                    <div className="mt-4 space-y-3 text-sm text-[#5f4a3d]">
-                      <div className="flex justify-between gap-3">
-                        <span>Mon - Fri</span>
-                        <span className="font-bold">6:30 AM - 7 PM</span>
-                      </div>
-                      <div className="flex justify-between gap-3">
-                        <span>Sat - Sun</span>
-                        <span className="font-bold">7 AM - 8 PM</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
