@@ -27,28 +27,72 @@ export function BurgerCraft() {
         mobilePanelClassName="border border-[#202020]/10 bg-[#fff3d7]"
       />
 
-      <section className="relative overflow-hidden pt-28 md:pt-36">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(32,32,32,0.08)_1px,transparent_1px),linear-gradient(rgba(217,45,32,0.08)_1px,transparent_1px)] bg-[size:38px_38px]" />
-        <Container className="relative grid items-center gap-12 pb-20 md:grid-cols-[1fr_0.95fr] md:pb-28">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-[#d92d20]">Gourmet burger restaurant</p>
-            <h1 className="mt-4 text-5xl font-black leading-none md:text-7xl">BurgerCraft stacks big flavor by hand.</h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#5f4c34]">
-              Crispy edges, toasted buns, pickle crunch, and street-food energy for casual dinners that do not play it safe.
-            </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <CTAButton href="#order" size="lg" className="bg-[#d92d20] hover:bg-[#b9241a]">Order Now</CTAButton>
-              <CTAButton href="#burgers" variant="outline" size="lg" className="border-[#202020] text-[#202020] hover:bg-[#f3b53f]/30">See Burgers</CTAButton>
+      <section className="relative overflow-hidden bg-[#fff3d7] pt-28 md:pt-36">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(32,32,32,0.08)_1px,transparent_1px),linear-gradient(rgba(217,45,32,0.08)_1px,transparent_1px)] bg-[size:42px_42px]" />
+        <div className="absolute -left-24 top-24 h-48 w-48 rounded-full border-[28px] border-[#d92d20]/15" />
+        <div className="absolute bottom-10 right-0 hidden h-40 w-40 rotate-12 bg-[#3f8f3a]/15 md:block" />
+
+        <Container className="relative pb-16 md:pb-24">
+          <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
+            <div className="pb-6">
+              <div className="inline-flex -rotate-2 border-4 border-[#202020] bg-[#f3b53f] px-4 py-2 text-xs font-black uppercase tracking-[0.2em] shadow-[5px_5px_0_#202020]">
+                Griddle-first burger lab
+              </div>
+              <h1 className="mt-7 max-w-4xl text-[4.6rem] font-black uppercase leading-[0.82] md:text-[7.4rem] lg:text-[8.2rem]">
+                Built
+                <span className="block text-[#d92d20]">to drip.</span>
+              </h1>
+              <p className="mt-7 max-w-2xl border-l-4 border-[#202020] pl-5 text-lg font-bold leading-8 text-[#5f4c34] md:text-xl">
+                Smash patties hit the steel, sauces get mixed like signatures, and every stack leaves the counter with its own messy little swagger.
+              </p>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <CTAButton href="#order" size="lg" className="bg-[#d92d20] text-white shadow-[6px_6px_0_#202020] hover:bg-[#b9241a]">
+                  Start My Stack
+                </CTAButton>
+                <CTAButton href="#build" variant="outline" size="lg" className="border-[#202020] bg-white text-[#202020] shadow-[6px_6px_0_#202020] hover:bg-[#f3b53f]">
+                  Build The Bite
+                </CTAButton>
+              </div>
             </div>
-          </div>
-          <div className="relative min-h-[430px]">
-            <div className="absolute left-8 right-8 top-8 h-16 rounded-full bg-[#f3b53f] shadow-2xl" />
-            <div className="absolute left-0 right-0 top-28 h-20 rounded-3xl bg-[#d92d20] shadow-2xl" />
-            <div className="absolute left-10 right-10 top-52 h-16 rounded-2xl bg-[#3f8f3a] shadow-2xl" />
-            <div className="absolute bottom-12 left-4 right-4 h-24 rounded-full bg-[#f3b53f] shadow-2xl" />
-            <div className="absolute bottom-0 right-0 rounded-2xl bg-[#202020] p-5 text-white shadow-xl">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f3b53f]">Made loud</p>
-              <p className="mt-1 text-2xl font-black">Smash, stack, sauce.</p>
+
+            <div className="relative min-h-[560px] overflow-hidden border-4 border-[#202020] bg-[#fff9e9] shadow-[12px_12px_0_#202020]">
+              <div className="absolute left-0 top-0 z-10 flex w-full items-center justify-between border-b-4 border-[#202020] bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.16em]">
+                <span>Order 047</span>
+                <span className="text-[#d92d20]">Open flame attitude</span>
+              </div>
+
+              <div className="absolute left-6 top-24 z-20 rotate-[-5deg] border-4 border-[#202020] bg-[#d92d20] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white shadow-[5px_5px_0_#202020]">
+                House sauce
+              </div>
+              <div className="absolute right-6 top-28 z-20 rotate-[6deg] border-4 border-[#202020] bg-[#3f8f3a] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white shadow-[5px_5px_0_#202020]">
+                Pickle snap
+              </div>
+              <div className="absolute bottom-24 left-6 z-20 rotate-[4deg] border-4 border-[#202020] bg-white px-5 py-3 text-sm font-black uppercase tracking-[0.16em] shadow-[5px_5px_0_#202020]">
+                Double smash
+              </div>
+
+              <div className="absolute left-1/2 top-[5.8rem] h-[29rem] w-[29rem] -translate-x-1/2 rounded-full bg-[#f3b53f]/25" />
+              <div className="absolute left-1/2 top-[7.6rem] h-20 w-[70%] -translate-x-1/2 rounded-t-[8rem] rounded-b-[2rem] border-4 border-[#202020] bg-[#f3b53f] shadow-[0_12px_0_#202020]" />
+              <div className="absolute left-1/2 top-[10.3rem] h-5 w-[62%] -translate-x-1/2 rounded-full bg-white/55" />
+
+              <div className="absolute left-1/2 top-[14.2rem] h-14 w-[82%] -translate-x-1/2 rotate-[-2deg] rounded-[2rem] border-4 border-[#202020] bg-[#d92d20] shadow-[7px_7px_0_#202020]" />
+              <div className="absolute left-1/2 top-[17.6rem] h-11 w-[76%] -translate-x-1/2 rotate-[2deg] rounded-[1.5rem] border-4 border-[#202020] bg-[#f7dc56] shadow-[7px_7px_0_#202020]" />
+              <div className="absolute left-1/2 top-[20.2rem] h-16 w-[86%] -translate-x-1/2 rotate-[-1deg] rounded-[2rem] border-4 border-[#202020] bg-[#6b2f20] shadow-[8px_8px_0_#202020]" />
+              <div className="absolute left-1/2 top-[23.9rem] h-12 w-[78%] -translate-x-1/2 rotate-[2deg] rounded-[1.5rem] border-4 border-[#202020] bg-[#3f8f3a] shadow-[7px_7px_0_#202020]" />
+              <div className="absolute left-1/2 top-[27rem] h-20 w-[72%] -translate-x-1/2 rounded-b-[8rem] rounded-t-[2rem] border-4 border-[#202020] bg-[#f3b53f] shadow-[8px_8px_0_#202020]" />
+
+              <div className="absolute bottom-0 left-0 right-0 grid border-t-4 border-[#202020] bg-[#202020] text-white sm:grid-cols-3">
+                {[
+                  { value: '3 min', label: 'Griddle sear' },
+                  { value: '8', label: 'Sauces mixed' },
+                  { value: '$15', label: 'Classic stack' },
+                ].map((stat) => (
+                  <div key={stat.label} className="border-b border-white/15 p-5 sm:border-b-0 sm:border-r sm:last:border-r-0">
+                    <p className="text-3xl font-black text-[#f3b53f]">{stat.value}</p>
+                    <p className="mt-1 text-xs font-black uppercase tracking-[0.16em] text-white/70">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </Container>

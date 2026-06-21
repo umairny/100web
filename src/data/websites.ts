@@ -62,16 +62,18 @@ export const categories: CategoryInfo[] = [
   {
     name: "Real Estate",
     description: "Property agents, real estate agencies, and developers",
-    icon: "🏠",
+    icon: "\uD83C\uDFE0",
     color: "from-blue-500 to-cyan-500",
     image: "/images/home/real-estate-preview.png",
+    href: "/real-estate",
   },
   {
     name: "Fitness",
     description: "Gyms, personal trainers, wellness centers",
-    icon: "💪",
+    icon: "\uD83D\uDCAA",
     color: "from-green-500 to-emerald-500",
     image: "/images/home/fitness-preview.png",
+    href: "/fitness",
   },
   {
     name: "Medical",
@@ -442,9 +444,47 @@ export const beautyWebsites: WebsiteDesign[] = [
   },
 ];
 
+export const realEstateWebsites: WebsiteDesign[] = [
+  {
+    id: 'skyline-realty-group',
+    title: 'Skyline Realty Group',
+    category: 'Real Estate',
+    style: 'premium, trustworthy, editorial, city-focused',
+    shortDescription: 'Modern real estate agency for curated listings, seller strategy, and neighborhood confidence',
+    slug: 'skyline-realty-group',
+    colors: {
+      primary: '#153e75',
+      secondary: '#eff6ff',
+      accent: '#f59e0b',
+      dark: '#0f172a',
+    },
+    status: 'completed',
+  },
+]
+
+export const fitnessWebsites: WebsiteDesign[] = [
+  {
+    id: 'pulseforge-fitness',
+    title: 'PulseForge Fitness',
+    category: 'Fitness',
+    style: 'high-energy, disciplined, modern, performance-focused',
+    shortDescription: 'Strength and conditioning gym with coaching, class schedules, transformation proof, and trial membership flow',
+    slug: 'pulseforge-fitness',
+    colors: {
+      primary: '#14532d',
+      secondary: '#ecfdf5',
+      accent: '#f97316',
+      dark: '#111827',
+    },
+    status: 'completed',
+  },
+]
+
 export const allWebsites: WebsiteDesign[] = [
   ...restaurantWebsites,
   ...beautyWebsites,
+  ...realEstateWebsites,
+  ...fitnessWebsites,
   // Other categories will be added later
 ];
 
@@ -464,3 +504,4 @@ export function getWebsiteBySlug(
       website.slug === slug,
   );
 }
+

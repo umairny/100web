@@ -27,29 +27,69 @@ export function MorningLeafTea() {
         mobilePanelClassName="border border-[#d9ccb1] bg-[#fbf7ea]"
       />
 
-      <section className="relative overflow-hidden pt-28 md:pt-36">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(143,163,122,0.24),transparent_24%),radial-gradient(circle_at_84%_18%,rgba(192,161,90,0.16),transparent_22%)]" />
-        <Container className="relative grid items-center gap-12 pb-20 md:grid-cols-[0.95fr_1.05fr] md:pb-28">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-[#8fa37a]">Tea house and wellness cafe</p>
-            <h1 className="mt-4 text-5xl font-black leading-tight md:text-7xl">MorningLeaf Tea for slower, softer mornings.</h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#6f5b45]">
-              Herbal blends, quiet tables, and a peaceful ritual for people who want their cafe time to feel intentional.
-            </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <CTAButton href="#visit" size="lg" className="bg-[#8fa37a] hover:bg-[#768b65]">Visit the Tea House</CTAButton>
-              <CTAButton href="#blends" variant="outline" size="lg" className="border-[#8fa37a] text-[#6f8261] hover:bg-white/70">Explore Blends</CTAButton>
-            </div>
-          </div>
-          <div className="relative mx-auto w-full max-w-lg">
-            <div className="aspect-[4/5] rounded-[3rem] bg-white p-8 shadow-2xl">
-              <div className="h-full rounded-[2.5rem] bg-[linear-gradient(160deg,#8fa37a,#fbf7ea_45%,#c0a15a)] p-8">
-                <div className="h-full rounded-full border-[18px] border-white/55" />
+      <section className="relative overflow-hidden bg-[#fbf7ea] pt-28 md:pt-36">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(111,130,97,0.08)_1px,transparent_1px),linear-gradient(180deg,rgba(192,161,90,0.08)_1px,transparent_1px)] bg-[size:54px_54px]" />
+        <div className="absolute left-1/2 top-0 hidden h-full w-px bg-[#d9ccb1]/70 lg:block" />
+        <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-[#8fa37a]/12" />
+        <Container className="relative pb-20 pt-8 md:pb-28">
+          <div className="mx-auto max-w-6xl">
+            <div className="mx-auto max-w-4xl text-center">
+              <p className="inline-flex rounded-full border border-[#d9ccb1] bg-white/75 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[#8fa37a]">
+                Botanical tea house
+              </p>
+              <h1 className="mx-auto mt-6 max-w-4xl text-5xl font-black leading-[0.96] text-[#4b3d2f] md:text-7xl">
+                A softer morning, poured one leaf at a time.
+              </h1>
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#6f5b45]">
+                MorningLeaf slows the cafe ritual down with herbal blends, low-caffeine cups, quiet tables,
+                and steep times that turn a drink into a small reset.
+              </p>
+              <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+                <CTAButton href="#visit" size="lg" className="bg-[#8fa37a] hover:bg-[#768b65]">
+                  Find a Quiet Table
+                </CTAButton>
+                <CTAButton href="#blends" variant="outline" size="lg" className="border-[#8fa37a] bg-white/55 text-[#6f8261] hover:bg-white">
+                  Browse Blends
+                </CTAButton>
               </div>
             </div>
-            <div className="absolute -bottom-6 left-8 right-8 rounded-3xl bg-[#4b3d2f] p-5 text-[#fbf7ea] shadow-xl">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#c0a15a]">Steeped slowly</p>
-              <p className="mt-1 text-2xl font-black">A quiet cup, brewed to order.</p>
+
+            <div className="relative mx-auto mt-12 min-h-[560px] w-full max-w-4xl">
+              <div className="absolute left-1/2 top-10 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-[#f4ecd8]" />
+              <div className="absolute left-1/2 top-32 h-72 w-72 -translate-x-1/2 rounded-full border-[24px] border-white bg-[radial-gradient(circle_at_48%_46%,#c0a15a_0_10%,#8fa37a_11%_42%,#5d714f_43%_100%)] shadow-2xl shadow-[#6f8261]/15" />
+              <div className="absolute left-1/2 top-[21rem] h-16 w-96 -translate-x-1/2 rounded-full bg-[#4b3d2f]/15" />
+
+              <div className="absolute left-[42%] top-0 h-24 w-1 rounded-full bg-[#8fa37a]/35" />
+              <div className="absolute left-1/2 top-2 h-28 w-1 -translate-x-1/2 rounded-full bg-[#c0a15a]/40" />
+              <div className="absolute right-[42%] top-0 h-24 w-1 rounded-full bg-[#8fa37a]/35" />
+
+              <div className="absolute left-0 top-24 w-52 rotate-[-4deg] rounded-[2rem] border border-[#d9ccb1] bg-white p-5 text-left shadow-xl md:left-16">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8fa37a]">House blend</p>
+                <p className="mt-2 text-2xl font-black text-[#4b3d2f]">Sage Morning</p>
+                <p className="mt-2 text-sm leading-6 text-[#6f5b45]">Green tea, pear, sage, muted citrus.</p>
+              </div>
+
+              <div className="absolute right-0 top-24 w-52 rotate-[4deg] rounded-[2rem] bg-[#4b3d2f] p-5 text-left text-[#fbf7ea] shadow-xl md:right-16">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#c0a15a]">Ritual card</p>
+                <p className="mt-2 text-2xl font-black">Water at 175F. Wait for quiet.</p>
+              </div>
+
+              <div className="absolute bottom-28 left-1/2 grid w-full max-w-2xl -translate-x-1/2 gap-3 px-4 sm:grid-cols-3">
+                {[
+                  { value: '3-5', label: 'minute steep' },
+                  { value: '0-40', label: 'mg caffeine' },
+                  { value: 'Daily', label: 'herbal flights' },
+                ].map((item) => (
+                  <div key={item.label} className="border border-[#d9ccb1] bg-white/80 p-4 text-center shadow-sm">
+                    <p className="text-2xl font-black text-[#6f8261]">{item.value}</p>
+                    <p className="mt-1 text-xs font-black uppercase tracking-[0.14em] text-[#6f5b45]">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full bg-[#c0a15a] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white shadow-lg">
+                Brewed to order
+              </div>
             </div>
           </div>
         </Container>

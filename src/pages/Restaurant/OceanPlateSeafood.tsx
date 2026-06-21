@@ -27,29 +27,69 @@ export function OceanPlateSeafood() {
         mobilePanelClassName="border border-[#d7e8e8] bg-white"
       />
 
-      <section className="relative overflow-hidden pt-28 md:pt-36">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_24%,rgba(57,182,200,0.2),transparent_24%),radial-gradient(circle_at_86%_18%,rgba(244,234,213,0.9),transparent_28%)]" />
-        <Container className="relative grid items-center gap-12 pb-20 md:grid-cols-[1fr_0.95fr] md:pb-28">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-[#39b6c8]">Fresh coastal seafood</p>
-            <h1 className="mt-4 text-5xl font-black leading-tight md:text-7xl">OceanPlate Seafood serves the coast with polish.</h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-[#496371]">
-              Fresh catch, relaxed dining, premium plates, and a clean coastal room built for lunch, dinner, and sunset reservations.
+      <section className="relative overflow-hidden bg-[#f7fbfb] pt-28 md:pt-36">
+        <div className="absolute inset-x-0 top-0 h-1/2 bg-[linear-gradient(180deg,#dff6f8_0%,#f7fbfb_100%)]" />
+        <div className="absolute inset-x-0 top-[46%] h-20 bg-[repeating-linear-gradient(0deg,rgba(57,182,200,0.22)_0_2px,transparent_2px_12px)]" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-[#f4ead5]" />
+        <div className="absolute left-1/2 top-[42%] h-px w-[92%] -translate-x-1/2 bg-[#075985]/20" />
+        <Container className="relative pb-20 pt-8 md:pb-28">
+          <div className="mx-auto max-w-5xl text-center">
+            <p className="inline-flex rounded-full border border-[#d7e8e8] bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.24em] text-[#39b6c8] shadow-sm">
+              Fresh catch and raw bar
             </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <CTAButton href="#reserve" size="lg" className="bg-[#075985] hover:bg-[#063047]">Reserve or Order</CTAButton>
-              <CTAButton href="#catch" variant="outline" size="lg" className="border-[#39b6c8] text-[#075985] hover:bg-[#e9f8fa]">View Fresh Catch</CTAButton>
+            <h1 className="mx-auto mt-6 max-w-5xl text-5xl font-black leading-[0.95] text-[#063047] md:text-7xl">
+              Seafood timed to the tide, plated for sunset.
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#496371]">
+              OceanPlate brings the day boat into a polished coastal room: oysters on ice, citrus scallops,
+              grilled fish, clean cocktails, and tables that feel close to the water.
+            </p>
+            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+              <CTAButton href="#reserve" size="lg" className="bg-[#075985] hover:bg-[#063047]">
+                Reserve by the Water
+              </CTAButton>
+              <CTAButton href="#catch" variant="outline" size="lg" className="border-[#39b6c8] bg-white/65 text-[#075985] hover:bg-[#e9f8fa]">
+                See Today's Catch
+              </CTAButton>
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-lg">
-            <div className="aspect-[4/5] overflow-hidden rounded-[3rem] bg-[#f4ead5] p-8 shadow-2xl">
-              <div className="h-full rounded-[2.5rem] bg-[linear-gradient(180deg,#075985,#39b6c8_42%,#f4ead5_43%)]">
-                <div className="h-full bg-[radial-gradient(circle_at_30%_34%,rgba(255,255,255,0.65),transparent_12%),radial-gradient(circle_at_68%_54%,rgba(255,127,98,0.55),transparent_10%)]" />
-              </div>
+
+          <div className="relative mx-auto mt-14 min-h-[520px] max-w-5xl">
+            <div className="absolute left-1/2 top-20 h-80 w-[44rem] max-w-[92vw] -translate-x-1/2 rounded-[50%] bg-white shadow-2xl shadow-[#075985]/12" />
+            <div className="absolute left-1/2 top-32 h-56 w-[34rem] max-w-[78vw] -translate-x-1/2 rounded-[50%] bg-[#e9f8fa] shadow-inner" />
+            <div className="absolute left-1/2 top-44 grid w-[28rem] max-w-[70vw] -translate-x-1/2 grid-cols-5 gap-3">
+              {[0, 1, 2, 3, 4].map((item) => (
+                <div key={item} className="aspect-square rounded-full border-[10px] border-[#075985] bg-[radial-gradient(circle,#f7fbfb_0_28%,#ff7f62_29%_42%,#f4ead5_43%_100%)] shadow-md" />
+              ))}
             </div>
-            <div className="absolute -bottom-6 left-8 right-8 rounded-3xl bg-white p-5 shadow-xl">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#39b6c8]">Today's landing</p>
-              <p className="mt-1 text-2xl font-black">Oysters, scallops, salmon.</p>
+            <div className="absolute left-1/2 top-72 h-16 w-[30rem] max-w-[76vw] -translate-x-1/2 rounded-full bg-[#063047]/10" />
+
+            <div className="absolute left-0 top-16 w-56 rotate-[-4deg] rounded-[1.75rem] border border-[#d7e8e8] bg-white p-5 text-left shadow-xl md:left-10">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#39b6c8]">Today's landing</p>
+              <p className="mt-2 text-2xl font-black text-[#063047]">Oysters, scallops, salmon.</p>
+              <p className="mt-2 text-sm leading-6 text-[#496371]">Bright, cold, and cut close to service.</p>
+            </div>
+
+            <div className="absolute right-0 top-20 w-56 rotate-[4deg] rounded-[1.75rem] bg-[#075985] p-5 text-left text-white shadow-xl md:right-10">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#aeeaf0]">Tide note</p>
+              <p className="mt-2 text-2xl font-black">Raw bar opens at 4 PM.</p>
+            </div>
+
+            <div className="absolute bottom-24 left-1/2 grid w-full max-w-2xl -translate-x-1/2 gap-3 px-4 sm:grid-cols-3">
+              {[
+                { value: '12', label: 'oyster varieties' },
+                { value: '4 PM', label: 'raw bar' },
+                { value: 'Sunset', label: 'dinner tables' },
+              ].map((item) => (
+                <div key={item.label} className="border border-[#d7e8e8] bg-white/85 p-4 text-center shadow-sm">
+                  <p className="text-2xl font-black text-[#075985]">{item.value}</p>
+                  <p className="mt-1 text-xs font-black uppercase tracking-[0.14em] text-[#496371]">{item.label}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full bg-[#39b6c8] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white shadow-lg">
+              Coastal table service
             </div>
           </div>
         </Container>
