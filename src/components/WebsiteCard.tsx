@@ -7,7 +7,7 @@ interface WebsiteCardProps {
 
 export function WebsiteCard({ website }: WebsiteCardProps) {
   const isCompleted = website.status === 'completed' || website.status === 'live'
-  const categoryPath = website.category.toLowerCase()
+  const categoryPath = website.category.toLowerCase().replace(/\s+/g, '-')
   const routePath = `/${categoryPath}/${website.slug}`
 
   return (
@@ -32,7 +32,15 @@ export function WebsiteCard({ website }: WebsiteCardProps) {
           backgroundImage: `linear-gradient(135deg, ${website.colors.primary} 0%, ${website.colors.accent} 100%)`,
         }}
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.35),transparent_24%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.22),transparent_28%)]" />
+        {website.image && (
+          <img
+            src={website.image}
+            alt={`${website.title} website preview`}
+            className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+        )}
+        <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-black/45 via-black/5 to-transparent' : 'bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.35),transparent_24%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.22),transparent_28%)]'}`} />
         <div className="absolute bottom-4 left-4 flex gap-2">
           {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => (
             <span

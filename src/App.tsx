@@ -7,10 +7,23 @@ import { BlushBeautyBar } from './pages/Beauty/BlushBeautyBar'
 import { GlowHausSalon } from './pages/Beauty/GlowHausSalon'
 import { LuxeNailStudio } from './pages/Beauty/LuxeNailStudio'
 import { SerenitySpa } from './pages/Beauty/SerenitySpa'
+import { VelvetSkinClinic } from './pages/Beauty/VelvetSkinClinic'
+import { ConstructionIndex } from './pages/Construction/ConstructionIndex'
+import { ForgePointBuilders } from './pages/Construction/ForgePointBuilders'
+import { CartBloomMarket } from './pages/Ecommerce/CartBloomMarket'
+import { EcommerceIndex } from './pages/Ecommerce/EcommerceIndex'
+import { EducationIndex } from './pages/Education/EducationIndex'
+import { LearnSphereAcademy } from './pages/Education/LearnSphereAcademy'
 import { FitnessIndex } from './pages/Fitness/FitnessIndex'
+import { HarborHealthClinic } from './pages/Medical/HarborHealthClinic'
+import { MedicalIndex } from './pages/Medical/MedicalIndex'
 import { PulseForgeFitness } from './pages/Fitness/PulseForgeFitness'
+import { PortfolioIndex } from './pages/Portfolio/PortfolioIndex'
+import { StudioValeCreative } from './pages/Portfolio/StudioValeCreative'
 import { RealEstateIndex } from './pages/RealEstate/RealEstateIndex'
 import { SkylineRealtyGroup } from './pages/RealEstate/SkylineRealtyGroup'
+import { FlowPilotCRM } from './pages/SaaS/FlowPilotCRM'
+import { SaaSIndex } from './pages/SaaS/SaaSIndex'
 import { BrewNestCoffee } from './pages/Restaurant/BrewNestCoffee'
 import { BurgerCraft } from './pages/Restaurant/BurgerCraft'
 import { EmberSteakhouse } from './pages/Restaurant/EmberSteakhouse'
@@ -30,7 +43,13 @@ function AppShell() {
     (pathname.startsWith('/restaurant/') && pathname !== '/restaurant') ||
     (pathname.startsWith('/beauty/') && pathname !== '/beauty') ||
     (pathname.startsWith('/real-estate/') && pathname !== '/real-estate') ||
-    (pathname.startsWith('/fitness/') && pathname !== '/fitness')
+    (pathname.startsWith('/fitness/') && pathname !== '/fitness') ||
+    (pathname.startsWith('/medical/') && pathname !== '/medical') ||
+    (pathname.startsWith('/construction/') && pathname !== '/construction') ||
+    (pathname.startsWith('/education/') && pathname !== '/education') ||
+    (pathname.startsWith('/e-commerce/') && pathname !== '/e-commerce') ||
+    (pathname.startsWith('/portfolio/') && pathname !== '/portfolio') ||
+    (pathname.startsWith('/saas/') && pathname !== '/saas')
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 })
@@ -47,10 +66,23 @@ function AppShell() {
           <Route path="/beauty/luxe-nail-studio" element={<LuxeNailStudio />} />
           <Route path="/beauty/serenity-spa" element={<SerenitySpa />} />
           <Route path="/beauty/blush-beauty-bar" element={<BlushBeautyBar />} />
+          <Route path="/beauty/velvet-skin-clinic" element={<VelvetSkinClinic />} />
           <Route path="/real-estate" element={<RealEstateIndex />} />
           <Route path="/real-estate/skyline-realty-group" element={<SkylineRealtyGroup />} />
           <Route path="/fitness" element={<FitnessIndex />} />
           <Route path="/fitness/pulseforge-fitness" element={<PulseForgeFitness />} />
+          <Route path="/medical" element={<MedicalIndex />} />
+          <Route path="/medical/harbor-health-clinic" element={<HarborHealthClinic />} />
+          <Route path="/construction" element={<ConstructionIndex />} />
+          <Route path="/construction/forgepoint-builders" element={<ForgePointBuilders />} />
+          <Route path="/education" element={<EducationIndex />} />
+          <Route path="/education/learnsphere-academy" element={<LearnSphereAcademy />} />
+          <Route path="/e-commerce" element={<EcommerceIndex />} />
+          <Route path="/e-commerce/cartbloom-market" element={<CartBloomMarket />} />
+          <Route path="/portfolio" element={<PortfolioIndex />} />
+          <Route path="/portfolio/studio-vale-creative" element={<StudioValeCreative />} />
+          <Route path="/saas" element={<SaaSIndex />} />
+          <Route path="/saas/flowpilot-crm" element={<FlowPilotCRM />} />
           <Route path="/restaurant" element={<RestaurantIndex />} />
           <Route path="/restaurant/brewnest-coffee" element={<BrewNestCoffee />} />
           <Route path="/restaurant/urbanbite-kitchen" element={<UrbanBiteKitchen />} />

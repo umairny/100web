@@ -1,4 +1,4 @@
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const navLinks = [
   { label: 'Listings', href: '#listings' },
@@ -43,7 +43,7 @@ const sellerSteps = [
 export function SkylineRealtyGroup() {
   return (
     <main className="bg-[#f5f8fb] text-[#0f172a]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="Skyline Realty"
         links={navLinks}
         ctaLabel="Book Consult"

@@ -1,4 +1,4 @@
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const navLinks = [
   { label: 'Programs', href: '#programs' },
@@ -29,7 +29,7 @@ const results = [
 export function PulseForgeFitness() {
   return (
     <main className="bg-[#f3fbf6] text-[#111827]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="PulseForge"
         links={navLinks}
         ctaLabel="Start Trial"

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const catches = [
   { name: 'Citrus Seared Scallops', detail: 'Aqua herb oil, lemon cream, shaved fennel' },
@@ -10,7 +10,7 @@ const catches = [
 export function OceanPlateSeafood() {
   return (
     <main className="brand-motion motion-oceanplate bg-white text-[#063047]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="OceanPlate Seafood"
         links={[
           { label: 'Fresh Catch', href: '#catch' },

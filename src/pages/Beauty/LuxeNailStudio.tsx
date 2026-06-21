@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const styles = ['Pearl chrome', 'Soft french', 'Gold line art']
 
 export function LuxeNailStudio() {
   return (
     <main className="brand-motion motion-luxenail bg-[#fffdf9] text-[#191919]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="Luxe Nail Studio"
         collectionPath="/beauty"
         links={[{ label: 'Services', href: '#services' }, { label: 'Styles', href: '#styles' }, { label: 'Packages', href: '#packages' }]}

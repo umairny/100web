@@ -83,11 +83,13 @@ function CategoryMenu({
   currentHash,
   onNavigate,
   className = 'grid gap-2',
+  compact = false,
 }: {
   pathname: string
   currentHash: string
   onNavigate?: () => void
   className?: string
+  compact?: boolean
 }) {
   return (
     <div className={className}>
@@ -99,24 +101,28 @@ function CategoryMenu({
             key={link.label}
             to={link.href}
             onClick={onNavigate}
-            className={`group flex items-center gap-3 rounded-2xl border p-3 transition-all duration-200 hover:-translate-y-0.5 ${
+            className={`group flex items-center rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 ${
               isActive
                 ? 'border-gray-950 bg-gray-950 text-white shadow-lg shadow-gray-950/15'
                 : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-950 hover:shadow-md'
-            }`}
+            } ${compact ? 'gap-2 p-2' : 'gap-3 p-3'}`}
           >
             <span
-              className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-xs font-black ${
+              className={`grid shrink-0 place-items-center rounded-xl text-xs font-black ${
                 isActive ? 'bg-white/15 text-white' : 'bg-gray-100 text-gray-950 group-hover:bg-coffee-100'
-              }`}
+              } ${compact ? 'h-8 w-8' : 'h-10 w-10'}`}
             >
               {getInitials(link.label)}
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block truncate text-sm font-black">{link.label}</span>
-              <span className={`mt-0.5 block text-xs font-semibold ${isActive ? 'text-white/65' : 'text-gray-500'}`}>
-                {link.description}
+              <span className={`block truncate font-black ${compact ? 'text-xs sm:text-sm' : 'text-sm'}`}>
+                {link.label}
               </span>
+              {!compact && (
+                <span className={`mt-0.5 block text-xs font-semibold ${isActive ? 'text-white/65' : 'text-gray-500'}`}>
+                  {link.description}
+                </span>
+              )}
             </span>
             <span
               className={`h-2 w-2 rounded-full ${
@@ -181,56 +187,87 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
   if (mode === 'floating') {
     return (
       <nav className="pointer-events-none fixed inset-0 z-[60]">
-        <div className="group pointer-events-auto fixed left-5 top-5 hidden md:block">
+        {isOpen && (
           <button
             type="button"
-            aria-label="Open portfolio navigation"
-            className="relative z-10 flex h-14 items-center gap-3 rounded-2xl border border-gray-200 bg-white/94 px-3 pr-5 text-gray-950 shadow-xl shadow-gray-950/15 backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 group-hover:border-gray-950 group-hover:bg-gray-950 group-hover:text-white group-hover:shadow-gray-950/25"
+            aria-label="Close portfolio navigation"
+            onClick={() => setIsOpen(false)}
+            className="pointer-events-auto fixed inset-0 hidden bg-transparent md:block"
+          />
+        )}
+
+        <div className="pointer-events-auto fixed bottom-5 left-5 hidden md:block">
+          <button
+            type="button"
+            aria-label="Toggle portfolio navigation"
+            aria-expanded={isOpen}
+            onClick={() => setIsOpen((current) => !current)}
+            className={`relative z-10 flex h-16 items-center gap-3 rounded-full border px-3 pr-5 shadow-2xl backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-coffee-300/35 ${
+              isOpen
+                ? 'border-gray-950 bg-gray-950 text-white shadow-gray-950/25'
+                : 'border-gray-200 bg-white/95 text-gray-950 shadow-gray-950/15 hover:border-gray-300 hover:bg-gray-50'
+            }`}
           >
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-gray-950 text-xs font-black text-white transition group-hover:bg-white group-hover:text-gray-950">
+            <span
+              className={`grid h-11 w-11 place-items-center rounded-full text-xs font-black transition ${
+                isOpen ? 'bg-white text-gray-950' : 'bg-gray-950 text-white'
+              }`}
+            >
               100
             </span>
-            <span className="text-left">
-              <span className="block text-sm font-black leading-none">Menu</span>
-              <span className="mt-1 block text-[0.65rem] font-black uppercase tracking-[0.16em] text-gray-500 transition group-hover:text-white/55">
-                Portfolio
+            <span className="text-left leading-none">
+              <span className="block text-sm font-black">Explore sites</span>
+              <span className={`mt-1 block text-[0.65rem] font-black uppercase tracking-[0.16em] ${isOpen ? 'text-white/55' : 'text-gray-500'}`}>
+                {liveCategoryCount}/{categoryLinks.length} live
               </span>
+            </span>
+            <span className="ml-1">
+              <MenuIcon isOpen={isOpen} />
             </span>
           </button>
 
-          <div className="absolute left-0 top-full pt-3">
-            <div className="pointer-events-none -translate-y-2 scale-95 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:scale-100 group-focus-within:opacity-100">
-              <div className="w-[24rem] rounded-3xl border border-gray-200 bg-white/96 p-4 shadow-2xl shadow-gray-950/20 backdrop-blur-xl">
-                <Brand compact />
+          {isOpen && (
+            <div className="absolute bottom-full left-0 pb-3">
+              <div className="scale-in">
+                <div className="w-[42rem] rounded-3xl border border-gray-200 bg-white/96 p-4 shadow-2xl shadow-gray-950/20 backdrop-blur-xl">
+                  <Brand compact onClick={() => setIsOpen(false)} />
 
-                <div className="mt-4 grid gap-1 border-t border-gray-200 pt-4">
-                  {primaryLinks.map((link) => {
-                    const isActive = isActiveHref(pathname, hash, link.href)
+                  <div className="mt-4 grid gap-1 border-t border-gray-200 pt-4">
+                    {primaryLinks.map((link) => {
+                      const isActive = isActiveHref(pathname, hash, link.href)
 
-                    return (
-                      <Link
-                        key={link.label}
-                        to={link.href}
-                        className={`rounded-2xl px-4 py-3 text-sm font-bold transition ${
-                          isActive ? 'bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-950'
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    )
-                  })}
-                </div>
-
-                <div className="mt-4 border-t border-gray-200 pt-4">
-                  <div className="mb-3 flex items-center justify-between px-1">
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">Categories</p>
-                    <p className="text-xs font-bold text-gray-400">{liveCategoryCount}/{categoryLinks.length} live</p>
+                      return (
+                        <Link
+                          key={link.label}
+                          to={link.href}
+                          onClick={() => setIsOpen(false)}
+                          className={`rounded-2xl px-4 py-3 text-sm font-bold transition ${
+                            isActive ? 'bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-950'
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      )
+                    })}
                   </div>
-                  <CategoryMenu pathname={pathname} currentHash={hash} />
+
+                  <div className="mt-4 border-t border-gray-200 pt-4">
+                    <div className="mb-3 flex items-center justify-between px-1">
+                      <p className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">Categories</p>
+                      <p className="text-xs font-bold text-gray-400">{liveCategoryCount}/{categoryLinks.length} live</p>
+                    </div>
+                    <CategoryMenu
+                      pathname={pathname}
+                      currentHash={hash}
+                      onNavigate={() => setIsOpen(false)}
+                      className="grid grid-cols-2 gap-2"
+                      compact
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         <button
@@ -273,7 +310,13 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
                   <p className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">All categories</p>
                   <p className="text-xs font-bold text-gray-400">{liveCategoryCount}/{categoryLinks.length} live</p>
                 </div>
-                <CategoryMenu pathname={pathname} currentHash={hash} onNavigate={() => setIsOpen(false)} />
+                <CategoryMenu
+                  pathname={pathname}
+                  currentHash={hash}
+                  onNavigate={() => setIsOpen(false)}
+                  className="grid grid-cols-2 gap-2"
+                  compact
+                />
               </div>
             </div>
           </>
@@ -408,7 +451,13 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
                 <p className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">All categories</p>
                 <p className="text-xs font-bold text-gray-400">{liveCategoryCount}/{categoryLinks.length} live</p>
               </div>
-              <CategoryMenu pathname={pathname} currentHash={hash} onNavigate={() => setIsOpen(false)} />
+              <CategoryMenu
+                pathname={pathname}
+                currentHash={hash}
+                onNavigate={() => setIsOpen(false)}
+                className="grid grid-cols-2 gap-2"
+                compact
+              />
             </div>
 
             <div className="mt-4 grid grid-cols-2 gap-2 border-t border-gray-200 pt-4">

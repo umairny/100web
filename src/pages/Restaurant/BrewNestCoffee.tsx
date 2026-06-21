@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const signatureDrinks = [
   {
     name: 'Velvet Roast Latte',
+    image: '/images/brewnest/velvet-roast-latte.png',
     label: 'Best Seller',
     price: '$6.50',
     description: 'Velvety espresso layered with house milk and a slow caramel finish.',
@@ -11,6 +12,7 @@ const signatureDrinks = [
   },
   {
     name: 'Honey Cinnamon Cold Brew',
+    image: '/images/brewnest/honey-cinnamon.png',
     label: 'New',
     price: '$6.25',
     description: 'Cold steeped for eighteen hours with wildflower honey and a warm spice lift.',
@@ -18,6 +20,7 @@ const signatureDrinks = [
   },
   {
     name: 'Signature Espresso',
+    image: '/images/brewnest/signature-espresso.png',
     label: 'House Favorite',
     price: '$4.25',
     description: 'Our daily roast pulled short for dark chocolate depth and a clean finish.',
@@ -25,6 +28,7 @@ const signatureDrinks = [
   },
   {
     name: 'Almond Cloud Cappuccino',
+    image: '/images/brewnest/almond-cloud-cappuccino.png',
     label: 'Seasonal',
     price: '$6.75',
     description: 'Silky almond foam, espresso, and toasted vanilla with a light nutty sweetness.',
@@ -89,7 +93,7 @@ const testimonials = [
 export function BrewNestCoffee() {
   return (
     <main className="brand-motion motion-brewnest bg-[#f6efe5] text-[#251c16]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="BrewNest Coffee"
         links={[
           { label: 'About', href: '#about' },
@@ -241,6 +245,13 @@ export function BrewNestCoffee() {
                 className="group rounded-[2rem] border border-[#e2d4c3] bg-white/85 p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className={`relative h-48 overflow-hidden rounded-[1.5rem] bg-gradient-to-br ${drink.background}`}>
+                  <img
+                    src={drink.image}
+                    alt={`${drink.name} coffee drink`}
+                    className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2d211a]/50 via-transparent to-transparent" />
                   <div className="absolute left-4 top-4 rounded-full bg-white/85 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#6c4a34] shadow-sm">
                     {drink.label}
                   </div>

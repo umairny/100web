@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const burgers = [
   { name: 'Craft Classic', detail: 'Double smash patties, cheddar, pickles, craft sauce', price: '$15' },
@@ -10,7 +10,7 @@ const burgers = [
 export function BurgerCraft() {
   return (
     <main className="brand-motion motion-burgercraft bg-[#fff3d7] text-[#202020]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="BurgerCraft"
         links={[
           { label: 'Burgers', href: '#burgers' },

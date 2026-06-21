@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const bowls = [
   { name: 'Avocado Garden Bowl', detail: 'Quinoa, avocado, cucumber, herbs, lemon tahini' },
@@ -10,7 +10,7 @@ const bowls = [
 export function FreshBowlCafe() {
   return (
     <main className="brand-motion motion-freshbowl bg-[#fbf7ed] text-[#26332a]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="FreshBowl Cafe"
         links={[
           { label: 'Bowls', href: '#bowls' },

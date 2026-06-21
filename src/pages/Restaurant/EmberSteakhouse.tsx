@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const steaks = [
   { name: 'Prime Ribeye', detail: '16 oz, ember butter, charred rosemary', price: '$58' },
@@ -10,7 +10,7 @@ const steaks = [
 export function EmberSteakhouse() {
   return (
     <main className="brand-motion motion-ember bg-[#0f0f10] text-[#f4ead7]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="Ember"
         links={[
           { label: 'Steaks', href: '#steaks' },

@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 export function BlushBeautyBar() {
   return (
     <main className="brand-motion motion-blush bg-[#fff0f6] text-[#111111]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="Blush Beauty Bar"
         collectionPath="/beauty"
         links={[{ label: 'Makeup', href: '#makeup' }, { label: 'Packages', href: '#packages' }, { label: 'Events', href: '#events' }]}

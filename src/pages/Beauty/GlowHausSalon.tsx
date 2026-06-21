@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const services = ['Signature cut and style', 'Dimensional color', 'Gloss and blowout']
 
 export function GlowHausSalon() {
   return (
     <main className="brand-motion motion-glowhaus bg-[#fbf4ef] text-[#2b2b2d]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="GlowHaus Salon"
         collectionPath="/beauty"
         links={[

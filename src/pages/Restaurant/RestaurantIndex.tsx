@@ -72,6 +72,14 @@ export function RestaurantIndex() {
                     className="absolute inset-x-0 top-0 h-2"
                     style={{ backgroundColor: website.colors.accent }}
                   />
+                  {website.image && (
+                    <img
+                      src={website.image}
+                      alt={`${website.title} website preview`}
+                      className="absolute inset-0 h-full w-full object-cover opacity-35 transition duration-500 group-hover:scale-105 group-hover:opacity-45"
+                      loading="lazy"
+                    />
+                  )}
                   <div
                     className="absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-35 transition duration-300 group-hover:scale-110"
                     style={{ backgroundColor: website.colors.primary }}
@@ -147,7 +155,15 @@ export function RestaurantIndex() {
                     backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 52%, ${website.colors.accent} 100%)`,
                   }}
                 >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_24%,rgba(255,255,255,0.55),transparent_22%),radial-gradient(circle_at_76%_70%,rgba(255,255,255,0.25),transparent_26%)]" />
+                  {website.image && (
+                    <img
+                      src={website.image}
+                      alt={`${website.title} website preview`}
+                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-[#171512]/70 via-[#171512]/10 to-transparent' : 'bg-[radial-gradient(circle_at_22%_24%,rgba(255,255,255,0.55),transparent_22%),radial-gradient(circle_at_76%_70%,rgba(255,255,255,0.25),transparent_26%)]'}`} />
                   <div className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#171512] shadow-sm">
                     {website.status === 'completed' ? 'Live' : 'Queued'}
                   </div>

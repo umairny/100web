@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Container, CTAButton, RestaurantSubNav } from "../../components";
+import { Container, CTAButton, SubWebsiteNav } from "../../components";
 
 const imageAssets = {
   hero: {
@@ -190,7 +190,7 @@ const IngredientDots = () => (
 export function LunaPizzaHouse() {
   return (
     <main className="brand-motion motion-luna bg-[#fff7e8] text-[#24211d]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="Luna Pizza House"
         links={[
           { label: "Pizzas", href: "#pizzas" },

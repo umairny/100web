@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Container, CTAButton, RestaurantSubNav } from "../../components";
+import { Container, CTAButton, SubWebsiteNav } from "../../components";
 
 const urbanImages = {
   hero: {
@@ -148,7 +148,7 @@ function PosterMarks() {
 export function UrbanBiteKitchen() {
   return (
     <main className="brand-motion motion-urbanbite bg-[#f4efe8] text-[#161616]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="UrbanBite"
         links={[
           { label: "Tickets", href: "#tickets" },

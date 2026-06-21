@@ -133,7 +133,15 @@ export function FitnessIndex() {
                     backgroundImage: `linear-gradient(145deg, ${website.colors.secondary} 0%, ${website.colors.primary} 56%, ${website.colors.accent} 100%)`,
                   }}
                 >
-                  <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.24)_1px,transparent_1px)] [background-size:44px_44px]" />
+                  {website.image && (
+                    <img
+                      src={website.image}
+                      alt={`${website.title} website preview`}
+                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-black/45 via-transparent to-transparent' : 'bg-[linear-gradient(90deg,rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.24)_1px,transparent_1px)] [background-size:44px_44px]'}`} />
                   <div className="absolute bottom-5 left-5 flex gap-2">
                     {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => (
                       <span key={color} className="h-7 w-7 rounded-full border border-white/80 shadow-sm" style={{ backgroundColor: color }} />

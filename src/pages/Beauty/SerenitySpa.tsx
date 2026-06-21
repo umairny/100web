@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 export function SerenitySpa() {
   return (
     <main className="brand-motion motion-serenity bg-[#fbf7ea] text-[#5f4d3d]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="Serenity Spa"
         collectionPath="/beauty"
         links={[{ label: 'Treatments', href: '#treatments' }, { label: 'Benefits', href: '#benefits' }, { label: 'Packages', href: '#packages' }]}

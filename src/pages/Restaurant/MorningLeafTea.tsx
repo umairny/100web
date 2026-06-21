@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const teas = [
   { name: 'Sage Morning', detail: 'Green tea, sage, pear, and muted gold citrus', tone: 'Light and clear' },
@@ -10,7 +10,7 @@ const teas = [
 export function MorningLeafTea() {
   return (
     <main className="brand-motion motion-morningleaf bg-[#fbf7ea] text-[#4b3d2f]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="MorningLeaf Tea"
         links={[
           { label: 'Blends', href: '#blends' },

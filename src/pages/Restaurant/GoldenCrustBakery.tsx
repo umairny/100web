@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, RestaurantSubNav } from '../../components'
+import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
 const featuredGoods = [
   {
@@ -84,7 +84,7 @@ const testimonials = [
 export function GoldenCrustBakery() {
   return (
     <main className="brand-motion motion-goldencrust bg-[#fff8e8] text-[#332015]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="Golden Crust Bakery"
         links={[
           { label: 'Baked Goods', href: '#goods' },
@@ -117,7 +117,7 @@ export function GoldenCrustBakery() {
               Back to Restaurant Collection
             </Link>
             <p className="inline-flex rounded-full bg-[#6d3f22] px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[#ffe7a4] shadow-lg shadow-[#6d3f22]/15">
-              Fresh Baked Daily • Artisan Bakery
+              Fresh Baked Daily ï¿½ Artisan Bakery
             </p>
             <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.94] text-[#332015] md:text-7xl">
               Follow the butter trail before the city wakes.
@@ -276,7 +276,7 @@ export function GoldenCrustBakery() {
           <div className="grid gap-6 md:grid-cols-4">
             {processSteps.map((item, index) => (
               <article key={item.step} className="rounded-[1.75rem] border border-[#efd9a8] bg-white p-6 shadow-sm">
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#b3772e]">0{index + 1} • {item.step}</p>
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#b3772e]">0{index + 1} ï¿½ {item.step}</p>
                 <h3 className="mt-8 text-2xl font-black text-[#332015]">{item.title}</h3>
                 <p className="mt-3 leading-7 text-[#6d3f22]">{item.text}</p>
               </article>

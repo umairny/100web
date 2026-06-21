@@ -109,12 +109,12 @@ export function BeautyIndex() {
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b76e79]">Live concepts</p>
               <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Four finished beauty homepages ready to explore.
+                Five finished beauty homepages ready to explore.
               </h2>
             </div>
             <p className="max-w-2xl text-lg leading-8 text-[#6b5a61]">
               These concepts are clickable and fully responsive, each with a different client mood: salon confidence,
-              nail-studio luxury, spa quiet, and beauty-bar glam.
+              nail-studio luxury, spa quiet, beauty-bar glam, and soft clinical skincare.
             </p>
           </AnimatedSection>
 
@@ -133,7 +133,15 @@ export function BeautyIndex() {
                     backgroundImage: `linear-gradient(145deg, ${website.colors.secondary} 0%, ${website.colors.primary} 56%, ${website.colors.accent} 100%)`,
                   }}
                 >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_26%_24%,rgba(255,255,255,0.62),transparent_25%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.28),transparent_30%)]" />
+                  {website.image && (
+                    <img
+                      src={website.image}
+                      alt={`${website.title} website preview`}
+                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-black/40 via-transparent to-transparent' : 'bg-[radial-gradient(circle_at_26%_24%,rgba(255,255,255,0.62),transparent_25%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.28),transparent_30%)]'}`} />
                   <div className="absolute bottom-5 left-5 flex gap-2">
                     {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => (
                       <span key={color} className="h-7 w-7 rounded-full border border-white/80 shadow-sm" style={{ backgroundColor: color }} />
@@ -183,7 +191,7 @@ export function BeautyIndex() {
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b76e79]">Roadmap</p>
               <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Six beauty directions queued for expansion.
+                Five beauty directions queued for expansion.
               </h2>
             </div>
             <p className="max-w-md text-sm leading-6 text-[#6b5a61]">

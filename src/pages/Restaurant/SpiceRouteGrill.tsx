@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Container, CTAButton, RestaurantSubNav } from "../../components";
+import { Container, CTAButton, SubWebsiteNav } from "../../components";
 
 const imageAssets = {
   hero: {
@@ -163,7 +163,7 @@ const SpiceDots = () => (
 export function SpiceRouteGrill() {
   return (
     <main className="brand-motion motion-spiceroute bg-[#fff4dd] text-[#1f1b18]">
-      <RestaurantSubNav
+      <SubWebsiteNav
         brand="SpiceRoute Grill"
         links={[
           { label: "Dishes", href: "#dishes" },
