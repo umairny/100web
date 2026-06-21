@@ -7,6 +7,10 @@ import { BlushBeautyBar } from './pages/Beauty/BlushBeautyBar'
 import { GlowHausSalon } from './pages/Beauty/GlowHausSalon'
 import { LuxeNailStudio } from './pages/Beauty/LuxeNailStudio'
 import { SerenitySpa } from './pages/Beauty/SerenitySpa'
+import { FitnessIndex } from './pages/Fitness/FitnessIndex'
+import { PulseForgeFitness } from './pages/Fitness/PulseForgeFitness'
+import { RealEstateIndex } from './pages/RealEstate/RealEstateIndex'
+import { SkylineRealtyGroup } from './pages/RealEstate/SkylineRealtyGroup'
 import { BrewNestCoffee } from './pages/Restaurant/BrewNestCoffee'
 import { BurgerCraft } from './pages/Restaurant/BurgerCraft'
 import { EmberSteakhouse } from './pages/Restaurant/EmberSteakhouse'
@@ -24,7 +28,9 @@ function AppShell() {
   const { pathname } = useLocation()
   const isDemoPage =
     (pathname.startsWith('/restaurant/') && pathname !== '/restaurant') ||
-    (pathname.startsWith('/beauty/') && pathname !== '/beauty')
+    (pathname.startsWith('/beauty/') && pathname !== '/beauty') ||
+    (pathname.startsWith('/real-estate/') && pathname !== '/real-estate') ||
+    (pathname.startsWith('/fitness/') && pathname !== '/fitness')
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 })
@@ -41,6 +47,10 @@ function AppShell() {
           <Route path="/beauty/luxe-nail-studio" element={<LuxeNailStudio />} />
           <Route path="/beauty/serenity-spa" element={<SerenitySpa />} />
           <Route path="/beauty/blush-beauty-bar" element={<BlushBeautyBar />} />
+          <Route path="/real-estate" element={<RealEstateIndex />} />
+          <Route path="/real-estate/skyline-realty-group" element={<SkylineRealtyGroup />} />
+          <Route path="/fitness" element={<FitnessIndex />} />
+          <Route path="/fitness/pulseforge-fitness" element={<PulseForgeFitness />} />
           <Route path="/restaurant" element={<RestaurantIndex />} />
           <Route path="/restaurant/brewnest-coffee" element={<BrewNestCoffee />} />
           <Route path="/restaurant/urbanbite-kitchen" element={<UrbanBiteKitchen />} />
