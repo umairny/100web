@@ -382,11 +382,11 @@ export const beautyWebsites: WebsiteDesign[] = [
   },
   {
     id: "crown-comb-barber",
-    title: "Crown & Comb Barber",
+    title: "Blade & Hearth",
     category: "Beauty",
     style: "classic, sharp, masculine, modern",
     shortDescription:
-      "Barber shop concept for precision cuts, grooming, and confident style",
+      "Barber shop concept for polished grooming, chair booking, and confident style",
     slug: "crown-comb-barber",
     colors: {
       primary: "#222222",
@@ -394,7 +394,8 @@ export const beautyWebsites: WebsiteDesign[] = [
       accent: "#b98b43",
       dark: "#0f0f0f",
     },
-    status: "coming-soon",
+    image: "/images/beauty/crown-comb-barber-hero.png",
+    status: "completed",
   },
   {
     id: "pureglow-aesthetics",

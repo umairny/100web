@@ -4,6 +4,7 @@ import { Navbar, Footer } from './components'
 import { Home } from './pages/Home'
 import { BeautyIndex } from './pages/Beauty/BeautyIndex'
 import { BlushBeautyBar } from './pages/Beauty/BlushBeautyBar'
+import { CrownCombBarber } from './pages/Beauty/CrownCombBarber'
 import { GlowHausSalon } from './pages/Beauty/GlowHausSalon'
 import { LuxeNailStudio } from './pages/Beauty/LuxeNailStudio'
 import { SerenitySpa } from './pages/Beauty/SerenitySpa'
@@ -67,6 +68,7 @@ function AppShell() {
           <Route path="/beauty/serenity-spa" element={<SerenitySpa />} />
           <Route path="/beauty/blush-beauty-bar" element={<BlushBeautyBar />} />
           <Route path="/beauty/velvet-skin-clinic" element={<VelvetSkinClinic />} />
+          <Route path="/beauty/crown-comb-barber" element={<CrownCombBarber />} />
           <Route path="/real-estate" element={<RealEstateIndex />} />
           <Route path="/real-estate/skyline-realty-group" element={<SkylineRealtyGroup />} />
           <Route path="/fitness" element={<FitnessIndex />} />
