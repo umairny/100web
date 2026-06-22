@@ -16,6 +16,21 @@ interface CTAButtonProps {
   target?: '_blank' | '_self' | '_parent' | '_top'
 }
 
+function hasTextColorClass(className: string, variantPrefix?: string) {
+  return className.split(/\s+/).some((token) => {
+    const normalizedToken = token.startsWith('!') ? token.slice(1) : token
+    const textToken = variantPrefix
+      ? normalizedToken.startsWith(`${variantPrefix}:`)
+        ? normalizedToken.slice(variantPrefix.length + 1)
+        : ''
+      : normalizedToken.includes(':')
+        ? ''
+        : normalizedToken
+
+    return /^!?text-(white|black|transparent|current|inherit|\[[^\]]+\]|[a-z]+-\d{2,3}(?:\/\d+)?)$/.test(textToken)
+  })
+}
+
 export function CTAButton({
   children,
   onClick,
@@ -43,9 +58,27 @@ export function CTAButton({
   ].join(' ')
   
   const variantStyles = {
-    primary: 'bg-coffee-700 text-white shadow-lg shadow-coffee-700/20 hover:bg-coffee-800 hover:shadow-xl hover:shadow-coffee-700/25',
-    secondary: 'bg-gray-100 text-gray-950 shadow-sm ring-1 ring-gray-950/5 hover:bg-gray-200 hover:shadow-lg',
-    outline: 'border-2 border-coffee-700 bg-transparent text-coffee-700 hover:border-coffee-800 hover:bg-coffee-50 hover:shadow-lg hover:shadow-coffee-700/10',
+    primary:
+      'bg-gradient-to-b from-coffee-600 to-coffee-800 shadow-xl shadow-coffee-800/25 ring-1 ring-coffee-500/25 hover:from-coffee-700 hover:to-coffee-900 hover:shadow-2xl hover:shadow-coffee-800/35 focus-visible:ring-coffee-400/55',
+    secondary:
+      'bg-white shadow-lg shadow-gray-950/10 ring-1 ring-gray-950/10 hover:bg-gray-950 hover:shadow-xl hover:shadow-gray-950/18 hover:ring-gray-950 focus-visible:ring-gray-400/45',
+    outline:
+      'border-2 border-coffee-700 bg-white/75 shadow-sm shadow-coffee-800/10 ring-1 ring-coffee-700/10 backdrop-blur hover:border-coffee-800 hover:bg-coffee-700 hover:shadow-xl hover:shadow-coffee-800/25 focus-visible:ring-coffee-400/55',
+  }
+
+  const variantTextStyles = {
+    primary: {
+      base: 'text-white',
+      hover: '',
+    },
+    secondary: {
+      base: 'text-gray-950',
+      hover: 'hover:text-white',
+    },
+    outline: {
+      base: 'text-coffee-800',
+      hover: 'hover:text-white',
+    },
   }
   
   const sizeStyles = {
@@ -54,7 +87,12 @@ export function CTAButton({
     lg: 'gap-3 px-8 py-4 text-lg',
   }
   
-  const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`
+  const textStyles = [
+    hasTextColorClass(className) ? '' : variantTextStyles[variant].base,
+    hasTextColorClass(className, 'hover') ? '' : variantTextStyles[variant].hover,
+  ].join(' ')
+
+  const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${textStyles} ${sizeStyles[size]} ${className}`
   const content = (
     <>
       {leadingIcon && (

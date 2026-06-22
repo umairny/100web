@@ -4,7 +4,7 @@ import { Container, CTAButton, SubWebsiteNav } from "../../components";
 
 const urbanImages = {
   hero: {
-    src: "/images/urbanbite-kitchen-card.png",
+    src: "/images/restaurent/urbanbite-kitchen-card.png",
     alt: "UrbanBite Kitchen bold casual dining preview",
     fallbackStyle:
       "bg-[linear-gradient(135deg,#161616_0%,#161616_34%,#ef3b2d_35%,#ef3b2d_58%,#f6c65c_59%,#f6c65c_72%,#f4efe8_73%)]",

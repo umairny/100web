@@ -4,7 +4,7 @@ import { Container, CTAButton, SubWebsiteNav } from "../../components";
 
 const imageAssets = {
   hero: {
-    src: "/images/spiceroute/hero-grill.png",
+    src: "/images/restaurent/spiceroute/hero-grill.png",
     alt: "Sizzling grilled kebabs and tikka served on a dark charcoal plate",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_50%_45%,rgba(244,161,26,0.95)_0_12%,transparent_13%),radial-gradient(circle_at_42%_58%,rgba(143,29,27,0.95)_0_18%,transparent_19%),linear-gradient(135deg,#211815,#5b1518_48%,#f4a11a)]",
@@ -12,7 +12,7 @@ const imageAssets = {
       "A premium Indian-Pakistani fusion grill restaurant hero image, sizzling grilled kebabs and tikka on a dark charcoal plate, warm saffron and deep red lighting, subtle smoke, elegant restaurant atmosphere, premium food photography, cinematic, no text, no logo.",
   },
   signatureDish1: {
-    src: "/images/spiceroute/signature-dish-1.png",
+    src: "/images/restaurent/spiceroute/signature-dish-1.png",
     alt: "Chicken tikka skewers with saffron rice, chutney, and herbs",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_45%_42%,#f4a11a_0_12%,transparent_13%),radial-gradient(circle_at_56%_55%,#8f1d1b_0_18%,transparent_19%),linear-gradient(135deg,#1f1b18,#6b181b_55%,#f0b13a)]",
@@ -20,7 +20,7 @@ const imageAssets = {
       "Close-up premium food photography of chicken tikka skewers with charred edges, saffron rice, chutney, herbs, warm restaurant lighting, deep red and charcoal background, no text.",
   },
   signatureDish2: {
-    src: "/images/spiceroute/signature-dish-2.png",
+    src: "/images/restaurent/spiceroute/signature-dish-2.png",
     alt: "Seekh kebab platter with naan, grilled vegetables, and mint chutney",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_30%_55%,#e9c36a_0_10%,transparent_11%),radial-gradient(circle_at_58%_42%,#5f1517_0_22%,transparent_23%),linear-gradient(135deg,#241817,#8f1d1b_60%,#d99622)]",
@@ -28,7 +28,7 @@ const imageAssets = {
       "Modern plated seekh kebab platter with naan, grilled vegetables, mint chutney, rich spices, elegant dark table, warm golden highlights, premium restaurant menu photography, no text.",
   },
   signatureDish3: {
-    src: "/images/spiceroute/signature-dish-3.png",
+    src: "/images/restaurent/spiceroute/signature-dish-3.png",
     alt: "Mixed grill family platter with kebabs, tikka, lamb chops, naan, and chutneys",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_36%_42%,#f4a11a_0_10%,transparent_11%),radial-gradient(circle_at_64%_46%,#c56a1b_0_12%,transparent_13%),radial-gradient(circle_at_52%_60%,#7c1c1d_0_22%,transparent_23%),linear-gradient(135deg,#171312,#4a1113_55%,#f4a11a)]",
@@ -36,7 +36,7 @@ const imageAssets = {
       "Indian-Pakistani fusion mixed grill family platter with kebabs, tikka, lamb chops, naan, chutneys, onions, lemon, cinematic warm lighting, premium dining style, no text.",
   },
   interior: {
-    src: "/images/spiceroute/interior.png",
+    src: "/images/restaurent/spiceroute/interior.png",
     alt: "Modern South Asian fusion restaurant interior with amber lights and deep red accents",
     fallbackStyle:
       "bg-[linear-gradient(90deg,rgba(244,161,26,0.18)_1px,transparent_1px),linear-gradient(180deg,#1f1b18,#4b1416_58%,#8f1d1b)] [background-size:42px_42px]",

@@ -134,7 +134,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     style: "warm, premium, friendly, minimal",
     shortDescription: "Artisan coffee roastery with a cozy neighborhood vibe",
     slug: "brewnest-coffee",
-    image: "/images/brewnest-coffee-card.png",
+    image: "/images/restaurent/brewnest-coffee-card.png",
     colors: {
       primary: "#8b6f52",
       secondary: "#f5f0e8",
@@ -151,7 +151,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern casual restaurant for city dining and fresh signature plates",
     slug: "urbanbite-kitchen",
-    image: "/images/urbanbite-kitchen-card.png",
+    image: "/images/restaurent/urbanbite-kitchen-card.png",
     colors: {
       primary: "#262626",
       secondary: "#f8f5ef",
@@ -168,7 +168,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Artisan bakery with fresh bread, pastries, and morning specials",
     slug: "golden-crust-bakery",
-    image: "/images/golden-crust-bakery-card.png",
+    image: "/images/restaurent/golden-crust-bakery-card.png",
     colors: {
       primary: "#d99a22",
       secondary: "#fff7df",
@@ -185,7 +185,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Indian-Pakistani fusion grill with bold spice and premium platters",
     slug: "spiceroute-grill",
-    image: "/images/spiceroute-grill-card.png",
+    image: "/images/restaurent/spiceroute-grill-card.png",
     colors: {
       primary: "#8f1d1b",
       secondary: "#fff4dd",
@@ -202,7 +202,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Handmade pizza restaurant with fresh ingredients and casual family dining",
     slug: "luna-pizza-house",
-    image: "/images/luna-pizza-house-card.png",
+    image: "/images/restaurent/luna-pizza-house-card.png",
     colors: {
       primary: "#c92a22",
       secondary: "#fff7e8",
@@ -219,7 +219,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Healthy bowl cafe with salads, smoothie bowls, and wellness meals",
     slug: "freshbowl-cafe",
-    image: "/images/freshbowl-cafe-card.png",
+    image: "/images/restaurent/freshbowl-cafe-card.png",
     colors: {
       primary: "#2f8f46",
       secondary: "#fbf7ed",
@@ -236,7 +236,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Premium steakhouse with grilled cuts, wine, and evening private dining",
     slug: "ember-steakhouse",
-    image: "/images/ember-steakhouse-card.png",
+    image: "/images/restaurent/ember-steakhouse-card.png",
     colors: {
       primary: "#0f0f10",
       secondary: "#f4ead7",
@@ -253,6 +253,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Peaceful tea house with herbal blends, quiet rituals, and mindful cafe moments",
     slug: "morningleaf-tea",
+    image: "/images/restaurent/morningleaf-tea/hero-tea.png",
     colors: {
       primary: "#8fa37a",
       secondary: "#fbf7ea",
@@ -269,6 +270,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Gourmet burger restaurant with handcrafted stacks and street-food energy",
     slug: "burgercraft",
+    image: "/images/restaurent/burger-craft.png",
     colors: {
       primary: "#f3b53f",
       secondary: "#fff3d7",
@@ -285,6 +287,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Coastal seafood restaurant with fresh catch, premium plates, and relaxed dining",
     slug: "oceanplate-seafood",
+    image: "/images/restaurent/oceanplate-seafood.png",
     colors: {
       primary: "#075985",
       secondary: "#f4ead5",

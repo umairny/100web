@@ -37,7 +37,7 @@ export function FreshBowlCafe() {
             <div className="absolute left-1/2 top-14 h-80 w-80 -translate-x-1/2 rounded-full bg-[#eef6dc] md:left-12 md:translate-x-0" />
             <div className="absolute left-1/2 top-24 h-64 w-64 -translate-x-1/2 overflow-hidden rounded-full border-[18px] border-white bg-[#eef6dc] shadow-inner md:left-20 md:translate-x-0">
               <img
-                src="/images/freshbowl-cafe/hero-bowl.png"
+                src="/images/restaurent/freshbowl-cafe/hero-bowl.png"
                 alt="Top-down fresh grain bowl with avocado, greens, chickpeas, herbs, and tahini"
                 className="h-full w-full object-cover"
               />
