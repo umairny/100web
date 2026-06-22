@@ -109,12 +109,12 @@ export function BeautyIndex() {
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b76e79]">Live concepts</p>
               <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Five finished beauty homepages ready to explore.
+                {liveWebsites.length} finished beauty homepages ready to explore.
               </h2>
             </div>
             <p className="max-w-2xl text-lg leading-8 text-[#6b5a61]">
               These concepts are clickable and fully responsive, each with a different client mood: salon confidence,
-              nail-studio luxury, spa quiet, beauty-bar glam, and soft clinical skincare.
+              nail-studio luxury, spa quiet, beauty-bar glam, barber precision, and soft clinical skincare.
             </p>
           </AnimatedSection>
 

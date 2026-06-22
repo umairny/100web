@@ -1,10 +1,11 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Container, CTAButton, SubWebsiteNav } from "../../components";
+import { imageUrl } from "../../assets/images";
 
 const urbanImages = {
   hero: {
-    src: "/images/restaurent/urbanbite-kitchen-card.png",
+    src: imageUrl("restaurent/urbanbite-kitchen-card.png"),
     alt: "UrbanBite Kitchen bold casual dining preview",
     fallbackStyle:
       "bg-[linear-gradient(135deg,#161616_0%,#161616_34%,#ef3b2d_35%,#ef3b2d_58%,#f6c65c_59%,#f6c65c_72%,#f4efe8_73%)]",

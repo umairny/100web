@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Container } from '../../components'
+import { imageUrl } from "../../assets/images";
 
 type TeaTone = 'herbal' | 'cup' | 'citrus' | 'chamomile' | 'matcha' | 'pot'
 
@@ -18,9 +19,9 @@ interface ResetItem {
 }
 
 const navItems = ['Home', 'Menu', 'Rituals', 'Reservations', 'About', 'Journal', 'Contact']
-const morningLeafHeroImage = '/images/restaurent/morningleaf-tea/hero-tea.png'
-const morningLeafMobileHeroImage = '/images/restaurent/morningleaf-tea/hero-mobile-tea.png'
-const morningLeafStoryImage = '/images/restaurent/morningleaf-tea/our-story.png'
+const morningLeafHeroImage = imageUrl("restaurent/morningleaf-tea/hero-tea.png")
+const morningLeafMobileHeroImage = imageUrl("restaurent/morningleaf-tea/hero-mobile-tea.png")
+const morningLeafStoryImage = imageUrl("restaurent/morningleaf-tea/our-story.png")
 
 const teas: Tea[] = [
   {
@@ -28,42 +29,42 @@ const teas: Tea[] = [
     description: 'Caffeine-free botanicals for balance and calm.',
     price: '$6.50',
     tone: 'herbal',
-    image: '/images/restaurent/morningleaf-tea/herbal-blends.png',
+    image: imageUrl("restaurent/morningleaf-tea/herbal-blends.png"),
   },
   {
     name: 'Low-Caffeine Cups',
     description: 'Gentle energy with mindful, natural notes.',
     price: '$6.00',
     tone: 'cup',
-    image: '/images/restaurent/morningleaf-tea/Low-Caffeine-Cups.png',
+    image: imageUrl("restaurent/morningleaf-tea/Low-Caffeine-Cups.png"),
   },
   {
     name: 'Citrus Green Tea',
     description: 'Bright citrus. Smooth green. Light and fresh.',
     price: '$6.75',
     tone: 'citrus',
-    image: '/images/restaurent/morningleaf-tea/Citrus-Green-Tea.png',
+    image: imageUrl("restaurent/morningleaf-tea/Citrus-Green-Tea.png"),
   },
   {
     name: 'Chamomile Reset',
     description: 'Floral and soothing. Perfect for unwinding.',
     price: '$6.50',
     tone: 'chamomile',
-    image: '/images/restaurent/morningleaf-tea/Chamomile-Reset.png',
+    image: imageUrl("restaurent/morningleaf-tea/Chamomile-Reset.png"),
   },
   {
     name: 'Matcha Ritual',
     description: 'Crafted matcha for focus and clarity.',
     price: '$7.25',
     tone: 'matcha',
-    image: '/images/restaurent/morningleaf-tea/Matcha-Ritual.png',
+    image: imageUrl("restaurent/morningleaf-tea/Matcha-Ritual.png"),
   },
   {
     name: 'Steeped Wellness',
     description: 'Thoughtful blends for everyday well-being.',
     price: '$6.75',
     tone: 'pot',
-    image: '/images/restaurent/morningleaf-tea/Steeped-Wellness.png',
+    image: imageUrl("restaurent/morningleaf-tea/Steeped-Wellness.png"),
   },
 ]
 

@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import { Container, CTAButton, SubWebsiteNav } from '../../components'
+import { imageUrl } from "../../assets/images";
 
 const signatureDrinks = [
   {
     name: 'Velvet Roast Latte',
-    image: '/images/restaurent/brewnest/velvet-roast-latte.png',
+    image: imageUrl("restaurent/brewnest/velvet-roast-latte.png"),
     label: 'Best Seller',
     price: '$6.50',
     description: 'Velvety espresso layered with house milk and a slow caramel finish.',
@@ -12,7 +13,7 @@ const signatureDrinks = [
   },
   {
     name: 'Honey Cinnamon Cold Brew',
-    image: '/images/restaurent/brewnest/honey-cinnamon.png',
+    image: imageUrl("restaurent/brewnest/honey-cinnamon.png"),
     label: 'New',
     price: '$6.25',
     description: 'Cold steeped for eighteen hours with wildflower honey and a warm spice lift.',
@@ -20,7 +21,7 @@ const signatureDrinks = [
   },
   {
     name: 'Signature Espresso',
-    image: '/images/restaurent/brewnest/signature-espresso.png',
+    image: imageUrl("restaurent/brewnest/signature-espresso.png"),
     label: 'House Favorite',
     price: '$4.25',
     description: 'Our daily roast pulled short for dark chocolate depth and a clean finish.',
@@ -28,7 +29,7 @@ const signatureDrinks = [
   },
   {
     name: 'Almond Cloud Cappuccino',
-    image: '/images/restaurent/brewnest/almond-cloud-cappuccino.png',
+    image: imageUrl("restaurent/brewnest/almond-cloud-cappuccino.png"),
     label: 'Seasonal',
     price: '$6.75',
     description: 'Silky almond foam, espresso, and toasted vanilla with a light nutty sweetness.',

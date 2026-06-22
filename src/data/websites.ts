@@ -1,3 +1,5 @@
+import { imageUrl } from "../assets/images";
+
 export type WebsiteCategory =
   | "Restaurant"
   | "Beauty"
@@ -49,7 +51,7 @@ export const categories: CategoryInfo[] = [
     description: "Coffee shops, cafes, restaurants, and dining experiences",
     icon: "🍽️",
     color: "from-orange-500 to-red-500",
-    image: "/images/home/restaurant-preview.png",
+    image: imageUrl("home/restaurant-preview.png"),
     href: "/restaurant",
   },
   {
@@ -57,7 +59,7 @@ export const categories: CategoryInfo[] = [
     description: "Salons, spas, cosmetics, and beauty services",
     icon: "💄",
     color: "from-pink-500 to-rose-500",
-    image: "/images/home/beauty-preview.png",
+    image: imageUrl("home/beauty-preview.png"),
     href: "/beauty",
   },
   {
@@ -65,7 +67,7 @@ export const categories: CategoryInfo[] = [
     description: "Property agents, real estate agencies, and developers",
     icon: "\uD83C\uDFE0",
     color: "from-blue-500 to-cyan-500",
-    image: "/images/home/real-estate-preview.png",
+    image: imageUrl("home/real-estate-preview.png"),
     href: "/real-estate",
   },
   {
@@ -73,7 +75,7 @@ export const categories: CategoryInfo[] = [
     description: "Gyms, personal trainers, wellness centers",
     icon: "\uD83D\uDCAA",
     color: "from-green-500 to-emerald-500",
-    image: "/images/home/fitness-preview.png",
+    image: imageUrl("home/fitness-preview.png"),
     href: "/fitness",
   },
   {
@@ -81,7 +83,7 @@ export const categories: CategoryInfo[] = [
     description: "Clinics, hospitals, doctors, and health services",
     icon: "⚕️",
     color: "from-red-500 to-pink-500",
-    image: "/images/home/medical-preview.png",
+    image: imageUrl("home/medical-preview.png"),
     href: "/medical",
   },
   {
@@ -89,7 +91,7 @@ export const categories: CategoryInfo[] = [
     description: "Contractors, builders, and construction companies",
     icon: "🏗️",
     color: "from-amber-600 to-yellow-600",
-    image: "/images/home/construction-preview.png",
+    image: imageUrl("home/construction-preview.png"),
     href: "/construction",
   },
   {
@@ -97,7 +99,7 @@ export const categories: CategoryInfo[] = [
     description: "Schools, courses, tutoring, and online learning",
     icon: "📚",
     color: "from-indigo-500 to-purple-500",
-    image: "/images/home/education-preview.png",
+    image: imageUrl("home/education-preview.png"),
     href: "/education",
   },
   {
@@ -105,7 +107,7 @@ export const categories: CategoryInfo[] = [
     description: "Online stores, marketplaces, and retail shops",
     icon: "🛍️",
     color: "from-violet-500 to-fuchsia-500",
-    image: "/images/home/ecommerce-preview.png",
+    image: imageUrl("home/ecommerce-preview.png"),
     href: "/e-commerce",
   },
   {
@@ -113,7 +115,7 @@ export const categories: CategoryInfo[] = [
     description: "Creative portfolios, freelancers, and agencies",
     icon: "✨",
     color: "from-slate-600 to-gray-600",
-    image: "/images/home/portfolio-preview.png",
+    image: imageUrl("home/portfolio-preview.png"),
     href: "/portfolio",
   },
   {
@@ -121,7 +123,7 @@ export const categories: CategoryInfo[] = [
     description: "Software services, apps, and digital platforms",
     icon: "💻",
     color: "from-sky-500 to-blue-500",
-    image: "/images/home/saas-preview.png",
+    image: imageUrl("home/saas-preview.png"),
     href: "/saas",
   },
 ];
@@ -134,7 +136,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     style: "warm, premium, friendly, minimal",
     shortDescription: "Artisan coffee roastery with a cozy neighborhood vibe",
     slug: "brewnest-coffee",
-    image: "/images/restaurent/brewnest-coffee-card.png",
+    image: imageUrl("restaurent/brewnest-coffee-card.png"),
     colors: {
       primary: "#8b6f52",
       secondary: "#f5f0e8",
@@ -151,7 +153,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern casual restaurant for city dining and fresh signature plates",
     slug: "urbanbite-kitchen",
-    image: "/images/restaurent/urbanbite-kitchen-card.png",
+    image: imageUrl("restaurent/urbanbite-kitchen-card.png"),
     colors: {
       primary: "#262626",
       secondary: "#f8f5ef",
@@ -168,7 +170,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Artisan bakery with fresh bread, pastries, and morning specials",
     slug: "golden-crust-bakery",
-    image: "/images/restaurent/golden-crust-bakery-card.png",
+    image: imageUrl("restaurent/golden-crust-bakery-card.png"),
     colors: {
       primary: "#d99a22",
       secondary: "#fff7df",
@@ -185,7 +187,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Indian-Pakistani fusion grill with bold spice and premium platters",
     slug: "spiceroute-grill",
-    image: "/images/restaurent/spiceroute-grill-card.png",
+    image: imageUrl("restaurent/spiceroute-grill-card.png"),
     colors: {
       primary: "#8f1d1b",
       secondary: "#fff4dd",
@@ -202,7 +204,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Handmade pizza restaurant with fresh ingredients and casual family dining",
     slug: "luna-pizza-house",
-    image: "/images/restaurent/luna-pizza-house-card.png",
+    image: imageUrl("restaurent/luna-pizza-house-card.png"),
     colors: {
       primary: "#c92a22",
       secondary: "#fff7e8",
@@ -219,7 +221,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Healthy bowl cafe with salads, smoothie bowls, and wellness meals",
     slug: "freshbowl-cafe",
-    image: "/images/restaurent/freshbowl-cafe-card.png",
+    image: imageUrl("restaurent/freshbowl-cafe-card.png"),
     colors: {
       primary: "#2f8f46",
       secondary: "#fbf7ed",
@@ -236,7 +238,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Premium steakhouse with grilled cuts, wine, and evening private dining",
     slug: "ember-steakhouse",
-    image: "/images/restaurent/ember-steakhouse-card.png",
+    image: imageUrl("restaurent/ember-steakhouse-card.png"),
     colors: {
       primary: "#0f0f10",
       secondary: "#f4ead7",
@@ -253,7 +255,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Peaceful tea house with herbal blends, quiet rituals, and mindful cafe moments",
     slug: "morningleaf-tea",
-    image: "/images/restaurent/morningleaf-tea/hero-tea.png",
+    image: imageUrl("restaurent/morning-leaf-tea.png"),
     colors: {
       primary: "#8fa37a",
       secondary: "#fbf7ea",
@@ -270,7 +272,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Gourmet burger restaurant with handcrafted stacks and street-food energy",
     slug: "burgercraft",
-    image: "/images/restaurent/burger-craft.png",
+    image: imageUrl("restaurent/burger-craft.png"),
     colors: {
       primary: "#f3b53f",
       secondary: "#fff3d7",
@@ -287,7 +289,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Coastal seafood restaurant with fresh catch, premium plates, and relaxed dining",
     slug: "oceanplate-seafood",
-    image: "/images/restaurent/oceanplate-seafood.png",
+    image: imageUrl("restaurent/oceanplate-seafood.png"),
     colors: {
       primary: "#075985",
       secondary: "#f4ead5",
@@ -371,7 +373,7 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Skincare clinic for facials, treatments, and confident glowing skin",
     slug: "velvet-skin-clinic",
-    image: "/images/home/beauty-preview.png",
+    image: imageUrl("beauty/Velvet-Skin-Clinic.png"),
     colors: {
       primary: "#b98f8f",
       secondary: "#fff7f5",
@@ -382,7 +384,7 @@ export const beautyWebsites: WebsiteDesign[] = [
   },
   {
     id: "crown-comb-barber",
-    title: "Blade & Hearth",
+    title: "Crown & Comb Barber",
     category: "Beauty",
     style: "classic, sharp, masculine, modern",
     shortDescription:
@@ -394,7 +396,7 @@ export const beautyWebsites: WebsiteDesign[] = [
       accent: "#b98b43",
       dark: "#0f0f0f",
     },
-    image: "/images/beauty/crown-comb-barber-hero.png",
+    image: imageUrl("beauty/crown-comb-barber.png"),
     status: "completed",
   },
   {
@@ -465,155 +467,163 @@ export const beautyWebsites: WebsiteDesign[] = [
 
 export const realEstateWebsites: WebsiteDesign[] = [
   {
-    id: 'skyline-realty-group',
-    title: 'Skyline Realty Group',
-    category: 'Real Estate',
-    style: 'premium, trustworthy, editorial, city-focused',
-    shortDescription: 'Modern real estate agency for curated listings, seller strategy, and neighborhood confidence',
-    slug: 'skyline-realty-group',
-    image: '/images/home/real-estate-preview.png',
+    id: "skyline-realty-group",
+    title: "Skyline Realty Group",
+    category: "Real Estate",
+    style: "premium, trustworthy, editorial, city-focused",
+    shortDescription:
+      "Modern real estate agency for curated listings, seller strategy, and neighborhood confidence",
+    slug: "skyline-realty-group",
+    image: imageUrl("home/real-estate-preview.png"),
     colors: {
-      primary: '#153e75',
-      secondary: '#eff6ff',
-      accent: '#f59e0b',
-      dark: '#0f172a',
+      primary: "#153e75",
+      secondary: "#eff6ff",
+      accent: "#f59e0b",
+      dark: "#0f172a",
     },
-    status: 'completed',
+    status: "completed",
   },
-]
+];
 
 export const fitnessWebsites: WebsiteDesign[] = [
   {
-    id: 'pulseforge-fitness',
-    title: 'PulseForge Fitness',
-    category: 'Fitness',
-    style: 'high-energy, disciplined, modern, performance-focused',
-    shortDescription: 'Strength and conditioning gym with coaching, class schedules, transformation proof, and trial membership flow',
-    slug: 'pulseforge-fitness',
-    image: '/images/home/fitness-preview.png',
+    id: "pulseforge-fitness",
+    title: "PulseForge Fitness",
+    category: "Fitness",
+    style: "high-energy, disciplined, modern, performance-focused",
+    shortDescription:
+      "Strength and conditioning gym with coaching, class schedules, transformation proof, and trial membership flow",
+    slug: "pulseforge-fitness",
+    image: imageUrl("home/fitness-preview.png"),
     colors: {
-      primary: '#14532d',
-      secondary: '#ecfdf5',
-      accent: '#f97316',
-      dark: '#111827',
+      primary: "#14532d",
+      secondary: "#ecfdf5",
+      accent: "#f97316",
+      dark: "#111827",
     },
-    status: 'completed',
+    status: "completed",
   },
-]
+];
 
 export const medicalWebsites: WebsiteDesign[] = [
   {
-    id: 'harbor-health-clinic',
-    title: 'Harbor Health Clinic',
-    category: 'Medical',
-    style: 'calm, trustworthy, accessible, patient-focused',
-    shortDescription: 'Modern primary care clinic with service clarity, provider trust, insurance guidance, and appointment booking',
-    slug: 'harbor-health-clinic',
-    image: '/images/home/medical-preview.png',
+    id: "harbor-health-clinic",
+    title: "Harbor Health Clinic",
+    category: "Medical",
+    style: "calm, trustworthy, accessible, patient-focused",
+    shortDescription:
+      "Modern primary care clinic with service clarity, provider trust, insurance guidance, and appointment booking",
+    slug: "harbor-health-clinic",
+    image: imageUrl("home/medical-preview.png"),
     colors: {
-      primary: '#0f766e',
-      secondary: '#ccfbf1',
-      accent: '#ef4444',
-      dark: '#102522',
+      primary: "#0f766e",
+      secondary: "#ccfbf1",
+      accent: "#ef4444",
+      dark: "#102522",
     },
-    status: 'completed',
+    status: "completed",
   },
-]
+];
 
 export const constructionWebsites: WebsiteDesign[] = [
   {
-    id: 'forgepoint-builders',
-    title: 'ForgePoint Builders',
-    category: 'Construction',
-    style: 'rugged, trustworthy, structured, project-proof focused',
-    shortDescription: 'General contractor homepage with project proof, service clarity, process steps, and estimate conversion',
-    slug: 'forgepoint-builders',
-    image: '/images/home/construction-preview.png',
+    id: "forgepoint-builders",
+    title: "ForgePoint Builders",
+    category: "Construction",
+    style: "rugged, trustworthy, structured, project-proof focused",
+    shortDescription:
+      "General contractor homepage with project proof, service clarity, process steps, and estimate conversion",
+    slug: "forgepoint-builders",
+    image: imageUrl("home/construction-preview.png"),
     colors: {
-      primary: '#3f3f46',
-      secondary: '#fef3c7',
-      accent: '#d97706',
-      dark: '#1f2428',
+      primary: "#3f3f46",
+      secondary: "#fef3c7",
+      accent: "#d97706",
+      dark: "#1f2428",
     },
-    status: 'completed',
+    status: "completed",
   },
-]
+];
 
 export const educationWebsites: WebsiteDesign[] = [
   {
-    id: 'learnsphere-academy',
-    title: 'LearnSphere Academy',
-    category: 'Education',
-    style: 'clear, encouraging, structured, student-outcome focused',
-    shortDescription: 'Online academy homepage with curriculum previews, mentor trust, student outcomes, and enrollment flow',
-    slug: 'learnsphere-academy',
-    image: '/images/home/education-preview.png',
+    id: "learnsphere-academy",
+    title: "LearnSphere Academy",
+    category: "Education",
+    style: "clear, encouraging, structured, student-outcome focused",
+    shortDescription:
+      "Online academy homepage with curriculum previews, mentor trust, student outcomes, and enrollment flow",
+    slug: "learnsphere-academy",
+    image: imageUrl("home/education-preview.png"),
     colors: {
-      primary: '#3730a3',
-      secondary: '#e0e7ff',
-      accent: '#22c55e',
-      dark: '#111827',
+      primary: "#3730a3",
+      secondary: "#e0e7ff",
+      accent: "#22c55e",
+      dark: "#111827",
     },
-    status: 'completed',
+    status: "completed",
   },
-]
+];
 
 export const ecommerceWebsites: WebsiteDesign[] = [
   {
-    id: 'cartbloom-market',
-    title: 'CartBloom Market',
-    category: 'E-commerce',
-    style: 'polished, shoppable, conversion-focused, editorial retail',
-    shortDescription: 'Curated online store homepage with product discovery, bundle offers, reviews, and checkout momentum',
-    slug: 'cartbloom-market',
-    image: '/images/home/ecommerce-preview.png',
+    id: "cartbloom-market",
+    title: "CartBloom Market",
+    category: "E-commerce",
+    style: "polished, shoppable, conversion-focused, editorial retail",
+    shortDescription:
+      "Curated online store homepage with product discovery, bundle offers, reviews, and checkout momentum",
+    slug: "cartbloom-market",
+    image: imageUrl("home/ecommerce-preview.png"),
     colors: {
-      primary: '#7c3aed',
-      secondary: '#f3e8ff',
-      accent: '#ec4899',
-      dark: '#17111f',
+      primary: "#7c3aed",
+      secondary: "#f3e8ff",
+      accent: "#ec4899",
+      dark: "#17111f",
     },
-    status: 'completed',
+    status: "completed",
   },
-]
+];
 
 export const portfolioWebsites: WebsiteDesign[] = [
   {
-    id: 'studio-vale-creative',
-    title: 'Studio Vale Creative',
-    category: 'Portfolio',
-    style: 'editorial, selective, confident, case-study driven',
-    shortDescription: 'Creative studio portfolio with selected work, service packaging, process clarity, and inquiry conversion',
-    slug: 'studio-vale-creative',
-    image: '/images/home/portfolio-preview.png',
+    id: "studio-vale-creative",
+    title: "Studio Vale Creative",
+    category: "Portfolio",
+    style: "editorial, selective, confident, case-study driven",
+    shortDescription:
+      "Creative studio portfolio with selected work, service packaging, process clarity, and inquiry conversion",
+    slug: "studio-vale-creative",
+    image: imageUrl("home/portfolio-preview.png"),
     colors: {
-      primary: '#111827',
-      secondary: '#e5e7eb',
-      accent: '#38bdf8',
-      dark: '#0f172a',
+      primary: "#111827",
+      secondary: "#e5e7eb",
+      accent: "#38bdf8",
+      dark: "#0f172a",
     },
-    status: 'completed',
+    status: "completed",
   },
-]
+];
 
 export const saasWebsites: WebsiteDesign[] = [
   {
-    id: 'flowpilot-crm',
-    title: 'FlowPilot CRM',
-    category: 'SaaS',
-    style: 'clean, product-led, trustworthy, conversion-focused',
-    shortDescription: 'CRM product homepage with workflow value, integrations, pricing, proof, and trial conversion',
-    slug: 'flowpilot-crm',
-    image: '/images/home/saas-preview.png',
+    id: "flowpilot-crm",
+    title: "FlowPilot CRM",
+    category: "SaaS",
+    style: "clean, product-led, trustworthy, conversion-focused",
+    shortDescription:
+      "CRM product homepage with workflow value, integrations, pricing, proof, and trial conversion",
+    slug: "flowpilot-crm",
+    image: imageUrl("home/saas-preview.png"),
     colors: {
-      primary: '#075985',
-      secondary: '#e0f2fe',
-      accent: '#14b8a6',
-      dark: '#082f49',
+      primary: "#075985",
+      secondary: "#e0f2fe",
+      accent: "#14b8a6",
+      dark: "#082f49",
     },
-    status: 'completed',
+    status: "completed",
   },
-]
+];
 
 export const allWebsites: WebsiteDesign[] = [
   ...restaurantWebsites,

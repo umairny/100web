@@ -1,10 +1,11 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Container, CTAButton, SubWebsiteNav } from "../../components";
+import { imageUrl } from "../../assets/images";
 
 const imageAssets = {
   hero: {
-    src: "/images/restaurent/luna-pizza/hero-pizza.png",
+    src: imageUrl("restaurent/luna-pizza/hero-pizza.png"),
     alt: "Handmade wood-fired pizza with melted mozzarella and basil on a rustic table",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_50%_46%,#f7cf7d_0_24%,transparent_25%),radial-gradient(circle_at_45%_42%,#f9f2df_0_6%,transparent_7%),radial-gradient(circle_at_58%_54%,#c92a22_0_5%,transparent_6%),radial-gradient(circle_at_38%_61%,#2f8f46_0_4%,transparent_5%),linear-gradient(135deg,#fff7e8,#f6d48b_45%,#c92a22)]",
@@ -12,7 +13,7 @@ const imageAssets = {
       "Premium modern pizza restaurant hero image, handmade wood-fired pizza on a rustic table, melted mozzarella, basil leaves, tomato sauce, warm Italian restaurant lighting, playful family-friendly atmosphere, cinematic food photography, no text, no logo, no watermark.",
   },
   margherita: {
-    src: "/images/restaurent/luna-pizza/margherita.png",
+    src: imageUrl("restaurent/luna-pizza/margherita.png"),
     alt: "Classic Margherita pizza with fresh mozzarella, basil, and tomato sauce",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_50%_52%,#f6d48b_0_31%,transparent_32%),radial-gradient(circle_at_42%_42%,#f9f2df_0_7%,transparent_8%),radial-gradient(circle_at_58%_60%,#2f8f46_0_5%,transparent_6%),radial-gradient(circle_at_61%_39%,#c92a22_0_6%,transparent_7%),linear-gradient(135deg,#fff7e8,#f2bc5b)]",
@@ -20,7 +21,7 @@ const imageAssets = {
       "Close-up of classic Margherita pizza with fresh mozzarella, basil leaves, rich tomato sauce, slightly charred crust, warm natural light, premium food photography, no text, no logo, no watermark.",
   },
   pepperoni: {
-    src: "/images/restaurent/luna-pizza/pepperoni.png",
+    src: imageUrl("restaurent/luna-pizza/pepperoni.png"),
     alt: "Pepperoni pizza with crispy edges, melted cheese, and golden crust",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_51%_50%,#f0bf63_0_31%,transparent_32%),radial-gradient(circle_at_42%_40%,#a91f18_0_6%,transparent_7%),radial-gradient(circle_at_58%_48%,#c92a22_0_6%,transparent_7%),radial-gradient(circle_at_48%_64%,#a91f18_0_7%,transparent_8%),linear-gradient(135deg,#fff7e8,#d83b2e)]",
@@ -28,7 +29,7 @@ const imageAssets = {
       "Modern pepperoni pizza with crispy edges, melted cheese, tomato sauce, golden crust, rustic Italian table, warm restaurant lighting, appetizing premium food photography, no text, no logo, no watermark.",
   },
   veggie: {
-    src: "/images/restaurent/luna-pizza/veggie.png",
+    src: imageUrl("restaurent/luna-pizza/veggie.png"),
     alt: "Vegetable pizza with peppers, mushrooms, olives, basil, and mozzarella",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_50%_50%,#f6d48b_0_31%,transparent_32%),radial-gradient(circle_at_39%_43%,#2f8f46_0_5%,transparent_6%),radial-gradient(circle_at_57%_38%,#7b3f98_0_4%,transparent_5%),radial-gradient(circle_at_62%_61%,#f36b2d_0_5%,transparent_6%),radial-gradient(circle_at_45%_63%,#f9f2df_0_6%,transparent_7%),linear-gradient(135deg,#fff7e8,#b7d879)]",
@@ -36,7 +37,7 @@ const imageAssets = {
       "Fresh vegetable pizza with colorful peppers, mushrooms, olives, basil, mozzarella, golden crust, bright modern pizza restaurant style, clean food photography, no text, no logo, no watermark.",
   },
   interior: {
-    src: "/images/restaurent/luna-pizza/interior.png",
+    src: imageUrl("restaurent/luna-pizza/interior.png"),
     alt: "Modern family-friendly pizza restaurant interior with warm lights and red and green accents",
     fallbackStyle:
       "bg-[linear-gradient(90deg,rgba(201,42,34,0.18)_1px,transparent_1px),linear-gradient(180deg,#fff7e8,#f3dfbc_45%,#2f8f46)] [background-size:38px_38px]",
