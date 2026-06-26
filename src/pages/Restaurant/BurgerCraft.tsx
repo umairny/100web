@@ -1,197 +1,363 @@
 import { Link } from 'react-router-dom'
 import { Container, CTAButton, SubWebsiteNav } from '../../components'
 
+const highlightBadges = ['Fresh Daily', 'House Sauce', 'Dine In / Takeout']
+
 const burgers = [
-  { name: 'Craft Classic', detail: 'Double smash patties, cheddar, pickles, craft sauce', price: '$15' },
-  { name: 'Firehouse Stack', detail: 'Pepper jack, crispy onions, jalapeno relish, hot ketchup', price: '$17' },
-  { name: 'Green Market Burger', detail: 'Veggie patty, pickle slaw, avocado, basil mayo', price: '$16' },
+  {
+    name: 'The Classic Craft',
+    detail: 'Lettuce, tomato, cheddar, pickles, and craft sauce.',
+    price: '$12.95',
+    label: 'Photo: The Classic Craft burger',
+    gradient: 'from-[#f7c85b] via-[#b85a27] to-[#2a1710]',
+  },
+  {
+    name: 'Bacon Melt',
+    detail: 'Double cheddar, crispy bacon, grilled onions, and smoky mayo.',
+    price: '$15.50',
+    label: 'Photo: Bacon Melt burger',
+    gradient: 'from-[#ffe071] via-[#9b3b24] to-[#1e1511]',
+  },
+  {
+    name: 'Spicy Stack',
+    detail: 'Jalapenos, pepper jack, hot honey, lettuce, and chili sauce.',
+    price: '$14.75',
+    label: 'Photo: Spicy Stack burger',
+    gradient: 'from-[#f2bf3f] via-[#d73527] to-[#2f7a39]',
+  },
+  {
+    name: 'Crispy Chicken Crunch',
+    detail: 'Crispy chicken, slaw, pickles, and spicy ranch.',
+    price: '$13.95',
+    label: 'Photo: Crispy Chicken Crunch sandwich',
+    gradient: 'from-[#f8df8b] via-[#d98d25] to-[#354f25]',
+  },
+  {
+    name: 'Truffle Smash',
+    detail: 'Swiss cheese, mushrooms, caramelized onions, and truffle mayo.',
+    price: '$16.25',
+    label: 'Photo: Truffle Smash burger',
+    gradient: 'from-[#f4d46b] via-[#7a4a2a] to-[#17120f]',
+  },
+  {
+    name: 'Plant Power Burger',
+    detail: 'Plant-based patty, vegan cheddar, lettuce, tomato, and house sauce.',
+    price: '$14.25',
+    label: 'Photo: Plant Power Burger',
+    gradient: 'from-[#f7c85b] via-[#44823c] to-[#23170f]',
+  },
 ]
+
+const comboItems = ['Craft Burger', 'Golden Fries', 'House Sauce', 'Classic Shake']
+
+const locations = [
+  {
+    name: 'Burger Craft Downtown',
+    address: '125 Craft Street, New York, NY',
+    hours: 'Open daily: 11:00 AM - 11:00 PM',
+  },
+  {
+    name: 'Burger Craft Kitchen',
+    address: '88 Grill Avenue, Brooklyn, NY',
+    hours: 'Open daily: 12:00 PM - 10:00 PM',
+  },
+]
+
+function BurgerPhotoPlaceholder({ label, gradient }: { label: string; gradient: string }) {
+  return (
+    <div className="burger-photo-placeholder relative min-h-52 overflow-hidden rounded-[1.5rem] border-2 border-[#211915]/10 bg-[#fff1ce] p-4" aria-label={label}>
+      <div className="absolute left-4 top-4 z-10 rounded-full bg-[#fffaf0]/90 px-3 py-1 text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#7a3c1d]">
+        {label}
+      </div>
+      <div className="absolute inset-x-8 top-16 h-14 rounded-t-[5rem] rounded-b-2xl bg-gradient-to-b from-[#f6bd45] to-[#b96624] shadow-[0_8px_0_#211915] transition duration-300 group-hover:-translate-y-1" />
+      <div className="absolute inset-x-6 top-32 h-8 rotate-[-2deg] rounded-full bg-[#d92d20] shadow-[5px_5px_0_#211915]" />
+      <div className="absolute inset-x-10 top-40 h-8 rotate-[2deg] rounded-xl bg-[#f7d94c] shadow-[5px_5px_0_#211915]" />
+      <div className={`absolute inset-x-7 top-48 h-12 rounded-2xl bg-gradient-to-r ${gradient} shadow-[6px_6px_0_#211915]`} />
+      <div className="absolute inset-x-12 bottom-8 h-14 rounded-b-[5rem] rounded-t-2xl bg-gradient-to-b from-[#d68a34] to-[#f2bd54] shadow-[0_8px_0_#211915]" />
+      <div className="absolute bottom-4 left-1/2 h-4 w-52 -translate-x-1/2 rounded-full bg-[#211915]/15 blur-sm" />
+    </div>
+  )
+}
 
 export function BurgerCraft() {
   return (
-    <main className="brand-motion motion-burgercraft bg-[#fff3d7] text-[#202020]">
+    <main className="brand-motion motion-burgercraft overflow-hidden bg-[#fff4dc] text-[#211915]">
       <SubWebsiteNav
-        brand="BurgerCraft"
+        brand="Burger Craft"
         links={[
-          { label: 'Burgers', href: '#burgers' },
-          { label: 'Build', href: '#build' },
-          { label: 'Combos', href: '#combos' },
+          { label: 'Home', href: '#home' },
+          { label: 'Menu', href: '#menu' },
+          { label: 'Craft Story', href: '#story' },
+          { label: 'Locations', href: '#locations' },
+          { label: 'Order Online', href: '#order' },
         ]}
         ctaLabel="Order Now"
         ctaHref="#order"
-        className="border-b border-[#202020]/10 bg-[#fff3d7]/95"
+        className="border-b border-[#211915]/10 bg-[#fff4dc]/94 shadow-sm shadow-[#211915]/10"
         brandClassName="text-[#d92d20]"
-        linkClassName="text-[#202020] transition hover:bg-[#f3b53f]/30 hover:text-[#d92d20]"
-        ctaClassName="bg-[#d92d20] text-white hover:bg-[#b9241a]"
-        menuButtonClassName="border-[#202020]/15 text-[#202020] hover:bg-[#f3b53f]/30"
-        mobilePanelClassName="border border-[#202020]/10 bg-[#fff3d7]"
+        linkClassName="rounded-full px-3 py-2 text-[#211915] transition hover:bg-[#f7c948] hover:text-[#211915]"
+        activeLinkClassName="burger-nav-active"
+        ctaClassName="bg-[#d92d20] text-white shadow-lg shadow-[#d92d20]/20 hover:bg-[#b52319]"
+        activeCtaClassName="burger-nav-cta-active"
+        menuButtonClassName="border-[#211915]/20 text-[#211915] hover:bg-[#f7c948]"
+        mobilePanelClassName="border border-[#211915]/10 bg-[#fff4dc]"
       />
 
-      <section className="relative overflow-hidden bg-[#fff3d7] pt-28 md:pt-36">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(32,32,32,0.08)_1px,transparent_1px),linear-gradient(rgba(217,45,32,0.08)_1px,transparent_1px)] bg-[size:42px_42px]" />
-        <div className="absolute -left-24 top-24 h-48 w-48 rounded-full border-[28px] border-[#d92d20]/15" />
-        <div className="absolute bottom-10 right-0 hidden h-40 w-40 rotate-12 bg-[#3f8f3a]/15 md:block" />
+      <section id="home" className="relative min-h-screen overflow-hidden pt-28 md:pt-32">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(33,25,21,0.07)_1px,transparent_1px),linear-gradient(rgba(217,45,32,0.08)_1px,transparent_1px)] bg-[size:46px_46px]" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-[#211915]" />
+        <div className="absolute inset-x-0 top-24 h-12 bg-[repeating-linear-gradient(90deg,#f7c948_0_60px,#fff4dc_60px_120px,#d92d20_120px_180px)] shadow-xl shadow-[#211915]/15" />
+        <div className="float-slow absolute -left-20 top-48 h-44 w-44 rounded-full border-[24px] border-[#d92d20]/20" />
+        <div className="pulse-soft absolute bottom-24 right-8 hidden h-40 w-40 rotate-12 rounded-[2rem] bg-[#2f7a39]/15 lg:block" />
 
-        <Container className="relative pb-16 md:pb-24">
-          <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
-            <div className="pb-6">
-              <div className="inline-flex -rotate-2 border-4 border-[#202020] bg-[#f3b53f] px-4 py-2 text-xs font-black uppercase tracking-[0.2em] shadow-[5px_5px_0_#202020]">
-                Griddle-first burger lab
-              </div>
-              <h1 className="mt-7 max-w-4xl text-[4.6rem] font-black uppercase leading-[0.82] md:text-[7.4rem] lg:text-[8.2rem]">
-                Built
-                <span className="block text-[#d92d20]">to drip.</span>
-              </h1>
-              <p className="mt-7 max-w-2xl border-l-4 border-[#202020] pl-5 text-lg font-bold leading-8 text-[#5f4c34] md:text-xl">
-                Smash patties hit the steel, sauces get mixed like signatures, and every stack leaves the counter with its own messy little swagger.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="#order" size="lg" className="bg-[#d92d20] text-white shadow-[6px_6px_0_#202020] hover:bg-[#b9241a]">
-                  Start My Stack
-                </CTAButton>
-                <CTAButton href="#build" variant="outline" size="lg" className="border-[#202020] bg-white text-[#202020] shadow-[6px_6px_0_#202020] hover:bg-[#f3b53f]">
-                  Build The Bite
-                </CTAButton>
-              </div>
+        <Container className="relative grid min-h-[calc(100vh-7rem)] items-center gap-12 pb-20 pt-12 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="max-w-4xl">
+            <Link
+              to="/restaurant"
+              className="mb-7 inline-flex rounded-full border border-[#211915]/15 bg-white/80 px-4 py-2 text-sm font-black text-[#211915] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#fff8ea]"
+            >
+              Back to Restaurant Collection
+            </Link>
+            <p className="inline-flex -rotate-1 rounded-full bg-[#211915] px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[#f7c948] shadow-xl shadow-[#211915]/15">
+              Handcrafted Burgers
+            </p>
+            <h1 className="mt-6 text-5xl font-black uppercase leading-[0.88] tracking-normal text-[#211915] sm:text-6xl lg:text-8xl">
+              Built Fresh. Stacked High. Served Hot.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg font-bold leading-8 text-[#654026] md:text-xl">
+              Smash-style burgers, golden fries, house sauces, and thick shakes made for serious burger lovers.
+            </p>
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <CTAButton href="#order" size="lg" className="rounded-full bg-[#d92d20] text-white shadow-[7px_7px_0_#211915] hover:bg-[#b52319]">
+                Order Now
+              </CTAButton>
+              <CTAButton href="#menu" variant="outline" size="lg" className="rounded-full border-[#211915] bg-white text-[#211915] shadow-[7px_7px_0_#211915] hover:bg-[#f7c948] hover:text-[#211915]">
+                View Menu
+              </CTAButton>
             </div>
+            <div className="mt-10 flex flex-wrap gap-3">
+              {highlightBadges.map((badge) => (
+                <span key={badge} className="burger-badge rounded-full border-2 border-[#211915] bg-[#fffaf0] px-4 py-2 text-sm font-black uppercase tracking-[0.12em] shadow-[4px_4px_0_#211915]">
+                  {badge}
+                </span>
+              ))}
+            </div>
+          </div>
 
-            <div className="relative min-h-[560px] overflow-hidden border-4 border-[#202020] bg-[#fff9e9] shadow-[12px_12px_0_#202020]">
-              <div className="absolute left-0 top-0 z-10 flex w-full items-center justify-between border-b-4 border-[#202020] bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.16em]">
-                <span>Order 047</span>
-                <span className="text-[#d92d20]">Open flame attitude</span>
-              </div>
-
-              <div className="absolute left-6 top-24 z-20 rotate-[-5deg] border-4 border-[#202020] bg-[#d92d20] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white shadow-[5px_5px_0_#202020]">
-                House sauce
-              </div>
-              <div className="absolute right-6 top-28 z-20 rotate-[6deg] border-4 border-[#202020] bg-[#3f8f3a] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white shadow-[5px_5px_0_#202020]">
-                Pickle snap
-              </div>
-              <div className="absolute bottom-24 left-6 z-20 rotate-[4deg] border-4 border-[#202020] bg-white px-5 py-3 text-sm font-black uppercase tracking-[0.16em] shadow-[5px_5px_0_#202020]">
-                Double smash
-              </div>
-
-              <div className="absolute left-1/2 top-[5.8rem] h-[29rem] w-[29rem] -translate-x-1/2 rounded-full bg-[#f3b53f]/25" />
-              <div className="absolute left-1/2 top-[7.6rem] h-20 w-[70%] -translate-x-1/2 rounded-t-[8rem] rounded-b-[2rem] border-4 border-[#202020] bg-[#f3b53f] shadow-[0_12px_0_#202020]" />
-              <div className="absolute left-1/2 top-[10.3rem] h-5 w-[62%] -translate-x-1/2 rounded-full bg-white/55" />
-
-              <div className="absolute left-1/2 top-[14.2rem] h-14 w-[82%] -translate-x-1/2 rotate-[-2deg] rounded-[2rem] border-4 border-[#202020] bg-[#d92d20] shadow-[7px_7px_0_#202020]" />
-              <div className="absolute left-1/2 top-[17.6rem] h-11 w-[76%] -translate-x-1/2 rotate-[2deg] rounded-[1.5rem] border-4 border-[#202020] bg-[#f7dc56] shadow-[7px_7px_0_#202020]" />
-              <div className="absolute left-1/2 top-[20.2rem] h-16 w-[86%] -translate-x-1/2 rotate-[-1deg] rounded-[2rem] border-4 border-[#202020] bg-[#6b2f20] shadow-[8px_8px_0_#202020]" />
-              <div className="absolute left-1/2 top-[23.9rem] h-12 w-[78%] -translate-x-1/2 rotate-[2deg] rounded-[1.5rem] border-4 border-[#202020] bg-[#3f8f3a] shadow-[7px_7px_0_#202020]" />
-              <div className="absolute left-1/2 top-[27rem] h-20 w-[72%] -translate-x-1/2 rounded-b-[8rem] rounded-t-[2rem] border-4 border-[#202020] bg-[#f3b53f] shadow-[8px_8px_0_#202020]" />
-
-              <div className="absolute bottom-0 left-0 right-0 grid border-t-4 border-[#202020] bg-[#202020] text-white sm:grid-cols-3">
-                {[
-                  { value: '3 min', label: 'Griddle sear' },
-                  { value: '8', label: 'Sauces mixed' },
-                  { value: '$15', label: 'Classic stack' },
-                ].map((stat) => (
-                  <div key={stat.label} className="border-b border-white/15 p-5 sm:border-b-0 sm:border-r sm:last:border-r-0">
-                    <p className="text-3xl font-black text-[#f3b53f]">{stat.value}</p>
-                    <p className="mt-1 text-xs font-black uppercase tracking-[0.16em] text-white/70">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
+          <div className="burger-stack-visual relative mx-auto min-h-[560px] w-full max-w-2xl">
+            <div className="absolute inset-x-4 bottom-7 top-4 rounded-[2.5rem] border-4 border-[#211915] bg-[#fffaf0] shadow-[12px_12px_0_#211915]" />
+            <div className="absolute left-8 right-8 top-10 flex items-center justify-between border-b-4 border-[#211915] pb-4 text-xs font-black uppercase tracking-[0.16em]">
+              <span>Photo: Hero craft burger</span>
+              <span className="text-[#d92d20]">Hot counter</span>
+            </div>
+            <div className="absolute left-1/2 top-24 h-96 w-96 -translate-x-1/2 rounded-full bg-[#f7c948]/28" />
+            <div className="absolute left-1/2 top-28 h-20 w-[78%] -translate-x-1/2 rounded-t-[8rem] rounded-b-[2rem] border-4 border-[#211915] bg-[#f1af3b] shadow-[0_12px_0_#211915]" />
+            <div className="absolute left-1/2 top-48 h-12 w-[88%] -translate-x-1/2 -rotate-2 rounded-full border-4 border-[#211915] bg-[#d92d20] shadow-[7px_7px_0_#211915]" />
+            <div className="absolute left-1/2 top-56 h-12 w-[78%] -translate-x-1/2 rotate-2 rounded-xl border-4 border-[#211915] bg-[#f7d94c] shadow-[7px_7px_0_#211915]" />
+            <div className="absolute left-1/2 top-[17rem] h-20 w-[90%] -translate-x-1/2 -rotate-1 rounded-[2rem] border-4 border-[#211915] bg-[#5b2f1f] shadow-[8px_8px_0_#211915]" />
+            <div className="absolute left-1/2 top-[21.5rem] h-12 w-[78%] -translate-x-1/2 rotate-2 rounded-2xl border-4 border-[#211915] bg-[#2f7a39] shadow-[7px_7px_0_#211915]" />
+            <div className="absolute left-1/2 top-[24.7rem] h-20 w-[72%] -translate-x-1/2 rounded-b-[8rem] rounded-t-[2rem] border-4 border-[#211915] bg-[#f1af3b] shadow-[8px_8px_0_#211915]" />
+            <div className="absolute left-2 top-28 rotate-[-7deg] rounded-2xl border-4 border-[#211915] bg-[#d92d20] px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-white shadow-[6px_6px_0_#211915]">
+              Sauce drip approved
+            </div>
+            <div className="absolute bottom-12 right-2 rotate-[5deg] rounded-2xl border-4 border-[#211915] bg-[#f7c948] px-5 py-4 text-sm font-black uppercase tracking-[0.14em] shadow-[6px_6px_0_#211915]">
+              Thick shakes daily
             </div>
           </div>
         </Container>
       </section>
 
-      <section id="about" className="bg-[#202020] py-20 text-white md:py-28">
-        <Container className="grid gap-10 md:grid-cols-2 md:items-center">
+      <section id="story" className="bg-[#211915] py-20 text-white md:py-28">
+        <Container className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <p className="font-black uppercase tracking-[0.24em] text-[#f3b53f]">About BurgerCraft</p>
-            <h2 className="mt-3 text-4xl font-black md:text-5xl">A modern burger counter with handcrafted attitude.</h2>
+            <p className="font-black uppercase tracking-[0.24em] text-[#f7c948]">Craft story</p>
+            <h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] md:text-7xl">This Is Burger Craft</h2>
+            <p className="mt-6 max-w-3xl text-xl font-bold leading-9 text-white/78">
+              We keep it simple: quality beef, toasted buns, melted cheese, fresh toppings, crispy sides, and flavor in every bite.
+            </p>
           </div>
-          <p className="text-lg leading-8 text-white/75">
-            We keep the menu tight, the griddle hot, and the flavor bold: fresh patties, punchy sauces, crisp toppings,
-            and combos built for real appetite.
-          </p>
+          <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] border-4 border-white bg-[#d92d20] p-6 shadow-[10px_10px_0_#f7c948]">
+            <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_20%_20%,#f7c948_0_10%,transparent_11%),radial-gradient(circle_at_70%_60%,#fff4dc_0_8%,transparent_9%)]" />
+            <div className="relative rounded-[1.5rem] bg-[#fff4dc] p-6 text-[#211915]">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d92d20]">Texture: burger counter wall</p>
+              <p className="mt-16 text-4xl font-black uppercase leading-none md:text-5xl">Hot griddle. Cold shakes. No shortcuts.</p>
+            </div>
+          </div>
         </Container>
       </section>
 
-      <section id="burgers" className="py-20 md:py-28">
+      <section id="menu" className="py-20 md:py-28">
         <Container>
-          <div className="mb-12 text-center">
-            <p className="font-black uppercase tracking-[0.24em] text-[#d92d20]">Signature burgers</p>
-            <h2 className="mt-3 text-4xl font-black md:text-5xl">Stacks with crunch, char, and sauce.</h2>
+          <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div className="max-w-3xl">
+              <p className="font-black uppercase tracking-[0.24em] text-[#d92d20]">Featured burgers</p>
+              <h2 className="mt-3 text-4xl font-black uppercase leading-tight md:text-6xl">Stacks with crunch, char, and sauce.</h2>
+            </div>
+            <CTAButton href="#order" className="rounded-full bg-[#211915] text-white hover:bg-black">
+              Order From Menu
+            </CTAButton>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {burgers.map((burger) => (
-              <article key={burger.name} className="rounded-[2rem] border-4 border-[#202020] bg-white p-6 shadow-[8px_8px_0_#202020]">
-                <div className="mb-6 aspect-[4/3] rounded-[1.5rem] bg-[linear-gradient(180deg,#f3b53f_0_22%,#d92d20_23%_48%,#3f8f3a_49%_62%,#f3b53f_63%)]" />
-                <div className="flex justify-between gap-4">
-                  <h3 className="text-2xl font-black">{burger.name}</h3>
-                  <span className="font-black text-[#d92d20]">{burger.price}</span>
+              <article key={burger.name} className="burger-menu-card group rounded-[2rem] border-4 border-[#211915] bg-white p-5 shadow-[8px_8px_0_#211915] transition duration-300 hover:-translate-y-1 hover:shadow-[12px_12px_0_#d92d20]">
+                <BurgerPhotoPlaceholder label={burger.label} gradient={burger.gradient} />
+                <div className="mt-6 flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-2xl font-black uppercase leading-tight">{burger.name}</h3>
+                    <p className="mt-3 leading-7 text-[#654026]">{burger.detail}</p>
+                  </div>
+                  <p className="shrink-0 rounded-full bg-[#f7c948] px-3 py-1 text-sm font-black text-[#211915]">{burger.price}</p>
                 </div>
-                <p className="mt-3 leading-7 text-[#5f4c34]">{burger.detail}</p>
+                <button type="button" className="mt-6 w-full rounded-full bg-[#d92d20] px-5 py-3 font-black text-white transition hover:-translate-y-0.5 hover:bg-[#b52319]">
+                  Add to Order
+                </button>
               </article>
             ))}
           </div>
         </Container>
       </section>
 
-      <section id="build" className="bg-[#f3b53f] py-20 md:py-28">
-        <Container className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+      <section className="bg-[#f7c948] py-20 md:py-28">
+        <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="font-black uppercase tracking-[0.24em] text-[#202020]">Build your burger</p>
-            <h2 className="mt-3 text-4xl font-black md:text-5xl">Choose the stack. Control the chaos.</h2>
+            <p className="font-black uppercase tracking-[0.24em] text-[#211915]">Signature combo</p>
+            <h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] md:text-7xl">Make It a Craft Combo</h2>
+            <p className="mt-6 text-lg font-bold leading-8 text-[#4e321f]">
+              Pair your burger with crispy fries, loaded sauce, and a shake for the full Burger Craft experience.
+            </p>
+            <CTAButton href="#order" size="lg" className="mt-8 rounded-full bg-[#211915] text-white shadow-[7px_7px_0_#d92d20] hover:bg-black">
+              Build Your Combo
+            </CTAButton>
           </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {['Patty', 'Cheese', 'Sauce'].map((step) => (
-              <div key={step} className="rounded-2xl bg-white p-6 shadow-sm">
-                <h3 className="text-3xl font-black">{step}</h3>
-                <p className="mt-3 text-[#5f4c34]">Pick your favorite and make the burger yours.</p>
-              </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {comboItems.map((item, index) => (
+              <article key={item} className="burger-combo-card rounded-[1.5rem] border-4 border-[#211915] bg-[#fffaf0] p-6 shadow-[7px_7px_0_#211915]">
+                <p className="text-sm font-black uppercase tracking-[0.16em] text-[#d92d20]">Combo item 0{index + 1}</p>
+                <h3 className="mt-6 text-3xl font-black uppercase">{item}</h3>
+              </article>
             ))}
           </div>
         </Container>
       </section>
 
-      <section id="combos" className="py-20 md:py-28">
-        <Container className="grid gap-6 md:grid-cols-3">
-          {['Classic Combo', 'Loaded Fries Box', 'Craft Soda Duo'].map((combo) => (
-            <article key={combo} className="rounded-3xl bg-white p-8 shadow-sm">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d92d20]">Combo deal</p>
-              <h3 className="mt-6 text-3xl font-black">{combo}</h3>
-              <p className="mt-4 leading-7 text-[#5f4c34]">Burger, fries, drink, and enough flavor to make lunch feel like an event.</p>
-            </article>
-          ))}
-        </Container>
-      </section>
-
-      <section className="bg-white py-20 md:py-28">
-        <Container className="grid gap-6 md:grid-cols-3">
-          {['Messy in the best possible way.', 'The Firehouse Stack is ridiculous.', 'Fast, fun, and seriously good.'].map((quote) => (
-            <blockquote key={quote} className="rounded-3xl bg-[#fff3d7] p-8">
-              <p className="text-xl font-bold leading-8">"{quote}"</p>
-              <footer className="mt-6 text-sm font-black uppercase tracking-[0.18em] text-[#d92d20]">Burger fan</footer>
-            </blockquote>
-          ))}
-        </Container>
-      </section>
-
-      <section id="order" className="bg-[#d92d20] py-20 text-white">
-        <Container className="text-center">
-          <h2 className="text-4xl font-black md:text-5xl">Your burger is waiting.</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/85">Order now for pickup, dinner, or a full combo run.</p>
-          <CTAButton href="tel:555-0155" size="lg" className="mt-8 bg-[#202020] text-white hover:bg-black">Call (555) 015-5500</CTAButton>
-        </Container>
-      </section>
-
-      <section className="border-t border-[#202020]/10 py-8">
+      <section id="order" className="bg-[#fffaf0] py-20 md:py-28">
         <Container>
-          <Link to="/restaurant" className="font-bold text-[#d92d20] hover:text-[#202020]">
-            Back to Restaurant Collection
-          </Link>
+          <div className="mb-12 max-w-3xl">
+            <p className="font-black uppercase tracking-[0.24em] text-[#d92d20]">Pickup and delivery</p>
+            <h2 className="mt-3 text-4xl font-black uppercase leading-tight md:text-6xl">Burger Craft at Home</h2>
+            <p className="mt-5 text-lg font-bold leading-8 text-[#654026]">
+              Order online for pickup or delivery and bring the craft burger experience to your table.
+            </p>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-2">
+            {[
+              ['Pickup', 'Order ahead and grab your meal fresh from the counter.', 'Start Pickup Order'],
+              ['Delivery', 'Get burgers, fries, and shakes delivered hot.', 'Order Delivery'],
+            ].map(([title, text, button]) => (
+              <article key={title} className="rounded-[2rem] border-4 border-[#211915] bg-[#211915] p-8 text-white shadow-[10px_10px_0_#f7c948] transition hover:-translate-y-1">
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-[#f7c948]">Order option</p>
+                <h3 className="mt-5 text-5xl font-black uppercase">{title}</h3>
+                <p className="mt-4 max-w-xl text-lg leading-8 text-white/75">{text}</p>
+                <button type="button" className="mt-8 rounded-full bg-[#d92d20] px-6 py-3 font-black text-white transition hover:bg-[#b52319]">
+                  {button}
+                </button>
+              </article>
+            ))}
+          </div>
         </Container>
       </section>
 
-      <footer className="bg-[#202020] py-10 text-white">
-        <Container className="flex flex-col justify-between gap-4 text-sm md:flex-row">
-          <p className="font-black">BurgerCraft</p>
-          <p className="text-white/70">311 Griddle Street | Burgers, fries, craft sodas</p>
+      <section id="locations" className="py-20 md:py-28">
+        <Container>
+          <div className="mb-12 max-w-3xl">
+            <p className="font-black uppercase tracking-[0.24em] text-[#d92d20]">Locations</p>
+            <h2 className="mt-3 text-4xl font-black uppercase leading-tight md:text-6xl">Visit Burger Craft</h2>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-2">
+            {locations.map((location) => (
+              <article key={location.name} className="rounded-[2rem] border-4 border-[#211915] bg-white p-7 shadow-[8px_8px_0_#211915]">
+                <h3 className="text-3xl font-black uppercase">{location.name}</h3>
+                <p className="mt-4 text-lg font-bold text-[#654026]">{location.address}</p>
+                <p className="mt-2 text-[#654026]">{location.hours}</p>
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                  <button type="button" className="rounded-full border-2 border-[#211915] bg-white px-5 py-3 font-black transition hover:bg-[#f7c948]">
+                    Get Directions
+                  </button>
+                  <button type="button" className="rounded-full bg-[#d92d20] px-5 py-3 font-black text-white transition hover:bg-[#b52319]">
+                    Order From This Location
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-[#211915] py-20 text-white md:py-28">
+        <Container className="grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+          <div>
+            <p className="font-black uppercase tracking-[0.24em] text-[#f7c948]">Events and catering</p>
+            <h2 className="mt-3 text-4xl font-black uppercase leading-tight md:text-6xl">Big Orders. Bigger Flavor.</h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-white/75">
+              Planning a party, office lunch, or game night? Burger Craft can handle large burger orders, combo boxes, and custom meal packs.
+            </p>
+          </div>
+          <CTAButton href="#order" size="lg" className="rounded-full bg-[#f7c948] text-[#211915] shadow-[7px_7px_0_#d92d20] hover:bg-[#ffe37a]">
+            Plan a Group Order
+          </CTAButton>
+        </Container>
+      </section>
+
+      <section className="bg-[#d92d20] py-20 text-white md:py-28">
+        <Container className="text-center">
+          <p className="font-black uppercase tracking-[0.24em] text-[#f7c948]">Final call</p>
+          <h2 className="mx-auto mt-3 max-w-3xl text-5xl font-black uppercase leading-[0.95] md:text-7xl">Craving a Better Burger?</h2>
+          <p className="mx-auto mt-5 max-w-xl text-lg font-bold leading-8 text-white/85">
+            Your next handcrafted burger is only one click away.
+          </p>
+          <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
+            <CTAButton href="#order" size="lg" className="rounded-full bg-[#211915] text-white hover:bg-black">
+              Order Now
+            </CTAButton>
+            <CTAButton href="#menu" variant="outline" size="lg" className="rounded-full border-white bg-transparent text-white hover:bg-white hover:text-[#211915]">
+              Explore Menu
+            </CTAButton>
+          </div>
+        </Container>
+      </section>
+
+      <footer className="bg-[#fff4dc] py-12 text-[#211915]">
+        <Container className="grid gap-8 md:grid-cols-[1.25fr_0.75fr_0.85fr_0.65fr]">
+          <div>
+            <p className="text-2xl font-black uppercase text-[#d92d20]">Burger Craft</p>
+            <p className="mt-3 max-w-sm leading-7 text-[#654026]">
+              Handmade burgers, crispy fries, sauces, shakes, and casual dine-in or takeout energy.
+            </p>
+            <p className="mt-6 text-sm font-bold text-[#8b725f]">Copyright 2026 Burger Craft. All rights reserved.</p>
+          </div>
+          <div>
+            <p className="font-black uppercase">Quick links</p>
+            <div className="mt-3 grid gap-2 text-[#654026]">
+              <a href="#home" className="hover:text-[#d92d20]">Home</a>
+              <a href="#menu" className="hover:text-[#d92d20]">Menu</a>
+              <a href="#story" className="hover:text-[#d92d20]">Craft Story</a>
+              <a href="#locations" className="hover:text-[#d92d20]">Locations</a>
+            </div>
+          </div>
+          <div>
+            <p className="font-black uppercase">Contact</p>
+            <p className="mt-3 leading-7 text-[#654026]">hello@burgercraft.example<br />(555) 015-5500<br />Open daily for lunch and dinner</p>
+          </div>
+          <div>
+            <p className="font-black uppercase">Social</p>
+            <div className="mt-3 flex gap-3">
+              {['IG', 'FB', 'TK'].map((item) => (
+                <a key={item} href="#home" className="flex h-10 w-10 items-center justify-center rounded-full bg-[#211915] text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-[#d92d20]">
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
         </Container>
       </footer>
     </main>

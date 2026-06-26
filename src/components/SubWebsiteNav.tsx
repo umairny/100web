@@ -25,6 +25,18 @@ interface SubWebsiteNavProps {
 
 const normalizePath = (path: string) => path.replace(/\/+$/, "") || "/";
 
+const getHrefHash = (href: string) => {
+  const hashIndex = href.indexOf("#");
+
+  if (hashIndex === -1) {
+    return "";
+  }
+
+  const hrefHash = href.slice(hashIndex);
+
+  return hrefHash.length > 1 ? hrefHash : "";
+};
+
 export function SubWebsiteNav({
   brand,
   links,
@@ -44,13 +56,97 @@ export function SubWebsiteNav({
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    const updateHash = () => setCurrentHash(window.location.hash);
+    const sectionHashes = Array.from(
+      new Set([...links.map((link) => getHrefHash(link.href)), getHrefHash(ctaHref)].filter(Boolean)),
+    );
+    let animationFrameId: number | undefined;
 
-    updateHash();
-    window.addEventListener("hashchange", updateHash);
+    const getActiveHashFromScroll = () => {
+      const sections = sectionHashes
+        .map((sectionHash) => {
+          const section = document.getElementById(decodeURIComponent(sectionHash.slice(1)));
 
-    return () => window.removeEventListener("hashchange", updateHash);
-  }, [pathname, hash]);
+          if (!section) {
+            return undefined;
+          }
+
+          return {
+            hash: sectionHash,
+            rect: section.getBoundingClientRect(),
+          };
+        })
+        .filter((section): section is { hash: string; rect: DOMRect } => Boolean(section));
+
+      if (sections.length === 0) {
+        return "";
+      }
+
+      if (window.scrollY < 24) {
+        return sections[0].hash;
+      }
+
+      const scrollMarker = Math.min(180, Math.max(112, window.innerHeight * 0.24));
+      const visibleSection = sections.find(({ rect }) => rect.top <= scrollMarker && rect.bottom > scrollMarker);
+
+      if (visibleSection) {
+        return visibleSection.hash;
+      }
+
+      const passedSections = sections.filter(({ rect }) => rect.top <= scrollMarker);
+
+      if (passedSections.length > 0) {
+        return passedSections[passedSections.length - 1].hash;
+      }
+
+      return sections[0].hash;
+    };
+
+    const updateHash = (preferUrlHash = false) => {
+      if (sectionHashes.length === 0) {
+        setCurrentHash(window.location.hash);
+        return;
+      }
+
+      const urlHash = window.location.hash;
+      const nextHash =
+        preferUrlHash &&
+        sectionHashes.includes(urlHash) &&
+        document.getElementById(decodeURIComponent(urlHash.slice(1)))
+          ? urlHash
+          : getActiveHashFromScroll();
+
+      setCurrentHash((current) => (current === nextHash ? current : nextHash));
+    };
+
+    const requestHashUpdate = (preferUrlHash = false) => {
+      if (animationFrameId !== undefined) {
+        return;
+      }
+
+      animationFrameId = window.requestAnimationFrame(() => {
+        animationFrameId = undefined;
+        updateHash(preferUrlHash);
+      });
+    };
+
+    const requestSectionUpdate = () => requestHashUpdate(false);
+    const requestUrlHashUpdate = () => updateHash(true);
+
+    updateHash(Boolean(window.location.hash));
+    window.addEventListener("hashchange", requestUrlHashUpdate);
+    window.addEventListener("scroll", requestSectionUpdate, { passive: true });
+    window.addEventListener("resize", requestSectionUpdate);
+
+    return () => {
+      if (animationFrameId !== undefined) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+
+      window.removeEventListener("hashchange", requestUrlHashUpdate);
+      window.removeEventListener("scroll", requestSectionUpdate);
+      window.removeEventListener("resize", requestSectionUpdate);
+    };
+  }, [links, ctaHref, pathname, hash]);
 
   const isActiveHref = (href: string) => {
     const hashIndex = href.indexOf("#");

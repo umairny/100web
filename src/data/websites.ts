@@ -266,11 +266,11 @@ export const restaurantWebsites: WebsiteDesign[] = [
   },
   {
     id: "burgercraft",
-    title: "BurgerCraft",
+    title: "Burger Craft",
     category: "Restaurant",
     style: "bold, fun, modern, energetic",
     shortDescription:
-      "Gourmet burger restaurant with handcrafted stacks and street-food energy",
+      "Modern handmade burger restaurant with craft stacks, fries, sauces, and shakes",
     slug: "burgercraft",
     image: imageUrl("restaurent/burger-craft.png"),
     colors: {

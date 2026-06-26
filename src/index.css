@@ -313,6 +313,262 @@ blockquote {
   box-shadow: 0 22px 55px rgba(190, 88, 130, 0.16);
 }
 
+
+@keyframes navActivePop {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.96);
+  }
+  58% {
+    transform: translate3d(0, -2px, 0) scale(1.04);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes burgerLayerWobble {
+  0%,
+  100% {
+    transform: translateX(-50%) rotate(var(--burger-rotate, 0deg));
+  }
+  50% {
+    transform: translateX(-50%) translateY(-5px) rotate(calc(var(--burger-rotate, 0deg) * -1));
+  }
+}
+
+@keyframes burgerBadgeBounce {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--badge-rotate, 0deg));
+  }
+  50% {
+    transform: translate3d(0, -7px, 0) rotate(var(--badge-rotate, 0deg));
+  }
+}
+
+@keyframes burgerCardEnter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) rotate(-0.7deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+.restaurant-subnav a[aria-current="location"] {
+  animation: navActivePop 360ms ease-out both;
+}
+
+.restaurant-subnav a[aria-current="location"].burger-nav-active {
+  background: #f7c948;
+  box-shadow: 4px 4px 0 #211915;
+  color: #211915;
+  text-decoration: none;
+}
+
+.restaurant-subnav a[aria-current="location"].burger-nav-cta-active {
+  box-shadow: 4px 4px 0 #211915, 0 14px 28px rgba(217, 45, 32, 0.22);
+  transform: translate3d(0, -1px, 0);
+}
+
+.motion-burgercraft .burger-badge {
+  --badge-rotate: -1deg;
+  animation: burgerBadgeBounce 4.8s ease-in-out infinite;
+}
+
+.motion-burgercraft .burger-badge:nth-child(2) {
+  --badge-rotate: 1deg;
+  animation-delay: 220ms;
+}
+
+.motion-burgercraft .burger-badge:nth-child(3) {
+  --badge-rotate: -0.5deg;
+  animation-delay: 420ms;
+}
+
+.motion-burgercraft .burger-stack-visual > div:nth-child(5) {
+  animation: pulseSoft 4.2s ease-in-out infinite;
+}
+
+.motion-burgercraft .burger-stack-visual > div:nth-child(6) {
+  --burger-rotate: 0deg;
+  animation: burgerLayerWobble 5.2s ease-in-out infinite;
+}
+
+.motion-burgercraft .burger-stack-visual > div:nth-child(7) {
+  --burger-rotate: -2deg;
+  animation: burgerLayerWobble 4.8s ease-in-out 120ms infinite;
+}
+
+.motion-burgercraft .burger-stack-visual > div:nth-child(8) {
+  --burger-rotate: 2deg;
+  animation: burgerLayerWobble 5.6s ease-in-out 240ms infinite;
+}
+
+.motion-burgercraft .burger-stack-visual > div:nth-child(9) {
+  --burger-rotate: -1deg;
+  animation: burgerLayerWobble 5s ease-in-out 360ms infinite;
+}
+
+.motion-burgercraft .burger-menu-card,
+.motion-burgercraft .burger-combo-card {
+  animation: burgerCardEnter 0.72s ease-out both;
+}
+
+.motion-burgercraft .burger-photo-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 18%, rgba(255, 255, 255, 0.32) 46%, transparent 72%);
+  transform: translateX(-125%) skewX(-14deg);
+  transition: transform 700ms ease;
+  pointer-events: none;
+}
+
+.motion-burgercraft .burger-menu-card:hover .burger-photo-placeholder::after {
+  transform: translateX(125%) skewX(-14deg);
+}
+
+@keyframes goldenNavGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(243, 181, 54, 0);
+    transform: translate3d(0, 0, 0) scale(0.98);
+  }
+  55% {
+    box-shadow: 0 10px 28px rgba(184, 117, 40, 0.22);
+    transform: translate3d(0, -1px, 0) scale(1.035);
+  }
+  100% {
+    box-shadow: 0 8px 22px rgba(184, 117, 40, 0.18);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes goldenDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(8px, -10px, 0) rotate(4deg);
+  }
+}
+
+@keyframes goldenSlowFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--golden-rotate, 0deg));
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) rotate(calc(var(--golden-rotate, 0deg) + 2deg));
+  }
+}
+
+@keyframes goldenPastryRise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes goldenPanelFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+.restaurant-subnav a[aria-current="location"].golden-nav-active {
+  background: linear-gradient(135deg, #fff1bd, #f3b536);
+  box-shadow: 0 8px 22px rgba(184, 117, 40, 0.18);
+  color: #2f1c12;
+  text-decoration: none;
+  animation: goldenNavGlow 420ms ease-out both;
+}
+
+.restaurant-subnav a[aria-current="location"].golden-nav-cta-active {
+  box-shadow: 0 0 0 2px rgba(75, 42, 24, 0.18), 0 14px 32px rgba(184, 117, 40, 0.24);
+  transform: translate3d(0, -1px, 0);
+}
+
+.motion-goldencrust .golden-orbit {
+  animation: goldenDrift 8s ease-in-out infinite;
+}
+
+.motion-goldencrust .golden-soft-pulse {
+  animation: pulseSoft 5.8s ease-in-out infinite;
+}
+
+.motion-goldencrust .golden-floating-badge {
+  --golden-rotate: 12deg;
+  animation: goldenSlowFloat 6.4s ease-in-out infinite;
+}
+
+.motion-goldencrust .golden-crumb-row > div {
+  animation: goldenPastryRise 0.68s ease-out both;
+}
+
+.motion-goldencrust .golden-crumb-row > div:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.motion-goldencrust .golden-crumb-row > div:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.motion-goldencrust .golden-hero-visual > div:nth-child(2) {
+  animation: goldenPanelFloat 6.8s ease-in-out infinite;
+}
+
+.motion-goldencrust .golden-hero-visual > div:nth-child(3),
+.motion-goldencrust .golden-hero-visual > div:nth-child(4) {
+  animation: goldenSlowFloat 5.8s ease-in-out infinite;
+}
+
+.motion-goldencrust .golden-hero-visual > div:nth-child(4) {
+  animation-delay: 320ms;
+}
+
+.motion-goldencrust .golden-reward-card,
+.motion-goldencrust .golden-benefit-card,
+.motion-goldencrust .golden-menu-card {
+  animation: goldenPastryRise 0.74s ease-out both;
+}
+
+.motion-goldencrust .golden-feature-card {
+  animation: scaleIn 0.8s ease-out both;
+}
+
+.motion-goldencrust .golden-account-panel {
+  animation: goldenPanelFloat 7.2s ease-in-out infinite;
+}
+
+.motion-goldencrust .golden-food-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 18%, rgba(255, 255, 255, 0.38) 46%, transparent 72%);
+  transform: translateX(-125%) skewX(-12deg);
+  transition: transform 760ms ease;
+  pointer-events: none;
+}
+
+.motion-goldencrust .golden-menu-card:hover .golden-food-placeholder::after {
+  transform: translateX(125%) skewX(-12deg);
+}
+
+.motion-goldencrust .golden-menu-card:hover .golden-food-placeholder > img {
+  transform: scale(1.05);
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
