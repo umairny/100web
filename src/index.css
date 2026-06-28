@@ -9,6 +9,189 @@ body {
   overscroll-behavior-y: none;
 }
 
+/* UrbanBite's reveal system is observer-driven so content animates only when it enters view. */
+.urbanbite-site [data-urban-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 750ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.urbanbite-site [data-urban-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.urbanbite-site .urban-date {
+  color-scheme: dark;
+}
+
+.motion-ember [data-ember-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition:
+    opacity 750ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 750ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.motion-ember [data-ember-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.motion-ember .ember-date {
+  color-scheme: dark;
+}
+
+.ocean-display {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.motion-oceanplate [data-ocean-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 750ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 750ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms ease;
+}
+
+.motion-oceanplate [data-ocean-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.motion-oceanplate .ocean-date {
+  color-scheme: light;
+}
+
+.burger-display {
+  font-family: "Archivo Black", Impact, sans-serif;
+}
+
+.burger-script {
+  font-family: "Lobster", "Brush Script MT", cursive;
+}
+
+.motion-burgercraft [data-burger-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms ease;
+}
+
+.motion-burgercraft [data-burger-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes restaurantCinematicDrift {
+  0% {
+    transform: scale(1.04) translate3d(-0.5%, 0, 0);
+  }
+  100% {
+    transform: scale(1.1) translate3d(0.5%, -0.5%, 0);
+  }
+}
+
+@keyframes restaurantCopyReveal {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translate3d(0, 34px, 0);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes restaurantCardReveal {
+  from {
+    opacity: 0;
+    filter: blur(7px);
+    transform: perspective(1200px) translate3d(70px, 18px, 0) rotateY(-7deg) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: perspective(1200px) translate3d(0, 0, 0) rotateY(0) scale(1);
+  }
+}
+
+@keyframes restaurantLightSweep {
+  from {
+    transform: translateX(-140%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(240%) skewX(-18deg);
+  }
+}
+
+@keyframes restaurantCarouselProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.restaurant-cinematic {
+  font-family: "Manrope", sans-serif;
+}
+
+.restaurant-cinematic-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+}
+
+.restaurant-cinematic-image {
+  animation: restaurantCinematicDrift 12s ease-in-out infinite alternate;
+}
+
+.restaurant-slide-copy {
+  animation: restaurantCopyReveal 850ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.restaurant-slide-card {
+  animation: restaurantCardReveal 1000ms cubic-bezier(0.16, 1, 0.3, 1) 100ms both;
+  transform-origin: center right;
+}
+
+.restaurant-slide-card::after {
+  content: "";
+  position: absolute;
+  inset: -30% auto -30% 0;
+  width: 22%;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  animation: restaurantLightSweep 1150ms ease-out 300ms both;
+}
+
+.restaurant-carousel-progress {
+  transform-origin: left center;
+  animation: restaurantCarouselProgress 6s linear both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .urbanbite-site *,
+  .urbanbite-site *::before,
+  .urbanbite-site *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

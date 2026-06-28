@@ -113,80 +113,66 @@ export function BrewNestCoffee() {
         mobilePanelClassName="border border-[#d7c7b3] bg-[#fbf6ef]"
       />
 
-      <section className="relative overflow-hidden border-b border-[#e2d4c3] bg-[#f6efe5] pt-28 md:pt-36">
-        <div className="absolute inset-x-0 top-0 h-28 bg-[#2d211a]" />
-        <div className="absolute left-0 top-28 hidden h-full w-24 border-r border-[#dac8b4] bg-[repeating-linear-gradient(180deg,#efe0cd_0_18px,#f8efe4_18px_36px)] lg:block" />
-        <div className="absolute right-0 top-28 hidden h-full w-24 border-l border-[#dac8b4] bg-[repeating-linear-gradient(180deg,#f8efe4_0_18px,#efe0cd_18px_36px)] lg:block" />
+      <section className="relative isolate overflow-hidden border-b border-[#4c382b] bg-[#241a14] pt-20 text-[#f8f1e8] md:pt-24">
+        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_18%_24%,rgba(192,145,94,0.18),transparent_28%),linear-gradient(115deg,#241a14_0%,#2d211a_52%,#17100c_100%)]" />
+        <div className="absolute inset-0 -z-10 opacity-[0.045] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:42px_42px]" />
+        <div className="absolute -left-32 bottom-0 -z-10 h-96 w-96 rounded-full bg-[#b88755]/10 blur-[100px]" />
 
-        <Container className="relative pb-20 md:pb-28">
-          <div className="rounded-b-[2.5rem] bg-[#2d211a] px-5 pb-6 pt-5 text-[#f6efe5] shadow-[0_26px_70px_rgba(45,33,26,0.2)] md:px-8">
-            <div className="grid gap-4 text-xs font-black uppercase tracking-[0.18em] sm:grid-cols-3">
-              <span className="border-b border-white/15 pb-3 sm:border-b-0 sm:border-r sm:pb-0">BrewNest Coffee</span>
-              <span className="border-b border-white/15 pb-3 text-[#d9b274] sm:border-b-0 sm:border-r sm:pb-0 sm:text-center">Slow bar open daily</span>
-              <span className="sm:text-right">6:30 AM - 7 PM</span>
-            </div>
+        <Container className="relative pb-14 pt-10 sm:pb-20 md:pt-14 lg:pb-24">
+          <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 text-[0.61rem] font-bold uppercase tracking-[0.18em] text-white/48">
+            <span className="flex items-center gap-2 text-[#d9b274]"><span className="h-1.5 w-1.5 rounded-full bg-[#d9b274] shadow-[0_0_10px_#d9b274]" />Slow bar open now</span>
+            <span>Old Town Market · 6:30 AM–7 PM</span>
           </div>
 
-          <div className="grid gap-12 pt-12 lg:grid-cols-[1.03fr_0.97fr] lg:items-center">
-            <div>
-              <div className="inline-flex rounded-full border border-[#d9c7b0] bg-white/70 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#8d6748] shadow-sm">
-                Slow coffee, fresh daily
-              </div>
-              <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.95] text-[#2d211a] md:text-7xl">
-                Coffee that makes the room feel slower.
+          <div className="grid items-center gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:gap-16">
+            <div className="relative z-10">
+              <p className="flex items-center gap-3 text-[0.68rem] font-black uppercase tracking-[0.22em] text-[#d9b274]"><span className="h-px w-9 bg-[#d9b274]" />Roasted slowly · poured with care</p>
+              <h1 className="mt-7 max-w-3xl text-[clamp(3.6rem,7vw,7.1rem)] font-black leading-[0.86] tracking-[-0.06em]">
+                Coffee worth<br /><span className="font-serif font-normal italic text-[#d9b274]">slowing down for.</span>
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5f4a3d] md:text-xl">
-                BrewNest is designed around the pause: hand-pulled espresso, warm pastry shelves, soft seating, and mornings
-                that do not need to rush themselves out the door.
+              <p className="mt-7 max-w-xl text-base leading-8 text-white/58 sm:text-lg">
+                Hand-pulled espresso, small-batch roasts, and warm pastry shelves in a room designed to make mornings feel unhurried.
               </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="#menu" size="lg" className="bg-[#2d211a] hover:bg-[#6c4a34]">
-                  See Today's Menu
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <CTAButton href="#menu" size="lg" className="rounded-full bg-[#d4ad78] text-[#241a14] shadow-xl shadow-black/15 hover:bg-[#edd0a8]">
+                  Explore Today's Menu
                 </CTAButton>
-                <CTAButton
-                  href="#visit"
-                  variant="outline"
-                  size="lg"
-                  className="border-[#8d6748] bg-white/50 text-[#6c4a34] hover:bg-white"
-                >
-                  Plan A Visit
+                <CTAButton href="#visit" variant="outline" size="lg" className="rounded-full border-white/30 text-white hover:border-white/55 hover:bg-white/8">
+                  Plan a Visit
                 </CTAButton>
               </div>
-            </div>
 
-            <div className="relative mx-auto min-h-[540px] w-full max-w-xl">
-              <div className="absolute left-1/2 top-8 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-[#efe0cd]" />
-              <div className="absolute left-1/2 top-16 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full border border-[#d8c4ac] bg-[#fbf6ef] shadow-[0_26px_60px_rgba(77,55,38,0.12)]" />
-              <div className="absolute left-1/2 top-24 h-[16rem] w-[16rem] -translate-x-1/2 rounded-full bg-[#6c4a34] p-8 shadow-inner">
-                <div className="h-full rounded-full border-[18px] border-[#2d211a] bg-[#8d6748]">
-                  <div className="mx-auto mt-16 h-20 w-28 rounded-b-[4rem] rounded-t-[2rem] bg-[#f5eadb]" />
-                </div>
-              </div>
-
-              <div className="absolute left-6 top-3 w-44 rotate-[-7deg] border border-[#dac8b4] bg-white p-4 shadow-lg">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#8d6748]">Today</p>
-                <p className="mt-2 text-2xl font-black text-[#2d211a]">Velvet Roast</p>
-                <p className="mt-2 text-sm leading-6 text-[#5f4a3d]">Caramel, cocoa, low acidity</p>
-              </div>
-
-              <div className="absolute right-2 top-64 w-48 rotate-[5deg] rounded-t-[2rem] border border-[#dac8b4] bg-[#2d211a] p-5 text-white shadow-xl">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#d9b274]">Queue</p>
-                <p className="mt-2 text-4xl font-black">07</p>
-                <p className="mt-2 text-sm text-white/70">cups ahead, worth the wait</p>
-              </div>
-
-              <div className="absolute bottom-0 left-1/2 grid w-[92%] -translate-x-1/2 gap-3 rounded-[2rem] border border-[#dac8b4] bg-white/88 p-4 shadow-xl backdrop-blur sm:grid-cols-3">
+              <div className="mt-10 grid max-w-xl grid-cols-3 border-y border-white/10 py-5">
                 {[
-                  { value: '12+', label: 'Signature drinks' },
-                  { value: 'Fresh', label: 'Beans daily' },
-                  { value: 'Local', label: 'Roasters' },
+                  { value: '18 hr', label: 'Cold steep' },
+                  { value: 'Local', label: 'Roast partner' },
+                  { value: '12+', label: 'House pours' },
                 ].map((stat) => (
-                  <div key={stat.label} className="rounded-2xl bg-[#f6efe5] p-4">
-                    <p className="text-2xl font-black text-[#2d211a]">{stat.value}</p>
-                    <p className="mt-1 text-[0.68rem] font-black uppercase tracking-[0.14em] text-[#8d6748]">{stat.label}</p>
+                  <div key={stat.label} className="border-r border-white/10 px-3 first:pl-0 last:border-0 sm:px-5">
+                    <p className="text-xl font-black text-[#f8f1e8] sm:text-2xl">{stat.value}</p>
+                    <p className="mt-1 text-[0.5rem] font-black uppercase tracking-[0.15em] text-white/38 sm:text-[0.58rem]">{stat.label}</p>
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="relative mx-auto w-full max-w-2xl pb-8 sm:pb-12">
+              <div className="absolute -right-5 -top-5 h-48 w-48 rounded-full border border-[#d9b274]/20 sm:-right-10 sm:-top-10 sm:h-72 sm:w-72" />
+              <div className="absolute -right-1 top-7 h-28 w-28 rounded-full border border-[#d9b274]/10 sm:h-44 sm:w-44" />
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#3a2a20] shadow-[0_35px_90px_rgba(0,0,0,0.42)] sm:rounded-[2.8rem]">
+                <img src={signatureDrinks[0].image} alt="Velvet Roast latte at BrewNest Coffee" className="aspect-[4/5] max-h-[650px] w-full object-cover object-center sm:aspect-[5/4] lg:aspect-[4/5]" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(26,17,12,0.7)_100%)]" />
+                <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-5 p-6 sm:p-8">
+                  <div><p className="text-[0.56rem] font-black uppercase tracking-[0.2em] text-[#e4bd86]">House signature</p><p className="mt-2 text-2xl font-black sm:text-3xl">Velvet Roast Latte</p><p className="mt-1 text-xs text-white/55">Caramel · cocoa · silky finish</p></div>
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#f8f1e8] text-sm font-black text-[#241a14]">$6.50</span>
+                </div>
+              </div>
+
+              <div className="absolute -bottom-1 left-4 rounded-2xl border border-[#dfc69f]/30 bg-[#f8f1e8] p-4 text-[#2d211a] shadow-2xl sm:-left-7 sm:bottom-2 sm:p-5">
+                <p className="text-[0.52rem] font-black uppercase tracking-[0.18em] text-[#8d6748]">Barista note</p>
+                <p className="mt-2 max-w-[12rem] text-sm font-bold leading-5">Best enjoyed here, without checking the clock.</p>
+              </div>
+              <div className="absolute right-4 top-4 rounded-full border border-white/15 bg-[#241a14]/75 px-4 py-2 text-[0.54rem] font-black uppercase tracking-[0.16em] text-[#e4bd86] backdrop-blur sm:right-6 sm:top-6">Guest favorite</div>
             </div>
           </div>
         </Container>

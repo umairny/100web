@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, CTAButton, SubWebsiteNav } from '../../components'
+import { Container, SubWebsiteNav } from '../../components'
 import { imageUrl } from '../../assets/images'
 
 const bakeryImages = {
@@ -11,441 +12,279 @@ const bakeryImages = {
   finalCta: imageUrl('restaurent/golden-crust-bakery/golden-crust-final-cta.png'),
 }
 
-const rewardSteps = [
-  {
-    title: 'Join for Free',
-    text: 'Create your free account in seconds.',
-    marker: '01',
-  },
-  {
-    title: 'Earn Points',
-    text: 'Earn points on every online or in-store bakery order.',
-    marker: '02',
-  },
-  {
-    title: 'Redeem Treats',
-    text: 'Use your points for pastries, coffee, cakes, and seasonal specials.',
-    marker: '03',
-  },
-]
-
-const benefits = [
-  'Earn 10 crumbs for every $1 spent',
-  'Birthday cake slice reward',
-  'Early access to seasonal pastries',
-  'Member-only bakery bundles',
-  'Surprise weekend treats',
-  'Coffee and croissant deals',
-]
-
 const menuItems = [
   {
     name: 'Butter Croissant',
-    desc: 'Laminated butter layers with a glossy golden finish.',
+    desc: 'Laminated butter layers with a delicate, honey-gold finish.',
     price: '$4.75',
-    tag: 'Butter Croissant',
+    badge: 'Baker’s pick',
     image: imageUrl('restaurent/golden-crust-bakery/butter-croissant.png'),
     alt: 'Flaky golden butter croissant on a warm bakery surface',
   },
   {
     name: 'Sourdough Loaf',
-    desc: 'Slow-fermented loaf with a crackly crust and tender crumb.',
+    desc: 'Slow-fermented for 36 hours with a crackly crust and open crumb.',
     price: '$9.50',
-    tag: 'Sourdough Loaf',
+    badge: 'Daily bake',
     image: imageUrl('restaurent/golden-crust-bakery/sourdough-loaf.png'),
     alt: 'Fresh scored sourdough loaf with a crisp artisan crust',
   },
   {
-    name: 'Chocolate Eclair',
-    desc: 'Vanilla cream, choux pastry, and dark chocolate glaze.',
+    name: 'Chocolate Éclair',
+    desc: 'Vanilla bean cream, airy choux and a dark chocolate glaze.',
     price: '$6.25',
-    tag: 'Chocolate Eclair',
+    badge: 'Classic',
     image: imageUrl('restaurent/golden-crust-bakery/chocolate-eclair.png'),
     alt: 'Chocolate eclair with glossy dark chocolate glaze',
   },
   {
-    name: 'Strawberry Cream Cake',
-    desc: 'Soft vanilla sponge layered with berry cream and jam.',
+    name: 'Strawberry Cloud',
+    desc: 'Soft vanilla sponge layered with strawberry cream and fresh jam.',
     price: '$8.00',
-    tag: 'Strawberry Cream Cake',
+    badge: 'Seasonal',
     image: imageUrl('restaurent/golden-crust-bakery/strawberry-cream-cake.png'),
     alt: 'Slice of strawberry cream cake with soft sponge and berry filling',
   },
   {
     name: 'Cinnamon Roll',
-    desc: 'Brown sugar swirl, cinnamon butter, and vanilla glaze.',
+    desc: 'Brown sugar swirl, cultured butter and a light vanilla glaze.',
     price: '$5.25',
-    tag: 'Cinnamon Roll',
+    badge: 'Morning favorite',
     image: imageUrl('restaurent/golden-crust-bakery/cinnamon-roll.png'),
     alt: 'Cinnamon roll with vanilla glaze and cinnamon sugar swirl',
   },
   {
-    name: 'Iced Latte',
-    desc: 'Cold espresso, creamy milk, and a caramel-smooth finish.',
+    name: 'Iced Oat Latte',
+    desc: 'Double espresso, creamy oat milk and a caramel-smooth finish.',
     price: '$5.50',
-    tag: 'Iced Latte',
+    badge: 'Barista bar',
     image: imageUrl('restaurent/golden-crust-bakery/iced-latte.png'),
     alt: 'Iced latte in a clear glass with creamy coffee layers',
   },
 ]
 
-function ProductImage({ label, image, alt }: { label: string; image: string; alt: string }) {
+const rewards = [
+  ['01', 'Join in a minute', 'Create your free Golden Rewards account in a few simple taps.'],
+  ['02', 'Collect your crumbs', 'Earn 10 crumbs for every dollar, in the bakery or online.'],
+  ['03', 'Taste the rewards', 'Turn crumbs into fresh pastries, coffee and birthday treats.'],
+]
+
+const benefits = [
+  ['10×', 'Crumbs on every dollar'],
+  ['2×', 'Points every Friday'],
+  ['Free', 'Birthday cake slice'],
+  ['First', 'Taste of seasonal bakes'],
+]
+
+function ArrowIcon() {
   return (
-    <div className="golden-food-placeholder relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-[#fff1c8] shadow-inner shadow-[#7b4826]/10">
-      <img
-        src={image}
-        alt={alt}
-        loading="lazy"
-        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-      />
-      <div className="absolute left-4 top-4 rounded-full bg-white/85 px-3 py-1 text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#7b4826] shadow-sm backdrop-blur">
-        {label}
-      </div>
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-4 w-4">
+      <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function WheatMark() {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" className="h-6 w-6">
+      <path d="M16 29V8M16 13c-5-.3-8-3.1-8.5-7 5-.2 8.2 2.6 8.5 7Zm0 6c-5-.3-8-3.1-8.5-7 5-.2 8.2 2.6 8.5 7Zm0 6c-5-.3-8-3.1-8.5-7 5-.2 8.2 2.6 8.5 7Zm0-12c5-.3 8-3.1 8.5-7-5-.2-8.2 2.6-8.5 7Zm0 6c5-.3 8-3.1 8.5-7-5-.2-8.2 2.6-8.5 7Zm0 6c5-.3 8-3.1 8.5-7-5-.2-8.2 2.6-8.5 7Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function Eyebrow({ children, light = false }: { children: string; light?: boolean }) {
+  return (
+    <p className={`flex items-center gap-3 text-[0.66rem] font-black uppercase tracking-[0.24em] ${light ? 'text-[#f4c96e]' : 'text-[#a8652d]'}`}>
+      <span className={`h-px w-9 ${light ? 'bg-[#f4c96e]' : 'bg-[#b87336]'}`} />
+      {children}
+    </p>
   )
 }
 
 export function GoldenCrustBakery() {
+  const [addedItem, setAddedItem] = useState('')
+
+  const addToOrder = (name: string) => {
+    setAddedItem(name)
+    window.setTimeout(() => setAddedItem(''), 2600)
+  }
+
   return (
-    <main className="brand-motion motion-goldencrust overflow-hidden bg-[#fff8e8] text-[#2f1c12]">
+    <main className="brand-motion motion-goldencrust overflow-hidden bg-[#fbf5e9] text-[#2d1a11]">
       <SubWebsiteNav
-        brand="Golden Crust Bakery"
+        brand="Golden Crust"
         links={[
-          { label: 'Home', href: '#join' },
-          { label: 'Rewards', href: '#rewards' },
-          { label: 'Perks', href: '#benefits' },
+          { label: 'Home', href: '#home' },
           { label: 'Menu', href: '#menu' },
-          { label: 'Order Online', href: '#order' },
+          { label: 'Our Bakery', href: '#bakery' },
+          { label: 'Rewards', href: '#rewards' },
+          { label: 'Visit', href: '#visit' },
         ]}
-        ctaLabel="Join Rewards"
-        ctaHref="#join"
-        className="border-b border-[#efd9a8] bg-[#fff8e8]/92 shadow-sm shadow-[#5b2f1f]/10"
-        brandClassName="text-[#4b2a18]"
-        linkClassName="rounded-full px-3 py-2 text-[#6d3b20] transition hover:bg-[#f5dfad] hover:text-[#2f1c12]"
+        ctaLabel="Order Online"
+        ctaHref="#menu"
+        className="border-b border-[#e7d8bd] bg-[#fbf5e9]/95 shadow-sm shadow-[#4b2816]/5"
+        brandClassName="font-black uppercase tracking-[0.12em] text-[#342016]"
+        linkClassName="rounded-full px-3 py-2 text-[#755039] transition hover:bg-[#f1e3c9] hover:text-[#2d1a11]"
         activeLinkClassName="golden-nav-active"
-        ctaClassName="bg-[#f3b536] text-[#2f1c12] shadow-lg shadow-[#b87528]/20 hover:bg-[#ffd05a]"
+        ctaClassName="bg-[#342016] text-white shadow-lg shadow-[#342016]/15 hover:bg-[#b87336]"
         activeCtaClassName="golden-nav-cta-active"
-        menuButtonClassName="border-[#e3bd75] text-[#4b2a18] hover:bg-[#f5dfad]"
-        mobilePanelClassName="border border-[#efd9a8] bg-[#fff8e8]"
+        menuButtonClassName="border-[#dbc29b] text-[#342016] hover:bg-[#f1e3c9]"
+        mobilePanelClassName="border border-[#e7d8bd] bg-[#fbf5e9]"
       />
 
-      <section id="join" className="relative min-h-screen overflow-hidden bg-[#fff8e8] pt-28 md:pt-32">
-        <div className="absolute inset-x-0 top-0 h-36 bg-[#3b2214]" />
-        <div className="absolute inset-x-0 top-24 h-16 bg-[repeating-linear-gradient(90deg,#f6c257_0_58px,#fff4d2_58px_116px,#b66b2c_116px_174px)] shadow-xl shadow-[#5b2f1f]/20" />
-        <div className="absolute inset-0 top-36 bg-[radial-gradient(circle_at_80%_20%,rgba(246,194,87,0.42),transparent_28%),linear-gradient(180deg,#fff8e8_0%,#fff2cf_48%,#fffaf1_100%)]" />
-        <div className="golden-orbit absolute left-4 top-52 h-24 w-24 rounded-full border-[18px] border-[#f6c257]/40" />
-        <div className="golden-soft-pulse absolute bottom-24 right-8 hidden h-40 w-40 rounded-full bg-[#7b4826]/10 lg:block" />
-        <div className="golden-floating-badge absolute right-[14%] top-48 hidden rotate-12 rounded-full bg-[#fffaf1] px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-[#7b4826] shadow-xl lg:block">
-          250 crumbs = free pastry
-        </div>
+      <section id="home" className="relative isolate min-h-[820px] overflow-hidden bg-[#2d1a11] pt-14 text-white lg:min-h-[880px]">
+        <img src={bakeryImages.hero} alt="Golden Crust Bakery counter filled with artisan bread and pastries" className="absolute inset-0 -z-30 h-full w-full object-cover object-[65%_center]" />
+        <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(35,18,10,0.98)_0%,rgba(35,18,10,0.92)_37%,rgba(35,18,10,0.3)_73%,rgba(35,18,10,0.48)_100%)]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,#2d1a11_0%,transparent_25%,rgba(0,0,0,0.08)_100%)]" />
 
-        <Container className="relative grid min-h-[calc(100vh-7rem)] items-center gap-12 pb-20 pt-14 lg:grid-cols-[0.95fr_1.05fr]">
+        <Container className="flex min-h-[800px] items-end pb-16 pt-28 lg:min-h-[860px] lg:items-center lg:pb-12">
           <div className="max-w-3xl">
-            <Link
-              to="/restaurant"
-              className="mb-7 inline-flex rounded-full border border-[#e5bf73] bg-white/70 px-4 py-2 text-sm font-black text-[#6d3b20] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#fff4d2]"
-            >
-              Back to Restaurant Collection
+            <Link to="/restaurant" className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/15 px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.14em] text-white/70 backdrop-blur transition hover:border-white/30 hover:text-white">
+              <span>←</span> Restaurant collection
             </Link>
-            <p className="inline-flex rounded-full bg-[#3b2214] px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[#ffd76a] shadow-xl shadow-[#5b2f1f]/15">
-              Freshly Baked Rewards
-            </p>
-            <h1 className="mt-6 text-5xl font-black leading-[0.92] text-[#2f1c12] sm:text-6xl lg:text-7xl">
-              Earn Sweet Rewards With Every Bite
+            <Eyebrow light>Made slowly · served warmly</Eyebrow>
+            <h1 className="mt-6 text-[clamp(3.8rem,8vw,7.7rem)] font-black leading-[0.84] tracking-[-0.07em]">
+              Your daily<br />dose of <span className="text-[#f2bd52]">golden.</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#6d3b20] md:text-xl">
-              Join Golden Rewards and collect points every time you order your favorite breads, pastries, cakes, and coffee.
+            <p className="mt-7 max-w-xl text-base leading-8 text-white/65 sm:text-lg">
+              Small-batch sourdough, buttery layers, joyful cakes and really good coffee—baked fresh every morning in the heart of Old Market.
             </p>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <CTAButton
-                href="#rewards"
-                size="lg"
-                className="rounded-full bg-[#f3b536] text-[#2f1c12] shadow-2xl shadow-[#b87528]/25 hover:bg-[#ffd05a]"
-              >
-                Join Golden Rewards
-              </CTAButton>
-              <CTAButton
-                href="#menu"
-                variant="outline"
-                size="lg"
-                className="rounded-full border-[#4b2a18] bg-white/70 text-[#4b2a18] hover:bg-[#4b2a18] hover:text-white"
-              >
-                View Bakery Menu
-              </CTAButton>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <a href="#menu" className="inline-flex items-center justify-center gap-3 rounded-full bg-[#f2bd52] px-7 py-4 text-xs font-black uppercase tracking-[0.14em] text-[#2d1a11] shadow-[0_16px_45px_rgba(242,189,82,0.2)] transition hover:-translate-y-1 hover:bg-[#ffd06e]">
+                Explore the menu <ArrowIcon />
+              </a>
+              <a href="#rewards" className="inline-flex items-center justify-center rounded-full border border-white/25 bg-black/10 px-7 py-4 text-xs font-black uppercase tracking-[0.14em] backdrop-blur transition hover:-translate-y-1 hover:bg-white/10">
+                Join rewards
+              </a>
             </div>
-            <div className="golden-crumb-row mt-10 grid max-w-xl grid-cols-3 gap-3">
-              {['10 crumbs per $1', 'Free birthday slice', 'Seasonal previews'].map((item) => (
-                <div key={item} className="rounded-2xl border border-[#e6c27b] bg-white/70 p-4 text-sm font-black text-[#4b2a18] shadow-sm">
-                  {item}
+
+            <div className="mt-12 grid max-w-2xl grid-cols-3 border-y border-white/14 py-5">
+              {[['7 AM', 'First batch'], ['36 hr', 'Sourdough'], ['Local', 'Ingredients']].map(([value, label]) => (
+                <div key={label} className="border-r border-white/14 px-3 first:pl-0 last:border-0 sm:px-6">
+                  <p className="text-lg font-black text-[#f2bd52] sm:text-2xl">{value}</p>
+                  <p className="mt-1 text-[0.55rem] font-bold uppercase tracking-[0.15em] text-white/42 sm:text-[0.62rem]">{label}</p>
                 </div>
               ))}
             </div>
           </div>
-
-          <div className="golden-hero-visual relative mx-auto min-h-[520px] w-full max-w-2xl">
-            <div className="absolute inset-x-6 bottom-8 top-4 rounded-[3rem] bg-[#4b2a18] shadow-2xl shadow-[#5b2f1f]/25" />
-            <div className="absolute inset-x-12 top-12 rounded-[2.5rem] bg-[#fffaf1] p-5 shadow-2xl">
-              <div className="overflow-hidden rounded-[2rem] bg-[#f5d98c] p-3">
-                <img
-                  src={bakeryImages.hero}
-                  alt="Golden Crust Bakery display with fresh croissants, bread, cakes, and pastries"
-                  className="h-80 w-full rounded-[1.6rem] object-cover shadow-xl shadow-[#5b2f1f]/20 sm:h-[24rem]"
-                />
-              </div>
-            </div>
-            <div className="absolute left-0 top-28 rounded-[1.5rem] bg-white p-5 shadow-2xl shadow-[#5b2f1f]/15">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#b87528]">Member badge</p>
-              <p className="mt-2 text-3xl font-black text-[#2f1c12]">Golden</p>
-              <p className="mt-1 text-sm font-bold text-[#7b4826]">128 crumbs earned</p>
-            </div>
-            <div className="absolute bottom-2 right-2 rounded-[1.5rem] bg-[#f3b536] p-5 text-[#2f1c12] shadow-2xl shadow-[#b87528]/25">
-              <p className="text-sm font-black uppercase tracking-[0.16em]">Today only</p>
-              <p className="mt-2 text-2xl font-black">Double crumbs on cakes</p>
-            </div>
-          </div>
         </Container>
+
+        <div className="absolute bottom-10 right-8 hidden w-64 rounded-[1.5rem] border border-white/15 bg-[#24140d]/80 p-5 shadow-2xl backdrop-blur-xl xl:block">
+          <div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-full bg-[#f2bd52] text-[#2d1a11]"><WheatMark /></span><div><p className="text-[0.58rem] font-black uppercase tracking-[0.18em] text-white/42">Fresh from the oven</p><p className="mt-1 text-sm font-bold">Next batch · 10:30 AM</p></div></div>
+        </div>
       </section>
 
-      <section className="bg-[#fffaf1] py-20 md:py-28">
-        <Container className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div>
-            <p className="font-black uppercase tracking-[0.22em] text-[#b87528]">Inside the bakery</p>
-            <h2 className="mt-3 text-4xl font-black leading-tight text-[#2f1c12] md:text-5xl">
-              Warm counters, small batches, and a pastry case worth lingering over.
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-[#6d3b20]">
-              Step into Golden Crust for fresh bread, laminated pastry, celebration cakes, and a display counter that changes with the season.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <img
-              src={bakeryImages.interior}
-              alt="Warm Golden Crust Bakery interior with artisan bakery styling"
-              loading="lazy"
-              className="h-72 w-full rounded-[2rem] object-cover shadow-2xl shadow-[#5b2f1f]/12 sm:h-96"
-            />
-            <img
-              src={bakeryImages.displayCounter}
-              alt="Bakery display counter filled with fresh pastries and seasonal baked goods"
-              loading="lazy"
-              className="h-72 w-full rounded-[2rem] object-cover shadow-2xl shadow-[#5b2f1f]/12 sm:mt-10 sm:h-96"
-            />
-          </div>
-        </Container>
-      </section>
+      <div className="border-y border-[#dfcda9] bg-[#f2bd52] py-3 text-[#2d1a11]">
+        <div className="flex min-w-max justify-center gap-8 px-5 text-[0.62rem] font-black uppercase tracking-[0.2em] sm:gap-14">
+          {['Baked this morning', 'Cultured butter', 'Locally milled flour', 'Coffee roasted nearby'].map((item) => <span key={item} className="flex items-center gap-8 sm:gap-14">{item}<span className="text-[#8b5129]">✦</span></span>)}
+        </div>
+      </div>
 
-      <section id="rewards" className="relative overflow-hidden bg-[#fffaf1] py-20 md:py-28">
-        <img
-          src={bakeryImages.benefitsBg}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover opacity-10"
-        />
-        <div className="absolute inset-0 bg-[#fffaf1]/82" />
-        <Container className="relative">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
-            <p className="font-black uppercase tracking-[0.22em] text-[#b87528]">How Golden Rewards works</p>
-            <h2 className="mt-3 text-4xl font-black leading-tight text-[#2f1c12] md:text-5xl">Join once, earn every delicious time.</h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {rewardSteps.map((step) => (
-              <article key={step.title} className="golden-reward-card rounded-[2rem] border border-[#ead09a] bg-white/92 p-7 shadow-sm shadow-[#5b2f1f]/5 backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#5b2f1f]/10">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f3b536] text-lg font-black text-[#2f1c12] shadow-lg shadow-[#b87528]/15">
-                  {step.marker}
-                </div>
-                <h3 className="mt-8 text-2xl font-black text-[#2f1c12]">{step.title}</h3>
-                <p className="mt-3 leading-7 text-[#6d3b20]">{step.text}</p>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-20 md:py-28">
+      <section id="menu" className="bg-[#fbf5e9] py-20 sm:py-24 lg:py-28">
         <Container>
-          <div className="golden-feature-card grid overflow-hidden rounded-[2.5rem] bg-[#3b2214] shadow-2xl shadow-[#5b2f1f]/20 lg:grid-cols-[1fr_0.9fr]">
-            <div className="p-8 text-[#fff8e8] md:p-12 lg:p-16">
-              <p className="inline-flex rounded-full bg-[#f3b536] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#2f1c12]">
-                Welcome reward
-              </p>
-              <h2 className="mt-6 text-4xl font-black leading-tight md:text-6xl">Your First Treat Is On Us</h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-[#f8dfac]">
-                Sign up today and unlock a welcome pastry reward after your first order.
-              </p>
-              <CTAButton href="#join" size="lg" className="mt-9 rounded-full bg-[#f3b536] text-[#2f1c12] hover:bg-[#ffd05a]">
-                Start Earning Today
-              </CTAButton>
-            </div>
-            <div className="relative min-h-[360px] overflow-hidden bg-[#f3b536] p-6 md:p-8">
-              <img
-                src={bakeryImages.rewardPastry}
-                alt="Golden Rewards welcome pastry reward with a freshly baked pastry"
-                loading="lazy"
-                className="h-full min-h-[320px] w-full rounded-[2rem] object-cover shadow-2xl shadow-[#5b2f1f]/25"
-              />
-              <div className="absolute left-12 top-12 rounded-full bg-[#3b2214]/92 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#ffd76a] shadow-lg backdrop-blur">
-                Welcome pastry reward
-              </div>
-              <div className="absolute bottom-10 right-8 rotate-6 rounded-[1.25rem] bg-white p-4 text-[#2f1c12] shadow-xl">
-                <p className="text-sm font-black uppercase tracking-[0.14em] text-[#b87528]">Unlocked</p>
-                <p className="mt-1 text-2xl font-black">Free pastry</p>
-              </div>
-            </div>
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div><Eyebrow>Today at the counter</Eyebrow><h2 className="mt-5 text-4xl font-black leading-[0.93] tracking-[-0.05em] sm:text-6xl">Fresh favorites,<br />still warm.</h2></div>
+            <div className="max-w-md md:text-right"><p className="text-sm leading-7 text-[#816550]">Our counter changes with the season. These are the beloved regulars we make every single day.</p><p className="mt-3 text-xs font-bold text-[#a8652d]">Pickup ready in 20–30 minutes</p></div>
           </div>
-        </Container>
-      </section>
 
-      <section id="benefits" className="bg-[#fffaf1] py-20 md:py-28">
-        <Container>
-          <div className="mb-12 max-w-3xl">
-            <p className="font-black uppercase tracking-[0.22em] text-[#b87528]">Crumbs, cakes, and perks</p>
-            <h2 className="mt-3 text-4xl font-black leading-tight text-[#2f1c12] md:text-5xl">Rewards that feel fresh from the oven.</h2>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {benefits.map((benefit, index) => (
-              <article key={benefit} className="golden-benefit-card group rounded-[1.75rem] border border-[#ead09a] bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#f3b536] hover:shadow-2xl hover:shadow-[#5b2f1f]/10">
-                <div className="mb-8 flex items-center justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff0c2] text-lg font-black text-[#7b4826]">{index + 1}</span>
-                  <span className="h-3 w-3 rounded-full bg-[#f3b536] transition group-hover:scale-[1.8]" />
-                </div>
-                <h3 className="text-xl font-black leading-tight text-[#2f1c12]">{benefit}</h3>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-20 md:py-28">
-        <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <p className="font-black uppercase tracking-[0.22em] text-[#b87528]">Rewards account</p>
-            <h2 className="mt-3 text-4xl font-black leading-tight text-[#2f1c12] md:text-5xl">Track Your Crumbs Anytime</h2>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-[#6d3b20]">
-              See your points, unlock rewards, and discover fresh bakery offers from your account.
-            </p>
-          </div>
-          <div className="golden-account-panel mx-auto w-full max-w-md rounded-[2.5rem] bg-[#3b2214] p-4 shadow-2xl shadow-[#5b2f1f]/20">
-            <div className="rounded-[2rem] bg-[#fff8e8] p-5">
-              <div className="mx-auto mb-4 h-1.5 w-20 rounded-full bg-[#d7bd90]" />
-              <div className="rounded-[1.5rem] bg-gradient-to-br from-[#f3b536] to-[#b87528] p-5 text-[#2f1c12]">
-                <p className="text-sm font-black uppercase tracking-[0.16em]">Golden Rewards</p>
-                <p className="mt-4 text-5xl font-black">1,240</p>
-                <p className="font-bold">crumbs in your account</p>
-              </div>
-              <div className="mt-5 grid gap-3">
-                {['Free coffee ready', '80 crumbs to cake slice', 'Weekend bundle unlocked'].map((item) => (
-                  <div key={item} className="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm">
-                    <span className="font-bold text-[#4b2a18]">{item}</span>
-                    <span className="h-3 w-3 rounded-full bg-[#f3b536]" />
-                  </div>
-                ))}
-              </div>
-              <button type="button" className="mt-5 w-full rounded-full bg-[#3b2214] px-5 py-4 font-black text-white transition hover:-translate-y-0.5 hover:bg-[#24140d]">
-                Open Rewards Panel
-              </button>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section id="menu" className="bg-[#fffaf1] py-20 md:py-28">
-        <Container>
-          <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-            <div>
-              <p className="font-black uppercase tracking-[0.22em] text-[#b87528]">Menu preview</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight text-[#2f1c12] md:text-5xl">Fresh favorites for your next order.</h2>
-              <CTAButton href="#order" variant="outline" className="mt-6 rounded-full border-[#4b2a18] bg-white text-[#4b2a18] hover:bg-[#4b2a18] hover:text-white">
-                Order Online
-              </CTAButton>
-            </div>
-            <img
-              src={bakeryImages.displayCounter}
-              alt="Golden Crust Bakery pastry display counter with fresh menu favorites"
-              loading="lazy"
-              className="h-72 w-full rounded-[2rem] object-cover shadow-2xl shadow-[#5b2f1f]/12"
-            />
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {menuItems.map((item) => (
-              <article key={item.name} className="golden-menu-card group rounded-[2rem] border border-[#ead09a] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#5b2f1f]/10">
-                <ProductImage label={item.tag} image={item.image} alt={item.alt} />
-                <div className="mt-5 flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-2xl font-black text-[#2f1c12]">{item.name}</h3>
-                    <p className="mt-2 leading-7 text-[#6d3b20]">{item.desc}</p>
-                  </div>
-                  <p className="shrink-0 rounded-full bg-[#f3b536] px-3 py-1 text-sm font-black text-[#2f1c12]">{item.price}</p>
+              <article key={item.name} className="golden-menu-card group overflow-hidden rounded-[1.6rem] border border-[#e7d7bc] bg-[#fffdf8] shadow-[0_16px_50px_rgba(64,36,19,0.07)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_24px_65px_rgba(64,36,19,0.13)]">
+                <div className="golden-food-placeholder relative aspect-[1.35] overflow-hidden bg-[#ead8b6]">
+                  <img src={item.image} alt={item.alt} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                  <span className="absolute left-4 top-4 rounded-full bg-[#fffaf0]/90 px-3 py-2 text-[0.56rem] font-black uppercase tracking-[0.16em] text-[#704327] shadow-sm backdrop-blur">{item.badge}</span>
                 </div>
-                <button type="button" className="mt-5 w-full rounded-full border border-[#4b2a18] bg-[#4b2a18] px-5 py-3 font-black text-white transition hover:-translate-y-0.5 hover:bg-[#2f1c12]">
-                  Add to Order
-                </button>
+                <div className="p-5 sm:p-6">
+                  <div className="flex items-start justify-between gap-4"><h3 className="text-2xl font-black tracking-[-0.025em]">{item.name}</h3><span className="shrink-0 text-lg font-black text-[#a8652d]">{item.price}</span></div>
+                  <p className="mt-3 min-h-12 text-sm leading-6 text-[#816550]">{item.desc}</p>
+                  <button type="button" onClick={() => addToOrder(item.name)} className="mt-5 flex w-full items-center justify-between rounded-full border border-[#d8c3a1] px-5 py-3 text-xs font-black uppercase tracking-[0.12em] transition hover:border-[#342016] hover:bg-[#342016] hover:text-white">
+                    Add to order <span className="text-lg leading-none">+</span>
+                  </button>
+                </div>
               </article>
             ))}
           </div>
         </Container>
       </section>
 
-      <section id="order" className="relative overflow-hidden bg-[#3b2214] py-20 text-[#fff8e8] md:py-28">
-        <img
-          src={bakeryImages.finalCta}
-          alt="Fresh Golden Crust Bakery pastries ready for rewards members"
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover opacity-35"
-        />
-        <div className="absolute inset-0 bg-[#3b2214]/78" />
-        <div className="absolute inset-x-0 top-0 h-8 bg-[repeating-linear-gradient(90deg,#f6c257_0_56px,#fff4d2_56px_112px,#b66b2c_112px_168px)]" />
-        <Container className="relative text-center">
-          <p className="font-black uppercase tracking-[0.22em] text-[#f3b536]">Final call</p>
-          <h2 className="mx-auto mt-3 max-w-3xl text-4xl font-black leading-tight md:text-6xl">Ready to Taste the Rewards?</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#f8dfac]">
-            Fresh bread, warm pastries, and golden rewards are waiting.
-          </p>
-          <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
-            <CTAButton href="#join" size="lg" className="rounded-full bg-[#f3b536] text-[#2f1c12] hover:bg-[#ffd05a]">
-              Join Golden Rewards
-            </CTAButton>
-            <CTAButton href="#menu" variant="outline" size="lg" className="rounded-full border-[#fff8e8] bg-transparent text-[#fff8e8] hover:bg-[#fff8e8] hover:text-[#2f1c12]">
-              Order Online
-            </CTAButton>
+      <section id="bakery" className="bg-[#efe2ca] py-20 sm:py-24 lg:py-28">
+        <Container className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-20">
+          <div className="relative pb-8 pr-0 sm:pr-10">
+            <img src={bakeryImages.interior} alt="Warm Golden Crust artisan bakery interior" loading="lazy" className="aspect-[4/3] w-full rounded-[1.7rem] object-cover shadow-2xl shadow-[#482513]/15" />
+            <img src={bakeryImages.displayCounter} alt="Counter filled with Golden Crust pastries" loading="lazy" className="absolute -bottom-2 right-0 hidden aspect-square w-[42%] rounded-[1.3rem] border-[6px] border-[#efe2ca] object-cover shadow-xl sm:block" />
+            <div className="absolute -left-3 bottom-16 rounded-xl bg-[#f2bd52] px-4 py-3 text-[#2d1a11] shadow-lg sm:left-5"><p className="text-2xl font-black">Since ’98</p><p className="text-[0.55rem] font-black uppercase tracking-[0.16em]">Old Market mornings</p></div>
+          </div>
+          <div>
+            <Eyebrow>Our bakery</Eyebrow>
+            <h2 className="mt-5 text-4xl font-black leading-[0.95] tracking-[-0.05em] sm:text-6xl">The good stuff takes time.</h2>
+            <p className="mt-6 text-base leading-8 text-[#755a47]">Before the city wakes, our ovens are already humming. We fold, proof and bake in small batches, using techniques that reward patience and ingredients we can name.</p>
+            <p className="mt-4 text-base leading-8 text-[#755a47]">Come for the bread. Stay for the warm light, a window seat and the very real possibility of a second pastry.</p>
+            <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-[#cfb992] pt-7">
+              {['Small-batch daily', 'Naturally leavened', 'Seasonal produce', 'Made by hand'].map((item) => <p key={item} className="flex items-center gap-3 text-sm font-bold"><span className="h-2 w-2 rounded-full bg-[#b87336]" />{item}</p>)}
+            </div>
           </div>
         </Container>
       </section>
 
-      <footer id="footer" className="bg-[#fff8e8] py-12 text-[#2f1c12]">
-        <Container className="grid gap-8 md:grid-cols-[1.3fr_0.8fr_0.8fr_0.8fr]">
-          <div>
-            <p className="text-2xl font-black">Golden Crust Bakery</p>
-            <p className="mt-3 max-w-sm leading-7 text-[#6d3b20]">
-              Artisan bread, warm pastries, celebration cakes, and golden rewards baked for everyday joy.
-            </p>
-            <p className="mt-6 text-sm font-bold text-[#8c684d]">Copyright 2026 Golden Crust Bakery. All rights reserved.</p>
-          </div>
-          <div>
-            <p className="font-black text-[#7b4826]">Links</p>
-            <div className="mt-3 grid gap-2 text-[#6d3b20]">
-              <a href="#menu" className="hover:text-[#2f1c12]">Menu</a>
-              <a href="#rewards" className="hover:text-[#2f1c12]">Rewards</a>
-              <a href="#benefits" className="hover:text-[#2f1c12]">Catering</a>
-              <a href="#footer" className="hover:text-[#2f1c12]">Contact</a>
+      <section id="rewards" className="relative overflow-hidden bg-[#2d1a11] py-20 text-white sm:py-24 lg:py-28">
+        <img src={bakeryImages.benefitsBg} alt="" aria-hidden="true" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-[0.07] mix-blend-luminosity" />
+        <div className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_center,rgba(242,189,82,0.12),transparent_60%)]" />
+        <Container className="relative">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div><Eyebrow light>Golden Rewards</Eyebrow><h2 className="mt-5 text-4xl font-black leading-[0.93] tracking-[-0.05em] sm:text-6xl">A little thank-you in every bite.</h2></div>
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[1.2rem] bg-white/10 sm:grid-cols-4">
+              {benefits.map(([value, label]) => <div key={label} className="bg-[#392117]/80 p-5"><p className="text-3xl font-black text-[#f2bd52]">{value}</p><p className="mt-2 text-xs leading-5 text-white/50">{label}</p></div>)}
             </div>
           </div>
-          <div>
-            <p className="font-black text-[#7b4826]">Visit</p>
-            <p className="mt-3 leading-7 text-[#6d3b20]">88 Brioche Lane<br />Old Market District<br />Open daily 7 AM - 3 PM</p>
+
+          <div className="relative mt-14 grid gap-4 lg:grid-cols-3">
+            <div className="absolute left-[16%] right-[16%] top-7 hidden h-px bg-white/12 lg:block" />
+            {rewards.map(([number, title, text]) => (
+              <article key={number} className="relative rounded-[1.4rem] border border-white/10 bg-white/[0.045] p-6 backdrop-blur transition hover:-translate-y-1 hover:border-[#f2bd52]/40 hover:bg-white/[0.07]">
+                <span className="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-[#f2bd52]/35 bg-[#2d1a11] text-sm font-black text-[#f2bd52]">{number}</span>
+                <h3 className="mt-8 text-2xl font-black">{title}</h3><p className="mt-3 text-sm leading-7 text-white/52">{text}</p>
+              </article>
+            ))}
           </div>
-          <div>
-            <p className="font-black text-[#7b4826]">Social</p>
-            <div className="mt-3 flex gap-3">
-              {['IG', 'FB', 'TT'].map((item) => (
-                <a key={item} href="#join" className="flex h-10 w-10 items-center justify-center rounded-full bg-[#3b2214] text-sm font-black text-[#fff8e8] transition hover:-translate-y-0.5 hover:bg-[#b87528]">
-                  {item}
-                </a>
-              ))}
+
+          <div id="join" className="golden-feature-card mt-14 grid overflow-hidden rounded-[1.8rem] bg-[#f2bd52] text-[#2d1a11] shadow-2xl shadow-black/20 lg:grid-cols-[1fr_0.82fr]">
+            <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#815021]">A warm welcome</p>
+              <h3 className="mt-4 text-4xl font-black leading-[0.95] tracking-[-0.045em] sm:text-5xl">Your first pastry is on us.</h3>
+              <p className="mt-5 max-w-xl text-sm leading-7 text-[#684019]">Join Golden Rewards today and unlock a complimentary pastry after your first purchase.</p>
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row"><button type="button" className="inline-flex items-center justify-center gap-3 rounded-full bg-[#2d1a11] px-7 py-4 text-xs font-black uppercase tracking-[0.13em] text-white transition hover:-translate-y-1 hover:bg-[#4b2b1c]">Join for free <ArrowIcon /></button><p className="self-center text-xs font-bold text-[#815021]">No fee. Just better mornings.</p></div>
             </div>
+            <div className="relative min-h-80 overflow-hidden"><img src={bakeryImages.rewardPastry} alt="Fresh pastry available as a Golden Rewards welcome gift" loading="lazy" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-r from-[#f2bd52]/30 to-transparent lg:bg-gradient-to-r" /><span className="absolute right-5 top-5 rounded-full bg-[#fffaf0]/90 px-4 py-2 text-[0.58rem] font-black uppercase tracking-[0.16em] backdrop-blur">Welcome reward</span></div>
           </div>
+        </Container>
+      </section>
+
+      <section id="visit" className="relative isolate overflow-hidden py-24 text-white sm:py-28">
+        <img src={bakeryImages.finalCta} alt="Golden Crust pastries on the bakery counter" loading="lazy" className="absolute inset-0 -z-20 h-full w-full object-cover" />
+        <div className="absolute inset-0 -z-10 bg-[#2d1a11]/78" />
+        <Container className="text-center">
+          <p className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#f2bd52] text-[#2d1a11]"><WheatMark /></p>
+          <h2 className="mx-auto mt-7 max-w-3xl text-4xl font-black leading-[0.94] tracking-[-0.05em] sm:text-6xl">There’s always something warm waiting.</h2>
+          <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-white/58">88 Brioche Lane · Old Market District<br />Open daily from 7 AM to 3 PM</p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><a href="#menu" className="inline-flex items-center justify-center gap-3 rounded-full bg-[#f2bd52] px-7 py-4 text-xs font-black uppercase tracking-[0.14em] text-[#2d1a11] transition hover:-translate-y-1 hover:bg-[#ffd06e]">Order for pickup <ArrowIcon /></a><a href="tel:5550142020" className="inline-flex items-center justify-center rounded-full border border-white/25 px-7 py-4 text-xs font-black uppercase tracking-[0.14em] transition hover:bg-white/10">Call the bakery</a></div>
+        </Container>
+      </section>
+
+      <footer className="bg-[#fbf5e9] py-12">
+        <Container>
+          <div className="grid gap-10 border-b border-[#dfcdae] pb-10 sm:grid-cols-2 lg:grid-cols-[1.25fr_0.75fr_0.75fr_0.75fr]">
+            <div><div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-full bg-[#342016] text-[#f2bd52]"><WheatMark /></span><div><p className="font-black uppercase tracking-[0.08em]">Golden Crust</p><p className="text-[0.55rem] font-bold uppercase tracking-[0.24em] text-[#9c7659]">Bakery &amp; Coffee</p></div></div><p className="mt-5 max-w-sm text-sm leading-7 text-[#816550]">Slow bread, flaky mornings and neighborhood warmth since 1998.</p></div>
+            <div><p className="text-xs font-black uppercase tracking-[0.16em] text-[#a8652d]">Explore</p><div className="mt-4 grid gap-2 text-sm text-[#755a47]"><a href="#menu" className="hover:text-[#2d1a11]">Menu</a><a href="#bakery" className="hover:text-[#2d1a11]">Our bakery</a><a href="#rewards" className="hover:text-[#2d1a11]">Rewards</a></div></div>
+            <div><p className="text-xs font-black uppercase tracking-[0.16em] text-[#a8652d]">Visit</p><p className="mt-4 text-sm leading-7 text-[#755a47]">88 Brioche Lane<br />Old Market District<br />Daily · 7 AM–3 PM</p></div>
+            <div><p className="text-xs font-black uppercase tracking-[0.16em] text-[#a8652d]">Say hello</p><p className="mt-4 text-sm leading-7 text-[#755a47]">hello@goldencrust.test<br />(555) 014-2020</p><div className="mt-4 flex gap-3 text-xs font-black"><a href="#visit">IG</a><a href="#visit">FB</a><a href="#visit">TK</a></div></div>
+          </div>
+          <div className="flex flex-col justify-between gap-3 pt-7 text-xs text-[#9a7d66] sm:flex-row"><p>© 2026 Golden Crust Bakery. Baked with care.</p><Link to="/restaurant" className="font-bold transition hover:text-[#2d1a11]">← Restaurant collection</Link></div>
         </Container>
       </footer>
+
+      <div aria-live="polite" className={`fixed bottom-6 right-6 z-[70] rounded-full bg-[#342016] px-5 py-3 text-sm font-bold text-white shadow-2xl transition duration-300 ${addedItem ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'}`}>
+        {addedItem ? `${addedItem} added to your order` : ''}
+      </div>
     </main>
   )
 }

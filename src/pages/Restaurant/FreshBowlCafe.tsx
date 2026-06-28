@@ -3,9 +3,24 @@ import { Container, CTAButton, SubWebsiteNav } from '../../components'
 import { imageUrl } from "../../assets/images";
 
 const bowls = [
-  { name: 'Avocado Garden Bowl', detail: 'Quinoa, avocado, cucumber, herbs, lemon tahini' },
-  { name: 'Sunrise Smoothie Bowl', detail: 'Mango, banana, granola, berries, chia crunch' },
-  { name: 'Protein Harvest Bowl', detail: 'Greens, brown rice, chickpeas, roasted sweet potato' },
+  {
+    name: 'Avocado Garden Bowl',
+    detail: 'Quinoa, avocado, cucumber, herbs, lemon tahini',
+    image: imageUrl('restaurent/freshbowl-cafe/avacado.png'),
+    alt: 'Avocado garden bowl with quinoa, cucumber, greens, and lemon tahini',
+  },
+  {
+    name: 'Sunrise Smoothie Bowl',
+    detail: 'Mango, banana, granola, berries, chia crunch',
+    image: imageUrl('restaurent/freshbowl-cafe/sunrise.png'),
+    alt: 'Colorful sunrise smoothie bowl topped with berries, granola, and fruit',
+  },
+  {
+    name: 'Protein Harvest Bowl',
+    detail: 'Greens, brown rice, chickpeas, roasted sweet potato',
+    image: imageUrl('restaurent/freshbowl-cafe/protein.png'),
+    alt: 'Protein harvest bowl with chickpeas, greens, rice, and roasted sweet potato',
+  },
 ]
 
 export function FreshBowlCafe() {
@@ -123,10 +138,23 @@ export function FreshBowlCafe() {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {bowls.map((bowl) => (
-              <article key={bowl.name} className="rounded-[2rem] bg-white p-6 shadow-sm">
-                <div className="mb-6 aspect-[4/3] rounded-[2rem] bg-[radial-gradient(circle_at_25%_30%,#2f8f46_0_14%,transparent_15%),radial-gradient(circle_at_70%_65%,#9fbe5a_0_20%,transparent_21%),linear-gradient(135deg,#fbf7ed,#dce8c2)]" />
-                <h3 className="text-2xl font-black">{bowl.name}</h3>
-                <p className="mt-3 leading-7 text-[#5f6d61]">{bowl.detail}</p>
+              <article key={bowl.name} className="group overflow-hidden rounded-[2rem] bg-white p-4 shadow-sm transition duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#2f8f46]/10">
+                <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-[1.6rem] bg-[#eef6dc]">
+                  <img
+                    src={bowl.image}
+                    alt={bowl.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#26332a]/25 via-transparent to-transparent" />
+                  <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-2 text-[0.62rem] font-black uppercase tracking-[0.15em] text-[#2f8f46] shadow-sm backdrop-blur">
+                    Fresh favorite
+                  </span>
+                </div>
+                <div className="px-2 pb-3">
+                  <h3 className="text-2xl font-black">{bowl.name}</h3>
+                  <p className="mt-3 leading-7 text-[#5f6d61]">{bowl.detail}</p>
+                </div>
               </article>
             ))}
           </div>

@@ -1,492 +1,400 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Container, CTAButton, SubWebsiteNav } from "../../components";
 import { imageUrl } from "../../assets/images";
 
-const urbanImages = {
-  hero: {
-    src: imageUrl("restaurent/urbanbite-kitchen-card.png"),
-    alt: "UrbanBite Kitchen bold casual dining preview",
-    fallbackStyle:
-      "bg-[linear-gradient(135deg,#161616_0%,#161616_34%,#ef3b2d_35%,#ef3b2d_58%,#f6c65c_59%,#f6c65c_72%,#f4efe8_73%)]",
-  },
+const images = {
+  hero: imageUrl("restaurent/urbanbite/hero.png"),
+  burger: imageUrl("restaurent/urbanbite/burger.png"),
+  pasta: imageUrl("restaurent/urbanbite/pasta.png"),
+  steak: imageUrl("restaurent/urbanbite/stake.png"),
+  dessert: imageUrl("restaurent/urbanbite/cheese-cake.png"),
+  interior: imageUrl("restaurent/urbanbite/interior.png"),
+  plating: imageUrl("restaurent/urbanbite/stake-bites.png"),
 };
 
-const signatureDishes = [
-  {
-    name: "Fire-Grilled Chicken Bowl",
-    label: "Popular",
-    price: "$18",
-    description:
-      "Charred chicken, herbed rice, pickled slaw, and smoky red pepper drizzle.",
-  },
-  {
-    name: "Tomato Basil Smash Burger",
-    label: "Chef Pick",
-    price: "$17",
-    description:
-      "Double smashed beef, basil aioli, roasted tomato jam, and soft brioche.",
-  },
-  {
-    name: "Street Corn Tacos",
-    label: "Spicy",
-    price: "$16",
-    description:
-      "Corn-crusted tortillas, chipotle crema, cotija, and lime-charred sweet corn.",
-  },
-  {
-    name: "Urban Mac & Cheese",
-    label: "New",
-    price: "$15",
-    description:
-      "Cavatappi, aged cheddar sauce, crisp breadcrumbs, and roasted chili oil.",
-  },
+const navLinks = [
+  ["Home", "#home"],
+  ["Menu", "#menu"],
+  ["About", "#about"],
+  ["Reservations", "#reservations"],
+  ["Gallery", "#gallery"],
+  ["Contact", "#contact"],
 ];
 
 const menuItems = [
-  ["Crispy Chicken Sliders", "Hot honey pickles", "$13"],
-  ["Loaded Truffle Fries", "Parmesan and garlic herb", "$11"],
-  ["Garlic Herb Flatbread", "Whipped ricotta and charred tomato", "$12"],
-  ["Spicy Shrimp Tacos", "Lime slaw and chili crema", "$16"],
-  ["Garden Power Bowl", "Greens, grains, avocado", "$15"],
-  ["Classic House Burger", "Cheddar, pickles, onion", "$16"],
-  ["Lemon Pepper Wings", "Crisp finish and ranch", "$14"],
-  ["Chocolate Skillet Brownie", "Warm vanilla cream", "$9"],
-];
-
-const serviceStats = [
-  ["8 min", "average lunch pickup"],
-  ["25+", "fresh plates"],
-  ["7 days", "open weekly"],
-  ["214", "Market Ave"],
-];
-
-const reasons = [
   {
-    title: "Fast Without Feeling Rushed",
-    description:
-      "Built for lunch meetings, dinner dates, and late city bites that still feel composed.",
+    title: "Urban Burger",
+    description: "Double smashed beef, smoked cheddar, house pickles and ember sauce.",
+    price: "$18",
+    image: images.burger,
+    tag: "House favorite",
   },
   {
-    title: "Big Flavor, Clean Plates",
-    description:
-      "Fresh produce, tight prep, and flame-forward cooking keep every dish lively and balanced.",
+    title: "Fire Pasta",
+    description: "Rigatoni, charred tomato cream, parmesan and a spark of chili oil.",
+    price: "$22",
+    image: images.pasta,
+    tag: "Chef's pick",
   },
   {
-    title: "A Room With Real Energy",
-    description:
-      "Open kitchen light, downtown rhythm, and a crowd that keeps the room current every night.",
+    title: "Charred Steak",
+    description: "Prime sirloin, blistered peppers, herb butter and natural jus.",
+    price: "$36",
+    image: images.steak,
+    tag: "From the flame",
+  },
+  {
+    title: "Berry Cheesecake",
+    description: "Vanilla bean cheesecake, dark berry compote and cocoa crumb.",
+    price: "$12",
+    image: images.dessert,
+    tag: "Sweet finish",
   },
 ];
 
-const testimonials = [
-  {
-    name: "Jordan Hayes",
-    role: "Downtown Creative",
-    quote:
-      "UrbanBite feels like the place you text your friends about as soon as dinner lands. The burger is unreal.",
-  },
-  {
-    name: "Mia Patel",
-    role: "Neighborhood Regular",
-    quote:
-      "The bowl menu is fresh, the sauces are sharp, and the room has just the right amount of city energy.",
-  },
-  {
-    name: "Carlos Benton",
-    role: "Late Dinner Guest",
-    quote:
-      "Fast service, confident food, and a menu that actually makes you want to come back next week.",
-  },
+const galleryItems = [
+  [images.steak, "Steak", "Fire-grilled prime cut"],
+  [images.burger, "Burger", "The Urban double stack"],
+  [images.interior, "Interior", "Warm nights downtown"],
+  [images.pasta, "Pasta", "Rigatoni from the pass"],
+  [images.dessert, "Dessert", "Berry cheesecake"],
+  [images.plating, "Chef plating", "Details at the pass"],
 ];
 
-function UrbanImage({
-  src,
-  alt,
-  fallbackStyle,
-  className = "",
-  children,
-}: {
-  src: string;
-  alt: string;
-  fallbackStyle: string;
-  className?: string;
-  children?: ReactNode;
-}) {
-  const [isLoaded, setIsLoaded] = useState(true);
+const features = [
+  ["01", "Flame-grilled specials"],
+  ["02", "Fresh ingredients"],
+  ["03", "Modern dining room"],
+  ["04", "Online reservations"],
+];
 
+function ArrowIcon() {
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <div className={`absolute inset-0 ${fallbackStyle}`} />
-      {isLoaded && (
-        <img
-          src={src}
-          alt={alt}
-          className="absolute inset-0 h-full w-full object-cover"
-          onError={() => setIsLoaded(false)}
-        />
-      )}
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-4 w-4">
+      <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function PlusIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-5 w-5">
+      <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function FlameIcon() {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" className="h-6 w-6">
+      <path d="M17.4 2.8c1 6.2-4.8 7.2-2.8 12.3 1-1.9 2.6-3.1 4.3-4.2 2.5 2.8 4.5 5.7 4.5 9.5 0 4.6-3.2 8.1-7.6 8.1S8.2 25.1 8.2 20.4c0-5.9 4.1-9.9 9.2-17.6Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M16.1 18.1c1.9 2.2 2.8 3.7 2.8 5.4a3 3 0 0 1-6 0c0-2 1.2-3.7 3.2-5.4Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function SectionEyebrow({ children, light = false }: { children: ReactNode; light?: boolean }) {
+  return (
+    <div className={`flex items-center gap-3 text-[0.68rem] font-bold uppercase tracking-[0.24em] ${light ? "text-white/62" : "text-[#6e6863]"}`}>
+      <span className="h-[2px] w-9 bg-[#ef3434]" />
       {children}
     </div>
   );
 }
 
-function PosterMarks() {
-  return (
-    <>
-      <div className="absolute left-6 top-6 h-20 w-20 border-[14px] border-white/80 bg-[#ef3b2d]" />
-      <div className="absolute bottom-10 left-12 h-12 w-44 -rotate-6 bg-[#f6c65c]" />
-      <div className="absolute right-10 top-16 h-36 w-20 rotate-12 bg-[#161616]/78" />
-      <div className="absolute bottom-12 right-12 grid grid-cols-3 gap-2">
-        {Array.from({ length: 9 }).map((_, index) => (
-          <span key={index} className="h-3 w-3 bg-white/85" />
-        ))}
-      </div>
-    </>
-  );
-}
-
 export function UrbanBiteKitchen() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-urban-reveal]"));
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14 },
+    );
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
+  const handleReservation = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitted(true);
+    window.setTimeout(() => setSubmitted(false), 4200);
+    event.currentTarget.reset();
+  };
+
   return (
-    <main className="brand-motion motion-urbanbite bg-[#f4efe8] text-[#161616]">
-      <SubWebsiteNav
-        brand="UrbanBite"
-        links={[
-          { label: "Tickets", href: "#tickets" },
-          { label: "Menu", href: "#menu" },
-          { label: "Kitchen", href: "#kitchen" },
-          { label: "Reviews", href: "#reviews" },
-        ]}
-        ctaLabel="Reserve"
-        ctaHref="#reserve"
-        className="border-b border-white/10 bg-[#161616]/95 text-white"
-        brandClassName="text-sm uppercase tracking-[0.24em] text-white"
-        linkClassName="px-3 py-2 text-white/85 transition hover:bg-[#ef3b2d] hover:text-white"
-        ctaClassName="bg-[#ef3b2d] text-white hover:bg-[#d83227]"
-        menuButtonClassName="border-white/20 text-white hover:bg-white/10"
-        mobilePanelClassName="border border-white/10 bg-[#161616]"
-      />
+    <main className="urbanbite-site min-h-screen overflow-x-clip bg-[#0b0b0c] text-white">
+      <nav
+        aria-label="UrbanBite navigation"
+        className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${
+          scrolled ? "border-white/10 bg-[#0b0b0c]/95 shadow-2xl shadow-black/30 backdrop-blur-xl" : "border-transparent bg-black/30 backdrop-blur-sm"
+        }`}
+      >
+        <div className={`mx-auto flex max-w-[1400px] items-center justify-between px-5 transition-all duration-500 sm:px-8 lg:px-12 ${scrolled ? "h-[4.5rem]" : "h-[5.25rem]"}`}>
+          <a href="#home" className="group flex items-center gap-3" onClick={() => setMenuOpen(false)}>
+            <span className="grid h-11 w-11 place-items-center rounded-[0.8rem] bg-[#ef3434] text-white shadow-[0_0_30px_rgba(239,52,52,0.3)] transition-transform group-hover:rotate-3 group-hover:scale-105">
+              <FlameIcon />
+            </span>
+            <span>
+              <span className="block text-[1.05rem] font-black uppercase leading-none tracking-[-0.02em]">UrbanBite</span>
+              <span className="mt-1 block text-[0.55rem] font-bold uppercase tracking-[0.32em] text-white/45">Kitchen &amp; Grill</span>
+            </span>
+          </a>
 
-      <section className="relative overflow-hidden bg-[#161616] pt-28 text-white md:pt-36">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:34px_34px]" />
-        <Container className="relative pb-10 md:pb-14">
-          <div className="grid min-h-[700px] border border-white/12 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="flex flex-col justify-between border-b border-white/12 p-6 md:p-10 lg:border-b-0 lg:border-r">
-              <div>
-                <div className="inline-flex bg-[#ef3b2d] px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-white">
-                  Modern casual dining / downtown energy
-                </div>
-                <h1 className="mt-8 max-w-4xl text-6xl font-black uppercase leading-[0.85] tracking-normal text-white md:text-8xl lg:text-9xl">
-                  Urban Bite Kitchen
-                </h1>
-              </div>
+          <div className="hidden items-center gap-7 lg:flex">
+            {navLinks.map(([label, href]) => (
+              <a key={href} href={href} className="group relative py-3 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white/68 transition hover:text-white">
+                {label}
+                <span className="absolute inset-x-0 bottom-1 h-px origin-left scale-x-0 bg-[#ef3434] transition-transform duration-300 group-hover:scale-x-100" />
+              </a>
+            ))}
+          </div>
 
-              <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_18rem] lg:items-end">
-                <p className="max-w-2xl text-xl font-semibold leading-9 text-white/78">
-                  Flame-forward plates, stacked burgers, quick lunch tickets,
-                  and a dining room with enough downtown charge to carry the
-                  night.
-                </p>
-                <div className="border border-white/16 bg-white/[0.06] p-5">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f6c65c]">
-                    Service window
-                  </p>
-                  <div className="mt-5 space-y-3 text-sm text-white/80">
-                    <div className="flex justify-between gap-4">
-                      <span>Mon - Thu</span>
-                      <span className="font-black">11 AM - 10 PM</span>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <span>Fri - Sun</span>
-                      <span className="font-black">11 AM - 11 PM</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <a href="#reservations" className="hidden items-center gap-2 rounded-full bg-[#ef3434] px-5 py-3 text-[0.7rem] font-black uppercase tracking-[0.14em] shadow-[0_10px_30px_rgba(239,52,52,0.2)] transition hover:-translate-y-0.5 hover:bg-[#ff4848] md:inline-flex">
+            Book a table <ArrowIcon />
+          </a>
 
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="#menu" size="lg" className="bg-[#ef3b2d] hover:bg-[#d83227]">
-                  View Menu
-                </CTAButton>
-                <CTAButton
-                  href="#reserve"
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10"
-                >
-                  Reserve a Table
-                </CTAButton>
-              </div>
-            </div>
+          <button
+            type="button"
+            aria-label="Toggle restaurant navigation"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((current) => !current)}
+            className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/[0.04] md:hidden"
+          >
+            <span className="flex w-5 flex-col gap-[5px]">
+              <span className={`h-[2px] w-full bg-white transition ${menuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
+              <span className={`h-[2px] w-full bg-white transition ${menuOpen ? "opacity-0" : ""}`} />
+              <span className={`h-[2px] w-full bg-white transition ${menuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
+            </span>
+          </button>
+        </div>
 
-            <div className="relative grid min-h-[520px] grid-rows-[1fr_auto]">
-              <UrbanImage
-                src={urbanImages.hero.src}
-                alt={urbanImages.hero.alt}
-                fallbackStyle={urbanImages.hero.fallbackStyle}
-                className="min-h-[460px]"
-              >
-                <PosterMarks />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,22,22,0.04),rgba(22,22,22,0.72))]" />
-                <div className="absolute bottom-6 left-6 right-6 bg-[#161616]/84 p-5 shadow-2xl backdrop-blur">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f6c65c]">
-                    Chef pick
-                  </p>
-                  <p className="mt-2 text-3xl font-black">
-                    Tomato Basil Smash Burger
-                  </p>
-                </div>
-              </UrbanImage>
-              <div className="grid grid-cols-2 border-t border-white/12 md:grid-cols-4">
-                {serviceStats.map(([value, label]) => (
-                  <div key={label} className="border-r border-white/12 p-4 last:border-r-0">
-                    <p className="text-2xl font-black text-[#f6c65c]">{value}</p>
-                    <p className="mt-1 text-xs font-black uppercase tracking-[0.14em] text-white/62">
-                      {label}
-                    </p>
-                  </div>
-                ))}
-              </div>
+        <div className={`overflow-hidden border-t border-white/10 bg-[#111112] transition-all duration-500 md:hidden ${menuOpen ? "max-h-[30rem] opacity-100" : "max-h-0 border-transparent opacity-0"}`}>
+          <div className="grid gap-1 px-5 py-5">
+            {navLinks.map(([label, href]) => (
+              <a key={href} href={href} onClick={() => setMenuOpen(false)} className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold text-white/70 transition hover:bg-white/5 hover:text-white">
+                {label}<span className="text-[#ef3434]">→</span>
+              </a>
+            ))}
+            <a href="#reservations" onClick={() => setMenuOpen(false)} className="mt-2 rounded-xl bg-[#ef3434] px-4 py-3 text-center text-sm font-black uppercase tracking-[0.12em]">Book a table</a>
+          </div>
+        </div>
+      </nav>
+
+      <section id="home" className="relative isolate flex min-h-[760px] items-end overflow-hidden pt-28 lg:min-h-[850px] lg:items-center">
+        <img src={images.hero} alt="Flame-grilled steak with a chef in the UrbanBite kitchen" className="absolute inset-0 -z-30 h-full w-full object-cover object-[62%_center]" />
+        <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(7,7,8,0.98)_0%,rgba(7,7,8,0.88)_35%,rgba(7,7,8,0.28)_72%,rgba(7,7,8,0.55)_100%)]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,#0b0b0c_0%,transparent_24%,rgba(0,0,0,0.15)_100%)]" />
+        <div className="absolute -left-40 top-20 -z-10 h-[38rem] w-[38rem] rounded-full bg-[#ef3434]/10 blur-[120px]" />
+
+        <div className="mx-auto w-full max-w-[1400px] px-5 pb-16 sm:px-8 lg:px-12 lg:pb-12">
+          <div className="max-w-[760px]" data-urban-reveal>
+            <SectionEyebrow light>Modern grill · downtown nights</SectionEyebrow>
+            <h1 className="mt-7 text-[clamp(3.7rem,8vw,7.8rem)] font-black uppercase leading-[0.84] tracking-[-0.065em]">
+              Bold flavor.<br />
+              <span className="text-[#ef3434]">Urban fire.</span>
+            </h1>
+            <p className="mt-7 max-w-xl text-base leading-7 text-white/64 sm:text-lg sm:leading-8">
+              A modern grill kitchen serving smoky steaks, handcrafted burgers, rich pastas, and unforgettable desserts.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <a href="#menu" className="inline-flex items-center justify-center gap-3 rounded-full bg-[#ef3434] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] shadow-[0_14px_40px_rgba(239,52,52,0.25)] transition hover:-translate-y-1 hover:bg-[#ff4949]">
+                View menu <ArrowIcon />
+              </a>
+              <a href="#reservations" className="inline-flex items-center justify-center gap-3 rounded-full border border-white/25 bg-black/20 px-7 py-4 text-xs font-black uppercase tracking-[0.15em] backdrop-blur transition hover:-translate-y-1 hover:border-white/50 hover:bg-white/10">
+                Reserve now
+              </a>
             </div>
           </div>
-        </Container>
 
-        <div className="border-y border-white/12 bg-[#ef3b2d] py-4 text-sm font-black uppercase tracking-[0.24em] text-white">
-          <div className="flex min-w-max gap-8 px-6">
-            {[
-              "Open kitchen",
-              "City plates",
-              "Hot honey",
-              "Smash burgers",
-              "Late bites",
-              "Counter energy",
-            ].map((item) => (
-              <span key={item}>{item}</span>
+          <div className="mt-14 flex max-w-[760px] flex-wrap items-center gap-x-9 gap-y-4 border-t border-white/14 pt-6 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/46 lg:mt-20">
+            <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[#ef3434]" />Open daily</span>
+            <span>Lunch · Dinner · Late nights</span>
+            <span>214 Market Avenue</span>
+          </div>
+        </div>
+
+        <div className="absolute bottom-12 right-12 hidden rounded-2xl border border-white/15 bg-black/45 p-5 backdrop-blur-xl xl:block" data-urban-reveal>
+          <div className="flex items-center gap-4">
+            <div className="grid h-12 w-12 place-items-center rounded-full border border-[#ef3434]/50 text-[#ef3434]"><FlameIcon /></div>
+            <div><p className="text-[0.62rem] font-bold uppercase tracking-[0.22em] text-white/45">Tonight at the pass</p><p className="mt-1 font-bold">Live fire from 5 PM</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="menu" className="bg-[#f5f2ee] py-20 text-[#141414] sm:py-24 lg:py-28">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end" data-urban-reveal>
+            <div>
+              <SectionEyebrow>From the kitchen</SectionEyebrow>
+              <h2 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] sm:text-6xl">Featured plates</h2>
+            </div>
+            <p className="max-w-md text-sm leading-7 text-[#77716c]">Big heat, honest ingredients, and a menu built to turn an ordinary night into something worth remembering.</p>
+          </div>
+
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {menuItems.map((item, index) => (
+              <article key={item.title} data-urban-reveal style={{ transitionDelay: `${index * 70}ms` }} className="group overflow-hidden rounded-[1.35rem] border border-black/[0.07] bg-white shadow-[0_18px_55px_rgba(31,24,20,0.09)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_26px_70px_rgba(31,24,20,0.16)]">
+                <div className="relative aspect-[1.15] overflow-hidden bg-[#ddd7d0]">
+                  <img src={item.image} alt={item.title} className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-110" />
+                  <span className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-white backdrop-blur">{item.tag}</span>
+                </div>
+                <div className="relative min-h-[190px] p-5 pb-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="text-xl font-black tracking-[-0.025em]">{item.title}</h3>
+                    <span className="text-lg font-black text-[#ef3434]">{item.price}</span>
+                  </div>
+                  <p className="mt-3 pr-2 text-sm leading-6 text-[#77716c]">{item.description}</p>
+                  <button type="button" aria-label={`Add ${item.title} to order`} className="absolute bottom-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-[#ef3434] text-white shadow-lg shadow-red-500/20 transition group-hover:rotate-90 group-hover:scale-110">
+                    <PlusIcon />
+                  </button>
+                  <span className="absolute bottom-8 left-5 h-[2px] w-8 bg-[#ef3434]" />
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="tickets" className="py-20 md:py-28">
-        <Container>
-          <div className="grid gap-8 lg:grid-cols-[22rem_1fr]">
-            <div className="bg-[#161616] p-7 text-white">
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f6c65c]">
-                Signature tickets
-              </p>
-              <h2 className="mt-4 text-4xl font-black uppercase leading-none">
-                Order-board hits.
-              </h2>
-              <p className="mt-6 leading-7 text-white/68">
-                No soft luxury layout here. UrbanBite reads like a live kitchen:
-                tickets up, plates moving, flavor loud.
-              </p>
+      <section id="reservations" className="relative bg-[#111112] py-20 sm:py-24 lg:py-28">
+        <div className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_60%_50%,rgba(239,52,52,0.08),transparent_55%)]" />
+        <div className="relative mx-auto grid max-w-[1400px] gap-10 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16 lg:px-12">
+          <div className="relative" data-urban-reveal>
+            <div className="overflow-hidden rounded-[1.5rem]">
+              <img src={images.interior} alt="Warm modern UrbanBite dining room" className="aspect-[4/3] h-full w-full object-cover" />
+              <div className="absolute inset-0 rounded-[1.5rem] bg-gradient-to-t from-black/45 via-transparent to-transparent" />
             </div>
-
-            <div className="border-y border-[#161616]">
-              {signatureDishes.map((dish, index) => (
-                <article
-                  key={dish.name}
-                  className="grid gap-5 border-b border-[#161616] py-6 last:border-b-0 md:grid-cols-[4rem_1fr_auto] md:items-center"
-                >
-                  <span className="text-sm font-black uppercase tracking-[0.2em] text-[#ef3b2d]">
-                    #{index + 1}
-                  </span>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="text-3xl font-black uppercase leading-none">
-                        {dish.name}
-                      </h3>
-                      <span className="bg-[#ef3b2d] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-white">
-                        {dish.label}
-                      </span>
-                    </div>
-                    <p className="mt-3 max-w-2xl leading-7 text-[#535353]">
-                      {dish.description}
-                    </p>
-                  </div>
-                  <span className="text-3xl font-black">{dish.price}</span>
-                </article>
-              ))}
+            <div className="absolute -bottom-5 left-5 right-5 flex items-center justify-between rounded-2xl border border-white/10 bg-[#0b0b0c]/90 p-5 shadow-2xl backdrop-blur sm:left-auto sm:right-5 sm:w-72">
+              <div><p className="text-2xl font-black">4.9</p><p className="text-[0.62rem] uppercase tracking-[0.18em] text-white/45">Guest rating</p></div>
+              <div className="text-sm tracking-[0.12em] text-[#ef3434]">★★★★★</div>
             </div>
           </div>
-        </Container>
-      </section>
 
-      <section id="menu" className="bg-[#161616] py-20 text-white md:py-28">
-        <Container>
-          <div className="grid gap-8 lg:grid-cols-[1fr_1.15fr]">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f6c65c]">
-                Menu Preview
+          <div data-urban-reveal>
+            <SectionEyebrow light>Plan your night</SectionEyebrow>
+            <h2 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] sm:text-6xl">Reserve your table</h2>
+            <p className="mt-5 max-w-xl text-sm leading-7 text-white/55 sm:text-base">Choose your evening and we’ll take care of the atmosphere. For parties larger than eight, call our host directly.</p>
+
+            <form onSubmit={handleReservation} className="mt-9 grid gap-4 sm:grid-cols-2">
+              <label className="grid gap-2 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-white/45">
+                Name
+                <input required name="name" type="text" placeholder="Your name" className="h-14 rounded-xl border border-white/12 bg-white/[0.045] px-4 text-sm normal-case tracking-normal text-white outline-none transition placeholder:text-white/24 focus:border-[#ef3434] focus:bg-white/[0.07]" />
+              </label>
+              <label className="grid gap-2 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-white/45">
+                Date
+                <input required name="date" type="date" className="urban-date h-14 rounded-xl border border-white/12 bg-white/[0.045] px-4 text-sm normal-case tracking-normal text-white outline-none transition focus:border-[#ef3434] focus:bg-white/[0.07]" />
+              </label>
+              <label className="grid gap-2 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-white/45">
+                Time
+                <select required name="time" defaultValue="" className="h-14 rounded-xl border border-white/12 bg-[#171718] px-4 text-sm normal-case tracking-normal text-white outline-none transition focus:border-[#ef3434]">
+                  <option value="" disabled>Select time</option><option>5:30 PM</option><option>6:30 PM</option><option>7:30 PM</option><option>8:30 PM</option><option>9:30 PM</option>
+                </select>
+              </label>
+              <label className="grid gap-2 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-white/45">
+                Guests
+                <select required name="guests" defaultValue="2 guests" className="h-14 rounded-xl border border-white/12 bg-[#171718] px-4 text-sm normal-case tracking-normal text-white outline-none transition focus:border-[#ef3434]">
+                  <option>1 guest</option><option>2 guests</option><option>3 guests</option><option>4 guests</option><option>5 guests</option><option>6 guests</option><option>7 guests</option><option>8 guests</option>
+                </select>
+              </label>
+              <button type="submit" className="mt-2 inline-flex h-14 items-center justify-center gap-3 rounded-xl bg-[#ef3434] text-xs font-black uppercase tracking-[0.15em] shadow-[0_14px_40px_rgba(239,52,52,0.2)] transition hover:-translate-y-1 hover:bg-[#ff4848] sm:col-span-2">
+                Confirm reservation <ArrowIcon />
+              </button>
+              <p aria-live="polite" className={`text-center text-sm text-[#ff6969] transition sm:col-span-2 ${submitted ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"}`}>
+                Thanks — your table request is on its way. We’ll confirm shortly.
               </p>
-              <h2 className="mt-3 text-5xl font-black uppercase leading-none md:text-7xl">
-                Fast line, full flavor.
-              </h2>
-            </div>
-            <div className="grid gap-px bg-white/12 md:grid-cols-2">
-              {menuItems.map(([name, note, price]) => (
-                <article key={name} className="bg-[#161616] p-5">
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="text-xl font-black">{name}</h3>
-                    <span className="font-black text-[#f6c65c]">{price}</span>
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-white/58">{note}</p>
-                </article>
-              ))}
-            </div>
+            </form>
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section id="kitchen" className="py-20 md:py-28">
-        <Container>
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="grid gap-px bg-[#161616]">
-              {reasons.map((reason) => (
-                <article key={reason.title} className="bg-[#f4efe8] p-7 md:p-8">
-                  <div className="mb-7 h-3 w-24 bg-[#ef3b2d]" />
-                  <h3 className="text-3xl font-black uppercase">{reason.title}</h3>
-                  <p className="mt-4 max-w-2xl leading-7 text-[#535353]">
-                    {reason.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-
-            <div className="bg-[#ef3b2d] p-8 text-white md:p-10">
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f6c65c]">
-                Kitchen story
-              </p>
-              <h2 className="mt-4 text-5xl font-black uppercase leading-none">
-                Built like a busy line.
-              </h2>
-              <p className="mt-7 text-lg leading-8 text-white/84">
-                The room is open, the pass is visible, and the food moves with
-                purpose. UrbanBite is clean prep, fast plates, and city comfort
-                with sharper edges.
-              </p>
-              <div className="mt-8 border border-white/24 p-5">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f6c65c]">
-                  Chef note
-                </p>
-                <p className="mt-4 text-2xl font-black">
-                  Bright sauces, hard sears, crisp textures, clean plates.
-                </p>
+      <section id="about" className="border-y border-white/[0.07] bg-[#0b0b0c] py-20 sm:py-24 lg:py-28">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-5 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:px-12">
+          <div data-urban-reveal>
+            <SectionEyebrow light>Our story</SectionEyebrow>
+            <h2 className="mt-5 max-w-4xl text-4xl font-black uppercase leading-[0.98] tracking-[-0.045em] sm:text-6xl lg:text-7xl">City energy.<br /><span className="text-[#ef3434]">Made over fire.</span></h2>
+            <p className="mt-7 max-w-2xl text-base leading-8 text-white/56">UrbanBite Kitchen blends fire, flavor, and modern city dining. From flame-grilled steaks to handcrafted comfort plates, every dish is made for bold taste and memorable nights.</p>
+          </div>
+          <div className="grid border-t border-white/12 sm:grid-cols-2 lg:grid-cols-1" data-urban-reveal>
+            {features.map(([number, label]) => (
+              <div key={label} className="group flex items-center gap-5 border-b border-white/12 py-5 transition hover:pl-2">
+                <span className="text-xs font-black text-[#ef3434]">{number}</span>
+                <span className="font-bold text-white/78 group-hover:text-white">{label}</span>
+                <span className="ml-auto text-white/25 transition group-hover:translate-x-1 group-hover:text-[#ef3434]">→</span>
               </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section id="reviews" className="border-y border-[#161616] bg-white py-20 md:py-28">
-        <Container>
-          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#ef3b2d]">
-                Receipts
-              </p>
-              <h2 className="mt-3 text-4xl font-black uppercase leading-none md:text-6xl">
-                Heard after dinner.
-              </h2>
-            </div>
-            <p className="max-w-md leading-7 text-[#535353]">
-              A few notes from guests who came for something quick and stayed
-              for another round.
-            </p>
-          </div>
-          <div className="grid gap-5 lg:grid-cols-3">
-            {testimonials.map((testimonial) => (
-              <blockquote key={testimonial.name} className="border-2 border-[#161616] bg-[#f4efe8] p-7 shadow-[8px_8px_0_#161616]">
-                <p className="text-lg font-bold leading-8">"{testimonial.quote}"</p>
-                <footer className="mt-8 border-t border-[#161616] pt-4">
-                  <p className="font-black uppercase">{testimonial.name}</p>
-                  <p className="mt-1 text-sm text-[#535353]">{testimonial.role}</p>
-                </footer>
-              </blockquote>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section id="reserve" className="bg-[#ef3b2d] py-20 text-white md:py-28">
-        <Container>
-          <div className="grid gap-8 lg:grid-cols-[1fr_24rem] lg:items-stretch">
-            <div className="border-y border-white/28 py-8">
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f6c65c]">
-                Reservation callout
-              </p>
-              <h2 className="mt-4 text-5xl font-black uppercase leading-none md:text-7xl">
-                Pull up for lunch, dinner, or a late bite.
-              </h2>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="tel:555-014-4040" size="lg" className="bg-[#161616] text-white hover:bg-black">
-                  Reserve by Phone
-                </CTAButton>
-                <CTAButton href="#menu" variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                  View Menu
-                </CTAButton>
-              </div>
-            </div>
-
-            <div className="bg-[#161616] p-6">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f6c65c]">
-                Find us
-              </p>
-              <div className="mt-6 space-y-5 text-white/82">
-                <p>214 Market Ave</p>
-                <p>Downtown Arts District</p>
-                <p>(555) 014-4040</p>
-                <div className="border-t border-white/12 pt-5">
-                  <p>Mon - Thu: 11 AM - 10 PM</p>
-                  <p className="mt-2">Fri - Sun: 11 AM - 11 PM</p>
-                </div>
-              </div>
-            </div>
+      <section id="gallery" className="bg-[#f5f2ee] py-20 text-[#141414] sm:py-24 lg:py-28">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end" data-urban-reveal>
+            <div><SectionEyebrow>Inside UrbanBite</SectionEyebrow><h2 className="mt-5 text-4xl font-black uppercase leading-none tracking-[-0.045em] sm:text-6xl">Food. Fire. People.</h2></div>
+            <a href="#contact" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.15em] text-[#ef3434]">Follow the kitchen <ArrowIcon /></a>
           </div>
-        </Container>
+
+          <div className="mt-12 grid auto-rows-[220px] gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[230px]">
+            {galleryItems.map(([src, title, caption], index) => {
+              const spans = ["lg:col-span-5 lg:row-span-2", "lg:col-span-3", "lg:col-span-4", "lg:col-span-3", "lg:col-span-4", "lg:col-span-7"];
+              return (
+                <figure key={title} data-urban-reveal style={{ transitionDelay: `${(index % 3) * 70}ms` }} className={`group relative overflow-hidden rounded-[1.2rem] ${spans[index]}`}>
+                  <img src={src} alt={title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent opacity-80 transition group-hover:opacity-100" />
+                  <figcaption className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                    <p className="text-lg font-black uppercase tracking-[-0.02em]">{title}</p>
+                    <p className="mt-1 text-xs text-white/55">{caption}</p>
+                  </figcaption>
+                </figure>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
-      <footer className="border-t border-[#2c2c2c] bg-[#111111] py-12 text-white">
-        <Container>
-          <div className="grid gap-8 md:grid-cols-3">
+      <section className="relative overflow-hidden bg-[#ef3434] py-16 sm:py-20">
+        <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(90deg,#000_1px,transparent_1px),linear-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]" />
+        <div className="relative mx-auto flex max-w-[1400px] flex-col justify-between gap-7 px-5 sm:px-8 md:flex-row md:items-center lg:px-12" data-urban-reveal>
+          <div><p className="text-xs font-black uppercase tracking-[0.22em] text-black/55">Your table is waiting</p><h2 className="mt-3 text-4xl font-black uppercase leading-none tracking-[-0.045em] sm:text-5xl">Come hungry. Leave inspired.</h2></div>
+          <a href="#reservations" className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#0b0b0c] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-white transition hover:-translate-y-1 hover:bg-[#202022]">Book your night <ArrowIcon /></a>
+        </div>
+      </section>
+
+      <footer id="contact" className="bg-[#0b0b0c] pb-10 pt-16 text-white sm:pt-20">
+        <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+          <div className="grid gap-10 border-b border-white/10 pb-12 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.8fr_0.8fr]">
             <div>
-              <p className="text-2xl font-black uppercase">UrbanBite Kitchen</p>
-              <p className="mt-3 max-w-sm text-sm leading-7 text-white/68">
-                Bold city dining with fresh plates, strong sauces, and a room
-                that feels current from open to close.
-              </p>
+              <div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-xl bg-[#ef3434]"><FlameIcon /></span><div><p className="font-black uppercase">UrbanBite</p><p className="text-[0.55rem] font-bold uppercase tracking-[0.3em] text-white/35">Kitchen &amp; Grill</p></div></div>
+              <p className="mt-5 max-w-sm text-sm leading-7 text-white/44">A modern neighborhood grill for hard sears, cold drinks, and nights that deserve another round.</p>
             </div>
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f6c65c]">Hours</p>
-              <div className="mt-4 space-y-2 text-sm text-white/68">
-                <p>Mon - Thu: 11 AM - 10 PM</p>
-                <p>Fri - Sun: 11 AM - 11 PM</p>
-              </div>
-            </div>
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f6c65c]">Location & Social</p>
-              <div className="mt-4 space-y-2 text-sm text-white/68">
-                <p>214 Market Ave, Downtown Arts District</p>
-                <p>Instagram</p>
-                <p>TikTok</p>
-                <p>Facebook</p>
-              </div>
-            </div>
+            <div><p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[#ef3434]">Visit</p><p className="mt-4 text-sm leading-7 text-white/55">214 Market Avenue<br />Downtown Arts District<br />New York, NY 10012</p></div>
+            <div><p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[#ef3434]">Hours</p><p className="mt-4 text-sm leading-7 text-white/55">Mon–Thu · 5–11 PM<br />Fri–Sat · 5 PM–1 AM<br />Sunday · 4–10 PM</p></div>
+            <div><p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[#ef3434]">Quick links</p><div className="mt-4 grid gap-2 text-sm text-white/55"><a href="#menu" className="hover:text-white">Menu</a><a href="#about" className="hover:text-white">Our story</a><a href="#reservations" className="hover:text-white">Reservations</a><span className="mt-2 flex gap-4 text-white/75"><a href="#contact">IG</a><a href="#contact">FB</a><a href="#contact">TK</a></span></div></div>
           </div>
-        </Container>
+          <div className="flex flex-col justify-between gap-4 pt-7 text-xs text-white/30 sm:flex-row sm:items-center"><p>© 2026 UrbanBite Kitchen. All fire, all flavor.</p><Link to="/restaurant" className="transition hover:text-white">← Back to restaurant collection</Link></div>
+        </div>
       </footer>
-
-      <section className="border-t border-[#ddd6cf] bg-[#f4efe8] py-10">
-        <Container className="flex flex-col items-center justify-center gap-4 text-center sm:flex-row">
-          <Link to="/restaurant" className="font-bold text-[#ef3b2d] hover:text-[#161616]">
-            Back to Restaurant Collection
-          </Link>
-          <Link to="/" className="font-bold text-[#666666] hover:text-[#161616]">
-            Back to 100 Designs Portfolio
-          </Link>
-        </Container>
-      </section>
     </main>
   );
 }

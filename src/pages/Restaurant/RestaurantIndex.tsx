@@ -1,10 +1,35 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatedSection, Container, CTAButton } from '../../components'
 import { restaurantWebsites } from '../../data/websites'
 
 export function RestaurantIndex() {
   const completedCount = restaurantWebsites.filter((website) => website.status === 'completed').length
-  const featuredRestaurants = restaurantWebsites.slice(0, 4)
+  const carouselRestaurants = restaurantWebsites.filter((website) => website.status === 'completed' && website.image)
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false)
+  const activeRestaurant = carouselRestaurants[activeSlide] ?? restaurantWebsites[0]
+
+  useEffect(() => {
+    if (isCarouselPaused || carouselRestaurants.length < 2) return
+    const interval = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % carouselRestaurants.length)
+    }, 6000)
+    return () => window.clearInterval(interval)
+  }, [carouselRestaurants.length, isCarouselPaused])
+
+  useEffect(() => {
+    const handleKeyboard = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowRight') setActiveSlide((current) => (current + 1) % carouselRestaurants.length)
+      if (event.key === 'ArrowLeft') setActiveSlide((current) => (current - 1 + carouselRestaurants.length) % carouselRestaurants.length)
+    }
+    window.addEventListener('keydown', handleKeyboard)
+    return () => window.removeEventListener('keydown', handleKeyboard)
+  }, [carouselRestaurants.length])
+
+  const moveSlide = (direction: number) => {
+    setActiveSlide((current) => (current + direction + carouselRestaurants.length) % carouselRestaurants.length)
+  }
   const diningStyles = ['Coffee', 'Bakery', 'Pizza', 'Bowls', 'Steak', 'Tea', 'Burgers', 'Seafood']
   const experienceNotes = [
     {
@@ -28,77 +53,73 @@ export function RestaurantIndex() {
   ]
 
   return (
-    <main className="bg-[#fffaf1] text-[#171512]">
-      <section className="relative -mt-16 overflow-hidden bg-[#171512] py-16 text-white md:py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(239,59,45,0.28),transparent_24%),radial-gradient(circle_at_82%_18%,rgba(47,143,70,0.2),transparent_22%),radial-gradient(circle_at_70%_84%,rgba(227,106,44,0.22),transparent_24%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.08)_0_1px,transparent_1px_52px)]" />
-        <Container>
-          <AnimatedSection className="relative grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-end xl:gap-24">
-            <div>
-              <Link to="/" className="text-sm mr-4 font-bold text-[#f4c76d] transition hover:text-white">
-                Back to Home
-              </Link>
-              <div className="mt-8 inline-flex border rounded-full border-white/15 bg-white/10 px-4 py-2 text-sm font-black uppercase tracking-[0.16em] text-[#f4c76d]">
-                {completedCount} / {restaurantWebsites.length} concepts live
+    <main className="restaurant-cinematic bg-[#fffaf1] text-[#171512]">
+      <section
+        aria-roledescription="carousel"
+        aria-label="Featured restaurant concepts"
+        onMouseEnter={() => setIsCarouselPaused(true)}
+        onMouseLeave={() => setIsCarouselPaused(false)}
+        onFocusCapture={() => setIsCarouselPaused(true)}
+        onBlurCapture={() => setIsCarouselPaused(false)}
+        className="relative -mt-16 min-h-[920px] overflow-hidden bg-[#0b0a09] pt-16 text-white sm:min-h-screen"
+      >
+        {carouselRestaurants.map((website, index) => (
+          <div key={website.id} aria-hidden={index !== activeSlide} className={`absolute inset-0 transition-opacity duration-1000 ${index === activeSlide ? 'opacity-100' : 'opacity-0'}`}>
+            <img src={website.image} alt="" className={`h-full w-full object-cover blur-[1px] ${index === activeSlide ? 'restaurant-cinematic-image' : 'scale-105'}`} />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,7,6,0.98)_0%,rgba(7,7,6,0.9)_34%,rgba(7,7,6,0.42)_66%,rgba(7,7,6,0.7)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_44%,transparent_0%,rgba(0,0,0,0.18)_45%,rgba(0,0,0,0.72)_100%),linear-gradient(0deg,#0b0a09_0%,transparent_38%,rgba(0,0,0,0.28)_100%)]" />
+          </div>
+        ))}
+        <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:48px_48px]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-3 bg-black/55" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-3 bg-black/55" />
+        <div className="absolute left-0 top-0 h-full w-1 bg-white/10" style={{ backgroundColor: activeRestaurant.colors.accent }} />
+
+        <div className="relative mx-auto flex min-h-[856px] max-w-[1500px] flex-col px-5 pb-7 pt-10 sm:min-h-[calc(100vh-4rem)] sm:px-8 lg:px-12">
+          <div className="flex items-center justify-between gap-4">
+            <Link to="/" className="inline-flex items-center gap-2 text-[0.65rem] font-black uppercase tracking-[0.18em] text-white/60 transition hover:text-white"><span>←</span> Portfolio home</Link>
+            <div className="rounded-full border border-white/15 bg-black/25 px-4 py-2 text-[0.58rem] font-black uppercase tracking-[0.16em] text-white/65 backdrop-blur">{completedCount} concepts live</div>
+          </div>
+
+          <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 xl:gap-24">
+            <div key={`copy-${activeRestaurant.id}`} aria-live="polite" className="restaurant-slide-copy relative z-10 max-w-2xl">
+              <div className="flex items-center gap-3 text-[0.6rem] font-semibold uppercase tracking-[0.28em]" style={{ color: activeRestaurant.colors.accent }}><span className="h-px w-10" style={{ backgroundColor: activeRestaurant.colors.accent }} />Restaurant collection · 0{activeSlide + 1}</div>
+              <p className="mt-7 text-xs font-medium uppercase tracking-[0.24em] text-white/42">{activeRestaurant.style}</p>
+              <h1 className="restaurant-cinematic-title mt-3 text-[clamp(4.2rem,8vw,8.6rem)] leading-[0.78] tracking-[-0.055em]">{activeRestaurant.title}</h1>
+              <p className="mt-6 max-w-xl text-base leading-8 text-white/62 sm:text-lg">{activeRestaurant.shortDescription}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link to={`/restaurant/${activeRestaurant.slug}`} className="inline-flex items-center justify-center gap-3 rounded-full px-7 py-4 text-xs font-black uppercase tracking-[0.13em] text-[#11100f] shadow-2xl transition hover:-translate-y-1" style={{ backgroundColor: activeRestaurant.colors.accent }}>Explore this concept <span>→</span></Link>
+                <a href="#concepts" className="inline-flex items-center justify-center rounded-full border border-white/25 bg-black/15 px-7 py-4 text-xs font-black uppercase tracking-[0.13em] backdrop-blur transition hover:-translate-y-1 hover:bg-white/10">View all restaurants</a>
               </div>
-              <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#f4c76d]">Restaurant collection</p>
-              <h1 className="mt-4 max-w-4xl text-5xl font-black leading-[0.95] md:text-7xl">
-                A tasting menu of restaurant web experiences.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
-                Ten responsive homepage concepts across coffee, bakery, grill, pizza, healthy bowls,
-                steakhouse, tea, burgers, and seafood. Each one explores a different brand mood and layout system.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="#concepts" size="lg" className="bg-[#f4c76d] text-[#171512] hover:bg-white">
-                  Browse Concepts
-                </CTAButton>
-                <CTAButton href="/#featured" variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10">
-                  Recently Completed
-                </CTAButton>
-              </div>
+              <div className="mt-9 flex items-center gap-3 text-[0.55rem] font-semibold uppercase tracking-[0.2em] text-white/35"><span className="h-px w-12 bg-white/25" />Curated dining stories</div>
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-2 lg:pl-6 xl:pl-10">
-              {featuredRestaurants.map((website, index) => (
-                <Link
-                  key={website.id}
-                  to={`/restaurant/${website.slug}`}
-                  className={`group relative min-h-48 overflow-hidden border border-white/12 bg-white/8 p-5 shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-1 hover:bg-white/12 ${
-                    index % 2 === 1 ? 'lg:translate-y-10' : ''
-                  }`}
-                >
-                  <div
-                    className="absolute inset-x-0 top-0 h-2"
-                    style={{ backgroundColor: website.colors.accent }}
-                  />
-                  {website.image && (
-                    <img
-                      src={website.image}
-                      alt={`${website.title} website preview`}
-                      className="absolute inset-0 h-full w-full object-cover opacity-35 transition duration-500 group-hover:scale-105 group-hover:opacity-45"
-                      loading="lazy"
-                    />
-                  )}
-                  <div
-                    className="absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-35 transition duration-300 group-hover:scale-110"
-                    style={{ backgroundColor: website.colors.primary }}
-                  />
-                  <p className="relative text-xs font-black uppercase tracking-[0.18em] text-white/55">
-                    Concept 0{index + 1}
-                  </p>
-                  <h2 className="relative mt-8 text-2xl font-black text-white">{website.title}</h2>
-                  <p className="relative mt-3 text-sm leading-6 text-white/65">{website.shortDescription}</p>
-                  <div className="relative mt-5 flex gap-2">
-                    {[website.colors.primary, website.colors.secondary, website.colors.accent].map((color) => (
-                      <span key={color} className="h-5 w-5 rounded-full border border-white/40" style={{ backgroundColor: color }} />
-                    ))}
-                  </div>
-                </Link>
+            <div key={`card-${activeRestaurant.id}`} className="restaurant-slide-card relative mx-auto w-full max-w-3xl lg:ml-auto">
+              <div className="absolute -inset-5 rotate-2 rounded-[2rem] border border-white/10 bg-white/[0.035] backdrop-blur-sm" />
+              <Link to={`/restaurant/${activeRestaurant.slug}`} className="group relative block overflow-hidden rounded-[1.5rem] border border-white/20 bg-[#1b1917] p-2 shadow-[0_40px_110px_rgba(0,0,0,0.5)] sm:p-3">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[1rem]"><img src={activeRestaurant.image} alt={`${activeRestaurant.title} website preview`} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" /><div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" /></div>
+                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 text-white sm:bottom-8 sm:left-8 sm:right-8"><div><p className="text-[0.55rem] font-black uppercase tracking-[0.18em] text-white/55">Live restaurant concept</p><p className="mt-1 hidden text-lg font-black sm:block">Open the full experience</p></div><span className="grid h-11 w-11 place-items-center rounded-full text-xl text-[#11100f] transition group-hover:rotate-[-15deg] group-hover:scale-110" style={{ backgroundColor: activeRestaurant.colors.accent }}>↗</span></div>
+              </Link>
+              <div className="absolute -bottom-4 -left-3 rounded-full border border-white/15 bg-[#161412]/90 px-4 py-2 text-[0.55rem] font-black uppercase tracking-[0.15em] text-white/55 shadow-xl backdrop-blur sm:-left-6">Responsive · Editorial · Conversion ready</div>
+            </div>
+          </div>
+
+          <div className="grid items-end gap-5 lg:grid-cols-[auto_1fr_auto]">
+            <div className="flex gap-2">
+              <button type="button" onClick={() => moveSlide(-1)} aria-label="Previous restaurant" className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-black/20 text-lg backdrop-blur transition hover:bg-white hover:text-[#11100f]">←</button>
+              <button type="button" onClick={() => moveSlide(1)} aria-label="Next restaurant" className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-black/20 text-lg backdrop-blur transition hover:bg-white hover:text-[#11100f]">→</button>
+            </div>
+            <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
+              {carouselRestaurants.map((website, index) => (
+                <button key={website.id} type="button" onClick={() => setActiveSlide(index)} aria-label={`Show ${website.title}`} aria-current={index === activeSlide ? 'true' : undefined} className={`group relative h-[4.6rem] min-w-[7.5rem] overflow-hidden rounded-xl border text-left transition sm:h-20 sm:min-w-[9rem] ${index === activeSlide ? 'active border-white/60 opacity-100' : 'border-white/10 opacity-50 hover:opacity-90'}`}>
+                  <img src={website.image} alt="" className="absolute inset-0 h-full w-full object-cover transition group-hover:scale-105" /><span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" /><span className="absolute bottom-2 left-2 right-2 truncate text-[0.54rem] font-black uppercase tracking-[0.08em] text-white">{website.title}</span>{index === activeSlide && <span className="absolute inset-x-0 bottom-0 h-[3px]" style={{ backgroundColor: website.colors.accent }} />}
+                </button>
               ))}
             </div>
-          </AnimatedSection>
-        </Container>
+            <div className="hidden min-w-24 text-right lg:block"><p className="text-2xl font-black">{String(activeSlide + 1).padStart(2, '0')}</p><p className="text-[0.55rem] font-black uppercase tracking-[0.16em] text-white/35">of {String(carouselRestaurants.length).padStart(2, '0')}</p></div>
+          </div>
+        </div>
+        <div className="absolute inset-x-0 bottom-3 z-20 h-[2px] bg-white/10"><span key={`progress-${activeSlide}-${isCarouselPaused}`} className="restaurant-carousel-progress block h-full w-full" style={{ backgroundColor: activeRestaurant.colors.accent, animationPlayState: isCarouselPaused ? 'paused' : 'running' }} /></div>
       </section>
 
       <section className="border-b border-[#eadfc8] bg-[#fffaf1] py-10">
@@ -137,7 +158,7 @@ export function RestaurantIndex() {
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-6 text-[#6d6254]">
-              Each card uses the actual brand palette so the page works like a quick visual menu for the collection.
+              Each card uses real concept artwork so the collection reads like a visual menu of distinct restaurant experiences.
             </p>
           </AnimatedSection>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -167,21 +188,16 @@ export function RestaurantIndex() {
                   <div className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#171512] shadow-sm">
                     {website.status === 'completed' ? 'Live' : 'Queued'}
                   </div>
-                  <div className="absolute bottom-5 left-5 flex gap-2">
-                    {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => (
-                      <span key={color} className="h-6 w-6 rounded-full border border-white/75 shadow-sm" style={{ backgroundColor: color }} />
-                    ))}
-                  </div>
                 </div>
                 <div className="p-6">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#9a5b25]">{website.category}</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#9a5b25]">{website.category}</p>
                   <div className="mt-3 flex items-start justify-between gap-4">
-                    <h3 className="text-2xl font-black text-[#171512] transition group-hover:text-[#9a5b25]">
+                    <h3 className="restaurant-cinematic-title text-3xl font-semibold text-[#171512] transition group-hover:text-[#9a5b25]">
                       {website.title}
                     </h3>
-                    <span className="text-xl font-black text-[#9a5b25]">0{index + 1}</span>
+                    <span className="text-sm font-semibold tracking-[0.12em] text-[#9a5b25]">0{index + 1}</span>
                   </div>
-                  <p className="mt-3 text-sm font-bold text-[#6d6254]">{website.style}</p>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-[#6d6254]">{website.style}</p>
                   <p className="mt-4 min-h-12 text-sm leading-6 text-[#6d6254]">{website.shortDescription}</p>
                   <div className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[#171512] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#9a5b25]">
                     View Design
