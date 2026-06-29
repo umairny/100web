@@ -9,6 +9,158 @@ body {
   overscroll-behavior-y: none;
 }
 
+.glowhaus-serif {
+  font-family: "Iowan Old Style", Baskerville, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.luxe-serif {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.serenity-serif {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.blush-serif {
+  font-family: "Bodoni 72", Didot, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+.blush-script {
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-weight: 400;
+}
+
+.glowhaus-site ::selection {
+  background: #dca9a5;
+  color: #292020;
+}
+
+.glowhaus-site {
+  font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+}
+
+.glowhaus-site .text-\[8px\] {
+  font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem);
+}
+
+.glowhaus-site .text-\[9px\] {
+  font-size: clamp(0.8125rem, 0.78rem + 0.12vw, 0.875rem);
+}
+
+.glowhaus-site .text-\[10px\] {
+  font-size: clamp(0.875rem, 0.83rem + 0.12vw, 0.9375rem);
+}
+
+.glowhaus-site .text-\[11px\],
+.glowhaus-site .text-\[12px\] {
+  font-size: clamp(0.9375rem, 0.89rem + 0.12vw, 1rem);
+}
+
+.glowhaus-site .leading-4 {
+  line-height: 1.45rem;
+}
+
+.glowhaus-site .leading-5 {
+  line-height: 1.65rem;
+}
+
+.luxe-site ::selection {
+  background: #ddbd8b;
+  color: #34251f;
+}
+
+.serenity-site ::selection {
+  background: #aeb89a;
+  color: #263021;
+}
+
+.blush-site {
+  font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  color-scheme: dark;
+  text-rendering: optimizeLegibility;
+}
+
+.blush-site ::selection {
+  background: #ff397f;
+  color: white;
+}
+
+.blush-site .text-\[10px\] {
+  font-size: 0.75rem;
+}
+
+.blush-site .text-xs {
+  font-size: clamp(0.8125rem, 0.77rem + 0.14vw, 0.9rem);
+  line-height: 1.35rem;
+}
+
+.blush-site .text-sm {
+  font-size: clamp(0.9375rem, 0.89rem + 0.14vw, 1rem);
+  line-height: 1.6rem;
+}
+
+/* Keep the editorial layout compact without sacrificing readability. */
+.luxe-site .text-\[8px\] {
+  font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem);
+}
+
+.luxe-site .text-\[9px\] {
+  font-size: clamp(0.8125rem, 0.77rem + 0.12vw, 0.875rem);
+}
+
+.luxe-site .text-\[10px\] {
+  font-size: clamp(0.875rem, 0.82rem + 0.14vw, 0.9375rem);
+}
+
+.luxe-site .text-\[11px\],
+.luxe-site .text-\[12px\] {
+  font-size: clamp(0.9375rem, 0.88rem + 0.14vw, 1rem);
+}
+
+.luxe-site .leading-4 {
+  line-height: 1.5rem;
+}
+
+.luxe-site .leading-5 {
+  line-height: 1.7rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glowhaus-site *,
+  .glowhaus-site *::before,
+  .glowhaus-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .luxe-site *,
+  .luxe-site *::before,
+  .luxe-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .serenity-site *,
+  .serenity-site *::before,
+  .serenity-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .blush-site *,
+  .blush-site *::before,
+  .blush-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* UrbanBite's reveal system is observer-driven so content animates only when it enters view. */
 .urbanbite-site [data-urban-reveal] {
   opacity: 0;
