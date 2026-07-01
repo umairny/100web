@@ -27,6 +27,7 @@ export interface WebsiteDesign {
   shortDescription: string;
   slug: string;
   image?: string;
+  marketLabel?: string;
   colors: {
     primary: string;
     secondary: string;
@@ -482,6 +483,7 @@ export const realEstateWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern real estate agency for curated listings, seller strategy, and neighborhood confidence",
     slug: "skyline-realty-group",
+    marketLabel: "Urban residential",
     image: imageUrl("home/real-estate-preview.png"),
     colors: {
       primary: "#153e75",
@@ -491,8 +493,115 @@ export const realEstateWebsites: WebsiteDesign[] = [
     },
     status: "completed",
   },
+  {
+    id: "harborkey-homes",
+    title: "HarborKey Homes",
+    category: "Real Estate",
+    style: "airy, coastal, welcoming, family-focused",
+    shortDescription:
+      "Coastal and waterfront homes presented around family life, local knowledge, and confident moves",
+    slug: "harborkey-homes",
+    marketLabel: "Coastal homes",
+    colors: { primary: "#2f6f8f", secondary: "#f4ead8", accent: "#7fc8d8", dark: "#17384d" },
+    status: "coming-soon",
+  },
+  {
+    id: "apex-commercial-realty",
+    title: "Apex Commercial Realty",
+    category: "Real Estate",
+    style: "authoritative, structured, modern, investment-led",
+    shortDescription:
+      "Commercial brokerage for office, retail, leasing, and investment opportunities with clear market intelligence",
+    slug: "apex-commercial-realty",
+    marketLabel: "Commercial property",
+    colors: { primary: "#363b42", secondary: "#eee8df", accent: "#b87345", dark: "#171a1f" },
+    status: "coming-soon",
+  },
+  {
+    id: "nestpath-mortgage",
+    title: "NestPath Mortgage",
+    category: "Real Estate",
+    style: "friendly, reassuring, clear, guidance-focused",
+    shortDescription:
+      "Mortgage guidance for first-time buyers, refinancing, and practical paths to home ownership",
+    slug: "nestpath-mortgage",
+    marketLabel: "Mortgage guidance",
+    colors: { primary: "#23766f", secondary: "#f4f1e8", accent: "#d6a84f", dark: "#183b3a" },
+    status: "coming-soon",
+  },
+  {
+    id: "cedar-stone-estates",
+    title: "Cedar & Stone Estates",
+    category: "Real Estate",
+    style: "natural, refined, private, heritage-inspired",
+    shortDescription:
+      "Rural estates and luxury acreage positioned through privacy, craftsmanship, and lasting value",
+    slug: "cedar-stone-estates",
+    marketLabel: "Rural luxury",
+    colors: { primary: "#405846", secondary: "#e9e4d8", accent: "#9a8164", dark: "#232c26" },
+    status: "coming-soon",
+  },
+  {
+    id: "metroloft-rentals",
+    title: "MetroLoft Rentals",
+    category: "Real Estate",
+    style: "urban, energetic, convenient, design-forward",
+    shortDescription:
+      "Modern apartment discovery and leasing built around city access, amenities, and flexible living",
+    slug: "metroloft-rentals",
+    marketLabel: "Urban rentals",
+    colors: { primary: "#4f46a5", secondary: "#eef0f7", accent: "#ef7c72", dark: "#24233b" },
+    status: "coming-soon",
+  },
+  {
+    id: "foundry-property-group",
+    title: "Foundry Property Group",
+    category: "Real Estate",
+    style: "bold, architectural, ambitious, investor-ready",
+    shortDescription:
+      "Developer portfolio for landmark residential projects, new communities, and investment opportunities",
+    slug: "foundry-property-group",
+    marketLabel: "Property development",
+    colors: { primary: "#41444a", secondary: "#ece9e3", accent: "#d96b32", dark: "#1d2025" },
+    status: "coming-soon",
+  },
+  {
+    id: "suncrest-vacation-villas",
+    title: "Suncrest Vacation Villas",
+    category: "Real Estate",
+    style: "sunlit, aspirational, relaxed, destination-led",
+    shortDescription:
+      "Holiday villas and resort investments framed around memorable stays, lifestyle, and income potential",
+    slug: "suncrest-vacation-villas",
+    marketLabel: "Vacation property",
+    colors: { primary: "#16899a", secondary: "#fff6df", accent: "#e6b84f", dark: "#164450" },
+    status: "coming-soon",
+  },
+  {
+    id: "oakline-property-management",
+    title: "Oakline Property Management",
+    category: "Real Estate",
+    style: "dependable, organized, calm, service-focused",
+    shortDescription:
+      "Property management for landlords and tenants with responsive service and transparent operations",
+    slug: "oakline-property-management",
+    marketLabel: "Property management",
+    colors: { primary: "#3f6b52", secondary: "#eef1e8", accent: "#8da16f", dark: "#18334a" },
+    status: "coming-soon",
+  },
+  {
+    id: "keystart-realty",
+    title: "KeyStart Realty",
+    category: "Real Estate",
+    style: "approachable, optimistic, simple, buyer-first",
+    shortDescription:
+      "A first-time buyer agency that turns unfamiliar decisions into a practical, encouraging home search",
+    slug: "keystart-realty",
+    marketLabel: "First-time buyers",
+    colors: { primary: "#2767b1", secondary: "#f2f6fb", accent: "#f2c94c", dark: "#17324f" },
+    status: "coming-soon",
+  },
 ];
-
 export const fitnessWebsites: WebsiteDesign[] = [
   {
     id: "pulseforge-fitness",
