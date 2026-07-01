@@ -9,6 +9,10 @@ import { GlowHausSalon } from './pages/Beauty/GlowHausSalon'
 import { LuxeNailStudio } from './pages/Beauty/LuxeNailStudio'
 import { SerenitySpa } from './pages/Beauty/SerenitySpa'
 import { VelvetSkinClinic } from './pages/Beauty/VelvetSkinClinic'
+import { PureGlowAesthetics } from './pages/Beauty/PureGlowAesthetics'
+import BloomBridalStudio from './pages/Beauty/BloomBridalStudio'
+import SilkStyleHair from './pages/Beauty/SilkStyleHair'
+import AuraWellnessSpa from './pages/Beauty/AuraWellnessSpa'
 import { ConstructionIndex } from './pages/Construction/ConstructionIndex'
 import { ForgePointBuilders } from './pages/Construction/ForgePointBuilders'
 import { CartBloomMarket } from './pages/Ecommerce/CartBloomMarket'
@@ -69,6 +73,10 @@ function AppShell() {
           <Route path="/beauty/blush-beauty-bar" element={<BlushBeautyBar />} />
           <Route path="/beauty/velvet-skin-clinic" element={<VelvetSkinClinic />} />
           <Route path="/beauty/crown-comb-barber" element={<CrownCombBarber />} />
+          <Route path="/beauty/pureglow-aesthetics" element={<PureGlowAesthetics />} />
+          <Route path="/beauty/bloom-bridal-studio" element={<BloomBridalStudio />} />
+          <Route path="/beauty/silk-style-hair" element={<SilkStyleHair />} />
+          <Route path="/beauty/aura-wellness-spa" element={<AuraWellnessSpa />} />
           <Route path="/real-estate" element={<RealEstateIndex />} />
           <Route path="/real-estate/skyline-realty-group" element={<SkylineRealtyGroup />} />
           <Route path="/fitness" element={<FitnessIndex />} />

@@ -1,268 +1,174 @@
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatedSection, Container, CTAButton } from '../../components'
 import { beautyWebsites } from '../../data/websites'
 
+const tags: Record<string, string> = {
+  'glowhaus-salon': 'Hair',
+  'luxe-nail-studio': 'Nails',
+  'serenity-spa': 'Wellness',
+  'blush-beauty-bar': 'Beauty',
+  'velvet-skin-clinic': 'Skin',
+  'crown-comb-barber': 'Grooming',
+  'pureglow-aesthetics': 'Aesthetics',
+  'bloom-bridal-studio': 'Bridal',
+  'silk-style-hair': 'Hair',
+  'aura-wellness-spa': 'Wellness',
+}
+
+const principles = [
+  ['01', 'Distinct by design', 'Every concept has its own visual language, audience, and conversion rhythm.'],
+  ['02', 'Built to be felt', 'Typography, photography, color, and motion work together to create a memorable atmosphere.'],
+  ['03', 'Ready to convert', 'Clear services, social proof, and thoughtful booking paths turn browsing into confident action.'],
+]
+
 export function BeautyIndex() {
-  const liveWebsites = beautyWebsites.filter((website) => website.status === 'completed' || website.status === 'live')
-  const comingSoonWebsites = beautyWebsites.filter((website) => website.status !== 'completed' && website.status !== 'live')
-  const beautyServices = ['Salon', 'Nails', 'Spa', 'Makeup', 'Skin', 'Barber', 'Bridal', 'Hair']
-  const studioNotes = [
-    {
-      title: 'Soft Conversion',
-      text: 'Beauty clients need trust first: clear service mood, gentle actions, and polished visual hierarchy before booking.',
-    },
-    {
-      title: 'Palette Memory',
-      text: 'Each concept keeps its own signature tones, from blush glam to spa greens and nail-studio gold.',
-    },
-    {
-      title: 'Editorial Rhythm',
-      text: 'The collection favors airy spacing, tactile cards, and boutique-style sections instead of a dense directory feel.',
-    },
-  ]
-  const designModes = [
-    ['Polished', 'nails, salon'],
-    ['Restorative', 'spa, wellness'],
-    ['Glam', 'makeup, beauty bar'],
-    ['Clinical soft', 'skin, aesthetics'],
-  ]
+  const websites = beautyWebsites.filter((website) => website.status === 'completed' || website.status === 'live')
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const [filter, setFilter] = useState('All')
+  const touchStart = useRef<number | null>(null)
+  const filters = ['All', ...Array.from(new Set(websites.map((website) => tags[website.slug])))]
+  const filteredWebsites = useMemo(() => filter === 'All' ? websites : websites.filter((website) => tags[website.slug] === filter), [filter, websites])
+  const featured = websites[activeSlide]
+
+  useEffect(() => {
+    if (paused) return
+    const interval = window.setInterval(() => setActiveSlide((slide) => (slide + 1) % websites.length), 6500)
+    return () => window.clearInterval(interval)
+  }, [paused, websites.length])
+
+  const moveSlide = (direction: number) => setActiveSlide((activeSlide + direction + websites.length) % websites.length)
 
   return (
-    <main className="bg-[#fff8fb] text-[#21191d]">
-      <section className="relative -mt-16 overflow-hidden bg-[#fff8fb] pb-20 pt-20 md:pb-28 md:pt-28">
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.92),rgba(255,240,246,0.74)),radial-gradient(circle_at_18%_22%,rgba(255,61,154,0.18),transparent_24%),radial-gradient(circle_at_82%_18%,rgba(215,181,109,0.18),transparent_22%)]" />
-        <div className="absolute right-0 top-0 hidden h-full w-28 bg-[#21191d] lg:block" />
-        <div className="absolute bottom-0 left-0 h-40 w-full bg-[repeating-linear-gradient(90deg,rgba(33,25,29,0.06)_0_1px,transparent_1px_44px)]" />
-        <Container>
-          <AnimatedSection className="relative grid gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:items-center">
-            <div>
-              <Link to="/" className="text-sm mr-4 font-bold text-[#b76e79] transition hover:text-[#21191d]">
-                Back to Home
-              </Link>
-              <div className="mt-8 inline-flex rounded-full border border-[#efd7df] bg-white/80 px-4 py-2 text-sm font-black uppercase tracking-[0.16em] text-[#b76e79] shadow-sm">
-                {liveWebsites.length} live / {beautyWebsites.length} total
+    <main className="beauty-index bg-[#f5f0eb] text-[#181514]">
+      <style>{`
+        .beauty-index { font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif; }
+        .beauty-display { font-family: Georgia, "Times New Roman", serif; }
+        .beauty-slide { opacity: 0; transform: scale(1.035); transition: opacity .85s ease, transform 1.4s ease; }
+        .beauty-slide.is-active { opacity: 1; transform: scale(1); }
+        .beauty-progress { animation: beautyProgress 6.5s linear both; transform-origin: left; }
+        @keyframes beautyProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+        @media (prefers-reduced-motion: reduce) { .beauty-slide { transition: none; } .beauty-progress { animation: none; } }
+      `}</style>
+
+      <section
+        className="relative -mt-16 min-h-[100svh] overflow-hidden bg-[#171312] text-white"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onTouchStart={(event) => { touchStart.current = event.touches[0].clientX }}
+        onTouchEnd={(event) => {
+          if (touchStart.current === null) return
+          const distance = event.changedTouches[0].clientX - touchStart.current
+          if (Math.abs(distance) > 50) moveSlide(distance > 0 ? -1 : 1)
+          touchStart.current = null
+        }}
+        aria-roledescription="carousel"
+        aria-label="Featured beauty websites"
+      >
+        {websites.map((website, index) => (
+          <div key={website.id} className={`beauty-slide absolute inset-0 ${index === activeSlide ? 'is-active' : ''}`} aria-hidden={index !== activeSlide}>
+            <img src={website.image} alt="" className="h-full w-full object-cover object-center" fetchPriority={index === 0 ? 'high' : 'auto'} />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,12,12,.94)_0%,rgba(16,12,12,.72)_36%,rgba(16,12,12,.16)_72%,rgba(16,12,12,.26)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(10,8,8,.78),transparent_42%)]" />
+          </div>
+        ))}
+
+        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1480px] flex-col px-5 pb-8 pt-24 sm:px-8 lg:px-12 lg:pb-10 lg:pt-28">
+          <div className="flex items-center justify-between border-b border-white/20 pb-4 text-[.7rem] font-bold uppercase tracking-[.2em] text-white/70">
+            <Link to="/" className="transition hover:text-white">← 100 Websites</Link>
+            <span className="hidden sm:block">Beauty / Live Collection</span>
+            <span>{String(activeSlide + 1).padStart(2, '0')} / {String(websites.length).padStart(2, '0')}</span>
+          </div>
+
+          <div className="grid flex-1 items-center py-14 lg:grid-cols-[minmax(0,760px)_1fr]">
+            <div key={featured.id} className="fade-in-up max-w-3xl" aria-live="polite">
+              <div className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[.22em] text-[#f0bdac]">
+                <span className="h-px w-10 bg-[#f0bdac]" /> {tags[featured.slug]} concept
               </div>
-              <p className="mt-8 text-sm font-black uppercase tracking-[0.26em] text-[#b76e79]">Beauty collection</p>
-              <h1 className="mt-4 max-w-5xl text-5xl font-black leading-[0.94] md:text-7xl">
-                Beauty websites with boutique energy, not template polish.
+              <h1 className="beauty-display text-[clamp(3.9rem,8vw,8.2rem)] leading-[.88] tracking-[-.055em]">
+                {featured.title}
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#6b5a61]">
-                Salon, spa, nails, bridal, skincare, barber, and beauty bar concepts shaped around trust,
-                atmosphere, booking confidence, and a visual style clients can feel quickly.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="#live-concepts" size="lg" className="bg-[#21191d] text-white hover:bg-[#b76e79]">
-                  View Live Concepts
-                </CTAButton>
-                <CTAButton href="#coming-soon" variant="outline" size="lg" className="border-[#b76e79] bg-white/70 text-[#b76e79] hover:bg-white">
-                  Preview Roadmap
-                </CTAButton>
+              <p className="mt-7 max-w-xl text-base leading-7 text-white/75 sm:text-lg sm:leading-8">{featured.shortDescription}.</p>
+              <p className="mt-4 max-w-xl text-sm font-semibold capitalize tracking-wide text-[#e9c0b2]">{featured.style}</p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Link to={`/beauty/${featured.slug}`} className="group inline-flex min-h-14 items-center justify-between gap-10 bg-white px-6 text-sm font-black uppercase tracking-[.1em] text-[#181514] transition hover:bg-[#e9c0b2]">
+                  Explore Website <span className="transition group-hover:translate-x-1">→</span>
+                </Link>
+                <a href="#collection" className="inline-flex min-h-14 items-center justify-center border border-white/35 px-6 text-sm font-bold uppercase tracking-[.1em] text-white transition hover:bg-white/10">View Collection</a>
               </div>
             </div>
-
-            <div className="relative min-h-[520px]">
-              <div className="absolute left-1/2 top-6 h-[27rem] w-[20rem] -translate-x-1/2 rounded-t-[12rem] rounded-b-[3rem] bg-[#21191d] shadow-2xl shadow-[#b76e79]/20" />
-              <div className="absolute left-1/2 top-16 h-[20rem] w-[15rem] -translate-x-1/2 rounded-t-[9rem] rounded-b-[2rem] bg-[linear-gradient(160deg,#f5b6c8,#fffdf9_48%,#d7b56d)] p-5">
-                <div className="h-full rounded-t-[7rem] rounded-b-[1.5rem] border border-white/70 bg-white/35" />
-              </div>
-              <div className="absolute left-2 top-20 w-48 rotate-[-5deg] border border-[#efd7df] bg-white p-5 shadow-xl">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#b76e79]">Live studio</p>
-                <p className="mt-2 text-2xl font-black">GlowHaus Salon</p>
-                <p className="mt-2 text-sm leading-6 text-[#6b5a61]">Color, styling, confident beauty.</p>
-              </div>
-              <div className="absolute bottom-20 right-0 w-52 rotate-[5deg] bg-[#fff0f6] p-5 shadow-xl">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ff3d9a]">Mood board</p>
-                <p className="mt-2 text-2xl font-black">Spa calm, nail polish, bridal softness.</p>
-              </div>
-              <div className="absolute bottom-2 left-1/2 grid w-full max-w-md -translate-x-1/2 grid-cols-3 border border-[#efd7df] bg-white/90 text-center shadow-xl">
-                {[
-                  { value: liveWebsites.length, label: 'Live' },
-                  { value: comingSoonWebsites.length, label: 'Queued' },
-                  { value: '10', label: 'Styles' },
-                ].map((stat) => (
-                  <div key={stat.label} className="border-r border-[#efd7df] p-4 last:border-r-0">
-                    <p className="text-2xl font-black text-[#b76e79]">{stat.value}</p>
-                    <p className="text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#6b5a61]">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-        </Container>
-      </section>
-
-      <section className="border-y border-[#efd7df] bg-white py-8">
-        <Container>
-          <div className="flex flex-wrap justify-center gap-2">
-            {beautyServices.map((service) => (
-              <span key={service} className="rounded-full border border-[#efd7df] bg-[#fff8fb] px-4 py-2 text-sm font-bold text-[#6b5a61]">
-                {service}
-              </span>
-            ))}
           </div>
-        </Container>
-      </section>
 
-      <section id="live-concepts" className="py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="mb-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b76e79]">Live concepts</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                {liveWebsites.length} finished beauty homepages ready to explore.
-              </h2>
-            </div>
-            <p className="max-w-2xl text-lg leading-8 text-[#6b5a61]">
-              These concepts are clickable and fully responsive, each with a different client mood: salon confidence,
-              nail-studio luxury, spa quiet, beauty-bar glam, barber precision, and soft clinical skincare.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {liveWebsites.map((website, index) => (
-              <Link
-                key={website.id}
-                to={`/beauty/${website.slug}`}
-                className={`group reveal-card grid overflow-hidden border border-[#efd7df] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl lg:grid-cols-[0.92fr_1.08fr] ${
-                  index % 2 === 1 ? 'delay-100' : ''
-                }`}
-              >
-                <div
-                  className="relative min-h-64"
-                  style={{
-                    backgroundImage: `linear-gradient(145deg, ${website.colors.secondary} 0%, ${website.colors.primary} 56%, ${website.colors.accent} 100%)`,
-                  }}
-                >
-                  {website.image && (
-                    <img
-                      src={website.image}
-                      alt={`${website.title} website preview`}
-                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  )}
-                  <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-black/40 via-transparent to-transparent' : 'bg-[radial-gradient(circle_at_26%_24%,rgba(255,255,255,0.62),transparent_25%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.28),transparent_30%)]'}`} />
-                  <div className="absolute bottom-5 left-5 flex gap-2">
-                    {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => (
-                      <span key={color} className="h-7 w-7 rounded-full border border-white/80 shadow-sm" style={{ backgroundColor: color }} />
-                    ))}
-                  </div>
-                </div>
-                <div className="p-7">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#b76e79]">Live design</p>
-                  <h3 className="mt-4 text-3xl font-black transition group-hover:text-[#b76e79]">{website.title}</h3>
-                  <p className="mt-3 text-sm font-bold text-[#6b5a61]">{website.style}</p>
-                  <p className="mt-5 text-base leading-7 text-[#6b5a61]">{website.shortDescription}</p>
-                  <div className="mt-8 inline-flex w-full items-center justify-center rounded-lg bg-[#21191d] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#b76e79]">
-                    Open Homepage
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="border-y border-[#efd7df] bg-[#fff0f6] py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b76e79]">Beauty UX direction</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Designed around confidence, calm, and booking intent.
-              </h2>
-            </div>
-            <div className="grid gap-5 md:grid-cols-3">
-              {studioNotes.map((note) => (
-                <article key={note.title} className="border border-white bg-white/80 p-6 shadow-sm">
-                  <div className="mb-6 h-2 w-16 bg-[#b76e79]" />
-                  <h3 className="text-2xl font-black">{note.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[#6b5a61]">{note.text}</p>
-                </article>
+          <div className="grid gap-6 border-t border-white/20 pt-5 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div className="grid grid-cols-5 gap-2 lg:grid-cols-10">
+              {websites.map((website, index) => (
+                <button key={website.id} type="button" onClick={() => setActiveSlide(index)} className={`group text-left transition ${activeSlide === index ? 'text-white' : 'text-white/45 hover:text-white/80'}`} aria-label={`Show ${website.title}`}>
+                  <span className="block h-px overflow-hidden bg-white/25">{activeSlide === index && <span key={`${index}-${activeSlide}`} className={`beauty-progress block h-full bg-[#efb49f] ${paused ? '[animation-play-state:paused]' : ''}`} />}</span>
+                  <span className="mt-3 hidden truncate text-[.62rem] font-bold uppercase tracking-[.1em] xl:block">{website.title}</span>
+                </button>
               ))}
             </div>
-          </AnimatedSection>
-        </Container>
+            <div className="flex gap-2 justify-self-end">
+              <button type="button" onClick={() => moveSlide(-1)} className="grid h-12 w-12 place-items-center border border-white/30 text-xl transition hover:bg-white hover:text-black" aria-label="Previous website">←</button>
+              <button type="button" onClick={() => moveSlide(1)} className="grid h-12 w-12 place-items-center border border-white/30 text-xl transition hover:bg-white hover:text-black" aria-label="Next website">→</button>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section id="coming-soon" className="py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b76e79]">Roadmap</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Five beauty directions queued for expansion.
-              </h2>
-            </div>
-            <p className="max-w-md text-sm leading-6 text-[#6b5a61]">
-              Coming-soon cards are intentionally softer and disabled, so users understand what is live without hitting dead routes.
-            </p>
-          </AnimatedSection>
+      <section className="border-b border-[#d9d0c8] bg-[#efe7e0]">
+        <div className="mx-auto grid max-w-[1480px] grid-cols-2 divide-x divide-[#d9d0c8] px-5 sm:grid-cols-4 sm:px-8 lg:px-12">
+          {[[websites.length, 'Live websites'], ['10', 'Unique identities'], ['100%', 'Responsive'], ['∞', 'Ways to glow']].map(([value, label]) => (
+            <div key={label} className="px-4 py-7 text-center"><b className="beauty-display block text-3xl font-normal">{value}</b><span className="mt-1 block text-[.68rem] font-bold uppercase tracking-[.14em] text-[#756b66]">{label}</span></div>
+          ))}
+        </div>
+      </section>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {comingSoonWebsites.map((website) => (
-              <article key={website.id} className="overflow-hidden border border-[#efd7df] bg-white/75 opacity-90 shadow-sm">
-                <div
-                  className="h-32"
-                  style={{
-                    backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 58%, ${website.colors.accent} 100%)`,
-                  }}
-                />
-                <div className="p-6">
-                  <div className="inline-flex rounded-full bg-[#fff0f6] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#b76e79]">
-                    Coming soon
+      <section id="collection" className="px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <div className="mx-auto max-w-[1480px]">
+          <div className="grid gap-8 border-b border-[#cfc4bc] pb-10 lg:grid-cols-[1fr_1fr] lg:items-end">
+            <div><p className="text-xs font-black uppercase tracking-[.22em] text-[#a25f58]">The live collection</p><h2 className="beauty-display mt-4 max-w-3xl text-5xl leading-[.96] tracking-[-.045em] sm:text-6xl lg:text-7xl">Ten brands. Ten completely different moods.</h2></div>
+            <p className="max-w-2xl text-base leading-8 text-[#665e59] lg:justify-self-end">Explore finished, responsive beauty websites spanning editorial hair, wellness, skincare, bridal artistry, nails, makeup, and modern grooming.</p>
+          </div>
+
+          <div className="flex gap-2 overflow-x-auto py-7 [scrollbar-width:none]" aria-label="Filter websites">
+            {filters.map((item) => <button key={item} type="button" onClick={() => setFilter(item)} className={`shrink-0 rounded-full border px-5 py-2.5 text-sm font-bold transition ${filter === item ? 'border-[#181514] bg-[#181514] text-white' : 'border-[#cfc4bc] bg-transparent text-[#665e59] hover:border-[#181514] hover:text-[#181514]'}`}>{item}</button>)}
+          </div>
+
+          <div className="grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+            {filteredWebsites.map((website, index) => (
+              <Link key={website.id} to={`/beauty/${website.slug}`} className={`group block ${index % 3 === 1 ? 'xl:translate-y-10' : ''}`}>
+                <article className="overflow-hidden bg-white shadow-[0_12px_40px_rgba(54,42,36,.08)] transition duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_28px_70px_rgba(54,42,36,.16)]">
+                  <div className="relative aspect-[16/11] overflow-hidden bg-[#ddd3cc]">
+                    <img src={website.image} alt={`${website.title} website preview`} className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.035]" loading="lazy" decoding="async" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                    <span className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1.5 text-[.65rem] font-black uppercase tracking-[.14em] text-[#282220] backdrop-blur">{tags[website.slug]}</span>
+                    <span className="absolute bottom-5 right-5 grid h-12 w-12 place-items-center rounded-full bg-white text-xl text-black transition duration-300 group-hover:rotate-[-30deg] group-hover:bg-[#edb29d]">↗</span>
                   </div>
-                  <h3 className="mt-5 text-2xl font-black">{website.title}</h3>
-                  <p className="mt-3 text-sm font-bold text-[#6b5a61]">{website.style}</p>
-                  <p className="mt-4 text-sm leading-6 text-[#6b5a61]">{website.shortDescription}</p>
-                </div>
-              </article>
+                  <div className="p-6 sm:p-7">
+                    <div className="flex items-start justify-between gap-4"><div><p className="text-[.68rem] font-black uppercase tracking-[.16em] text-[#a25f58]">0{websites.indexOf(website) + 1} / Live</p><h3 className="beauty-display mt-2 text-3xl tracking-[-.035em] sm:text-[2.15rem]">{website.title}</h3></div><div className="mt-1 flex -space-x-1">{[website.colors.primary, website.colors.accent, website.colors.dark].map((color) => <span key={color} className="h-5 w-5 rounded-full border-2 border-white" style={{ backgroundColor: color }} />)}</div></div>
+                    <p className="mt-4 min-h-14 text-sm leading-6 text-[#6e6560]">{website.shortDescription}.</p>
+                    <div className="mt-6 flex items-center justify-between border-t border-[#e5ddd7] pt-4 text-xs font-bold uppercase tracking-[.1em]"><span className="capitalize text-[#827873]">{website.style.split(',').slice(0, 2).join(' ·')}</span><span>Open site →</span></div>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
-            <div className="border border-[#efd7df] bg-[#fff8fb] p-8 md:p-10">
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b76e79]">Design modes</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Beauty layouts need a different rhythm than restaurant pages.
-              </h2>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {designModes.map(([mode, examples]) => (
-                  <div key={mode} className="border border-[#efd7df] bg-white p-5">
-                    <p className="text-2xl font-black">{mode}</p>
-                    <p className="mt-2 text-sm font-bold text-[#6b5a61]">{examples}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+      <section className="bg-[#1b1817] px-5 py-20 text-white sm:px-8 lg:px-12 lg:py-28">
+        <div className="mx-auto max-w-[1480px]">
+          <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr]"><div><p className="text-xs font-black uppercase tracking-[.22em] text-[#eeb49f]">Design philosophy</p><h2 className="beauty-display mt-4 text-5xl leading-none tracking-[-.045em] sm:text-6xl">Beautiful is only the beginning.</h2></div><p className="max-w-xl self-end text-base leading-8 text-white/60 lg:justify-self-end">Each concept is designed to earn attention, build trust, and make the next step feel natural.</p></div>
+          <div className="mt-14 grid border-y border-white/15 md:grid-cols-3 md:divide-x md:divide-white/15">
+            {principles.map(([number, title, text]) => <article key={number} className="border-b border-white/15 px-2 py-9 last:border-b-0 md:border-b-0 md:px-8 md:py-12"><span className="text-xs font-bold text-[#eeb49f]">{number}</span><h3 className="beauty-display mt-8 text-3xl">{title}</h3><p className="mt-4 text-sm leading-7 text-white/55">{text}</p></article>)}
+          </div>
+        </div>
+      </section>
 
-            <div className="relative overflow-hidden bg-[#21191d] p-8 text-white shadow-2xl md:p-10">
-              <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#ff3d9a]/25" />
-              <div className="absolute -bottom-24 left-8 h-64 w-64 rounded-full bg-[#d7b56d]/20" />
-              <div className="relative">
-                <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f5b6c8]">Start browsing</p>
-                <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
-                  Begin with the live studios, then compare the queued service niches.
-                </h2>
-                <p className="mt-5 text-lg leading-8 text-white/70">
-                  This page now works like a beauty lookbook: polished, calmer, and clearly separate from the restaurant collection.
-                </p>
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                  <CTAButton href="#live-concepts" size="lg" className="bg-[#f5b6c8] text-[#21191d] hover:bg-white">
-                    Back to Live Concepts
-                  </CTAButton>
-                  <CTAButton href="/beauty/glowhaus-salon" variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10">
-                    Open GlowHaus
-                  </CTAButton>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </Container>
+      <section className="relative overflow-hidden bg-[#e8b4a2] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
+        <div className="absolute -right-24 -top-36 h-96 w-96 rounded-full border border-[#181514]/15" /><div className="absolute -right-5 -top-16 h-64 w-64 rounded-full border border-[#181514]/15" />
+        <div className="relative mx-auto flex max-w-[1480px] flex-col justify-between gap-8 lg:flex-row lg:items-end"><div><p className="text-xs font-black uppercase tracking-[.22em]">Ready to explore?</p><h2 className="beauty-display mt-4 max-w-4xl text-5xl leading-[.95] tracking-[-.05em] sm:text-7xl">Find the beauty brand that feels like you.</h2></div><a href="#collection" className="group inline-flex min-h-14 shrink-0 items-center justify-between gap-12 bg-[#181514] px-7 text-sm font-black uppercase tracking-[.1em] text-white">Browse all websites <span className="transition group-hover:translate-x-1">→</span></a></div>
       </section>
     </main>
   )

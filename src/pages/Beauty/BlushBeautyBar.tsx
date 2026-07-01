@@ -1,5 +1,6 @@
 import { useEffect, useState, type MouseEvent, type ReactNode } from 'react'
 import {
+  ArrowRight,
   Award,
   Camera,
   CirclePlay,
@@ -133,13 +134,44 @@ export function BlushBeautyBar() {
         {menuOpen && <nav id="blush-mobile-menu" className="grid max-h-[calc(100vh-72px)] overflow-auto border-t border-[#ff4385]/20 bg-[#050510] p-4 xl:hidden">{navItems.map(([label,id]) => <a key={id} href={`#${id}`} onClick={(event) => navigate(event,id)} className={`rounded px-4 py-3 text-sm font-semibold uppercase ${activeSection === id ? 'active bg-[#ff3374]/15 text-[#ff4d8d]' : 'hover:bg-white/5'}`}>{label}</a>)}<Button className="mt-3">Book Now</Button></nav>}
       </header>
 
-      <section id="home" className="relative min-h-[650px] overflow-hidden"><img src={image('hero.png')} alt="Bold pink glam makeup look" className="absolute inset-0 h-full w-full object-cover object-center" /><div className="absolute inset-0 bg-gradient-to-r from-[#02020b] via-[#02020b]/75 to-transparent lg:via-[#02020b]/35" /><div className="relative mx-auto flex min-h-[650px] max-w-[1510px] items-center px-6 pb-16 pt-28 lg:px-14"><div className="max-w-[690px]"><p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ffc0d3]">Event-Ready Beauty That Steals the Night <Sparkles className="ml-2 inline h-4 w-4 text-[#ff4385]" /></p><h1 className="blush-serif mt-5 text-5xl uppercase leading-[0.9] tracking-[-0.03em] text-white sm:text-7xl lg:text-8xl">Bold Looks.</h1><p className="blush-script mt-2 text-5xl leading-none text-[#ff4b8a] drop-shadow-[0_0_10px_rgba(255,47,120,0.9)] sm:text-7xl">Unforgettable Nights.</p><p className="mt-7 max-w-lg text-base leading-7 text-white/80">From soft glam to full-on glam — we create camera-ready beauty that turns heads and steals the spotlight.</p><div className="mt-8 flex flex-col gap-4 sm:flex-row"><Button>Book Your Glam <span>→</span></Button><Button href="#services" outline>Explore Services</Button></div></div></div></section>
+      <section id="home" className="relative min-h-[720px] overflow-hidden sm:min-h-[700px]">
+        <img src={image('hero.png')} alt="Bold pink glam makeup look" className="absolute inset-0 h-full w-full object-cover object-[68%_center] sm:object-center" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#02020b] via-[#02020b]/80 to-[#02020b]/10 sm:via-[#02020b]/65 lg:via-[#02020b]/30" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_48%,rgba(255,32,111,0.14),transparent_34%),linear-gradient(to_top,rgba(2,2,11,0.85),transparent_35%)]" />
+        <div className="relative mx-auto flex min-h-[720px] max-w-[1510px] items-center px-6 pb-20 pt-32 sm:min-h-[700px] lg:px-14">
+          <div className="max-w-[720px]">
+            <div className="flex items-center gap-3"><span className="h-px w-10 bg-[#ff4385] shadow-[0_0_8px_#ff4385]" /><p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ffc0d3]">Event-Ready Beauty That Steals the Night</p><Sparkles className="h-4 w-4 shrink-0 text-[#ff4385]" /></div>
+            <h1 className="blush-serif mt-6 text-[clamp(3.6rem,7vw,7.25rem)] uppercase leading-[0.82] tracking-[-0.045em] text-white drop-shadow-[0_5px_25px_rgba(0,0,0,0.45)]">Bold Looks.</h1>
+            <p className="blush-script mt-3 whitespace-nowrap text-[clamp(3rem,6vw,6.3rem)] leading-none text-[#ff4b8a] drop-shadow-[0_0_12px_rgba(255,47,120,0.95)]">Unforgettable Nights.</p>
+            <p className="mt-8 max-w-lg border-l-2 border-[#ff4385] pl-5 text-base leading-7 text-white/80">From soft glam to full-on glam — we create camera-ready beauty that turns heads and steals the spotlight.</p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row"><Button>Book Your Glam <ArrowRight className="h-4 w-4" /></Button><Button href="#services" outline>Explore Services</Button></div>
+            <div className="mt-7 flex items-center gap-3 text-xs uppercase tracking-[0.12em] text-white/55"><span className="relative flex h-2.5 w-2.5"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff4385] opacity-50" /><span className="relative h-2.5 w-2.5 rounded-full bg-[#ff4385]" /></span>Evening appointments available</div>
+          </div>
+        </div>
+        <a href="#services" className="absolute bottom-8 right-8 hidden items-center gap-3 text-xs uppercase tracking-[0.18em] text-white/55 transition hover:text-[#ff4385] lg:flex"><span className="h-px w-12 bg-current" />Scroll to explore</a>
+      </section>
 
       <section className="relative z-10 mx-auto -mt-8 max-w-[1370px] px-5"><div className="grid rounded-lg border border-[#ff397f] bg-[#080812]/95 px-6 py-5 shadow-[0_0_25px_rgba(255,33,107,0.12)] sm:grid-cols-2 lg:grid-cols-4">{[[Star,'4.9','500+ 5-Star Reviews'],[Diamond,'Expert Beauty Every Time','On Time. On Point. Always.'],[UsersRound,'10K+','Happy Glam Clients'],[Award,'Premium Beauty Experience','Luxury Products. Pro Artists.']].map(([RawIcon,title,copy],index) => { const StatIcon = RawIcon as LucideIcon; return <div key={String(title)} className="flex items-center gap-4 py-3 lg:border-r lg:border-[#ff397f]/45 lg:px-6 lg:last:border-0"><StatIcon className="h-9 w-9 shrink-0 text-[#ff4385]" strokeWidth={1.5} /><div><h2 className="text-base font-semibold uppercase">{String(title)}</h2><p className="mt-1 text-xs text-white/65">{String(copy)}</p>{index === 0 && <span className="text-xs tracking-widest text-[#ffd800]">★★★★★</span>}</div></div> })}</div></section>
 
       <section id="services" className="mx-auto max-w-[1370px] px-5 py-8"><SectionTitle eyebrow="Our Glam Services" title="Looks for every moment. Perfect for every you." /><div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">{services.map(({name,copy,price,image:src,icon:ServiceIcon}) => <article key={name} className="group overflow-hidden rounded-lg border border-[#ff397f]/85 bg-[#080812] transition duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(255,45,119,0.28)]"><div className="aspect-[1.35/1] overflow-hidden"><img src={image(src)} alt={name} className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105" /></div><div className="p-5"><ServiceIcon className="h-7 w-7 text-[#ff4385]" strokeWidth={1.5} /><h3 className="blush-serif mt-2 text-xl uppercase text-[#ff4b8a]">{name}</h3><p className="mt-2 min-h-11 text-sm leading-5 text-white/70">{copy}</p><p className="mt-3 text-xs font-bold uppercase tracking-wider text-[#ff4385]">{price}</p></div></article>)}</div></section>
 
-      <section id="gallery" className="mx-auto max-w-[1370px] px-5 pb-6"><div className="grid overflow-hidden rounded-lg border border-[#ff397f]/80 bg-[#070711] md:grid-cols-[0.7fr_2.3fr]"><div className="flex flex-col justify-center p-7"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#ff4385]">Signature Looks</p><h2 className="blush-serif mt-2 text-3xl leading-none md:text-4xl">Your Look.<br />Our Artistry.</h2><Button href="#blog" outline className="mt-5 min-h-9 px-5 py-2">View Gallery</Button></div><img src={image('banner.png')} alt="Signature Blush makeup looks" className="h-full min-h-52 w-full object-cover" /></div></section>
+      <section id="gallery" className="mx-auto max-w-[1370px] px-5 pb-8">
+        <div className="group relative grid overflow-hidden rounded-xl border border-[#ff397f]/85 bg-[#070711] shadow-[0_14px_45px_rgba(0,0,0,0.4),0_0_22px_rgba(255,38,112,0.10)] md:grid-cols-[0.82fr_2.18fr]">
+          <div className="relative flex min-h-64 flex-col justify-center overflow-hidden bg-[radial-gradient(circle_at_20%_20%,rgba(255,48,119,0.16),transparent_44%)] p-7 md:p-9">
+            <Sparkles className="absolute -right-5 -top-5 h-28 w-28 text-[#ff4385]/10" strokeWidth={1} />
+            <div className="flex items-center gap-3"><span className="h-px w-8 bg-[#ff4385]" /><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ff4385]">Signature Looks</p></div>
+            <h2 className="blush-serif mt-4 text-4xl leading-[0.95] md:text-5xl">Your Look.<br /><span className="text-[#ff8aaf]">Our Artistry.</span></h2>
+            <p className="mt-4 max-w-xs text-sm leading-6 text-white/55">Precision detail, bold color and a finish designed around you.</p>
+            <Button href="#blog" outline className="mt-6 w-fit min-h-10 px-6 py-2">View Gallery <ArrowRight className="h-4 w-4" /></Button>
+          </div>
+          <div className="relative min-h-64 overflow-hidden md:min-h-[310px]">
+            <img src={image('banner.png')} alt="Signature Blush makeup looks" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#070711]/35 via-transparent to-transparent" />
+            <div className="absolute right-4 top-4 rounded-full border border-white/20 bg-black/35 px-4 py-2 text-xs uppercase tracking-[0.16em] text-white/80 backdrop-blur-md">The Blush Edit</div>
+            <a href="#blog" aria-label="Explore signature looks" className="absolute right-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-[#ff6b9e]/70 bg-[#120712]/75 text-[#ff6b9e] backdrop-blur-md transition hover:scale-105 hover:bg-[#ff397f] hover:text-white"><ArrowRight className="h-5 w-5" /></a>
+          </div>
+        </div>
+      </section>
 
       <section id="about" className="mx-auto grid max-w-[1370px] gap-8 px-5 py-5 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"><img src={image('interior.png')} alt="Blush Beauty Bar neon interior" className="min-h-[360px] w-full rounded-lg border border-[#ff397f]/70 object-cover" /><div className="px-2 lg:px-8"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ff4385]">About Us</p><h2 className="blush-serif mt-3 text-4xl uppercase leading-none md:text-5xl">More Than Makeup.<br />It’s <span className="text-[#ff4385]">An Experience.</span></h2><p className="mt-5 max-w-xl text-sm leading-6 text-white/65">Blush Beauty Bar is more than beauty — it’s confidence, celebration and self-expression. From everyday looks to unforgettable nights, we make you feel iconic.</p><Button href="#blog" outline className="mt-6">Learn More</Button></div></section>
 

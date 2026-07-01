@@ -161,6 +161,42 @@ body {
   }
 }
 
+.pureglow-site {
+  font-family: "Avenir Next", Avenir, "Segoe UI", Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+.pureglow-site .font-serif,
+.pureglow-site .section-title {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.pureglow-site .eyebrow {
+  color: #b87949;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.pureglow-site .section-title {
+  color: #143f3d;
+  font-size: clamp(2rem, 3.6vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.03;
+  margin-top: 0.45rem;
+}
+
+.pureglow-site section[id] {
+  scroll-margin-top: 76px;
+}
+
+.pureglow-site ::selection {
+  background: #ef9b92;
+  color: #143f3d;
+}
+
 /* UrbanBite's reveal system is observer-driven so content animates only when it enters view. */
 .urbanbite-site [data-urban-reveal] {
   opacity: 0;

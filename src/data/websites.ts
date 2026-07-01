@@ -309,6 +309,7 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern hair salon with premium styling, confident beauty, and clean branding",
     slug: "glowhaus-salon",
+    image: imageUrl("beauty/glowhaus-card.png"),
     colors: {
       primary: "#f5b6c8",
       secondary: "#fbf4ef",
@@ -325,6 +326,7 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Elegant nail studio for manicures, nail art, and luxury self-care",
     slug: "luxe-nail-studio",
+    image: imageUrl("beauty/luxe-card.png"),
     colors: {
       primary: "#e9c7c4",
       secondary: "#fffdf9",
@@ -341,6 +343,7 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Spa and massage wellness retreat with calming treatments and natural textures",
     slug: "serenity-spa",
+    image: imageUrl("beauty/serenity-card.png"),
     colors: {
       primary: "#8fa37a",
       secondary: "#fbf7ea",
@@ -357,6 +360,7 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Makeup and beauty bar for glam sessions, events, and social-ready looks",
     slug: "blush-beauty-bar",
+    image: imageUrl("beauty/blush-card.png"),
     colors: {
       primary: "#ff3d9a",
       secondary: "#fff0f6",
@@ -373,7 +377,7 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Skincare clinic for facials, treatments, and confident glowing skin",
     slug: "velvet-skin-clinic",
-    image: imageUrl("beauty/Velvet-Skin-Clinic.png"),
+    image: imageUrl("beauty/velvet-card.png"),
     colors: {
       primary: "#b98f8f",
       secondary: "#fff7f5",
@@ -396,7 +400,7 @@ export const beautyWebsites: WebsiteDesign[] = [
       accent: "#b98b43",
       dark: "#0f0f0f",
     },
-    image: imageUrl("beauty/crown-comb-barber.png"),
+    image: imageUrl("beauty/crownandcomb-card.png"),
     status: "completed",
   },
   {
@@ -407,13 +411,14 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Aesthetic care concept for injectables, glow treatments, and skin confidence",
     slug: "pureglow-aesthetics",
+    image: imageUrl("beauty/pureglow-card.png"),
     colors: {
       primary: "#d7b9a7",
       secondary: "#fbfaf7",
       accent: "#9fb8ad",
       dark: "#343434",
     },
-    status: "coming-soon",
+    status: "completed",
   },
   {
     id: "bloom-bridal-studio",
@@ -423,13 +428,14 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Bridal beauty studio for hair, makeup, trials, and wedding-day styling",
     slug: "bloom-bridal-studio",
+    image: imageUrl("beauty/bloom-card.png"),
     colors: {
       primary: "#e8aeb7",
       secondary: "#fff8f3",
       accent: "#bfa46b",
       dark: "#4a3b3f",
     },
-    status: "coming-soon",
+    status: "completed",
   },
   {
     id: "silk-style-hair",
@@ -439,13 +445,14 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Hair styling concept for color, blowouts, treatments, and trend-forward cuts",
     slug: "silk-style-hair",
+    image: imageUrl("beauty/silkstyle-card.png"),
     colors: {
       primary: "#7a5c65",
       secondary: "#fbf3f0",
       accent: "#d9a7b0",
       dark: "#2b2024",
     },
-    status: "coming-soon",
+    status: "completed",
   },
   {
     id: "aura-wellness-spa",
@@ -455,13 +462,14 @@ export const beautyWebsites: WebsiteDesign[] = [
     shortDescription:
       "Wellness spa concept for body treatments, rituals, and restorative care",
     slug: "aura-wellness-spa",
+    image: imageUrl("beauty/aura-card.png"),
     colors: {
       primary: "#9c8f72",
       secondary: "#f7f1e6",
       accent: "#b8c7a3",
       dark: "#4a4034",
     },
-    status: "coming-soon",
+    status: "completed",
   },
 ];
 
