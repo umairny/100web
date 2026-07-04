@@ -27,6 +27,8 @@ import { PortfolioIndex } from './pages/Portfolio/PortfolioIndex'
 import { StudioValeCreative } from './pages/Portfolio/StudioValeCreative'
 import { RealEstateIndex } from './pages/RealEstate/RealEstateIndex'
 import { SkylineRealtyGroup } from './pages/RealEstate/SkylineRealtyGroup'
+import { HarborKeyHomes } from './pages/RealEstate/HarborKeyHomes'
+import { ApexCommercialRealty } from './pages/RealEstate/ApexCommercialRealty'
 import { FlowPilotCRM } from './pages/SaaS/FlowPilotCRM'
 import { SaaSIndex } from './pages/SaaS/SaaSIndex'
 import { BrewNestCoffee } from './pages/Restaurant/BrewNestCoffee'
@@ -79,6 +81,8 @@ function AppShell() {
           <Route path="/beauty/aura-wellness-spa" element={<AuraWellnessSpa />} />
           <Route path="/real-estate" element={<RealEstateIndex />} />
           <Route path="/real-estate/skyline-realty-group" element={<SkylineRealtyGroup />} />
+          <Route path="/real-estate/harborkey-homes" element={<HarborKeyHomes />} />
+          <Route path="/real-estate/apex-commercial-realty" element={<ApexCommercialRealty />} />
           <Route path="/fitness" element={<FitnessIndex />} />
           <Route path="/fitness/pulseforge-fitness" element={<PulseForgeFitness />} />
           <Route path="/medical" element={<MedicalIndex />} />

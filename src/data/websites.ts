@@ -502,8 +502,9 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Coastal and waterfront homes presented around family life, local knowledge, and confident moves",
     slug: "harborkey-homes",
     marketLabel: "Coastal homes",
+    image: imageUrl("realestate/harborkey/hero.png"),
     colors: { primary: "#2f6f8f", secondary: "#f4ead8", accent: "#7fc8d8", dark: "#17384d" },
-    status: "coming-soon",
+    status: "completed",
   },
   {
     id: "apex-commercial-realty",
@@ -514,8 +515,9 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Commercial brokerage for office, retail, leasing, and investment opportunities with clear market intelligence",
     slug: "apex-commercial-realty",
     marketLabel: "Commercial property",
-    colors: { primary: "#363b42", secondary: "#eee8df", accent: "#b87345", dark: "#171a1f" },
-    status: "coming-soon",
+    image: imageUrl("realestate/apex/hero.png"),
+    colors: { primary: "#1C2736", secondary: "#F4F6F8", accent: "#7A2948", dark: "#101722" },
+    status: "completed",
   },
   {
     id: "nestpath-mortgage",
