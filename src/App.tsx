@@ -29,6 +29,8 @@ import { RealEstateIndex } from './pages/RealEstate/RealEstateIndex'
 import { SkylineRealtyGroup } from './pages/RealEstate/SkylineRealtyGroup'
 import { HarborKeyHomes } from './pages/RealEstate/HarborKeyHomes'
 import { ApexCommercialRealty } from './pages/RealEstate/ApexCommercialRealty'
+import { NestPathMortgage } from './pages/RealEstate/NestPathMortgage'
+import { CedarStoneEstates } from './pages/RealEstate/CedarStoneEstates'
 import { FlowPilotCRM } from './pages/SaaS/FlowPilotCRM'
 import { SaaSIndex } from './pages/SaaS/SaaSIndex'
 import { BrewNestCoffee } from './pages/Restaurant/BrewNestCoffee'
@@ -83,6 +85,8 @@ function AppShell() {
           <Route path="/real-estate/skyline-realty-group" element={<SkylineRealtyGroup />} />
           <Route path="/real-estate/harborkey-homes" element={<HarborKeyHomes />} />
           <Route path="/real-estate/apex-commercial-realty" element={<ApexCommercialRealty />} />
+          <Route path="/real-estate/nestpath-mortgage" element={<NestPathMortgage />} />
+          <Route path="/real-estate/cedar-stone-estates" element={<CedarStoneEstates />} />
           <Route path="/fitness" element={<FitnessIndex />} />
           <Route path="/fitness/pulseforge-fitness" element={<PulseForgeFitness />} />
           <Route path="/medical" element={<MedicalIndex />} />

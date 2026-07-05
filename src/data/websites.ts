@@ -528,8 +528,9 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Mortgage guidance for first-time buyers, refinancing, and practical paths to home ownership",
     slug: "nestpath-mortgage",
     marketLabel: "Mortgage guidance",
-    colors: { primary: "#23766f", secondary: "#f4f1e8", accent: "#d6a84f", dark: "#183b3a" },
-    status: "coming-soon",
+    image: imageUrl("realestate/nestpath/hero.png"),
+    colors: { primary: "#197D7A", secondary: "#F4F1EA", accent: "#E0AF45", dark: "#0E3D3F" },
+    status: "completed",
   },
   {
     id: "cedar-stone-estates",
@@ -540,8 +541,9 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Rural estates and luxury acreage positioned through privacy, craftsmanship, and lasting value",
     slug: "cedar-stone-estates",
     marketLabel: "Rural luxury",
-    colors: { primary: "#405846", secondary: "#e9e4d8", accent: "#9a8164", dark: "#232c26" },
-    status: "coming-soon",
+    image: imageUrl("realestate/cedar-stone/hero.png"),
+    colors: { primary: "#4C6252", secondary: "#E9E4D8", accent: "#A68E72", dark: "#1F2D28" },
+    status: "completed",
   },
   {
     id: "metroloft-rentals",
