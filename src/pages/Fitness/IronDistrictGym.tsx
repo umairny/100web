@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import { ArrowRight, BarChart3, Check, ChevronUp, ClipboardCheck, Dumbbell, Hammer, Menu, MoveUpRight, ShieldCheck, Target, Weight, X, Zap } from 'lucide-react'
+import { ArrowRight, BarChart3, Check, ClipboardCheck, Dumbbell, Hammer, Menu, MoveUpRight, ShieldCheck, Target, Weight, X, Zap } from 'lucide-react'
 import heroImage from '../../assets/images/fitness/IronDistrict/hero.png'
 import powerliftingImage from '../../assets/images/fitness/IronDistrict/powerlifting.png'
 import foundationsImage from '../../assets/images/fitness/IronDistrict/strength-foundations.png'
@@ -63,18 +63,40 @@ export function IronDistrictGym() {
     <main className="irondistrict-site -mt-16 overflow-hidden bg-[#C9CDD1] text-[#111318] selection:bg-[#F6C945] selection:text-[#0A0B0D]">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0A0B0D]/95 text-white backdrop-blur-xl"><div className="mx-auto flex h-[4.75rem] max-w-[96rem] items-center justify-between px-5 lg:px-10"><IronLogo /><nav className="hidden items-center gap-1 lg:flex" aria-label="IronDistrict navigation">{navLinks.map(([label, href]) => { const active = activeSection === href.slice(1); return <a key={label} href={href} aria-current={active ? 'location' : undefined} className={`px-4 py-2 text-[0.64rem] font-black uppercase tracking-[0.14em] transition ${active ? 'irondistrict-nav-active bg-[#F6C945] text-[#0A0B0D]' : 'text-white/50 hover:bg-white/[0.06] hover:text-white'}`}>{label}</a> })}</nav><IronButton href="#contact" className="hidden lg:inline-flex">Join The District</IronButton><button type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen} className="grid h-10 w-10 place-items-center border border-white/15 lg:hidden">{menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button></div>{menuOpen && <nav className="border-t border-white/10 bg-[#0A0B0D] p-5 lg:hidden">{navLinks.map(([label, href]) => { const active = activeSection === href.slice(1); return <a key={label} href={href} aria-current={active ? 'location' : undefined} onClick={() => setMenuOpen(false)} className={`block px-4 py-3 text-sm font-black uppercase tracking-[0.1em] ${active ? 'irondistrict-nav-active bg-[#F6C945] text-[#0A0B0D]' : 'text-white/58'}`}>{label}</a> })}<IronButton href="#contact" className="mt-4 w-full">Join The District</IronButton></nav>}</header>
 
-      <section id="home" className="relative bg-[#C9CDD1] pt-[4.75rem] text-[#0A0B0D]">
-        <img src={abstractImage} alt="" className="absolute inset-0 h-full w-full object-cover opacity-[0.08] mix-blend-multiply" />
-        <div className="relative mx-auto grid min-h-[54rem] max-w-[100rem] border-x border-[#777D83] lg:grid-cols-[1.05fr_.95fr]">
-          <div className="flex flex-col justify-between border-b border-[#777D83] p-5 pt-14 lg:border-b-0 lg:border-r lg:p-10 lg:pt-16 xl:p-16">
-            <div className="flex items-center justify-between gap-4 border-b border-[#777D83] pb-5"><p className="text-[0.62rem] font-black uppercase tracking-[0.22em]">IronDistrict / Strength Facility</p><span className="bg-[#F6C945] px-3 py-2 text-[0.58rem] font-black uppercase tracking-[0.14em]">Est. 2018</span></div>
-            <div className="py-14"><p className="flex items-center gap-3 text-[0.62rem] font-black uppercase tracking-[0.22em]"><span className="h-3 w-3 bg-[#0A0B0D]" /> Hardcore strength training</p><h1 className="mt-7 max-w-4xl text-[clamp(4.8rem,8.8vw,9.2rem)] font-black uppercase leading-[0.68] tracking-[-0.095em]">Built for <span className="inline-block bg-[#0A0B0D] px-3 text-[#F6C945]">heavy</span> days and hard work.</h1><p className="mt-8 max-w-xl text-lg font-semibold leading-8 text-[#444A50]">Elite equipment, serious coaching, and a focused environment for lifters who train with purpose.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><IronButton href="#contact">Start Training</IronButton><a href="#membership" className="inline-flex min-h-12 items-center justify-center gap-3 border border-[#0A0B0D] px-6 text-xs font-black uppercase tracking-[0.16em] transition hover:bg-[#0A0B0D] hover:text-white">View Memberships <ArrowRight className="h-4 w-4" /></a></div></div>
-            <div className="grid grid-cols-2 border-l border-t border-[#777D83] sm:grid-cols-4">{[['24', 'Strength Stations'], ['COMP', 'Powerlifting Ready'], ['COACH', 'Led Programs'], ['OPEN', 'Gym Access']].map(([value, label]) => <div key={label} className="border-b border-r border-[#777D83] p-4"><p className="text-2xl font-black">{value}</p><p className="mt-1 text-[0.5rem] font-black uppercase tracking-[0.15em] text-[#555B61]">{label}</p></div>)}</div>
-          </div>
-          <div className="relative min-h-[42rem] overflow-hidden bg-[#0A0B0D] p-4 lg:min-h-full lg:p-7">
-            <img src={heroImage} alt="Heavy strength training inside IronDistrict Gym" className="h-full min-h-[40rem] w-full object-cover grayscale-[35%] contrast-125" />
-            <div className="absolute inset-x-4 bottom-4 grid grid-cols-[1fr_auto] items-end bg-[#0A0B0D]/90 p-5 text-white backdrop-blur lg:inset-x-7 lg:bottom-7"><div><p className="text-[0.58rem] font-black uppercase tracking-[0.2em] text-[#F6C945]">Floor status / Active</p><p className="mt-2 text-3xl font-black uppercase leading-none">No mirrors. No posing. Just work.</p></div><ChevronUp className="h-7 w-7 text-[#F6C945]" /></div>
-            <div className="absolute right-0 top-20 bg-[#F6C945] px-3 py-8 text-[0.6rem] font-black uppercase tracking-[0.16em] [writing-mode:vertical-rl]">District Standard</div>
+      <section id="home" className="relative isolate overflow-hidden bg-[#0A0B0D] pt-[4.75rem] text-white">
+        <img src={heroImage} alt="Heavy strength training inside IronDistrict Gym" className="absolute inset-0 h-full w-full object-cover opacity-55 grayscale-[45%] contrast-125" />
+        <img src={abstractImage} alt="" className="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-screen" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_32%,rgba(246,201,69,.22),transparent_28%),linear-gradient(90deg,rgba(10,11,13,.98)_0%,rgba(10,11,13,.86)_48%,rgba(10,11,13,.42)_100%)]" />
+        <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(90deg,white_1px,transparent_1px),linear-gradient(0deg,white_1px,transparent_1px)] [background-size:7rem_7rem]" />
+        <div className="relative mx-auto min-h-[55rem] max-w-[100rem] px-5 py-12 lg:px-10 lg:py-16 xl:px-16">
+          <div className="grid min-h-[46rem] gap-8 lg:grid-cols-[1fr_26rem] lg:items-stretch">
+            <div className="flex flex-col justify-between">
+              <div className="flex max-w-2xl flex-wrap items-center gap-3">
+                <span className="bg-[#F6C945] px-4 py-2 text-[0.58rem] font-black uppercase tracking-[0.18em] text-[#0A0B0D]">Strength Facility</span>
+                <span className="border border-white/18 bg-white/[0.05] px-4 py-2 text-[0.58rem] font-black uppercase tracking-[0.18em] text-white/62">Est. 2018</span>
+                <span className="border border-white/18 bg-white/[0.05] px-4 py-2 text-[0.58rem] font-black uppercase tracking-[0.18em] text-white/62">Open gym + coaching</span>
+              </div>
+              <div className="max-w-6xl py-12">
+                <p className="mb-7 flex items-center gap-3 text-[0.62rem] font-black uppercase tracking-[0.24em] text-[#F6C945]"><span className="h-px w-12 bg-[#F6C945]" /> IronDistrict Gym</p>
+                <h1 className="max-w-6xl text-[clamp(4.6rem,12vw,12.5rem)] font-black uppercase leading-[0.72] tracking-[-0.11em]">Train where the bar sets the tone.</h1>
+                <div className="mt-9 grid max-w-4xl gap-6 border-l-4 border-[#F6C945] pl-6 md:grid-cols-[1fr_auto] md:items-end">
+                  <p className="text-lg font-semibold leading-8 text-white/64">A hard-edged strength facility with elite equipment, direct coaching, and a room built for lifters who show up ready to work.</p>
+                  <div className="flex flex-col gap-3 sm:flex-row md:flex-col"><IronButton href="#contact">Start Training</IronButton><a href="#membership" className="inline-flex min-h-12 items-center justify-center gap-3 border border-white/25 bg-white/[0.03] px-6 text-xs font-black uppercase tracking-[0.16em] transition hover:border-[#F6C945] hover:text-[#F6C945]">View Memberships <ArrowRight className="h-4 w-4" /></a></div>
+                </div>
+              </div>
+              <div className="grid max-w-4xl grid-cols-2 gap-px bg-white/14 p-px sm:grid-cols-4">{[['24', 'Strength stations'], ['COMP', 'Powerlifting ready'], ['COACH', 'Led programs'], ['OPEN', 'Gym access']].map(([value, label]) => <div key={label} className="bg-[#0A0B0D]/88 p-5 backdrop-blur"><p className="text-3xl font-black text-[#F6C945]">{value}</p><p className="mt-2 text-[0.55rem] font-black uppercase tracking-[0.16em] text-white/48">{label}</p></div>)}</div>
+            </div>
+            <aside className="grid gap-4 lg:grid-rows-[1fr_auto]">
+              <div className="relative overflow-hidden border border-white/16 bg-white/[0.06] p-5 backdrop-blur-md">
+                <div className="flex items-center justify-between border-b border-white/12 pb-4"><p className="text-[0.58rem] font-black uppercase tracking-[0.18em] text-white/46">Floor status</p><span className="h-3 w-3 bg-[#F6C945]" /></div>
+                <p className="mt-10 text-5xl font-black uppercase leading-[0.82] tracking-[-0.08em]">No mirrors. No posing. Just work.</p>
+                <div className="mt-10 grid gap-3">{['Technique-first coaching', 'Heavy racks and platforms', 'Focused member culture'].map((item) => <span key={item} className="flex items-center gap-3 border-t border-white/10 pt-3 text-xs font-black uppercase tracking-[0.12em] text-white/58"><Check className="h-4 w-4 text-[#F6C945]" />{item}</span>)}</div>
+              </div>
+              <div className="grid grid-cols-[auto_1fr] overflow-hidden border border-[#F6C945]/45 bg-[#F6C945] text-[#0A0B0D]">
+                <span className="grid place-items-center border-r border-black/20 px-4 text-[0.58rem] font-black uppercase tracking-[0.18em] [writing-mode:vertical-rl]">District Standard</span>
+                <div className="p-5"><p className="text-[0.58rem] font-black uppercase tracking-[0.18em] text-black/50">Today's rule</p><p className="mt-3 text-2xl font-black uppercase leading-none tracking-[-0.04em]">Earn every plate.</p></div>
+              </div>
+            </aside>
           </div>
         </div>
       </section>

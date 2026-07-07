@@ -103,7 +103,7 @@ function CategoryMenu({
             onClick={onNavigate}
             className={`group flex items-center rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 ${
               isActive
-                ? 'border-gray-950 bg-gray-950 text-white shadow-lg shadow-gray-950/15'
+                ? 'active border-gray-950 bg-gray-950 text-white shadow-lg shadow-gray-950/15'
                 : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-950 hover:shadow-md'
             } ${compact ? 'gap-2 p-2' : 'gap-3 p-3'}`}
           >
@@ -143,6 +143,8 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const { pathname, hash } = useLocation()
   const liveCategoryCount = categoryLinks.filter((category) => category.isLive).length
+  const isCategoriesActive = categoryLinks.some((link) => isActiveHref(pathname, hash, link.href))
+  const isBrowseActive = isActiveHref(pathname, hash, '/#categories')
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 24)
@@ -242,7 +244,7 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
                           to={link.href}
                           onClick={() => setIsOpen(false)}
                           className={`rounded-2xl px-4 py-3 text-sm font-bold transition ${
-                            isActive ? 'bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-950'
+                            isActive ? 'active bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-950'
                           }`}
                         >
                           {link.label}
@@ -293,16 +295,22 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
               <Brand onClick={() => setIsOpen(false)} />
 
               <div className="mt-4 grid gap-1 border-t border-gray-200 pt-4">
-                {primaryLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="rounded-2xl px-4 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-100 hover:text-gray-950"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {primaryLinks.map((link) => {
+                  const isActive = isActiveHref(pathname, hash, link.href)
+
+                  return (
+                    <Link
+                      key={link.label}
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`rounded-2xl px-4 py-3 text-sm font-bold transition ${
+                        isActive ? 'active bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-950'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                })}
               </div>
 
               <div className="mt-4 border-t border-gray-200 pt-4">
@@ -343,8 +351,9 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
                 <Link
                   key={link.label}
                   to={link.href}
+                  aria-current={isActive ? 'page' : undefined}
                   className={`relative rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 ease-out hover:-translate-y-0.5 ${
-                    isActive ? 'bg-white text-gray-950 shadow-sm' : 'text-gray-600 hover:bg-white/75 hover:text-gray-950'
+                    isActive ? 'active bg-white text-gray-950 shadow-sm' : 'text-gray-600 hover:bg-white/75 hover:text-gray-950'
                   }`}
                 >
                   {link.label}
@@ -366,9 +375,16 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
               <button
                 type="button"
                 aria-expanded={isCategoryMenuOpen}
-                className="relative rounded-full px-4 py-2 text-sm font-bold text-gray-600 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/75 hover:text-gray-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-coffee-300/35"
+                className={`relative rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/75 hover:text-gray-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-coffee-300/35 ${
+                  isCategoriesActive ? 'active bg-white text-gray-950 shadow-sm' : 'text-gray-600'
+                }`}
               >
                 Categories
+                <span
+                  className={`absolute inset-x-5 -bottom-0.5 h-0.5 rounded-full bg-coffee-700 transition-opacity ${
+                    isCategoriesActive ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
               </button>
               <div
                 className={`absolute right-0 top-full w-[44rem] origin-top pt-3 transition-all duration-200 ease-out ${
@@ -405,7 +421,12 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
           <div className="hidden items-center gap-3 md:flex">
             <Link
               to="/#categories"
-              className="rounded-full bg-gray-950 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-gray-950/20 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-coffee-700 hover:shadow-coffee-700/20"
+              aria-current={isBrowseActive ? 'page' : undefined}
+              className={`rounded-full px-5 py-2.5 text-sm font-black shadow-lg transition-all duration-300 ease-out hover:-translate-y-0.5 ${
+                isBrowseActive
+                  ? 'active bg-coffee-700 text-white shadow-coffee-700/20'
+                  : 'bg-gray-950 text-white shadow-gray-950/20 hover:bg-coffee-700 hover:shadow-coffee-700/20'
+              }`}
             >
               Browse Websites
             </Link>
@@ -434,16 +455,23 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
         {isOpen && (
           <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-gray-200 py-4 md:hidden">
             <div className="grid gap-2">
-              {primaryLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="rounded-2xl px-4 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-100 hover:text-gray-950"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {primaryLinks.map((link) => {
+                const isActive = isActiveHref(pathname, hash, link.href)
+
+                return (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    onClick={() => setIsOpen(false)}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`rounded-2xl px-4 py-3 text-sm font-bold transition ${
+                      isActive ? 'active bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-950'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              })}
             </div>
 
             <div className="mt-4 border-t border-gray-200 pt-4">
@@ -464,7 +492,10 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
               <Link
                 to="/#categories"
                 onClick={() => setIsOpen(false)}
-                className="rounded-2xl bg-gray-950 px-4 py-3 text-center text-sm font-black text-white transition hover:bg-coffee-700"
+                aria-current={isBrowseActive ? 'page' : undefined}
+                className={`rounded-2xl px-4 py-3 text-center text-sm font-black transition ${
+                  isBrowseActive ? 'active bg-coffee-700 text-white' : 'bg-gray-950 text-white hover:bg-coffee-700'
+                }`}
               >
                 Browse
               </Link>

@@ -25,6 +25,11 @@ import { MedicalIndex } from './pages/Medical/MedicalIndex'
 import { PulseForgeFitness } from './pages/Fitness/PulseForgeFitnessPremium'
 import { CoreLabPilates } from './pages/Fitness/CoreLabPilates'
 import { IronDistrictGym } from './pages/Fitness/IronDistrictGym'
+import { PeakRunCoaching } from './pages/Fitness/PeakRunCoaching'
+import { FlowStateYoga } from './pages/Fitness/FlowStateYoga'
+import { BoxHouseTraining } from './pages/Fitness/BoxHouseTraining'
+import { VitalFormWellness } from './pages/Fitness/VitalFormWellness'
+import { RideHausCycling } from './pages/Fitness/RideHausCycling'
 import { PortfolioIndex } from './pages/Portfolio/PortfolioIndex'
 import { StudioValeCreative } from './pages/Portfolio/StudioValeCreative'
 import { RealEstateIndex } from './pages/RealEstate/RealEstateIndex'
@@ -103,6 +108,11 @@ function AppShell() {
           <Route path="/fitness/pulseforge-fitness" element={<PulseForgeFitness />} />
           <Route path="/fitness/corelab-pilates" element={<CoreLabPilates />} />
           <Route path="/fitness/irondistrict-gym" element={<IronDistrictGym />} />
+          <Route path="/fitness/peakrun-coaching" element={<PeakRunCoaching />} />
+          <Route path="/fitness/flowstate-yoga" element={<FlowStateYoga />} />
+          <Route path="/fitness/boxhouse-training" element={<BoxHouseTraining />} />
+          <Route path="/fitness/vitalform-wellness" element={<VitalFormWellness />} />
+          <Route path="/fitness/ridehaus-cycling" element={<RideHausCycling />} />
           <Route path="/medical" element={<MedicalIndex />} />
           <Route path="/medical/harbor-health-clinic" element={<HarborHealthClinic />} />
           <Route path="/construction" element={<ConstructionIndex />} />

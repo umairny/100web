@@ -29,11 +29,6 @@ const uxNotes = [
 ]
 
 const comingSoonConcepts = [
-  ['PeakRun Coaching', 'running plans and races', 'PACE'],
-  ['FlowState Yoga', 'mindful movement studio', 'FLOW'],
-  ['BoxHouse Training', 'boxing and conditioning', 'FIGHT'],
-  ['VitalForm Wellness', 'fitness, nutrition, recovery', 'RESET'],
-  ['RideHaus Cycling', 'high-energy indoor cycling', 'RIDE'],
   ['Elevate Climbing', 'bouldering and climbing community', 'CLIMB'],
   ['Reset Recovery Club', 'mobility, recovery, and restoration', 'REST'],
 ]
@@ -106,8 +101,8 @@ export function FitnessIndex() {
       <section id="live-concepts" className="bg-[#07130c] px-5 py-24 text-white lg:px-10 lg:py-32">
         <div className="mx-auto max-w-[94rem]">
           <div className="grid gap-10 lg:grid-cols-[.68fr_1.32fr] lg:items-end">
-            <div><p className="text-[0.65rem] font-black uppercase tracking-[0.25em] text-[#dfff3f]">Live concepts / 01–{String(liveWebsites.length).padStart(2, '0')}</p><h2 className="mt-5 text-[clamp(3.5rem,7vw,7.5rem)] font-black uppercase leading-[0.82] tracking-[-0.075em]">Three training worlds are live.</h2></div>
-            <p className="max-w-2xl text-lg leading-8 text-white/55">From high-output performance coaching to calm, intentional Pilates, each live concept turns a distinct movement philosophy into a clear digital experience.</p>
+            <div><p className="text-[0.65rem] font-black uppercase tracking-[0.25em] text-[#dfff3f]">Live concepts / 01–{String(liveWebsites.length).padStart(2, '0')}</p><h2 className="mt-5 text-[clamp(3.5rem,7vw,7.5rem)] font-black uppercase leading-[0.82] tracking-[-0.075em]">Eight training worlds are live.</h2></div>
+            <p className="max-w-2xl text-lg leading-8 text-white/55">From performance coaching to Pilates, serious lifting, race-ready running, mindful yoga, boxing conditioning, integrated wellness, and indoor cycling, each live concept turns a distinct movement philosophy into a clear digital experience.</p>
           </div>
 
           <div className="mt-14 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
@@ -120,7 +115,7 @@ export function FitnessIndex() {
                   <div className="absolute bottom-4 right-4 flex gap-1.5">{[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => <span key={color} className="h-5 w-5 border border-white/60" style={{ backgroundColor: color }} />)}</div>
                 </div>
                 <div className="p-5 sm:p-6">
-                  <p className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-[#dfff3f]">{website.id === 'pulseforge-fitness' ? 'Performance coaching' : website.id === 'corelab-pilates' ? 'Pilates studio' : 'Strength facility'}</p>
+                  <p className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-[#dfff3f]">{website.id === 'pulseforge-fitness' ? 'Performance coaching' : website.id === 'corelab-pilates' ? 'Pilates studio' : website.id === 'irondistrict-gym' ? 'Strength facility' : website.id === 'peakrun-coaching' ? 'Running coaching' : website.id === 'flowstate-yoga' ? 'Yoga studio' : website.id === 'vitalform-wellness' ? 'Wellness platform' : website.id === 'ridehaus-cycling' ? 'Cycling studio' : 'Boxing studio'}</p>
                   <div className="mt-3 flex items-start justify-between gap-4"><h3 className="text-3xl font-black uppercase leading-none tracking-[-0.05em] sm:text-4xl">{website.title}</h3><ArrowUpRight className="h-5 w-5 shrink-0 text-[#dfff3f] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
                   <p className="mt-4 line-clamp-2 text-sm leading-6 text-white/55">{website.shortDescription}</p>
                   <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4"><span className="text-[0.58rem] font-black uppercase tracking-[0.16em] text-white/38">Open experience</span><span className="text-xs font-black text-[#dfff3f]">0{index + 1} / 0{liveWebsites.length}</span></div>
@@ -138,19 +133,19 @@ export function FitnessIndex() {
 
       <section id="roadmap" className="bg-[#f4f1e8] px-5 py-24 lg:px-10 lg:py-32">
         <div className="mx-auto max-w-[94rem]">
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_.9fr] lg:items-end"><div><p className="text-[0.65rem] font-black uppercase tracking-[0.25em] text-[#14532d]">Training board / Concepts 04–10</p><h2 className="mt-5 text-[clamp(3.7rem,7vw,7.5rem)] font-black uppercase leading-[0.8] tracking-[-0.08em]">Seven ways still to move.</h2></div><p className="max-w-xl text-base leading-8 text-[#4f5953]">Each queued direction targets a distinct fitness behavior, audience, and first conversion moment.</p></div>
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_.9fr] lg:items-end"><div><p className="text-[0.65rem] font-black uppercase tracking-[0.25em] text-[#14532d]">Training board / Concepts 09–10</p><h2 className="mt-5 text-[clamp(3.7rem,7vw,7.5rem)] font-black uppercase leading-[0.8] tracking-[-0.08em]">Two ways still to move.</h2></div><p className="max-w-xl text-base leading-8 text-[#4f5953]">Each queued direction targets a distinct fitness behavior, audience, and first conversion moment.</p></div>
 
           <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {comingSoonConcepts.map(([name, focus, signal], index) => (
               <article key={name} className={`fitness-poster group relative flex min-h-[27rem] flex-col justify-between overflow-hidden border border-[#07130c] p-6 ${posterStyles[index]} ${index === 1 || index === 6 ? 'md:translate-y-8' : ''}`}>
                 <div className="absolute -right-6 top-16 -rotate-90 text-[5rem] font-black uppercase leading-none tracking-[-0.08em] opacity-[0.08]">{signal}</div>
-                <div className="relative flex items-center justify-between"><span className="text-xs font-black uppercase tracking-[0.18em]">Concept {String(index + 4).padStart(2, '0')}</span><Bolt className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" /></div>
+                <div className="relative flex items-center justify-between"><span className="text-xs font-black uppercase tracking-[0.18em]">Concept {String(index + 9).padStart(2, '0')}</span><Bolt className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" /></div>
                 <div className="relative"><p className="text-[0.6rem] font-black uppercase tracking-[0.2em] opacity-55">{signal} / Coming soon</p><h3 className="mt-4 text-4xl font-black uppercase leading-[0.86] tracking-[-0.065em]">{name}</h3><p className="mt-4 text-sm font-bold capitalize opacity-65">{focus}</p><div className="mt-7 flex items-center justify-between border-t border-current/25 pt-5"><span className="text-[0.62rem] font-black uppercase tracking-[0.15em]">Queued direction</span><MoveUpRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></div></div>
               </article>
             ))}
           </div>
 
-          <div className="mt-20 flex flex-col items-start justify-between gap-5 border-t border-[#07130c] pt-8 md:flex-row md:items-center"><p className="max-w-xl text-2xl font-black uppercase leading-tight tracking-[-0.04em]">Three live. Seven in the rack. A complete fitness category in motion.</p><a href="#live-concepts" className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.16em]">Back to live designs <Dumbbell className="h-5 w-5 text-[#14532d]" /></a></div>
+          <div className="mt-20 flex flex-col items-start justify-between gap-5 border-t border-[#07130c] pt-8 md:flex-row md:items-center"><p className="max-w-xl text-2xl font-black uppercase leading-tight tracking-[-0.04em]">Eight live. Two in the rack. A complete fitness category in motion.</p><a href="#live-concepts" className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.16em]">Back to live designs <Dumbbell className="h-5 w-5 text-[#14532d]" /></a></div>
         </div>
       </section>
     </main>
