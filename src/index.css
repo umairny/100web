@@ -1093,3 +1093,303 @@ blockquote {
     transition: none;
   }
 }
+
+.metroloft-site {
+  font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.metroloft-site section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+.metroloft-site .metro-card {
+  box-shadow: 0 10px 30px rgba(32, 36, 70, 0.05);
+  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+}
+
+.metroloft-site .metro-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(90, 82, 200, 0.3);
+  box-shadow: 0 24px 50px rgba(32, 36, 70, 0.11);
+}
+
+.metroloft-site input[type="date"] {
+  color-scheme: light;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metroloft-site *,
+  .metroloft-site *::before,
+  .metroloft-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.foundry-site {
+  font-family: "Arial Narrow", "Avenir Next Condensed", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1, "tnum" 1;
+}
+
+.foundry-site section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+.foundry-site .foundry-project {
+  box-shadow: 0 10px 30px rgba(16, 20, 26, 0.05);
+  transition: transform 350ms ease, box-shadow 350ms ease, border-color 350ms ease;
+}
+
+.foundry-site .foundry-project:hover {
+  transform: translateY(-6px);
+  border-color: rgba(232, 111, 42, 0.6);
+  box-shadow: 0 24px 50px rgba(16, 20, 26, 0.13);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foundry-site *,
+  .foundry-site *::before,
+  .foundry-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.suncrest-site {
+  font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.suncrest-site section[id] {
+  scroll-margin-top: 4.75rem;
+}
+
+.suncrest-site .suncrest-card {
+  box-shadow: 0 10px 32px rgba(16, 63, 74, 0.055);
+  transition: transform 350ms ease, box-shadow 350ms ease, border-color 350ms ease;
+}
+
+.suncrest-site .suncrest-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(21, 149, 163, 0.3);
+  box-shadow: 0 24px 55px rgba(16, 63, 74, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suncrest-site *,
+  .suncrest-site *::before,
+  .suncrest-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.oakline-site {
+  font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.oakline-site section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+.oakline-site .oak-card {
+  box-shadow: 0 8px 28px rgba(22, 50, 74, 0.05);
+  transition: transform 320ms ease, box-shadow 320ms ease, border-color 320ms ease;
+}
+
+.oakline-site .oak-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(61, 118, 87, 0.3);
+  box-shadow: 0 22px 48px rgba(22, 50, 74, 0.11);
+}
+
+.oakline-site .oakline-nav-active {
+  box-shadow: inset 0 0 0 1px rgba(61, 118, 87, 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oakline-site *,
+  .oakline-site *::before,
+  .oakline-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.keystart-site {
+  font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.keystart-site h1,
+.keystart-site h2,
+.keystart-site h3 {
+  font-weight: 600;
+}
+
+.keystart-site section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+.keystart-site .key-card {
+  box-shadow: 0 8px 28px rgba(21, 52, 75, 0.05);
+  transition: transform 320ms ease, box-shadow 320ms ease, border-color 320ms ease;
+}
+
+.keystart-site .key-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(63, 115, 85, 0.3);
+  box-shadow: 0 22px 48px rgba(21, 52, 75, 0.11);
+}
+
+.keystart-site .keystart-nav-active {
+  box-shadow: inset 0 0 0 1px rgba(63, 115, 85, 0.16);
+}
+
+.fitness-index-kinetic {
+  font-family: "Arial Narrow", "Avenir Next Condensed", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1, "tnum" 1;
+}
+
+.fitness-index-kinetic section[id] {
+  scroll-margin-top: 2rem;
+}
+
+.fitness-index-kinetic .fitness-poster {
+  box-shadow: 8px 8px 0 rgba(7, 19, 12, 0.12);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.fitness-index-kinetic .fitness-poster:hover {
+  transform: translate(-3px, -5px) rotate(-0.4deg);
+  box-shadow: 14px 16px 0 rgba(7, 19, 12, 0.16);
+}
+
+.pulseforge-premium {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1, "tnum" 1;
+}
+
+.pulseforge-premium h1,
+.pulseforge-premium h2,
+.pulseforge-premium h3,
+.pulseforge-premium h4 {
+  font-family: "Arial Narrow", "Avenir Next Condensed", "Roboto Condensed", Impact, sans-serif;
+  font-stretch: condensed;
+}
+
+.pulseforge-premium section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+.pulseforge-premium .forge-card {
+  box-shadow: 0 12px 34px rgba(11, 13, 16, 0.07);
+  transition: transform 320ms ease, box-shadow 320ms ease, border-color 320ms ease;
+}
+
+.pulseforge-premium .forge-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(240, 90, 40, 0.45);
+  box-shadow: 0 26px 55px rgba(11, 13, 16, 0.14);
+}
+
+.pulseforge-premium .pulseforge-nav-active {
+  box-shadow: inset 0 0 0 1px rgba(240, 90, 40, 0.2);
+}
+
+.corelab-site {
+  font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.corelab-site h1,
+.corelab-site h2,
+.corelab-site h3,
+.corelab-serif {
+  font-family: "Iowan Old Style", Baskerville, Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+.corelab-site section[id] {
+  scroll-margin-top: 4.75rem;
+}
+
+.corelab-site .corelab-card {
+  box-shadow: 0 10px 32px rgba(84, 72, 64, 0.055);
+  transition: transform 340ms ease, box-shadow 340ms ease, border-color 340ms ease;
+}
+
+.corelab-site .corelab-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(181, 111, 89, 0.3);
+  box-shadow: 0 24px 52px rgba(84, 72, 64, 0.12);
+}
+
+.corelab-site .corelab-nav-active {
+  box-shadow: inset 0 0 0 1px rgba(181, 111, 89, 0.14);
+}
+
+.irondistrict-site {
+  font-family: "Arial Narrow", "Avenir Next Condensed", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1, "tnum" 1;
+}
+
+.irondistrict-site section[id] { scroll-margin-top: 4.75rem; }
+
+.irondistrict-site .iron-card {
+  box-shadow: 8px 8px 0 rgba(10, 11, 13, 0.12);
+  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+}
+
+.irondistrict-site .iron-card:hover {
+  transform: translate(-3px, -4px);
+  border-color: rgba(105, 82, 0, 0.65);
+  box-shadow: 13px 14px 0 rgba(10, 11, 13, 0.17);
+}
+
+.irondistrict-site .irondistrict-nav-active { box-shadow: 4px 4px 0 rgba(246, 201, 69, 0.18); }
+
+@media (prefers-reduced-motion: reduce) {
+  .irondistrict-site *, .irondistrict-site *::before, .irondistrict-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .corelab-site *,
+  .corelab-site *::before,
+  .corelab-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulseforge-premium *,
+  .pulseforge-premium *::before,
+  .pulseforge-premium *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fitness-index-kinetic *,
+  .fitness-index-kinetic *::before,
+  .fitness-index-kinetic *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keystart-site *,
+  .keystart-site *::before,
+  .keystart-site *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

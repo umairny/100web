@@ -17,6 +17,9 @@ const comingSoonConcepts = [
   ['InvoicePilot', 'billing and subscription software'],
   ['RecruitFlow', 'hiring pipeline SaaS'],
   ['SecureLayer', 'security compliance platform'],
+  ['PeoplePulse HR', 'employee experience and HR operations'],
+  ['RouteStack Logistics', 'fleet and delivery coordination'],
+  ['ConsentLayer Privacy', 'privacy consent and policy management'],
 ]
 
 export function SaaSIndex() {
@@ -182,13 +185,13 @@ export function SaaSIndex() {
           </AnimatedSection>
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {comingSoonConcepts.map(([name, focus]) => (
-              <article key={name} className="border border-[#cfeaf6] bg-[#f4fbff] p-6 opacity-90 shadow-sm">
-                <div className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#075985]">
-                  Coming soon
+            {comingSoonConcepts.map(([name, focus], index) => (
+              <article key={name} className="group overflow-hidden border border-[#cfeaf6] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="relative h-40 overflow-hidden bg-[linear-gradient(145deg,#f4fbff,#075985_58%,#14b8a6)]">
+                  <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(90deg,white_1px,transparent_1px),linear-gradient(white_1px,transparent_1px)] [background-size:32px_32px]" /><div className="absolute bottom-5 left-[14%] h-12 w-[30%] rounded-lg bg-white/25" /><div className="absolute right-[14%] top-[22%] h-24 w-[34%] rounded-lg border-8 border-white/20" />
+                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#075985]">Coming soon</div><span className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">Concept {String(index + 2).padStart(2, '0')}</span>
                 </div>
-                <h3 className="mt-5 text-2xl font-black">{name}</h3>
-                <p className="mt-3 text-sm font-bold text-slate-600">{focus}</p>
+                <div className="p-6"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#075985]">Software product</p><h3 className="mt-3 text-2xl font-black">{name}</h3><p className="mt-2 text-sm font-bold capitalize text-slate-500">{focus}</p><p className="mt-4 text-sm leading-6 text-slate-600">A conversion-focused SaaS concept explaining product value, core workflow, integrations, buyer trust, and a low-friction trial path.</p><div className="mt-5 flex gap-2 border-t border-slate-200 pt-5">{['#075985', '#f4fbff', '#14b8a6', '#082f49'].map((color) => <span key={color} className="h-6 w-6 rounded-full border border-slate-300" style={{ backgroundColor: color }} />)}</div><span className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500">Coming Soon</span></div>
               </article>
             ))}
           </div>

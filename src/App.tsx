@@ -19,10 +19,12 @@ import { CartBloomMarket } from './pages/Ecommerce/CartBloomMarket'
 import { EcommerceIndex } from './pages/Ecommerce/EcommerceIndex'
 import { EducationIndex } from './pages/Education/EducationIndex'
 import { LearnSphereAcademy } from './pages/Education/LearnSphereAcademy'
-import { FitnessIndex } from './pages/Fitness/FitnessIndex'
+import { FitnessIndex } from './pages/Fitness/FitnessIndexKinetic'
 import { HarborHealthClinic } from './pages/Medical/HarborHealthClinic'
 import { MedicalIndex } from './pages/Medical/MedicalIndex'
-import { PulseForgeFitness } from './pages/Fitness/PulseForgeFitness'
+import { PulseForgeFitness } from './pages/Fitness/PulseForgeFitnessPremium'
+import { CoreLabPilates } from './pages/Fitness/CoreLabPilates'
+import { IronDistrictGym } from './pages/Fitness/IronDistrictGym'
 import { PortfolioIndex } from './pages/Portfolio/PortfolioIndex'
 import { StudioValeCreative } from './pages/Portfolio/StudioValeCreative'
 import { RealEstateIndex } from './pages/RealEstate/RealEstateIndex'
@@ -31,6 +33,11 @@ import { HarborKeyHomes } from './pages/RealEstate/HarborKeyHomes'
 import { ApexCommercialRealty } from './pages/RealEstate/ApexCommercialRealty'
 import { NestPathMortgage } from './pages/RealEstate/NestPathMortgage'
 import { CedarStoneEstates } from './pages/RealEstate/CedarStoneEstates'
+import { MetroLoftRentals } from './pages/RealEstate/MetroLoftRentals'
+import { FoundryPropertyGroup } from './pages/RealEstate/FoundryPropertyGroup'
+import { SuncrestVacationVillas } from './pages/RealEstate/SuncrestVacationVillas'
+import { OaklinePropertyManagement } from './pages/RealEstate/OaklinePropertyManagement'
+import { KeyStartRealty } from './pages/RealEstate/KeyStartRealtyEditorial'
 import { FlowPilotCRM } from './pages/SaaS/FlowPilotCRM'
 import { SaaSIndex } from './pages/SaaS/SaaSIndex'
 import { BrewNestCoffee } from './pages/Restaurant/BrewNestCoffee'
@@ -87,8 +94,15 @@ function AppShell() {
           <Route path="/real-estate/apex-commercial-realty" element={<ApexCommercialRealty />} />
           <Route path="/real-estate/nestpath-mortgage" element={<NestPathMortgage />} />
           <Route path="/real-estate/cedar-stone-estates" element={<CedarStoneEstates />} />
+          <Route path="/real-estate/metroloft-rentals" element={<MetroLoftRentals />} />
+          <Route path="/real-estate/foundry-property-group" element={<FoundryPropertyGroup />} />
+          <Route path="/real-estate/suncrest-vacation-villas" element={<SuncrestVacationVillas />} />
+          <Route path="/real-estate/oakline-property-management" element={<OaklinePropertyManagement />} />
+          <Route path="/real-estate/keystart-realty" element={<KeyStartRealty />} />
           <Route path="/fitness" element={<FitnessIndex />} />
           <Route path="/fitness/pulseforge-fitness" element={<PulseForgeFitness />} />
+          <Route path="/fitness/corelab-pilates" element={<CoreLabPilates />} />
+          <Route path="/fitness/irondistrict-gym" element={<IronDistrictGym />} />
           <Route path="/medical" element={<MedicalIndex />} />
           <Route path="/medical/harbor-health-clinic" element={<HarborHealthClinic />} />
           <Route path="/construction" element={<ConstructionIndex />} />

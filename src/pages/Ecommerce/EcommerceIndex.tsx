@@ -17,6 +17,9 @@ const comingSoonConcepts = [
   ['LittleSprout Toys', 'curated toy shop'],
   ['PantryPilot', 'specialty grocery delivery'],
   ['CycleBox Gear', 'cycling equipment store'],
+  ['Hearth & Linen', 'considered home textiles and decor'],
+  ['PawParcel Pets', 'pet essentials subscription shop'],
+  ['FieldNote Skincare', 'botanical daily skincare collection'],
 ]
 
 export function EcommerceIndex() {
@@ -182,13 +185,13 @@ export function EcommerceIndex() {
           </AnimatedSection>
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {comingSoonConcepts.map(([name, focus]) => (
-              <article key={name} className="border border-[#eadcff] bg-[#fbf7ff] p-6 opacity-90 shadow-sm">
-                <div className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#7c3aed]">
-                  Coming soon
+            {comingSoonConcepts.map(([name, focus], index) => (
+              <article key={name} className="group overflow-hidden border border-[#eadcff] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="relative h-40 overflow-hidden bg-[linear-gradient(145deg,#fbf7ff,#7c3aed_58%,#ec4899)]">
+                  <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(90deg,white_1px,transparent_1px),linear-gradient(white_1px,transparent_1px)] [background-size:32px_32px]" /><div className="absolute bottom-4 left-[20%] h-20 w-20 rotate-6 rounded-2xl bg-white/25" /><div className="absolute right-[18%] top-[24%] h-24 w-24 -rotate-6 rounded-full bg-white/20" />
+                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#7c3aed]">Coming soon</div><span className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">Concept {String(index + 2).padStart(2, '0')}</span>
                 </div>
-                <h3 className="mt-5 text-2xl font-black">{name}</h3>
-                <p className="mt-3 text-sm font-bold text-slate-600">{focus}</p>
+                <div className="p-6"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#7c3aed]">Retail concept</p><h3 className="mt-3 text-2xl font-black">{name}</h3><p className="mt-2 text-sm font-bold capitalize text-slate-500">{focus}</p><p className="mt-4 text-sm leading-6 text-slate-600">A product-led storefront direction combining clear collections, trust cues, promotional rhythm, and a friction-light buying path.</p><div className="mt-5 flex gap-2 border-t border-slate-200 pt-5">{['#7c3aed', '#fbf7ff', '#ec4899', '#17111f'].map((color) => <span key={color} className="h-6 w-6 rounded-full border border-slate-300" style={{ backgroundColor: color }} />)}</div><span className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500">Coming Soon</span></div>
               </article>
             ))}
           </div>

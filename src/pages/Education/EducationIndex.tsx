@@ -17,6 +17,9 @@ const comingSoonConcepts = [
   ['FluentPath Languages', 'adult language learning'],
   ['TutorLoop', 'one-on-one tutoring marketplace'],
   ['SkillForge Workshops', 'career upskilling programs'],
+  ['ScholarSpring Preschool', 'early learning and family enrollment'],
+  ['Atlas College Counseling', 'college planning and application guidance'],
+  ['ProTrack Trades', 'hands-on skilled trade training'],
 ]
 
 export function EducationIndex() {
@@ -182,13 +185,13 @@ export function EducationIndex() {
           </AnimatedSection>
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {comingSoonConcepts.map(([name, focus]) => (
-              <article key={name} className="border border-[#dbe0ff] bg-[#f7f8ff] p-6 opacity-90 shadow-sm">
-                <div className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#3730a3]">
-                  Coming soon
+            {comingSoonConcepts.map(([name, focus], index) => (
+              <article key={name} className="group overflow-hidden border border-[#dbe0ff] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="relative h-40 overflow-hidden bg-[linear-gradient(145deg,#f7f8ff,#3730a3_58%,#22c55e)]">
+                  <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(90deg,white_1px,transparent_1px),linear-gradient(white_1px,transparent_1px)] [background-size:32px_32px]" /><div className="absolute bottom-0 left-[14%] h-[60%] w-[30%] rounded-t-full bg-white/20" /><div className="absolute bottom-0 right-[14%] h-[45%] w-[32%] bg-white/30 [clip-path:polygon(50%_0,100%_100%,0_100%)]" />
+                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#3730a3]">Coming soon</div><span className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">Concept {String(index + 2).padStart(2, '0')}</span>
                 </div>
-                <h3 className="mt-5 text-2xl font-black">{name}</h3>
-                <p className="mt-3 text-sm font-bold text-slate-600">{focus}</p>
+                <div className="p-6"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#3730a3]">Learning experience</p><h3 className="mt-3 text-2xl font-black">{name}</h3><p className="mt-2 text-sm font-bold capitalize text-slate-500">{focus}</p><p className="mt-4 text-sm leading-6 text-slate-600">A structured education concept presenting outcomes, curriculum, instructor trust, schedules, and a clear enrollment journey.</p><div className="mt-5 flex gap-2 border-t border-slate-200 pt-5">{['#3730a3', '#f7f8ff', '#22c55e', '#111827'].map((color) => <span key={color} className="h-6 w-6 rounded-full border border-slate-300" style={{ backgroundColor: color }} />)}</div><span className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500">Coming Soon</span></div>
               </article>
             ))}
           </div>

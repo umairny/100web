@@ -17,6 +17,9 @@ const comingSoonConcepts = [
   ['StoneField Landscapes', 'outdoor living and hardscape projects'],
   ['PrimeDeck Builders', 'decks, pergolas, and backyard upgrades'],
   ['CivicWorks Contractors', 'municipal and infrastructure projects'],
+  ['ForgeLine Electrical', 'residential and commercial electrical work'],
+  ['TerraForm Concrete', 'foundations, flatwork, and structural concrete'],
+  ['BluePeak Plumbing', 'plumbing installation and emergency service'],
 ]
 
 export function ConstructionIndex() {
@@ -183,13 +186,13 @@ export function ConstructionIndex() {
           </AnimatedSection>
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {comingSoonConcepts.map(([name, focus]) => (
-              <article key={name} className="border border-[#eadfc8] bg-[#faf7ef] p-6 opacity-90 shadow-sm">
-                <div className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#92400e]">
-                  Coming soon
+            {comingSoonConcepts.map(([name, focus], index) => (
+              <article key={name} className="group overflow-hidden border border-[#eadfc8] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="relative h-40 overflow-hidden bg-[linear-gradient(145deg,#faf7ef,#3f3f46_58%,#d97706)]">
+                  <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(90deg,white_1px,transparent_1px),linear-gradient(white_1px,transparent_1px)] [background-size:32px_32px]" /><div className="absolute bottom-0 left-[12%] h-[50%] w-[28%] bg-white/20" /><div className="absolute bottom-0 right-[16%] h-[75%] w-[34%] bg-white/30 [clip-path:polygon(50%_0,100%_36%,100%_100%,0_100%,0_36%)]" />
+                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#92400e]">Coming soon</div><span className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">Concept {String(index + 2).padStart(2, '0')}</span>
                 </div>
-                <h3 className="mt-5 text-2xl font-black">{name}</h3>
-                <p className="mt-3 text-sm font-bold text-stone-600">{focus}</p>
+                <div className="p-6"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#92400e]">Trade & contractor</p><h3 className="mt-3 text-2xl font-black">{name}</h3><p className="mt-2 text-sm font-bold capitalize text-stone-500">{focus}</p><p className="mt-4 text-sm leading-6 text-stone-600">A proof-led contractor concept featuring services, completed work, credentials, service areas, and a straightforward quote request.</p><div className="mt-5 flex gap-2 border-t border-stone-200 pt-5">{['#3f3f46', '#faf7ef', '#d97706', '#171717'].map((color) => <span key={color} className="h-6 w-6 rounded-full border border-stone-300" style={{ backgroundColor: color }} />)}</div><span className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-stone-100 px-4 py-3 text-sm font-bold text-stone-500">Coming Soon</span></div>
               </article>
             ))}
           </div>

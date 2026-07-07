@@ -17,6 +17,9 @@ const comingSoonConcepts = [
   ['Renew Physical Therapy', 'recovery plans and progress proof'],
   ['MindWell Counseling', 'approachable therapy intake'],
   ['Harbor Urgent Care', 'same-day visits and wait-time clarity'],
+  ['Willow Women’s Health', 'supportive women’s health services'],
+  ['PulseHeart Cardiology', 'specialist heart care and diagnostics'],
+  ['ClearSkin Dermatology', 'medical and cosmetic skin care'],
 ]
 
 export function MedicalIndex() {
@@ -183,13 +186,13 @@ export function MedicalIndex() {
           </AnimatedSection>
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {comingSoonConcepts.map(([name, focus]) => (
-              <article key={name} className="border border-[#cce8e4] bg-[#f4fbfa] p-6 opacity-90 shadow-sm">
-                <div className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#0f766e]">
-                  Coming soon
+            {comingSoonConcepts.map(([name, focus], index) => (
+              <article key={name} className="group overflow-hidden border border-[#cce8e4] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="relative h-40 overflow-hidden bg-[linear-gradient(145deg,#f4fbfa,#0f766e_58%,#ef4444)]">
+                  <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(90deg,white_1px,transparent_1px),linear-gradient(white_1px,transparent_1px)] [background-size:32px_32px]" /><div className="absolute -bottom-12 left-[18%] h-40 w-40 rounded-full border-[20px] border-white/20" /><div className="absolute right-[14%] top-[28%] h-16 w-16 rounded-full bg-white/25" />
+                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#0f766e]">Coming soon</div><span className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">Concept {String(index + 2).padStart(2, '0')}</span>
                 </div>
-                <h3 className="mt-5 text-2xl font-black">{name}</h3>
-                <p className="mt-3 text-sm font-bold text-slate-600">{focus}</p>
+                <div className="p-6"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#0f766e]">Healthcare concept</p><h3 className="mt-3 text-2xl font-black">{name}</h3><p className="mt-2 text-sm font-bold capitalize text-slate-500">{focus}</p><p className="mt-4 text-sm leading-6 text-slate-600">A reassuring patient-first direction with clear services, provider credibility, practical visit details, and simple appointment access.</p><div className="mt-5 flex gap-2 border-t border-slate-200 pt-5">{['#0f766e', '#f4fbfa', '#ef4444', '#102522'].map((color) => <span key={color} className="h-6 w-6 rounded-full border border-slate-300" style={{ backgroundColor: color }} />)}</div><span className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500">Coming Soon</span></div>
               </article>
             ))}
           </div>
