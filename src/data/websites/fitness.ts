@@ -137,5 +137,39 @@ export const fitnessWebsites: WebsiteDesign[] = [
     },
     status: "completed",
   },
+  {
+    id: "elevate-climbing",
+    title: "Elevate Climbing",
+    category: "Fitness",
+    style: "chalky, playful, route-map inspired, adventurous, community-focused",
+    shortDescription:
+      "Modern bouldering gym website with climbing zones, skill classes, weekly route setting, community events, route-team coaches, memberships, and progress visuals",
+    slug: "elevate-climbing",
+    image: imageUrl("fitness/ElevateClimbing/hero.png"),
+    colors: {
+      primary: "#25303A",
+      secondary: "#F7F1E6",
+      accent: "#21A6A1",
+      dark: "#606A70",
+    },
+    status: "completed",
+  },
+  {
+    id: "reset-recovery-club",
+    title: "Reset Recovery Club",
+    category: "Fitness",
+    style: "serene, spa-tech, frosted-glass, clinical-editorial, restorative",
+    shortDescription:
+      "Premium recovery studio website with mobility sessions, assisted stretching, compression lounge, reset method, recovery tech, memberships, journal content, and calm testimonials",
+    slug: "reset-recovery-club",
+    image: imageUrl("fitness/resetRecoveryClub/hero.png"),
+    colors: {
+      primary: "#23313B",
+      secondary: "#F6F8F7",
+      accent: "#75B7A6",
+      dark: "#607075",
+    },
+    status: "completed",
+  },
 ];
 

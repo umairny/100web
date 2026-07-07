@@ -30,6 +30,8 @@ import { FlowStateYoga } from './pages/Fitness/FlowStateYoga'
 import { BoxHouseTraining } from './pages/Fitness/BoxHouseTraining'
 import { VitalFormWellness } from './pages/Fitness/VitalFormWellness'
 import { RideHausCycling } from './pages/Fitness/RideHausCycling'
+import { ElevateClimbing } from './pages/Fitness/ElevateClimbing'
+import { ResetRecoveryClub } from './pages/Fitness/ResetRecoveryClub'
 import { PortfolioIndex } from './pages/Portfolio/PortfolioIndex'
 import { StudioValeCreative } from './pages/Portfolio/StudioValeCreative'
 import { RealEstateIndex } from './pages/RealEstate/RealEstateIndex'
@@ -113,6 +115,8 @@ function AppShell() {
           <Route path="/fitness/boxhouse-training" element={<BoxHouseTraining />} />
           <Route path="/fitness/vitalform-wellness" element={<VitalFormWellness />} />
           <Route path="/fitness/ridehaus-cycling" element={<RideHausCycling />} />
+          <Route path="/fitness/elevate-climbing" element={<ElevateClimbing />} />
+          <Route path="/fitness/reset-recovery-club" element={<ResetRecoveryClub />} />
           <Route path="/medical" element={<MedicalIndex />} />
           <Route path="/medical/harbor-health-clinic" element={<HarborHealthClinic />} />
           <Route path="/construction" element={<ConstructionIndex />} />
