@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatedSection, Container, CTAButton } from '../../components'
 import { realEstateWebsites } from '../../data/websites'
@@ -29,78 +30,169 @@ export function RealEstateIndex() {
   const liveCount = liveWebsites.length
   const comingSoonCount = comingSoonWebsites.length
   const totalCount = realEstateWebsites.length
+  const carouselWebsites = liveWebsites.filter((website) => website.image)
+  const [activeHeroIndex, setActiveHeroIndex] = useState(0)
+  const [isHeroPaused, setIsHeroPaused] = useState(false)
+  const activeHero = carouselWebsites[activeHeroIndex] ?? liveWebsites[0] ?? realEstateWebsites[0]
+
+  useEffect(() => {
+    if (isHeroPaused || carouselWebsites.length < 2) return
+    const interval = window.setInterval(() => {
+      setActiveHeroIndex((index) => (index + 1) % carouselWebsites.length)
+    }, 7000)
+    return () => window.clearInterval(interval)
+  }, [carouselWebsites.length, isHeroPaused])
+
+  const moveHero = (direction: number) => {
+    setActiveHeroIndex((index) => (index + direction + carouselWebsites.length) % carouselWebsites.length)
+  }
 
   return (
     <main className="bg-[#f5f8fb] text-[#0f172a]">
-      <section className="relative -mt-16 overflow-hidden bg-[#0f172a] pb-20 pt-24 text-white md:pb-28 md:pt-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(37,99,235,0.36),transparent_26%),radial-gradient(circle_at_82%_22%,rgba(245,158,11,0.24),transparent_24%),linear-gradient(135deg,#0f172a,#153e75_56%,#0b1120)]" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.08)_0_1px,transparent_1px_56px)]" />
+      <section
+        className="real-estate-hero relative -mt-16 min-h-[900px] overflow-hidden bg-[#08111f] pt-16 text-white sm:min-h-screen"
+        aria-roledescription="carousel"
+        aria-label="Featured real estate website concepts"
+        onMouseEnter={() => setIsHeroPaused(true)}
+        onMouseLeave={() => setIsHeroPaused(false)}
+        onFocusCapture={() => setIsHeroPaused(true)}
+        onBlurCapture={() => setIsHeroPaused(false)}
+      >
+        <style>{`
+          .real-estate-hero-panel { opacity: 0; transform: translateX(18px) scale(.985); transition: opacity .7s ease, transform .9s ease; }
+          .real-estate-hero-panel.is-active { opacity: 1; transform: translateX(0) scale(1); }
+          .real-estate-hero-progress { animation: realEstateHeroProgress 7s linear both; transform-origin: left; }
+          @keyframes realEstateHeroProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+          @media (prefers-reduced-motion: reduce) { .real-estate-hero-panel { transition: none; } .real-estate-hero-progress { animation: none; } }
+        `}</style>
+
+        {carouselWebsites.map((website, index) => (
+          <div
+            key={website.id}
+            aria-hidden={index !== activeHeroIndex}
+            className={`absolute inset-0 transition-opacity duration-700 ${index === activeHeroIndex ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <img src={website.image} alt="" className="h-full w-full object-cover" fetchPriority={index === 0 ? 'high' : 'auto'} />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,17,31,.98)_0%,rgba(8,17,31,.88)_33%,rgba(8,17,31,.52)_66%,rgba(8,17,31,.76)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_74%_38%,rgba(255,255,255,.12),transparent_27%),linear-gradient(0deg,#08111f_0%,transparent_42%)]" />
+          </div>
+        ))}
+        <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:64px_64px]" />
+
         <Container>
-          <AnimatedSection className="relative grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <div>
-              <Link to="/" className="text-sm font-bold text-white/70 transition hover:text-white">
+          <div className="relative z-10 flex min-h-[836px] flex-col pb-8 pt-8 sm:min-h-[calc(100vh-4rem)] lg:pt-10">
+            <div className="flex items-center justify-between gap-4 border-b border-white/15 pb-4">
+              <Link to="/" className="text-xs font-black uppercase tracking-[0.18em] text-white/55 transition hover:text-white">
                 Back to Home
               </Link>
-              <div className="mt-8 inline-flex border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#fbbf24]">
-                {liveCount} live / {comingSoonCount} coming soon / {totalCount} total
-              </div>
-              <h1 className="mt-6 max-w-5xl text-5xl font-black leading-[0.92] md:text-7xl">
-                Real estate websites built around trust, search, and decisive action.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
-                A category hub for agencies, agents, developers, rentals, mortgage brands, and property groups that need
-                listings to feel premium and easy to act on.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="#collection" size="lg" className="bg-[#fbbf24] text-[#0f172a] hover:bg-white">
-                  Explore Collection
-                </CTAButton>
-                <CTAButton href="#principles" variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10">
-                  Design Principles
-                </CTAButton>
+              <div className="hidden text-xs font-black uppercase tracking-[0.18em] text-white/45 sm:block">
+                {String(activeHeroIndex + 1).padStart(2, '0')} / {String(carouselWebsites.length).padStart(2, '0')}
               </div>
             </div>
 
-            <div className="relative min-h-[520px]">
-              <div className="absolute inset-x-8 top-0 h-[31rem] border border-white/15 bg-white/8 shadow-2xl shadow-black/30 backdrop-blur">
-                <div className="grid h-full grid-cols-[0.7fr_1fr]">
-                  <div className="border-r border-white/10 bg-[#eff6ff] p-5 text-[#0f172a]">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#153e75]">Listing board</p>
-                    <div className="mt-8 space-y-4">
-                      {['$1.28M', '$740K', '$2.4M'].map((price, index) => (
-                        <div key={price} className="bg-white p-4 shadow-sm">
-                          <p className="text-2xl font-black">{price}</p>
-                          <p className="mt-1 text-xs font-bold text-slate-500">Featured property 0{index + 1}</p>
-                        </div>
-                      ))}
+            <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14 xl:gap-20">
+              <div key={`real-estate-copy-${activeHero.id}`} className="real-estate-hero-panel is-active max-w-3xl" aria-live="polite">
+                <div className="inline-flex border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#fbbf24] backdrop-blur">
+                  {liveCount} live / {comingSoonCount} coming soon / {totalCount} total
+                </div>
+                <p className="mt-8 text-xs font-black uppercase tracking-[0.24em] text-white/45">
+                  {activeHero.marketLabel} / Concept dossier
+                </p>
+                <h1 className="mt-5 max-w-5xl text-5xl font-black leading-[0.88] md:text-7xl">
+                  {activeHero.title}
+                </h1>
+                <p className="mt-6 max-w-xl text-lg leading-8 text-white/72">
+                  {activeHero.shortDescription}.
+                </p>
+                <p className="mt-4 max-w-xl text-sm font-bold capitalize leading-6 text-white/45">
+                  {activeHero.style}
+                </p>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <Link
+                    to={`/real-estate/${activeHero.slug}`}
+                    className="inline-flex min-h-14 items-center justify-center rounded-lg bg-[#fbbf24] px-8 py-4 text-lg font-bold text-[#08111f] transition hover:-translate-y-0.5 hover:bg-white"
+                  >
+                    Open Concept
+                  </Link>
+                  <CTAButton href="#collection" variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10">
+                    Explore Collection
+                  </CTAButton>
+                </div>
+              </div>
+
+              <div className="relative min-h-[520px] lg:min-h-[620px]">
+                <div className="absolute left-0 top-8 z-20 hidden w-44 space-y-2 xl:block">
+                  {carouselWebsites.slice(0, 6).map((website, index) => (
+                    <button
+                      key={website.id}
+                      type="button"
+                      onClick={() => setActiveHeroIndex(index)}
+                      aria-label={`Show ${website.title}`}
+                      aria-current={index === activeHeroIndex ? 'true' : undefined}
+                      className={`group w-full border px-3 py-3 text-left backdrop-blur transition ${index === activeHeroIndex ? 'border-white/60 bg-white text-[#08111f]' : 'border-white/15 bg-white/8 text-white/55 hover:bg-white/15 hover:text-white'}`}
+                    >
+                      <span className="block text-[0.6rem] font-black uppercase tracking-[0.16em]">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="mt-1 block truncate text-xs font-black">{website.title}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="absolute inset-x-0 top-0 mx-auto max-w-[760px] xl:left-auto xl:right-0">
+                  <div className="relative overflow-hidden border border-white/15 bg-white/10 p-3 shadow-[0_44px_120px_rgba(0,0,0,.5)] backdrop-blur">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[#0f172a] sm:aspect-[16/10]">
+                      <img key={activeHero.id} src={activeHero.image} alt={`${activeHero.title} website preview`} className="h-full w-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#08111f]/78 via-transparent to-transparent" />
+                      <div className="absolute left-5 top-5 border border-white/20 bg-[#08111f]/70 px-4 py-2 text-[0.62rem] font-black uppercase tracking-[0.16em] text-white/75 backdrop-blur">
+                        Active market
+                      </div>
+                      <Link
+                        to={`/real-estate/${activeHero.slug}`}
+                        className="absolute bottom-5 right-5 grid h-12 w-12 place-items-center rounded-full text-sm font-black text-[#08111f] transition hover:rotate-[-12deg] hover:bg-white"
+                        style={{ backgroundColor: activeHero.colors.accent }}
+                        aria-label={`Open ${activeHero.title}`}
+                      >Open
+                      </Link>
                     </div>
                   </div>
-                  <div className="relative overflow-hidden bg-[linear-gradient(135deg,#153e75,#2563eb_48%,#f59e0b)]">
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:46px_46px]" />
-                    <div className="absolute bottom-6 left-6 right-6 bg-white/92 p-5 text-[#0f172a] shadow-xl">
-                      <p className="text-sm font-black uppercase tracking-[0.18em] text-[#153e75]">Skyline Realty Group</p>
-                      <p className="mt-2 text-3xl font-black">Curated city homes with market clarity.</p>
-                    </div>
+
+                  <div className="mt-4 grid grid-cols-3 border border-white/15 bg-white/95 text-center text-[#0f172a] shadow-xl">
+                    {[
+                      [String(liveCount).padStart(2, '0'), 'Live'],
+                      [String(comingSoonCount).padStart(2, '0'), 'Queued'],
+                      [String(totalCount).padStart(2, '0'), 'Total'],
+                    ].map(([value, label]) => (
+                      <div key={label} className="border-r border-slate-200 p-4 last:border-r-0">
+                        <p className="text-3xl font-black" style={{ color: activeHero.colors.primary }}>{value}</p>
+                        <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">{label}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-              <div className="absolute bottom-0 left-0 grid w-full grid-cols-3 border border-white/15 bg-white/95 text-center text-[#0f172a] shadow-xl">
-                {[
-                  [String(liveCount).padStart(2, '0'), 'Live'],
-                  [String(comingSoonCount).padStart(2, '0'), 'Queued'],
-                  [String(totalCount).padStart(2, '0'), 'Total'],
-                ].map(([value, label]) => (
-                  <div key={label} className="border-r border-slate-200 p-4 last:border-r-0">
-                    <p className="text-3xl font-black text-[#153e75]">{value}</p>
-                    <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">{label}</p>
-                  </div>
+            </div>
+
+            <div className="grid items-end gap-5 border-t border-white/15 pt-5 lg:grid-cols-[auto_1fr_auto]">
+              <div className="flex gap-2">
+                <button type="button" onClick={() => moveHero(-1)} aria-label="Previous real estate concept" className="grid h-11 w-11 place-items-center border border-white/20 bg-white/8 text-lg transition hover:bg-white hover:text-[#08111f]">&lt;</button>
+                <button type="button" onClick={() => moveHero(1)} aria-label="Next real estate concept" className="grid h-11 w-11 place-items-center border border-white/20 bg-white/8 text-lg transition hover:bg-white hover:text-[#08111f]">&gt;</button>
+              </div>
+              <div className="grid grid-cols-5 gap-2 lg:grid-cols-10">
+                {carouselWebsites.map((website, index) => (
+                  <button key={website.id} type="button" onClick={() => setActiveHeroIndex(index)} className={`group text-left transition ${index === activeHeroIndex ? 'text-white' : 'text-white/35 hover:text-white/70'}`} aria-label={`Show ${website.title}`}>
+                    <span className="block h-1 overflow-hidden bg-white/15">
+                      {index === activeHeroIndex && <span key={`${activeHeroIndex}-${isHeroPaused}`} className="real-estate-hero-progress block h-full" style={{ backgroundColor: website.colors.accent, animationPlayState: isHeroPaused ? 'paused' : 'running' }} />}
+                    </span>
+                    <span className="mt-3 hidden truncate text-[0.58rem] font-black uppercase tracking-[0.1em] xl:block">{website.marketLabel}</span>
+                  </button>
                 ))}
               </div>
+              <p className="hidden max-w-44 text-right text-[0.62rem] font-bold uppercase leading-5 tracking-[0.14em] text-white/35 lg:block">
+                Market-ready previews for property brands
+              </p>
             </div>
-          </AnimatedSection>
+          </div>
         </Container>
       </section>
-
       <section className="border-b border-[#dbe4ef] bg-white py-8">
         <Container>
           <div className="flex flex-wrap justify-center gap-2">

@@ -380,6 +380,19 @@ body {
   }
 }
 
+@keyframes homeHeroCarouselProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.home-hero-carousel-progress {
+  transform-origin: left center;
+  animation: homeHeroCarouselProgress 5.5s linear both;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

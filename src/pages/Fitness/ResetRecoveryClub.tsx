@@ -345,120 +345,152 @@ export function ResetRecoveryClub() {
         id="home"
         className="relative z-10 min-h-screen scroll-mt-28 px-5 pb-20 pt-32 lg:px-10 lg:pb-28 lg:pt-40"
       >
-        <div className="mx-auto grid max-w-[94rem] gap-6 lg:grid-cols-[7rem_.86fr_1.14fr] lg:items-stretch">
-          <aside className="hidden rounded-[2rem] border border-white/70 bg-white/46 p-4 shadow-sm backdrop-blur-xl lg:grid">
-            <div className="flex h-full flex-col items-center justify-between gap-5">
-              <p className="[writing-mode:vertical-rl] rotate-180 text-[0.6rem] font-bold uppercase tracking-[0.24em] text-[#809095]">
-                Recovery protocol 01
+        <div className="mx-auto grid max-w-[94rem] gap-6 lg:grid-cols-[minmax(0,.98fr)_minmax(34rem,1.02fr)] lg:items-stretch">
+          <div className="relative overflow-hidden rounded-[2.6rem] border border-white/80 bg-white/68 p-6 shadow-[0_30px_100px_rgba(35,49,59,.12)] backdrop-blur-xl sm:p-8 lg:p-12">
+            <div className="flex flex-wrap items-center gap-3">
+              <p className="inline-flex items-center gap-3 rounded-full border border-[#C9D3D6] bg-white/70 px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#607075]">
+                <Wind className="h-4 w-4 text-[#75B7A6]" />
+                Mobility / Recovery / Restoration
               </p>
-              <div className="grid gap-3">
-                {[Wind, Waves, Moon].map((Icon, index) => (
-                  <span
-                    key={index}
-                    className="grid h-12 w-12 place-items-center rounded-full border border-[#C9D3D6] bg-white/70 text-[#75B7A6]"
-                  >
-                    <Icon className="h-5 w-5" />
-                  </span>
-                ))}
-              </div>
-              <span className="[writing-mode:vertical-rl] rotate-180 text-[0.6rem] font-bold uppercase tracking-[0.24em] text-[#809095]">
-                Slow / steady
+              <span className="rounded-full bg-[#DDEBE8] px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-[#2F6E62]">
+                Low sensory sessions
               </span>
             </div>
-          </aside>
-          <div className="rounded-[3rem] border border-white bg-white/44 p-7 shadow-[0_30px_100px_rgba(35,49,59,.12)] backdrop-blur-xl sm:p-10 lg:p-12">
-            <p className="inline-flex items-center gap-3 rounded-full border border-[#C9D3D6] bg-white/60 px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-[#6A7A7E]">
-              <Wind className="h-4 w-4 text-[#75B7A6]" />
-              Mobility • Recovery • Restoration
-            </p>
-            <h1 className="mt-7 max-w-5xl text-[clamp(4rem,8.4vw,9.5rem)] font-semibold leading-[0.86] tracking-[-0.085em] text-[#23313B]">
-              Recover Better. Move Freer. Reset Fully.
+
+            <h1 className="mt-8 max-w-5xl text-[clamp(3.8rem,7.5vw,8.2rem)] font-semibold leading-[0.9] text-[#23313B]">
+              Recovery that feels quiet, guided, and easy to repeat.
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#607075]">
-              A modern recovery club for mobility work, assisted stretching,
-              compression, breath-led restoration, and guided sessions that help
-              your body return to balance.
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#607075]">
+              Reset Recovery Club blends assisted stretching, mobility work,
+              compression sessions, and breath-led restoration inside a calm
+              club built for better daily movement.
             </p>
+
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <ResetButton href="#contact">Book Your First Reset</ResetButton>
               <ResetButton href="#services" outline>
                 Explore Services
               </ResetButton>
             </div>
-            <div className="mt-12 grid gap-3 border-t border-[#C9D3D6]/70 pt-6 sm:grid-cols-3">
+
+            <div className="mt-10 grid gap-3 sm:grid-cols-3">
               {[
-                ["04", "Reset rooms"],
-                ["30–50", "Minute sessions"],
-                ["Low", "Sensory load"],
+                ["30-50", "Minute sessions"],
+                ["04", "Recovery rooms"],
+                ["Low", "Noise + light"],
               ].map(([value, label]) => (
                 <div
                   key={label}
-                  className="rounded-[1.4rem] bg-[#F6F8F7]/80 p-4"
+                  className="rounded-[1.4rem] border border-[#C9D3D6]/70 bg-[#F6F8F7]/90 p-4"
                 >
-                  <p className="text-3xl font-semibold tracking-[-0.06em]">
+                  <p className="text-3xl font-semibold leading-none text-[#23313B]">
                     {value}
                   </p>
-                  <p className="mt-1 text-[0.56rem] font-bold uppercase tracking-[0.16em] text-[#809095]">
+                  <p className="mt-2 text-[0.56rem] font-bold uppercase tracking-[0.16em] text-[#809095]">
                     {label}
                   </p>
                 </div>
               ))}
             </div>
-          </div>
 
-          <div className="relative">
-            <div className="absolute -left-4 top-10 z-20 hidden rounded-[1.6rem] border border-white/70 bg-white/72 p-5 shadow-xl backdrop-blur-xl md:block">
-              <p className="text-xs font-semibold text-[#6A7A7E]">Calm pulse</p>
-              <div className="mt-4 flex items-center gap-3">
-                <span className="h-12 w-12 animate-pulse rounded-full bg-[#DDEBE8] ring-8 ring-[#DDEBE8]/45" />
-                <span className="text-2xl font-semibold tracking-[-0.05em]">
-                  04:00
-                </span>
-              </div>
-            </div>
-            <div className="relative min-h-[43rem] overflow-hidden rounded-[4rem_2rem_4rem_2rem] border border-white bg-white/45 p-3 shadow-[0_30px_95px_rgba(35,49,59,.15)] backdrop-blur">
-              <img
-                src={images.hero}
-                alt="Reset Recovery Club serene recovery room"
-                className="absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] rounded-[3.4rem_1.4rem_3.4rem_1.4rem] object-cover"
-              />
-              <div className="absolute inset-3 rounded-[3.4rem_1.4rem_3.4rem_1.4rem] bg-gradient-to-t from-[#23313B]/62 via-transparent to-white/12" />
-              <div className="absolute left-7 right-7 top-7 grid gap-2 sm:grid-cols-2">
-                {[
-                  "Assisted Stretching",
-                  "Compression Lounge",
-                  "Mobility Reset",
-                  "Breath Recovery",
-                ].map((chip) => (
-                  <span
-                    key={chip}
-                    className="rounded-full border border-white/70 bg-white/72 px-4 py-2 text-[0.58rem] font-bold uppercase tracking-[0.14em] text-[#23313B] backdrop-blur"
+            <div className="mt-8 grid gap-3 border-t border-[#C9D3D6]/70 pt-6 md:grid-cols-2">
+              {[
+                [Waves, "Arrive", "A softer transition from work, training, or daily tension."],
+                [Moon, "Downshift", "Guided recovery cues help your body settle before deeper work."],
+              ].map(([Icon, title, text]) => {
+                const CardIcon = Icon as typeof Waves;
+                return (
+                  <div
+                    key={title as string}
+                    className="flex gap-4 rounded-[1.5rem] bg-white/64 p-4"
                   >
-                    {chip}
-                  </span>
-                ))}
-              </div>
-              <div className="absolute bottom-7 left-7 right-7 rounded-[2rem] border border-white/35 bg-white/72 p-5 backdrop-blur-xl">
-                <div className="grid gap-4 sm:grid-cols-3">
-                  {[
-                    ["Low", "Room noise"],
-                    ["42%", "Recovery load"],
-                    ["Warm", "Lounge mode"],
-                  ].map(([value, label]) => (
-                    <div key={label}>
-                      <p className="text-2xl font-semibold tracking-[-0.05em]">
-                        {value}
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#DDEBE8] text-[#2F6E62]">
+                      <CardIcon className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <p className="font-semibold text-[#23313B]">
+                        {title as string}
                       </p>
-                      <p className="mt-1 text-[0.55rem] font-bold uppercase tracking-[0.16em] text-[#809095]">
-                        {label}
+                      <p className="mt-1 text-sm leading-6 text-[#607075]">
+                        {text as string}
                       </p>
                     </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="relative min-h-[42rem] overflow-hidden rounded-[2.8rem] border border-white bg-white/50 p-3 shadow-[0_30px_95px_rgba(35,49,59,.15)] backdrop-blur">
+            <img
+              src={images.hero}
+              alt="Reset Recovery Club serene recovery room"
+              className="absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] rounded-[2.35rem] object-cover"
+            />
+            <div className="absolute inset-3 rounded-[2.35rem] bg-gradient-to-t from-[#23313B]/72 via-[#23313B]/12 to-white/14" />
+
+            <div className="absolute left-6 right-6 top-6 flex flex-wrap gap-2">
+              {[
+                "Assisted stretch",
+                "Compression lounge",
+                "Mobility reset",
+                "Breath recovery",
+              ].map((chip) => (
+                <span
+                  key={chip}
+                  className="rounded-full border border-white/70 bg-white/78 px-4 py-2 text-[0.58rem] font-bold uppercase tracking-[0.13em] text-[#23313B] backdrop-blur"
+                >
+                  {chip}
+                </span>
+              ))}
+            </div>
+
+            <div className="absolute bottom-6 left-6 right-6 grid gap-4 lg:grid-cols-[1fr_.86fr] lg:items-end">
+              <div className="rounded-[2rem] border border-white/45 bg-white/82 p-5 shadow-2xl backdrop-blur-xl">
+                <p className="text-xs font-bold uppercase tracking-[0.17em] text-[#6EAFA0]">
+                  First reset path
+                </p>
+                <div className="mt-5 grid gap-3">
+                  {[
+                    ["01", "Movement check-in"],
+                    ["02", "Mobility or stretch session"],
+                    ["03", "At-home reset cue"],
+                  ].map(([number, label]) => (
+                    <div key={label} className="flex items-center gap-3">
+                      <span className="grid h-9 w-9 place-items-center rounded-full bg-[#23313B] text-xs font-bold text-white">
+                        {number}
+                      </span>
+                      <span className="text-sm font-semibold text-[#23313B]">
+                        {label}
+                      </span>
+                    </div>
                   ))}
+                </div>
+              </div>
+
+              <div className="rounded-[2rem] border border-white/35 bg-[#23313B]/82 p-5 text-white shadow-2xl backdrop-blur-xl">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/58">
+                      Lounge mode
+                    </p>
+                    <p className="mt-2 text-3xl font-semibold leading-none">
+                      04:00
+                    </p>
+                    <p className="mt-1 text-sm text-white/62">arrival buffer</p>
+                  </div>
+                  <span className="grid h-16 w-16 place-items-center rounded-full bg-[#75B7A6]/22 text-[#BCE5DA] ring-8 ring-white/10">
+                    <TimerReset className="h-7 w-7" />
+                  </span>
+                </div>
+                <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/16">
+                  <span className="block h-full w-2/3 rounded-full bg-[#75B7A6]" />
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div className="mx-auto mt-5 grid max-w-[94rem] gap-3 md:grid-cols-4">
           {[
             "Arrive quietly",
@@ -468,19 +500,18 @@ export function ResetRecoveryClub() {
           ].map((step, index) => (
             <div
               key={step}
-              className="rounded-[1.5rem] border border-white/70 bg-white/42 p-5 backdrop-blur-xl"
+              className="rounded-[1.5rem] border border-white/70 bg-white/50 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:bg-white/72"
             >
               <p className="text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#75B7A6]">
                 Protocol 0{index + 1}
               </p>
-              <p className="mt-4 text-lg font-semibold tracking-[-0.03em]">
+              <p className="mt-4 text-lg font-semibold text-[#23313B]">
                 {step}
               </p>
             </div>
           ))}
         </div>
       </section>
-
       <section
         id="services"
         className="relative z-10 scroll-mt-28 px-5 py-24 lg:px-10 lg:py-32"

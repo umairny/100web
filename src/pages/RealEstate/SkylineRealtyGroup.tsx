@@ -591,63 +591,125 @@ export function SkylineRealtyGroup() {
 
       <section
         id="neighborhoods"
-        className="scroll-mt-32 border-y border-[#dbe4ef] bg-white py-20 md:py-28"
+        className="scroll-mt-32 border-y border-[#dbe4ef] bg-[#edf4fb] py-20 md:py-28"
       >
         <Container>
-          <div className="mb-12 max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#153e75]">
-              Neighborhood intelligence
-            </p>
-            <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-              The right home starts with the right block.
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-slate-600">
-              Skyline compares daily rhythm, housing character, and market
-              position before a buyer falls in love with the wrong fit.
-            </p>
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#153e75]">
+                Neighborhood intelligence
+              </p>
+              <h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight md:text-5xl">
+                The right home starts with the right block.
+              </h2>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+                Skyline compares daily rhythm, housing character, and market
+                position before a buyer falls in love with the wrong fit.
+              </p>
+            </div>
+
+            <div className="border border-[#c9d8e8] bg-white p-5 shadow-xl shadow-slate-900/5">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+                Fit check
+              </p>
+              <div className="mt-5 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {[
+                  ["Daily rhythm", "Commute, errands, dining, and weekend pace"],
+                  ["Housing character", "Building type, scale, privacy, and upkeep"],
+                  ["Market position", "Price band, scarcity, and resale context"],
+                ].map(([label, text]) => (
+                  <div
+                    key={label}
+                    className="border border-[#dbe4ef] bg-[#f8fafc] p-4"
+                  >
+                    <p className="font-black text-[#0f172a]">{label}</p>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="grid gap-6 lg:grid-cols-3">
-            {neighborhoods.map((item) => (
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {neighborhoods.map((item, index) => (
               <article
                 key={item.name}
-                className="overflow-hidden border border-[#dbe4ef] bg-[#f5f8fb]"
+                className="group overflow-hidden border border-[#c9d8e8] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-slate-900/10"
               >
-                <EditorialImage
-                  src={item.image}
-                  alt={`${item.name} neighborhood`}
-                  tone={item.tone}
-                  className="aspect-[3/2] w-full object-cover"
-                />
+                <div className="relative overflow-hidden">
+                  <EditorialImage
+                    src={item.image}
+                    alt={`${item.name} neighborhood`}
+                    tone={item.tone}
+                    className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/78 via-[#0f172a]/12 to-transparent" />
+                  <div className="absolute left-5 right-5 top-5 flex items-start justify-between gap-3">
+                    <span className="bg-white/92 px-3 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#153e75] shadow-lg">
+                      Area 0{index + 1}
+                    </span>
+                    <span className="bg-[#fbbf24] px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#0f172a] shadow-lg">
+                      {item.position}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-5 left-5 right-5 text-white">
+                    <h3 className="text-3xl font-black md:text-4xl">
+                      {item.name}
+                    </h3>
+                    <p className="mt-2 max-w-sm text-sm leading-6 text-white/80">
+                      {item.text}
+                    </p>
+                  </div>
+                </div>
+
                 <div className="p-6">
-                  <h3 className="text-3xl font-black">{item.name}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {item.text}
-                  </p>
-                  <dl className="mt-6 space-y-3 border-t border-slate-200 pt-5 text-sm">
-                    <div className="flex justify-between gap-4">
-                      <dt className="text-slate-500">Connection</dt>
-                      <dd className="text-right font-bold">{item.commute}</dd>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <dt className="text-slate-500">Home types</dt>
-                      <dd className="text-right font-bold">{item.homes}</dd>
-                    </div>
-                    <div className="flex justify-between gap-4">
-                      <dt className="text-slate-500">Position</dt>
-                      <dd className="text-right font-bold">{item.position}</dd>
-                    </div>
+                  <dl className="grid gap-3 text-sm">
+                    {[
+                      ["Connection", item.commute],
+                      ["Home types", item.homes],
+                      ["Position", item.position],
+                    ].map(([label, value]) => (
+                      <div
+                        key={label}
+                        className="flex items-center justify-between gap-4 border border-[#e2e8f0] bg-[#f8fafc] px-4 py-3"
+                      >
+                        <dt className="font-bold text-slate-500">{label}</dt>
+                        <dd className="text-right font-black text-[#0f172a]">
+                          {value}
+                        </dd>
+                      </div>
+                    ))}
                   </dl>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      focusInquiry("Buying", `${item.name} neighborhood fit`)
+                    }
+                    className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-[#153e75] px-5 py-3 text-sm font-black text-white transition hover:bg-[#0f172a] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#93c5fd]/45"
+                  >
+                    Compare this area
+                  </button>
                 </div>
               </article>
             ))}
           </div>
-          <p className="mt-6 text-xs leading-5 text-slate-500">
-            Neighborhood descriptions are fictional portfolio content and are
-            not current market guidance.
-          </p>
+
+          <div className="mt-8 flex flex-col gap-4 border border-[#c9d8e8] bg-white p-5 text-sm text-slate-600 shadow-sm md:flex-row md:items-center md:justify-between">
+            <p className="leading-6">
+              Neighborhood descriptions are fictional portfolio content and are
+              not current market guidance.
+            </p>
+            <a
+              href="#listings"
+              className="inline-flex items-center justify-center rounded-lg border border-[#c9d8e8] px-4 py-2 font-black text-[#153e75] transition hover:border-[#153e75] hover:bg-[#153e75] hover:text-white"
+            >
+              Match listings by area
+            </a>
+          </div>
         </Container>
       </section>
-
       <section
         id="about"
         className="scroll-mt-32 bg-[#0f172a] py-20 text-white md:py-28"

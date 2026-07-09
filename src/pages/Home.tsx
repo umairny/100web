@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState, type ReactNode } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
 import { AnimatedSection, Container, CTAButton } from "../components";
 import { imageUrl } from "../assets/optimized";
 import {
@@ -308,7 +309,66 @@ export function Home() {
 
     return { ...category, liveCount };
   });
+  const heroSlides = [
+    {
+      label: "Portfolio preview",
+      kicker: `${completedDesignCount} live homepages`,
+      title: `Restaurant, beauty, real estate, and fitness collections are live, with ${remainingCount} concepts still planned.`,
+      image: homeImages.heroShowcase,
+      href: "#live-work",
+      cta: "Browse live work",
+      accent: "#f0c76a",
+    },
+    {
+      label: "Restaurant systems",
+      kicker: `${liveRestaurants.length} dining concepts`,
+      title:
+        "Menu-first landing pages with distinct atmospheres, conversion sections, and polished mobile layouts.",
+      image: homeImages.restaurantCollection,
+      href: "/restaurant",
+      cta: "View restaurants",
+      accent: "#ee765c",
+    },
+    {
+      label: "Beauty brands",
+      kicker: `${liveBeauty.length} beauty concepts`,
+      title:
+        "Salon, spa, aesthetics, and wellness pages with soft visuals, clear services, and booking-focused flows.",
+      image: homeImages.beautyCollection,
+      href: "/beauty",
+      cta: "View beauty",
+      accent: "#f2a7bb",
+    },
+    {
+      label: "Category roadmap",
+      kicker: `${categories.length} business categories`,
+      title:
+        "A full portfolio map across restaurants, real estate, fitness, medical, construction, education, retail, and more.",
+      image: homeImages.categoriesOverview,
+      href: "#categories",
+      cta: "View categories",
+      accent: "#1e8b79",
+    },
+  ];
+  const [activeHeroIndex, setActiveHeroIndex] = useState(0);
+  const [isHeroPaused, setIsHeroPaused] = useState(false);
+  const activeHeroSlide = heroSlides[activeHeroIndex];
 
+  useEffect(() => {
+    if (isHeroPaused || heroSlides.length < 2) return;
+
+    const timer = window.setInterval(() => {
+      setActiveHeroIndex((current) => (current + 1) % heroSlides.length);
+    }, 5500);
+
+    return () => window.clearInterval(timer);
+  }, [heroSlides.length, isHeroPaused]);
+
+  const moveHeroSlide = (direction: -1 | 1) => {
+    setActiveHeroIndex(
+      (current) => (current + direction + heroSlides.length) % heroSlides.length,
+    );
+  };
   return (
     <main className="bg-[#f6f1e8] text-[#17211d]">
       <section className="relative -mt-16 overflow-hidden bg-[#10201c] pb-20 pt-24 text-white md:pb-28 md:pt-32">
@@ -370,29 +430,91 @@ export function Home() {
               <div className="relative">
                 <div className="absolute -left-5 top-10 h-32 w-32 rounded-full bg-[#f0c76a]/20 blur-2xl" />
                 <div className="absolute -right-6 bottom-12 h-40 w-40 rounded-full bg-[#ee765c]/25 blur-2xl" />
-                <div className="relative border border-white/12 bg-white/8 p-3 shadow-2xl shadow-black/30">
+                <div
+                  className="relative border border-white/12 bg-white/8 p-3 shadow-2xl shadow-black/30"
+                  onMouseEnter={() => setIsHeroPaused(true)}
+                  onMouseLeave={() => setIsHeroPaused(false)}
+                  onFocusCapture={() => setIsHeroPaused(true)}
+                  onBlurCapture={() => setIsHeroPaused(false)}
+                >
                   <HomeImage
-                    src={homeImages.heroShowcase.src}
-                    alt={homeImages.heroShowcase.alt}
-                    fallbackStyle={homeImages.heroShowcase.fallbackStyle}
-                    className="min-h-[380px] md:min-h-[540px]"
+                    key={activeHeroSlide.label}
+                    src={activeHeroSlide.image.src}
+                    alt={activeHeroSlide.image.alt}
+                    fallbackStyle={activeHeroSlide.image.fallbackStyle}
+                    className="min-h-[430px] md:min-h-[560px]"
                   >
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(0,0,0,0.76))]" />
-                    <div className="absolute left-5 top-5 bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#161616] shadow-lg">
-                      Portfolio preview
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04)_16%,rgba(0,0,0,0.78))]" />
+                    <div className="absolute left-5 top-5 max-w-[calc(100%-8.5rem)] bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#161616] shadow-lg">
+                      {activeHeroSlide.label}
+                    </div>
+                    <div className="absolute right-5 top-5 flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => moveHeroSlide(-1)}
+                        className="grid h-11 w-11 place-items-center rounded-full bg-white/92 text-[#10201c] shadow-lg transition hover:bg-[#f0c76a] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/45"
+                        aria-label="Show previous hero slide"
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => moveHeroSlide(1)}
+                        className="grid h-11 w-11 place-items-center rounded-full bg-white/92 text-[#10201c] shadow-lg transition hover:bg-[#f0c76a] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/45"
+                        aria-label="Show next hero slide"
+                      >
+                        <ChevronRight className="h-5 w-5" />
+                      </button>
                     </div>
                     <div className="absolute bottom-5 left-5 right-5 bg-white/92 p-5 text-[#17211d] shadow-xl backdrop-blur">
-                      <p className="text-sm font-black uppercase tracking-[0.18em] text-[#1e8b79]">
-                        {completedDesignCount} live homepages
+                      <p
+                        className="text-sm font-black uppercase tracking-[0.18em]"
+                        style={{ color: activeHeroSlide.accent }}
+                      >
+                        {activeHeroSlide.kicker}
                       </p>
                       <h2 className="mt-2 text-2xl font-black">
-                        Restaurant, beauty, real estate, and fitness collections
-                        are live, with {remainingCount} concepts still planned.
+                        {activeHeroSlide.title}
                       </h2>
+                      <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                        <Link
+                          to={activeHeroSlide.href}
+                          className="inline-flex items-center justify-center rounded-lg bg-[#10201c] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#1e8b79]"
+                        >
+                          {activeHeroSlide.cta}
+                        </Link>
+                        <div className="flex gap-2" aria-label="Hero slides">
+                          {heroSlides.map((slide, index) => (
+                            <button
+                              key={slide.label}
+                              type="button"
+                              onClick={() => setActiveHeroIndex(index)}
+                              className={`h-3 rounded-full transition ${
+                                index === activeHeroIndex
+                                  ? "w-10 bg-[#10201c]"
+                                  : "w-3 bg-[#10201c]/25 hover:bg-[#10201c]/55"
+                              }`}
+                              aria-label={`Show ${slide.label}`}
+                              aria-current={
+                                index === activeHeroIndex ? "true" : undefined
+                              }
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="absolute inset-x-3 bottom-3 h-1 bg-white/20">
+                      <span
+                        key={`${activeHeroIndex}-${isHeroPaused}`}
+                        className="home-hero-carousel-progress block h-full w-full"
+                        style={{
+                          backgroundColor: activeHeroSlide.accent,
+                          animationPlayState: isHeroPaused ? "paused" : "running",
+                        }}
+                      />
                     </div>
                   </HomeImage>
-                </div>
-              </div>
+                </div>              </div>
             </AnimatedSection>
           </div>
         </Container>
