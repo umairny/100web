@@ -36,85 +36,55 @@ const homeImages = {
     fallbackStyle:
       "bg-[radial-gradient(circle_at_20%_24%,rgba(236,72,153,0.22),transparent_24%),radial-gradient(circle_at_78%_72%,rgba(215,181,109,0.2),transparent_24%),linear-gradient(135deg,#fff0f6,#ffffff)]",
   },
-  componentSystem: {
-    src: imageUrl("home/component-system.webp"),
-    alt: "Reusable website component system with cards, layouts, navigation, and CTA blocks",
+  realEstatePreview: {
+    src: imageUrl("home/real-estate-preview.webp"),
+    alt: "Real estate website collection preview",
     fallbackStyle:
-      "bg-[radial-gradient(circle_at_22%_24%,rgba(139,111,82,0.2),transparent_24%),radial-gradient(circle_at_78%_72%,rgba(47,143,70,0.18),transparent_24%),linear-gradient(135deg,#111827,#374151)]",
+      "bg-[radial-gradient(circle_at_18%_22%,rgba(21,62,117,0.2),transparent_24%),radial-gradient(circle_at_80%_74%,rgba(251,191,36,0.2),transparent_24%),linear-gradient(135deg,#eef6ff,#ffffff)]",
   },
-  categoriesOverview: {
-    src: imageUrl("home/categories-overview.webp"),
-    alt: "Overview of website categories in the 100 website design project",
+  fitnessPreview: {
+    src: imageUrl("home/fitness-preview.webp"),
+    alt: "Fitness website collection preview",
     fallbackStyle:
-      "bg-[radial-gradient(circle_at_20%_22%,rgba(139,111,82,0.2),transparent_24%),radial-gradient(circle_at_80%_72%,rgba(14,165,233,0.16),transparent_24%),linear-gradient(135deg,#ffffff,#f7f2e8)]",
+      "bg-[radial-gradient(circle_at_18%_22%,rgba(20,83,45,0.22),transparent_24%),radial-gradient(circle_at_80%_74%,rgba(132,204,22,0.2),transparent_24%),linear-gradient(135deg,#ecfdf5,#ffffff)]",
   },
-  designProcess: {
-    src: imageUrl("home/design-process.webp"),
-    alt: "Website design workflow from brand direction to client-ready responsive homepage",
+  medicalPreview: {
+    src: imageUrl("home/medical-preview.webp"),
+    alt: "Medical website collection preview",
     fallbackStyle:
-      "bg-[radial-gradient(circle_at_22%_28%,rgba(244,161,26,0.24),transparent_24%),radial-gradient(circle_at_80%_70%,rgba(239,59,45,0.18),transparent_24%),linear-gradient(135deg,#f7f2e8,#ffffff)]",
+      "bg-[radial-gradient(circle_at_18%_22%,rgba(15,118,110,0.2),transparent_24%),radial-gradient(circle_at_80%_74%,rgba(14,165,233,0.16),transparent_24%),linear-gradient(135deg,#ecfeff,#ffffff)]",
+  },
+  constructionPreview: {
+    src: imageUrl("home/construction-preview.webp"),
+    alt: "Construction website collection preview",
+    fallbackStyle:
+      "bg-[radial-gradient(circle_at_18%_22%,rgba(146,64,14,0.22),transparent_24%),radial-gradient(circle_at_80%_74%,rgba(63,63,70,0.18),transparent_24%),linear-gradient(135deg,#fff7ed,#ffffff)]",
+  },
+  educationPreview: {
+    src: imageUrl("home/education-preview.webp"),
+    alt: "Education website collection preview",
+    fallbackStyle:
+      "bg-[radial-gradient(circle_at_18%_22%,rgba(55,48,163,0.2),transparent_24%),radial-gradient(circle_at_80%_74%,rgba(34,197,94,0.16),transparent_24%),linear-gradient(135deg,#eef2ff,#ffffff)]",
+  },
+  ecommercePreview: {
+    src: imageUrl("home/ecommerce-preview.webp"),
+    alt: "E-commerce website collection preview",
+    fallbackStyle:
+      "bg-[radial-gradient(circle_at_18%_22%,rgba(124,58,237,0.2),transparent_24%),radial-gradient(circle_at_80%_74%,rgba(236,72,153,0.16),transparent_24%),linear-gradient(135deg,#faf5ff,#ffffff)]",
+  },
+  portfolioPreview: {
+    src: imageUrl("home/portfolio-preview.webp"),
+    alt: "Portfolio website collection preview",
+    fallbackStyle:
+      "bg-[radial-gradient(circle_at_18%_22%,rgba(3,105,161,0.2),transparent_24%),radial-gradient(circle_at_80%_74%,rgba(56,189,248,0.16),transparent_24%),linear-gradient(135deg,#f0f9ff,#ffffff)]",
+  },
+  saasPreview: {
+    src: imageUrl("home/saas-preview.webp"),
+    alt: "SaaS website collection preview",
+    fallbackStyle:
+      "bg-[radial-gradient(circle_at_18%_22%,rgba(7,89,133,0.2),transparent_24%),radial-gradient(circle_at_80%_74%,rgba(20,184,166,0.16),transparent_24%),linear-gradient(135deg,#e0f2fe,#ffffff)]",
   },
 };
-
-const processSteps = [
-  {
-    title: "Choose a business mood",
-    text: "Each concept starts with audience, service type, palette, layout stance, and a conversion goal.",
-  },
-  {
-    title: "Build the real homepage",
-    text: "The pages include useful sections, local navigation, content hierarchy, CTAs, and responsive layout behavior.",
-  },
-  {
-    title: "Polish the collection",
-    text: "The index pages, hero systems, cards, spacing, and mobile states are tuned so the work feels portfolio-ready.",
-  },
-];
-
-const plannedCategoryBlueprints = [
-  {
-    name: "Medical",
-    focus:
-      "Provider trust, services, patient pathways, appointment booking, insurance cues, and calm accessibility.",
-    palette: ["#0f766e", "#ccfbf1", "#ef4444"],
-    accent: "bg-[#0f766e]",
-  },
-  {
-    name: "Construction",
-    focus:
-      "Project proof, service areas, before-after sections, quote funnels, certifications, and rugged visuals.",
-    palette: ["#3f3f46", "#fef3c7", "#d97706"],
-    accent: "bg-[#3f3f46]",
-  },
-  {
-    name: "Education",
-    focus:
-      "Programs, outcomes, course paths, enrollment CTAs, faculty trust, and parent/student clarity.",
-    palette: ["#3730a3", "#e0e7ff", "#22c55e"],
-    accent: "bg-[#3730a3]",
-  },
-  {
-    name: "E-commerce",
-    focus:
-      "Product discovery, offer hierarchy, category browsing, social proof, cart-first CTAs, and promotions.",
-    palette: ["#7c3aed", "#f3e8ff", "#ec4899"],
-    accent: "bg-[#7c3aed]",
-  },
-  {
-    name: "Portfolio",
-    focus:
-      "Creator positioning, project cards, case studies, service packaging, testimonials, and contact flow.",
-    palette: ["#111827", "#e5e7eb", "#38bdf8"],
-    accent: "bg-[#111827]",
-  },
-  {
-    name: "SaaS",
-    focus:
-      "Product value, feature modules, pricing, integrations, customer proof, and trial conversion.",
-    palette: ["#075985", "#e0f2fe", "#14b8a6"],
-    accent: "bg-[#075985]",
-  },
-];
 
 function HomeImage({
   src,
@@ -178,6 +148,7 @@ export function Home() {
   const liveSaaS = saasWebsites.filter(
     (website) => website.status === "completed" || website.status === "live",
   );
+
   const completedDesignCount =
     liveRestaurants.length +
     liveBeauty.length +
@@ -191,139 +162,128 @@ export function Home() {
     liveSaaS.length;
   const plannedCount = 100;
   const remainingCount = plannedCount - completedDesignCount;
+  const completionPercent = Math.round((completedDesignCount / plannedCount) * 100);
+
   const liveCollections = [
     {
-      title: "Restaurant Collection",
-      text: "Ten complete dining concepts with different hero systems, palettes, and menu-driven sections.",
+      title: "Restaurant",
+      text: "Dining concepts with menu flow, atmosphere, reservations, and visual appetite.",
       href: "/restaurant",
       image: homeImages.restaurantCollection,
       count: liveRestaurants.length,
       tone: "text-[#9a5b25]",
-      button: "View restaurants",
+      button: "Open restaurants",
     },
     {
-      title: "Beauty Collection",
-      text: "Four live beauty concepts plus a roadmap for salons, spas, nails, bridal, skin, and wellness.",
+      title: "Beauty",
+      text: "Salon, spa, bridal, nails, skin, and wellness pages with booking-first UX.",
       href: "/beauty",
       image: homeImages.beautyCollection,
       count: liveBeauty.length,
       tone: "text-[#b76e79]",
-      button: "View beauty",
+      button: "Open beauty",
     },
     {
-      title: "Real Estate Collection",
-      text: "Premium property pages focused on listings, neighborhood trust, agent credibility, and lead capture.",
+      title: "Real Estate",
+      text: "Listings, neighborhoods, agent trust, market positioning, and lead capture.",
       href: "/real-estate",
-      image: homeImages.categoriesOverview,
+      image: homeImages.realEstatePreview,
       count: liveRealEstate.length,
       tone: "text-[#153e75]",
-      button: "View real estate",
+      button: "Open real estate",
     },
     {
-      title: "Fitness Collection",
-      text: "High-energy gym and coaching pages focused on programs, schedules, proof, and trial signups.",
+      title: "Fitness",
+      text: "Gyms, studios, coaching, recovery, membership, and trial conversion pages.",
       href: "/fitness",
-      image: homeImages.componentSystem,
+      image: homeImages.fitnessPreview,
       count: liveFitness.length,
       tone: "text-[#14532d]",
-      button: "View fitness",
+      button: "Open fitness",
     },
     {
-      title: "Medical Collection",
-      text: "Patient-friendly clinic pages focused on trust, services, insurance clarity, and appointment booking.",
+      title: "Medical",
+      text: "Clinic pages built around trust, services, patient pathways, and appointments.",
       href: "/medical",
-      image: homeImages.categoriesOverview,
+      image: homeImages.medicalPreview,
       count: liveMedical.length,
       tone: "text-[#0f766e]",
-      button: "View medical",
+      button: "Open medical",
     },
     {
-      title: "Construction Collection",
-      text: "Contractor and builder pages focused on project proof, services, process clarity, and estimate requests.",
+      title: "Construction",
+      text: "Builder and contractor concepts focused on proof, services, and estimates.",
       href: "/construction",
-      image: homeImages.categoriesOverview,
+      image: homeImages.constructionPreview,
       count: liveConstruction.length,
       tone: "text-[#92400e]",
-      button: "View construction",
+      button: "Open construction",
     },
     {
-      title: "Education Collection",
-      text: "Learning pages focused on curriculum clarity, mentor trust, outcomes, and enrollment flow.",
+      title: "Education",
+      text: "Learning pages with programs, outcomes, faculty trust, and enrollment paths.",
       href: "/education",
-      image: homeImages.categoriesOverview,
+      image: homeImages.educationPreview,
       count: liveEducation.length,
       tone: "text-[#3730a3]",
-      button: "View education",
+      button: "Open education",
     },
     {
-      title: "E-commerce Collection",
-      text: "Retail pages focused on product discovery, offer clarity, trust signals, and checkout momentum.",
+      title: "E-commerce",
+      text: "Retail homepages shaped around discovery, offers, trust, and cart momentum.",
       href: "/e-commerce",
-      image: homeImages.categoriesOverview,
+      image: homeImages.ecommercePreview,
       count: liveEcommerce.length,
       tone: "text-[#7c3aed]",
-      button: "View e-commerce",
+      button: "Open e-commerce",
     },
     {
-      title: "Portfolio Collection",
-      text: "Creator and studio pages focused on positioning, selected work, services, and inquiry quality.",
+      title: "Portfolio",
+      text: "Creator and studio pages for positioning, selected work, services, and inquiry.",
       href: "/portfolio",
-      image: homeImages.categoriesOverview,
+      image: homeImages.portfolioPreview,
       count: livePortfolio.length,
       tone: "text-[#0369a1]",
-      button: "View portfolio",
+      button: "Open portfolio",
     },
     {
-      title: "SaaS Collection",
-      text: "Software product pages focused on value, workflows, integrations, pricing, and trial conversion.",
+      title: "SaaS",
+      text: "Software pages with product value, workflows, integrations, pricing, and trials.",
       href: "/saas",
-      image: homeImages.categoriesOverview,
+      image: homeImages.saasPreview,
       count: liveSaaS.length,
       tone: "text-[#075985]",
-      button: "View SaaS",
+      button: "Open SaaS",
     },
   ];
-  const categoryProgress = categories.map((category) => {
-    const liveCount =
-      category.name === "Restaurant"
-        ? liveRestaurants.length
-        : category.name === "Beauty"
-          ? liveBeauty.length
-          : category.name === "Real Estate"
-            ? liveRealEstate.length
-            : category.name === "Fitness"
-              ? liveFitness.length
-              : category.name === "Medical"
-                ? liveMedical.length
-                : category.name === "Construction"
-                  ? liveConstruction.length
-                  : category.name === "Education"
-                    ? liveEducation.length
-                    : category.name === "E-commerce"
-                      ? liveEcommerce.length
-                      : category.name === "Portfolio"
-                        ? livePortfolio.length
-                        : category.name === "SaaS"
-                          ? liveSaaS.length
-                          : 0;
 
-    return { ...category, liveCount };
-  });
+  const featuredWebsites = [
+    ...liveRestaurants.slice(0, 1),
+    ...liveBeauty.slice(0, 1),
+    ...liveRealEstate.slice(0, 1),
+    ...liveFitness.slice(0, 1),
+    ...liveMedical.slice(0, 1),
+    ...liveConstruction.slice(0, 1),
+    ...liveEducation.slice(0, 1),
+    ...liveEcommerce.slice(0, 1),
+    ...livePortfolio.slice(0, 1),
+    ...liveSaaS.slice(0, 1),
+  ];
+
   const heroSlides = [
     {
       label: "Portfolio preview",
       kicker: `${completedDesignCount} live homepages`,
-      title: `Restaurant, beauty, real estate, and fitness collections are live, with ${remainingCount} concepts still planned.`,
+      title: `Browse ${categories.length} business categories from one focused portfolio hub.`,
       image: homeImages.heroShowcase,
-      href: "#live-work",
-      cta: "Browse live work",
+      href: "#collections",
+      cta: "Browse collections",
       accent: "#f0c76a",
     },
     {
       label: "Restaurant systems",
       kicker: `${liveRestaurants.length} dining concepts`,
-      title:
-        "Menu-first landing pages with distinct atmospheres, conversion sections, and polished mobile layouts.",
+      title: "Menu-first restaurant pages with distinct atmospheres and conversion sections.",
       image: homeImages.restaurantCollection,
       href: "/restaurant",
       cta: "View restaurants",
@@ -332,22 +292,11 @@ export function Home() {
     {
       label: "Beauty brands",
       kicker: `${liveBeauty.length} beauty concepts`,
-      title:
-        "Salon, spa, aesthetics, and wellness pages with soft visuals, clear services, and booking-focused flows.",
+      title: "Salon, spa, skin, and wellness pages with soft visuals and clear booking flows.",
       image: homeImages.beautyCollection,
       href: "/beauty",
       cta: "View beauty",
       accent: "#f2a7bb",
-    },
-    {
-      label: "Category roadmap",
-      kicker: `${categories.length} business categories`,
-      title:
-        "A full portfolio map across restaurants, real estate, fitness, medical, construction, education, retail, and more.",
-      image: homeImages.categoriesOverview,
-      href: "#categories",
-      cta: "View categories",
-      accent: "#1e8b79",
     },
   ];
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
@@ -369,86 +318,101 @@ export function Home() {
       (current) => (current + direction + heroSlides.length) % heroSlides.length,
     );
   };
+
   return (
     <main className="bg-[#f6f1e8] text-[#17211d]">
-      <section className="relative -mt-16 overflow-hidden bg-[#10201c] pb-20 pt-24 text-white md:pb-28 md:pt-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(30,139,121,0.38),transparent_25%),radial-gradient(circle_at_84%_18%,rgba(238,118,92,0.32),transparent_22%),radial-gradient(circle_at_70%_88%,rgba(229,177,90,0.22),transparent_26%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.08)_0_1px,transparent_1px_52px)]" />
+      <section className="relative -mt-16 overflow-hidden bg-[#0d1f1a] pb-12 pt-24 text-white md:pb-16 md:pt-32">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_14%,rgba(30,139,121,0.42),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(238,118,92,0.28),transparent_24%),linear-gradient(135deg,#0d1f1a_0%,#142822_50%,#07110f_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-white/15" />
         <Container>
-          <div className="relative grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <AnimatedSection animation="slide-left">
-              <div className="inline-flex border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[#f0c76a]">
+              <div className="inline-flex border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#f0c76a]">
                 Umair 100 Website Designs
               </div>
-              <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[0.92] md:text-7xl">
-                A portfolio system for real business homepage concepts.
+              <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[0.96] md:text-7xl">
+                A cleaner way to browse complete business homepage demos.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72 md:text-xl">
-                A growing library of complete React, TypeScript, and Tailwind
-                homepage designs, built category by category with distinct brand
-                direction instead of repeated templates.
+                Pick a category, scan the live count, and open polished React
+                homepages built with distinct brand direction instead of the
+                same template wearing different colors.
               </p>
+
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <CTAButton
-                  href="#live-work"
+                  href="#collections"
                   size="lg"
                   className="bg-[#f0c76a] text-[#10201c] hover:bg-white"
                 >
-                  Explore Live Work
+                  Browse Collections
                 </CTAButton>
                 <CTAButton
-                  href="#planned-categories"
+                  href="#featured"
                   variant="outline"
                   size="lg"
                   className="border-white/40 text-white hover:bg-white/10"
                 >
-                  View Roadmap
+                  View Featured Demos
                 </CTAButton>
               </div>
-              <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
-                {[
-                  { value: categories.length, label: "Categories" },
-                  { value: plannedCount, label: "Planned concepts" },
-                  { value: completedDesignCount, label: "Live designs" },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="border border-white/12 bg-white/8 p-5"
-                  >
-                    <p className="text-3xl font-black text-[#f0c76a]">
-                      {stat.value}
+
+              <div className="mt-10 max-w-2xl border border-white/12 bg-white/8 p-5 backdrop-blur">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-white/52">
+                      Portfolio progress
                     </p>
-                    <p className="mt-1 text-xs font-black uppercase tracking-[0.16em] text-white/60">
-                      {stat.label}
+                    <p className="mt-2 text-4xl font-black text-[#f0c76a]">
+                      {completedDesignCount}/{plannedCount}
                     </p>
                   </div>
+                  <p className="max-w-xs text-sm leading-6 text-white/62">
+                    {remainingCount} concepts remaining across {categories.length} planned categories.
+                  </p>
+                </div>
+                <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/12">
+                  <div
+                    className="h-full rounded-full bg-[#f0c76a]"
+                    style={{ width: `${completionPercent}%` }}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {liveCollections.slice(0, 6).map((collection) => (
+                  <Link
+                    key={collection.title}
+                    to={collection.href}
+                    className="rounded-full border border-white/12 bg-white/8 px-4 py-2 text-sm font-bold text-white/72 transition hover:border-[#f0c76a]/60 hover:bg-white/14 hover:text-white"
+                  >
+                    {collection.title} - {collection.count}
+                  </Link>
                 ))}
               </div>
             </AnimatedSection>
 
             <AnimatedSection animation="scale-in" delay="delay-200">
-              <div className="relative">
-                <div className="absolute -left-5 top-10 h-32 w-32 rounded-full bg-[#f0c76a]/20 blur-2xl" />
-                <div className="absolute -right-6 bottom-12 h-40 w-40 rounded-full bg-[#ee765c]/25 blur-2xl" />
-                <div
-                  className="relative border border-white/12 bg-white/8 p-3 shadow-2xl shadow-black/30"
-                  onMouseEnter={() => setIsHeroPaused(true)}
-                  onMouseLeave={() => setIsHeroPaused(false)}
-                  onFocusCapture={() => setIsHeroPaused(true)}
-                  onBlurCapture={() => setIsHeroPaused(false)}
+              <div
+                className="relative overflow-hidden border border-white/12 bg-white/8 p-3 shadow-2xl shadow-black/30"
+                onMouseEnter={() => setIsHeroPaused(true)}
+                onMouseLeave={() => setIsHeroPaused(false)}
+                onFocusCapture={() => setIsHeroPaused(true)}
+                onBlurCapture={() => setIsHeroPaused(false)}
+              >
+                <HomeImage
+                  key={activeHeroSlide.label}
+                  src={activeHeroSlide.image.src}
+                  alt={activeHeroSlide.image.alt}
+                  fallbackStyle={activeHeroSlide.image.fallbackStyle}
+                  className="min-h-[520px]"
                 >
-                  <HomeImage
-                    key={activeHeroSlide.label}
-                    src={activeHeroSlide.image.src}
-                    alt={activeHeroSlide.image.alt}
-                    fallbackStyle={activeHeroSlide.image.fallbackStyle}
-                    className="min-h-[430px] md:min-h-[560px]"
-                  >
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04)_16%,rgba(0,0,0,0.78))]" />
-                    <div className="absolute left-5 top-5 max-w-[calc(100%-8.5rem)] bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#161616] shadow-lg">
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02)_12%,rgba(0,0,0,0.78))]" />
+                  <div className="absolute left-5 right-5 top-5 flex items-start justify-between gap-4">
+                    <div className="bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#161616] shadow-lg">
                       {activeHeroSlide.label}
                     </div>
-                    <div className="absolute right-5 top-5 flex gap-2">
+                    <div className="flex gap-2">
                       <button
                         type="button"
                         onClick={() => moveHeroSlide(-1)}
@@ -466,149 +430,117 @@ export function Home() {
                         <ChevronRight className="h-5 w-5" />
                       </button>
                     </div>
-                    <div className="absolute bottom-5 left-5 right-5 bg-white/92 p-5 text-[#17211d] shadow-xl backdrop-blur">
+                  </div>
+
+                  <div className="absolute bottom-5 left-5 right-5 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+                    <div className="bg-white/94 p-5 text-[#17211d] shadow-xl backdrop-blur">
                       <p
-                        className="text-sm font-black uppercase tracking-[0.18em]"
+                        className="text-sm font-black uppercase tracking-[0.16em]"
                         style={{ color: activeHeroSlide.accent }}
                       >
                         {activeHeroSlide.kicker}
                       </p>
-                      <h2 className="mt-2 text-2xl font-black">
+                      <h2 className="mt-2 max-w-xl text-2xl font-black md:text-3xl">
                         {activeHeroSlide.title}
                       </h2>
-                      <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                        <Link
-                          to={activeHeroSlide.href}
-                          className="inline-flex items-center justify-center rounded-lg bg-[#10201c] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#1e8b79]"
-                        >
-                          {activeHeroSlide.cta}
-                        </Link>
-                        <div className="flex gap-2" aria-label="Hero slides">
-                          {heroSlides.map((slide, index) => (
-                            <button
-                              key={slide.label}
-                              type="button"
-                              onClick={() => setActiveHeroIndex(index)}
-                              className={`h-3 rounded-full transition ${
-                                index === activeHeroIndex
-                                  ? "w-10 bg-[#10201c]"
-                                  : "w-3 bg-[#10201c]/25 hover:bg-[#10201c]/55"
-                              }`}
-                              aria-label={`Show ${slide.label}`}
-                              aria-current={
-                                index === activeHeroIndex ? "true" : undefined
-                              }
-                            />
-                          ))}
-                        </div>
+                      <Link
+                        to={activeHeroSlide.href}
+                        className="mt-5 inline-flex items-center justify-center rounded-lg bg-[#10201c] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#1e8b79]"
+                      >
+                        {activeHeroSlide.cta}
+                      </Link>
+                    </div>
+                    <div className="flex items-center justify-between gap-3 bg-white/94 p-4 shadow-xl backdrop-blur lg:flex-col lg:items-stretch">
+                      <div className="flex gap-2" aria-label="Hero slides">
+                        {heroSlides.map((slide, index) => (
+                          <button
+                            key={slide.label}
+                            type="button"
+                            onClick={() => setActiveHeroIndex(index)}
+                            className={`h-3 rounded-full transition ${
+                              index === activeHeroIndex
+                                ? "w-10 bg-[#10201c]"
+                                : "w-3 bg-[#10201c]/25 hover:bg-[#10201c]/55"
+                            }`}
+                            aria-label={`Show ${slide.label}`}
+                            aria-current={
+                              index === activeHeroIndex ? "true" : undefined
+                            }
+                          />
+                        ))}
                       </div>
+                      <p className="text-xs font-black uppercase tracking-[0.14em] text-[#5f6963]">
+                        {activeHeroIndex + 1}/{heroSlides.length}
+                      </p>
                     </div>
-                    <div className="absolute inset-x-3 bottom-3 h-1 bg-white/20">
-                      <span
-                        key={`${activeHeroIndex}-${isHeroPaused}`}
-                        className="home-hero-carousel-progress block h-full w-full"
-                        style={{
-                          backgroundColor: activeHeroSlide.accent,
-                          animationPlayState: isHeroPaused ? "paused" : "running",
-                        }}
-                      />
-                    </div>
-                  </HomeImage>
-                </div>              </div>
+                  </div>
+
+                  <div className="absolute inset-x-3 bottom-3 h-1 bg-white/20">
+                    <span
+                      key={`${activeHeroIndex}-${isHeroPaused}`}
+                      className="home-hero-carousel-progress block h-full w-full"
+                      style={{
+                        backgroundColor: activeHeroSlide.accent,
+                        animationPlayState: isHeroPaused ? "paused" : "running",
+                      }}
+                    />
+                  </div>
+                </HomeImage>
+              </div>
             </AnimatedSection>
           </div>
         </Container>
       </section>
-
-      <section className="border-b border-[#ddd2c0] bg-[#fffaf1] py-8">
+      <section id="collections" className="py-16 md:py-24">
         <Container>
-          <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
-            <div className="flex flex-wrap gap-2">
-              {[
-                "React",
-                "TypeScript",
-                "Tailwind CSS",
-                "Responsive",
-                "Business homepages",
-                "Portfolio-ready",
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-[#ddd2c0] bg-white px-4 py-2 text-sm font-bold text-[#5f6963]"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-            <div className="grid grid-cols-2 overflow-hidden border border-[#ddd2c0] bg-white text-center">
-              <div className="border-r border-[#ddd2c0] px-5 py-3">
-                <p className="text-2xl font-black">{completedDesignCount}</p>
-                <p className="text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#5f6963]">
-                  Complete
-                </p>
-              </div>
-              <div className="px-5 py-3">
-                <p className="text-2xl font-black">{remainingCount}</p>
-                <p className="text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#5f6963]">
-                  Remaining
-                </p>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section id="live-work" className="py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="mb-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <AnimatedSection className="mb-10 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#1e8b79]">
-                Live collections
+                Collection hubs
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Four category hubs with full-page concepts inside.
+                Ten direct paths into finished homepage concepts.
               </h2>
             </div>
             <p className="max-w-2xl text-lg leading-8 text-[#5f6963]">
-              The homepage now leads with what is actually useful: direct paths
-              into complete collections, visible progress, and a clear
-              explanation of how the system grows.
+              The homepage now works like an index: choose the business type,
+              open the category, then review the individual demos inside.
             </p>
           </AnimatedSection>
 
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
             {liveCollections.map((collection) => (
               <Link
                 key={collection.title}
                 to={collection.href}
-                className="group overflow-hidden bg-white shadow-xl shadow-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                className="group overflow-hidden bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
               >
                 <HomeImage
                   src={collection.image.src}
                   alt={collection.image.alt}
                   fallbackStyle={collection.image.fallbackStyle}
-                  className="min-h-[330px]"
+                  className="min-h-[220px]"
                 >
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(0,0,0,0.72))]" />
-                  <div className="absolute left-5 top-5 bg-white/92 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#161616]">
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(0,0,0,0.72))]" />
+                  <div className="absolute left-4 top-4 bg-white/94 px-3 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#161616]">
                     {collection.count} live
                   </div>
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <p className="text-2xl font-black">{collection.title}</p>
+                    <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-white/70">
+                      {collection.button}
+                    </p>
+                  </div>
                 </HomeImage>
-                <div className="p-8">
+                <div className="p-5">
                   <p
-                    className={`text-sm font-black uppercase tracking-[0.22em] ${collection.tone}`}
+                    className={`text-xs font-black uppercase tracking-[0.18em] ${collection.tone}`}
                   >
-                    Collection hub
+                    Category hub
                   </p>
-                  <h3 className="mt-3 text-4xl font-black">
-                    {collection.title}
-                  </h3>
-                  <p className="mt-4 text-base leading-7 text-[#5f6963]">
+                  <p className="mt-3 text-sm leading-6 text-[#5f6963]">
                     {collection.text}
                   </p>
-                  <div className="mt-7 inline-flex w-full items-center justify-center rounded-lg bg-[#10201c] px-5 py-3 text-sm font-bold text-white transition group-hover:bg-[#1e8b79]">
-                    {collection.button}
-                  </div>
                 </div>
               </Link>
             ))}
@@ -616,73 +548,25 @@ export function Home() {
         </Container>
       </section>
 
-      <section className="border-y border-[#ddd2c0] bg-[#fffaf1] py-20 md:py-28">
+      <section id="featured" className="border-y border-[#ddd2c0] bg-[#fffaf1] py-16 md:py-24">
         <Container>
-          <AnimatedSection className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#1e8b79]">
-                Portfolio structure
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                The project is organized like a product, not a pile of pages.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-[#5f6963]">
-                Each category gets its own index, each business gets a full
-                homepage, and each completed page is designed to feel like a
-                different real-world brand.
-              </p>
-            </div>
-
-            <div className="grid gap-5 md:grid-cols-3">
-              {processSteps.map((step, index) => (
-                <article
-                  key={step.title}
-                  className="border border-[#ddd2c0] bg-white p-6 shadow-sm"
-                >
-                  <p className="text-5xl font-black text-[#ee765c]">
-                    0{index + 1}
-                  </p>
-                  <h3 className="mt-6 text-2xl font-black">{step.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[#5f6963]">
-                    {step.text}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </AnimatedSection>
-        </Container>
-      </section>
-
-      <section id="featured" className="py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <AnimatedSection className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#1e8b79]">
                 Featured work
               </p>
               <h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight md:text-5xl">
-                All ten categories now have live starter concepts ready to
-                review.
+                A quick sample from every live category.
               </h2>
             </div>
             <p className="max-w-md text-base leading-7 text-[#5f6963]">
-              A tighter preview of the live work, with links into each live
-              collection page for the full set.
+              Use this section for fast review, then jump into the full category
+              hub when a direction feels right.
             </p>
           </AnimatedSection>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              ...liveRestaurants.slice(0, 1),
-              ...liveBeauty.slice(0, 1),
-              ...liveRealEstate.slice(0, 1),
-              ...liveFitness.slice(0, 1),
-              ...liveMedical.slice(0, 1),
-              ...liveConstruction.slice(0, 1),
-              ...liveEducation.slice(0, 1),
-              ...liveEcommerce.slice(0, 1),
-              ...livePortfolio.slice(0, 1),
-              ...liveSaaS.slice(0, 1),
-            ].map((website, index) => (
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+            {featuredWebsites.map((website, index) => (
               <Link
                 key={website.id}
                 to={`/${website.category.toLowerCase().replace(/\s+/g, "-")}/${website.slug}`}
@@ -697,7 +581,7 @@ export function Home() {
                 }`}
               >
                 <div
-                  className="relative h-44 overflow-hidden"
+                  className="relative h-40 overflow-hidden"
                   style={{
                     backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 55%, ${website.colors.accent} 100%)`,
                   }}
@@ -711,7 +595,7 @@ export function Home() {
                     />
                   )}
                   <div
-                    className={`absolute inset-0 ${website.image ? "bg-gradient-to-t from-black/45 via-black/5 to-transparent" : "bg-[radial-gradient(circle_at_24%_24%,rgba(255,255,255,0.58),transparent_25%),radial-gradient(circle_at_78%_76%,rgba(255,255,255,0.26),transparent_28%)]"}`}
+                    className={`absolute inset-0 ${website.image ? "bg-gradient-to-t from-black/50 via-black/5 to-transparent" : "bg-[radial-gradient(circle_at_24%_24%,rgba(255,255,255,0.58),transparent_25%),radial-gradient(circle_at_78%_76%,rgba(255,255,255,0.26),transparent_28%)]"}`}
                   />
                   <div className="absolute bottom-4 left-4 flex gap-2">
                     {[
@@ -721,23 +605,23 @@ export function Home() {
                     ].map((color) => (
                       <span
                         key={color}
-                        className="h-6 w-6 rounded-full border border-white/75"
+                        className="h-5 w-5 rounded-full border border-white/75"
                         style={{ backgroundColor: color }}
                       />
                     ))}
                   </div>
                 </div>
-                <div className="p-6">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#1e8b79]">
+                <div className="p-5">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#1e8b79]">
                     {website.category}
                   </p>
-                  <h3 className="mt-3 text-2xl font-black transition group-hover:text-[#1e8b79]">
+                  <h3 className="mt-3 text-xl font-black transition group-hover:text-[#1e8b79]">
                     {website.title}
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-[#5f6963]">
                     {website.shortDescription}
                   </p>
-                  <div className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[#10201c] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#1e8b79]">
+                  <div className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-[#10201c] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#1e8b79]">
                     Open design
                   </div>
                 </div>
@@ -747,250 +631,48 @@ export function Home() {
         </Container>
       </section>
 
-      <section
-        id="categories"
-        className="border-y border-[#ddd2c0] bg-[#f6f1e8] py-20 md:py-28"
-      >
-        <Container>
-          <AnimatedSection className="mb-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#1e8b79]">
-                The full plan
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Ten categories, one hundred practical homepage concepts.
-              </h2>
-            </div>
-            <p className="max-w-2xl text-lg leading-8 text-[#5f6963]">
-              Restaurants and beauty are underway. The remaining categories stay
-              visible as the roadmap, so the project feels intentional even
-              before every page is live.
-            </p>
-          </AnimatedSection>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {categoryProgress.map((category) => (
-              <Link
-                key={category.name}
-                to={category.href || "#categories"}
-                className={`group min-h-56 overflow-hidden bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl ${
-                  category.href ? "" : "pointer-events-none opacity-75"
-                }`}
-              >
-                <div className={`h-2 bg-gradient-to-r ${category.color}`} />
-                <div className="mt-6 flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-3xl font-black">{category.name}</p>
-                    <p className="mt-3 text-sm leading-6 text-[#5f6963]">
-                      {category.description}
-                    </p>
-                  </div>
-                  <span className="text-2xl">{category.icon}</span>
-                </div>
-                <div className="mt-8 flex items-end justify-between">
-                  <div>
-                    <p className="text-3xl font-black text-[#ee765c]">
-                      {category.liveCount}
-                    </p>
-                    <p className="text-xs font-black uppercase tracking-[0.16em] text-[#5f6963]">
-                      Live
-                    </p>
-                  </div>
-                  <p className="text-xs font-black uppercase tracking-[0.16em] text-[#5f6963]">
-                    {category.href ? "Open" : "Planned"}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section
-        id="about-project"
-        className="bg-[#10201c] py-20 text-white md:py-28"
-      >
-        <Container>
-          <AnimatedSection className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0c76a]">
-                Why this works
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Complete page systems make the portfolio easier to judge.
-              </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/70">
-                Instead of isolated hero shots, each concept has sections,
-                navigation, CTA behavior, responsive structure, and enough
-                detail to understand the business direction.
-              </p>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              {[
-                "Distinct category indexes",
-                "Full responsive homepages",
-                "Brand-specific color systems",
-                "Reusable React components",
-              ].map((item) => (
-                <article
-                  key={item}
-                  className="border border-white/10 bg-white/5 p-6"
-                >
-                  <div className="mb-8 h-2 w-16 bg-[#f0c76a]" />
-                  <h3 className="text-2xl font-black">{item}</h3>
-                  <p className="mt-3 leading-7 text-white/55">
-                    Built for scanning, extending, and presenting.
-                  </p>
-                </article>
-              ))}
-            </div>
-          </AnimatedSection>
-        </Container>
-      </section>
-
-      <section className="bg-white py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-center">
-            <div className="border border-[#e5dccd] bg-[#f8f4ec] p-8 md:p-10">
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#9a5b25]">
-                Design system
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Shared components, different personalities.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-[#6a6258]">
-                Cards, nav, CTA buttons, image fallbacks, motion classes, and
-                layout shells are reused, while each business gets its own
-                visual stance.
-              </p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {[
-                  "Hero systems",
-                  "Collection cards",
-                  "Responsive spacing",
-                  "CTA patterns",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="border border-[#e5dccd] bg-white p-5"
-                  >
-                    <p className="font-black">{item}</p>
-                    <p className="mt-2 text-sm leading-6 text-[#6a6258]">
-                      Shared base, tuned per brand.
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <HomeImage
-              src={homeImages.componentSystem.src}
-              alt={homeImages.componentSystem.alt}
-              fallbackStyle={homeImages.componentSystem.fallbackStyle}
-              className="min-h-[430px] shadow-2xl shadow-black/10"
-            >
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.68))]" />
-              <div className="absolute bottom-5 left-5 right-5 bg-white/92 p-5 text-[#161616] shadow-xl">
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#9a5b25]">
-                  Component library
-                </p>
-                <p className="mt-2 text-2xl font-black">
-                  One system, many business moods.
-                </p>
-              </div>
-            </HomeImage>
-          </AnimatedSection>
-        </Container>
-      </section>
-
-      <section id="roadmap" className="bg-[#f8f4ec] py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-            <HomeImage
-              src={homeImages.designProcess.src}
-              alt={homeImages.designProcess.alt}
-              fallbackStyle={homeImages.designProcess.fallbackStyle}
-              className="min-h-[420px] shadow-2xl shadow-black/10"
-            />
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#9a5b25]">
-                Build roadmap
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Keep expanding in focused, reviewable batches.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-[#6a6258]">
-                The next best work is continuing category by category, keeping
-                every index page and individual homepage coherent as the project
-                grows.
-              </p>
-              <div className="mt-8 space-y-3">
-                {[
-                  [
-                    "Live now",
-                    "Restaurant, beauty, real estate, and fitness categories",
-                  ],
-                  ["Next focus", "Expand each category to 10"],
-                  ["Long-term goal", "100 polished homepage concepts"],
-                ].map(([label, text]) => (
-                  <div
-                    key={label}
-                    className="border border-[#e5dccd] bg-white p-5"
-                  >
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#9a5b25]">
-                      {label}
-                    </p>
-                    <p className="mt-2 text-xl font-black">{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-        </Container>
-      </section>
-
-      <section className="py-20 md:py-28">
+      <section className="py-16 md:py-24">
         <Container>
           <AnimatedSection
             animation="scale-in"
-            className="overflow-hidden bg-[#161616] text-white shadow-2xl"
+            className="overflow-hidden bg-[#10201c] text-white shadow-2xl"
           >
             <div className="grid gap-8 p-8 md:grid-cols-[1fr_0.82fr] md:p-12 lg:p-16">
               <div>
-                <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f4c76d]">
-                  Next step
+                <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0c76a]">
+                  Portfolio status
                 </p>
                 <h2 className="mt-4 max-w-3xl text-4xl font-black leading-tight md:text-5xl">
-                  Review the live collections, then keep building the next
-                  category.
+                  {completedDesignCount} live concepts across {categories.length} categories.
                 </h2>
                 <p className="mt-5 max-w-2xl text-lg leading-8 text-white/70">
-                  The homepage now acts as a cleaner command center for the full
-                  portfolio: what is live, why it matters, and where the project
-                  is going.
+                  The page is intentionally shorter now: fewer explanations,
+                  more direct routes into the work.
                 </p>
               </div>
               <div className="bg-white p-6 text-[#161616]">
                 <p className="text-sm font-black uppercase tracking-[0.2em] text-[#6a6258]">
-                  Quick links
+                  Start here
                 </p>
                 <div className="mt-6 grid gap-3">
-                  <Link
-                    to="/restaurant"
-                    className="bg-[#f8f4ec] p-4 font-black transition hover:bg-[#f4c76d]"
-                  >
-                    Restaurant Collection
-                  </Link>
-                  <Link
-                    to="/beauty"
-                    className="bg-[#fff0f6] p-4 font-black transition hover:bg-[#f5b6c8]"
-                  >
-                    Beauty Collection
-                  </Link>
                   <a
-                    href="#categories"
+                    href="#collections"
+                    className="bg-[#f8f4ec] p-4 font-black transition hover:bg-[#f0c76a]"
+                  >
+                    Browse all collections
+                  </a>
+                  <a
+                    href="#featured"
+                    className="bg-[#eef7f3] p-4 font-black transition hover:bg-[#b9e5d9]"
+                  >
+                    Review featured concepts
+                  </a>
+                  <Link
+                    to="/fitness"
                     className="bg-gray-100 p-4 font-black transition hover:bg-gray-200"
                   >
-                    Category Roadmap
-                  </a>
+                    Latest category: Fitness
+                  </Link>
                 </div>
               </div>
             </div>
