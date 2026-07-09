@@ -1,4 +1,4 @@
-import { imageUrl } from "../../assets/images";
+import { imageUrl } from "../../assets/optimized";
 import type { WebsiteDesign } from "../websites";
 export const educationWebsites: WebsiteDesign[] = [
   {
@@ -9,7 +9,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "Online academy homepage with curriculum previews, mentor trust, student outcomes, and enrollment flow",
     slug: "learnsphere-academy",
-    image: imageUrl("home/education-preview.png"),
+    image: imageUrl("home/education-preview.webp"),
     colors: {
       primary: "#3730a3",
       secondary: "#e0e7ff",
@@ -19,4 +19,3 @@ export const educationWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-

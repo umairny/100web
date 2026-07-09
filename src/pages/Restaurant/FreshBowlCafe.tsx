@@ -1,27 +1,27 @@
-import { Link } from 'react-router-dom'
-import { Container, CTAButton, SubWebsiteNav } from '../../components'
-import { imageUrl } from "../../assets/images";
+import { Link } from "react-router-dom";
+import { Container, CTAButton, SubWebsiteNav } from "../../components";
+import { imageUrl } from "../../assets/optimized";
 
 const bowls = [
   {
-    name: 'Avocado Garden Bowl',
-    detail: 'Quinoa, avocado, cucumber, herbs, lemon tahini',
-    image: imageUrl('restaurent/freshbowl-cafe/avacado.png'),
-    alt: 'Avocado garden bowl with quinoa, cucumber, greens, and lemon tahini',
+    name: "Avocado Garden Bowl",
+    detail: "Quinoa, avocado, cucumber, herbs, lemon tahini",
+    image: imageUrl("restaurent/freshbowl-cafe/avacado.webp"),
+    alt: "Avocado garden bowl with quinoa, cucumber, greens, and lemon tahini",
   },
   {
-    name: 'Sunrise Smoothie Bowl',
-    detail: 'Mango, banana, granola, berries, chia crunch',
-    image: imageUrl('restaurent/freshbowl-cafe/sunrise.png'),
-    alt: 'Colorful sunrise smoothie bowl topped with berries, granola, and fruit',
+    name: "Sunrise Smoothie Bowl",
+    detail: "Mango, banana, granola, berries, chia crunch",
+    image: imageUrl("restaurent/freshbowl-cafe/sunrise.webp"),
+    alt: "Colorful sunrise smoothie bowl topped with berries, granola, and fruit",
   },
   {
-    name: 'Protein Harvest Bowl',
-    detail: 'Greens, brown rice, chickpeas, roasted sweet potato',
-    image: imageUrl('restaurent/freshbowl-cafe/protein.png'),
-    alt: 'Protein harvest bowl with chickpeas, greens, rice, and roasted sweet potato',
+    name: "Protein Harvest Bowl",
+    detail: "Greens, brown rice, chickpeas, roasted sweet potato",
+    image: imageUrl("restaurent/freshbowl-cafe/protein.webp"),
+    alt: "Protein harvest bowl with chickpeas, greens, rice, and roasted sweet potato",
   },
-]
+];
 
 export function FreshBowlCafe() {
   return (
@@ -29,9 +29,9 @@ export function FreshBowlCafe() {
       <SubWebsiteNav
         brand="FreshBowl Cafe"
         links={[
-          { label: 'Bowls', href: '#bowls' },
-          { label: 'Nutrition', href: '#nutrition' },
-          { label: 'Build Yours', href: '#build' },
+          { label: "Bowls", href: "#bowls" },
+          { label: "Nutrition", href: "#nutrition" },
+          { label: "Build Yours", href: "#build" },
         ]}
         ctaLabel="Start Order"
         ctaHref="#order"
@@ -53,7 +53,7 @@ export function FreshBowlCafe() {
             <div className="absolute left-1/2 top-14 h-80 w-80 -translate-x-1/2 rounded-full bg-[#eef6dc] md:left-12 md:translate-x-0" />
             <div className="absolute left-1/2 top-24 h-64 w-64 -translate-x-1/2 overflow-hidden rounded-full border-[18px] border-white bg-[#eef6dc] shadow-inner md:left-20 md:translate-x-0">
               <img
-                src={imageUrl("restaurent/freshbowl-cafe/hero-bowl.png")}
+                src={imageUrl("restaurent/freshbowl-cafe/hero-bowl.webp")}
                 alt="Top-down fresh grain bowl with avocado, greens, chickpeas, herbs, and tahini"
                 className="h-full w-full object-cover"
               />
@@ -62,13 +62,15 @@ export function FreshBowlCafe() {
 
             <div className="absolute left-1/2 top-80 grid w-72 -translate-x-1/2 rotate-[-3deg] grid-cols-2 gap-3 rounded-[2rem] border border-[#dce8c2] bg-white p-4 shadow-xl md:left-2 md:translate-x-0">
               {[
-                ['Base', 'quinoa'],
-                ['Green', 'kale'],
-                ['Protein', 'chickpea'],
-                ['Sauce', 'tahini'],
+                ["Base", "quinoa"],
+                ["Green", "kale"],
+                ["Protein", "chickpea"],
+                ["Sauce", "tahini"],
               ].map(([label, value]) => (
                 <div key={label} className="rounded-2xl bg-[#fbf7ed] p-3">
-                  <p className="text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#2f8f46]">{label}</p>
+                  <p className="text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#2f8f46]">
+                    {label}
+                  </p>
                   <p className="mt-1 font-black text-[#26332a]">{value}</p>
                 </div>
               ))}
@@ -80,32 +82,51 @@ export function FreshBowlCafe() {
           </div>
 
           <div className="text-center md:order-2 md:text-right">
-            <p className="text-sm font-black uppercase tracking-[0.26em] text-[#2f8f46]">Healthy bowl cafe</p>
+            <p className="text-sm font-black uppercase tracking-[0.26em] text-[#2f8f46]">
+              Healthy bowl cafe
+            </p>
             <h1 className="mx-auto mt-4 max-w-4xl text-5xl font-black leading-[0.96] md:ml-auto md:mr-0 md:text-7xl">
               Fresh meals that move at your pace.
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-[#5f6d61] md:ml-auto md:mr-0">
-              Salads, smoothie bowls, and nourishing grain bowls built for bright lunches, fast pickup,
-              and everyday wellness without the overthinking.
+              Salads, smoothie bowls, and nourishing grain bowls built for
+              bright lunches, fast pickup, and everyday wellness without the
+              overthinking.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-end">
-              <CTAButton href="#order" size="lg" className="bg-[#2f8f46] hover:bg-[#287a3d]">
+              <CTAButton
+                href="#order"
+                size="lg"
+                className="bg-[#2f8f46] hover:bg-[#287a3d]"
+              >
                 Start Your Order
               </CTAButton>
-              <CTAButton href="#build" variant="outline" size="lg" className="border-[#2f8f46] bg-white/65 text-[#2f8f46] hover:bg-[#eef6dc]">
+              <CTAButton
+                href="#build"
+                variant="outline"
+                size="lg"
+                className="border-[#2f8f46] bg-white/65 text-[#2f8f46] hover:bg-[#eef6dc]"
+              >
                 Build a Bowl
               </CTAButton>
             </div>
 
             <div className="mx-auto mt-10 grid max-w-xl gap-3 sm:grid-cols-3 md:ml-auto md:mr-0">
               {[
-                { value: '15+', label: 'toppings' },
-                { value: '6', label: 'house sauces' },
-                { value: '10m', label: 'pickup window' },
+                { value: "15+", label: "toppings" },
+                { value: "6", label: "house sauces" },
+                { value: "10m", label: "pickup window" },
               ].map((item) => (
-                <div key={item.label} className="border border-[#dce8c2] bg-white/80 p-4 text-center shadow-sm md:text-right">
-                  <p className="text-2xl font-black text-[#2f8f46]">{item.value}</p>
-                  <p className="mt-1 text-xs font-black uppercase tracking-[0.14em] text-[#5f6d61]">{item.label}</p>
+                <div
+                  key={item.label}
+                  className="border border-[#dce8c2] bg-white/80 p-4 text-center shadow-sm md:text-right"
+                >
+                  <p className="text-2xl font-black text-[#2f8f46]">
+                    {item.value}
+                  </p>
+                  <p className="mt-1 text-xs font-black uppercase tracking-[0.14em] text-[#5f6d61]">
+                    {item.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -117,14 +138,21 @@ export function FreshBowlCafe() {
         <Container className="grid gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
           <div className="rounded-[2rem] bg-[#eef6dc] p-8">
             <p className="text-5xl font-black text-[#2f8f46]">15+</p>
-            <p className="mt-3 text-xl font-black">fresh toppings prepped daily</p>
+            <p className="mt-3 text-xl font-black">
+              fresh toppings prepped daily
+            </p>
           </div>
           <div>
-            <p className="font-black uppercase tracking-[0.24em] text-[#2f8f46]">About FreshBowl</p>
-            <h2 className="mt-3 text-4xl font-black md:text-5xl">Clean food without making lunch complicated.</h2>
+            <p className="font-black uppercase tracking-[0.24em] text-[#2f8f46]">
+              About FreshBowl
+            </p>
+            <h2 className="mt-3 text-4xl font-black md:text-5xl">
+              Clean food without making lunch complicated.
+            </h2>
             <p className="mt-5 text-lg leading-8 text-[#5f6d61]">
-              We make quick meals feel calm and considered, using crisp produce, filling grains, bright sauces,
-              and simple combinations that keep you moving.
+              We make quick meals feel calm and considered, using crisp produce,
+              filling grains, bright sauces, and simple combinations that keep
+              you moving.
             </p>
           </div>
         </Container>
@@ -133,12 +161,19 @@ export function FreshBowlCafe() {
       <section id="bowls" className="py-20 md:py-28">
         <Container>
           <div className="mb-12 text-center">
-            <p className="font-black uppercase tracking-[0.24em] text-[#2f8f46]">Popular bowls</p>
-            <h2 className="mt-3 text-4xl font-black md:text-5xl">Colorful, filling, easy to love.</h2>
+            <p className="font-black uppercase tracking-[0.24em] text-[#2f8f46]">
+              Popular bowls
+            </p>
+            <h2 className="mt-3 text-4xl font-black md:text-5xl">
+              Colorful, filling, easy to love.
+            </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {bowls.map((bowl) => (
-              <article key={bowl.name} className="group overflow-hidden rounded-[2rem] bg-white p-4 shadow-sm transition duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#2f8f46]/10">
+              <article
+                key={bowl.name}
+                className="group overflow-hidden rounded-[2rem] bg-white p-4 shadow-sm transition duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#2f8f46]/10"
+              >
                 <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-[1.6rem] bg-[#eef6dc]">
                   <img
                     src={bowl.image}
@@ -161,17 +196,34 @@ export function FreshBowlCafe() {
         </Container>
       </section>
 
-      <section id="nutrition" className="bg-[#26332a] py-20 text-white md:py-28">
+      <section
+        id="nutrition"
+        className="bg-[#26332a] py-20 text-white md:py-28"
+      >
         <Container>
           <div className="mb-12 max-w-2xl">
-            <p className="font-black uppercase tracking-[0.24em] text-[#9fbe5a]">Nutrition benefits</p>
-            <h2 className="mt-3 text-4xl font-black md:text-5xl">Built around balance.</h2>
+            <p className="font-black uppercase tracking-[0.24em] text-[#9fbe5a]">
+              Nutrition benefits
+            </p>
+            <h2 className="mt-3 text-4xl font-black md:text-5xl">
+              Built around balance.
+            </h2>
           </div>
           <div className="grid gap-4 md:grid-cols-4">
-            {['Fiber-rich grains', 'Lean proteins', 'Fresh greens', 'House dressings'].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/5 p-6">
+            {[
+              "Fiber-rich grains",
+              "Lean proteins",
+              "Fresh greens",
+              "House dressings",
+            ].map((item) => (
+              <div
+                key={item}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6"
+              >
                 <h3 className="text-2xl font-black">{item}</h3>
-                <p className="mt-3 text-white/70">Simple ingredients that make meals satisfying and bright.</p>
+                <p className="mt-3 text-white/70">
+                  Simple ingredients that make meals satisfying and bright.
+                </p>
               </div>
             ))}
           </div>
@@ -181,11 +233,19 @@ export function FreshBowlCafe() {
       <section id="build" className="py-20 md:py-28">
         <Container className="grid gap-10 md:grid-cols-2 md:items-center">
           <div>
-            <p className="font-black uppercase tracking-[0.24em] text-[#2f8f46]">Build your bowl</p>
-            <h2 className="mt-3 text-4xl font-black md:text-5xl">Pick a base, add color, finish with sauce.</h2>
+            <p className="font-black uppercase tracking-[0.24em] text-[#2f8f46]">
+              Build your bowl
+            </p>
+            <h2 className="mt-3 text-4xl font-black md:text-5xl">
+              Pick a base, add color, finish with sauce.
+            </h2>
           </div>
           <div className="space-y-4">
-            {['Base: greens, rice, quinoa, or noodles', 'Protein: chickpeas, chicken, tofu, or egg', 'Finish: herbs, seeds, crunch, and dressing'].map((step) => (
+            {[
+              "Base: greens, rice, quinoa, or noodles",
+              "Protein: chickpeas, chicken, tofu, or egg",
+              "Finish: herbs, seeds, crunch, and dressing",
+            ].map((step) => (
               <div key={step} className="rounded-2xl bg-white p-6 shadow-sm">
                 <p className="text-xl font-black">{step}</p>
               </div>
@@ -196,10 +256,16 @@ export function FreshBowlCafe() {
 
       <section className="bg-white py-20 md:py-28">
         <Container className="grid gap-6 md:grid-cols-3">
-          {['My weekday lunch reset.', 'Fresh, fast, and actually filling.', 'The smoothie bowls taste like sunshine.'].map((quote) => (
+          {[
+            "My weekday lunch reset.",
+            "Fresh, fast, and actually filling.",
+            "The smoothie bowls taste like sunshine.",
+          ].map((quote) => (
             <blockquote key={quote} className="rounded-3xl bg-[#fbf7ed] p-8">
               <p className="text-xl font-bold leading-8">"{quote}"</p>
-              <footer className="mt-6 text-sm font-black uppercase tracking-[0.18em] text-[#2f8f46]">Cafe guest</footer>
+              <footer className="mt-6 text-sm font-black uppercase tracking-[0.18em] text-[#2f8f46]">
+                Cafe guest
+              </footer>
             </blockquote>
           ))}
         </Container>
@@ -207,15 +273,28 @@ export function FreshBowlCafe() {
 
       <section id="order" className="bg-[#9fbe5a] py-20">
         <Container className="text-center">
-          <h2 className="text-4xl font-black md:text-5xl">Start fresh today.</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-[#26332a]/80">Order ahead for pickup, or build your bowl at the counter.</p>
-          <CTAButton href="tel:555-0166" size="lg" className="mt-8 bg-[#26332a] text-white hover:bg-[#1c261f]">Call (555) 016-6600</CTAButton>
+          <h2 className="text-4xl font-black md:text-5xl">
+            Start fresh today.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-[#26332a]/80">
+            Order ahead for pickup, or build your bowl at the counter.
+          </p>
+          <CTAButton
+            href="tel:555-0166"
+            size="lg"
+            className="mt-8 bg-[#26332a] text-white hover:bg-[#1c261f]"
+          >
+            Call (555) 016-6600
+          </CTAButton>
         </Container>
       </section>
 
       <section className="border-t border-[#dce8c2] py-8">
         <Container>
-          <Link to="/restaurant" className="font-bold text-[#2f8f46] hover:text-[#26332a]">
+          <Link
+            to="/restaurant"
+            className="font-bold text-[#2f8f46] hover:text-[#26332a]"
+          >
             Back to Restaurant Collection
           </Link>
         </Container>
@@ -224,9 +303,11 @@ export function FreshBowlCafe() {
       <footer className="py-10">
         <Container className="flex flex-col justify-between gap-4 text-sm md:flex-row">
           <p className="font-black">FreshBowl Cafe</p>
-          <p className="text-[#5f6d61]">75 Wellness Way | Bowls, smoothies, salads</p>
+          <p className="text-[#5f6d61]">
+            75 Wellness Way | Bowls, smoothies, salads
+          </p>
         </Container>
       </footer>
     </main>
-  )
+  );
 }

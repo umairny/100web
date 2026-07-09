@@ -1,4 +1,4 @@
-import { imageUrl } from "../../assets/images";
+import { imageUrl } from "../../assets/optimized";
 import type { WebsiteDesign } from "../websites";
 export const constructionWebsites: WebsiteDesign[] = [
   {
@@ -9,7 +9,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "General contractor homepage with project proof, service clarity, process steps, and estimate conversion",
     slug: "forgepoint-builders",
-    image: imageUrl("home/construction-preview.png"),
+    image: imageUrl("home/construction-preview.webp"),
     colors: {
       primary: "#3f3f46",
       secondary: "#fef3c7",
@@ -19,4 +19,3 @@ export const constructionWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-

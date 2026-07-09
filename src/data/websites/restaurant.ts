@@ -1,4 +1,4 @@
-import { imageUrl } from "../../assets/images";
+import { imageUrl } from "../../assets/optimized";
 import type { WebsiteDesign } from "../websites";
 export const restaurantWebsites: WebsiteDesign[] = [
   {
@@ -8,7 +8,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     style: "warm, premium, friendly, minimal",
     shortDescription: "Artisan coffee roastery with a cozy neighborhood vibe",
     slug: "brewnest-coffee",
-    image: imageUrl("restaurent/brewnest-coffee-card.png"),
+    image: imageUrl("restaurent/brewnest-coffee-card.webp"),
     colors: {
       primary: "#8b6f52",
       secondary: "#f5f0e8",
@@ -25,7 +25,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern casual restaurant for city dining and fresh signature plates",
     slug: "urbanbite-kitchen",
-    image: imageUrl("restaurent/urbanbite-kitchen-card.png"),
+    image: imageUrl("restaurent/urbanbite-kitchen-card.webp"),
     colors: {
       primary: "#262626",
       secondary: "#f8f5ef",
@@ -42,7 +42,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Artisan bakery with fresh bread, pastries, and morning specials",
     slug: "golden-crust-bakery",
-    image: imageUrl("restaurent/golden-crust-bakery-card.png"),
+    image: imageUrl("restaurent/golden-crust-bakery-card.webp"),
     colors: {
       primary: "#d99a22",
       secondary: "#fff7df",
@@ -59,7 +59,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Indian-Pakistani fusion grill with bold spice and premium platters",
     slug: "spiceroute-grill",
-    image: imageUrl("restaurent/spiceroute-grill-card.png"),
+    image: imageUrl("restaurent/spiceroute-grill-card.webp"),
     colors: {
       primary: "#8f1d1b",
       secondary: "#fff4dd",
@@ -76,7 +76,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Handmade pizza restaurant with fresh ingredients and casual family dining",
     slug: "luna-pizza-house",
-    image: imageUrl("restaurent/luna-pizza-house-card.png"),
+    image: imageUrl("restaurent/luna-pizza-house-card.webp"),
     colors: {
       primary: "#c92a22",
       secondary: "#fff7e8",
@@ -93,7 +93,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Healthy bowl cafe with salads, smoothie bowls, and wellness meals",
     slug: "freshbowl-cafe",
-    image: imageUrl("restaurent/freshbowl-cafe-card.png"),
+    image: imageUrl("restaurent/freshbowl-cafe-card.webp"),
     colors: {
       primary: "#2f8f46",
       secondary: "#fbf7ed",
@@ -110,7 +110,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Premium steakhouse with grilled cuts, wine, and evening private dining",
     slug: "ember-steakhouse",
-    image: imageUrl("restaurent/ember-steakhouse-card.png"),
+    image: imageUrl("restaurent/ember-steakhouse-card.webp"),
     colors: {
       primary: "#0f0f10",
       secondary: "#f4ead7",
@@ -127,7 +127,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Peaceful tea house with herbal blends, quiet rituals, and mindful cafe moments",
     slug: "morningleaf-tea",
-    image: imageUrl("restaurent/morning-leaf-tea.png"),
+    image: imageUrl("restaurent/morning-leaf-tea.webp"),
     colors: {
       primary: "#8fa37a",
       secondary: "#fbf7ea",
@@ -144,7 +144,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern handmade burger restaurant with craft stacks, fries, sauces, and shakes",
     slug: "burgercraft",
-    image: imageUrl("restaurent/burger-craft.png"),
+    image: imageUrl("restaurent/burger-craft.webp"),
     colors: {
       primary: "#f3b53f",
       secondary: "#fff3d7",
@@ -161,7 +161,7 @@ export const restaurantWebsites: WebsiteDesign[] = [
     shortDescription:
       "Coastal seafood restaurant with fresh catch, premium plates, and relaxed dining",
     slug: "oceanplate-seafood",
-    image: imageUrl("restaurent/oceanplate-seafood.png"),
+    image: imageUrl("restaurent/oceanplate-seafood.webp"),
     colors: {
       primary: "#075985",
       secondary: "#f4ead5",
@@ -171,4 +171,3 @@ export const restaurantWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-

@@ -1,50 +1,165 @@
 import { useEffect, useRef, useState } from "react";
-import heroImage from "../../assets/images/beauty/silkstyle/hero.png";
-import interiorImage from "../../assets/images/beauty/silkstyle/interio.png";
-import galleryOne from "../../assets/images/beauty/silkstyle/gallary01.png";
-import galleryTwo from "../../assets/images/beauty/silkstyle/gallary02.png";
-import galleryThree from "../../assets/images/beauty/silkstyle/gallary03.png";
-import galleryFour from "../../assets/images/beauty/silkstyle/gallary04.png";
-import jessicaImage from "../../assets/images/beauty/silkstyle/jessica.png";
-import marcusImage from "../../assets/images/beauty/silkstyle/marcus.png";
-import glossImage from "../../assets/images/beauty/silkstyle/gloss.png";
-import repairImage from "../../assets/images/beauty/silkstyle/repair.png";
+import heroImage from "../../assets/optimized/beauty/silkstyle/hero.webp";
+import interiorImage from "../../assets/optimized/beauty/silkstyle/interio.webp";
+import galleryOne from "../../assets/optimized/beauty/silkstyle/gallary01.webp";
+import galleryTwo from "../../assets/optimized/beauty/silkstyle/gallary02.webp";
+import galleryThree from "../../assets/optimized/beauty/silkstyle/gallary03.webp";
+import galleryFour from "../../assets/optimized/beauty/silkstyle/gallary04.webp";
+import jessicaImage from "../../assets/optimized/beauty/silkstyle/jessica.webp";
+import marcusImage from "../../assets/optimized/beauty/silkstyle/marcus.webp";
+import glossImage from "../../assets/optimized/beauty/silkstyle/gloss.webp";
+import repairImage from "../../assets/optimized/beauty/silkstyle/repair.webp";
 
-const navItems = ["Home", "About", "Services", "Stylists", "Journal", "Contact"];
+const navItems = [
+  "Home",
+  "About",
+  "Services",
+  "Stylists",
+  "Journal",
+  "Contact",
+];
 
 type IconName = "color" | "dryer" | "scissors" | "drop";
 
-const services: Array<{ icon: IconName; title: string; text: string; price: string; duration: string; ideal: string; includes: string[] }> = [
-  { icon: "color", title: "Color", text: "Dimensional, lived-in color mapped to your tone, texture, and lifestyle.", price: "From $185", duration: "2–3.5 hours", ideal: "For depth, brightness, and seamless grow-out", includes: ["Personal color mapping", "Gloss and bond care", "At-home maintenance plan"] },
-  { icon: "dryer", title: "Blowouts", text: "Polished, touchable volume shaped to last without feeling overstyled.", price: "From $75", duration: "45–60 minutes", ideal: "For events, weekly styling, or an instant reset", includes: ["Luxury cleanse", "Heat protection", "Finish tailored to you"] },
-  { icon: "scissors", title: "Cuts", text: "Modern, wearable shapes designed around movement, density, and natural texture.", price: "From $110", duration: "60–90 minutes", ideal: "For refined shape and effortless daily styling", includes: ["Shape consultation", "Precision cut", "Styling lesson"] },
-  { icon: "drop", title: "Treatments", text: "Targeted restorative rituals that rebuild strength and return luminous softness.", price: "From $95", duration: "45–75 minutes", ideal: "For dryness, damage, dullness, or stressed hair", includes: ["Hair health analysis", "Custom treatment blend", "Care prescription"] },
+const services: Array<{
+  icon: IconName;
+  title: string;
+  text: string;
+  price: string;
+  duration: string;
+  ideal: string;
+  includes: string[];
+}> = [
+  {
+    icon: "color",
+    title: "Color",
+    text: "Dimensional, lived-in color mapped to your tone, texture, and lifestyle.",
+    price: "From $185",
+    duration: "2–3.5 hours",
+    ideal: "For depth, brightness, and seamless grow-out",
+    includes: [
+      "Personal color mapping",
+      "Gloss and bond care",
+      "At-home maintenance plan",
+    ],
+  },
+  {
+    icon: "dryer",
+    title: "Blowouts",
+    text: "Polished, touchable volume shaped to last without feeling overstyled.",
+    price: "From $75",
+    duration: "45–60 minutes",
+    ideal: "For events, weekly styling, or an instant reset",
+    includes: ["Luxury cleanse", "Heat protection", "Finish tailored to you"],
+  },
+  {
+    icon: "scissors",
+    title: "Cuts",
+    text: "Modern, wearable shapes designed around movement, density, and natural texture.",
+    price: "From $110",
+    duration: "60–90 minutes",
+    ideal: "For refined shape and effortless daily styling",
+    includes: ["Shape consultation", "Precision cut", "Styling lesson"],
+  },
+  {
+    icon: "drop",
+    title: "Treatments",
+    text: "Targeted restorative rituals that rebuild strength and return luminous softness.",
+    price: "From $95",
+    duration: "45–75 minutes",
+    ideal: "For dryness, damage, dullness, or stressed hair",
+    includes: [
+      "Hair health analysis",
+      "Custom treatment blend",
+      "Care prescription",
+    ],
+  },
 ];
 
 const testimonials = [
-  ["The most thoughtful color consultation I’ve ever had. My hair looks expensive, healthy, and completely like me.", "Maya R."],
-  ["Jessica understood the movement I wanted immediately. The cut still falls beautifully weeks later.", "Amelia K."],
-  ["The salon is calm, refined, and never rushed. Marcus gave me the best transformation of my life.", "Sofia T."],
+  [
+    "The most thoughtful color consultation I’ve ever had. My hair looks expensive, healthy, and completely like me.",
+    "Maya R.",
+  ],
+  [
+    "Jessica understood the movement I wanted immediately. The cut still falls beautifully weeks later.",
+    "Amelia K.",
+  ],
+  [
+    "The salon is calm, refined, and never rushed. Marcus gave me the best transformation of my life.",
+    "Sofia T.",
+  ],
 ];
 
 const journalPosts = [
-  ["Color Notes", "How to keep dimensional brunette color luminous between visits", galleryTwo],
-  ["The Cut Edit", "Why shape and movement matter more than chasing every trend", galleryFour],
-  ["Healthy Hair", "A stylist-approved ritual for stronger, silkier lengths", glossImage],
+  [
+    "Color Notes",
+    "How to keep dimensional brunette color luminous between visits",
+    galleryTwo,
+  ],
+  [
+    "The Cut Edit",
+    "Why shape and movement matter more than chasing every trend",
+    galleryFour,
+  ],
+  [
+    "Healthy Hair",
+    "A stylist-approved ritual for stronger, silkier lengths",
+    glossImage,
+  ],
 ];
 
 function Icon({ name }: { name: IconName }) {
-  const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  return <svg viewBox="0 0 32 32" aria-hidden="true">
-    {name === "color" && <><path {...p} d="m7 25 12-12 5 5-12 12H7Z"/><path {...p} d="m17 15 6-8 3 3-5 8M9 25l3 3"/></>}
-    {name === "dryer" && <><path {...p} d="M5 9h13c5 0 8 3 8 7s-3 7-8 7h-5v-6h5c1 0 2-1 2-2s-1-2-2-2H5Z"/><path {...p} d="m13 22-2 8H7l1-8M26 12l3-2M26 20l3 2"/></>}
-    {name === "scissors" && <><circle {...p} cx="9" cy="24" r="4"/><circle {...p} cx="23" cy="24" r="4"/><path {...p} d="M12 21 24 5M20 21 8 5M16 16l-4 5"/></>}
-    {name === "drop" && <><path {...p} d="M16 3S8 12 8 20a8 8 0 0 0 16 0c0-8-8-17-8-17Z"/><path {...p} d="M12 21c1 3 5 4 8 1"/></>}
-  </svg>;
+  const p = {
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      {name === "color" && (
+        <>
+          <path {...p} d="m7 25 12-12 5 5-12 12H7Z" />
+          <path {...p} d="m17 15 6-8 3 3-5 8M9 25l3 3" />
+        </>
+      )}
+      {name === "dryer" && (
+        <>
+          <path
+            {...p}
+            d="M5 9h13c5 0 8 3 8 7s-3 7-8 7h-5v-6h5c1 0 2-1 2-2s-1-2-2-2H5Z"
+          />
+          <path {...p} d="m13 22-2 8H7l1-8M26 12l3-2M26 20l3 2" />
+        </>
+      )}
+      {name === "scissors" && (
+        <>
+          <circle {...p} cx="9" cy="24" r="4" />
+          <circle {...p} cx="23" cy="24" r="4" />
+          <path {...p} d="M12 21 24 5M20 21 8 5M16 16l-4 5" />
+        </>
+      )}
+      {name === "drop" && (
+        <>
+          <path {...p} d="M16 3S8 12 8 20a8 8 0 0 0 16 0c0-8-8-17-8-17Z" />
+          <path {...p} d="M12 21c1 3 5 4 8 1" />
+        </>
+      )}
+    </svg>
+  );
 }
 
 function Logo() {
-  return <a className="silkLogo" href="#home" aria-label="Silk and Style Hair home"><span>Silk <i>&</i> Style</span><small>Hair</small></a>;
+  return (
+    <a className="silkLogo" href="#home" aria-label="Silk and Style Hair home">
+      <span>
+        Silk <i>&</i> Style
+      </span>
+      <small>Hair</small>
+    </a>
+  );
 }
 
 export default function SilkStyleHair() {
@@ -57,21 +172,36 @@ export default function SilkStyleHair() {
 
   useEffect(() => {
     const updateActive = () => {
-      const sections = navItems.map((item) => document.getElementById(item.toLowerCase())).filter((item): item is HTMLElement => Boolean(item)).sort((a, b) => a.offsetTop - b.offsetTop);
-      const passed = sections.filter((section) => section.offsetTop <= window.scrollY + 130);
+      const sections = navItems
+        .map((item) => document.getElementById(item.toLowerCase()))
+        .filter((item): item is HTMLElement => Boolean(item))
+        .sort((a, b) => a.offsetTop - b.offsetTop);
+      const passed = sections.filter(
+        (section) => section.offsetTop <= window.scrollY + 130,
+      );
       setActiveSection(passed[passed.length - 1]?.id ?? "home");
     };
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") { setMenuOpen(false); setBookingOpen(false); } };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        setBookingOpen(false);
+      }
+    };
     updateActive();
     window.addEventListener("scroll", updateActive, { passive: true });
     window.addEventListener("keydown", onKey);
-    return () => { window.removeEventListener("scroll", updateActive); window.removeEventListener("keydown", onKey); };
+    return () => {
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   useEffect(() => {
     const previousTitle = document.title;
     document.title = "Silk & Style Hair | Luxury Hair Salon Los Angeles";
-    let description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    let description = document.querySelector<HTMLMetaElement>(
+      'meta[name="description"]',
+    );
     const createdDescription = !description;
     if (!description) {
       description = document.createElement("meta");
@@ -79,35 +209,63 @@ export default function SilkStyleHair() {
       document.head.appendChild(description);
     }
     const previousDescription = description?.content;
-    if (description) description.content = "Luxury cuts, dimensional color, blowouts, and restorative hair treatments at Silk & Style Hair in Los Angeles.";
+    if (description)
+      description.content =
+        "Luxury cuts, dimensional color, blowouts, and restorative hair treatments at Silk & Style Hair in Los Angeles.";
     const structuredData = document.createElement("script");
     structuredData.type = "application/ld+json";
-    structuredData.text = JSON.stringify({ "@context": "https://schema.org", "@type": "HairSalon", name: "Silk & Style Hair", telephone: "+1-323-555-0198", email: "hello@silkandstylehair.com", address: { "@type": "PostalAddress", streetAddress: "1234 Maple Drive", addressLocality: "Los Angeles", addressRegion: "CA", postalCode: "90026" }, priceRange: "$$$" });
+    structuredData.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "HairSalon",
+      name: "Silk & Style Hair",
+      telephone: "+1-323-555-0198",
+      email: "hello@silkandstylehair.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "1234 Maple Drive",
+        addressLocality: "Los Angeles",
+        addressRegion: "CA",
+        postalCode: "90026",
+      },
+      priceRange: "$$$",
+    });
     document.head.appendChild(structuredData);
     return () => {
       document.title = previousTitle;
       if (createdDescription) description?.remove();
-      else if (description && previousDescription !== undefined) description.content = previousDescription;
+      else if (description && previousDescription !== undefined)
+        description.content = previousDescription;
       structuredData.remove();
     };
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = bookingOpen || menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [bookingOpen, menuOpen]);
 
   useEffect(() => {
     if (!bookingOpen || !modalRef.current) return;
     const modal = modalRef.current;
-    const focusable = Array.from(modal.querySelectorAll<HTMLElement>('button, input, select, textarea, a[href]')).filter((item) => !item.hasAttribute("disabled"));
+    const focusable = Array.from(
+      modal.querySelectorAll<HTMLElement>(
+        "button, input, select, textarea, a[href]",
+      ),
+    ).filter((item) => !item.hasAttribute("disabled"));
     focusable[0]?.focus();
     const trapFocus = (event: KeyboardEvent) => {
       if (event.key !== "Tab" || focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     modal.addEventListener("keydown", trapFocus);
     return () => modal.removeEventListener("keydown", trapFocus);
@@ -119,87 +277,562 @@ export default function SilkStyleHair() {
     setBookingOpen(true);
   };
 
-  return <main className="silkPage">
-    <style>{css}</style>
+  return (
+    <main className="silkPage">
+      <style>{css}</style>
 
-    <header className="silkNav">
-      <Logo />
-      <nav className="desktopNav" aria-label="Primary navigation">
-        {navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`} className={activeSection === item.toLowerCase() ? "active" : ""} aria-current={activeSection === item.toLowerCase() ? "page" : undefined}>{item}</a>)}
-      </nav>
-      <button type="button" className="darkButton navBook" onClick={() => openBooking()}>Book Appointment <span>→</span></button>
-      <button type="button" className="silkMenu" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation">{menuOpen ? "×" : "☰"}</button>
-      {menuOpen && <nav className="mobileNav" aria-label="Mobile navigation">{navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)} className={activeSection === item.toLowerCase() ? "active" : ""}>{item}</a>)}</nav>}
-    </header>
+      <header className="silkNav">
+        <Logo />
+        <nav className="desktopNav" aria-label="Primary navigation">
+          {navItems.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className={activeSection === item.toLowerCase() ? "active" : ""}
+              aria-current={
+                activeSection === item.toLowerCase() ? "page" : undefined
+              }
+            >
+              {item}
+            </a>
+          ))}
+        </nav>
+        <button
+          type="button"
+          className="darkButton navBook"
+          onClick={() => openBooking()}
+        >
+          Book Appointment <span>→</span>
+        </button>
+        <button
+          type="button"
+          className="silkMenu"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-expanded={menuOpen}
+          aria-label="Toggle navigation"
+        >
+          {menuOpen ? "×" : "☰"}
+        </button>
+        {menuOpen && (
+          <nav className="mobileNav" aria-label="Mobile navigation">
+            {navItems.map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                onClick={() => setMenuOpen(false)}
+                className={activeSection === item.toLowerCase() ? "active" : ""}
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+        )}
+      </header>
 
-    <section id="home" className="silkHero">
-      <div className="heroCopy">
-        <p className="kicker">Confidence. Craft. Culture.</p>
-        <h1>Elevated Hair.<br /><em>Effortless You.</em></h1>
-        <span className="accentLine" />
-        <p className="heroLead">Silk & Style Hair is where artistry meets intention. From dimensional color to signature blowouts, we create looks that feel as good as they look.</p>
-        <div className="heroActions"><button type="button" className="darkButton" onClick={() => openBooking()}>Book Your Appointment <span>→</span></button><a className="lineButton" href="#services">Explore Services</a></div>
-        <div className="heroProof"><span className="proofStars">★★★★★</span><strong>4.9</strong><span>from 320+ salon guests</span></div>
-        <a href="#services" className="scrollCue"><span>↓</span> Scroll<br />Down</a>
-      </div>
-      <div className="heroVisual"><img src={heroImage} alt="Woman with dimensional brunette hair" fetchPriority="high" decoding="async" /></div>
-    </section>
+      <section id="home" className="silkHero">
+        <div className="heroCopy">
+          <p className="kicker">Confidence. Craft. Culture.</p>
+          <h1>
+            Elevated Hair.
+            <br />
+            <em>Effortless You.</em>
+          </h1>
+          <span className="accentLine" />
+          <p className="heroLead">
+            Silk & Style Hair is where artistry meets intention. From
+            dimensional color to signature blowouts, we create looks that feel
+            as good as they look.
+          </p>
+          <div className="heroActions">
+            <button
+              type="button"
+              className="darkButton"
+              onClick={() => openBooking()}
+            >
+              Book Your Appointment <span>→</span>
+            </button>
+            <a className="lineButton" href="#services">
+              Explore Services
+            </a>
+          </div>
+          <div className="heroProof">
+            <span className="proofStars">★★★★★</span>
+            <strong>4.9</strong>
+            <span>from 320+ salon guests</span>
+          </div>
+          <a href="#services" className="scrollCue">
+            <span>↓</span> Scroll
+            <br />
+            Down
+          </a>
+        </div>
+        <div className="heroVisual">
+          <img
+            src={heroImage}
+            alt="Woman with dimensional brunette hair"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
+      </section>
 
-    <section id="services" className="serviceStrip">
-      <div className="serviceIntro"><div><p className="kicker">Signature Services</p><h2>Considered care.<br /><em>Designed around you.</em></h2></div><p>Every service begins with a thoughtful consultation and ends with a clear plan for maintaining your look at home.</p></div>
-      {services.map((service, index) => <article key={service.title}>
-        <div className="serviceTop"><span className="serviceNumber">0{index + 1}</span><span className="serviceIcon"><Icon name={service.icon} /></span></div>
-        <h2>{service.title}</h2>
-        <p>{service.text}</p>
-        <p className="serviceIdeal">{service.ideal}</p>
-        <ul>{service.includes.map((item) => <li key={item}>{item}</li>)}</ul>
-        <div className="serviceMeta"><span>{service.price}</span><span>{service.duration}</span></div>
-        <button type="button" onClick={() => openBooking(service.title)}>Book {service.title} <span>→</span></button>
-      </article>)}
-      <div className="servicePromise"><span>New here?</span><p>Not sure what to book? Start with a complimentary 15-minute consultation and we’ll build the right plan together.</p><button type="button" onClick={() => openBooking("Consultation")}>Book a Consultation →</button></div>
-    </section>
+      <section id="services" className="serviceStrip">
+        <div className="serviceIntro">
+          <div>
+            <p className="kicker">Signature Services</p>
+            <h2>
+              Considered care.
+              <br />
+              <em>Designed around you.</em>
+            </h2>
+          </div>
+          <p>
+            Every service begins with a thoughtful consultation and ends with a
+            clear plan for maintaining your look at home.
+          </p>
+        </div>
+        {services.map((service, index) => (
+          <article key={service.title}>
+            <div className="serviceTop">
+              <span className="serviceNumber">0{index + 1}</span>
+              <span className="serviceIcon">
+                <Icon name={service.icon} />
+              </span>
+            </div>
+            <h2>{service.title}</h2>
+            <p>{service.text}</p>
+            <p className="serviceIdeal">{service.ideal}</p>
+            <ul>
+              {service.includes.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <div className="serviceMeta">
+              <span>{service.price}</span>
+              <span>{service.duration}</span>
+            </div>
+            <button type="button" onClick={() => openBooking(service.title)}>
+              Book {service.title} <span>→</span>
+            </button>
+          </article>
+        ))}
+        <div className="servicePromise">
+          <span>New here?</span>
+          <p>
+            Not sure what to book? Start with a complimentary 15-minute
+            consultation and we’ll build the right plan together.
+          </p>
+          <button type="button" onClick={() => openBooking("Consultation")}>
+            Book a Consultation →
+          </button>
+        </div>
+      </section>
 
-    <section id="about" className="storySplit">
-      <img src={interiorImage} alt="Silk and Style salon interior" loading="lazy" decoding="async" />
-      <div><p className="kicker">The Silk & Style Experience</p><h2>Modern beauty.<br /><em>Meaningful results.</em></h2><p>We believe great hair is personal. Our approach blends technical precision with creative vision to enhance your natural beauty. Every appointment is elevated, intentional, and designed around you.</p><a href="#stylists" className="lineButton">Our Story</a></div>
-    </section>
+      <section id="about" className="storySplit">
+        <img
+          src={interiorImage}
+          alt="Silk and Style salon interior"
+          loading="lazy"
+          decoding="async"
+        />
+        <div>
+          <p className="kicker">The Silk & Style Experience</p>
+          <h2>
+            Modern beauty.
+            <br />
+            <em>Meaningful results.</em>
+          </h2>
+          <p>
+            We believe great hair is personal. Our approach blends technical
+            precision with creative vision to enhance your natural beauty. Every
+            appointment is elevated, intentional, and designed around you.
+          </p>
+          <a href="#stylists" className="lineButton">
+            Our Story
+          </a>
+        </div>
+      </section>
 
-    <section className="transformations sectionPad" aria-labelledby="transform-title">
-      <div className="sectionIntro"><p className="kicker">Transformations</p><h2 id="transform-title">Real results.<br /><em>Beautifully you.</em></h2><a href="#journal" className="textLink">View More Looks <span>→</span></a></div>
-      <article className="beforeAfter"><figure><img src={galleryOne} alt="Hair before transformation" loading="lazy" decoding="async" /><figcaption>Before</figcaption></figure><span>→</span><figure><img src={galleryTwo} alt="Hair after transformation" loading="lazy" decoding="async" /><figcaption>After</figcaption></figure></article>
-      <article className="beforeAfter"><figure><img src={galleryThree} alt="Hair before restyling" loading="lazy" decoding="async" /><figcaption>Before</figcaption></figure><span>→</span><figure><img src={galleryFour} alt="Hair after restyling" loading="lazy" decoding="async" /><figcaption>After</figcaption></figure></article>
-    </section>
+      <section
+        className="transformations sectionPad"
+        aria-labelledby="transform-title"
+      >
+        <div className="sectionIntro">
+          <p className="kicker">Transformations</p>
+          <h2 id="transform-title">
+            Real results.
+            <br />
+            <em>Beautifully you.</em>
+          </h2>
+          <a href="#journal" className="textLink">
+            View More Looks <span>→</span>
+          </a>
+        </div>
+        <article className="beforeAfter">
+          <figure>
+            <img
+              src={galleryOne}
+              alt="Hair before transformation"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Before</figcaption>
+          </figure>
+          <span>→</span>
+          <figure>
+            <img
+              src={galleryTwo}
+              alt="Hair after transformation"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>After</figcaption>
+          </figure>
+        </article>
+        <article className="beforeAfter">
+          <figure>
+            <img
+              src={galleryThree}
+              alt="Hair before restyling"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Before</figcaption>
+          </figure>
+          <span>→</span>
+          <figure>
+            <img
+              src={galleryFour}
+              alt="Hair after restyling"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>After</figcaption>
+          </figure>
+        </article>
+      </section>
 
-    <section id="stylists" className="stylists sectionPad">
-      <div className="sectionIntro"><p className="kicker">Our Stylists</p><h2>Artistry in<br /><em>every detail.</em></h2><a href="#contact" className="textLink">Meet The Team <span>→</span></a></div>
-      <article className="stylist"><img src={jessicaImage} alt="Jessica Lane, senior stylist" loading="lazy" decoding="async" /><div><h3>Jessica Lane</h3><span className="miniLine"/><p>Senior Stylist<br />Color Specialist</p><small>Next opening: Thursday</small><button type="button" onClick={() => openBooking("Color with Jessica")}>Book Jessica →</button></div></article>
-      <article className="stylist"><img src={marcusImage} alt="Marcus Vale, creative director" loading="lazy" decoding="async" /><div><h3>Marcus Vale</h3><span className="miniLine"/><p>Creative Director<br />Cut & Style Expert</p><small>Next opening: Saturday</small><button type="button" onClick={() => openBooking("Cut with Marcus")}>Book Marcus →</button></div></article>
-    </section>
+      <section id="stylists" className="stylists sectionPad">
+        <div className="sectionIntro">
+          <p className="kicker">Our Stylists</p>
+          <h2>
+            Artistry in
+            <br />
+            <em>every detail.</em>
+          </h2>
+          <a href="#contact" className="textLink">
+            Meet The Team <span>→</span>
+          </a>
+        </div>
+        <article className="stylist">
+          <img
+            src={jessicaImage}
+            alt="Jessica Lane, senior stylist"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h3>Jessica Lane</h3>
+            <span className="miniLine" />
+            <p>
+              Senior Stylist
+              <br />
+              Color Specialist
+            </p>
+            <small>Next opening: Thursday</small>
+            <button
+              type="button"
+              onClick={() => openBooking("Color with Jessica")}
+            >
+              Book Jessica →
+            </button>
+          </div>
+        </article>
+        <article className="stylist">
+          <img
+            src={marcusImage}
+            alt="Marcus Vale, creative director"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h3>Marcus Vale</h3>
+            <span className="miniLine" />
+            <p>
+              Creative Director
+              <br />
+              Cut & Style Expert
+            </p>
+            <small>Next opening: Saturday</small>
+            <button
+              type="button"
+              onClick={() => openBooking("Cut with Marcus")}
+            >
+              Book Marcus →
+            </button>
+          </div>
+        </article>
+      </section>
 
-    <section className="products sectionPad">
-      <div className="sectionIntro"><p className="kicker">Curated For You</p><h2>Style. Care.<br /><em>Results.</em></h2></div>
-      <article><img src={glossImage} alt="Silk and Style Gloss Elixir" loading="lazy" decoding="async" /><div><h3>Silk & Style<br />Gloss Elixir</h3><p>Hydrates, smooths and adds luminous shine.</p><a href="#contact" className="textLink">Learn More <span>→</span></a></div></article>
-      <article><img src={repairImage} alt="Silk and Style Repair Masque" loading="lazy" decoding="async" /><div><h3>Silk & Style<br />Repair Masque</h3><p>Deeply nourishes and strengthens from within.</p><a href="#contact" className="textLink">Learn More <span>→</span></a></div></article>
-    </section>
+      <section className="products sectionPad">
+        <div className="sectionIntro">
+          <p className="kicker">Curated For You</p>
+          <h2>
+            Style. Care.
+            <br />
+            <em>Results.</em>
+          </h2>
+        </div>
+        <article>
+          <img
+            src={glossImage}
+            alt="Silk and Style Gloss Elixir"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h3>
+              Silk & Style
+              <br />
+              Gloss Elixir
+            </h3>
+            <p>Hydrates, smooths and adds luminous shine.</p>
+            <a href="#contact" className="textLink">
+              Learn More <span>→</span>
+            </a>
+          </div>
+        </article>
+        <article>
+          <img
+            src={repairImage}
+            alt="Silk and Style Repair Masque"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h3>
+              Silk & Style
+              <br />
+              Repair Masque
+            </h3>
+            <p>Deeply nourishes and strengthens from within.</p>
+            <a href="#contact" className="textLink">
+              Learn More <span>→</span>
+            </a>
+          </div>
+        </article>
+      </section>
 
-    <section className="testimonials sectionPad" aria-labelledby="review-title"><div className="sectionIntro"><p className="kicker">Client Notes</p><h2 id="review-title">Loved for the<br /><em>details.</em></h2></div>{testimonials.map(([quote, name]) => <blockquote key={name}><span>“</span><p>{quote}</p><footer><b>{name}</b><i>★★★★★</i></footer></blockquote>)}</section>
+      <section
+        className="testimonials sectionPad"
+        aria-labelledby="review-title"
+      >
+        <div className="sectionIntro">
+          <p className="kicker">Client Notes</p>
+          <h2 id="review-title">
+            Loved for the
+            <br />
+            <em>details.</em>
+          </h2>
+        </div>
+        {testimonials.map(([quote, name]) => (
+          <blockquote key={name}>
+            <span>“</span>
+            <p>{quote}</p>
+            <footer>
+              <b>{name}</b>
+              <i>★★★★★</i>
+            </footer>
+          </blockquote>
+        ))}
+      </section>
 
-    <section id="journal" className="journal sectionPad"><div className="sectionIntro"><p className="kicker">The Journal</p><h2>Notes on hair,<br /><em>care, and craft.</em></h2></div>{journalPosts.map(([category, title, image]) => <article key={title}><img src={image} alt="" loading="lazy" decoding="async" /><div><small>{category}</small><h3>{title}</h3><a href="#contact" className="textLink">Read Article <span>→</span></a></div></article>)}</section>
+      <section id="journal" className="journal sectionPad">
+        <div className="sectionIntro">
+          <p className="kicker">The Journal</p>
+          <h2>
+            Notes on hair,
+            <br />
+            <em>care, and craft.</em>
+          </h2>
+        </div>
+        {journalPosts.map(([category, title, image]) => (
+          <article key={title}>
+            <img src={image} alt="" loading="lazy" decoding="async" />
+            <div>
+              <small>{category}</small>
+              <h3>{title}</h3>
+              <a href="#contact" className="textLink">
+                Read Article <span>→</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </section>
 
-    <section id="contact" className="blackCta"><div><h2>Your best hair is <em>one appointment away.</em></h2><p>Let’s create something beautiful together.</p></div><button type="button" className="outlineDark" onClick={() => openBooking()}>Book Your Appointment <span>→</span></button></section>
+      <section id="contact" className="blackCta">
+        <div>
+          <h2>
+            Your best hair is <em>one appointment away.</em>
+          </h2>
+          <p>Let’s create something beautiful together.</p>
+        </div>
+        <button
+          type="button"
+          className="outlineDark"
+          onClick={() => openBooking()}
+        >
+          Book Your Appointment <span>→</span>
+        </button>
+      </section>
 
-    <footer className="silkFooter">
-      <div><Logo /><small>© 2026 Silk & Style Hair. All rights reserved.</small></div>
-      <div><h3>Menu</h3>{["About","Services","Stylists","Journal","Contact"].map(item => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}</div>
-      <div><h3>Info</h3><p>1234 Maple Drive<br />Los Angeles, CA 90026<br />(323) 555-0198<br />hello@silkandstylehair.com</p></div>
-      <div><h3>Hours</h3><p>Tue – Fri &nbsp; 10am – 7pm<br />Sat &nbsp; 9am – 6pm<br />Sun – Mon &nbsp; Closed</p></div>
-      <div><h3>Follow Along</h3><p className="footerSocial">◎ &nbsp; p</p><p className="legal">Privacy Policy &nbsp;&nbsp; Terms & Conditions</p></div>
-    </footer>
+      <footer className="silkFooter">
+        <div>
+          <Logo />
+          <small>© 2026 Silk & Style Hair. All rights reserved.</small>
+        </div>
+        <div>
+          <h3>Menu</h3>
+          {["About", "Services", "Stylists", "Journal", "Contact"].map(
+            (item) => (
+              <a key={item} href={`#${item.toLowerCase()}`}>
+                {item}
+              </a>
+            ),
+          )}
+        </div>
+        <div>
+          <h3>Info</h3>
+          <p>
+            1234 Maple Drive
+            <br />
+            Los Angeles, CA 90026
+            <br />
+            (323) 555-0198
+            <br />
+            hello@silkandstylehair.com
+          </p>
+        </div>
+        <div>
+          <h3>Hours</h3>
+          <p>
+            Tue – Fri &nbsp; 10am – 7pm
+            <br />
+            Sat &nbsp; 9am – 6pm
+            <br />
+            Sun – Mon &nbsp; Closed
+          </p>
+        </div>
+        <div>
+          <h3>Follow Along</h3>
+          <p className="footerSocial">◎ &nbsp; p</p>
+          <p className="legal">
+            Privacy Policy &nbsp;&nbsp; Terms & Conditions
+          </p>
+        </div>
+      </footer>
 
-    {bookingOpen && <div className="silkModalBack" onMouseDown={(event) => event.target === event.currentTarget && setBookingOpen(false)}>
-      <section ref={modalRef} className="silkModal" role="dialog" aria-modal="true" aria-labelledby="silk-booking-title"><button className="modalClose" type="button" onClick={() => setBookingOpen(false)} aria-label="Close booking form">×</button>{bookingSuccess ? <div className="bookingSuccess" role="status"><span>✓</span><p className="kicker">Request Received</p><h2 id="silk-booking-title">We’ll be in touch.</h2><p>Thank you. Our concierge will contact you within one business day to confirm availability.</p><button type="button" className="darkButton" onClick={() => setBookingOpen(false)}>Close</button></div> : <><p className="kicker">Reserve Your Time</p><h2 id="silk-booking-title">Book an Appointment</h2><p>Tell us what you’re looking for and we’ll match you with the right stylist.</p><form onSubmit={(event) => { event.preventDefault(); setBookingSuccess(true); }}><label>Full name<input required autoComplete="name" /></label><label>Email<input type="email" required autoComplete="email" /></label><label>Service<select value={selectedService} onChange={(event) => setSelectedService(event.target.value)}><option>Consultation</option><option>Dimensional Color</option><option>Color</option><option>Blowouts</option><option>Cuts</option><option>Treatments</option><option>Color with Jessica</option><option>Cut with Marcus</option></select></label><label>Preferred date<input type="date" required /></label><label className="full">Anything we should know?<textarea rows={3} placeholder="Hair history, goals, or preferred stylist" /></label><button className="darkButton full" type="submit">Request Appointment <span>→</span></button></form></>}</section>
-    </div>}
-  </main>;
+      {bookingOpen && (
+        <div
+          className="silkModalBack"
+          onMouseDown={(event) =>
+            event.target === event.currentTarget && setBookingOpen(false)
+          }
+        >
+          <section
+            ref={modalRef}
+            className="silkModal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="silk-booking-title"
+          >
+            <button
+              className="modalClose"
+              type="button"
+              onClick={() => setBookingOpen(false)}
+              aria-label="Close booking form"
+            >
+              ×
+            </button>
+            {bookingSuccess ? (
+              <div className="bookingSuccess" role="status">
+                <span>✓</span>
+                <p className="kicker">Request Received</p>
+                <h2 id="silk-booking-title">We’ll be in touch.</h2>
+                <p>
+                  Thank you. Our concierge will contact you within one business
+                  day to confirm availability.
+                </p>
+                <button
+                  type="button"
+                  className="darkButton"
+                  onClick={() => setBookingOpen(false)}
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              <>
+                <p className="kicker">Reserve Your Time</p>
+                <h2 id="silk-booking-title">Book an Appointment</h2>
+                <p>
+                  Tell us what you’re looking for and we’ll match you with the
+                  right stylist.
+                </p>
+                <form
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    setBookingSuccess(true);
+                  }}
+                >
+                  <label>
+                    Full name
+                    <input required autoComplete="name" />
+                  </label>
+                  <label>
+                    Email
+                    <input type="email" required autoComplete="email" />
+                  </label>
+                  <label>
+                    Service
+                    <select
+                      value={selectedService}
+                      onChange={(event) =>
+                        setSelectedService(event.target.value)
+                      }
+                    >
+                      <option>Consultation</option>
+                      <option>Dimensional Color</option>
+                      <option>Color</option>
+                      <option>Blowouts</option>
+                      <option>Cuts</option>
+                      <option>Treatments</option>
+                      <option>Color with Jessica</option>
+                      <option>Cut with Marcus</option>
+                    </select>
+                  </label>
+                  <label>
+                    Preferred date
+                    <input type="date" required />
+                  </label>
+                  <label className="full">
+                    Anything we should know?
+                    <textarea
+                      rows={3}
+                      placeholder="Hair history, goals, or preferred stylist"
+                    />
+                  </label>
+                  <button className="darkButton full" type="submit">
+                    Request Appointment <span>→</span>
+                  </button>
+                </form>
+              </>
+            )}
+          </section>
+        </div>
+      )}
+    </main>
+  );
 }
 
 const css = `

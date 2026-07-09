@@ -1,4 +1,4 @@
-import { imageUrl } from "../../assets/images";
+import { imageUrl } from "../../assets/optimized";
 import type { WebsiteDesign } from "../websites";
 export const realEstateWebsites: WebsiteDesign[] = [
   {
@@ -10,7 +10,7 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Modern real estate agency for curated listings, seller strategy, and neighborhood confidence",
     slug: "skyline-realty-group",
     marketLabel: "Urban residential",
-    image: imageUrl("home/real-estate-preview.png"),
+    image: imageUrl("home/real-estate-preview.webp"),
     colors: {
       primary: "#153e75",
       secondary: "#eff6ff",
@@ -28,8 +28,13 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Coastal and waterfront homes presented around family life, local knowledge, and confident moves",
     slug: "harborkey-homes",
     marketLabel: "Coastal homes",
-    image: imageUrl("realestate/harborkey/hero.png"),
-    colors: { primary: "#2f6f8f", secondary: "#f4ead8", accent: "#7fc8d8", dark: "#17384d" },
+    image: imageUrl("realestate/harborkey/hero.webp"),
+    colors: {
+      primary: "#2f6f8f",
+      secondary: "#f4ead8",
+      accent: "#7fc8d8",
+      dark: "#17384d",
+    },
     status: "completed",
   },
   {
@@ -41,8 +46,13 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Commercial brokerage for office, retail, leasing, and investment opportunities with clear market intelligence",
     slug: "apex-commercial-realty",
     marketLabel: "Commercial property",
-    image: imageUrl("realestate/apex/hero.png"),
-    colors: { primary: "#1C2736", secondary: "#F4F6F8", accent: "#7A2948", dark: "#101722" },
+    image: imageUrl("realestate/apex/hero.webp"),
+    colors: {
+      primary: "#1C2736",
+      secondary: "#F4F6F8",
+      accent: "#7A2948",
+      dark: "#101722",
+    },
     status: "completed",
   },
   {
@@ -54,8 +64,13 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Mortgage guidance for first-time buyers, refinancing, and practical paths to home ownership",
     slug: "nestpath-mortgage",
     marketLabel: "Mortgage guidance",
-    image: imageUrl("realestate/nestpath/hero.png"),
-    colors: { primary: "#197D7A", secondary: "#F4F1EA", accent: "#E0AF45", dark: "#0E3D3F" },
+    image: imageUrl("realestate/nestpath/hero.webp"),
+    colors: {
+      primary: "#197D7A",
+      secondary: "#F4F1EA",
+      accent: "#E0AF45",
+      dark: "#0E3D3F",
+    },
     status: "completed",
   },
   {
@@ -67,8 +82,13 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Rural estates and luxury acreage positioned through privacy, craftsmanship, and lasting value",
     slug: "cedar-stone-estates",
     marketLabel: "Rural luxury",
-    image: imageUrl("realestate/cedar-stone/hero.png"),
-    colors: { primary: "#4C6252", secondary: "#E9E4D8", accent: "#A68E72", dark: "#1F2D28" },
+    image: imageUrl("realestate/cedar-stone/hero.webp"),
+    colors: {
+      primary: "#4C6252",
+      secondary: "#E9E4D8",
+      accent: "#A68E72",
+      dark: "#1F2D28",
+    },
     status: "completed",
   },
   {
@@ -80,8 +100,13 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Modern apartment discovery and leasing built around city access, amenities, and flexible living",
     slug: "metroloft-rentals",
     marketLabel: "Urban rentals",
-    image: imageUrl("realestate/metroloft/hero.png"),
-    colors: { primary: "#5A52C8", secondary: "#E8EDF4", accent: "#F07C72", dark: "#202446" },
+    image: imageUrl("realestate/metroloft/hero.webp"),
+    colors: {
+      primary: "#5A52C8",
+      secondary: "#E8EDF4",
+      accent: "#F07C72",
+      dark: "#202446",
+    },
     status: "completed",
   },
   {
@@ -93,8 +118,13 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Developer portfolio for landmark residential projects, new communities, and investment opportunities",
     slug: "foundry-property-group",
     marketLabel: "Property development",
-    image: imageUrl("realestate/foundry/hero.png"),
-    colors: { primary: "#343A43", secondary: "#F2F0EA", accent: "#E86F2A", dark: "#10141A" },
+    image: imageUrl("realestate/foundry/hero.webp"),
+    colors: {
+      primary: "#343A43",
+      secondary: "#F2F0EA",
+      accent: "#E86F2A",
+      dark: "#10141A",
+    },
     status: "completed",
   },
   {
@@ -106,8 +136,13 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Holiday villas and resort investments framed around memorable stays, lifestyle, and income potential",
     slug: "suncrest-vacation-villas",
     marketLabel: "Vacation property",
-    image: imageUrl("realestate/suncrest/hero.png"),
-    colors: { primary: "#1595A3", secondary: "#F7F1E3", accent: "#E8B94A", dark: "#103F4A" },
+    image: imageUrl("realestate/suncrest/hero.webp"),
+    colors: {
+      primary: "#1595A3",
+      secondary: "#F7F1E3",
+      accent: "#E8B94A",
+      dark: "#103F4A",
+    },
     status: "completed",
   },
   {
@@ -119,8 +154,13 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "Property management for landlords and tenants with responsive service and transparent operations",
     slug: "oakline-property-management",
     marketLabel: "Property management",
-    image: imageUrl("realestate/oakline/hero.png"),
-    colors: { primary: "#3D7657", secondary: "#F2F7F5", accent: "#8FA377", dark: "#16324A" },
+    image: imageUrl("realestate/oakline/hero.webp"),
+    colors: {
+      primary: "#3D7657",
+      secondary: "#F2F7F5",
+      accent: "#8FA377",
+      dark: "#16324A",
+    },
     status: "completed",
   },
   {
@@ -132,9 +172,13 @@ export const realEstateWebsites: WebsiteDesign[] = [
       "A first-time buyer agency that turns unfamiliar decisions into a practical, encouraging home search",
     slug: "keystart-realty",
     marketLabel: "First-time buyers",
-    image: imageUrl("realestate/keystar/hero.png"),
-    colors: { primary: "#3F7355", secondary: "#F3F7F4", accent: "#9BAD83", dark: "#15344B" },
+    image: imageUrl("realestate/keystar/hero.webp"),
+    colors: {
+      primary: "#3F7355",
+      secondary: "#F3F7F4",
+      accent: "#9BAD83",
+      dark: "#15344B",
+    },
     status: "completed",
   },
 ];
-

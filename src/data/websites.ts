@@ -1,4 +1,4 @@
-import { imageUrl } from "../assets/images";
+import { imageUrl } from "../assets/optimized";
 import { restaurantWebsites } from "./websites/restaurant";
 import { beautyWebsites } from "./websites/beauty";
 import { realEstateWebsites } from "./websites/real-estate";
@@ -62,7 +62,7 @@ export const categories: CategoryInfo[] = [
     description: "Coffee shops, cafes, restaurants, and dining experiences",
     icon: "🍽️",
     color: "from-orange-500 to-red-500",
-    image: imageUrl("home/restaurant-preview.png"),
+    image: imageUrl("home/restaurant-preview.webp"),
     href: "/restaurant",
   },
   {
@@ -70,7 +70,7 @@ export const categories: CategoryInfo[] = [
     description: "Salons, spas, cosmetics, and beauty services",
     icon: "💄",
     color: "from-pink-500 to-rose-500",
-    image: imageUrl("home/beauty-preview.png"),
+    image: imageUrl("home/beauty-preview.webp"),
     href: "/beauty",
   },
   {
@@ -78,7 +78,7 @@ export const categories: CategoryInfo[] = [
     description: "Property agents, real estate agencies, and developers",
     icon: "\uD83C\uDFE0",
     color: "from-blue-500 to-cyan-500",
-    image: imageUrl("home/real-estate-preview.png"),
+    image: imageUrl("home/real-estate-preview.webp"),
     href: "/real-estate",
   },
   {
@@ -86,7 +86,7 @@ export const categories: CategoryInfo[] = [
     description: "Gyms, personal trainers, wellness centers",
     icon: "\uD83D\uDCAA",
     color: "from-green-500 to-emerald-500",
-    image: imageUrl("home/fitness-preview.png"),
+    image: imageUrl("home/fitness-preview.webp"),
     href: "/fitness",
   },
   {
@@ -94,7 +94,7 @@ export const categories: CategoryInfo[] = [
     description: "Clinics, hospitals, doctors, and health services",
     icon: "⚕️",
     color: "from-red-500 to-pink-500",
-    image: imageUrl("home/medical-preview.png"),
+    image: imageUrl("home/medical-preview.webp"),
     href: "/medical",
   },
   {
@@ -102,7 +102,7 @@ export const categories: CategoryInfo[] = [
     description: "Contractors, builders, and construction companies",
     icon: "🏗️",
     color: "from-amber-600 to-yellow-600",
-    image: imageUrl("home/construction-preview.png"),
+    image: imageUrl("home/construction-preview.webp"),
     href: "/construction",
   },
   {
@@ -110,7 +110,7 @@ export const categories: CategoryInfo[] = [
     description: "Schools, courses, tutoring, and online learning",
     icon: "📚",
     color: "from-indigo-500 to-purple-500",
-    image: imageUrl("home/education-preview.png"),
+    image: imageUrl("home/education-preview.webp"),
     href: "/education",
   },
   {
@@ -118,7 +118,7 @@ export const categories: CategoryInfo[] = [
     description: "Online stores, marketplaces, and retail shops",
     icon: "🛍️",
     color: "from-violet-500 to-fuchsia-500",
-    image: imageUrl("home/ecommerce-preview.png"),
+    image: imageUrl("home/ecommerce-preview.webp"),
     href: "/e-commerce",
   },
   {
@@ -126,7 +126,7 @@ export const categories: CategoryInfo[] = [
     description: "Creative portfolios, freelancers, and agencies",
     icon: "✨",
     color: "from-slate-600 to-gray-600",
-    image: imageUrl("home/portfolio-preview.png"),
+    image: imageUrl("home/portfolio-preview.webp"),
     href: "/portfolio",
   },
   {
@@ -134,7 +134,7 @@ export const categories: CategoryInfo[] = [
     description: "Software services, apps, and digital platforms",
     icon: "💻",
     color: "from-sky-500 to-blue-500",
-    image: imageUrl("home/saas-preview.png"),
+    image: imageUrl("home/saas-preview.webp"),
     href: "/saas",
   },
 ];
@@ -179,5 +179,3 @@ export function getWebsiteBySlug(
       website.slug === slug,
   );
 }
-
-

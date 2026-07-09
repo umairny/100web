@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import heroImage from "../../assets/images/beauty/bloombridal/hero.png";
-import galleryOne from "../../assets/images/beauty/bloombridal/gallary01.png";
-import galleryTwo from "../../assets/images/beauty/bloombridal/gallary02.png";
-import galleryThree from "../../assets/images/beauty/bloombridal/gallary03.png";
-import galleryFour from "../../assets/images/beauty/bloombridal/gallary04.png";
-import galleryFive from "../../assets/images/beauty/bloombridal/gallary05.png";
-import gallerySix from "../../assets/images/beauty/bloombridal/gallary06.png";
-import interiorImage from "../../assets/images/beauty/bloombridal/interior.png";
-import passionImage from "../../assets/images/beauty/bloombridal/passion.png";
+import heroImage from "../../assets/optimized/beauty/bloombridal/hero.webp";
+import galleryOne from "../../assets/optimized/beauty/bloombridal/gallary01.webp";
+import galleryTwo from "../../assets/optimized/beauty/bloombridal/gallary02.webp";
+import galleryThree from "../../assets/optimized/beauty/bloombridal/gallary03.webp";
+import galleryFour from "../../assets/optimized/beauty/bloombridal/gallary04.webp";
+import galleryFive from "../../assets/optimized/beauty/bloombridal/gallary05.webp";
+import gallerySix from "../../assets/optimized/beauty/bloombridal/gallary06.webp";
+import interiorImage from "../../assets/optimized/beauty/bloombridal/interior.webp";
+import passionImage from "../../assets/optimized/beauty/bloombridal/passion.webp";
 
 const IMG = {
   hero: heroImage,
@@ -31,22 +31,63 @@ const IMG = {
   footer6: gallerySix,
 };
 
-const navItems = ["Home", "About", "Services", "Gallery", "Packages", "Journey", "Blog", "Contact"];
+const navItems = [
+  "Home",
+  "About",
+  "Services",
+  "Gallery",
+  "Packages",
+  "Journey",
+  "Blog",
+  "Contact",
+];
 
 type IconName = "hair" | "brush" | "mirror" | "ring" | "calendar" | "sparkle";
 
 const services: Array<{ icon: IconName; title: string; text: string }> = [
-  { icon: "hair", title: "Bridal Hair", text: "Elegant styles that last all day" },
-  { icon: "brush", title: "Bridal Makeup", text: "Soft glam looks that enhance you" },
-  { icon: "mirror", title: "Trials", text: "Find your perfect look with confidence" },
-  { icon: "ring", title: "Wedding Day Styling", text: "We’re with you every step of the way" },
+  {
+    icon: "hair",
+    title: "Bridal Hair",
+    text: "Elegant styles that last all day",
+  },
+  {
+    icon: "brush",
+    title: "Bridal Makeup",
+    text: "Soft glam looks that enhance you",
+  },
+  {
+    icon: "mirror",
+    title: "Trials",
+    text: "Find your perfect look with confidence",
+  },
+  {
+    icon: "ring",
+    title: "Wedding Day Styling",
+    text: "We’re with you every step of the way",
+  },
 ];
 
 const journey = [
-  { no: "01", title: "Inquiry", text: "Tell us about your day and your vision." },
-  { no: "02", title: "Trial", text: "We create your perfect look with a trial session." },
-  { no: "03", title: "Wedding Morning", text: "Relax and enjoy while we take care of you." },
-  { no: "04", title: "Final Touch-Up", text: "We stay with you until you walk down the aisle." },
+  {
+    no: "01",
+    title: "Inquiry",
+    text: "Tell us about your day and your vision.",
+  },
+  {
+    no: "02",
+    title: "Trial",
+    text: "We create your perfect look with a trial session.",
+  },
+  {
+    no: "03",
+    title: "Wedding Morning",
+    text: "Relax and enjoy while we take care of you.",
+  },
+  {
+    no: "04",
+    title: "Final Touch-Up",
+    text: "We stay with you until you walk down the aisle.",
+  },
 ];
 
 const artists = [
@@ -82,39 +123,131 @@ const packages = [
     tag: "Our most loved bridal experience.",
     price: "$1,450",
     featured: true,
-    items: ["Bridal Hair & Makeup", "Trial Session", "Touch-up Kit", "Veil / Hair Accessory"],
+    items: [
+      "Bridal Hair & Makeup",
+      "Trial Session",
+      "Touch-up Kit",
+      "Veil / Hair Accessory",
+    ],
   },
   {
     title: "The Luxe",
     tag: "The ultimate bridal indulgence.",
     price: "$2,250",
-    items: ["Bridal Hair & Makeup", "Trial Session", "Touch-up Kit", "2nd Look or Hair Change", "Premium Accessory"],
+    items: [
+      "Bridal Hair & Makeup",
+      "Trial Session",
+      "Touch-up Kit",
+      "2nd Look or Hair Change",
+      "Premium Accessory",
+    ],
   },
 ];
 
 const faqs = [
-  ["How far ahead should I book?", "Most brides reserve 9–14 months ahead. Popular spring and autumn weekends can fill sooner."],
-  ["Is a bridal trial included?", "Trials are included in Signature and Luxe packages and can be added to Essential."],
-  ["Do you travel to wedding venues?", "Yes. We serve Beverly Hills, Los Angeles, Malibu, Orange County, and destination weddings."],
-  ["Can you style my bridal party?", "Absolutely. Hair and makeup can be added for bridesmaids, mothers, and other family members."],
+  [
+    "How far ahead should I book?",
+    "Most brides reserve 9–14 months ahead. Popular spring and autumn weekends can fill sooner.",
+  ],
+  [
+    "Is a bridal trial included?",
+    "Trials are included in Signature and Luxe packages and can be added to Essential.",
+  ],
+  [
+    "Do you travel to wedding venues?",
+    "Yes. We serve Beverly Hills, Los Angeles, Malibu, Orange County, and destination weddings.",
+  ],
+  [
+    "Can you style my bridal party?",
+    "Absolutely. Hair and makeup can be added for bridesmaids, mothers, and other family members.",
+  ],
 ];
 
 function Icon({ name }: { name: IconName }) {
-  const common = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  return <svg viewBox="0 0 32 32" aria-hidden="true">
-    {name === "hair" && <><path {...common} d="M7 27c1-8 2-17 10-21 3-1 6 0 8 2-7 1-8 7-7 11 1 5-2 8-6 8"/><path {...common} d="M11 26c-2-6 0-12 7-16M8 16c3 1 6 0 8-3"/></>}
-    {name === "brush" && <><path {...common} d="m9 26 8-15 5 3-9 14Z"/><path {...common} d="m17 11 2-7 6 3-3 7M11 23l4 2"/></>}
-    {name === "mirror" && <><ellipse {...common} cx="16" cy="12" rx="7" ry="9"/><path {...common} d="M16 21v7M12 28h8M12 12c0-3 2-5 5-6"/></>}
-    {name === "ring" && <><circle {...common} cx="16" cy="19" r="8"/><path {...common} d="m11 10 5-6 5 6-5 3Z"/><path {...common} d="m13 6 3 7 3-7"/></>}
-    {name === "calendar" && <><rect {...common} x="5" y="7" width="22" height="20" rx="3"/><path {...common} d="M10 4v6M22 4v6M5 13h22M10 18h4M18 18h4M10 22h4"/></>}
-    {name === "sparkle" && <><path {...common} d="M16 3c1 7 4 11 11 12-7 1-10 5-11 13-1-8-4-12-11-13 7-1 10-5 11-12Z"/><path {...common} d="M25 3v6M22 6h6"/></>}
-  </svg>;
+  const common = {
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      {name === "hair" && (
+        <>
+          <path
+            {...common}
+            d="M7 27c1-8 2-17 10-21 3-1 6 0 8 2-7 1-8 7-7 11 1 5-2 8-6 8"
+          />
+          <path {...common} d="M11 26c-2-6 0-12 7-16M8 16c3 1 6 0 8-3" />
+        </>
+      )}
+      {name === "brush" && (
+        <>
+          <path {...common} d="m9 26 8-15 5 3-9 14Z" />
+          <path {...common} d="m17 11 2-7 6 3-3 7M11 23l4 2" />
+        </>
+      )}
+      {name === "mirror" && (
+        <>
+          <ellipse {...common} cx="16" cy="12" rx="7" ry="9" />
+          <path {...common} d="M16 21v7M12 28h8M12 12c0-3 2-5 5-6" />
+        </>
+      )}
+      {name === "ring" && (
+        <>
+          <circle {...common} cx="16" cy="19" r="8" />
+          <path {...common} d="m11 10 5-6 5 6-5 3Z" />
+          <path {...common} d="m13 6 3 7 3-7" />
+        </>
+      )}
+      {name === "calendar" && (
+        <>
+          <rect {...common} x="5" y="7" width="22" height="20" rx="3" />
+          <path
+            {...common}
+            d="M10 4v6M22 4v6M5 13h22M10 18h4M18 18h4M10 22h4"
+          />
+        </>
+      )}
+      {name === "sparkle" && (
+        <>
+          <path
+            {...common}
+            d="M16 3c1 7 4 11 11 12-7 1-10 5-11 13-1-8-4-12-11-13 7-1 10-5 11-12Z"
+          />
+          <path {...common} d="M25 3v6M22 6h6" />
+        </>
+      )}
+    </svg>
+  );
 }
 
-function Button({ children, outline = false, href, onClick }: { children: React.ReactNode; outline?: boolean; href?: string; onClick?: () => void }) {
+function Button({
+  children,
+  outline = false,
+  href,
+  onClick,
+}: {
+  children: React.ReactNode;
+  outline?: boolean;
+  href?: string;
+  onClick?: () => void;
+}) {
   const className = outline ? "btn btnOutline" : "btn";
-  if (onClick) return <button type="button" onClick={onClick} className={className}>{children}<span>→</span></button>;
-  return <a href={href ?? "#contact"} className={className}>{children}<span>→</span></a>;
+  if (onClick)
+    return (
+      <button type="button" onClick={onClick} className={className}>
+        {children}
+        <span>→</span>
+      </button>
+    );
+  return (
+    <a href={href ?? "#contact"} className={className}>
+      {children}
+      <span>→</span>
+    </a>
+  );
 }
 
 export default function BloomBridalStudio() {
@@ -173,15 +306,43 @@ export default function BloomBridalStudio() {
 
         <nav className="navLinks" aria-label="Main navigation">
           {navItems.map((item) => (
-            <a className={activeSection === item.toLowerCase() ? "active" : ""} aria-current={activeSection === item.toLowerCase() ? "page" : undefined} key={item} href={`#${item.toLowerCase()}`}>{item}</a>
+            <a
+              className={activeSection === item.toLowerCase() ? "active" : ""}
+              aria-current={
+                activeSection === item.toLowerCase() ? "page" : undefined
+              }
+              key={item}
+              href={`#${item.toLowerCase()}`}
+            >
+              {item}
+            </a>
           ))}
         </nav>
 
-        <button className="bookTop" type="button" onClick={() => openBooking()}>Book Your Date <Icon name="calendar" /></button>
-        <button className="menuButton" type="button" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-label="Toggle navigation">{menuOpen ? "×" : "☰"}</button>
+        <button className="bookTop" type="button" onClick={() => openBooking()}>
+          Book Your Date <Icon name="calendar" />
+        </button>
+        <button
+          className="menuButton"
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-expanded={menuOpen}
+          aria-label="Toggle navigation"
+        >
+          {menuOpen ? "×" : "☰"}
+        </button>
         {menuOpen && (
           <nav className="mobileNav" aria-label="Mobile navigation">
-            {navItems.map((item) => <a className={activeSection === item.toLowerCase() ? "active" : ""} onClick={() => setMenuOpen(false)} key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}
+            {navItems.map((item) => (
+              <a
+                className={activeSection === item.toLowerCase() ? "active" : ""}
+                onClick={() => setMenuOpen(false)}
+                key={item}
+                href={`#${item.toLowerCase()}`}
+              >
+                {item}
+              </a>
+            ))}
           </nav>
         )}
       </header>
@@ -189,26 +350,50 @@ export default function BloomBridalStudio() {
       <section id="home" className="hero sectionShell">
         <div className="heroCopy">
           <p className="eyebrow">Luxury Bridal Beauty</p>
-          <h1>Where You <em>Bloom</em> for Your Big Day</h1>
+          <h1>
+            Where You <em>Bloom</em> for Your Big Day
+          </h1>
           <div className="goldLine" />
-          <p className="lead">Luxury bridal hair & makeup for the modern bride. Designed to make you feel confident, radiant and unforgettable.</p>
+          <p className="lead">
+            Luxury bridal hair & makeup for the modern bride. Designed to make
+            you feel confident, radiant and unforgettable.
+          </p>
           <div className="heroActions">
-            <Button onClick={() => openBooking()}>Book Your Consultation</Button>
-            <Button href="#about" outline>Explore the Studio</Button>
+            <Button onClick={() => openBooking()}>
+              Book Your Consultation
+            </Button>
+            <Button href="#about" outline>
+              Explore the Studio
+            </Button>
           </div>
         </div>
 
         <div className="heroArt">
-          <div className="award">2025<br /><span>Bridal Beauty</span></div>
-          <img src={IMG.hero} alt="Bride with romantic updo and lace dress" fetchPriority="high" decoding="async" />
+          <div className="award">
+            2025
+            <br />
+            <span>Bridal Beauty</span>
+          </div>
+          <img
+            src={IMG.hero}
+            alt="Bride with romantic updo and lace dress"
+            fetchPriority="high"
+            decoding="async"
+          />
           <div className="floral floralRight">✿</div>
         </div>
       </section>
 
-      <section id="services" className="serviceBar sectionShell" aria-label="Services overview">
+      <section
+        id="services"
+        className="serviceBar sectionShell"
+        aria-label="Services overview"
+      >
         {services.map((service) => (
           <article className="serviceItem" key={service.title}>
-            <div className="serviceIcon"><Icon name={service.icon} /></div>
+            <div className="serviceIcon">
+              <Icon name={service.icon} />
+            </div>
             <div>
               <h3>{service.title}</h3>
               <p>{service.text}</p>
@@ -220,29 +405,83 @@ export default function BloomBridalStudio() {
       <section id="gallery" className="gallery sectionShell">
         <div className="sectionIntro">
           <p className="eyebrow">Featured Looks</p>
-          <h2>Timeless Beauty, Modern <em>Romance</em></h2>
-          <p>A glimpse into the brides we’ve had the honor of making feel their most beautiful.</p>
-          <a className="textLink" href="#gallery">View Full Gallery →</a>
+          <h2>
+            Timeless Beauty, Modern <em>Romance</em>
+          </h2>
+          <p>
+            A glimpse into the brides we’ve had the honor of making feel their
+            most beautiful.
+          </p>
+          <a className="textLink" href="#gallery">
+            View Full Gallery →
+          </a>
         </div>
 
         <div className="galleryGrid">
-          <img className="tall" src={IMG.featured1} alt="Bridal portrait" loading="lazy" decoding="async" />
-          <img src={IMG.featured2} alt="Bridal hair detail" loading="lazy" decoding="async" />
-          <img src={IMG.featured3} alt="Makeup products flatlay" loading="lazy" decoding="async" />
-          <img className="tall wide" src={IMG.featured4} alt="Soft glam bridal makeup" loading="lazy" decoding="async" />
-          <img src={IMG.featured5} alt="Bride holding bouquet" loading="lazy" decoding="async" />
-          <img src={IMG.featured6} alt="Bride with bridesmaids" loading="lazy" decoding="async" />
+          <img
+            className="tall"
+            src={IMG.featured1}
+            alt="Bridal portrait"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src={IMG.featured2}
+            alt="Bridal hair detail"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src={IMG.featured3}
+            alt="Makeup products flatlay"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            className="tall wide"
+            src={IMG.featured4}
+            alt="Soft glam bridal makeup"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src={IMG.featured5}
+            alt="Bride holding bouquet"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src={IMG.featured6}
+            alt="Bride with bridesmaids"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </section>
 
       <section id="about" className="about sectionShell">
-        <img className="studioImg" src={IMG.studio} alt="Elegant bridal beauty studio interior" loading="lazy" decoding="async" />
+        <img
+          className="studioImg"
+          src={IMG.studio}
+          alt="Elegant bridal beauty studio interior"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="aboutCopy">
           <p className="eyebrow">About Bloom</p>
-          <h2>Beauty with Heart, Artistry with <em>Purpose</em></h2>
-          <p>Bloom Bridal Studio is a luxury beauty studio specializing in bridal hair, makeup and styling. We believe every bride deserves a calm, joyful experience and a look that feels like the most beautiful version of herself.</p>
+          <h2>
+            Beauty with Heart, Artistry with <em>Purpose</em>
+          </h2>
+          <p>
+            Bloom Bridal Studio is a luxury beauty studio specializing in bridal
+            hair, makeup and styling. We believe every bride deserves a calm,
+            joyful experience and a look that feels like the most beautiful
+            version of herself.
+          </p>
           <p className="script">Your dream, it is meant to.</p>
-          <Button href="#about" outline>Our Story</Button>
+          <Button href="#about" outline>
+            Our Story
+          </Button>
         </div>
         <div className="flowerCard">✿</div>
       </section>
@@ -252,12 +491,26 @@ export default function BloomBridalStudio() {
           <p className="eyebrow">Your Bridal</p>
           <h2>Beauty Journey ✨</h2>
           <p>A seamless, stress-free experience from start to finish.</p>
-          <a className="textLink" href="#journey">How It Works →</a>
+          <a className="textLink" href="#journey">
+            How It Works →
+          </a>
         </div>
         <div className="steps">
           {journey.map((step) => (
             <article className="step" key={step.no}>
-              <div className="stepIcon"><Icon name={step.no === "01" ? "calendar" : step.no === "02" ? "mirror" : step.no === "03" ? "hair" : "brush"} /></div>
+              <div className="stepIcon">
+                <Icon
+                  name={
+                    step.no === "01"
+                      ? "calendar"
+                      : step.no === "02"
+                        ? "mirror"
+                        : step.no === "03"
+                          ? "hair"
+                          : "brush"
+                  }
+                />
+              </div>
               <span>{step.no}</span>
               <h3>{step.title}</h3>
               <p>{step.text}</p>
@@ -267,34 +520,66 @@ export default function BloomBridalStudio() {
       </section>
 
       <section id="blog" className="artists sectionShell">
-        <img className="artistLead" src={IMG.artistLead} alt="Lead bridal artist" loading="lazy" decoding="async" />
+        <img
+          className="artistLead"
+          src={IMG.artistLead}
+          alt="Lead bridal artist"
+          loading="lazy"
+          decoding="async"
+        />
         <article className="artistNote">
           <p className="eyebrow">Meet The Artists</p>
-          <h2>Led by <em>Passion</em>. Driven by Perfection.</h2>
-          <p>Our team of experienced artists are here to make your bridal beauty journey effortless and unforgettable.</p>
+          <h2>
+            Led by <em>Passion</em>. Driven by Perfection.
+          </h2>
+          <p>
+            Our team of experienced artists are here to make your bridal beauty
+            journey effortless and unforgettable.
+          </p>
           <strong>Lisa Monteiro</strong>
           <small>Lead Hair & Makeup Artist</small>
         </article>
         {artists.map((artist) => (
           <article className="artistCard" key={artist.name}>
-            <img src={artist.image} alt={artist.name} loading="lazy" decoding="async" />
+            <img
+              src={artist.image}
+              alt={artist.name}
+              loading="lazy"
+              decoding="async"
+            />
             <h3>{artist.name}</h3>
             <p>{artist.role}</p>
-            <div className="socials"><a href="#contact" aria-label={`${artist.name} on Instagram`}>ig</a><a href="#contact" aria-label={`${artist.name} portfolio`}>◌</a></div>
+            <div className="socials">
+              <a href="#contact" aria-label={`${artist.name} on Instagram`}>
+                ig
+              </a>
+              <a href="#contact" aria-label={`${artist.name} portfolio`}>
+                ◌
+              </a>
+            </div>
           </article>
         ))}
-        <aside className="greenQuote">A team that cares as much as you do.</aside>
+        <aside className="greenQuote">
+          A team that cares as much as you do.
+        </aside>
       </section>
 
       <section className="reviews sectionShell">
         <div className="sectionIntro small">
           <p className="eyebrow">Love Notes</p>
-          <h2>From Our Beautiful <em>Brides</em></h2>
-          <a className="textLink" href="#blog">Read More Reviews →</a>
+          <h2>
+            From Our Beautiful <em>Brides</em>
+          </h2>
+          <a className="textLink" href="#blog">
+            Read More Reviews →
+          </a>
         </div>
         <div className="reviewCards">
           {reviews.map((review, index) => (
-            <article className={`reviewCard ${reviewIndex === index ? "active" : ""}`} key={review.name}>
+            <article
+              className={`reviewCard ${reviewIndex === index ? "active" : ""}`}
+              key={review.name}
+            >
               <div className="quote">“</div>
               <div className="stars">★★★★★</div>
               <p>{review.text}</p>
@@ -302,12 +587,36 @@ export default function BloomBridalStudio() {
             </article>
           ))}
           <div className="reviewControls" aria-label="Testimonial controls">
-            <button type="button" onClick={() => setReviewIndex((reviewIndex + reviews.length - 1) % reviews.length)} aria-label="Previous testimonial">←</button>
-            <span>{reviewIndex + 1} / {reviews.length}</span>
-            <button type="button" onClick={() => setReviewIndex((reviewIndex + 1) % reviews.length)} aria-label="Next testimonial">→</button>
+            <button
+              type="button"
+              onClick={() =>
+                setReviewIndex(
+                  (reviewIndex + reviews.length - 1) % reviews.length,
+                )
+              }
+              aria-label="Previous testimonial"
+            >
+              ←
+            </button>
+            <span>
+              {reviewIndex + 1} / {reviews.length}
+            </span>
+            <button
+              type="button"
+              onClick={() => setReviewIndex((reviewIndex + 1) % reviews.length)}
+              aria-label="Next testimonial"
+            >
+              →
+            </button>
           </div>
         </div>
-        <img className="sideBride" src={IMG.sideBride} alt="Bride holding bouquet" loading="lazy" decoding="async" />
+        <img
+          className="sideBride"
+          src={IMG.sideBride}
+          alt="Bride holding bouquet"
+          loading="lazy"
+          decoding="async"
+        />
       </section>
 
       <section id="packages" className="packages sectionShell">
@@ -315,20 +624,35 @@ export default function BloomBridalStudio() {
           <p className="eyebrow">Choose Your</p>
           <h2>Perfect Package</h2>
           <p>Curated experiences to suit every bride’s needs.</p>
-          <a className="textLink" href="#packages">View All Packages →</a>
+          <a className="textLink" href="#packages">
+            View All Packages →
+          </a>
         </div>
 
         <div className="packageCards">
           {packages.map((pack) => (
-            <article className={pack.featured ? "packageCard featured" : "packageCard"} key={pack.title}>
+            <article
+              className={pack.featured ? "packageCard featured" : "packageCard"}
+              key={pack.title}
+            >
               {pack.featured && <div className="badge">Most Loved</div>}
               <div className="packageIcon">✺</div>
               <h3>{pack.title}</h3>
               <p>{pack.tag}</p>
-              <ul>{pack.items.map((item) => <li key={item}>{item}</li>)}</ul>
+              <ul>
+                {pack.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
               <small>Starting at</small>
               <strong>{pack.price}</strong>
-              <button type="button" className="choosePackage" onClick={() => openBooking(pack.title)}>Choose {pack.title.replace("The ", "")}</button>
+              <button
+                type="button"
+                className="choosePackage"
+                onClick={() => openBooking(pack.title)}
+              >
+                Choose {pack.title.replace("The ", "")}
+              </button>
             </article>
           ))}
           <article className="addons">
@@ -344,19 +668,42 @@ export default function BloomBridalStudio() {
         </div>
       </section>
 
-      <section className="planning sectionShell" aria-labelledby="planning-title">
+      <section
+        className="planning sectionShell"
+        aria-labelledby="planning-title"
+      >
         <div className="availability">
           <p className="eyebrow">Now Reserving</p>
-          <h2 id="planning-title">Your Date Deserves a Calm, Beautiful Plan.</h2>
-          <p>We are currently welcoming 2026–2027 celebrations throughout Los Angeles, Beverly Hills, Malibu, Orange County, and select destination locations.</p>
-          <div className="availabilityMeta"><span><Icon name="calendar" /> Limited weekend dates</span><span><Icon name="sparkle" /> Travel available</span></div>
+          <h2 id="planning-title">
+            Your Date Deserves a Calm, Beautiful Plan.
+          </h2>
+          <p>
+            We are currently welcoming 2026–2027 celebrations throughout Los
+            Angeles, Beverly Hills, Malibu, Orange County, and select
+            destination locations.
+          </p>
+          <div className="availabilityMeta">
+            <span>
+              <Icon name="calendar" /> Limited weekend dates
+            </span>
+            <span>
+              <Icon name="sparkle" /> Travel available
+            </span>
+          </div>
           <Button onClick={() => openBooking()}>Check Your Date</Button>
         </div>
         <div className="faqList">
           <p className="eyebrow">Questions, Answered</p>
           {faqs.map(([question, answer], index) => (
             <article className="faqItem" key={question}>
-              <button type="button" onClick={() => setOpenFaq(openFaq === index ? -1 : index)} aria-expanded={openFaq === index}>{question}<span>{openFaq === index ? "−" : "+"}</span></button>
+              <button
+                type="button"
+                onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
+                aria-expanded={openFaq === index}
+              >
+                {question}
+                <span>{openFaq === index ? "−" : "+"}</span>
+              </button>
               {openFaq === index && <p>{answer}</p>}
             </article>
           ))}
@@ -368,15 +715,31 @@ export default function BloomBridalStudio() {
           <h2>Let’s Create Your Dream Look</h2>
           <p>Your day is one of a kind. Your beauty should be too.</p>
         </div>
-        <Button onClick={() => openBooking()} outline>Book Your Date</Button>
-        <p>Or call us at <strong>+1 (555) 123-4567</strong></p>
+        <Button onClick={() => openBooking()} outline>
+          Book Your Date
+        </Button>
+        <p>
+          Or call us at <strong>+1 (555) 123-4567</strong>
+        </p>
       </section>
 
       <footer className="footer sectionShell">
         <div>
-          <a className="logo footerLogo" href="#home"><span>Bloom</span><small>Bridal Studio</small></a>
-          <p>Luxury bridal hair, makeup and styling for your most beautiful day.</p>
-          <div className="socials footerSocials"><a href="#gallery" aria-label="Instagram">Instagram</a><a href="#gallery" aria-label="Pinterest">Pinterest</a></div>
+          <a className="logo footerLogo" href="#home">
+            <span>Bloom</span>
+            <small>Bridal Studio</small>
+          </a>
+          <p>
+            Luxury bridal hair, makeup and styling for your most beautiful day.
+          </p>
+          <div className="socials footerSocials">
+            <a href="#gallery" aria-label="Instagram">
+              Instagram
+            </a>
+            <a href="#gallery" aria-label="Pinterest">
+              Pinterest
+            </a>
+          </div>
         </div>
 
         <div>
@@ -390,7 +753,11 @@ export default function BloomBridalStudio() {
 
         <div>
           <h3>Studio</h3>
-          <p>123 Blossom Lane<br />Beverly Hills, CA 90210</p>
+          <p>
+            123 Blossom Lane
+            <br />
+            Beverly Hills, CA 90210
+          </p>
           <p>+1 (555) 123-4567</p>
           <p>hello@bloombridalstudio.com</p>
           <p>Open Tue – Sun | 9am – 6pm</p>
@@ -399,8 +766,21 @@ export default function BloomBridalStudio() {
         <div>
           <h3>Follow Along</h3>
           <div className="instaGrid">
-            {[IMG.footer1, IMG.footer2, IMG.footer3, IMG.footer4, IMG.footer5, IMG.footer6].map((src) => (
-              <img key={src} src={src} alt="Bloom Bridal Studio social preview" loading="lazy" decoding="async" />
+            {[
+              IMG.footer1,
+              IMG.footer2,
+              IMG.footer3,
+              IMG.footer4,
+              IMG.footer5,
+              IMG.footer6,
+            ].map((src) => (
+              <img
+                key={src}
+                src={src}
+                alt="Bloom Bridal Studio social preview"
+                loading="lazy"
+                decoding="async"
+              />
             ))}
           </div>
         </div>
@@ -408,30 +788,105 @@ export default function BloomBridalStudio() {
         <div>
           <h3>Stay in Bloom</h3>
           <p>Get beauty tips, special offers and studio updates.</p>
-          <form className="subscribe" onSubmit={(event) => event.preventDefault()}>
+          <form
+            className="subscribe"
+            onSubmit={(event) => event.preventDefault()}
+          >
             <label htmlFor="bloom-email">Email address</label>
-            <input id="bloom-email" type="email" placeholder="Your email address" required />
+            <input
+              id="bloom-email"
+              type="email"
+              placeholder="Your email address"
+              required
+            />
             <button type="submit">Subscribe</button>
           </form>
         </div>
       </footer>
 
       {bookingOpen && (
-        <div className="modalBackdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setBookingOpen(false)}>
-          <section className="bookingModal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
-            <button className="modalClose" type="button" onClick={() => setBookingOpen(false)} aria-label="Close booking form">×</button>
+        <div
+          className="modalBackdrop"
+          role="presentation"
+          onMouseDown={(event) =>
+            event.target === event.currentTarget && setBookingOpen(false)
+          }
+        >
+          <section
+            className="bookingModal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="booking-title"
+          >
+            <button
+              className="modalClose"
+              type="button"
+              onClick={() => setBookingOpen(false)}
+              aria-label="Close booking form"
+            >
+              ×
+            </button>
             <p className="eyebrow">Begin Your Bridal Journey</p>
             <h2 id="booking-title">Tell Us About Your Day</h2>
-            <p>Share a few details and our bridal concierge will be in touch within two business days.</p>
-            <form className="bookingForm" onSubmit={(event) => { event.preventDefault(); setBookingOpen(false); }}>
-              <label>Full name<input autoFocus name="name" required autoComplete="name" /></label>
-              <label>Email address<input name="email" type="email" required autoComplete="email" /></label>
-              <label>Wedding date<input name="date" type="date" required /></label>
-              <label>Wedding location<input name="location" required /></label>
-              <label>Package<select name="package" value={selectedPackage} onChange={(event) => setSelectedPackage(event.target.value)}>{packages.map((pack) => <option key={pack.title}>{pack.title}</option>)}</select></label>
-              <label>Estimated party size<input name="party" type="number" min="1" defaultValue="1" /></label>
-              <label className="fullField">Tell us about your vision<textarea name="vision" rows={3} placeholder="Your style, timing, and anything else you’d love us to know..." /></label>
-              <button className="btn fullField" type="submit">Request Consultation <span>→</span></button>
+            <p>
+              Share a few details and our bridal concierge will be in touch
+              within two business days.
+            </p>
+            <form
+              className="bookingForm"
+              onSubmit={(event) => {
+                event.preventDefault();
+                setBookingOpen(false);
+              }}
+            >
+              <label>
+                Full name
+                <input autoFocus name="name" required autoComplete="name" />
+              </label>
+              <label>
+                Email address
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                />
+              </label>
+              <label>
+                Wedding date
+                <input name="date" type="date" required />
+              </label>
+              <label>
+                Wedding location
+                <input name="location" required />
+              </label>
+              <label>
+                Package
+                <select
+                  name="package"
+                  value={selectedPackage}
+                  onChange={(event) => setSelectedPackage(event.target.value)}
+                >
+                  {packages.map((pack) => (
+                    <option key={pack.title}>{pack.title}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Estimated party size
+                <input name="party" type="number" min="1" defaultValue="1" />
+              </label>
+              <label className="fullField">
+                Tell us about your vision
+                <textarea
+                  name="vision"
+                  rows={3}
+                  placeholder="Your style, timing, and anything else you’d love us to know..."
+                />
+              </label>
+              <button className="btn fullField" type="submit">
+                Request Consultation <span>→</span>
+              </button>
             </form>
           </section>
         </div>

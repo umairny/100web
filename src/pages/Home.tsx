@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, type ReactNode } from "react";
 import { AnimatedSection, Container, CTAButton } from "../components";
-import { imageUrl } from "../assets/images";
+import { imageUrl } from "../assets/optimized";
 import {
   beautyWebsites,
   categories,
@@ -18,37 +18,37 @@ import {
 
 const homeImages = {
   heroShowcase: {
-    src: imageUrl("home/hero-showcase.png"),
+    src: imageUrl("home/hero-showcase.webp"),
     alt: "100 website design showcase by Umair Ahmad",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_20%_20%,rgba(139,111,82,0.25),transparent_28%),radial-gradient(circle_at_82%_24%,rgba(239,59,45,0.2),transparent_24%),linear-gradient(135deg,#f7f2e8,#ffffff_48%,#111827)]",
   },
   restaurantCollection: {
-    src: imageUrl("home/restaurant-collection-collage.png"),
+    src: imageUrl("home/restaurant-collection-collage.webp"),
     alt: "Restaurant website design collection preview collage",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_18%_22%,rgba(239,59,45,0.22),transparent_24%),radial-gradient(circle_at_80%_78%,rgba(244,161,26,0.22),transparent_26%),linear-gradient(135deg,#fff7e8,#ffffff)]",
   },
   beautyCollection: {
-    src: imageUrl("home/beauty-collection-collage.png"),
+    src: imageUrl("home/beauty-collection-collage.webp"),
     alt: "Beauty and salon website design collection preview collage",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_20%_24%,rgba(236,72,153,0.22),transparent_24%),radial-gradient(circle_at_78%_72%,rgba(215,181,109,0.2),transparent_24%),linear-gradient(135deg,#fff0f6,#ffffff)]",
   },
   componentSystem: {
-    src: imageUrl("home/component-system.png"),
+    src: imageUrl("home/component-system.webp"),
     alt: "Reusable website component system with cards, layouts, navigation, and CTA blocks",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_22%_24%,rgba(139,111,82,0.2),transparent_24%),radial-gradient(circle_at_78%_72%,rgba(47,143,70,0.18),transparent_24%),linear-gradient(135deg,#111827,#374151)]",
   },
   categoriesOverview: {
-    src: imageUrl("home/categories-overview.png"),
+    src: imageUrl("home/categories-overview.webp"),
     alt: "Overview of website categories in the 100 website design project",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_20%_22%,rgba(139,111,82,0.2),transparent_24%),radial-gradient(circle_at_80%_72%,rgba(14,165,233,0.16),transparent_24%),linear-gradient(135deg,#ffffff,#f7f2e8)]",
   },
   designProcess: {
-    src: imageUrl("home/design-process.png"),
+    src: imageUrl("home/design-process.webp"),
     alt: "Website design workflow from brand direction to client-ready responsive homepage",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_22%_28%,rgba(244,161,26,0.24),transparent_24%),radial-gradient(circle_at_80%_70%,rgba(239,59,45,0.18),transparent_24%),linear-gradient(135deg,#f7f2e8,#ffffff)]",

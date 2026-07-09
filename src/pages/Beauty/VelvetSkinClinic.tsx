@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Container } from "../../components";
-import consultationImage from "../../assets/images/beauty/Velvet-Skin-Clinic/consultation.png";
-import facialTreatmentImage from "../../assets/images/beauty/Velvet-Skin-Clinic/facial-treatment.png";
-import heroImage from "../../assets/images/beauty/Velvet-Skin-Clinic/hero.png";
-import ledTreatmentImage from "../../assets/images/beauty/Velvet-Skin-Clinic/led-treatment.png";
-import peelTreatmentImage from "../../assets/images/beauty/Velvet-Skin-Clinic/peel-treatment.png";
-import studioInteriorImage from "../../assets/images/beauty/Velvet-Skin-Clinic/studio-interior.png";
+import consultationImage from "../../assets/optimized/beauty/Velvet-Skin-Clinic/consultation.webp";
+import facialTreatmentImage from "../../assets/optimized/beauty/Velvet-Skin-Clinic/facial-treatment.webp";
+import heroImage from "../../assets/optimized/beauty/Velvet-Skin-Clinic/hero.webp";
+import ledTreatmentImage from "../../assets/optimized/beauty/Velvet-Skin-Clinic/led-treatment.webp";
+import peelTreatmentImage from "../../assets/optimized/beauty/Velvet-Skin-Clinic/peel-treatment.webp";
+import studioInteriorImage from "../../assets/optimized/beauty/Velvet-Skin-Clinic/studio-interior.webp";
 
 type IconName =
   | "menu"

@@ -1,4 +1,4 @@
-import { imageUrl } from "../../assets/images";
+import { imageUrl } from "../../assets/optimized";
 import type { WebsiteDesign } from "../websites";
 export const saasWebsites: WebsiteDesign[] = [
   {
@@ -9,7 +9,7 @@ export const saasWebsites: WebsiteDesign[] = [
     shortDescription:
       "CRM product homepage with workflow value, integrations, pricing, proof, and trial conversion",
     slug: "flowpilot-crm",
-    image: imageUrl("home/saas-preview.png"),
+    image: imageUrl("home/saas-preview.webp"),
     colors: {
       primary: "#075985",
       secondary: "#e0f2fe",
@@ -19,4 +19,3 @@ export const saasWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-
