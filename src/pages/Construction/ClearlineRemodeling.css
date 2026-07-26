@@ -1,0 +1,825 @@
+.cl-site {
+  --green: #5d695b;
+  --gold: #b69355;
+  --ink: #252923;
+  --cream: #f7f5f0;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  overflow-x: clip;
+}
+.cl-site * {
+  box-sizing: border-box;
+}
+.cl-site a {
+  text-decoration: none;
+}
+.cl-wrap {
+  width: min(1480px, calc(100% - 80px));
+  margin: auto;
+}
+.cl-top {
+  height: 45px;
+  background: #f2f0ec;
+  font-family: Manrope, sans-serif;
+  font-size: 12px;
+}
+.cl-top > .cl-wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cl-top span,
+.cl-top a {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: var(--ink);
+}
+.cl-top svg {
+  width: 14px;
+}
+.cl-header {
+  height: 108px;
+  background: rgba(255, 255, 255, 0.97);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+.cl-nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.cl-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink);
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+.cl-logo > span {
+  font-size: 40px;
+  color: var(--gold);
+}
+.cl-logo small {
+  display: block;
+  font-family: Manrope, sans-serif;
+  font-size: 10px;
+  letter-spacing: 6px;
+  margin-top: 5px;
+}
+.cl-nav nav {
+  display: flex;
+  gap: 46px;
+  margin-left: auto;
+  height: 100%;
+}
+.cl-nav nav a {
+  color: var(--ink);
+  font-family: Manrope, sans-serif;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+.cl-nav nav a svg {
+  width: 13px;
+}
+.cl-nav nav a.active {
+  color: var(--green);
+}
+.cl-nav nav a.active:after {
+  content: "";
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gold);
+}
+.cl-menu {
+  display: none;
+  background: none;
+  border: 0;
+}
+.cl-button {
+  display: inline-flex;
+  min-height: 58px;
+  padding: 0 34px;
+  background: var(--green);
+  border: 2px solid var(--green);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font:
+    bold 13px Manrope,
+    sans-serif;
+  border-radius: 3px;
+}
+.cl-button.small {
+  min-height: 50px;
+  padding: 0 28px;
+}
+.cl-button.outline {
+  background: #fff;
+  color: var(--ink);
+  border-color: #aeb3ac;
+}
+.cl-site section[id],
+.cl-site footer[id],
+#cl-estimate {
+  scroll-margin-top: 108px;
+}
+.cl-hero {
+  height: 790px;
+  position: relative;
+}
+.cl-hero > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cl-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.97),
+    rgba(255, 255, 255, 0.58) 52%,
+    rgba(255, 255, 255, 0.12)
+  );
+}
+.cl-hero-grid {
+  height: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 0.72fr;
+  gap: 100px;
+  align-items: center;
+}
+.cl-hero h1 {
+  font-size: 66px;
+  line-height: 1.02;
+  font-weight: 400;
+  max-width: 760px;
+  margin: 0;
+}
+.cl-hero p {
+  font-size: 18px;
+  line-height: 1.65;
+}
+.cl-actions {
+  display: flex;
+  gap: 22px;
+  margin-top: 28px;
+}
+.cl-form {
+  background: #fff;
+  padding: 35px;
+  border-radius: 10px;
+  box-shadow: 0 14px 38px rgba(36, 34, 28, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.cl-form h2 {
+  font-size: 29px;
+  margin: 0;
+}
+.cl-form p {
+  font-size: 13px;
+  margin: 0 0 6px;
+}
+.cl-form input,
+.cl-form select,
+.cl-form textarea {
+  min-height: 49px;
+  border: 1px solid #ddd;
+  padding: 12px;
+  font:
+    13px Manrope,
+    sans-serif;
+}
+.cl-form textarea {
+  min-height: 95px;
+}
+.cl-form button {
+  min-height: 52px;
+  background: var(--green);
+  color: #fff;
+  border: 0;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.cl-form small {
+  font:
+    11px Manrope,
+    sans-serif;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.cl-form small svg {
+  width: 13px;
+}
+.cl-stats {
+  position: relative;
+  margin-top: -14px;
+  z-index: 4;
+}
+.cl-stats > .cl-wrap {
+  min-height: 135px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.11);
+  padding: 18px;
+}
+.cl-stats > .cl-wrap > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 24px;
+  border-right: 1px solid #ddd;
+}
+.cl-stats svg {
+  width: 40px;
+}
+.cl-stats strong,
+.cl-stats small {
+  display: block;
+}
+.cl-stats strong {
+  font-size: 25px;
+}
+.cl-stats small {
+  font:
+    10px Manrope,
+    sans-serif;
+}
+.cl-section {
+  padding: 95px 0;
+}
+.cl-heading {
+  margin-bottom: 45px;
+}
+.cl-heading.center {
+  text-align: center;
+}
+.cl-heading > span,
+.cl-over {
+  color: var(--gold);
+  font:
+    bold 11px Manrope,
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.cl-heading h2 {
+  font-size: 42px;
+  font-weight: 400;
+  margin: 8px 0;
+}
+.cl-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+.cl-services article {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding-bottom: 26px;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.05);
+}
+.cl-services img {
+  width: 100%;
+  height: 245px;
+  object-fit: cover;
+}
+.cl-services article > span {
+  display: flex;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  margin: -28px auto 12px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px #bbb;
+}
+.cl-services h3,
+.cl-projects h3 {
+  font-size: 20px;
+}
+.cl-services p {
+  font:
+    14px/1.5 Manrope,
+    sans-serif;
+  padding: 0 25px;
+}
+.cl-services a {
+  color: var(--gold);
+  font:
+    bold 11px Manrope,
+    sans-serif;
+  text-transform: uppercase;
+}
+.cl-services a svg {
+  width: 13px;
+}
+.cl-promise {
+  background: #f5f3ef;
+}
+.cl-promise > .cl-wrap {
+  display: grid;
+  grid-template-columns: 0.8fr 0.8fr 1.5fr;
+  gap: 45px;
+  align-items: center;
+}
+.cl-promise > .cl-wrap > img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+.cl-promise h2 {
+  font-size: 43px;
+  font-weight: 400;
+}
+.cl-promise p {
+  font:
+    15px/1.65 Manrope,
+    sans-serif;
+}
+.cl-promise-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.cl-promise-grid article {
+  padding: 28px;
+  border: 1px solid #ddd;
+  text-align: center;
+  min-height: 200px;
+}
+.cl-promise-grid svg {
+  color: var(--green);
+}
+.cl-promise-grid h3 {
+  font-size: 17px;
+}
+.cl-projects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.cl-projects article {
+  border: 1px solid #ddd;
+}
+.cl-projects img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+.cl-projects article > div {
+  padding: 20px;
+}
+.cl-projects p,
+.cl-projects small {
+  font:
+    13px/1.5 Manrope,
+    sans-serif;
+}
+.cl-process {
+  background: #faf9f7;
+}
+.cl-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  text-align: center;
+  position: relative;
+}
+.cl-steps:before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: 10%;
+  right: 10%;
+  border-top: 2px solid #d0c4ad;
+}
+.cl-steps article {
+  position: relative;
+  padding: 0 25px;
+}
+.cl-steps span {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+.cl-steps h3 {
+  font-size: 18px;
+}
+.cl-steps p {
+  font:
+    13px/1.5 Manrope,
+    sans-serif;
+}
+.cl-document {
+  background: #f4f2ed;
+}
+.cl-document > .cl-wrap {
+  display: grid;
+  grid-template-columns: 0.75fr 0.65fr 1.5fr;
+  gap: 0;
+  background: #fff;
+}
+.cl-document > .cl-wrap > div:first-child {
+  padding: 45px;
+}
+.cl-document h2 {
+  font-size: 34px;
+  font-weight: 400;
+}
+.cl-document p,
+.cl-document span {
+  font:
+    14px/1.7 Manrope,
+    sans-serif;
+}
+.cl-document span {
+  display: flex;
+  gap: 8px;
+}
+.cl-document span svg {
+  width: 16px;
+}
+.cl-document > .cl-wrap > img {
+  width: 100%;
+  height: 430px;
+  object-fit: cover;
+}
+.cl-phone-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 30px;
+}
+.cl-phone-grid article {
+  text-align: center;
+}
+.cl-phone-grid article > div {
+  height: 280px;
+  border: 7px solid #202020;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cl-phone-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cl-phone-grid svg {
+  width: 45px;
+}
+.cl-phone-grid strong {
+  display: block;
+  font:
+    12px Manrope,
+    sans-serif;
+  margin-top: 10px;
+}
+.cl-testimonials {
+  background: #f7f6f3;
+}
+.cl-community {
+  display: grid;
+  grid-template-columns: 260px 330px 1fr;
+  gap: 45px;
+  align-items: center;
+}
+.cl-community p {
+  font:
+    14px/2 Manrope,
+    sans-serif;
+}
+.cl-community p svg {
+  width: 14px;
+}
+.cl-map {
+  height: 330px;
+  background: #dbe6df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #557866;
+  font-weight: bold;
+  position: relative;
+}
+.cl-map div {
+  position: absolute;
+  right: 30px;
+  top: 70px;
+}
+.cl-map span {
+  position: absolute;
+  transform: rotate(-55deg);
+  color: #9fb8ac;
+}
+.cl-quotes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.cl-quotes article {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 25px;
+  min-height: 270px;
+}
+.cl-quotes b {
+  font-size: 38px;
+  color: var(--gold);
+}
+.cl-quotes p {
+  font:
+    13px/1.6 Manrope,
+    sans-serif;
+}
+.cl-quotes strong {
+  font-size: 13px;
+}
+.cl-quotes span {
+  display: block;
+  color: #d3a23a;
+  margin-top: 15px;
+}
+.cl-faq > div > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 60px;
+}
+.cl-faq details {
+  border: 1px solid #ddd;
+  padding: 0 18px;
+}
+.cl-faq summary {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font:
+    14px Manrope,
+    sans-serif;
+}
+.cl-faq details p {
+  font:
+    13px Manrope,
+    sans-serif;
+}
+.cl-cta {
+  background:
+    linear-gradient(90deg, rgba(85, 71, 55, 0.75), rgba(85, 71, 55, 0.45)),
+    url("/src/assets/images/Construction/clearline/bathroom.png") center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 65px 0;
+}
+.cl-cta h2 {
+  font-size: 42px;
+  font-weight: 400;
+  margin: 0;
+}
+.cl-footer {
+  background: #242821;
+  color: #fff;
+  padding: 55px 0 20px;
+}
+.cl-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: 55px;
+}
+.cl-footer .cl-logo {
+  color: #fff;
+  font-size: 19px;
+}
+.cl-footer .cl-logo > span {
+  font-size: 30px;
+}
+.cl-footer h3 {
+  font:
+    13px Manrope,
+    sans-serif;
+  text-transform: uppercase;
+}
+.cl-footer p,
+.cl-footer a {
+  display: block;
+  color: #fff;
+  font:
+    12px/1.8 Manrope,
+    sans-serif;
+}
+.cl-footer-grid > div:last-child p {
+  display: flex;
+  gap: 7px;
+}
+.cl-footer p svg {
+  width: 14px;
+}
+.cl-copy {
+  border-top: 1px solid #4a4e48;
+  margin-top: 30px;
+  padding-top: 20px;
+  font:
+    11px Manrope,
+    sans-serif;
+}
+@media (max-width: 1100px) {
+  .cl-wrap {
+    width: min(920px, calc(100% - 40px));
+  }
+  .cl-nav nav {
+    gap: 20px;
+  }
+  .cl-hero-grid {
+    grid-template-columns: 1fr 0.75fr;
+    gap: 40px;
+  }
+  .cl-hero h1 {
+    font-size: 50px;
+  }
+  .cl-stats > .cl-wrap {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cl-promise > .cl-wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cl-promise-grid {
+    grid-column: 1/-1;
+  }
+  .cl-document > .cl-wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cl-phone-grid {
+    grid-column: 1/-1;
+  }
+  .cl-community {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cl-quotes {
+    grid-column: 1/-1;
+  }
+  .cl-footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 760px) {
+  .cl-top {
+    display: none;
+  }
+  .cl-header {
+    height: 84px;
+  }
+  .cl-site section[id],
+  .cl-site footer[id],
+  #cl-estimate {
+    scroll-margin-top: 84px;
+  }
+  .cl-menu {
+    display: block;
+    margin-left: auto;
+  }
+  .cl-nav nav {
+    display: none;
+    position: absolute;
+    top: 84px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 15px 25px;
+    flex-direction: column;
+    height: auto;
+  }
+  .cl-nav nav.open {
+    display: flex;
+  }
+  .cl-nav nav a {
+    min-height: 42px;
+  }
+  .cl-nav > .cl-button {
+    display: none;
+  }
+  .cl-logo {
+    font-size: 20px;
+  }
+  .cl-logo > span {
+    font-size: 30px;
+  }
+  .cl-hero {
+    height: auto;
+    min-height: 1050px;
+  }
+  .cl-hero-grid {
+    grid-template-columns: 1fr;
+    padding: 65px 0;
+  }
+  .cl-hero h1 {
+    font-size: 44px;
+  }
+  .cl-stats {
+    margin: 0;
+    padding: 20px 0;
+  }
+  .cl-stats > .cl-wrap,
+  .cl-services,
+  .cl-projects {
+    grid-template-columns: 1fr;
+  }
+  .cl-promise > .cl-wrap,
+  .cl-document > .cl-wrap,
+  .cl-community {
+    grid-template-columns: 1fr;
+  }
+  .cl-promise > .cl-wrap > img {
+    height: 350px;
+  }
+  .cl-steps {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+  }
+  .cl-steps:before {
+    display: none;
+  }
+  .cl-steps article:last-child {
+    grid-column: 1/-1;
+  }
+  .cl-phone-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cl-phone-grid article > div {
+    height: 220px;
+  }
+  .cl-faq > div > div {
+    grid-template-columns: 1fr;
+  }
+  .cl-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cl-section {
+    padding: 68px 0;
+  }
+  .cl-heading h2 {
+    font-size: 35px;
+  }
+}
+@media (max-width: 480px) {
+  .cl-wrap {
+    width: calc(100% - 30px);
+  }
+  .cl-hero h1 {
+    font-size: 38px;
+  }
+  .cl-actions {
+    flex-direction: column;
+  }
+  .cl-stats > .cl-wrap,
+  .cl-promise-grid,
+  .cl-steps,
+  .cl-phone-grid,
+  .cl-quotes,
+  .cl-footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .cl-steps article:last-child {
+    grid-column: auto;
+  }
+  .cl-services img,
+  .cl-projects img {
+    height: 220px;
+  }
+  .cl-form {
+    padding: 24px;
+  }
+}

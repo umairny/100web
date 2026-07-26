@@ -19,4 +19,3 @@ export const saasWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-

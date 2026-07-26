@@ -1,201 +1,166 @@
 import { Link } from 'react-router-dom'
-import { AnimatedSection, Container, CTAButton } from '../../components'
+import { ArrowRight, BookOpen, Check, GraduationCap, LayoutGrid, School, Sparkles, Users } from 'lucide-react'
 import { educationWebsites } from '../../data/websites'
+import './EducationIndex.css'
+import fluentPathImage from '../../assets/images/education/fluentpath.png'
+import tutorLoopImage from '../../assets/images/education/tutorloop.png'
+import skillForgeImage from '../../assets/images/education/skillforge.png'
+import scholarSpringImage from '../../assets/images/education/scholarspring.png'
+import atlasCollegeImage from '../../assets/images/education/atlascollege.png'
+import proTrackImage from '../../assets/images/education/protrack.png'
+import examEdgeImage from '../../assets/images/education/examedge.png'
 
-const learningTypes = ['Online Courses', 'Tutoring', 'Academies', 'Test Prep', 'Workshops', 'Student Portals']
-
-const uxNotes = [
-  ['Outcomes first', 'Education pages need clear learning goals, curriculum shape, student proof, and enrollment paths.'],
-  ['Reduce decision stress', 'Users should quickly see who it is for, what is included, schedule options, and pricing cues.'],
-  ['Trust through structure', 'Strong hierarchy, lesson previews, instructor credibility, and progress signals make programs feel real.'],
+const categories = [
+  [GraduationCap, 'Online Academies'],
+  [School, 'Private Schools'],
+  [BookOpen, 'Tutoring & Prep'],
+  [Users, 'Student Communities'],
+  [Sparkles, 'Workshops'],
+  [LayoutGrid, 'Learning Portals'],
 ]
 
-const comingSoonConcepts = [
-  ['BrightBridge Academy', 'private school admissions'],
-  ['ExamEdge Prep', 'SAT and ACT preparation'],
-  ['CodeNest Kids', 'coding classes for children'],
-  ['FluentPath Languages', 'adult language learning'],
-  ['TutorLoop', 'one-on-one tutoring marketplace'],
-  ['SkillForge Workshops', 'career upskilling programs'],
-  ['ScholarSpring Preschool', 'early learning and family enrollment'],
-  ['Atlas College Counseling', 'college planning and application guidance'],
-  ['ProTrack Trades', 'hands-on skilled trade training'],
+const principles = [
+  ['01', 'Make the path visible', 'Show programs, curriculum, schedules, and the next enrollment step without making families search.'],
+  ['02', 'Build trust early', 'Lead with outcomes, faculty credibility, student support, and specific proof of learning.'],
+  ['03', 'Design for decisions', 'Give every visitor a clear route based on their goals, age, learning style, and timeline.'],
+]
+
+const upcoming = [
+  { name: 'TutorLoop', focus: 'Tutoring marketplace', audience: 'Students & families', format: 'One-to-one sessions', image: tutorLoopImage, description: 'A trusted marketplace that helps families compare tutors, book sessions, and track learning goals.', features: ['Verified tutors', 'Smart matching', 'Session dashboard'], status: 'Design ready' },
+  { name: 'SkillForge', focus: 'Career workshops', audience: 'Career switchers', format: 'Short intensives', image: skillForgeImage, description: 'Practical, instructor-led workshops focused on skills learners can apply immediately at work.', features: ['Workshop calendar', 'Skill pathways', 'Completion badges'], status: 'In planning' },
+  { name: 'ScholarSpring', focus: 'Early learning', audience: 'Children & parents', format: 'Campus programs', image: scholarSpringImage, description: 'A warm preschool enrollment experience built around play, safety, routines, and family trust.', features: ['Program comparison', 'Family resources', 'Visit scheduling'], status: 'In planning' },
+  { name: 'ProTrack Trades', focus: 'Skilled-trade training', audience: 'Career starters', format: 'Hands-on programs', image: proTrackImage, description: 'A direct enrollment experience for practical training, certifications, apprenticeships, and job placement.', features: ['Trade pathways', 'Facility tours', 'Career outcomes'], status: 'Researching' },
 ]
 
 export function EducationIndex() {
   const liveWebsites = educationWebsites.filter((website) => website.status === 'completed' || website.status === 'live')
 
   return (
-    <main className="bg-[#f7f8ff] text-[#111827]">
-      <section className="relative -mt-16 overflow-hidden bg-[#1e1b4b] pb-20 pt-24 text-white md:pb-28 md:pt-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_20%,rgba(79,70,229,0.58),transparent_28%),radial-gradient(circle_at_84%_24%,rgba(34,197,94,0.28),transparent_22%),linear-gradient(135deg,#111827,#3730a3_58%,#1e1b4b)]" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.08)_0_1px,transparent_1px_56px)]" />
-        <Container>
-          <AnimatedSection className="relative grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-            <div>
-              <Link to="/" className="text-sm font-bold text-white/70 transition hover:text-white">
-                Back to Home
-              </Link>
-              <div className="mt-8 inline-flex border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#bbf7d0]">
-                {liveWebsites.length} live / 10 planned
-              </div>
-              <h1 className="mt-6 max-w-5xl text-5xl font-black leading-[0.92] md:text-7xl">
-                Education websites built for enrollment, clarity, and student momentum.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/74">
-                A category hub for schools, tutors, course creators, academies, test prep brands, and training programs that need users to understand the learning path fast.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="#live-concepts" size="lg" className="bg-[#bbf7d0] text-[#111827] hover:bg-white">
-                  View Live Concept
-                </CTAButton>
-                <CTAButton href="#roadmap" variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10">
-                  See Roadmap
-                </CTAButton>
-              </div>
+    <main className="edu-index">
+      <section className="edu-hero">
+        <div className="edu-orb orb-one" />
+        <div className="edu-orb orb-two" />
+        <div className="edu-shell hero-layout">
+          <div className="hero-content">
+            <Link to="/" className="back-link">← Back to all categories</Link>
+            <span className="hero-label"><span>{liveWebsites.length}</span> live education experiences</span>
+            <h1>Education websites that make the next step feel clear.</h1>
+            <p>Explore thoughtful digital experiences for online academies, private schools, tutors, and learning communities—each designed around trust, momentum, and enrollment.</p>
+            <div className="hero-actions">
+              <a href="#live-websites" className="edu-button primary">Explore websites <ArrowRight /></a>
+              <a href="#approach" className="edu-button secondary">Our UX approach</a>
             </div>
+            <div className="hero-proof">
+              <span><Check /> Responsive by design</span>
+              <span><Check /> Real enrollment flows</span>
+              <span><Check /> Accessible structure</span>
+            </div>
+          </div>
 
-            <div className="relative min-h-[520px]">
-              <div className="absolute right-0 top-8 h-[29rem] w-full border border-white/15 bg-white/10 p-5 shadow-2xl shadow-black/30 backdrop-blur">
-                <div className="grid h-full grid-rows-[1fr_auto] overflow-hidden bg-[#e0e7ff] text-[#111827]">
-                  <div className="relative bg-[linear-gradient(135deg,#e0e7ff,#3730a3_54%,#22c55e)]">
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.20)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.20)_1px,transparent_1px)] [background-size:46px_46px]" />
-                    <div className="absolute left-8 top-8 rounded-full bg-white/92 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#3730a3] shadow-sm">
-                      Cohort starts Monday
-                    </div>
-                    <div className="absolute bottom-6 left-6 right-6 bg-white/94 p-5 shadow-xl">
-                      <p className="text-sm font-black uppercase tracking-[0.18em] text-[#3730a3]">LearnSphere Academy</p>
-                      <p className="mt-2 text-3xl font-black">A course path students can actually follow.</p>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 border-t border-slate-200 bg-white text-center">
-                    {[
-                      ['12', 'Modules'],
-                      ['92%', 'Completion'],
-                      ['4.9', 'Rating'],
-                    ].map(([value, label]) => (
-                      <div key={label} className="border-r border-slate-200 p-4 last:border-r-0">
-                        <p className="text-2xl font-black text-[#3730a3]">{value}</p>
-                        <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-500">{label}</p>
-                      </div>
-                    ))}
+          <div className="hero-showcase" aria-hidden="true">
+            {liveWebsites.slice(0, 2).map((website, index) => (
+              <div className={`showcase-card card-${index + 1}`} key={website.id}>
+                <img src={website.image} alt="" />
+                <div><span>Live concept</span><strong>{website.title}</strong></div>
+              </div>
+            ))}
+            <div className="showcase-badge"><Sparkles /><strong>Designed for clarity</strong><span>From first visit to enrollment</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="category-strip">
+        <div className="edu-shell category-list">
+          {categories.map(([Icon, label]) => <div key={String(label)}><Icon /><span>{String(label)}</span></div>)}
+        </div>
+      </section>
+
+      <section className="live-section edu-shell" id="live-websites">
+        <div className="section-heading">
+          <div><span className="eyebrow">Live websites</span><h2>Distinct ways to inspire learners.</h2></div>
+          <p>Explore experiences for online learners, private-school families, and young creators taking their first steps with code.</p>
+        </div>
+
+        <div className="live-grid">
+          {liveWebsites.map((website, index) => (
+            <Link to={`/education/${website.slug}`} className="website-card" key={website.id}>
+              <div className="browser-frame">
+                <div className="browser-bar"><span /><span /><span /><b>{website.slug}.edu</b></div>
+                <div className="preview-window"><img src={website.image} alt={`${website.title} homepage preview`} loading="lazy" /></div>
+                <span className="live-pill">Live</span>
+              </div>
+              <div className="website-copy">
+                <div className="website-number">0{index + 1}</div>
+                <div>
+                  <span className="website-type">{website.slug === 'codenest-kids' ? 'Coding academy for kids' : index === 0 ? 'Online learning platform' : 'Private school admissions'}</span>
+                  <h3>{website.title}</h3>
+                  <p>{website.shortDescription}</p>
+                  <div className="style-row">
+                    <span>{website.style}</span>
+                    <div className="swatches">{Object.values(website.colors).map(color => <i key={color} style={{ backgroundColor: color }} />)}</div>
                   </div>
                 </div>
+                <span className="open-site">View full website <ArrowRight /></span>
               </div>
-            </div>
-          </AnimatedSection>
-        </Container>
+            </Link>
+          ))}
+        </div>
       </section>
 
-      <section className="border-b border-[#dbe0ff] bg-white py-8">
-        <Container>
-          <div className="flex flex-wrap justify-center gap-2">
-            {learningTypes.map((item) => (
-              <span key={item} className="rounded-full border border-[#dbe0ff] bg-[#f7f8ff] px-4 py-2 text-sm font-bold text-slate-600">
-                {item}
-              </span>
-            ))}
+      <section className="approach-section" id="approach">
+        <div className="edu-shell">
+          <div className="section-heading light">
+            <div><span className="eyebrow">Education UX approach</span><h2>Good design reduces enrollment anxiety.</h2></div>
+            <p>Education decisions carry weight. The interface should answer practical questions while making the experience feel welcoming and credible.</p>
           </div>
-        </Container>
+          <div className="principle-grid">
+            {principles.map(([number, title, text]) => <article key={number}><span>{number}</span><div className="principle-icon">{number === '01' ? <LayoutGrid /> : number === '02' ? <Users /> : <ArrowRight />}</div><h3>{title}</h3><p>{text}</p></article>)}
+          </div>
+        </div>
       </section>
 
-      <section id="live-concepts" className="py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="mb-12 grid gap-6 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#3730a3]">Live concept</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                One online academy homepage is ready to explore.
-              </h2>
-            </div>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
-              The first education concept focuses on cohort learning with curriculum previews, instructor trust,
-              student outcomes, and a clear enrollment flow.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-            {liveWebsites.map((website) => (
-              <Link
-                key={website.id}
-                to={`/education/${website.slug}`}
-                className="group grid overflow-hidden bg-white shadow-xl shadow-slate-950/8 transition duration-300 hover:-translate-y-1 hover:shadow-2xl md:grid-cols-[0.95fr_1.05fr]"
-              >
-                <div
-                  className="relative min-h-72"
-                  style={{
-                    backgroundImage: `linear-gradient(145deg, ${website.colors.secondary} 0%, ${website.colors.primary} 56%, ${website.colors.accent} 100%)`,
-                  }}
+      <section className="roadmap-section edu-shell" id="roadmap">
+        <div className="section-heading">
+          <div><span className="eyebrow">Coming next</span><h2>More learning experiences are taking shape.</h2></div>
+          <p>The roadmap expands beyond academies and schools into focused tools for tutoring, test preparation, language learning, and career growth.</p>
+        </div>
+        <div className="roadmap-summary">
+          <span><strong>{upcoming.length}</strong> concepts in the pipeline</span>
+          <span><strong>5</strong> learning audiences</span>
+          <span><strong>3</strong> delivery models</span>
+        </div>
+        <div className="roadmap-grid">
+          {upcoming.map((concept, index) => (
+            <article key={concept.name}>
+              <div className="concept-art">
+                {concept.image ? <img src={concept.image} alt={`${concept.name} website preview`} loading="lazy" /> : <div className="examedge-preview"><span>1540</span><i/><i/><i/><strong>Score progress</strong></div>}
+                <span className="concept-number">0{index + 3}</span>
+                <span className={`concept-status status-${concept.status.toLowerCase().replace(/\s+/g, '-')}`}>{concept.status}</span>
+              </div>
+              <div className="concept-copy">
+                <Link
+                  to={`/education/${concept.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                  className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-slate-600 transition hover:border-slate-400 hover:text-slate-900"
                 >
-                  {website.image && (
-                    <img
-                      src={website.image}
-                      alt={`${website.title} website preview`}
-                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  )}
-                  <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-[#111827]/50 via-transparent to-transparent' : 'bg-[linear-gradient(90deg,rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.24)_1px,transparent_1px)] [background-size:44px_44px]'}`} />
-                  <div className="absolute bottom-5 left-5 flex gap-2">
-                    {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => (
-                      <span key={color} className="h-7 w-7 rounded-full border border-white/80 shadow-sm" style={{ backgroundColor: color }} />
-                    ))}
-                  </div>
-                </div>
-                <div className="p-8">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#3730a3]">Live design</p>
-                  <h3 className="mt-4 text-4xl font-black transition group-hover:text-[#3730a3]">{website.title}</h3>
-                  <p className="mt-3 text-sm font-bold text-slate-600">{website.style}</p>
-                  <p className="mt-5 text-base leading-7 text-slate-600">{website.shortDescription}</p>
-                  <div className="mt-8 inline-flex w-full items-center justify-center rounded-lg bg-[#111827] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#3730a3]">
-                    Open Homepage
-                  </div>
-                </div>
-              </Link>
-            ))}
-
-            <div className="border border-[#dbe0ff] bg-[#eef2ff] p-8">
-              <p className="text-sm font-black uppercase tracking-[0.22em] text-[#3730a3]">Education UX rules</p>
-              <h3 className="mt-4 text-3xl font-black">Students need to see the path before they enroll.</h3>
-              <div className="mt-8 space-y-4">
-                {uxNotes.map(([title, text]) => (
-                  <article key={title} className="bg-white p-5 shadow-sm">
-                    <h4 className="text-xl font-black">{title}</h4>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
-                  </article>
-                ))}
+                  Coming soon
+                </Link>
+                <h3>{concept.name}</h3>
+                <strong>{concept.focus}</strong>
+                <p>{concept.description}</p>
+                <div className="concept-meta"><span><b>For</b>{concept.audience}</span><span><b>Format</b>{concept.format}</span></div>
+                <ul>{concept.features.map(feature => <li key={feature}><Check />{feature}</li>)}</ul>
+                <div className="concept-footer"><span>Concept preview</span><BookOpen /></div>
               </div>
-            </div>
-          </div>
-        </Container>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section id="roadmap" className="border-y border-[#dbe0ff] bg-white py-20 md:py-28">
-        <Container>
-          <AnimatedSection className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#3730a3]">Roadmap</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                More school and learning niches can follow.
-              </h2>
-            </div>
-            <p className="max-w-md text-sm leading-6 text-slate-600">
-              These coming-soon cards keep the Education category useful while the first academy concept is live.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {comingSoonConcepts.map(([name, focus], index) => (
-              <article key={name} className="group overflow-hidden border border-[#dbe0ff] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="relative h-40 overflow-hidden bg-[linear-gradient(145deg,#f7f8ff,#3730a3_58%,#22c55e)]">
-                  <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(90deg,white_1px,transparent_1px),linear-gradient(white_1px,transparent_1px)] [background-size:32px_32px]" /><div className="absolute bottom-0 left-[14%] h-[60%] w-[30%] rounded-t-full bg-white/20" /><div className="absolute bottom-0 right-[14%] h-[45%] w-[32%] bg-white/30 [clip-path:polygon(50%_0,100%_100%,0_100%)]" />
-                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#3730a3]">Coming soon</div><span className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">Concept {String(index + 2).padStart(2, '0')}</span>
-                </div>
-                <div className="p-6"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#3730a3]">Learning experience</p><h3 className="mt-3 text-2xl font-black">{name}</h3><p className="mt-2 text-sm font-bold capitalize text-slate-500">{focus}</p><p className="mt-4 text-sm leading-6 text-slate-600">A structured education concept presenting outcomes, curriculum, instructor trust, schedules, and a clear enrollment journey.</p><div className="mt-5 flex gap-2 border-t border-slate-200 pt-5">{['#3730a3', '#f7f8ff', '#22c55e', '#111827'].map((color) => <span key={color} className="h-6 w-6 rounded-full border border-slate-300" style={{ backgroundColor: color }} />)}</div><span className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500">Coming Soon</span></div>
-              </article>
-            ))}
-          </div>
-        </Container>
+      <section className="edu-cta">
+        <div className="edu-shell">
+          <div><span className="eyebrow">Explore the collection</span><h2>Find a design direction for your next education experience.</h2></div>
+          <a href="#live-websites" className="edu-button primary">View live websites <ArrowRight /></a>
+        </div>
       </section>
     </main>
   )

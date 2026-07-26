@@ -19,4 +19,3 @@ export const portfolioWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-

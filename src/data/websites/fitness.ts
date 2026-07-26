@@ -141,7 +141,8 @@ export const fitnessWebsites: WebsiteDesign[] = [
     id: "elevate-climbing",
     title: "Elevate Climbing",
     category: "Fitness",
-    style: "chalky, playful, route-map inspired, adventurous, community-focused",
+    style:
+      "chalky, playful, route-map inspired, adventurous, community-focused",
     shortDescription:
       "Modern bouldering gym website with climbing zones, skill classes, weekly route setting, community events, route-team coaches, memberships, and progress visuals",
     slug: "elevate-climbing",
@@ -172,4 +173,3 @@ export const fitnessWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-

@@ -172,4 +172,3 @@ export const beautyWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-

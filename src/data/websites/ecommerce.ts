@@ -19,4 +19,3 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-

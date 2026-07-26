@@ -1,86 +1,146 @@
 import { Link } from 'react-router-dom'
+import {
+  ArrowRight,
+  CalendarCheck,
+  FileText,
+  HeartPulse,
+  ShieldCheck,
+  Stethoscope,
+} from 'lucide-react'
 import { AnimatedSection, Container, CTAButton } from '../../components'
+import { imageUrl } from '../../assets/images'
 import { medicalWebsites } from '../../data/websites'
 
-const careTracks = ['Primary Care', 'Preventive Visits', 'Lab Work', 'Telehealth', 'Chronic Care', 'Family Medicine']
+const careTracks = [
+  'Primary Care',
+  'Preventive Visits',
+  'Telehealth',
+  'Care Plans',
+  'Patient Support',
+  'Access Guidance',
+]
 
 const uxNotes = [
-  ['Trust immediately', 'Medical pages need board-certified signals, plain-language services, and easy access to appointment paths.'],
-  ['Patient clarity', 'Insurance, visit types, hours, and next steps should be visible before the user has to search.'],
-  ['Calm accessibility', 'The interface should feel reassuring, readable, and fast for users who may already be stressed.'],
+  {
+    title: 'Trust before action',
+    text: 'Patients should quickly see what care is offered, who provides it, and how the clinic handles next steps.',
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Plain-language paths',
+    text: 'Visit types, appointment options, insurance guidance, and follow-up details should be scannable.',
+    icon: FileText,
+  },
+  {
+    title: 'Calm conversion',
+    text: 'Booking prompts should feel helpful and visible without adding pressure to an already sensitive search.',
+    icon: CalendarCheck,
+  },
 ]
 
-const comingSoonConcepts = [
-  ['BrightPath Pediatrics', 'family-first pediatric care'],
-  ['NorthStar Dental', 'clean dental booking flow'],
-  ['ClearView Optometry', 'eye exams and eyewear retail'],
-  ['Renew Physical Therapy', 'recovery plans and progress proof'],
-  ['MindWell Counseling', 'approachable therapy intake'],
-  ['Harbor Urgent Care', 'same-day visits and wait-time clarity'],
-  ['Willow Women’s Health', 'supportive women’s health services'],
-  ['PulseHeart Cardiology', 'specialist heart care and diagnostics'],
-  ['ClearSkin Dermatology', 'medical and cosmetic skin care'],
+const gallery = [
+  {
+    title: 'Clinic confidence',
+    text: 'Warm spaces and staff imagery reduce the cold, clinical feel.',
+    image: 'medical/harbor/clinic-interior.png',
+  },
+  {
+    title: 'Clear consultation',
+    text: 'Consultation visuals reinforce guidance, listening, and clarity.',
+    image: 'medical/harbor/doctor-consultation.png',
+  },
+  {
+    title: 'Support after visits',
+    text: 'Follow-up imagery makes ongoing care feel organized.',
+    image: 'medical/harbor/patient-support.png',
+  },
 ]
+
+const totalMedicalConcepts = 10
 
 export function MedicalIndex() {
   const liveWebsites = medicalWebsites.filter((website) => website.status === 'completed' || website.status === 'live')
+  const plannedRoadmapCount = Math.max(totalMedicalConcepts - liveWebsites.length, 0)
 
   return (
-    <main className="bg-[#f4fbfa] text-[#102522]">
-      <section className="relative -mt-16 overflow-hidden bg-[#073b35] pb-20 pt-24 text-white md:pb-28 md:pt-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_20%,rgba(20,184,166,0.46),transparent_28%),radial-gradient(circle_at_84%_24%,rgba(239,68,68,0.22),transparent_22%),linear-gradient(135deg,#062f2b,#0f766e_58%,#08342f)]" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.08)_0_1px,transparent_1px_56px)]" />
+    <main className="bg-[#fff8f2] text-[#18313a]">
+      <section className="relative isolate -mt-16 overflow-hidden bg-[#fbeee8] pt-24 md:pt-32">
+        <img
+          src={imageUrl('medical/harbor/doctor-consultation.png')}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 -z-20 hidden h-full w-1/2 object-cover opacity-28 lg:block"
+        />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(115deg,#fff8f2_0%,#fff8f2_54%,rgba(251,238,232,0.74)_100%)]" />
+        <svg
+          aria-hidden="true"
+          className="absolute left-0 top-20 -z-10 h-[34rem] w-full text-[#d77565]/18"
+          viewBox="0 0 1440 520"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M-80 320 C 160 120, 310 500, 560 260 S 940 150, 1160 300 S 1430 350, 1530 130"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="54"
+            strokeLinecap="round"
+          />
+        </svg>
         <Container>
-          <AnimatedSection className="relative grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <AnimatedSection className="grid min-h-[calc(100vh-5rem)] gap-12 py-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:py-16">
             <div>
-              <Link to="/" className="text-sm font-bold text-white/70 transition hover:text-white">
+              <Link to="/" className="inline-flex text-sm font-bold text-[#6e6f55] transition hover:text-[#18313a]">
                 Back to Home
               </Link>
-              <div className="mt-8 inline-flex border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#99f6e4]">
-                {liveWebsites.length} live / 10 planned
+              <div className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-[#8a4d5c] shadow-sm ring-1 ring-[#efd5cc]">
+                <Stethoscope aria-hidden="true" size={17} />
+                {liveWebsites.length} live / {totalMedicalConcepts} planned
               </div>
-              <h1 className="mt-6 max-w-5xl text-5xl font-black leading-[0.92] md:text-7xl">
-                Medical websites built for patient trust and simple appointments.
+              <h1 className="mt-6 max-w-5xl font-serif text-5xl leading-[1.02] tracking-normal text-[#18313a] md:text-7xl">
+                A stylish medical design library with softer patient paths.
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/74">
-                A category hub for clinics, doctors, dentists, therapists, urgent care centers, and health practices that
-                need calm information architecture and direct patient action.
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5d6d66] md:text-xl">
+                A healthcare design hub focused on trust, service clarity, appointment confidence, and friendly paths
+                into care.
               </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="#live-concepts" size="lg" className="bg-[#99f6e4] text-[#073b35] hover:bg-white">
-                  View Live Concept
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <CTAButton href="#live-concepts" size="lg" className="rounded-full bg-[#18313a] text-white hover:bg-[#8a4d5c]">
+                  View Live Concepts
                 </CTAButton>
-                <CTAButton href="#roadmap" variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10">
-                  See Roadmap
+                <CTAButton
+                  href="#design-system"
+                  variant="outline"
+                  size="lg"
+                  trailingIcon={<ArrowRight aria-hidden="true" size={20} />}
+                  className="rounded-full border-[#dcbfb4] bg-white/70 text-[#18313a] hover:bg-white hover:text-[#18313a]"
+                >
+                  View Design System
                 </CTAButton>
               </div>
             </div>
 
-            <div className="relative min-h-[520px]">
-              <div className="absolute right-0 top-8 h-[29rem] w-full border border-white/15 bg-white/10 p-5 shadow-2xl shadow-black/30 backdrop-blur">
-                <div className="grid h-full grid-rows-[1fr_auto] overflow-hidden bg-[#ecfeff] text-[#102522]">
-                  <div className="relative bg-[linear-gradient(135deg,#ccfbf1,#0f766e_54%,#ef4444)]">
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.22)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.22)_1px,transparent_1px)] [background-size:46px_46px]" />
-                    <div className="absolute left-8 top-8 rounded-full bg-white/92 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#0f766e] shadow-sm">
-                      Same week appointments
-                    </div>
-                    <div className="absolute bottom-6 left-6 right-6 bg-white/94 p-5 shadow-xl">
-                      <p className="text-sm font-black uppercase tracking-[0.18em] text-[#0f766e]">Harbor Health Clinic</p>
-                      <p className="mt-2 text-3xl font-black">Care plans that feel clear before you arrive.</p>
-                    </div>
+            <div className="relative">
+              <div className="grid gap-4 rounded-[3rem] border border-white bg-white/74 p-4 shadow-2xl shadow-[#8a4d5c]/14 backdrop-blur sm:grid-cols-[0.92fr_1.08fr] sm:items-end">
+                <img
+                  src={imageUrl('medical/harbor/hero.png')}
+                  alt="A welcoming modern clinic"
+                  className="h-80 w-full rounded-[2.25rem] rounded-br-[6rem] object-cover shadow-xl shadow-[#18313a]/12 sm:h-[34rem]"
+                />
+                <div className="space-y-4">
+                  <img
+                    src={imageUrl('medical/clearview/appointment.png')}
+                    alt="Mobile scheduling for a healthcare appointment"
+                    className="h-56 w-full rounded-[2.25rem] rounded-tl-[5rem] object-cover shadow-lg shadow-[#18313a]/10"
+                  />
+                  <div className="rounded-[2.25rem] rounded-bl-[5rem] bg-[#18313a] p-6 text-white shadow-lg shadow-[#18313a]/16">
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#f3c8bd]">Medical UX focus</p>
+                    <p className="mt-3 font-serif text-3xl leading-tight">Book clearly, understand care, follow the plan.</p>
                   </div>
-                  <div className="grid grid-cols-3 border-t border-slate-200 bg-white text-center">
-                    {[
-                      ['24h', 'Portal reply'],
-                      ['8-6', 'Weekdays'],
-                      ['4.8', 'Rating'],
-                    ].map(([value, label]) => (
-                      <div key={label} className="border-r border-slate-200 p-4 last:border-r-0">
-                        <p className="text-2xl font-black text-[#0f766e]">{value}</p>
-                        <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-500">{label}</p>
-                      </div>
-                    ))}
-                  </div>
+                  <img
+                    src={imageUrl('medical/northstar/dental-team.png')}
+                    alt="A friendly healthcare care team"
+                    className="h-52 w-full rounded-[2.25rem] rounded-tr-[5rem] object-cover shadow-lg shadow-[#18313a]/10"
+                  />
                 </div>
               </div>
             </div>
@@ -88,11 +148,11 @@ export function MedicalIndex() {
         </Container>
       </section>
 
-      <section className="border-b border-[#cce8e4] bg-white py-8">
+      <section className="border-y border-[#efd5cc] bg-white py-8">
         <Container>
           <div className="flex flex-wrap justify-center gap-2">
             {careTracks.map((track) => (
-              <span key={track} className="rounded-full border border-[#cce8e4] bg-[#f4fbfa] px-4 py-2 text-sm font-bold text-slate-600">
+              <span key={track} className="rounded-full border border-[#efd5cc] bg-[#fff8f2] px-5 py-2 text-sm font-bold text-[#6c6158]">
                 {track}
               </span>
             ))}
@@ -100,102 +160,162 @@ export function MedicalIndex() {
         </Container>
       </section>
 
-      <section id="live-concepts" className="py-20 md:py-28">
+      <section id="live-concepts" className="relative isolate overflow-hidden bg-[#18313a] py-20 text-white md:py-28">
+        <svg
+          aria-hidden="true"
+          className="absolute inset-x-0 top-10 -z-10 h-64 w-full text-white/7"
+          viewBox="0 0 1440 260"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M-70 150 C 120 40, 260 220, 430 116 S 720 18, 880 138 S 1190 254, 1510 58"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="42"
+            strokeLinecap="round"
+          />
+        </svg>
         <Container>
-          <AnimatedSection className="mb-12 grid gap-6 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
+          <AnimatedSection className="mb-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#0f766e]">Live concept</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                One primary care clinic homepage is ready to explore.
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#f3c8bd]">Live concepts</p>
+              <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">
+                Ten specialty concepts in one polished board.
               </h2>
             </div>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
-              The first medical concept focuses on a neighborhood clinic with service clarity, provider trust,
-              insurance guidance, and appointment conversion.
-            </p>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                [liveWebsites.length, 'Live'],
+                [plannedRoadmapCount, 'Queued'],
+                [totalMedicalConcepts, 'Total'],
+              ].map(([value, label]) => (
+                <div key={label} className="rounded-[2rem] rounded-br-[4rem] bg-white/10 p-4 text-center ring-1 ring-white/14">
+                  <p className="font-serif text-4xl text-[#f3c8bd]">{value}</p>
+                  <p className="mt-1 text-xs font-black uppercase text-white/60">{label}</p>
+                </div>
+              ))}
+            </div>
           </AnimatedSection>
 
-          <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-            {liveWebsites.map((website) => (
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {liveWebsites.map((website, index) => (
               <Link
                 key={website.id}
                 to={`/medical/${website.slug}`}
-                className="group grid overflow-hidden bg-white shadow-xl shadow-slate-950/8 transition duration-300 hover:-translate-y-1 hover:shadow-2xl md:grid-cols-[0.95fr_1.05fr]"
+                className="group relative min-h-[25rem] overflow-hidden rounded-[2.5rem] rounded-br-[6rem] bg-white/10 shadow-xl shadow-black/16 ring-1 ring-white/14 transition duration-300 hover:-translate-y-1 hover:ring-[#f3c8bd]/80"
               >
-                <div
-                  className="relative min-h-72"
-                  style={{
-                    backgroundImage: `linear-gradient(145deg, ${website.colors.secondary} 0%, ${website.colors.primary} 56%, ${website.colors.accent} 100%)`,
-                  }}
-                >
-                  {website.image && (
-                    <img
-                      src={website.image}
-                      alt={`${website.title} website preview`}
-                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  )}
-                  <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-[#073b35]/50 via-transparent to-transparent' : 'bg-[linear-gradient(90deg,rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.24)_1px,transparent_1px)] [background-size:44px_44px]'}`} />
-                  <div className="absolute bottom-5 left-5 flex gap-2">
-                    {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => (
-                      <span key={color} className="h-7 w-7 rounded-full border border-white/80 shadow-sm" style={{ backgroundColor: color }} />
-                    ))}
-                  </div>
+                {website.image && (
+                  <img
+                    src={website.image}
+                    alt={`${website.title} website preview`}
+                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                )}
+                <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(24,49,58,0.92)_0%,rgba(24,49,58,0.42)_56%,rgba(24,49,58,0.1)_100%)]" />
+                <div className="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-xs font-black uppercase text-[#8a4d5c] shadow-lg shadow-black/10">
+                  Concept {String(index + 1).padStart(2, '0')}
                 </div>
-                <div className="p-8">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#0f766e]">Live design</p>
-                  <h3 className="mt-4 text-4xl font-black transition group-hover:text-[#0f766e]">{website.title}</h3>
-                  <p className="mt-3 text-sm font-bold text-slate-600">{website.style}</p>
-                  <p className="mt-5 text-base leading-7 text-slate-600">{website.shortDescription}</p>
-                  <div className="mt-8 inline-flex w-full items-center justify-center rounded-lg bg-[#102522] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#0f766e]">
-                    Open Homepage
-                  </div>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="font-serif text-3xl leading-tight text-white">
+                    {website.title}
+                  </h3>
+                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/72">
+                    {website.shortDescription}
+                  </p>
+                  <span className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-black text-[#8a4d5c] transition group-hover:bg-[#f3c8bd] group-hover:text-[#18313a]">
+                    Open Homepage <ArrowRight aria-hidden="true" size={17} />
+                  </span>
                 </div>
               </Link>
             ))}
+          </div>
 
-            <div className="border border-[#cce8e4] bg-[#ecfeff] p-8">
-              <p className="text-sm font-black uppercase tracking-[0.22em] text-[#0f766e]">Medical UX rules</p>
-              <h3 className="mt-4 text-3xl font-black">Patients need confidence before they click.</h3>
-              <div className="mt-8 space-y-4">
-                {uxNotes.map(([title, text]) => (
-                  <article key={title} className="bg-white p-5 shadow-sm">
-                    <h4 className="text-xl font-black">{title}</h4>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
+          <div className="mt-5 rounded-[2rem] border border-white/12 bg-white/8 p-5">
+            <p className="text-sm leading-7 text-white/68">
+              {liveWebsites.length} healthcare demos are live now, each with a different specialty, visual system, and
+              appointment path. {plannedRoadmapCount} concepts remain in the medical roadmap.
+            </p>
+          </div>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            {uxNotes.map(({ title, text, icon: Icon }) => (
+              <article key={title} className="rounded-[2rem] rounded-tl-[4rem] bg-white/10 p-6 ring-1 ring-white/14">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#f3c8bd] text-[#18313a]">
+                  <Icon aria-hidden="true" size={22} />
+                </span>
+                <h3 className="mt-5 font-serif text-2xl text-white">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-white/68">{text}</p>
+              </article>
+            ))}
           </div>
         </Container>
       </section>
 
-      <section id="roadmap" className="border-y border-[#cce8e4] bg-white py-20 md:py-28">
+      <section id="design-system" className="bg-[#fff8f2] py-20 md:py-28">
         <Container>
-          <AnimatedSection className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <AnimatedSection className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#0f766e]">Roadmap</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                More healthcare niches can follow.
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a4d5c]">Visual system</p>
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-[#18313a] md:text-5xl">
+                Healthcare pages work better when patients can picture the experience.
               </h2>
             </div>
-            <p className="max-w-md text-sm leading-6 text-slate-600">
-              These coming-soon cards keep the Medical category useful while the first clinic concept is live.
+            <p className="max-w-xl text-lg leading-8 text-[#5d6d66]">
+              The index now uses softer curves, image-led sections, and calmer labels so the collection feels curated
+              instead of crowded.
             </p>
           </AnimatedSection>
-
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {comingSoonConcepts.map(([name, focus], index) => (
-              <article key={name} className="group overflow-hidden border border-[#cce8e4] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <div className="relative h-40 overflow-hidden bg-[linear-gradient(145deg,#f4fbfa,#0f766e_58%,#ef4444)]">
-                  <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(90deg,white_1px,transparent_1px),linear-gradient(white_1px,transparent_1px)] [background-size:32px_32px]" /><div className="absolute -bottom-12 left-[18%] h-40 w-40 rounded-full border-[20px] border-white/20" /><div className="absolute right-[14%] top-[28%] h-16 w-16 rounded-full bg-white/25" />
-                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#0f766e]">Coming soon</div><span className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">Concept {String(index + 2).padStart(2, '0')}</span>
+          <div className="grid gap-5 md:grid-cols-3">
+            {gallery.map(({ title, text, image }) => (
+              <article key={title} className="overflow-hidden rounded-[2.5rem] rounded-tr-[6rem] bg-white shadow-sm shadow-[#14313f]/6 ring-1 ring-[#efd5cc]">
+                <img src={imageUrl(image)} alt="" className="h-72 w-full object-cover" />
+                <div className="p-6">
+                  <h3 className="font-serif text-3xl text-[#18313a]">{title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#5d6d66]">{text}</p>
                 </div>
-                <div className="p-6"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#0f766e]">Healthcare concept</p><h3 className="mt-3 text-2xl font-black">{name}</h3><p className="mt-2 text-sm font-bold capitalize text-slate-500">{focus}</p><p className="mt-4 text-sm leading-6 text-slate-600">A reassuring patient-first direction with clear services, provider credibility, practical visit details, and simple appointment access.</p><div className="mt-5 flex gap-2 border-t border-slate-200 pt-5">{['#0f766e', '#f4fbfa', '#ef4444', '#102522'].map((color) => <span key={color} className="h-6 w-6 rounded-full border border-slate-300" style={{ backgroundColor: color }} />)}</div><span className="mt-5 inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500">Coming Soon</span></div>
               </article>
             ))}
           </div>
+        </Container>
+      </section>
+
+      <section id="roadmap" className="border-y border-[#efd5cc] bg-white py-20 md:py-28">
+        <Container>
+          <AnimatedSection className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a4d5c]">Roadmap</p>
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-[#18313a] md:text-5xl">
+                The medical collection is complete.
+              </h2>
+              <p className="mt-5 max-w-xl text-lg leading-8 text-[#5d6d66]">
+                All 10 healthcare concepts are now live, each with its own specialty, visual system, calls to action,
+                and patient-first information structure.
+              </p>
+            </div>
+            <div className="rounded-[3rem] rounded-bl-[7rem] border border-[#efd5cc] bg-[#fff8f2] p-8 shadow-sm shadow-[#14313f]/5">
+              <div className="flex items-center gap-4">
+                <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#18313a] text-white">
+                  <HeartPulse aria-hidden="true" size={25} />
+                </span>
+                <div>
+                  <p className="font-serif text-4xl text-[#18313a]">10 / 10</p>
+                  <p className="text-xs font-black uppercase tracking-[0.16em] text-[#8a4d5c]">Live concepts</p>
+                </div>
+              </div>
+              <p className="mt-6 text-sm leading-7 text-[#5d6d66]">
+                Browse the live concept board above to compare primary care, pediatrics, dental, optometry, physical
+                therapy, counseling, urgent care, women's health, cardiology, and dermatology designs.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {['Primary', 'Pediatric', 'Dental', 'Optometry', 'Therapy', 'Mental health', 'Urgent', 'Women', 'Heart', 'Skin'].map((item) => (
+                  <span key={item} className="rounded-full bg-white px-3 py-1 text-xs font-black text-[#6c6158] ring-1 ring-[#efd5cc]">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
         </Container>
       </section>
     </main>

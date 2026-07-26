@@ -171,4 +171,3 @@ export const restaurantWebsites: WebsiteDesign[] = [
     status: "completed",
   },
 ];
-

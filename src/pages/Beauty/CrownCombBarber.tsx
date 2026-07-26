@@ -351,9 +351,7 @@ function Header() {
     };
   }, []);
   return (
-    <header
-      className="sticky top-0 z-50 border-b border-[#2e2519] bg-[#070807]/92 backdrop-blur-xl"
-    >
+    <header className="sticky top-0 z-50 border-b border-[#2e2519] bg-[#070807]/92 backdrop-blur-xl">
       <Container>
         <div className="hidden h-20 items-center justify-between gap-8 lg:flex">
           <BrandMark />
@@ -417,7 +415,10 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="home" className="relative scroll-mt-20 overflow-hidden bg-[#090a08]">
+    <section
+      id="home"
+      className="relative scroll-mt-20 overflow-hidden bg-[#090a08]"
+    >
       <div className="absolute inset-0">
         <img
           src={barberHero}
@@ -703,7 +704,10 @@ function GalleryGrid() {
 
 function ShopSection() {
   return (
-    <section id="shop" className="scroll-mt-20 bg-[#f6efe5] py-20 text-[#17130e] md:py-24">
+    <section
+      id="shop"
+      className="scroll-mt-20 bg-[#f6efe5] py-20 text-[#17130e] md:py-24"
+    >
       <Container className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.2em] text-[#8c642e]">

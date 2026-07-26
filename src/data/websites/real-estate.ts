@@ -29,7 +29,12 @@ export const realEstateWebsites: WebsiteDesign[] = [
     slug: "harborkey-homes",
     marketLabel: "Coastal homes",
     image: imageUrl("realestate/harborkey/hero.png"),
-    colors: { primary: "#2f6f8f", secondary: "#f4ead8", accent: "#7fc8d8", dark: "#17384d" },
+    colors: {
+      primary: "#2f6f8f",
+      secondary: "#f4ead8",
+      accent: "#7fc8d8",
+      dark: "#17384d",
+    },
     status: "completed",
   },
   {
@@ -42,7 +47,12 @@ export const realEstateWebsites: WebsiteDesign[] = [
     slug: "apex-commercial-realty",
     marketLabel: "Commercial property",
     image: imageUrl("realestate/apex/hero.png"),
-    colors: { primary: "#1C2736", secondary: "#F4F6F8", accent: "#7A2948", dark: "#101722" },
+    colors: {
+      primary: "#1C2736",
+      secondary: "#F4F6F8",
+      accent: "#7A2948",
+      dark: "#101722",
+    },
     status: "completed",
   },
   {
@@ -55,7 +65,12 @@ export const realEstateWebsites: WebsiteDesign[] = [
     slug: "nestpath-mortgage",
     marketLabel: "Mortgage guidance",
     image: imageUrl("realestate/nestpath/hero.png"),
-    colors: { primary: "#197D7A", secondary: "#F4F1EA", accent: "#E0AF45", dark: "#0E3D3F" },
+    colors: {
+      primary: "#197D7A",
+      secondary: "#F4F1EA",
+      accent: "#E0AF45",
+      dark: "#0E3D3F",
+    },
     status: "completed",
   },
   {
@@ -68,7 +83,12 @@ export const realEstateWebsites: WebsiteDesign[] = [
     slug: "cedar-stone-estates",
     marketLabel: "Rural luxury",
     image: imageUrl("realestate/cedar-stone/hero.png"),
-    colors: { primary: "#4C6252", secondary: "#E9E4D8", accent: "#A68E72", dark: "#1F2D28" },
+    colors: {
+      primary: "#4C6252",
+      secondary: "#E9E4D8",
+      accent: "#A68E72",
+      dark: "#1F2D28",
+    },
     status: "completed",
   },
   {
@@ -81,7 +101,12 @@ export const realEstateWebsites: WebsiteDesign[] = [
     slug: "metroloft-rentals",
     marketLabel: "Urban rentals",
     image: imageUrl("realestate/metroloft/hero.png"),
-    colors: { primary: "#5A52C8", secondary: "#E8EDF4", accent: "#F07C72", dark: "#202446" },
+    colors: {
+      primary: "#5A52C8",
+      secondary: "#E8EDF4",
+      accent: "#F07C72",
+      dark: "#202446",
+    },
     status: "completed",
   },
   {
@@ -94,7 +119,12 @@ export const realEstateWebsites: WebsiteDesign[] = [
     slug: "foundry-property-group",
     marketLabel: "Property development",
     image: imageUrl("realestate/foundry/hero.png"),
-    colors: { primary: "#343A43", secondary: "#F2F0EA", accent: "#E86F2A", dark: "#10141A" },
+    colors: {
+      primary: "#343A43",
+      secondary: "#F2F0EA",
+      accent: "#E86F2A",
+      dark: "#10141A",
+    },
     status: "completed",
   },
   {
@@ -107,7 +137,12 @@ export const realEstateWebsites: WebsiteDesign[] = [
     slug: "suncrest-vacation-villas",
     marketLabel: "Vacation property",
     image: imageUrl("realestate/suncrest/hero.png"),
-    colors: { primary: "#1595A3", secondary: "#F7F1E3", accent: "#E8B94A", dark: "#103F4A" },
+    colors: {
+      primary: "#1595A3",
+      secondary: "#F7F1E3",
+      accent: "#E8B94A",
+      dark: "#103F4A",
+    },
     status: "completed",
   },
   {
@@ -120,7 +155,12 @@ export const realEstateWebsites: WebsiteDesign[] = [
     slug: "oakline-property-management",
     marketLabel: "Property management",
     image: imageUrl("realestate/oakline/hero.png"),
-    colors: { primary: "#3D7657", secondary: "#F2F7F5", accent: "#8FA377", dark: "#16324A" },
+    colors: {
+      primary: "#3D7657",
+      secondary: "#F2F7F5",
+      accent: "#8FA377",
+      dark: "#16324A",
+    },
     status: "completed",
   },
   {
@@ -133,8 +173,12 @@ export const realEstateWebsites: WebsiteDesign[] = [
     slug: "keystart-realty",
     marketLabel: "First-time buyers",
     image: imageUrl("realestate/keystar/hero.png"),
-    colors: { primary: "#3F7355", secondary: "#F3F7F4", accent: "#9BAD83", dark: "#15344B" },
+    colors: {
+      primary: "#3F7355",
+      secondary: "#F3F7F4",
+      accent: "#9BAD83",
+      dark: "#15344B",
+    },
     status: "completed",
   },
 ];
-

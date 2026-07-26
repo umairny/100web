@@ -1,199 +1,608 @@
-import { Container, CTAButton, SubWebsiteNav } from '../../components'
+import {
+  ArrowRight,
+  Award,
+  Building2,
+  Calculator,
+  Check,
+  CheckCircle2,
+  ChevronDown,
+  ClipboardList,
+  Clock3,
+  FileText,
+  HardHat,
+  Home,
+  Mail,
+  MapPin,
+  Menu,
+  MessageSquare,
+  Phone,
+  Play,
+  ShieldCheck,
+  Star,
+  Users,
+  X,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import "./ForgePointBuilders.css";
 
-const navLinks = [
-  { label: 'Projects', href: '#projects' },
-  { label: 'Services', href: '#services' },
-  { label: 'Process', href: '#process' },
-  { label: 'Estimate', href: '#estimate' },
-]
+const navItems = [
+  { label: "Home", id: "home" },
+  { label: "Services", id: "services" },
+  { label: "Projects", id: "projects" },
+  { label: "Process", id: "process" },
+  { label: "About", id: "about" },
+  { label: "Contact", id: "contact" },
+];
 
-const projects = [
-  ['Cedar Ridge Renovation', 'Whole-home remodel, structural updates, kitchen expansion', '$420K scope'],
-  ['North Yard Buildout', 'Commercial office conversion with phased occupancy', '18 week schedule'],
-  ['Maple House Addition', 'Two-story addition, mudroom, primary suite, deck', 'Permits managed'],
-]
+const Facebook = () => <span aria-label="Facebook">f</span>;
+const Instagram = () => <span aria-label="Instagram">ig</span>;
+const Linkedin = () => <span aria-label="LinkedIn">in</span>;
 
 const services = [
-  ['Custom Builds', 'Ground-up residential projects with planning, permits, site coordination, and finish management.'],
-  ['Renovations', 'Kitchens, additions, whole-home remodels, and structural upgrades with clear milestones.'],
-  ['Commercial Work', 'Office, retail, and light commercial buildouts designed around uptime and inspection readiness.'],
-]
+  {
+    title: "Custom Builds",
+    text: "Ground-up homes and custom spaces designed around your vision.",
+    image: "custombuild.png",
+    icon: Home,
+  },
+  {
+    title: "Home Renovations",
+    text: "Kitchens, baths, additions, and whole-home transformations.",
+    image: "homerenovations.png",
+    icon: HardHat,
+  },
+  {
+    title: "Commercial Spaces",
+    text: "Functional, beautiful spaces for businesses and tenants.",
+    image: "commercial.png",
+    icon: Building2,
+  },
+  {
+    title: "Project Documentation",
+    text: "Clear plans, schedules, and updates so you always know what's happening.",
+    image: "project.png",
+    icon: FileText,
+  },
+  {
+    title: "Transparent Estimates",
+    text: "Detailed, honest estimates with no surprises—ever.",
+    image: "estimates.png",
+    icon: Calculator,
+  },
+];
 
-const processSteps = [
-  ['01', 'Scope the work', 'Walkthrough, photos, measurements, constraints, and priorities become a clean project brief.'],
-  ['02', 'Price the path', 'Materials, labor, allowances, timeline, and trade partners are mapped before approval.'],
-  ['03', 'Build with updates', 'Weekly check-ins, site notes, schedule changes, and finish decisions stay visible.'],
-]
+const projects = [
+  {
+    type: "CUSTOM HOME",
+    title: "Modern Farmhouse",
+    place: "Austin, TX",
+    image: "image01.png",
+  },
+  {
+    type: "RENOVATION",
+    title: "Kitchen Transformation",
+    place: "West Lake Hills, TX",
+    image: "image02.png",
+  },
+  {
+    type: "COMMERCIAL",
+    title: "Corporate Office Buildout",
+    place: "Round Rock, TX",
+    image: "image03.png",
+  },
+  {
+    type: "COMMERCIAL",
+    title: "Retail Space Buildout",
+    place: "Pflugerville, TX",
+    image: "image04.png",
+  },
+];
+
+const process = [
+  {
+    title: "Consultation",
+    text: "We listen, understand your goals, and walk the site together.",
+    icon: Users,
+  },
+  {
+    title: "Estimate",
+    text: "You receive a detailed, transparent estimate with no surprises.",
+    icon: Calculator,
+  },
+  {
+    title: "Planning",
+    text: "We finalize plans, schedule, and selections—keeping you informed.",
+    icon: ClipboardList,
+  },
+  {
+    title: "Build",
+    text: "Our team builds with care, communicates clearly, every step.",
+    icon: HardHat,
+  },
+  {
+    title: "Final Walkthrough",
+    text: "We review every detail to ensure you're 100% satisfied.",
+    icon: CheckCircle2,
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "ForgePoint Builders delivered our dream home with exceptional quality and communication. They truly care about their work.",
+    name: "Emily R.",
+    place: "Austin, TX",
+    initials: "ER",
+  },
+  {
+    quote:
+      "Our office buildout was completed on time and on budget. The documentation and updates throughout were top-notch.",
+    name: "Michael T.",
+    place: "Round Rock, TX",
+    initials: "MT",
+  },
+  {
+    quote:
+      "Transparent estimates, honest guidance, and an incredible team. We couldn't be happier with our renovation.",
+    name: "Sarah L.",
+    place: "West Lake Hills, TX",
+    initials: "SL",
+  },
+];
+
+function Logo() {
+  return (
+    <a href="#home" className="fp-logo" aria-label="ForgePoint Builders home">
+      <span className="fp-mark">F</span>
+      <span>
+        ForgePoint
+        <br />
+        Builders
+      </span>
+    </a>
+  );
+}
 
 export function ForgePointBuilders() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const marker = window.scrollY + 150;
+      let current = "home";
+
+      navItems.forEach(({ id }) => {
+        const section = document.getElementById(id);
+        if (section && section.offsetTop <= marker) current = id;
+      });
+
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 8
+      ) {
+        current = "contact";
+      }
+
+      setActiveSection(current);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    return () => window.removeEventListener("scroll", updateActiveSection);
+  }, []);
+
   return (
-    <main className="bg-[#faf7ef] text-[#1f2428]">
-      <SubWebsiteNav
-        brand="ForgePoint Builders"
-        links={navLinks}
-        ctaLabel="Request Estimate"
-        ctaHref="#estimate"
-        collectionPath="/construction"
-        className="border-b border-[#eadfc8] bg-white/94 text-[#1f2428]"
-        brandClassName="text-[#92400e]"
-        linkClassName="text-stone-600 hover:text-[#92400e]"
-        ctaClassName="bg-[#92400e] text-white hover:bg-[#78350f]"
-        menuButtonClassName="border-[#eadfc8] text-[#92400e] hover:bg-[#fef3c7]"
-        mobilePanelClassName="border border-[#eadfc8] bg-white"
-      />
+    <main className="fp-site" id="home">
+      <header className="fp-header">
+        <div className="fp-wrap fp-nav">
+          <Logo />
+          <button
+            className="fp-menu"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle navigation"
+          >
+            {menuOpen ? <X /> : <Menu />}
+          </button>
+          <nav className={menuOpen ? "is-open" : ""}>
+            {navItems.map(({ label, id }) => (
+              <a
+                key={id}
+                className={activeSection === id ? "active" : ""}
+                href={`#${id}`}
+                aria-current={activeSection === id ? "page" : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                {label}
+                {id === "services" && <ChevronDown size={13} />}
+              </a>
+            ))}
+          </nav>
+          <a className="fp-btn fp-btn-small" href="#estimate">
+            Request Estimate
+          </a>
+        </div>
+      </header>
 
-      <section className="relative overflow-hidden bg-[#252525] pb-20 pt-32 text-white md:pb-28 md:pt-40">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_24%,rgba(217,119,6,0.42),transparent_26%),radial-gradient(circle_at_78%_18%,rgba(254,243,199,0.16),transparent_22%),linear-gradient(135deg,#1f1f1f,#3f3f46_54%,#171717)]" />
-        <Container>
-          <div className="relative grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.26em] text-[#fbbf24]">ForgePoint Builders</p>
-              <h1 className="mt-5 max-w-5xl text-5xl font-black leading-[0.92] md:text-7xl">
-                Built right, documented clearly, finished with pride.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/74">
-                A general contractor website concept for custom builds, renovations, and commercial spaces that need
-                strong project proof, transparent estimates, and a confident path from first call to final walkthrough.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton href="#estimate" size="lg" className="bg-[#fbbf24] text-[#252525] hover:bg-white">
-                  Request Estimate
-                </CTAButton>
-                <CTAButton href="tel:555-0507" variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10">
-                  Call (555) 050-7000
-                </CTAButton>
-              </div>
-            </div>
-
-            <div className="relative min-h-[560px]">
-              <div className="absolute right-0 top-0 h-[32rem] w-full max-w-[38rem] border border-white/15 bg-white/10 p-4 shadow-2xl shadow-black/30 backdrop-blur">
-                <div className="grid h-full grid-rows-[1fr_auto] overflow-hidden bg-[#fef3c7] text-[#1f2428]">
-                  <div className="relative bg-[linear-gradient(135deg,#fef3c7,#3f3f46_52%,#d97706)]">
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.20)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.20)_1px,transparent_1px)] [background-size:48px_48px]" />
-                    <div className="absolute left-6 top-6 border border-white/50 bg-white/92 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#92400e] shadow-sm">
-                      18 years in the field
-                    </div>
-                    <div className="absolute bottom-6 left-6 right-6 bg-white/94 p-5 shadow-xl">
-                      <p className="text-sm font-black uppercase tracking-[0.18em] text-[#92400e]">Current project</p>
-                      <h2 className="mt-2 text-3xl font-black">Cedar Ridge renovation, phase 03.</h2>
-                      <p className="mt-2 text-sm font-bold text-stone-500">Framing complete / rough-ins scheduled</p>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 border-t border-stone-200 bg-white text-center">
-                    {[
-                      ['240', 'Projects'],
-                      ['42', 'Trade partners'],
-                      ['A+', 'Local rating'],
-                    ].map(([value, label]) => (
-                      <div key={label} className="border-r border-stone-200 p-4 last:border-r-0">
-                        <p className="text-2xl font-black text-[#92400e]">{value}</p>
-                        <p className="text-xs font-black uppercase tracking-[0.14em] text-stone-500">{label}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute bottom-0 left-0 w-64 bg-white p-5 text-[#1f2428] shadow-2xl">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#92400e]">Estimate desk</p>
-                <p className="mt-3 text-3xl font-black">Scope review returned within 48 hours.</p>
-              </div>
-            </div>
+      <section className="fp-hero">
+        <div
+          className="fp-media fp-hero-placeholder"
+          role="img"
+          aria-label="Placeholder for a modern custom home project photograph"
+        >
+          <span>Featured custom home</span>
+        </div>
+        <div className="fp-hero-shade" />
+        <div className="fp-wrap fp-hero-content">
+          <h1>
+            Built right,
+            <br />
+            documented clearly,
+            <br />
+            finished with pride.
+          </h1>
+          <p>
+            Custom builds, renovations, and commercial construction—delivered
+            with transparent estimates and a confident path from first call to
+            final walkthrough.
+          </p>
+          <div className="fp-actions">
+            <a className="fp-btn" href="#estimate">
+              Get a Quote <ArrowRight />
+            </a>
+            <a className="fp-btn fp-btn-outline" href="#projects">
+              View Projects
+            </a>
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section id="projects" className="py-20 md:py-28">
-        <Container>
-          <div className="mb-12 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#92400e]">Project proof</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">Recent work with scope, schedule, and outcome cues.</h2>
-            </div>
-            <p className="max-w-2xl text-lg leading-8 text-stone-600">
-              Construction buyers compare risk before style. These cards show the kind of proof a contractor site needs to earn a quote request.
+      <section className="fp-stats">
+        <div className="fp-wrap fp-stats-grid">
+          <div>
+            <ShieldCheck />
+            <strong>18+</strong>
+            <span>Years of Experience</span>
+          </div>
+          <div>
+            <HardHat />
+            <strong>450+</strong>
+            <span>Projects Completed</span>
+          </div>
+          <div>
+            <Award />
+            <strong>
+              Licensed
+              <br />
+              &amp; insured
+            </strong>
+            <span>Fully Compliant</span>
+          </div>
+          <div>
+            <Clock3 />
+            <strong>98%</strong>
+            <span>On-Time Delivery</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="fp-section fp-services">
+        <div className="fp-wrap">
+          <SectionHeading
+            eyebrow="Our Services"
+            title="Built for how you live and work."
+          />
+          <div className="fp-service-grid">
+            {services.map(({ title, text, icon: Icon }, index) => (
+              <article key={title} className="fp-service-card">
+                <div
+                  className={`fp-media fp-service-placeholder service-${index}`}
+                  role="img"
+                  aria-label={`${title} image placeholder`}
+                >
+                  <span>{title}</span>
+                </div>
+                <div>
+                  <Icon />
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                  <ArrowRight className="fp-arrow" />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" className="fp-section fp-projects">
+        <div className="fp-wrap">
+          <SectionHeading
+            eyebrow="Featured Projects"
+            title="Quality you can see. Results that last."
+          />
+          <div className="fp-project-grid">
+            {projects.map((project, index) => (
+              <article key={project.title} className="fp-project-card">
+                <div
+                  className={`fp-media fp-project-placeholder project-${index}`}
+                  role="img"
+                  aria-label={`${project.title} image placeholder`}
+                >
+                  <span>{project.title}</span>
+                </div>
+                <div>
+                  <small>{project.type}</small>
+                  <h3>{project.title}</h3>
+                  <p>
+                    <MapPin /> {project.place}
+                    <a href="#contact">
+                      View Project <ArrowRight />
+                    </a>
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="fp-center">
+            <a className="fp-btn fp-btn-outline" href="#projects">
+              View All Projects
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="process" className="fp-section fp-process">
+        <div className="fp-wrap">
+          <SectionHeading
+            eyebrow="Our Process"
+            title="A clear process. A better experience."
+          />
+          <div className="fp-process-grid">
+            {process.map(({ title, text, icon: Icon }, i) => (
+              <article key={title}>
+                <span className="fp-number">{i + 1}</span>
+                <div className="fp-process-icon">
+                  <Icon />
+                </div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="fp-documentation">
+        <div className="fp-wrap fp-doc-grid">
+          <div className="fp-doc-copy">
+            <span className="fp-eyebrow">
+              Documentation &amp; Communication
+            </span>
+            <h2>
+              Clarity in every detail.
+              <br />
+              Confidence at every step.
+            </h2>
+            <ul>
+              {[
+                "Real-time project updates and photos",
+                "Centralized documents and schedules",
+                "Transparent change orders",
+                "Budget tracking you can trust",
+                "One team. One standard. Total visibility.",
+              ].map((item) => (
+                <li key={item}>
+                  <CheckCircle2 />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Dashboard />
+        </div>
+      </section>
+
+      <section className="fp-section fp-testimonials">
+        <div className="fp-wrap">
+          <SectionHeading
+            eyebrow="What Our Clients Say"
+            title="Trusted by homeowners and businesses alike."
+          />
+          <div className="fp-testimonial-grid">
+            {testimonials.map((item, i) => (
+              <article key={item.name}>
+                <div className="fp-quote">“</div>
+                <p>{item.quote}</p>
+                <div className="fp-person">
+                  <span className={`avatar avatar-${i}`}>{item.initials}</span>
+                  <div>
+                    <strong>{item.name}</strong>
+                    <small>{item.place}</small>
+                  </div>
+                  <span className="fp-stars">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <Star key={n} />
+                    ))}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="estimate" className="fp-cta">
+        <div className="fp-wrap">
+          <div>
+            <h2>Ready to build something great?</h2>
+            <p>
+              Let's bring your vision to life—with clarity, quality, and
+              craftsmanship you can count on.
             </p>
           </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {projects.map(([title, detail, meta]) => (
-              <article key={title} className="overflow-hidden bg-white shadow-xl shadow-stone-950/8">
-                <div className="h-56 bg-[linear-gradient(135deg,#fef3c7,#3f3f46_52%,#d97706)]" />
-                <div className="p-6">
-                  <p className="text-sm font-black uppercase tracking-[0.18em] text-[#92400e]">{meta}</p>
-                  <h3 className="mt-4 text-2xl font-black">{title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-stone-600">{detail}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </Container>
+          <a className="fp-btn" href="mailto:hello@forgepointbuilders.com">
+            Request an Estimate <ArrowRight />
+          </a>
+          <a className="fp-btn fp-btn-outline" href="tel:5125550198">
+            Schedule a Consultation
+          </a>
+        </div>
       </section>
 
-      <section id="services" className="border-y border-[#eadfc8] bg-white py-20 md:py-28">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#92400e]">Services</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">From first sketch to final punch list.</h2>
-              <p className="mt-5 text-lg leading-8 text-stone-600">
-                The site keeps service areas specific enough for homeowners and business owners to identify the right fit quickly.
-              </p>
-            </div>
-            <div className="grid gap-5 md:grid-cols-3">
-              {services.map(([title, text]) => (
-                <article key={title} className="bg-[#faf7ef] p-6 shadow-sm">
-                  <div className="mb-6 h-2 w-16 bg-[#d97706]" />
-                  <h3 className="text-2xl font-black">{title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-stone-600">{text}</p>
-                </article>
-              ))}
+      <footer id="contact" className="fp-footer">
+        <div className="fp-wrap fp-footer-grid">
+          <div>
+            <Logo />
+            <p>
+              Built right. Documented clearly.
+              <br />
+              Finished with pride.
+            </p>
+            <div className="fp-social">
+              <Facebook />
+              <Instagram />
+              <Linkedin />
+              <Play />
             </div>
           </div>
-        </Container>
-      </section>
-
-      <section id="process" className="py-20 md:py-28">
-        <Container>
-          <div className="mb-12 max-w-3xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#92400e]">Build process</p>
-            <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">A cleaner project path with fewer surprises.</h2>
+          <FooterCol
+            title="Navigation"
+            links={["Home", "Services", "Projects", "About", "Contact"]}
+          />
+          <FooterCol
+            title="Services"
+            links={[
+              "Custom Builds",
+              "Home Renovations",
+              "Commercial Spaces",
+              "Project Documentation",
+              "Transparent Estimates",
+            ]}
+          />
+          <FooterCol
+            title="Service Areas"
+            links={[
+              "Austin, TX",
+              "Round Rock, TX",
+              "West Lake Hills, TX",
+              "Pflugerville, TX",
+              "Surrounding Areas",
+            ]}
+          />
+          <div>
+            <h3>Contact Us</h3>
+            <p>
+              <Phone /> (512) 555-0198
+            </p>
+            <p>
+              <Mail /> hello@forgepointbuilders.com
+            </p>
+            <p>
+              <MapPin /> 123 Builder Way, Suite 100
+              <br />
+              Austin, TX 78701
+            </p>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {processSteps.map(([number, title, text]) => (
-              <article key={title} className="border border-[#eadfc8] bg-white p-7 shadow-sm">
-                <p className="text-5xl font-black text-[#d97706]">{number}</p>
-                <h3 className="mt-8 text-2xl font-black">{title}</h3>
-                <p className="mt-4 text-sm leading-7 text-stone-600">{text}</p>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section id="estimate" className="bg-[#252525] py-20 text-white md:py-28">
-        <Container>
-          <div className="grid gap-8 lg:grid-cols-[1fr_0.76fr] lg:items-center">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#fbbf24]">Start the estimate</p>
-              <h2 className="mt-4 max-w-3xl text-4xl font-black leading-tight md:text-5xl">
-                Bring the project idea. ForgePoint brings the scope, schedule, and next step.
-              </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/70">
-                A contractor homepage should make it easy to share project type, location, budget range, and timeline without turning the form into a chore.
-              </p>
-            </div>
-            <div className="bg-white p-6 text-[#1f2428]">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-stone-500">Estimate desk</p>
-              <a href="tel:555-0507" className="mt-5 block bg-[#92400e] px-5 py-4 text-center text-sm font-black text-white transition hover:bg-[#78350f]">
-                Call (555) 050-7000
-              </a>
-              <a href="mailto:build@forgepoint.example" className="mt-3 block bg-[#fef3c7] px-5 py-4 text-center text-sm font-black text-[#92400e] transition hover:bg-[#fde68a]">
-                Email Project Details
-              </a>
-            </div>
-          </div>
-        </Container>
-      </section>
+        </div>
+        <div className="fp-copyright">
+          © 2024 ForgePoint Builders. All rights reserved.
+        </div>
+      </footer>
     </main>
-  )
+  );
+}
+
+function SectionHeading({
+  eyebrow,
+  title,
+}: {
+  eyebrow: string;
+  title: string;
+}) {
+  return (
+    <div className="fp-heading">
+      <span className="fp-eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+    </div>
+  );
+}
+
+function FooterCol({ title, links }: { title: string; links: string[] }) {
+  return (
+    <div>
+      <h3>{title}</h3>
+      {links.map((link) => (
+        <a key={link} href="#home">
+          {link}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function Dashboard() {
+  return (
+    <div className="fp-dashboard">
+      <aside>
+        <span className="fp-mini-logo">F</span>
+        {[
+          "Overview",
+          "Schedule",
+          "Documents",
+          "Budget",
+          "Selections",
+          "Messages",
+          "Photos",
+        ].map((x, i) => (
+          <span className={i === 0 ? "selected" : ""} key={x}>
+            {i === 0 ? <Home /> : i === 5 ? <MessageSquare /> : <FileText />}
+            {x}
+          </span>
+        ))}
+      </aside>
+      <div className="fp-dash-main">
+        <h3>Project Overview</h3>
+        <div className="fp-dash-cards">
+          <div>
+            <small>Project Status</small>
+            <strong>
+              <CheckCircle2 /> On Track
+            </strong>
+          </div>
+          <div>
+            <small>Budget</small>
+            <strong>$412,500</strong>
+            <span>of $460,000</span>
+          </div>
+          <div>
+            <small>Schedule</small>
+            <strong>22</strong>
+            <span>Days Remaining</span>
+          </div>
+        </div>
+        <h4>Recent Updates</h4>
+        {[
+          "Framing Inspection Completed",
+          "Kitchen Cabinets Approved",
+          "Electrical Rough-In Complete",
+        ].map((x, i) => (
+          <p key={x}>
+            <Check />
+            {x}
+            <small>May {12 - i * 2}, 2024</small>
+          </p>
+        ))}
+      </div>
+      <div className="fp-phone">
+        <div className="fp-notch" />
+        <h3>‹ Messages</h3>
+        <small>Project Manager</small>
+        <p>Framing inspection is complete. Great work from the team.</p>
+        <p className="mine">Awesome! Any items to note?</p>
+        <small>Project Manager</small>
+        <p>Just a few minor notes. I'll send over shortly.</p>
+        <div className="fp-input">Type a message...</div>
+      </div>
+    </div>
+  );
 }
