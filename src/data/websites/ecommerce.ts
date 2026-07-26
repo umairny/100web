@@ -1,4 +1,4 @@
-import { imageUrl } from "../../assets/images";
+import { imageUrl } from "../../assets/optimized";
 import type { WebsiteDesign } from "../websites";
 export const ecommerceWebsites: WebsiteDesign[] = [
   {
@@ -9,7 +9,7 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     shortDescription:
       "Curated online store homepage with product discovery, bundle offers, reviews, and checkout momentum",
     slug: "cartbloom-market",
-    image: imageUrl("home/ecommerce-preview.png"),
+    image: imageUrl("home/ecommerce-preview.webp"),
     colors: {
       primary: "#7c3aed",
       secondary: "#f3e8ff",

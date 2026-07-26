@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 import { imageUrl } from "../../assets/images";
 import brightBridgeImage from "../../assets/images/education/brightbridge.png";
 import atlasCollegeImage from "../../assets/images/education/atlascollege.png";
 import codeNestImage from "../../assets/images/education/codenest.png";
+=======
+import { imageUrl } from "../../assets/optimized";
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 import type { WebsiteDesign } from "../websites";
 export const educationWebsites: WebsiteDesign[] = [
   {
@@ -12,7 +16,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "Online academy homepage with curriculum previews, mentor trust, student outcomes, and enrollment flow",
     slug: "learnsphere-academy",
-    image: imageUrl("home/education-preview.png"),
+    image: imageUrl("home/education-preview.webp"),
     colors: {
       primary: "#3730a3",
       secondary: "#e0e7ff",

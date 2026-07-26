@@ -21,7 +21,11 @@ import {
 } from "lucide-react";
 
 const glowImages = import.meta.glob(
+<<<<<<< HEAD
   "../../assets/images/beauty/glowhaus/*.png",
+=======
+  "../../assets/optimized/beauty/glowhaus/*.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   {
     eager: true,
     query: "?url",
@@ -30,7 +34,11 @@ const glowImages = import.meta.glob(
 ) as Record<string, string>;
 
 const image = (name: string) =>
+<<<<<<< HEAD
   glowImages[`../../assets/images/beauty/glowhaus/${name}`];
+=======
+  glowImages[`../../assets/optimized/beauty/glowhaus/${name}`];
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 
 const navItems = [
   "Home",
@@ -46,42 +54,67 @@ const services = [
   {
     name: "Haircuts",
     copy: "Precision cuts tailored to you",
+<<<<<<< HEAD
     image: "haircut.png",
+=======
+    image: "haircut.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: "scissors",
   },
   {
     name: "Color",
     copy: "Dimensional color that glows",
+<<<<<<< HEAD
     image: "color.png",
+=======
+    image: "color.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: "diamond",
   },
   {
     name: "Styling",
     copy: "Curls, waves & event styling",
+<<<<<<< HEAD
     image: "styling.png",
+=======
+    image: "styling.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: "brush",
   },
   {
     name: "Gloss & Treatments",
     copy: "Shine, tone & healthy hair",
+<<<<<<< HEAD
     image: "glosstreatment.png",
+=======
+    image: "glosstreatment.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: "sparkle",
   },
   {
     name: "Blowouts",
     copy: "Smooth, voluminous and camera-ready",
+<<<<<<< HEAD
     image: "blowout.png",
+=======
+    image: "blowout.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: "dryer",
   },
   {
     name: "Bridal & Events",
     copy: "Beautiful hair for your big moments",
+<<<<<<< HEAD
     image: "bridalevent.png",
+=======
+    image: "bridalevent.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: "ring",
   },
 ];
 
 const stylists = [
+<<<<<<< HEAD
   { name: "Mia Rose", role: "Senior Stylist", image: "mia.png" },
   { name: "Lena Harper", role: "Color Specialist", image: "lena.png" },
   { name: "Jade Collins", role: "Stylist", image: "jade.png" },
@@ -94,21 +127,47 @@ const products = [
     name: "Repair & Strengthen",
     copy: "Stronger, healthier hair",
     image: "repair.png",
+=======
+  { name: "Mia Rose", role: "Senior Stylist", image: "mia.webp" },
+  { name: "Lena Harper", role: "Color Specialist", image: "lena.webp" },
+  { name: "Jade Collins", role: "Stylist", image: "jade.webp" },
+  { name: "Tori Blake", role: "Blowout Expert", image: "tori.webp" },
+];
+
+const products = [
+  { name: "Hydrate & Shine", copy: "Deep moisture", image: "hydrate.webp" },
+  {
+    name: "Repair & Strengthen",
+    copy: "Stronger, healthier hair",
+    image: "repair.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   },
   {
     name: "Smoothing Collection",
     copy: "Frizz control & softness",
+<<<<<<< HEAD
     image: "smooth.png",
+=======
+    image: "smooth.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   },
   {
     name: "Volume Collection",
     copy: "Lift, body & bounce",
+<<<<<<< HEAD
     image: "volume.png",
+=======
+    image: "volume.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   },
   {
     name: "Styling Essentials",
     copy: "Finish your look",
+<<<<<<< HEAD
     image: "styling.png",
+=======
+    image: "styling.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   },
 ];
 
@@ -411,7 +470,11 @@ export function GlowHausSalon() {
               </div>
               <div className="mt-8 flex items-center gap-4">
                 <div className="flex -space-x-2">
+<<<<<<< HEAD
                   {["mia.png", "lena.png", "jade.png", "tori.png"].map(
+=======
+                  {["mia.webp", "lena.webp", "jade.webp", "tori.webp"].map(
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
                     (src) => (
                       <img
                         key={src}
@@ -435,7 +498,11 @@ export function GlowHausSalon() {
           </div>
           <div className="relative min-h-[430px] lg:min-h-0">
             <img
+<<<<<<< HEAD
               src={image("hero.png")}
+=======
+              src={image("hero.webp")}
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
               alt="Client with glossy dimensional blonde hair at GlowHaus Salon"
               className="absolute inset-0 h-full w-full object-cover"
             />
@@ -484,7 +551,11 @@ export function GlowHausSalon() {
       >
         <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
           <img
+<<<<<<< HEAD
             src={image("interior.png")}
+=======
+            src={image("interior.webp")}
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
             alt="GlowHaus luxury salon interior"
             className="h-full min-h-[390px] w-full object-cover"
           />
@@ -529,7 +600,11 @@ export function GlowHausSalon() {
         <SectionLabel>Transformations</SectionLabel>
         <div className="mt-5 overflow-hidden rounded-lg">
           <img
+<<<<<<< HEAD
             src={image("gallery.png")}
+=======
+            src={image("gallery.webp")}
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
             alt="Six GlowHaus hair color and styling transformations"
             className="w-full"
           />
@@ -710,6 +785,7 @@ export function GlowHausSalon() {
         </div>
         <div className="grid grid-cols-3 gap-1 sm:grid-cols-5 lg:grid-cols-9">
           {[
+<<<<<<< HEAD
             "interior01.png",
             "haircut.png",
             "color.png",
@@ -719,6 +795,17 @@ export function GlowHausSalon() {
             "products.png",
             "bridalevent.png",
             "hero.png",
+=======
+            "interior01.webp",
+            "haircut.webp",
+            "color.webp",
+            "interior.webp",
+            "glosstreatment.webp",
+            "blowout.webp",
+            "products.webp",
+            "bridalevent.webp",
+            "hero.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
           ].map((src, index) => (
             <a
               href="#contact"

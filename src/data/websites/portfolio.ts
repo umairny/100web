@@ -1,4 +1,4 @@
-import { imageUrl } from "../../assets/images";
+import { imageUrl } from "../../assets/optimized";
 import type { WebsiteDesign } from "../websites";
 export const portfolioWebsites: WebsiteDesign[] = [
   {
@@ -9,7 +9,7 @@ export const portfolioWebsites: WebsiteDesign[] = [
     shortDescription:
       "Creative studio portfolio with selected work, service packaging, process clarity, and inquiry conversion",
     slug: "studio-vale-creative",
-    image: imageUrl("home/portfolio-preview.png"),
+    image: imageUrl("home/portfolio-preview.webp"),
     colors: {
       primary: "#111827",
       secondary: "#e5e7eb",

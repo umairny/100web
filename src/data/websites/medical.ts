@@ -1,4 +1,4 @@
-import { imageUrl } from "../../assets/images";
+import { imageUrl } from "../../assets/optimized";
 import type { WebsiteDesign } from "../websites";
 export const medicalWebsites: WebsiteDesign[] = [
   {
@@ -9,7 +9,11 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern primary care clinic with service clarity, provider trust, insurance guidance, and appointment booking",
     slug: "harbor-health-clinic",
+<<<<<<< HEAD
     image: imageUrl("medical/harbor/hero.png"),
+=======
+    image: imageUrl("home/medical-preview.webp"),
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     colors: {
       primary: "#0f766e",
       secondary: "#ccfbf1",

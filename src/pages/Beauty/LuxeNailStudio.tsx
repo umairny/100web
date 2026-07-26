@@ -24,7 +24,11 @@ import {
 } from "lucide-react";
 
 const luxeImages = import.meta.glob(
+<<<<<<< HEAD
   "../../assets/images/beauty/luxe-nail/*.png",
+=======
+  "../../assets/optimized/beauty/luxe-nail/*.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   {
     eager: true,
     query: "?url",
@@ -33,7 +37,11 @@ const luxeImages = import.meta.glob(
 ) as Record<string, string>;
 
 const image = (name: string) =>
+<<<<<<< HEAD
   luxeImages[`../../assets/images/beauty/luxe-nail/${name}`];
+=======
+  luxeImages[`../../assets/optimized/beauty/luxe-nail/${name}`];
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 
 const navItems = [
   ["Home", "home"],
@@ -80,6 +88,7 @@ const services = [
 ];
 
 const designs = [
+<<<<<<< HEAD
   ["frenchtip.png", "French Tips"],
   ["nude.png", "Nude Gloss"],
   ["chrome.png", "Chrome"],
@@ -92,6 +101,20 @@ const artists = [
   ["maya.png", "Maya", "Nail Specialist"],
   ["jasmin.png", "Jasmine", "Nail Artist"],
   ["tiffny.png", "Tiffany", "Nail Technician"],
+=======
+  ["frenchtip.webp", "French Tips"],
+  ["nude.webp", "Nude Gloss"],
+  ["chrome.webp", "Chrome"],
+  ["nailart.webp", "Nail Art"],
+  ["sclupt.webp", "Sculpted Sets"],
+];
+
+const artists = [
+  ["lauren.webp", "Lauren", "Senior Nail Artist"],
+  ["maya.webp", "Maya", "Nail Specialist"],
+  ["jasmin.webp", "Jasmine", "Nail Artist"],
+  ["tiffny.webp", "Tiffany", "Nail Technician"],
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 ];
 
 const reviews = [
@@ -110,14 +133,22 @@ const reviews = [
 ];
 
 const products = [
+<<<<<<< HEAD
   ["cuticaloil.png", "Cuticle Oil", "Nourish & Hydrate", "$14.00"],
   ["handcream.png", "Hand Cream", "Deep Hydration", "$16.00"],
   [
     "nailstarghtner.png",
+=======
+  ["cuticaloil.webp", "Cuticle Oil", "Nourish & Hydrate", "$14.00"],
+  ["handcream.webp", "Hand Cream", "Deep Hydration", "$16.00"],
+  [
+    "nailstarghtner.webp",
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "Nail Strengthener",
     "Stronger, Healthier Nails",
     "$16.00",
   ],
+<<<<<<< HEAD
   ["geltopcoat.png", "Gel Top Coat", "Long-Lasting Shine", "$16.00"],
   ["nudeblush.png", "Nude Blush", "Gel Polish", "$15.00"],
   ["nailkit.png", "Nail Care Kit", "Essentials for Home", "$22.00"],
@@ -143,6 +174,33 @@ const heroSlides = [
   ["chrome.png", "Liquid Chrome"],
   ["nailart.png", "Fine Art Details"],
   ["sclupt.png", "Sculpted Sets"],
+=======
+  ["geltopcoat.webp", "Gel Top Coat", "Long-Lasting Shine", "$16.00"],
+  ["nudeblush.webp", "Nude Blush", "Gel Polish", "$15.00"],
+  ["nailkit.webp", "Nail Care Kit", "Essentials for Home", "$22.00"],
+];
+
+const socialImages = [
+  "gallary01.webp",
+  "gallary02.webp",
+  "gallary03.webp",
+  "gallary04.webp",
+  "gallary05.webp",
+  "gallary06.webp",
+  "gallary07.webp",
+  "gallary08.webp",
+  "gallary09.webp",
+  "gallary10.webp",
+];
+
+const heroSlides = [
+  ["hero.webp", "Signature Nude"],
+  ["frenchtip.webp", "Modern French"],
+  ["nude.webp", "Nude Gloss"],
+  ["chrome.webp", "Liquid Chrome"],
+  ["nailart.webp", "Fine Art Details"],
+  ["sclupt.webp", "Sculpted Sets"],
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 ];
 
 function Icon({
@@ -506,7 +564,11 @@ export function LuxeNailStudio() {
         className="mx-auto grid max-w-[1510px] overflow-hidden px-5 pb-8 lg:grid-cols-2 lg:px-10"
       >
         <img
+<<<<<<< HEAD
           src={image("interior.png")}
+=======
+          src={image("interior.webp")}
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
           alt="Warm and luxurious Luxe Nail Studio interior"
           className="h-full min-h-[390px] w-full rounded-t-xl object-cover lg:rounded-l-xl lg:rounded-tr-none"
         />
@@ -687,7 +749,11 @@ export function LuxeNailStudio() {
       >
         <div className="relative overflow-hidden rounded-xl bg-[#f2e2d8]">
           <img
+<<<<<<< HEAD
             src={image("appoitment-bg.png")}
+=======
+            src={image("appoitment-bg.webp")}
+>>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
             alt="Soft nude manicure"
             className="absolute inset-y-0 left-0 h-full w-full object-cover object-[30%_65%] opacity-80 md:w-[42%]"
           />

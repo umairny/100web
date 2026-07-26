@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import heroImage from "../../assets/images/beauty/bloombridal/hero.png";
-import galleryOne from "../../assets/images/beauty/bloombridal/gallary01.png";
-import galleryTwo from "../../assets/images/beauty/bloombridal/gallary02.png";
-import galleryThree from "../../assets/images/beauty/bloombridal/gallary03.png";
-import galleryFour from "../../assets/images/beauty/bloombridal/gallary04.png";
-import galleryFive from "../../assets/images/beauty/bloombridal/gallary05.png";
-import gallerySix from "../../assets/images/beauty/bloombridal/gallary06.png";
-import interiorImage from "../../assets/images/beauty/bloombridal/interior.png";
-import passionImage from "../../assets/images/beauty/bloombridal/passion.png";
+import heroImage from "../../assets/optimized/beauty/bloombridal/hero.webp";
+import galleryOne from "../../assets/optimized/beauty/bloombridal/gallary01.webp";
+import galleryTwo from "../../assets/optimized/beauty/bloombridal/gallary02.webp";
+import galleryThree from "../../assets/optimized/beauty/bloombridal/gallary03.webp";
+import galleryFour from "../../assets/optimized/beauty/bloombridal/gallary04.webp";
+import galleryFive from "../../assets/optimized/beauty/bloombridal/gallary05.webp";
+import gallerySix from "../../assets/optimized/beauty/bloombridal/gallary06.webp";
+import interiorImage from "../../assets/optimized/beauty/bloombridal/interior.webp";
+import passionImage from "../../assets/optimized/beauty/bloombridal/passion.webp";
 
 const IMG = {
   hero: heroImage,

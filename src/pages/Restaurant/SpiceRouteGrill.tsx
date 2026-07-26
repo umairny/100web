@@ -1,11 +1,11 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Container, CTAButton, SubWebsiteNav } from "../../components";
-import { imageUrl } from "../../assets/images";
+import { imageUrl } from "../../assets/optimized";
 
 const imageAssets = {
   hero: {
-    src: imageUrl("restaurent/spiceroute/hero-grill.png"),
+    src: imageUrl("restaurent/spiceroute/hero-grill.webp"),
     alt: "Sizzling grilled kebabs and tikka served on a dark charcoal plate",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_50%_45%,rgba(244,161,26,0.95)_0_12%,transparent_13%),radial-gradient(circle_at_42%_58%,rgba(143,29,27,0.95)_0_18%,transparent_19%),linear-gradient(135deg,#211815,#5b1518_48%,#f4a11a)]",
@@ -13,7 +13,7 @@ const imageAssets = {
       "A premium Indian-Pakistani fusion grill restaurant hero image, sizzling grilled kebabs and tikka on a dark charcoal plate, warm saffron and deep red lighting, subtle smoke, elegant restaurant atmosphere, premium food photography, cinematic, no text, no logo.",
   },
   signatureDish1: {
-    src: imageUrl("restaurent/spiceroute/signature-dish-1.png"),
+    src: imageUrl("restaurent/spiceroute/signature-dish-1.webp"),
     alt: "Chicken tikka skewers with saffron rice, chutney, and herbs",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_45%_42%,#f4a11a_0_12%,transparent_13%),radial-gradient(circle_at_56%_55%,#8f1d1b_0_18%,transparent_19%),linear-gradient(135deg,#1f1b18,#6b181b_55%,#f0b13a)]",
@@ -21,7 +21,7 @@ const imageAssets = {
       "Close-up premium food photography of chicken tikka skewers with charred edges, saffron rice, chutney, herbs, warm restaurant lighting, deep red and charcoal background, no text.",
   },
   signatureDish2: {
-    src: imageUrl("restaurent/spiceroute/signature-dish-2.png"),
+    src: imageUrl("restaurent/spiceroute/signature-dish-2.webp"),
     alt: "Seekh kebab platter with naan, grilled vegetables, and mint chutney",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_30%_55%,#e9c36a_0_10%,transparent_11%),radial-gradient(circle_at_58%_42%,#5f1517_0_22%,transparent_23%),linear-gradient(135deg,#241817,#8f1d1b_60%,#d99622)]",
@@ -29,7 +29,7 @@ const imageAssets = {
       "Modern plated seekh kebab platter with naan, grilled vegetables, mint chutney, rich spices, elegant dark table, warm golden highlights, premium restaurant menu photography, no text.",
   },
   signatureDish3: {
-    src: imageUrl("restaurent/spiceroute/signature-dish-3.png"),
+    src: imageUrl("restaurent/spiceroute/signature-dish-3.webp"),
     alt: "Mixed grill family platter with kebabs, tikka, lamb chops, naan, and chutneys",
     fallbackStyle:
       "bg-[radial-gradient(circle_at_36%_42%,#f4a11a_0_10%,transparent_11%),radial-gradient(circle_at_64%_46%,#c56a1b_0_12%,transparent_13%),radial-gradient(circle_at_52%_60%,#7c1c1d_0_22%,transparent_23%),linear-gradient(135deg,#171312,#4a1113_55%,#f4a11a)]",
@@ -37,7 +37,7 @@ const imageAssets = {
       "Indian-Pakistani fusion mixed grill family platter with kebabs, tikka, lamb chops, naan, chutneys, onions, lemon, cinematic warm lighting, premium dining style, no text.",
   },
   interior: {
-    src: imageUrl("restaurent/spiceroute/interior.png"),
+    src: imageUrl("restaurent/spiceroute/interior.webp"),
     alt: "Modern South Asian fusion restaurant interior with amber lights and deep red accents",
     fallbackStyle:
       "bg-[linear-gradient(90deg,rgba(244,161,26,0.18)_1px,transparent_1px),linear-gradient(180deg,#1f1b18,#4b1416_58%,#8f1d1b)] [background-size:42px_42px]",
@@ -231,7 +231,7 @@ export function SpiceRouteGrill() {
               ].map(([value, label], index) => (
                 <div
                   key={label}
-                  className={`reveal-card rounded-3xl border border-[#f4a11a]/25 bg-white/[0.07] p-5 backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#ffc85b]/50 hover:bg-white/[0.09] ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : ''}`}
+                  className={`reveal-card rounded-3xl border border-[#f4a11a]/25 bg-white/[0.07] p-5 backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#ffc85b]/50 hover:bg-white/[0.09] ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : ""}`}
                 >
                   <p className="text-2xl font-black text-[#ffc85b] md:text-3xl">
                     {value}
@@ -330,7 +330,7 @@ export function SpiceRouteGrill() {
             {popularDishes.map((dish, index) => (
               <article
                 key={dish.name}
-                className={`group overflow-hidden rounded-[1.75rem] border border-[#f4a11a]/25 bg-[#1f1b18] shadow-xl shadow-black/15 transition duration-300 hover:-translate-y-1 hover:border-[#ffc85b] hover:shadow-2xl hover:shadow-black/25 ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : index === 3 ? 'delay-300' : ''}`}
+                className={`group overflow-hidden rounded-[1.75rem] border border-[#f4a11a]/25 bg-[#1f1b18] shadow-xl shadow-black/15 transition duration-300 hover:-translate-y-1 hover:border-[#ffc85b] hover:shadow-2xl hover:shadow-black/25 ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : index === 3 ? "delay-300" : ""}`}
               >
                 <ImageWithFallback image={dish.image} className="aspect-[4/3]">
                   <span className="absolute right-4 top-4 rounded-full bg-[#fff4dd] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#8f1d1b]">
@@ -370,7 +370,7 @@ export function SpiceRouteGrill() {
               {menuPreview.map((item, index) => (
                 <div
                   key={item}
-                  className={`reveal-card rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 font-bold text-[#fff4dd] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#f4a11a]/35 hover:bg-white/[0.1] ${index % 4 === 1 ? 'delay-100' : index % 4 === 2 ? 'delay-200' : index % 4 === 3 ? 'delay-300' : ''}`}
+                  className={`reveal-card rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 font-bold text-[#fff4dd] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#f4a11a]/35 hover:bg-white/[0.1] ${index % 4 === 1 ? "delay-100" : index % 4 === 2 ? "delay-200" : index % 4 === 3 ? "delay-300" : ""}`}
                 >
                   {item}
                 </div>
@@ -394,7 +394,7 @@ export function SpiceRouteGrill() {
             {flavorSteps.map((step, index) => (
               <article
                 key={step.title}
-                className={`rounded-[1.5rem] border border-[#e4c58a] bg-white/70 p-6 shadow-sm transition-all duration-300 ease-out hover:border-[#f4a11a]/60 hover:shadow-xl ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : index === 3 ? 'delay-300' : ''}`}
+                className={`rounded-[1.5rem] border border-[#e4c58a] bg-white/70 p-6 shadow-sm transition-all duration-300 ease-out hover:border-[#f4a11a]/60 hover:shadow-xl ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : index === 3 ? "delay-300" : ""}`}
               >
                 <p className="text-3xl font-black text-[#f4a11a]">
                   0{index + 1}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import barberHero from "../../assets/images/beauty/crown-comb-barber/hero.png";
-import { imageUrl } from "../../assets/images";
+import barberHero from "../../assets/optimized/beauty/crown-comb-barber/hero.webp";
+import { imageUrl } from "../../assets/optimized";
 import { Container } from "../../components";
 
 type IconName =
@@ -92,13 +92,13 @@ const features: Feature[] = [
 ];
 
 const barberImages = {
-  story: imageUrl("beauty/crown-comb-barber/our-story.png"),
-  chairs: imageUrl("beauty/crown-comb-barber/Barber-chairs.png"),
-  haircut: imageUrl("beauty/crown-comb-barber/Precision-haircut.png"),
-  tools: imageUrl("beauty/crown-comb-barber/Grooming-tools.png"),
-  interior: imageUrl("beauty/crown-comb-barber/Studio-interior.png"),
-  beardTrim: imageUrl("beauty/crown-comb-barber/Beard-trim.png"),
-  products: imageUrl("beauty/crown-comb-barber/Premium-products.png"),
+  story: imageUrl("beauty/crown-comb-barber/our-story.webp"),
+  chairs: imageUrl("beauty/crown-comb-barber/Barber-chairs.webp"),
+  haircut: imageUrl("beauty/crown-comb-barber/Precision-haircut.webp"),
+  tools: imageUrl("beauty/crown-comb-barber/Grooming-tools.webp"),
+  interior: imageUrl("beauty/crown-comb-barber/Studio-interior.webp"),
+  beardTrim: imageUrl("beauty/crown-comb-barber/Beard-trim.webp"),
+  products: imageUrl("beauty/crown-comb-barber/Premium-products.webp"),
 };
 
 const galleryItems = [
