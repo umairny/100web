@@ -9,11 +9,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern primary care clinic with service clarity, provider trust, insurance guidance, and appointment booking",
     slug: "harbor-health-clinic",
-<<<<<<< HEAD
-    image: imageUrl("medical/harbor/hero.png"),
-=======
-    image: imageUrl("home/medical-preview.webp"),
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
+    image: imageUrl("medical/harbor/hero.webp"),
     colors: {
       primary: "#0f766e",
       secondary: "#ccfbf1",
@@ -30,7 +26,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Pediatric clinic landing page with family-first services, visit guidance, provider trust, parent resources, and simple appointment access",
     slug: "brightpath-pediatrics",
-    image: imageUrl("medical/BrightPath/hero.png"),
+    image: imageUrl("medical/BrightPath/hero.webp"),
     colors: {
       primary: "#3f65a8",
       secondary: "#fff2b8",
@@ -47,7 +43,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern dental clinic landing page with clean booking flow, service clarity, provider credibility, visit details, and appointment access",
     slug: "northstar-dental",
-    image: imageUrl("medical/northstar/hero.png"),
+    image: imageUrl("medical/northstar/hero.webp"),
     colors: {
       primary: "#126f86",
       secondary: "#e8fbff",
@@ -64,7 +60,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Premium optometry and eyewear retail landing page with exam flow, frame categories, provider trust, visit details, and appointment access",
     slug: "clearview-optometry",
-    image: imageUrl("medical/clearview/hero.png"),
+    image: imageUrl("medical/clearview/hero.webp"),
     colors: {
       primary: "#2f6f9f",
       secondary: "#eaf6fb",
@@ -81,7 +77,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Premium physical therapy landing page with recovery plans, progress tracking, therapist credibility, visit details, and evaluation booking",
     slug: "renew-physical-therapy",
-    image: imageUrl("medical/renewphysical/hero.png"),
+    image: imageUrl("medical/renewphysical/hero.webp"),
     colors: {
       primary: "#507566",
       secondary: "#f8f5ef",
@@ -98,7 +94,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern counseling practice homepage with approachable intake, service clarity, therapist credibility, teletherapy details, and simple appointment access",
     slug: "mindwell-counseling",
-    image: imageUrl("medical/mindwell/hero.png"),
+    image: imageUrl("medical/mindwell/hero.webp"),
     colors: {
       primary: "#2d4b58",
       secondary: "#f8f3ea",
@@ -115,7 +111,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern urgent care homepage with same-day visit access, wait-time clarity, service cards, provider credibility, visit details, and reserve-a-spot flow",
     slug: "harbor-urgent-care",
-    image: imageUrl("medical/harbor-urgent-care/hero.png"),
+    image: imageUrl("medical/harbor-urgent-care/hero.webp"),
     colors: {
       primary: "#0f7ea5",
       secondary: "#e7fbff",
@@ -132,7 +128,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern women's health homepage with supportive visit paths, patient resources, provider credibility, telehealth guidance, and simple appointment access",
     slug: "willow-womens-health",
-    image: imageUrl("medical/willow/hero.png"),
+    image: imageUrl("medical/willow/hero.webp"),
     colors: {
       primary: "#7a405a",
       secondary: "#fff1f4",
@@ -149,7 +145,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Modern cardiology homepage with specialist services, diagnostic clarity, circular progress modules, provider credibility, patient resources, and consultation access",
     slug: "pulseheart-cardiology",
-    image: imageUrl("medical/pulseheart/hero.png"),
+    image: imageUrl("medical/pulseheart/hero.webp"),
     colors: {
       primary: "#8e1730",
       secondary: "#f8e7ec",
@@ -166,7 +162,7 @@ export const medicalWebsites: WebsiteDesign[] = [
     shortDescription:
       "Premium dermatology homepage with medical skin care services, consultation flow, provider credibility, patient resources, visit details, and appointment access",
     slug: "clearskin-dermatology",
-    image: imageUrl("medical/clearskin/hero.png"),
+    image: imageUrl("medical/clearskin/hero.webp"),
     colors: {
       primary: "#6e4a38",
       secondary: "#fbf7f1",

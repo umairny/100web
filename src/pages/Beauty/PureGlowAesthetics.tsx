@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-import heroImage from "../../assets/images/beauty/pureglow/hero.png";
-import beautyImage from "../../assets/images/beauty/pureglow/bearty-banner.png";
-import interiorImage from "../../assets/images/beauty/pureglow/interior.png";
-import createLookImage from "../../assets/images/beauty/pureglow/createyourlook.png";
-import lipFillerImage from "../../assets/images/beauty/pureglow/lipfiller.png";
-import botoxImage from "../../assets/images/beauty/pureglow/botox.png";
-import hydrafacialImage from "../../assets/images/beauty/pureglow/hydrafacial.png";
-import skinBoosterImage from "../../assets/images/beauty/pureglow/skinbooster.png";
-import microneedleImage from "../../assets/images/beauty/pureglow/microneedle.png";
-import underEyeImage from "../../assets/images/beauty/pureglow/undereyefiller.png";
-=======
 import heroImage from "../../assets/optimized/beauty/pureglow/hero.webp";
 import beautyImage from "../../assets/optimized/beauty/pureglow/bearty-banner.webp";
 import interiorImage from "../../assets/optimized/beauty/pureglow/interior.webp";
@@ -22,7 +10,6 @@ import hydrafacialImage from "../../assets/optimized/beauty/pureglow/hydrafacial
 import skinBoosterImage from "../../assets/optimized/beauty/pureglow/skinbooster.webp";
 import microneedleImage from "../../assets/optimized/beauty/pureglow/microneedle.webp";
 import underEyeImage from "../../assets/optimized/beauty/pureglow/undereyefiller.webp";
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 
 const navItems = [
   { label: "Home", id: "home" },

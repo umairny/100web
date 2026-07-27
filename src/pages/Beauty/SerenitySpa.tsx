@@ -19,11 +19,7 @@ import {
 } from "lucide-react";
 
 const serenityImages = import.meta.glob(
-<<<<<<< HEAD
-  "../../assets/images/beauty/serenity/*.png",
-=======
   "../../assets/optimized/beauty/serenity/*.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   {
     eager: true,
     query: "?url",
@@ -32,11 +28,7 @@ const serenityImages = import.meta.glob(
 ) as Record<string, string>;
 
 const image = (name: string) =>
-<<<<<<< HEAD
-  serenityImages[`../../assets/images/beauty/serenity/${name}`];
-=======
   serenityImages[`../../assets/optimized/beauty/serenity/${name}`];
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 
 const navItems = [
   ["Home", "home"],
@@ -51,61 +43,37 @@ const navItems = [
 
 const services = [
   [
-<<<<<<< HEAD
-    "swidish.png",
-=======
     "swidish.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "leaf",
     "Swedish Massage",
     "Relaxing, full-body massage to ease tension and promote circulation.",
   ],
   [
-<<<<<<< HEAD
-    "deep.png",
-=======
     "deep.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "branch",
     "Deep Tissue",
     "Targeted pressure to release chronic tension and muscle knots.",
   ],
   [
-<<<<<<< HEAD
-    "hotstone.png",
-=======
     "hotstone.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "waves",
     "Hot Stone Therapy",
     "Heated stones melt away tension and encourage deep relaxation.",
   ],
   [
-<<<<<<< HEAD
-    "aroma.png",
-=======
     "aroma.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "leaf",
     "Aromatherapy",
     "Scent-led therapy to balance mood, mind, and body naturally.",
   ],
   [
-<<<<<<< HEAD
-    "facial.png",
-=======
     "facial.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "face",
     "Signature Facials",
     "Nourishing facials for radiant, healthy, and balanced skin.",
   ],
   [
-<<<<<<< HEAD
-    "resorative.png",
-=======
     "resorative.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "sun",
     "Restorative Packages",
     "Curated experiences for deeper rest, renewal, and calm.",
@@ -114,33 +82,21 @@ const services = [
 
 const journeys = [
   [
-<<<<<<< HEAD
-    "rest-journey.png",
-=======
     "rest-journey.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "The Reset Journey",
     "90 Minutes",
     "Full body massage, aromatherapy scalp treatment, and herbal tea ritual.",
     "$195",
   ],
   [
-<<<<<<< HEAD
-    "restor-journey.png",
-=======
     "restor-journey.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "The Restore Journey",
     "120 Minutes",
     "Deep tissue massage, hot stone therapy, and nourishing facial.",
     "$245",
   ],
   [
-<<<<<<< HEAD
-    "renew-journey.png",
-=======
     "renew-journey.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "The Renew Journey",
     "180 Minutes",
     "Complete head-to-toe experience with massage, facial, and body polish.",
@@ -150,41 +106,25 @@ const journeys = [
 
 const therapists = [
   [
-<<<<<<< HEAD
-    "maya.png",
-=======
     "maya.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "Maya Thompson",
     "Massage Therapist",
     "Specializes in relaxation and holistic healing techniques.",
   ],
   [
-<<<<<<< HEAD
-    "james.png",
-=======
     "james.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "James Parker",
     "Deep Tissue Specialist",
     "Expert in sports therapy and chronic pain management.",
   ],
   [
-<<<<<<< HEAD
-    "elena.png",
-=======
     "elena.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "Elena Morris",
     "Aromatherapy Therapist",
     "Blends essential oils and touch to restore mind-body balance.",
   ],
   [
-<<<<<<< HEAD
-    "sofia.png",
-=======
     "sofia.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     "Sophia Lee",
     "Facial & Skin Therapist",
     "Passionate about natural skincare and holistic beauty.",
@@ -195,48 +135,27 @@ const testimonials = [
   [
     "Serenity Spa is my sanctuary. Every visit leaves me feeling lighter, calmer, and completely renewed.",
     "Jessica M.",
-<<<<<<< HEAD
-    "maya.png",
-=======
     "maya.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   ],
   [
     "The therapists are incredible. The attention to detail and peaceful space are unmatched.",
     "David R.",
-<<<<<<< HEAD
-    "james.png",
-=======
     "james.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   ],
   [
     "I’ve finally found a place where I can truly relax and take care of myself.",
     "Amanda L.",
-<<<<<<< HEAD
-    "elena.png",
-=======
     "elena.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
   ],
 ];
 
 const galleryImages = [
-<<<<<<< HEAD
-  "gallary01.png",
-  "gallary02.png",
-  "gallary03.png",
-  "gallary04.png",
-  "gallary05.png",
-  "gallary06.png",
-=======
   "gallary01.webp",
   "gallary02.webp",
   "gallary03.webp",
   "gallary04.webp",
   "gallary05.webp",
   "gallary06.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 ];
 
 function Icon({
@@ -455,11 +374,7 @@ export function SerenitySpa() {
         className="relative min-h-[640px] overflow-hidden text-white"
       >
         <img
-<<<<<<< HEAD
-          src={image("hero.png")}
-=======
           src={image("hero.webp")}
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
           alt="Peaceful massage room opening onto a lush garden"
           className="absolute inset-0 h-full w-full object-cover"
         />
@@ -572,11 +487,7 @@ export function SerenitySpa() {
         className="grid bg-[#f2f0e8] lg:grid-cols-[0.88fr_1.12fr]"
       >
         <img
-<<<<<<< HEAD
-          src={image("interior.png")}
-=======
           src={image("interior.webp")}
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
           alt="Serenity Spa relaxation lounge"
           className="h-full min-h-[420px] w-full object-cover"
         />

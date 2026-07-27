@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-import { imageUrl } from "../../assets/images";
 import brightBridgeImage from "../../assets/images/education/brightbridge.png";
 import atlasCollegeImage from "../../assets/images/education/atlascollege.png";
 import codeNestImage from "../../assets/images/education/codenest.png";
-=======
 import { imageUrl } from "../../assets/optimized";
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 import type { WebsiteDesign } from "../websites";
 export const educationWebsites: WebsiteDesign[] = [
   {

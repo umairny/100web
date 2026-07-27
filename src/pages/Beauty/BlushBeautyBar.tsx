@@ -19,16 +19,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-<<<<<<< HEAD
-const blushImages = import.meta.glob("../../assets/images/beauty/blush/*.png", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
-
-const image = (name: string) =>
-  blushImages[`../../assets/images/beauty/blush/${name}`];
-=======
 const blushImages = import.meta.glob(
   "../../assets/optimized/beauty/blush/*.webp",
   {
@@ -40,7 +30,6 @@ const blushImages = import.meta.glob(
 
 const image = (name: string) =>
   blushImages[`../../assets/optimized/beauty/blush/${name}`];
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 
 const navItems = [
   ["Home", "home"],
@@ -64,44 +53,28 @@ const services: Array<{
     name: "Bold Glam",
     copy: "Full coverage makeup for all-night impact.",
     price: "From $110",
-<<<<<<< HEAD
-    image: "bold.png",
-=======
     image: "bold.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: Star,
   },
   {
     name: "Soft Glam",
     copy: "Flawless, natural enhancement.",
     price: "From $90",
-<<<<<<< HEAD
-    image: "soft.png",
-=======
     image: "soft.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: Heart,
   },
   {
     name: "Party Looks",
     copy: "Fun, fierce & camera-ready for any celebration.",
     price: "From $95",
-<<<<<<< HEAD
-    image: "party.png",
-=======
     image: "party.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: Crown,
   },
   {
     name: "Social Ready",
     copy: "Quick glam refresh for photo-perfect, anywhere.",
     price: "From $60",
-<<<<<<< HEAD
-    image: "social.png",
-=======
     image: "social.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     icon: Camera,
   },
 ];
@@ -138,21 +111,13 @@ const artists = [
   {
     name: "Lena",
     role: "Lead Makeup Artist",
-<<<<<<< HEAD
-    image: "lena.png",
-=======
     image: "lena.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     copy: "Specializing in glam, bridal & transformation looks.",
   },
   {
     name: "Maya",
     role: "Senior Glam Artist",
-<<<<<<< HEAD
-    image: "maya.png",
-=======
     image: "maya.webp",
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
     copy: "Soft glam, party looks & social-ready expert.",
   },
 ];
@@ -173,17 +138,10 @@ const testimonials = [
 ];
 
 const products = [
-<<<<<<< HEAD
-  ["spray.png", "Setting Spray", "$28"],
-  ["primer.png", "Primer", "$30"],
-  ["lipgloss.png", "Lip Glosses", "$25"],
-  ["highlite.png", "Highlight Palette", "$35"],
-=======
   ["spray.webp", "Setting Spray", "$28"],
   ["primer.webp", "Primer", "$30"],
   ["lipgloss.webp", "Lip Glosses", "$25"],
   ["highlite.webp", "Highlight Palette", "$35"],
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 ];
 
 function Button({
@@ -388,11 +346,7 @@ export function BlushBeautyBar() {
         className="relative min-h-[720px] overflow-hidden sm:min-h-[700px]"
       >
         <img
-<<<<<<< HEAD
-          src={image("hero.png")}
-=======
           src={image("hero.webp")}
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
           alt="Bold pink glam makeup look"
           className="absolute inset-0 h-full w-full object-cover object-[68%_center] sm:object-center"
         />
@@ -553,11 +507,7 @@ export function BlushBeautyBar() {
           </div>
           <div className="relative min-h-64 overflow-hidden md:min-h-[310px]">
             <img
-<<<<<<< HEAD
-              src={image("banner.png")}
-=======
               src={image("banner.webp")}
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
               alt="Signature Blush makeup looks"
               className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]"
             />
@@ -581,11 +531,7 @@ export function BlushBeautyBar() {
         className="mx-auto grid max-w-[1370px] gap-8 px-5 py-5 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"
       >
         <img
-<<<<<<< HEAD
-          src={image("interior.png")}
-=======
           src={image("interior.webp")}
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
           alt="Blush Beauty Bar neon interior"
           className="min-h-[360px] w-full rounded-lg border border-[#ff397f]/70 object-cover"
         />
@@ -712,11 +658,7 @@ export function BlushBeautyBar() {
       <section id="book" className="mx-auto max-w-[1370px] px-5 pb-7">
         <div className="relative overflow-hidden rounded-lg border border-[#ff397f]/75">
           <img
-<<<<<<< HEAD
-            src={image("product-banner.png")}
-=======
             src={image("product-banner.webp")}
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
             alt="Professional makeup brushes"
             className="absolute inset-0 h-full w-full object-cover"
           />
@@ -790,11 +732,7 @@ export function BlushBeautyBar() {
             </div>
           </div>
           <img
-<<<<<<< HEAD
-            src={image("goodvibes.png")}
-=======
             src={image("goodvibes.webp")}
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
             alt="Good Vibes Only"
             className="mx-auto h-24 w-24 object-contain drop-shadow-[0_0_8px_rgba(255,45,119,0.65)]"
           />
@@ -803,25 +741,24 @@ export function BlushBeautyBar() {
               Glam Gallery
             </h3>
             <div className="mt-3 grid grid-cols-4 gap-1">
-<<<<<<< HEAD
-              {["modal01.png", "modal02.png", "modal03.png", "modal04.png"].map(
-=======
-              {["modal01.webp", "modal02.webp", "modal03.webp", "modal04.webp"].map(
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
-                (src) => (
-                  <a
-                    key={src}
-                    href="#gallery"
-                    className="aspect-square overflow-hidden"
-                  >
-                    <img
-                      src={image(src)}
-                      alt="Blush glam gallery"
-                      className="h-full w-full object-cover transition hover:scale-110"
-                    />
-                  </a>
-                ),
-              )}
+              {[
+                "modal01.webp",
+                "modal02.webp",
+                "modal03.webp",
+                "modal04.webp",
+              ].map((src) => (
+                <a
+                  key={src}
+                  href="#gallery"
+                  className="aspect-square overflow-hidden"
+                >
+                  <img
+                    src={image(src)}
+                    alt="Blush glam gallery"
+                    className="h-full w-full object-cover transition hover:scale-110"
+                  />
+                </a>
+              ))}
             </div>
           </div>
           <div>

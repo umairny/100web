@@ -1,23 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-<<<<<<< HEAD
-import heroImage from "../../assets/images/beauty/aura/hero.png";
-import interiorImage from "../../assets/images/beauty/aura/interior.png";
-import pathImage from "../../assets/images/beauty/aura/pathtorenewal.png";
-import bodyImage from "../../assets/images/beauty/aura/bodytreatment.png";
-import massageImage from "../../assets/images/beauty/aura/massage.png";
-import facialImage from "../../assets/images/beauty/aura/facial.png";
-import hydroImage from "../../assets/images/beauty/aura/hydro.png";
-import restoreImage from "../../assets/images/beauty/aura/restore.png";
-import mayaImage from "../../assets/images/beauty/aura/maya.png";
-import arjunImage from "../../assets/images/beauty/aura/arjun.png";
-import laylaImage from "../../assets/images/beauty/aura/layla.png";
-import noahImage from "../../assets/images/beauty/aura/noah.png";
-import oilImage from "../../assets/images/beauty/aura/oil.png";
-import soakImage from "../../assets/images/beauty/aura/soak.png";
-import glowImage from "../../assets/images/beauty/aura/glow.png";
-import candleImage from "../../assets/images/beauty/aura/candal.png";
-import maskImage from "../../assets/images/beauty/aura/sleepmask.png";
-=======
 import heroImage from "../../assets/optimized/beauty/aura/hero.webp";
 import interiorImage from "../../assets/optimized/beauty/aura/interior.webp";
 import pathImage from "../../assets/optimized/beauty/aura/pathtorenewal.webp";
@@ -35,7 +16,6 @@ import soakImage from "../../assets/optimized/beauty/aura/soak.webp";
 import glowImage from "../../assets/optimized/beauty/aura/glow.webp";
 import candleImage from "../../assets/optimized/beauty/aura/candal.webp";
 import maskImage from "../../assets/optimized/beauty/aura/sleepmask.webp";
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 
 const nav = [
   ["Rituals", "rituals"],
@@ -92,7 +72,6 @@ const practitioners = [
   ["Arjun Mehta", "Massage Therapist", arjunImage],
   ["Leila Chen", "Skin Therapist", laylaImage],
   ["Noah Patel", "Hydrotherapy Specialist", noahImage],
-<<<<<<< HEAD
 ];
 const products = [
   ["Aroma Body Oil", "$68", oilImage],
@@ -101,16 +80,6 @@ const products = [
   ["Calm Candle", "$42", candleImage],
   ["Silk Sleep Mask", "$28", maskImage],
 ];
-=======
-];
-const products = [
-  ["Aroma Body Oil", "$68", oilImage],
-  ["Restorative Bath Soak", "$48", soakImage],
-  ["Glow Facial Elixir", "$88", glowImage],
-  ["Calm Candle", "$42", candleImage],
-  ["Silk Sleep Mask", "$28", maskImage],
-];
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 const reviews = [
   [
     "Aura is a sanctuary. Every visit leaves me feeling lighter, clearer and deeply cared for.",

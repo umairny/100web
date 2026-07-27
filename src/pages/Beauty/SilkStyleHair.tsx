@@ -1,16 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-<<<<<<< HEAD
-import heroImage from "../../assets/images/beauty/silkstyle/hero.png";
-import interiorImage from "../../assets/images/beauty/silkstyle/interio.png";
-import galleryOne from "../../assets/images/beauty/silkstyle/gallary01.png";
-import galleryTwo from "../../assets/images/beauty/silkstyle/gallary02.png";
-import galleryThree from "../../assets/images/beauty/silkstyle/gallary03.png";
-import galleryFour from "../../assets/images/beauty/silkstyle/gallary04.png";
-import jessicaImage from "../../assets/images/beauty/silkstyle/jessica.png";
-import marcusImage from "../../assets/images/beauty/silkstyle/marcus.png";
-import glossImage from "../../assets/images/beauty/silkstyle/gloss.png";
-import repairImage from "../../assets/images/beauty/silkstyle/repair.png";
-=======
 import heroImage from "../../assets/optimized/beauty/silkstyle/hero.webp";
 import interiorImage from "../../assets/optimized/beauty/silkstyle/interio.webp";
 import galleryOne from "../../assets/optimized/beauty/silkstyle/gallary01.webp";
@@ -21,7 +9,6 @@ import jessicaImage from "../../assets/optimized/beauty/silkstyle/jessica.webp";
 import marcusImage from "../../assets/optimized/beauty/silkstyle/marcus.webp";
 import glossImage from "../../assets/optimized/beauty/silkstyle/gloss.webp";
 import repairImage from "../../assets/optimized/beauty/silkstyle/repair.webp";
->>>>>>> 355f61b90083ecaa00dead91704d4b68a69320c0
 
 const navItems = [
   "Home",
