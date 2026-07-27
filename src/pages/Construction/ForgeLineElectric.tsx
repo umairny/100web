@@ -311,7 +311,7 @@ export function ForgeLineElectric() {
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
           <div>
             <img
-              src="https://i.imgur.com/7mR8l4U.png" // Placeholder image for the complex map shown in original
+              src="https://i.imgur.com/7mR8l4U.webp" // Placeholder image for the complex map shown in original
               alt="Service Area Map"
               className="w-full rounded-lg shadow-md border border-slate-100"
             />

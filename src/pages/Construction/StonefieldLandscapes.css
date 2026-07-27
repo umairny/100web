@@ -484,7 +484,7 @@
 .sf-quote {
   background:
     linear-gradient(90deg, #a94722e8, #a94722ba),
-    url("/src/assets/images/Construction/stonefield/hero.png") center/cover;
+    url("/src/assets/optimized/Construction/stonefield/hero.webp") center/cover;
   color: #fff;
   text-align: center;
   padding: 45px;

@@ -571,7 +571,7 @@
 .pd-cta {
   background:
     linear-gradient(#183b2bd9, #183b2bd9),
-    url("/src/assets/images/Construction/primedeck/hero.png") center/cover;
+    url("/src/assets/optimized/Construction/primedeck/hero.webp") center/cover;
   color: #fff;
   text-align: center;
   padding: 55px;

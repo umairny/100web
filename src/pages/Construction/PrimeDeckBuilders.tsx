@@ -25,7 +25,7 @@ import {
 import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
 import "./PrimeDeckBuilders.css";
-const root = "/src/assets/images/Construction/primedeck";
+const root = "/src/assets/optimized/Construction/primedeck";
 const nav = [
   ["Services", "pd-services"],
   ["Our Work", "pd-work"],
@@ -38,29 +38,33 @@ const services = [
   [
     "Deck Building",
     "Custom decks designed for beauty, comfort, and durability.",
-    "deck.png",
+    "deck.webp",
   ],
   [
     "Pergolas",
     "Shade, style, and architectural charm built just for you.",
-    "pergola.png",
+    "pergola.webp",
   ],
-  ["Covered Patios", "Extend your living space—rain or shine.", "patio.png"],
+  ["Covered Patios", "Extend your living space—rain or shine.", "patio.webp"],
   [
     "Outdoor Kitchens",
     "Cook, entertain, and make memories outdoors.",
-    "patio.png",
+    "patio.webp",
   ],
-  ["Railings", "Safe, stylish railings in wood, metal, and cable.", "deck.png"],
+  [
+    "Railings",
+    "Safe, stylish railings in wood, metal, and cable.",
+    "deck.webp",
+  ],
   [
     "Resurfacing",
     "Give your deck new life with premium resurfacing.",
-    "deck.png",
+    "deck.webp",
   ],
   [
     "Backyard Upgrades",
     "From planters to privacy walls, we upgrade it all.",
-    "hero.png",
+    "hero.webp",
   ],
 ] as const;
 const stats = [
@@ -70,7 +74,7 @@ const stats = [
   [ShieldCheck, "5-Year", "Craftsmanship Warranty"],
   [CircleDollarSign, "Financing", "Options Available"],
 ] as const;
-const heroSlides = ["hero.png", "pergola.png", "patio.png", "deck.png"];
+const heroSlides = ["hero.webp", "pergola.webp", "patio.webp", "deck.webp"];
 const processSteps = [
   [
     "Consultation",
@@ -358,18 +362,20 @@ export function PrimeDeckBuilders() {
               View All Projects <ArrowRight />
             </a>
           </div>
-          {["deck.png", "pergola.png", "patio.png", "hero.png"].map((p, i) => (
-            <img
-              src={`${root}/${p}`}
-              alt={`PrimeDeck completed project ${i + 1}`}
-              key={p}
-            />
-          ))}
+          {["deck.webp", "pergola.webp", "patio.webp", "hero.webp"].map(
+            (p, i) => (
+              <img
+                src={`${root}/${p}`}
+                alt={`PrimeDeck completed project ${i + 1}`}
+                key={p}
+              />
+            ),
+          )}
         </div>
       </section>
       <section id="pd-about" className="pd-section pd-why">
         <div className="pd-wrap">
-          <img src={`${root}/pergola.png`} alt="Deck craftsmanship" />
+          <img src={`${root}/pergola.webp`} alt="Deck craftsmanship" />
           <div className="pd-why-grid">
             {[
               [

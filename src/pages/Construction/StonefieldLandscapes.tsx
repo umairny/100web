@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import "./StonefieldLandscapes.css";
-const root = "/src/assets/images/Construction/stonefield";
+const root = "/src/assets/optimized/Construction/stonefield";
 const nav = [
   ["Services", "sf-services"],
   ["Our Work", "sf-work"],
@@ -128,7 +128,7 @@ export function StonefieldLandscapes() {
         </div>
       </header>
       <section className="sf-hero">
-        <img src={`${root}/hero.png`} alt="Luxury stone fire pit landscape" />
+        <img src={`${root}/hero.webp`} alt="Luxury stone fire pit landscape" />
         <div className="sf-shade" />
         <div className="sf-wrap">
           <span>Live beautifully outside</span>
@@ -211,9 +211,9 @@ export function StonefieldLandscapes() {
           />
           <div className="sf-projects">
             {[
-              ["Elevated Backyard Retreat", "hero.png", "Carmel, IN"],
-              ["Poolside Oasis", "pool.png", "Zionsville, IN"],
-              ["Modern Front Entry", "entry.png", "Noblesville, IN"],
+              ["Elevated Backyard Retreat", "hero.webp", "Carmel, IN"],
+              ["Poolside Oasis", "pool.webp", "Zionsville, IN"],
+              ["Modern Front Entry", "entry.webp", "Noblesville, IN"],
             ].map(([a, p, c]) => (
               <article key={a}>
                 <img src={`${root}/${p}`} alt={a} />
@@ -255,7 +255,7 @@ export function StonefieldLandscapes() {
               <p>{b}</p>
             </article>
           ))}
-          <img src={`${root}/entry.png`} alt="Stonefield craftsmanship" />
+          <img src={`${root}/entry.webp`} alt="Stonefield craftsmanship" />
         </div>
       </section>
       <section id="sf-process" className="sf-section sf-process">
@@ -287,12 +287,12 @@ export function StonefieldLandscapes() {
           />
           <div>
             {[
-              ["Natural Stone", "entry.png"],
-              ["Porcelain Pavers", "pool.png"],
-              ["Flagstone", "hero.png"],
-              ["Wood Accents", "pool.png"],
-              ["Water Features", "pool.png"],
-              ["Custom Details", "hero.png"],
+              ["Natural Stone", "entry.webp"],
+              ["Porcelain Pavers", "pool.webp"],
+              ["Flagstone", "hero.webp"],
+              ["Wood Accents", "pool.webp"],
+              ["Water Features", "pool.webp"],
+              ["Custom Details", "hero.webp"],
             ].map(([a, p]) => (
               <article key={a}>
                 <img src={`${root}/${p}`} alt={a} />

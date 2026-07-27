@@ -173,7 +173,7 @@ export function BluePeakPlumbing() {
         <nav className="container mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img
-              src="https://i.imgur.com/i6nN6L7.png"
+              src="https://i.imgur.com/i6nN6L7.webp"
               alt="BluePeak Plumbing Logo"
               className="h-10"
             />{" "}
@@ -313,7 +313,7 @@ export function BluePeakPlumbing() {
           </div>
           <div className="lg:col-span-2">
             <img
-              src="https://i.imgur.com/6tB2R6K.png" // Placeholder for the map image
+              src="https://i.imgur.com/6tB2R6K.webp" // Placeholder for the map image
               alt="Service Area Map"
               className="w-full rounded-2xl aspect-video object-cover"
             />
@@ -396,7 +396,7 @@ export function BluePeakPlumbing() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <img
-                src="https://i.imgur.com/i6nN6L7.png"
+                src="https://i.imgur.com/i6nN6L7.webp"
                 alt="BluePeak Plumbing Logo"
                 className="h-10"
               />

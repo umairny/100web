@@ -26,7 +26,7 @@ import {
 import { useEffect, useState } from "react";
 import "./IronGateCommercial.css";
 
-const root = "/src/assets/images/Construction/irongate";
+const root = "/src/assets/optimized/Construction/irongate";
 const nav = [
   ["Services", "ig-services"],
   ["Projects", "ig-projects"],
@@ -56,17 +56,22 @@ const projects = [
   [
     "Ignite Technologies",
     "20,000 SF Office Buildout",
-    "hero.png",
+    "hero.webp",
     "Dallas, TX",
   ],
-  ["Luxe Salon Suites", "3,200 SF Retail Buildout", "retail.png", "Plano, TX"],
+  ["Luxe Salon Suites", "3,200 SF Retail Buildout", "retail.webp", "Plano, TX"],
   [
     "North Dallas Orthodontics",
     "4,500 SF Medical Buildout",
-    "medical.png",
+    "medical.webp",
     "Dallas, TX",
   ],
-  ["Summit Financial", "12,000 SF Office Buildout", "office.png", "Irving, TX"],
+  [
+    "Summit Financial",
+    "12,000 SF Office Buildout",
+    "office.webp",
+    "Irving, TX",
+  ],
 ] as const;
 const stats = [
   [Building2, "250+", "Projects Completed"],
@@ -155,7 +160,7 @@ export function IronGateCommercial() {
       </header>
       <section className="ig-hero">
         <img
-          src={`${root}/hero.png`}
+          src={`${root}/hero.webp`}
           alt="Modern commercial office reception"
         />
         <div className="ig-shade" />
@@ -455,7 +460,7 @@ export function IronGateCommercial() {
               ))}
             </div>
           </div>
-          <img src={`${root}/office.png`} alt="Dallas commercial office" />
+          <img src={`${root}/office.webp`} alt="Dallas commercial office" />
         </div>
       </section>
       <section className="ig-section ig-testimonials">
@@ -674,7 +679,7 @@ function Dashboard() {
             Safety<b>Zero Incidents</b>
           </span>
         </section>
-        <img src={`${root}/office.png`} alt="Project progress" />
+        <img src={`${root}/office.webp`} alt="Project progress" />
       </main>
     </div>
   );

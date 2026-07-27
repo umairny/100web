@@ -25,7 +25,7 @@ import {
 import { useEffect, useState } from "react";
 import "./ClearlineRemodeling.css";
 
-const img = "/src/assets/images/Construction/clearline";
+const img = "/src/assets/optimized/Construction/clearline";
 const links = [
   ["Services", "cl-services"],
   ["Our Work", "cl-work"],
@@ -37,37 +37,37 @@ const services = [
   [
     "Kitchen Remodeling",
     "Custom kitchens designed for the way you live.",
-    "hero.png",
+    "hero.webp",
     Home,
   ],
   [
     "Bathroom Remodeling",
     "Spa-like bathrooms with style and function.",
-    "bathroom.png",
+    "bathroom.webp",
     Bath,
   ],
   [
     "Custom Cabinetry",
     "Built-in storage that is beautiful and smart.",
-    "kitchen.png",
+    "kitchen.webp",
     Building2,
   ],
   [
     "Countertops & Tile",
     "Premium surfaces and expert installation.",
-    "planning.png",
+    "planning.webp",
     Sparkles,
   ],
   [
     "Shower & Tub Upgrades",
     "Modern upgrades for comfort and value.",
-    "bathroom.png",
+    "bathroom.webp",
     Bath,
   ],
   [
     "Whole-Home Updates",
     "Cohesive updates that elevate every room.",
-    "kitchen.png",
+    "kitchen.webp",
     Home,
   ],
 ] as const;
@@ -146,7 +146,7 @@ export function ClearlineRemodeling() {
         </div>
       </header>
       <section className="cl-hero">
-        <img src={`${img}/hero.png`} alt="Elegant white kitchen remodel" />
+        <img src={`${img}/hero.webp`} alt="Elegant white kitchen remodel" />
         <div className="cl-veil" />
         <div className="cl-wrap cl-hero-grid">
           <div>
@@ -205,7 +205,7 @@ export function ClearlineRemodeling() {
       </section>
       <section id="cl-about" className="cl-section cl-promise">
         <div className="cl-wrap">
-          <img src={`${img}/bathroom.png`} alt="Finished luxury bathroom" />
+          <img src={`${img}/bathroom.webp`} alt="Finished luxury bathroom" />
           <div>
             <span className="cl-over">Why Homeowners Choose Us</span>
             <h2>A Better Remodeling Experience</h2>
@@ -252,9 +252,9 @@ export function ClearlineRemodeling() {
           />
           <div className="cl-projects">
             {[
-              ["Modern Farmhouse Kitchen", "Bellevue, WA", "kitchen.png"],
-              ["Spa-Inspired Primary Bath", "Kirkland, WA", "bathroom.png"],
-              ["Timeless White Kitchen", "Redmond, WA", "hero.png"],
+              ["Modern Farmhouse Kitchen", "Bellevue, WA", "kitchen.webp"],
+              ["Spa-Inspired Primary Bath", "Kirkland, WA", "bathroom.webp"],
+              ["Timeless White Kitchen", "Redmond, WA", "hero.webp"],
             ].map(([a, b, p]) => (
               <article key={a}>
                 <img src={`${img}/${p}`} alt={a} />
@@ -324,7 +324,7 @@ export function ClearlineRemodeling() {
             ))}
           </div>
           <img
-            src={`${img}/planning.png`}
+            src={`${img}/planning.webp`}
             alt="Remodel planning documents and materials"
           />
           <div className="cl-phone-grid">
@@ -337,7 +337,7 @@ export function ClearlineRemodeling() {
               <article key={x}>
                 <div>
                   {i === 0 ? (
-                    <img src={`${img}/bathroom.png`} alt="" />
+                    <img src={`${img}/bathroom.webp`} alt="" />
                   ) : (
                     <FileText />
                   )}

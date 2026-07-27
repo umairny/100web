@@ -12,7 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-const r = "/src/assets/images/Construction/civicworks";
+const r = "/src/assets/optimized/Construction/civicworks";
 const civicNav = [
   ["Services", "services"],
   ["Projects", "projects"],
@@ -100,7 +100,7 @@ export function CivicWorksContractors() {
       </header>
       <section id="home" className="relative min-h-[720px] text-white">
         <img
-          src={`${r}/hero.png`}
+          src={`${r}/hero.webp`}
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#041421]/95 via-[#041421]/65 to-transparent" />
@@ -153,10 +153,10 @@ export function CivicWorksContractors() {
           </h2>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {[
-              ["Riverdale Boulevard", "road.png"],
-              ["Oak Creek Improvements", "bridge.png"],
-              ["North County WRF Upgrade", "water.png"],
-              ["County Bridge Rehab", "bridge.png"],
+              ["Riverdale Boulevard", "road.webp"],
+              ["Oak Creek Improvements", "bridge.webp"],
+              ["North County WRF Upgrade", "water.webp"],
+              ["County Bridge Rehab", "bridge.webp"],
             ].map(([a, p]) => (
               <article key={a}>
                 <img src={`${r}/${p}`} className="h-64 w-full object-cover" />

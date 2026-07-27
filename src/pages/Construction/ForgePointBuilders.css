@@ -608,7 +608,8 @@
 .fp-cta {
   background:
     linear-gradient(90deg, rgba(6, 22, 34, 0.98), rgba(6, 22, 34, 0.8)),
-    url("/src/assets/images/Construction/forgepoiont/image03.png") center/cover;
+    url("/src/assets/optimized/Construction/forgepoiont/image03.webp")
+      center/cover;
   color: #fff;
 }
 .fp-cta > .fp-wrap {

@@ -42,31 +42,31 @@ const services = [
   {
     title: "Custom Builds",
     text: "Ground-up homes and custom spaces designed around your vision.",
-    image: "custombuild.png",
+    image: "custombuild.webp",
     icon: Home,
   },
   {
     title: "Home Renovations",
     text: "Kitchens, baths, additions, and whole-home transformations.",
-    image: "homerenovations.png",
+    image: "homerenovations.webp",
     icon: HardHat,
   },
   {
     title: "Commercial Spaces",
     text: "Functional, beautiful spaces for businesses and tenants.",
-    image: "commercial.png",
+    image: "commercial.webp",
     icon: Building2,
   },
   {
     title: "Project Documentation",
     text: "Clear plans, schedules, and updates so you always know what's happening.",
-    image: "project.png",
+    image: "project.webp",
     icon: FileText,
   },
   {
     title: "Transparent Estimates",
     text: "Detailed, honest estimates with no surprises—ever.",
-    image: "estimates.png",
+    image: "estimates.webp",
     icon: Calculator,
   },
 ];
@@ -76,25 +76,25 @@ const projects = [
     type: "CUSTOM HOME",
     title: "Modern Farmhouse",
     place: "Austin, TX",
-    image: "image01.png",
+    image: "image01.webp",
   },
   {
     type: "RENOVATION",
     title: "Kitchen Transformation",
     place: "West Lake Hills, TX",
-    image: "image02.png",
+    image: "image02.webp",
   },
   {
     type: "COMMERCIAL",
     title: "Corporate Office Buildout",
     place: "Round Rock, TX",
-    image: "image03.png",
+    image: "image03.webp",
   },
   {
     type: "COMMERCIAL",
     title: "Retail Space Buildout",
     place: "Pflugerville, TX",
-    image: "image04.png",
+    image: "image04.webp",
   },
 ];
 

@@ -25,7 +25,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
 import "./SummitRoofCo.css";
 
-const root = "/src/assets/images/Construction/summitroof";
+const root = "/src/assets/optimized/Construction/summitroof";
 const nav = [
   ["Home", "sr-home"],
   ["Services", "sr-services"],
@@ -40,45 +40,45 @@ const services = [
   [
     "Roof Replacement",
     "High-quality materials installed by experts for lasting protection.",
-    "replacement.png",
+    "replacement.webp",
     Home,
   ],
   [
     "Roof Repair",
     "From minor fixes to major repairs, we get the job done right.",
-    "repair.png",
+    "repair.webp",
     Wrench,
   ],
   [
     "Storm Damage Repair",
     "Wind, hail, and storm damage repairs handled quickly and professionally.",
-    "stromrepair.png",
+    "stromrepair.webp",
     Hammer,
   ],
   [
     "Leak Detection",
     "Advanced detection to find leaks fast and prevent costly damage.",
-    "leakdetaction.png",
+    "leakdetaction.webp",
     Search,
   ],
   [
     "Insurance Claim Support",
     "We help document damage and work with your insurance company.",
-    "support.png",
+    "support.webp",
     FileCheck2,
   ],
   [
     "Roof Inspections",
     "Thorough inspections with photos and honest recommendations.",
-    "inspection.png",
+    "inspection.webp",
     ClipboardCheck,
   ],
 ] as const;
 
 const work = [
-  ["Asphalt Roof Replacement", "Hendersonville, TN", "roof.png"],
-  ["Storm Damage Repair", "Gallatin, TN", "stromrepair.png"],
-  ["Commercial TPO Installation", "Nashville, TN", "team.png"],
+  ["Asphalt Roof Replacement", "Hendersonville, TN", "roof.webp"],
+  ["Storm Damage Repair", "Gallatin, TN", "stromrepair.webp"],
+  ["Commercial TPO Installation", "Nashville, TN", "team.webp"],
 ] as const;
 
 const process = [
@@ -182,7 +182,7 @@ export function SummitRoofCo() {
 
       <section className="sr-hero">
         <img
-          src={`${root}/hero.png`}
+          src={`${root}/hero.webp`}
           alt="Professional roofer working on a shingle roof"
         />
         <div className="sr-overlay" />

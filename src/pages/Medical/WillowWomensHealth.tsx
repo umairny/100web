@@ -14,135 +14,181 @@ import {
   Sparkles,
   Stethoscope,
   Users,
-} from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
-import { Container, CTAButton, SubWebsiteNav } from '../../components'
-import { imageUrl } from '../../assets/images'
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { Container, CTAButton, SubWebsiteNav } from "../../components";
+import { imageUrl } from "../../assets/optimized";
 
 const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Visit Paths', href: '#visit-paths' },
-  { label: 'Resources', href: '#resources' },
-  { label: 'Providers', href: '#providers' },
-  { label: 'Telehealth', href: '#telehealth' },
-  { label: 'Reviews', href: '#reviews' },
-  { label: 'Contact', href: '#contact' },
-]
+  { label: "Services", href: "#services" },
+  { label: "Visit Paths", href: "#visit-paths" },
+  { label: "Resources", href: "#resources" },
+  { label: "Providers", href: "#providers" },
+  { label: "Telehealth", href: "#telehealth" },
+  { label: "Reviews", href: "#reviews" },
+  { label: "Contact", href: "#contact" },
+];
 
-const trustPoints = ['Supportive visit guidance', 'In-person and virtual options', 'Clear patient resources']
+const trustPoints = [
+  "Supportive visit guidance",
+  "In-person and virtual options",
+  "Clear patient resources",
+];
 
-const services: Array<{ title: string; text: string; icon: LucideIcon; tone: string }> = [
+const services: Array<{
+  title: string;
+  text: string;
+  icon: LucideIcon;
+  tone: string;
+}> = [
   {
-    title: 'Preventive Visits',
-    text: 'Routine care conversations, screening guidance, and practical next-step planning.',
+    title: "Preventive Visits",
+    text: "Routine care conversations, screening guidance, and practical next-step planning.",
     icon: CalendarCheck,
-    tone: 'bg-[#fff1f4]',
+    tone: "bg-[#fff1f4]",
   },
   {
-    title: 'Wellness Exams',
-    text: 'Supportive visits focused on questions, comfort, history, and ongoing care needs.',
+    title: "Wellness Exams",
+    text: "Supportive visits focused on questions, comfort, history, and ongoing care needs.",
     icon: Stethoscope,
-    tone: 'bg-[#f1f6ea]',
+    tone: "bg-[#f1f6ea]",
   },
   {
-    title: 'Reproductive Health Guidance',
-    text: 'Plain-language guidance for reproductive health questions, options, and follow-up planning.',
+    title: "Reproductive Health Guidance",
+    text: "Plain-language guidance for reproductive health questions, options, and follow-up planning.",
     icon: Flower2,
-    tone: 'bg-[#f5efff]',
+    tone: "bg-[#f5efff]",
   },
   {
-    title: 'Hormonal Health Conversations',
-    text: 'Thoughtful conversations about changes, symptoms, questions, and care planning.',
+    title: "Hormonal Health Conversations",
+    text: "Thoughtful conversations about changes, symptoms, questions, and care planning.",
     icon: HeartPulse,
-    tone: 'bg-[#fff7e8]',
+    tone: "bg-[#fff7e8]",
   },
   {
-    title: 'Pregnancy & Postpartum Support',
-    text: 'Supportive visit paths for pregnancy questions, postpartum needs, and practical resources.',
+    title: "Pregnancy & Postpartum Support",
+    text: "Supportive visit paths for pregnancy questions, postpartum needs, and practical resources.",
     icon: Baby,
-    tone: 'bg-[#f9edf1]',
+    tone: "bg-[#f9edf1]",
   },
   {
-    title: 'Follow-Up Care',
-    text: 'Review results, clarify next steps, and continue care conversations with confidence.',
+    title: "Follow-Up Care",
+    text: "Review results, clarify next steps, and continue care conversations with confidence.",
     icon: MessageCircle,
-    tone: 'bg-[#edf6f3]',
+    tone: "bg-[#edf6f3]",
   },
-]
+];
 
 const visitPaths = [
-  ['New patient visit', 'For patients beginning care and looking for clear first steps.'],
-  ['Preventive care', 'For routine wellness visits, screenings, and ongoing health planning.'],
-  ['Specific concern', 'For questions, symptoms, or changes you want to discuss with a provider.'],
-  ['Follow-up support', 'For reviewing results, next steps, care plans, or ongoing questions.'],
-]
+  [
+    "New patient visit",
+    "For patients beginning care and looking for clear first steps.",
+  ],
+  [
+    "Preventive care",
+    "For routine wellness visits, screenings, and ongoing health planning.",
+  ],
+  [
+    "Specific concern",
+    "For questions, symptoms, or changes you want to discuss with a provider.",
+  ],
+  [
+    "Follow-up support",
+    "For reviewing results, next steps, care plans, or ongoing questions.",
+  ],
+];
 
 const resources = [
-  'Preparing for your first appointment',
-  'Questions to ask your provider',
-  'Understanding follow-up steps',
-  'Telehealth visit preparation',
-  'Forms and practical details',
-  'When to call the clinic',
-]
+  "Preparing for your first appointment",
+  "Questions to ask your provider",
+  "Understanding follow-up steps",
+  "Telehealth visit preparation",
+  "Forms and practical details",
+  "When to call the clinic",
+];
 
 const providers = [
   {
-    name: 'Dr. Elena Brooks',
+    name: "Dr. Elena Brooks",
     role: "Women's Health Physician",
-    bio: 'Elena helps patients understand care options, prepare for appointments, and leave with practical next steps.',
+    bio: "Elena helps patients understand care options, prepare for appointments, and leave with practical next steps.",
   },
   {
-    name: 'Dr. Priya Shah',
-    role: 'Preventive Care',
-    bio: 'Priya focuses on preventive visits, patient questions, screening conversations, and ongoing care planning.',
+    name: "Dr. Priya Shah",
+    role: "Preventive Care",
+    bio: "Priya focuses on preventive visits, patient questions, screening conversations, and ongoing care planning.",
   },
   {
-    name: 'Maya Collins, NP',
-    role: 'Patient Support',
-    bio: 'Maya supports visits with warm guidance, resource review, and clear follow-up conversations.',
+    name: "Maya Collins, NP",
+    role: "Patient Support",
+    bio: "Maya supports visits with warm guidance, resource review, and clear follow-up conversations.",
   },
-]
+];
 
-const environmentPoints = ['Private visit rooms', 'Clear appointment guidance', 'Supportive resource access']
+const environmentPoints = [
+  "Private visit rooms",
+  "Clear appointment guidance",
+  "Supportive resource access",
+];
 
 const visitDetails = [
-  ['What to bring', 'Bring photo ID, payment details, current medications, and questions you want to discuss.'],
-  ['First visit details', 'Your first visit reviews health history, care goals, practical questions, and next steps.'],
-  ['Preventive visits', 'Preventive care may include wellness conversations, screenings, and ongoing health planning.'],
-  ['Follow-up appointments', 'Follow-ups can review results, care plans, questions, or provider recommendations.'],
-  ['Telehealth visits', 'Virtual visits can support follow-up conversations, resource review, and care-plan questions.'],
-  ['Payment and plan questions', 'Contact the clinic to review payment and plan details before your visit.'],
-]
+  [
+    "What to bring",
+    "Bring photo ID, payment details, current medications, and questions you want to discuss.",
+  ],
+  [
+    "First visit details",
+    "Your first visit reviews health history, care goals, practical questions, and next steps.",
+  ],
+  [
+    "Preventive visits",
+    "Preventive care may include wellness conversations, screenings, and ongoing health planning.",
+  ],
+  [
+    "Follow-up appointments",
+    "Follow-ups can review results, care plans, questions, or provider recommendations.",
+  ],
+  [
+    "Telehealth visits",
+    "Virtual visits can support follow-up conversations, resource review, and care-plan questions.",
+  ],
+  [
+    "Payment and plan questions",
+    "Contact the clinic to review payment and plan details before your visit.",
+  ],
+];
 
 const appointmentTypes = [
-  'New patient visit',
-  'Preventive visit',
-  'Specific concern',
-  'Telehealth follow-up',
-  'Resource question',
-]
+  "New patient visit",
+  "Preventive visit",
+  "Specific concern",
+  "Telehealth follow-up",
+  "Resource question",
+];
 
 const reviews = [
   {
-    name: 'Leah',
-    quote: 'The visit felt calm, and I understood what to expect before and after the appointment.',
+    name: "Leah",
+    quote:
+      "The visit felt calm, and I understood what to expect before and after the appointment.",
   },
   {
-    name: 'Camila',
-    quote: 'The resources were easy to follow, and the provider explained the next steps clearly.',
+    name: "Camila",
+    quote:
+      "The resources were easy to follow, and the provider explained the next steps clearly.",
   },
   {
-    name: 'Avery',
-    quote: 'I appreciated the warm tone and the way the appointment path was laid out.',
+    name: "Avery",
+    quote:
+      "I appreciated the warm tone and the way the appointment path was laid out.",
   },
-]
+];
 
 const SoftIcon = ({ icon: Icon }: { icon: LucideIcon }) => (
   <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[#8a5570] shadow-sm shadow-[#7a405a]/8 ring-1 ring-[#ead5dc]">
     <Icon aria-hidden="true" size={22} strokeWidth={1.9} />
   </span>
-)
+);
 
 export function WillowWomensHealth() {
   return (
@@ -172,38 +218,48 @@ export function WillowWomensHealth() {
             <div className="absolute -left-7 top-10 h-32 w-32 rounded-full bg-[#f4d7df]/80 blur-sm" />
             <div className="absolute -right-4 bottom-10 h-40 w-40 rounded-full bg-[#dcebd8]/90 blur-sm" />
             <img
-              src={imageUrl('medical/willow/hero.png')}
+              src={imageUrl("medical/willow/hero.webp")}
               alt="Warm women's health consultation"
               className="relative h-[34rem] w-full rounded-[3rem] object-cover shadow-2xl shadow-[#7a405a]/14 md:h-[40rem]"
             />
             <div className="absolute bottom-5 left-5 right-5 rounded-[2rem] border border-white/70 bg-white/90 p-5 shadow-2xl shadow-[#7a405a]/12 backdrop-blur md:right-auto md:w-80">
-              <p className="text-xs font-black uppercase text-[#a7793d]">Visit path</p>
+              <p className="text-xs font-black uppercase text-[#a7793d]">
+                Visit path
+              </p>
               <div className="mt-4 grid gap-3">
-                {['Choose care', 'Prepare', 'Meet provider', 'Follow up'].map((step, index) => (
-                  <div key={step} className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f9edf1] text-sm font-black text-[#7a405a]">
-                      {index + 1}
-                    </span>
-                    <span className="font-bold text-[#3b2632]">{step}</span>
-                  </div>
-                ))}
+                {["Choose care", "Prepare", "Meet provider", "Follow up"].map(
+                  (step, index) => (
+                    <div key={step} className="flex items-center gap-3">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f9edf1] text-sm font-black text-[#7a405a]">
+                        {index + 1}
+                      </span>
+                      <span className="font-bold text-[#3b2632]">{step}</span>
+                    </div>
+                  ),
+                )}
               </div>
             </div>
           </div>
 
           <div className="order-1 rounded-[2.5rem] border border-white/70 bg-white/58 p-6 shadow-2xl shadow-[#7a405a]/8 backdrop-blur md:p-8 lg:order-2 lg:text-right">
             <p className="inline-flex items-center gap-2 rounded-full border border-[#ead5dc] bg-white/70 px-4 py-2 text-sm font-black text-[#7a405a] shadow-sm shadow-[#7a405a]/5">
-              <Leaf aria-hidden="true" size={17} /> Supportive visit paths and patient resources
+              <Leaf aria-hidden="true" size={17} /> Supportive visit paths and
+              patient resources
             </p>
             <h1 className="mt-6 font-serif text-5xl leading-[1.02] tracking-normal text-[#3b2632] md:text-7xl">
               Supportive care with clearer visit paths.
             </h1>
             <p className="mt-6 text-lg leading-8 text-[#675b61] md:ml-auto md:max-w-2xl md:text-xl">
-              Willow Women's Health helps patients understand services, prepare for appointments, access helpful
-              resources, and feel supported through each step of care.
+              Willow Women's Health helps patients understand services, prepare
+              for appointments, access helpful resources, and feel supported
+              through each step of care.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:justify-end">
-              <CTAButton href="#contact" size="lg" className="rounded-full bg-[#7a405a] text-white hover:bg-[#6b8a70]">
+              <CTAButton
+                href="#contact"
+                size="lg"
+                className="rounded-full bg-[#7a405a] text-white hover:bg-[#6b8a70]"
+              >
                 Book a Visit
               </CTAButton>
               <CTAButton
@@ -218,8 +274,15 @@ export function WillowWomensHealth() {
             </div>
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               {trustPoints.map((point) => (
-                <div key={point} className="rounded-[1.5rem] border border-[#ead5dc] bg-white/70 p-4 text-sm font-bold text-[#675b61] shadow-sm shadow-[#7a405a]/5 backdrop-blur">
-                  <CheckCircle aria-hidden="true" className="mb-2 text-[#6b8a70] lg:ml-auto" size={18} />
+                <div
+                  key={point}
+                  className="rounded-[1.5rem] border border-[#ead5dc] bg-white/70 p-4 text-sm font-bold text-[#675b61] shadow-sm shadow-[#7a405a]/5 backdrop-blur"
+                >
+                  <CheckCircle
+                    aria-hidden="true"
+                    className="mb-2 text-[#6b8a70] lg:ml-auto"
+                    size={18}
+                  />
                   {point}
                 </div>
               ))}
@@ -233,22 +296,29 @@ export function WillowWomensHealth() {
         <Container>
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase text-[#7a405a]">Services</p>
+              <p className="text-sm font-black uppercase text-[#7a405a]">
+                Services
+              </p>
               <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-6xl">
                 Care for every stage and season.
               </h2>
             </div>
             <img
-              src={imageUrl('medical/willow/preventive-care.png')}
+              src={imageUrl("medical/willow/preventive-care.webp")}
               alt="Preventive women's health care conversation"
               className="h-60 w-full rounded-[2rem] object-cover shadow-xl shadow-[#7a405a]/10"
             />
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {services.map(({ title, text, icon, tone }) => (
-              <article key={title} className={`rounded-[2rem] border border-white p-6 shadow-sm shadow-[#7a405a]/6 ring-1 ring-[#ead5dc] ${tone}`}>
+              <article
+                key={title}
+                className={`rounded-[2rem] border border-white p-6 shadow-sm shadow-[#7a405a]/6 ring-1 ring-[#ead5dc] ${tone}`}
+              >
                 <SoftIcon icon={icon} />
-                <h3 className="mt-6 text-2xl font-black text-[#3b2632]">{title}</h3>
+                <h3 className="mt-6 text-2xl font-black text-[#3b2632]">
+                  {title}
+                </h3>
                 <p className="mt-3 text-sm leading-7 text-[#675b61]">{text}</p>
               </article>
             ))}
@@ -256,20 +326,26 @@ export function WillowWomensHealth() {
         </Container>
       </section>
 
-      <section id="visit-paths" className="relative overflow-hidden bg-[#f9edf1] py-20 md:py-28">
+      <section
+        id="visit-paths"
+        className="relative overflow-hidden bg-[#f9edf1] py-20 md:py-28"
+      >
         <div className="absolute inset-x-0 top-0 h-16 bg-[#fff8f2] [clip-path:ellipse(72%_76%_at_50%_0%)]" />
         <Container>
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <p className="text-sm font-black uppercase text-[#7a405a]">Visit paths</p>
+              <p className="text-sm font-black uppercase text-[#7a405a]">
+                Visit paths
+              </p>
               <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-6xl">
                 Know where to start.
               </h2>
               <p className="mt-5 text-lg leading-8 text-[#675b61]">
-                A soft visit-path system helps patients choose the right entry point before booking.
+                A soft visit-path system helps patients choose the right entry
+                point before booking.
               </p>
               <img
-                src={imageUrl('medical/willow/visit-paths.png')}
+                src={imageUrl("medical/willow/visit-paths.webp")}
                 alt="Women's health visit path planning"
                 className="mt-8 h-80 w-full rounded-[2.5rem] object-cover shadow-xl shadow-[#7a405a]/10"
               />
@@ -277,11 +353,20 @@ export function WillowWomensHealth() {
             <div className="relative grid gap-4">
               <div className="absolute left-8 top-8 hidden h-[calc(100%-4rem)] w-1 rounded-full bg-[#e7c0cc] md:block" />
               {visitPaths.map(([title, text], index) => (
-                <article key={title} className="relative rounded-[2rem] border border-white bg-white/76 p-6 shadow-sm shadow-[#7a405a]/6 backdrop-blur">
+                <article
+                  key={title}
+                  className="relative rounded-[2rem] border border-white bg-white/76 p-6 shadow-sm shadow-[#7a405a]/6 backdrop-blur"
+                >
                   <span className="absolute -left-1 top-6 hidden h-5 w-5 rounded-full border-4 border-[#f9edf1] bg-[#7a405a] md:block" />
-                  <p className="text-xs font-black uppercase text-[#a7793d]">Path {index + 1}</p>
-                  <h3 className="mt-2 text-2xl font-black text-[#3b2632]">{title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#675b61]">{text}</p>
+                  <p className="text-xs font-black uppercase text-[#a7793d]">
+                    Path {index + 1}
+                  </p>
+                  <h3 className="mt-2 text-2xl font-black text-[#3b2632]">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-[#675b61]">
+                    {text}
+                  </p>
                 </article>
               ))}
             </div>
@@ -293,24 +378,36 @@ export function WillowWomensHealth() {
         <Container>
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase text-[#7a405a]">Patient resources</p>
+              <p className="text-sm font-black uppercase text-[#7a405a]">
+                Patient resources
+              </p>
               <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
                 Helpful resources before and after your visit.
               </h2>
             </div>
             <img
-              src={imageUrl('medical/willow/patient-resources.png')}
+              src={imageUrl("medical/willow/patient-resources.webp")}
               alt="Patient resources and appointment notes"
               className="h-56 w-full rounded-[2rem] object-cover shadow-xl shadow-[#7a405a]/10"
             />
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {resources.map((resource, index) => (
-              <article key={resource} className="rounded-[1.75rem] border border-[#ead5dc] bg-white p-6 shadow-sm shadow-[#7a405a]/5">
-                <FileText aria-hidden="true" className="text-[#7a405a]" size={24} />
-                <h3 className="mt-5 text-xl font-black text-[#3b2632]">{resource}</h3>
+              <article
+                key={resource}
+                className="rounded-[1.75rem] border border-[#ead5dc] bg-white p-6 shadow-sm shadow-[#7a405a]/5"
+              >
+                <FileText
+                  aria-hidden="true"
+                  className="text-[#7a405a]"
+                  size={24}
+                />
+                <h3 className="mt-5 text-xl font-black text-[#3b2632]">
+                  {resource}
+                </h3>
                 <p className="mt-3 text-sm leading-7 text-[#675b61]">
-                  Resource {index + 1} keeps appointment preparation, questions, and follow-up details easy to scan.
+                  Resource {index + 1} keeps appointment preparation, questions,
+                  and follow-up details easy to scan.
                 </p>
               </article>
             ))}
@@ -322,28 +419,41 @@ export function WillowWomensHealth() {
         <Container>
           <div className="mb-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase text-[#6b8a70]">Providers</p>
+              <p className="text-sm font-black uppercase text-[#6b8a70]">
+                Providers
+              </p>
               <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-6xl">
                 A team that listens and explains clearly.
               </h2>
             </div>
             <p className="max-w-3xl text-lg leading-8 text-[#675b61]">
-              Provider cards stay warm and credible, with simple bios focused on listening, guidance, and practical
-              visit support.
+              Provider cards stay warm and credible, with simple bios focused on
+              listening, guidance, and practical visit support.
             </p>
           </div>
           <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
             <img
-              src={imageUrl('medical/willow/team.png')}
+              src={imageUrl("medical/willow/team.webp")}
               alt="Willow Women's Health care team"
               className="h-full min-h-[32rem] w-full rounded-[2.5rem] object-cover shadow-xl shadow-[#7a405a]/10"
             />
             <div className="grid gap-4">
               {providers.map(({ name, role, bio }) => (
-                <article key={name} className="rounded-[1.75rem] border border-[#d8e4d4] bg-white/82 p-6 shadow-sm shadow-[#6b8a70]/6">
-                  <Users aria-hidden="true" className="text-[#6b8a70]" size={24} />
-                  <h3 className="mt-5 text-2xl font-black text-[#3b2632]">{name}</h3>
-                  <p className="mt-1 text-sm font-black text-[#7a405a]">{role}</p>
+                <article
+                  key={name}
+                  className="rounded-[1.75rem] border border-[#d8e4d4] bg-white/82 p-6 shadow-sm shadow-[#6b8a70]/6"
+                >
+                  <Users
+                    aria-hidden="true"
+                    className="text-[#6b8a70]"
+                    size={24}
+                  />
+                  <h3 className="mt-5 text-2xl font-black text-[#3b2632]">
+                    {name}
+                  </h3>
+                  <p className="mt-1 text-sm font-black text-[#7a405a]">
+                    {role}
+                  </p>
                   <p className="mt-4 text-sm leading-7 text-[#675b61]">{bio}</p>
                 </article>
               ))}
@@ -355,22 +465,32 @@ export function WillowWomensHealth() {
       <section className="bg-[#fff8f2] py-20 md:py-28">
         <Container className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <img
-            src={imageUrl('medical/willow/room.png')}
+            src={imageUrl("medical/willow/room.webp")}
             alt="Warm women's health clinic room"
             className="h-[34rem] w-full rounded-[2.5rem] object-cover shadow-xl shadow-[#7a405a]/10"
           />
           <div>
-            <p className="text-sm font-black uppercase text-[#7a405a]">Clinic environment</p>
+            <p className="text-sm font-black uppercase text-[#7a405a]">
+              Clinic environment
+            </p>
             <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
               A calm space designed around comfort.
             </h2>
             <p className="mt-5 text-lg leading-8 text-[#675b61]">
-              A warm, private clinic environment for conversations, checkups, care planning, and follow-up support.
+              A warm, private clinic environment for conversations, checkups,
+              care planning, and follow-up support.
             </p>
             <div className="mt-8 grid gap-3">
               {environmentPoints.map((point) => (
-                <div key={point} className="flex items-center gap-3 rounded-2xl border border-[#ead5dc] bg-white p-4">
-                  <CheckCircle aria-hidden="true" className="text-[#6b8a70]" size={20} />
+                <div
+                  key={point}
+                  className="flex items-center gap-3 rounded-2xl border border-[#ead5dc] bg-white p-4"
+                >
+                  <CheckCircle
+                    aria-hidden="true"
+                    className="text-[#6b8a70]"
+                    size={20}
+                  />
                   <span className="font-black text-[#3b2632]">{point}</span>
                 </div>
               ))}
@@ -379,27 +499,41 @@ export function WillowWomensHealth() {
         </Container>
       </section>
 
-      <section id="telehealth" className="bg-[#3b2632] py-20 text-white md:py-28">
+      <section
+        id="telehealth"
+        className="bg-[#3b2632] py-20 text-white md:py-28"
+      >
         <Container className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
           <div>
-            <p className="text-sm font-black uppercase text-[#eec6d2]">Telehealth</p>
+            <p className="text-sm font-black uppercase text-[#eec6d2]">
+              Telehealth
+            </p>
             <h2 className="mt-3 font-serif text-4xl leading-tight md:text-6xl">
               Support that can start from home.
             </h2>
             <p className="mt-5 text-lg leading-8 text-white/72">
-              Virtual appointment options can support follow-up conversations, questions about care plans, resource
-              review, and convenient next-step guidance.
+              Virtual appointment options can support follow-up conversations,
+              questions about care plans, resource review, and convenient
+              next-step guidance.
             </p>
           </div>
           <div className="rounded-[2.5rem] border border-white/14 bg-white/10 p-4 shadow-2xl shadow-black/18">
             <img
-              src={imageUrl('medical/willow/telehealth-support.png')}
+              src={imageUrl("medical/willow/telehealth-support.webp")}
               alt="Telehealth support for women's health"
               className="h-80 w-full rounded-[2rem] object-cover"
             />
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {['Virtual appointment options', 'Follow-up conversations', 'Questions about care plans', 'Resource review'].map((item) => (
-                <div key={item} className="rounded-2xl bg-white/10 p-4 text-sm font-bold text-white/82 ring-1 ring-white/12">
+              {[
+                "Virtual appointment options",
+                "Follow-up conversations",
+                "Questions about care plans",
+                "Resource review",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl bg-white/10 p-4 text-sm font-bold text-white/82 ring-1 ring-white/12"
+                >
                   {item}
                 </div>
               ))}
@@ -411,16 +545,27 @@ export function WillowWomensHealth() {
       <section className="bg-[#fffaf5] py-20 md:py-28">
         <Container>
           <div className="mb-12 max-w-3xl">
-            <p className="text-sm font-black uppercase text-[#7a405a]">Visit details</p>
+            <p className="text-sm font-black uppercase text-[#7a405a]">
+              Visit details
+            </p>
             <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
               Practical details before your visit.
             </h2>
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {visitDetails.map(([title, text]) => (
-              <article key={title} className="rounded-[1.75rem] border border-[#ead5dc] bg-white p-6">
-                <Sparkles aria-hidden="true" className="text-[#7a405a]" size={22} />
-                <h3 className="mt-5 text-xl font-black text-[#3b2632]">{title}</h3>
+              <article
+                key={title}
+                className="rounded-[1.75rem] border border-[#ead5dc] bg-white p-6"
+              >
+                <Sparkles
+                  aria-hidden="true"
+                  className="text-[#7a405a]"
+                  size={22}
+                />
+                <h3 className="mt-5 text-xl font-black text-[#3b2632]">
+                  {title}
+                </h3>
                 <p className="mt-3 text-sm leading-7 text-[#675b61]">{text}</p>
               </article>
             ))}
@@ -431,25 +576,38 @@ export function WillowWomensHealth() {
       <section className="bg-[#f9edf1] py-20 md:py-28">
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="text-sm font-black uppercase text-[#7a405a]">Appointment access</p>
+            <p className="text-sm font-black uppercase text-[#7a405a]">
+              Appointment access
+            </p>
             <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
               Choose the visit path that fits your needs.
             </h2>
             <img
-              src={imageUrl('medical/willow/appointment.png')}
+              src={imageUrl("medical/willow/appointment.webp")}
               alt="Willow appointment access"
               className="mt-7 h-56 w-full rounded-[2rem] object-cover shadow-xl shadow-[#7a405a]/10"
             />
             <div className="mt-8">
-              <CTAButton href="#contact" size="lg" className="rounded-full bg-[#7a405a] text-white hover:bg-[#6b8a70]">
+              <CTAButton
+                href="#contact"
+                size="lg"
+                className="rounded-full bg-[#7a405a] text-white hover:bg-[#6b8a70]"
+              >
                 Book a Visit
               </CTAButton>
             </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {appointmentTypes.map((type) => (
-              <div key={type} className="flex items-center gap-3 rounded-2xl border border-[#ead5dc] bg-white/80 p-4">
-                <CalendarCheck aria-hidden="true" className="text-[#7a405a]" size={20} />
+              <div
+                key={type}
+                className="flex items-center gap-3 rounded-2xl border border-[#ead5dc] bg-white/80 p-4"
+              >
+                <CalendarCheck
+                  aria-hidden="true"
+                  className="text-[#7a405a]"
+                  size={20}
+                />
                 <span className="font-bold text-[#3b2632]">{type}</span>
               </div>
             ))}
@@ -461,48 +619,68 @@ export function WillowWomensHealth() {
         <Container>
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase text-[#7a405a]">Reviews</p>
+              <p className="text-sm font-black uppercase text-[#7a405a]">
+                Reviews
+              </p>
               <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
                 Patients notice when care feels clear and prepared.
               </h2>
             </div>
             <img
-              src={imageUrl('medical/willow/supportive-consultation.png')}
+              src={imageUrl("medical/willow/supportive-consultation.webp")}
               alt="Supportive women's health consultation"
               className="h-56 w-full rounded-[2rem] object-cover shadow-xl shadow-[#7a405a]/10"
             />
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {reviews.map(({ name, quote }) => (
-              <blockquote key={name} className="rounded-[2rem] border border-[#ead5dc] bg-white p-7 shadow-sm shadow-[#7a405a]/5">
-                <p className="font-serif text-5xl leading-none text-[#c77d96]">&ldquo;</p>
-                <p className="mt-2 text-lg font-bold leading-8 text-[#3b2632]">{quote}</p>
-                <footer className="mt-6 text-sm font-black uppercase text-[#6b8a70]">{name}</footer>
+              <blockquote
+                key={name}
+                className="rounded-[2rem] border border-[#ead5dc] bg-white p-7 shadow-sm shadow-[#7a405a]/5"
+              >
+                <p className="font-serif text-5xl leading-none text-[#c77d96]">
+                  &ldquo;
+                </p>
+                <p className="mt-2 text-lg font-bold leading-8 text-[#3b2632]">
+                  {quote}
+                </p>
+                <footer className="mt-6 text-sm font-black uppercase text-[#6b8a70]">
+                  {name}
+                </footer>
               </blockquote>
             ))}
           </div>
         </Container>
       </section>
 
-      <section id="contact" className="relative isolate overflow-hidden bg-[#3b2632] py-20 text-white md:py-28">
+      <section
+        id="contact"
+        className="relative isolate overflow-hidden bg-[#3b2632] py-20 text-white md:py-28"
+      >
         <img
-          src={imageUrl('medical/willow/cta.png')}
+          src={imageUrl("medical/willow/cta.webp")}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 -z-20 h-full w-full object-cover opacity-30"
         />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(59,38,50,0.96),rgba(59,38,50,0.7))]" />
         <Container className="max-w-5xl">
-          <p className="text-sm font-black uppercase text-[#eec6d2]">Start here</p>
+          <p className="text-sm font-black uppercase text-[#eec6d2]">
+            Start here
+          </p>
           <h2 className="mt-3 max-w-4xl font-serif text-4xl leading-tight md:text-6xl">
             Start with care that helps you feel prepared.
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-white/74">
-            Book a visit with Willow Women's Health and get supportive guidance, practical resources, and clearer next
-            steps for your care.
+            Book a visit with Willow Women's Health and get supportive guidance,
+            practical resources, and clearer next steps for your care.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CTAButton href="mailto:hello@willowwomens.example" size="lg" className="rounded-full bg-[#eec6d2] text-[#3b2632] hover:bg-white">
+            <CTAButton
+              href="mailto:hello@willowwomens.example"
+              size="lg"
+              className="rounded-full bg-[#eec6d2] text-[#3b2632] hover:bg-white"
+            >
               Book a Visit
             </CTAButton>
             <CTAButton
@@ -516,7 +694,8 @@ export function WillowWomensHealth() {
             </CTAButton>
           </div>
           <p className="mt-6 text-sm leading-6 text-white/70">
-            If you are experiencing a life-threatening emergency, call local emergency services immediately.
+            If you are experiencing a life-threatening emergency, call local
+            emergency services immediately.
           </p>
         </Container>
       </section>
@@ -527,30 +706,44 @@ export function WillowWomensHealth() {
             <div>
               <h2 className="font-serif text-3xl">Willow Women's Health</h2>
               <p className="mt-3 max-w-md leading-7 text-white/68">
-                Supportive visit paths and patient resources for patient-first women's care.
+                Supportive visit paths and patient resources for patient-first
+                women's care.
               </p>
               <p className="mt-5 text-sm leading-6 text-white/58">
-                If you are experiencing a life-threatening emergency, call local emergency services immediately.
+                If you are experiencing a life-threatening emergency, call local
+                emergency services immediately.
               </p>
             </div>
-            <nav aria-label="Footer navigation" className="grid gap-2 text-sm font-bold text-white/72">
-              {['Services', 'Visit Paths', 'Resources', 'Providers', 'Telehealth', 'Reviews', 'Contact', 'Privacy'].map((item) => (
+            <nav
+              aria-label="Footer navigation"
+              className="grid gap-2 text-sm font-bold text-white/72"
+            >
+              {[
+                "Services",
+                "Visit Paths",
+                "Resources",
+                "Providers",
+                "Telehealth",
+                "Reviews",
+                "Contact",
+                "Privacy",
+              ].map((item) => (
                 <a
                   key={item}
                   href={
-                    item === 'Services'
-                      ? '#services'
-                      : item === 'Visit Paths'
-                        ? '#visit-paths'
-                        : item === 'Resources'
-                          ? '#resources'
-                          : item === 'Providers'
-                            ? '#providers'
-                            : item === 'Telehealth'
-                              ? '#telehealth'
-                              : item === 'Reviews'
-                                ? '#reviews'
-                                : '#contact'
+                    item === "Services"
+                      ? "#services"
+                      : item === "Visit Paths"
+                        ? "#visit-paths"
+                        : item === "Resources"
+                          ? "#resources"
+                          : item === "Providers"
+                            ? "#providers"
+                            : item === "Telehealth"
+                              ? "#telehealth"
+                              : item === "Reviews"
+                                ? "#reviews"
+                                : "#contact"
                   }
                   className="hover:text-white"
                 >
@@ -560,25 +753,43 @@ export function WillowWomensHealth() {
             </nav>
             <div className="grid gap-3 text-sm text-white/72">
               <p className="flex gap-3">
-                <MapPin aria-hidden="true" className="mt-0.5 shrink-0 text-[#eec6d2]" size={18} />
+                <MapPin
+                  aria-hidden="true"
+                  className="mt-0.5 shrink-0 text-[#eec6d2]"
+                  size={18}
+                />
                 <span>450 Willow Garden Avenue, Suite 180</span>
               </p>
               <p className="flex gap-3">
-                <Clock aria-hidden="true" className="mt-0.5 shrink-0 text-[#eec6d2]" size={18} />
+                <Clock
+                  aria-hidden="true"
+                  className="mt-0.5 shrink-0 text-[#eec6d2]"
+                  size={18}
+                />
                 <span>Monday-Friday, 8 AM-6 PM</span>
               </p>
               <p className="flex gap-3">
-                <CalendarCheck aria-hidden="true" className="mt-0.5 shrink-0 text-[#eec6d2]" size={18} />
+                <CalendarCheck
+                  aria-hidden="true"
+                  className="mt-0.5 shrink-0 text-[#eec6d2]"
+                  size={18}
+                />
                 <span>Saturday, 9 AM-1 PM</span>
               </p>
               <p className="flex gap-3">
-                <Phone aria-hidden="true" className="mt-0.5 shrink-0 text-[#eec6d2]" size={18} />
-                <a href="tel:5550154289" className="hover:text-white">(555) 015-4289</a>
+                <Phone
+                  aria-hidden="true"
+                  className="mt-0.5 shrink-0 text-[#eec6d2]"
+                  size={18}
+                />
+                <a href="tel:5550154289" className="hover:text-white">
+                  (555) 015-4289
+                </a>
               </p>
             </div>
           </div>
         </Container>
       </footer>
     </main>
-  )
+  );
 }

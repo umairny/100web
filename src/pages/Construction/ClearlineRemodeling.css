@@ -600,7 +600,8 @@
 .cl-cta {
   background:
     linear-gradient(90deg, rgba(85, 71, 55, 0.75), rgba(85, 71, 55, 0.45)),
-    url("/src/assets/images/Construction/clearline/bathroom.png") center/cover;
+    url("/src/assets/optimized/Construction/clearline/bathroom.webp")
+      center/cover;
   color: #fff;
   text-align: center;
   padding: 65px 0;

@@ -681,7 +681,7 @@
 .sr-cta {
   background:
     linear-gradient(90deg, rgba(4, 26, 48, 0.98), rgba(4, 26, 48, 0.88)),
-    url("/src/assets/images/Construction/summitroof/roof.png") center/cover;
+    url("/src/assets/optimized/Construction/summitroof/roof.webp") center/cover;
   color: #fff;
 }
 .sr-cta > .sr-wrap {

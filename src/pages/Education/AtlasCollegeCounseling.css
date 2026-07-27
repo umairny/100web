@@ -594,7 +594,7 @@
 .counselor-avatar {
   height: 95px;
   border-radius: 5px;
-  background-image: url("../../assets/images/education/atlascollege/atlas-counselors.png");
+  background-image: url("../../assets/optimized/education/atlascollege/atlas-counselors.webp");
   background-size: 400% 100%;
   background-position: 0 center;
   color: transparent;
@@ -761,7 +761,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-image: url("../../assets/images/education/atlascollege/atlas-counselors.png");
+  background-image: url("../../assets/optimized/education/atlascollege/atlas-counselors.webp");
   background-size: 400%;
   background-position: 0 center;
 }

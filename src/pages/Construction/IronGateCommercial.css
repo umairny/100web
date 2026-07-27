@@ -593,7 +593,7 @@
 .ig-cta {
   background:
     linear-gradient(90deg, #061f33ec, #061f33c9),
-    url("/src/assets/images/Construction/irongate/office.png") center/cover;
+    url("/src/assets/optimized/Construction/irongate/office.webp") center/cover;
   color: #fff;
 }
 .ig-cta > .ig-wrap {

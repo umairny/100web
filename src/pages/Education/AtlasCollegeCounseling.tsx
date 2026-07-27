@@ -20,8 +20,8 @@ import {
   Users,
   X,
 } from "lucide-react";
-import heroImage from "../../assets/images/education/atlascollege/atlas-hero.png";
-import counselorsImage from "../../assets/images/education/atlascollege/atlas-counselors.png";
+import heroImage from "../../assets/optimized/education/atlascollege/atlas-hero.webp";
+import counselorsImage from "../../assets/optimized/education/atlascollege/atlas-counselors.webp";
 import "./AtlasCollegeCounseling.css";
 
 const nav = [

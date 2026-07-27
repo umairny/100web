@@ -1,6 +1,6 @@
-import brightBridgeImage from "../../assets/images/education/brightbridge.png";
-import atlasCollegeImage from "../../assets/images/education/atlascollege.png";
-import codeNestImage from "../../assets/images/education/codenest.png";
+import brightBridgeImage from "../../assets/optimized/education/brightbridge.webp";
+import atlasCollegeImage from "../../assets/optimized/education/atlascollege.webp";
+import codeNestImage from "../../assets/optimized/education/codenest.webp";
 import { imageUrl } from "../../assets/optimized";
 import type { WebsiteDesign } from "../websites";
 export const educationWebsites: WebsiteDesign[] = [
@@ -80,7 +80,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "Exam preparation homepage with course offerings, study plans, tutor trust, and enrollment conversion",
     slug: "exam-edge-prep",
-    image: imageUrl("home/education-preview.png"),
+    image: imageUrl("home/education-preview.webp"),
     colors: {
       primary: "#1a202c",
       secondary: "#edf2f7",
@@ -97,7 +97,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "Language learning homepage with course offerings, immersive experiences, tutor trust, and enrollment conversion",
     slug: "fluentpath-languages",
-    image: imageUrl("home/education-preview.png"),
+    image: imageUrl("home/education-preview.webp"),
     colors: {
       primary: "#2c5282",
       secondary: "#bee3f8",

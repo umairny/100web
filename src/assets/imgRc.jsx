@@ -7,7 +7,7 @@ const outputDir = "./optimized";
 
 const maxWidth = 1920;
 const quality = 82;
-const allowed = [".jpg", ".jpeg", ".png", ".webp"];
+const allowed = [".jpg", ".jpeg", ".webp", ".webp"];
 
 function getAllFiles(dir) {
   let results = [];

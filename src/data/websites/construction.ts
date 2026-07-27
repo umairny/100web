@@ -26,7 +26,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "Roofing contractor homepage with fast estimates, service proof, credentials, process clarity, and local coverage",
     slug: "summit-roof-co",
-    image: imageUrl("Construction/summitroof/hero.png"),
+    image: imageUrl("Construction/summitroof/hero.webp"),
     colors: {
       primary: "#062341",
       secondary: "#f4f7fb",
@@ -43,7 +43,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "Upscale remodeling homepage with project proof, transparent process, service clarity, and estimate conversion",
     slug: "clearline-remodeling",
-    image: imageUrl("Construction/clearline/hero.png"),
+    image: imageUrl("Construction/clearline/hero.webp"),
     colors: {
       primary: "#5d695b",
       secondary: "#f6f3ed",
@@ -60,7 +60,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "Commercial contractor homepage with tenant improvement services, project proof, credentials, process, and quote conversion",
     slug: "irongate-commercial",
-    image: imageUrl("Construction/irongate/hero.png"),
+    image: imageUrl("Construction/irongate/hero.webp"),
     colors: {
       primary: "#06253d",
       secondary: "#f3f5f6",
@@ -77,7 +77,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "Outdoor living contractor homepage with decks, pergolas, materials, project proof, process, and quote conversion",
     slug: "primedeck-builders",
-    image: imageUrl("Construction/primedeck/hero.png"),
+    image: imageUrl("Construction/primedeck/hero.webp"),
     colors: {
       primary: "#123c27",
       secondary: "#f7f2e8",
@@ -94,7 +94,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "Luxury landscape contractor homepage with hardscape services, outdoor living projects, materials, process, and quote conversion",
     slug: "stonefield-landscapes",
-    image: imageUrl("Construction/stonefield/hero.png"),
+    image: imageUrl("Construction/stonefield/hero.webp"),
     colors: {
       primary: "#55583a",
       secondary: "#f7f3e9",
@@ -111,7 +111,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "Municipal infrastructure contractor homepage with public-project proof, qualifications, safety, and service coverage",
     slug: "civicworks-contractors",
-    image: imageUrl("Construction/civicworks/hero.png"),
+    image: imageUrl("Construction/civicworks/hero.webp"),
     colors: {
       primary: "#071d31",
       secondary: "#f4f5f6",
@@ -128,7 +128,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "Electrical contractor homepage with service clarity, project proof, process steps, and estimate conversion",
     slug: "forgeline-electric",
-    image: imageUrl("Construction/forgeline/hero.png"),
+    image: imageUrl("Construction/forgeline/hero.webp"),
     colors: {
       primary: "#1a1a1a",
       secondary: "#f0f0f0",
@@ -145,7 +145,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "Concrete contractor homepage with service clarity, project proof, process steps, and estimate conversion",
     slug: "terraform-concrete",
-    image: imageUrl("Construction/terraform/hero.png"),
+    image: imageUrl("Construction/terraform/hero.webp"),
     colors: {
       primary: "#2c3e50",
       secondary: "#ecf0f1",
@@ -162,7 +162,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "Plumbing contractor homepage with service clarity, project proof, process steps, and estimate conversion",
     slug: "bluepeak-plumbing",
-    image: imageUrl("Construction/bluepeak/hero.png"),
+    image: imageUrl("Construction/bluepeak/hero.webp"),
     colors: {
       primary: "#1e3a5f",
       secondary: "#f0f4f8",
