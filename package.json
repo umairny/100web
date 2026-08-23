@@ -6,7 +6,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint"
+    "lint": "eslint",
+    "type-check": "tsc --noEmit",
+    "optimize": "node scripts/optimize-images.cjs"
   },
   "dependencies": {
     "lucide-react": "^1.27.0",

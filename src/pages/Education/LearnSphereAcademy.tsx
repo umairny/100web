@@ -1,817 +1,671 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
-  ArrowRight,
-  BarChart3,
-  BookOpen,
-  BriefcaseBusiness,
-  CalendarDays,
-  Check,
-  CheckCircle2,
-  ChevronDown,
-  Clock3,
-  Code2,
-  FolderOpen,
   GraduationCap,
-  LayoutDashboard,
-  Menu,
-  MessageCircle,
-  Play,
-  Star,
-  Trophy,
+  BookOpen,
   Users,
+  Award,
+  Clock,
+  Calendar,
+  CheckCircle2,
+  Menu,
   X,
+  ArrowRight,
+  Sparkles,
+  ChevronDown,
+  Briefcase,
+  TrendingUp,
+  MessageSquare,
+  Play,
+  FileCheck,
+  Zap,
 } from "lucide-react";
 import "./LearnSphereAcademy.css";
+
+// WebP Image Imports
+import heroImage from "../../assets/optimized/education/learnsphere/hero.webp";
 import uiuxImage from "../../assets/optimized/education/learnsphere/learnsphere-uiux.webp";
 import frontendImage from "../../assets/optimized/education/learnsphere/learnsphere-frontend.webp";
 import analyticsImage from "../../assets/optimized/education/learnsphere/learnsphere-analytics.webp";
 import productImage from "../../assets/optimized/education/learnsphere/learnsphere-product.webp";
+import mentorImage from "../../assets/optimized/education/learnsphere/mentor.webp";
 
-const programs = [
+const navItems = [
+  { id: "ls-programs", label: "Featured Programs" },
+  { id: "ls-curriculum", label: "Curriculum Path" },
+  { id: "ls-mentors", label: "Mentors & Office Hours" },
+  { id: "ls-outcomes", label: "Career Outcomes" },
+  { id: "ls-pricing", label: "Tuition & Plans" },
+  { id: "ls-faq", label: "FAQ" },
+];
+
+const featuredPrograms = [
   {
-    title: "UI/UX Design",
-    tone: "violet",
-    image: uiuxImage,
-    desc: "Design intuitive experiences users love. Master research, wireframing, UI design, and prototyping.",
-    weeks: "12 Weeks",
-    level: "Beginner to Intermediate",
-    date: "Jun 3, 2024",
+    id: "uiux",
+    title: "UI/UX & Product Design",
+    desc: "Master user research, Figma design systems, interactive prototyping, and usability testing.",
+    img: uiuxImage,
+    duration: "12 Weeks",
+    level: "Beginner to Pro",
+    nextCohort: "Jun 10, 2024",
+    tag: "MOST POPULAR",
   },
   {
-    title: "Front-End Development",
-    tone: "navy",
-    image: frontendImage,
-    desc: "Build responsive websites and web apps using HTML, CSS, JavaScript, and modern frameworks.",
-    weeks: "14 Weeks",
-    level: "Beginner to Intermediate",
-    date: "Jun 10, 2024",
+    id: "frontend",
+    title: "Front-End Web Development",
+    desc: "Build responsive modern web applications using HTML5, CSS3, JavaScript, and React.",
+    img: frontendImage,
+    duration: "14 Weeks",
+    level: "Beginner Friendly",
+    nextCohort: "Jun 17, 2024",
+    tag: "HIGH DEMAND",
   },
   {
-    title: "Data Analytics",
-    tone: "gold",
-    image: analyticsImage,
-    desc: "Turn data into insights. Learn SQL, Excel, Python, and visualization to solve real business problems.",
-    weeks: "12 Weeks",
-    level: "Beginner to Intermediate",
-    date: "Jun 17, 2024",
-  },
-  {
-    title: "Product Design",
-    tone: "coral",
-    image: productImage,
-    desc: "Design products people need. Combine UX, strategy, and experimentation to build better products.",
-    weeks: "12 Weeks",
+    id: "analytics",
+    title: "Data Analytics & Python",
+    desc: "Turn complex data into actionable business insights with SQL, Python, and Tableau.",
+    img: analyticsImage,
+    duration: "12 Weeks",
     level: "Intermediate",
-    date: "Jun 24, 2024",
+    nextCohort: "Jun 24, 2024",
+    tag: "BUSINESS CAREER",
+  },
+  {
+    id: "product",
+    title: "Product Management & Strategy",
+    desc: "Lead cross-functional engineering teams from product discovery to roadmap delivery.",
+    img: productImage,
+    duration: "10 Weeks",
+    level: "Intermediate",
+    nextCohort: "Jul 1, 2024",
+    tag: "EXECUTIVE TRACK",
   },
 ];
 
-const steps = [
-  [
-    BookOpen,
-    "Start with Fundamentals",
-    "Build a strong foundation with core concepts and essential tools you’ll use throughout your journey.",
-  ],
-  [
-    CalendarDays,
-    "Learn in Weekly Modules",
-    "Follow structured lessons, practical exercises, and quizzes designed for steady weekly progress.",
-  ],
-  [
-    Code2,
-    "Build in Project Labs",
-    "Apply what you learn in hands-on projects with mentor feedback and real-world scenarios.",
-  ],
-  [
-    Trophy,
-    "Graduate with a Portfolio",
-    "Complete a capstone project and graduate with a portfolio that showcases your best work.",
-  ],
+const curriculumSteps = [
+  {
+    step: "01",
+    title: "Foundations & Core Tools",
+    text: "Build a strong base with core methodologies, industry tools, and foundational concepts.",
+  },
+  {
+    step: "02",
+    title: "Guided Practical Labs",
+    text: "Apply new concepts in weekly hands-on labs with structured exercises and mentor reviews.",
+  },
+  {
+    step: "03",
+    title: "Capstone Portfolio Build",
+    text: "Design and build an end-to-end real project for a real client or simulated startup brief.",
+  },
+  {
+    step: "04",
+    title: "Career Prep & Graduation",
+    text: "Resume review, portfolio presentation polish, mock interviews, and alumni network intro.",
+  },
 ];
 
-const faq = [
-  [
-    "Who is LearnSphere Academy for?",
-    "Motivated beginners and career switchers who want a clear, guided path into an in-demand digital career.",
-  ],
-  [
-    "How long are the programs?",
-    "Most cohorts run for 12–14 weeks with flexible weekly study and scheduled mentor sessions.",
-  ],
-  [
-    "Do I need prior experience?",
-    "No. Each program begins with the fundamentals and builds toward portfolio-ready work.",
-  ],
-  [
-    "What kind of support will I get?",
-    "You’ll receive mentor office hours, project feedback, cohort chat, and career guidance.",
-  ],
-  [
-    "Will I get a certificate?",
-    "Yes. Graduates earn a certificate of completion and a verified project portfolio.",
-  ],
-  [
-    "How does payment work?",
-    "Choose a one-time payment or ask admissions about available installment plans.",
-  ],
+const mentorsList = [
+  {
+    name: "Sarah Chen",
+    role: "Senior Lead Product Designer",
+    company: "Meta",
+    bio: "10+ years shaping global consumer apps used by millions daily.",
+  },
+  {
+    name: "Marcus Vance",
+    role: "Staff Software Engineer",
+    company: "Stripe",
+    bio: "Passionate about clean architecture, React performance, and frontend tooling.",
+  },
+  {
+    name: "Elena Rostova",
+    role: "Head of Analytics & Data",
+    company: "Snowflake",
+    bio: "Specialist in machine learning pipelines, SQL optimization, and business intelligence.",
+  },
 ];
 
-function Logo() {
-  return (
-    <a className="ls-logo" href="#top" aria-label="LearnSphere Academy home">
-      <span className="ls-logo-mark">✦</span>
-      <span>
-        LearnSphere<small>Academy</small>
-      </span>
-    </a>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div className="dashboard-shell">
-      <aside className="dash-sidebar">
-        <Logo />
-        {[
-          LayoutDashboard,
-          BookOpen,
-          CalendarDays,
-          Users,
-          MessageCircle,
-          FolderOpen,
-        ].map((Icon, i) => (
-          <span className={i === 0 ? "active" : ""} key={i}>
-            <Icon size={14} />{" "}
-            <b>
-              {
-                [
-                  "Dashboard",
-                  "My Courses",
-                  "Calendar",
-                  "Mentors",
-                  "Community",
-                  "Resources",
-                ][i]
-              }
-            </b>
-          </span>
-        ))}
-      </aside>
-      <div className="dash-main">
-        <div className="dash-welcome">
-          <b>Welcome back, Aisha 👋</b>
-          <span>•••</span>
-        </div>
-        <div className="dash-grid">
-          <div className="progress-card dash-card">
-            <small>Your Progress</small>
-            <div className="progress-body">
-              <div className="ring">
-                <b>72%</b>
-              </div>
-              <div>
-                <b>UI/UX Design Cohort</b>
-                <p>Week 5 of 12 · Interface Design</p>
-                <button>Continue Learning</button>
-              </div>
-            </div>
-          </div>
-          <div className="mentor-card dash-card">
-            <small>Upcoming Mentor Check-in</small>
-            <div className="avatar">SC</div>
-            <b>Sarah Chen</b>
-            <p>Senior UX Designer</p>
-            <button>Join Session</button>
-          </div>
-          <div className="activity-card dash-card">
-            <small>Recent Activity</small>
-            {[
-              "Submitted: Mobile Banking UI",
-              "Feedback: Dashboard Redesign",
-              "Completed: User Research",
-            ].map((x, i) => (
-              <p key={x}>
-                <CheckCircle2 size={13} /> <b>{x}</b>
-                <span>{i + 1}d ago</span>
-              </p>
-            ))}
-          </div>
-          <div className="chat-card dash-card">
-            <small>Cohort Chat</small>
-            <p>
-              <span className="mini-avatar">JM</span>
-              <b>James</b>
-              <br />
-              Great feedback everyone!
-            </p>
-            <p>
-              <span className="mini-avatar blue">AR</span>
-              <b>Aisha</b>
-              <br />
-              Thanks! Learned a lot.
-            </p>
-            <div>Message cohort…</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+const faqs = [
+  {
+    q: "Who are LearnSphere Academy cohorts designed for?",
+    a: "Our programs are built for motivated beginners, career switchers, and upskilling professionals looking for structured, mentor-guided education.",
+  },
+  {
+    q: "How much time should I dedicate each week?",
+    a: "Students typically spend 8-12 hours per week attending live workshops, completing project labs, and joining mentor office hours.",
+  },
+  {
+    q: "Do I get a verified certificate upon completion?",
+    a: "Yes! All graduates receive a shareable digital certificate and a verified portfolio reviewed by lead industry mentors.",
+  },
+  {
+    q: "Are flexible payment plans or installments available?",
+    a: "Yes, we offer interest-free monthly installment plans as well as early-bird cohort discounts.",
+  },
+];
 
 export function LearnSphereAcademy() {
+  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [activeSection, setActiveSection] = useState("programs");
+  const [activeNav, setActiveNav] = useState("ls-programs");
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [selectedTier, setSelectedTier] = useState("guided");
+  const [applicationSubmitted, setApplicationSubmitted] = useState(false);
 
   useEffect(() => {
-    const sectionIds = [
-      "programs",
-      "curriculum",
-      "mentors",
-      "projects",
-      "outcomes",
-      "pricing",
-      "faq",
-    ];
-    const updateActiveSection = () => {
-      const scrollMarker = window.scrollY + 150;
-      let current = sectionIds[0];
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
 
-      sectionIds.forEach((id) => {
-        const section = document.getElementById(id);
-        if (section && section.offsetTop <= scrollMarker) current = id;
-      });
-
-      setActiveSection(current);
+      const offset = window.scrollY + 140;
+      for (let i = navItems.length - 1; i >= 0; i--) {
+        const el = document.getElementById(navItems[i].id);
+        if (el && el.offsetTop <= offset) {
+          setActiveNav(navItems[i].id);
+          break;
+        }
+      }
     };
 
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    return () => window.removeEventListener("scroll", updateActiveSection);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollTo = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    setActiveNav(id);
+    setMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      const topOffset = element.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: topOffset, behavior: "smooth" });
+    }
+  };
+
   return (
-    <main className="learnsphere-site" id="top">
-      <nav className="ls-nav">
-        <Logo />
-        <button
-          className="ls-menu"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle navigation"
-        >
-          {menuOpen ? <X /> : <Menu />}
-        </button>
-        <div className={`ls-links ${menuOpen ? "open" : ""}`}>
-          {[
-            "Programs",
-            "Curriculum",
-            "Mentors",
-            "Projects",
-            "Outcomes",
-            "Pricing",
-            "FAQ",
-          ].map((x) => {
-            const sectionId = x.toLowerCase();
-            return (
-              <a
-                key={x}
-                href={`#${sectionId}`}
-                className={activeSection === sectionId ? "active" : ""}
-                aria-current={activeSection === sectionId ? "page" : undefined}
-                onClick={() => {
-                  setActiveSection(sectionId);
-                  setMenuOpen(false);
-                }}
-              >
-                {x}
-              </a>
-            );
-          })}
-          <a className="primary-btn nav-cta" href="#pricing">
-            Apply Now
-          </a>
-        </div>
-      </nav>
-
-      <section className="hero ls-container">
-        <div className="hero-copy">
-          <h1>
-            Guided online
-            <br />
-            learning with <span>structure</span>
-            <br />
-            students can trust.
-          </h1>
-          <p>
-            Clear modules. Mentor feedback. Project labs.
-            <br />
-            Graduate with real skills and a portfolio
-            <br />
-            that opens doors.
-          </p>
-          <div className="hero-actions">
-            <a href="#programs" className="primary-btn">
-              Explore Programs <ArrowRight size={16} />
-            </a>
-            <a href="#pricing" className="outline-btn">
-              Join a Cohort <ArrowRight size={16} />
-            </a>
-          </div>
-          <div className="hero-trust">
-            <span>
-              <Users /> Live Mentor Guidance
-            </span>
-            <span>
-              <MessageCircle /> Cohort Community
-            </span>
-            <span>
-              <BriefcaseBusiness /> Portfolio-Ready Outcomes
-            </span>
-          </div>
-        </div>
-        <Dashboard />
-      </section>
-
-      <section className="stats ls-container">
-        {[
-          [Users, "12,500+", "Active Learners"],
-          [CalendarDays, "8,200+", "Mentor Sessions"],
-          [Trophy, "92%", "Completion Rate"],
-          [FolderOpen, "1,800+", "Portfolio Projects"],
-        ].map(([Icon, n, l]) => (
-          <div key={String(l)}>
-            <span className="stat-icon">
-              <Icon size={22} />
-            </span>
-            <p>
-              <b>{String(n)}</b>
-              <small>{String(l)}</small>
-            </p>
-          </div>
-        ))}
-      </section>
-
-      <section className="path ls-container" id="curriculum">
-        <div className="section-heading">
-          <small>Your learning path</small>
-          <h2>A clear path from start to success</h2>
-        </div>
-        <div className="steps">
-          {steps.map(([Icon, title, text], i) => (
-            <article key={String(title)}>
-              <span className="step-num">{i + 1}</span>
-              <span className="step-icon">
-                <Icon size={25} />
-              </span>
-              <h3>{String(title)}</h3>
-              <p>{String(text)}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="programs-section" id="programs">
-        <div className="ls-container">
-          <div className="section-top">
-            <div>
-              <small>Featured cohorts</small>
-              <h2>Programs designed for in-demand careers</h2>
+    <div className="learnsphere-site" id="ls-top">
+      {/* 1. Simple Classic Header */}
+      <header className={`ls-header ${scrolled ? "scrolled" : ""}`}>
+        <div className="ls-wrap ls-header-inner">
+          <a href="#ls-top" className="ls-brand-link" onClick={(e) => scrollTo(e, "ls-top")}>
+            <div className="ls-brand-icon-box">
+              <GraduationCap className="w-5 h-5 text-white" />
             </div>
-            <a href="#programs">
-              View all programs <ArrowRight />
-            </a>
-          </div>
-          <div className="program-grid">
-            {programs.map((p) => (
-              <article className="program-card" key={p.title}>
-                <div className={`program-art ${p.tone}`}>
-                  <img
-                    src={p.image}
-                    alt={`${p.title} course workspace`}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="program-copy">
-                  <h3>{p.title}</h3>
-                  <p>{p.desc}</p>
-                  <dl>
-                    <div>
-                      <dt>
-                        <Clock3 /> Duration
-                      </dt>
-                      <dd>{p.weeks}</dd>
-                    </div>
-                    <div>
-                      <dt>
-                        <BarChart3 /> Level
-                      </dt>
-                      <dd>{p.level}</dd>
-                    </div>
-                    <div>
-                      <dt>
-                        <CalendarDays /> Next Cohort
-                      </dt>
-                      <dd>{p.date}</dd>
-                    </div>
-                  </dl>
-                  <a href="#pricing">
-                    Learn More <ArrowRight />
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="roadmap ls-container">
-        <div className="roadmap-intro">
-          <small>Curriculum roadmap</small>
-          <h2>
-            Structured curriculum.
-            <br />
-            Measurable progress.
-          </h2>
-          <p>
-            Our programs are broken into weekly modules with clear outcomes and
-            milestones so you always know what’s next.
-          </p>
-          <a href="#curriculum">
-            View Full Curriculum <ArrowRight />
+            <h1 className="ls-brand-title">
+              LearnSphere <span>Academy</span>
+            </h1>
           </a>
-        </div>
-        <div className="timeline">
-          {[
-            [
-              "Week 1",
-              "Foundations",
-              "Core concepts, tools setup, and first mini challenge.",
-              "Completed",
-            ],
-            [
-              "Week 2–3",
-              "Core Concepts",
-              "Dive deeper with practical lessons and exercises.",
-              "Completed",
-            ],
-            [
-              "Week 4–6",
-              "Application",
-              "Apply skills to guided projects and scenarios.",
-              "In Progress",
-            ],
-            [
-              "Week 7–9",
-              "Advanced Topics",
-              "Advanced techniques and best practices.",
-              "Upcoming",
-            ],
-            [
-              "Week 10–11",
-              "Project Labs",
-              "Build real-world projects with mentor feedback.",
-              "Upcoming",
-            ],
-            [
-              "Week 12",
-              "Capstone & Showcase",
-              "Polish your portfolio and graduate with confidence.",
-              "Upcoming",
-            ],
-          ].map((r, i) => (
-            <div
-              key={r[0]}
-              className={i < 2 ? "done" : i === 2 ? "current" : ""}
+
+          {/* Desktop Nav Links */}
+          <nav className="ls-nav-links">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`ls-nav-item ${activeNav === item.id ? "active" : ""}`}
+                onClick={(e) => scrollTo(e, item.id)}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="ls-header-actions">
+            <a
+              href="#ls-pricing"
+              className="ls-cta-btn"
+              onClick={(e) => scrollTo(e, "ls-pricing")}
             >
-              <span className="timeline-dot" />
-              <b className="week">{r[0]}</b>
-              <strong>{r[1]}</strong>
-              <p>{r[2]}</p>
-              <em>
-                {r[3]} {i < 2 ? <CheckCircle2 /> : <Clock3 />}
-              </em>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="mentors" className="support ls-container">
-        <div className="section-heading">
-          <small>Mentor support</small>
-          <h2>Learn with guidance from industry experts</h2>
-        </div>
-        <div className="support-grid">
-          <article>
-            <div className="mentor-faces">
-              <span>SC</span>
-              <span>DM</span>
-              <span>+12</span>
-            </div>
-            <h3>Meet Your Mentors</h3>
-            <p>
-              Experienced professionals who’ve worked at top companies and love
-              teaching what they do.
-            </p>
-            <a href="#mentors">
-              View All Mentors <ArrowRight />
+              Apply Now
+              <ArrowRight className="w-4 h-4" />
             </a>
-          </article>
-          <article>
-            <CalendarDays />
-            <h3>Office Hours</h3>
-            <p>
-              Join weekly live sessions, Q&amp;A, and doubt clearing with your
-              mentors and cohort.
-            </p>
-            <a href="#mentors">
-              View Schedule <ArrowRight />
-            </a>
-          </article>
-          <article>
-            <MessageCircle />
-            <h3>Feedback That Helps</h3>
-            <p>
-              Get actionable feedback on your work and iterate with clarity and
-              confidence.
-            </p>
-            <a href="#mentors">
-              How Feedback Works <ArrowRight />
-            </a>
-          </article>
-        </div>
-      </section>
 
-      <section id="projects" className="projects ls-container">
-        <div className="section-heading">
-          <small>Project-based</small>
-          <h2>Build real projects. Get real feedback.</h2>
-        </div>
-        <div className="project-grid">
-          {[
-            [LayoutDashboard, "Hands-on Assignments"],
-            [Play, "Capstone Projects"],
-            [MessageCircle, "Critique Sessions"],
-            [BriefcaseBusiness, "Portfolio Building"],
-          ].map(([Icon, t], i) => (
-            <article key={String(t)}>
-              <div className={`project-pic p${i}`}>
-                <Icon />
-              </div>
-              <h3>{String(t)}</h3>
-              <p>
-                {
-                  [
-                    "Weekly tasks to apply what you learn and strengthen core skills.",
-                    "Work on end-to-end projects that solve real-world problems.",
-                    "Present your work, receive constructive feedback, and improve.",
-                    "Curate and publish your best work to stand out to employers.",
-                  ][i]
-                }
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="outcomes" className="outcomes ls-container">
-        <div className="outcome-copy">
-          <small>Curriculum that matter</small>
-          <h2>
-            Graduate job-ready with
-            <br />
-            skills and confidence.
-          </h2>
-          {[
-            "In-demand skills employers look for",
-            "Portfolio-ready projects",
-            "Resume & interview preparation",
-            "Lifetime access to alumni network",
-          ].map((x) => (
-            <p key={x}>
-              <Check /> {x}
-            </p>
-          ))}
-          <a href="#outcomes">
-            See Full Outcomes <ArrowRight />
-          </a>
-        </div>
-        <div className="outcome-cards">
-          <article>
-            <b>92%</b>
-            <p>of graduates get job opportunities within 6 months</p>
-            <div className="bars">
-              {[30, 52, 45, 72, 62, 84].map((h, i) => (
-                <i key={i} style={{ height: `${h}%` }} />
-              ))}
-            </div>
-          </article>
-          <article>
-            <h3>Top Skills Gained</h3>
-            {[
-              ["UI/UX Design", "92%"],
-              ["User Research", "87%"],
-              ["Prototyping", "88%"],
-              ["Figma", "94%"],
-              ["Design Systems", "80%"],
-            ].map((x) => (
-              <div className="skill" key={x[0]}>
-                <span>
-                  {x[0]} <em>{x[1]}</em>
-                </span>
-                <i>
-                  <b style={{ width: x[1] }} />
-                </i>
-              </div>
-            ))}
-          </article>
-          <article>
-            <h3>Portfolio Impact</h3>
-            <b>+3.2x</b>
-            <p>more interview callbacks with portfolio projects</p>
-            <svg viewBox="0 0 200 70">
-              <polyline
-                points="0,62 35,45 70,50 105,30 140,36 175,12 200,5"
-                fill="none"
-                stroke="#2463eb"
-                strokeWidth="3"
-              />
-            </svg>
-          </article>
-        </div>
-      </section>
-
-      <section className="testimonials ls-container">
-        <div className="section-heading">
-          <small>Student success stories</small>
-          <h2>Loved by learners. Proven by results.</h2>
-        </div>
-        <div className="quote-card">
-          <div className="quote-person">
-            <span>AM</span>
-            <b>Amara Mitchell</b>
-            <small>Product Designer at Orbit</small>
-          </div>
-          <blockquote>
-            “LearnSphere gave me the structure I was missing. The mentor
-            feedback made every project stronger, and my portfolio finally felt
-            professional.”
-          </blockquote>
-          <div className="stars">★★★★★</div>
-        </div>
-      </section>
-
-      <section id="pricing" className="pricing ls-container">
-        <div className="section-heading">
-          <small>Simple, transparent pricing</small>
-          <h2>Choose the path that fits your goals</h2>
-        </div>
-        <div className="pricing-grid">
-          {[
-            ["Core", "$699", "Self-paced learning with community support"],
-            ["Guided", "$1,199", "Mentor guidance and feedback"],
-            ["Career Track", "$1,799", "Full support to launch your career"],
-          ].map((x, i) => (
-            <article className={i === 1 ? "popular" : ""} key={x[0]}>
-              {i === 1 && <span className="popular-label">Most Popular</span>}
-              <h3>{x[0]}</h3>
-              <p>{x[2]}</p>
-              <b>{x[1]}</b>
-              <small>one-time payment</small>
-              {[
-                "Everything in course content",
-                "Community access",
-                "Projects & resources",
-                i === 0
-                  ? "Certificate of completion"
-                  : i === 1
-                    ? "Weekly mentor feedback"
-                    : "1:1 career coaching",
-              ].map((f) => (
-                <div className="feature" key={f}>
-                  <Check /> {f}
-                </div>
-              ))}
-              <a
-                href="#top"
-                className={i === 1 ? "primary-btn" : "outline-btn"}
-              >
-                Choose {x[0]}
-              </a>
-            </article>
-          ))}
-        </div>
-        <p className="payment-note">
-          Flexible payment plans available. Need help choosing?{" "}
-          <a href="#faq">Talk to an advisor →</a>
-        </p>
-      </section>
-
-      <section id="faq" className="faq ls-container">
-        <div className="section-top">
-          <div>
-            <small>Frequently asked questions</small>
-            <h2>Everything you need to know</h2>
-          </div>
-          <a href="mailto:hello@learnsphere.academy">
-            Contact Support <ArrowRight />
-          </a>
-        </div>
-        <div className="faq-grid">
-          {faq.map((x, i) => (
             <button
-              key={x[0]}
-              className={openFaq === i ? "open" : ""}
-              onClick={() => setOpenFaq(openFaq === i ? null : i)}
+              type="button"
+              className="ls-menu-toggle"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle navigation menu"
             >
-              <span>
-                <b>{x[0]}</b>
-                <ChevronDown />
-              </span>
-              {openFaq === i && <p>{x[1]}</p>}
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-          ))}
-        </div>
-      </section>
-
-      <section className="final-cta ls-container">
-        <div className="cta-art">
-          <GraduationCap />
-        </div>
-        <div>
-          <h2>Ready to build your future?</h2>
-          <p>
-            Join the next cohort and take the first step
-            <br />
-            towards a better career.
-          </p>
-        </div>
-        <a href="#pricing" className="outline-btn">
-          Apply for Next Cohort <ArrowRight />
-        </a>
-      </section>
-
-      <footer className="ls-footer">
-        <div className="ls-container footer-grid">
-          <div>
-            <Logo />
-            <p>
-              Guided online learning with structure
-              <br />
-              you can trust. Build skills, ship projects,
-              <br />
-              and launch your career.
-            </p>
-            <div className="socials">● ● ● ● ●</div>
           </div>
-          {[
-            [
-              "Programs",
-              "UI/UX Design",
-              "Front-End Development",
-              "Data Analytics",
-              "Product Design",
-              "All Programs",
-            ],
-            [
-              "Resources",
-              "Curriculum",
-              "Mentors",
-              "Projects",
-              "Blog",
-              "Careers",
-            ],
-            [
-              "Company",
-              "About Us",
-              "Contact Us",
-              "Privacy Policy",
-              "Terms of Service",
-            ],
-          ].map((c) => (
-            <div key={c[0]}>
-              <h3>{c[0]}</h3>
-              {c.slice(1).map((x) => (
-                <a key={x} href="#top">
-                  {x}
+        </div>
+      </header>
+
+      {/* Mobile Drawer Menu Portal */}
+      {menuOpen && typeof document !== "undefined" && createPortal(
+        <div className="ls-drawer-root">
+          <div
+            className="ls-drawer-backdrop"
+            onClick={() => setMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="ls-drawer-menu" role="dialog" aria-modal="true" aria-label="LearnSphere Navigation Menu">
+            <div className="ls-drawer-header">
+              <div className="flex items-center gap-2">
+                <div className="ls-brand-icon-box !w-8 !h-8">
+                  <GraduationCap className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-extrabold text-slate-900 text-lg">LearnSphere</span>
+              </div>
+              <button
+                type="button"
+                className="p-2 text-slate-600 hover:text-slate-900"
+                onClick={() => setMenuOpen(false)}
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="ls-drawer-body">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={`ls-drawer-link ${activeNav === item.id ? "active" : ""}`}
+                  onClick={(e) => scrollTo(e, item.id)}
+                >
+                  {item.label}
+                  <ArrowRight className="w-4 h-4 text-slate-400" />
                 </a>
               ))}
             </div>
-          ))}
-          <div>
-            <h3>Stay in the loop</h3>
-            <p>Get tips, updates, and cohort announcements.</p>
-            <div className="email-box">
-              Enter your email <ArrowRight />
+
+            <div className="ls-drawer-footer">
+              <a
+                href="#ls-pricing"
+                className="w-full bg-purple-700 text-white font-bold py-3 text-center rounded-lg flex items-center justify-center gap-2"
+                onClick={(e) => scrollTo(e, "ls-pricing")}
+              >
+                Apply for Next Cohort
+              </a>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* 2. Hero Section */}
+      <section className="ls-hero-section">
+        <div className="ls-wrap">
+          <div className="ls-hero-grid">
+            <div>
+              <div className="ls-badge-pill">
+                <Sparkles className="w-4 h-4" />
+                SUMMER 2024 COHORTS NOW OPEN
+              </div>
+
+              <h2 className="ls-hero-title">
+                Guided Online Learning with <span>Structure You Trust</span>.
+              </h2>
+
+              <p className="ls-hero-p">
+                Clear weekly modules, 1-on-1 mentor code & design reviews, project labs, and portfolio-ready career outcomes for high-growth tech careers.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="#ls-programs"
+                  className="bg-purple-700 hover:bg-purple-800 text-white font-bold text-base px-8 py-4 rounded-xl shadow-lg shadow-purple-600/20 transition-all flex items-center gap-2"
+                  onClick={(e) => scrollTo(e, "ls-programs")}
+                >
+                  Explore Programs
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+
+                <a
+                  href="#ls-pricing"
+                  className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 font-bold text-base px-7 py-4 rounded-xl transition-colors flex items-center gap-2"
+                  onClick={(e) => scrollTo(e, "ls-pricing")}
+                >
+                  View Cohort Plans
+                </a>
+              </div>
+            </div>
+
+            {/* Hero Image Showcase */}
+            <div className="ls-hero-frame">
+              <img src={heroImage} alt="LearnSphere Academy Students & Mentors" />
+              <div className="ls-hero-widget-overlay">
+                <div className="bg-purple-600 p-3 rounded-xl text-white">
+                  <CheckCircle2 className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-white text-sm margin-0">92% Graduation Success Rate</h4>
+                  <p className="text-xs text-slate-300 margin-0">Verified 1-on-1 Mentor Feedback Each Week</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="ls-container copyright">
-          <span>© 2024 LearnSphere Academy. All rights reserved.</span>
-          <span>
-            Made with <b>♥</b> for learners worldwide
-          </span>
+      </section>
+
+      {/* 3. Stats HUD Bar */}
+      <section className="ls-stats-bar">
+        <div className="ls-wrap">
+          <div className="ls-stats-grid">
+            <div className="ls-stat-box">
+              <Users className="w-8 h-8 text-purple-400" />
+              <div>
+                <h3>12,500+</h3>
+                <p>Active Learners</p>
+              </div>
+            </div>
+
+            <div className="ls-stat-box">
+              <Calendar className="w-8 h-8 text-purple-400" />
+              <div>
+                <h3>8,200+</h3>
+                <p>Mentor Sessions</p>
+              </div>
+            </div>
+
+            <div className="ls-stat-box">
+              <Award className="w-8 h-8 text-purple-400" />
+              <div>
+                <h3>92%</h3>
+                <p>Career Outcomes</p>
+              </div>
+            </div>
+
+            <div className="ls-stat-box">
+              <Briefcase className="w-8 h-8 text-purple-400" />
+              <div>
+                <h3>1,800+</h3>
+                <p>Portfolios Built</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Featured Programs */}
+      <section id="ls-programs" className="ls-section bg-white">
+        <div className="ls-wrap">
+          <div className="ls-section-head">
+            <span className="ls-eyebrow">
+              <BookOpen className="w-3.5 h-3.5" />
+              CAREER-READY COHORTS
+            </span>
+            <h2 className="ls-section-title">Programs Designed for In-Demand Careers</h2>
+          </div>
+
+          <div className="ls-programs-grid">
+            {featuredPrograms.map((program) => (
+              <div key={program.id} className="ls-program-card">
+                <div className="ls-program-img-wrap">
+                  <img src={program.img} alt={program.title} />
+                  <span className="absolute top-4 right-4 bg-slate-950/80 backdrop-blur-md text-purple-300 border border-purple-500/30 text-xs font-mono font-bold px-3 py-1 rounded-full">
+                    {program.tag}
+                  </span>
+                </div>
+
+                <div className="ls-program-body">
+                  <h3>{program.title}</h3>
+                  <p>{program.desc}</p>
+
+                  <div className="ls-program-meta">
+                    <div className="ls-program-meta-item">
+                      <span>DURATION</span>
+                      <strong>{program.duration}</strong>
+                    </div>
+                    <div className="ls-program-meta-item">
+                      <span>LEVEL</span>
+                      <strong>{program.level}</strong>
+                    </div>
+                    <div className="ls-program-meta-item">
+                      <span>NEXT COHORT</span>
+                      <strong>{program.nextCohort}</strong>
+                    </div>
+                  </div>
+
+                  <a
+                    href="#ls-pricing"
+                    className="mt-auto inline-flex items-center justify-between text-sm font-bold text-purple-700 hover:text-purple-900"
+                    onClick={(e) => scrollTo(e, "ls-pricing")}
+                  >
+                    Enroll in Cohort
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Curriculum Path */}
+      <section id="ls-curriculum" className="ls-section bg-slate">
+        <div className="ls-wrap">
+          <div className="ls-section-head">
+            <span className="ls-eyebrow">
+              <TrendingUp className="w-3.5 h-3.5" />
+              STRUCTURED SYLLABUS
+            </span>
+            <h2 className="ls-section-title">A Clear Path from Start to Success</h2>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {curriculumSteps.map((s, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm relative">
+                <span className="text-3xl font-extrabold text-purple-600/20 font-mono absolute top-6 right-6">
+                  {s.step}
+                </span>
+                <h3 className="font-extrabold text-lg text-slate-900 mb-3">{s.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{s.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Mentors Section */}
+      <section id="ls-mentors" className="ls-section bg-white">
+        <div className="ls-wrap">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="ls-eyebrow">
+                <Users className="w-3.5 h-3.5" />
+                EXPERT MENTORSHIP
+              </span>
+              <h2 className="ls-section-title mb-6">
+                Learn with Guidance from Industry Experts
+              </h2>
+              <p className="text-slate-600 text-base leading-relaxed mb-8">
+                Our mentors are staff engineers, lead product designers, and senior analytics directors working at top technology companies.
+              </p>
+
+              <div className="space-y-4">
+                {mentorsList.map((m, i) => (
+                  <div key={i} className="p-5 bg-slate-50 border border-slate-200 rounded-xl flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-purple-700 text-white font-bold flex items-center justify-center text-sm flex-shrink-0">
+                      {m.name.split(" ").map(n => n[0]).join("")}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-base">{m.name}</h4>
+                      <p className="text-xs font-mono text-purple-700 font-bold mb-1">{m.role} • {m.company}</p>
+                      <p className="text-xs text-slate-600">{m.bio}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
+              <img src={mentorImage} alt="LearnSphere Mentor Office Hours" className="w-full h-[520px] object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Tuition & Pricing */}
+      <section id="ls-pricing" className="ls-section bg-slate">
+        <div className="ls-wrap">
+          <div className="ls-section-head">
+            <span className="ls-eyebrow">
+              <FileCheck className="w-3.5 h-3.5" />
+              TRANSPARENT TUITION
+            </span>
+            <h2 className="ls-section-title">Choose the Path That Fits Your Goals</h2>
+          </div>
+
+          <div className="ls-pricing-grid">
+            <div className="ls-price-card">
+              <h3 className="font-extrabold text-xl text-slate-900 mb-2">Core Self-Paced</h3>
+              <p className="text-slate-600 text-sm mb-6">Full curriculum access with student community support.</p>
+              <div className="text-4xl font-extrabold text-slate-900 mb-1">$699</div>
+              <span className="text-xs font-mono text-slate-500 mb-6">One-time enrollment fee</span>
+
+              <ul className="space-y-3 text-sm text-slate-700 mb-8 flex-grow">
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Complete 12-week course modules</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Student Discord community access</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Capstone project templates</li>
+              </ul>
+
+              <button
+                type="button"
+                className="w-full bg-slate-900 text-white font-bold py-3.5 rounded-xl hover:bg-slate-800 transition-colors"
+                onClick={() => setSelectedTier("core")}
+              >
+                Enroll in Core
+              </button>
+            </div>
+
+            <div className="ls-price-card popular">
+              <span className="ls-popular-badge">RECOMMENDED</span>
+              <h3 className="font-extrabold text-xl text-slate-900 mb-2">Guided Cohort</h3>
+              <p className="text-slate-600 text-sm mb-6">Live weekly workshops, code reviews, and mentor check-ins.</p>
+              <div className="text-4xl font-extrabold text-purple-700 mb-1">$1,199</div>
+              <span className="text-xs font-mono text-slate-500 mb-6">One-time or $399/mo installments</span>
+
+              <ul className="space-y-3 text-sm text-slate-700 mb-8 flex-grow">
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Everything in Core plan</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Weekly 1-on-1 mentor office hours</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Personalized project feedback</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Verified Certificate of Completion</li>
+              </ul>
+
+              <button
+                type="button"
+                className="w-full bg-purple-700 text-white font-bold py-3.5 rounded-xl hover:bg-purple-800 transition-colors shadow-lg"
+                onClick={() => setSelectedTier("guided")}
+              >
+                Enroll in Guided Cohort
+              </button>
+            </div>
+
+            <div className="ls-price-card">
+              <h3 className="font-extrabold text-xl text-slate-900 mb-2">Career Track</h3>
+              <p className="text-slate-600 text-sm mb-6">Full career coaching, portfolio polish, and interview prep.</p>
+              <div className="text-4xl font-extrabold text-slate-900 mb-1">$1,799</div>
+              <span className="text-xs font-mono text-slate-500 mb-6">Includes job search guarantee</span>
+
+              <ul className="space-y-3 text-sm text-slate-700 mb-8 flex-grow">
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Everything in Guided Cohort</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> 1:1 Resume & LinkedIn review</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Mock technical & design interviews</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-purple-600" /> Direct referral to partner network</li>
+              </ul>
+
+              <button
+                type="button"
+                className="w-full bg-slate-900 text-white font-bold py-3.5 rounded-xl hover:bg-slate-800 transition-colors"
+                onClick={() => setSelectedTier("career")}
+              >
+                Apply for Career Track
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. FAQ Section */}
+      <section id="ls-faq" className="ls-section bg-white">
+        <div className="ls-wrap max-w-3xl">
+          <div className="ls-section-head">
+            <span className="ls-eyebrow">
+              <MessageSquare className="w-3.5 h-3.5" />
+              FREQUENTLY ASKED QUESTIONS
+            </span>
+            <h2 className="ls-section-title">Everything You Need to Know</h2>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="border border-slate-200 rounded-xl overflow-hidden">
+                <button
+                  type="button"
+                  className="w-full p-5 text-left font-bold text-slate-900 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition-colors"
+                  onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                >
+                  <span>{faq.q}</span>
+                  <ChevronDown className={`w-5 h-5 text-slate-500 transition-transform ${openFaqIndex === idx ? "rotate-180" : ""}`} />
+                </button>
+
+                {openFaqIndex === idx && (
+                  <div className="p-5 text-slate-600 text-sm bg-white border-t border-slate-200 leading-relaxed">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Simple Footer */}
+      <footer className="ls-footer">
+        <div className="ls-wrap">
+          <div className="ls-footer-grid">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="ls-brand-icon-box !w-8 !h-8">
+                  <GraduationCap className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-extrabold text-white text-xl">LearnSphere Academy</span>
+              </div>
+              <p className="text-sm text-slate-400 leading-relaxed">
+                Guided online learning with structure you can trust. Build skills, ship portfolio projects, and launch high-growth careers.
+              </p>
+            </div>
+
+            <div>
+              <h4>Programs</h4>
+              <ul className="ls-footer-links">
+                <li><a href="#ls-programs" onClick={(e) => scrollTo(e, "ls-programs")}>UI/UX Design</a></li>
+                <li><a href="#ls-programs" onClick={(e) => scrollTo(e, "ls-programs")}>Front-End Development</a></li>
+                <li><a href="#ls-programs" onClick={(e) => scrollTo(e, "ls-programs")}>Data Analytics</a></li>
+                <li><a href="#ls-programs" onClick={(e) => scrollTo(e, "ls-programs")}>Product Management</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4>Quick Links</h4>
+              <ul className="ls-footer-links">
+                <li><a href="#ls-curriculum" onClick={(e) => scrollTo(e, "ls-curriculum")}>Curriculum Path</a></li>
+                <li><a href="#ls-mentors" onClick={(e) => scrollTo(e, "ls-mentors")}>Mentors & Office Hours</a></li>
+                <li><a href="#ls-pricing" onClick={(e) => scrollTo(e, "ls-pricing")}>Tuition & Plans</a></li>
+                <li><a href="#ls-faq" onClick={(e) => scrollTo(e, "ls-faq")}>FAQ</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4>Admissions Office</h4>
+              <p className="text-sm text-slate-300 mb-3">Questions about upcoming cohorts?</p>
+              <a
+                href="mailto:admissions@learnsphere.academy"
+                className="inline-flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white font-bold px-6 py-3 rounded-xl text-sm transition-colors"
+              >
+                Contact Admissions
+              </a>
+            </div>
+          </div>
+
+          <div className="pt-8 border-t border-slate-800 text-center text-xs text-slate-400">
+            © {new Date().getFullYear()} LearnSphere Academy Inc. All rights reserved. Registered Educational Provider.
+          </div>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }

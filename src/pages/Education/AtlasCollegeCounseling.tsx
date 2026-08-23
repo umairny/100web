@@ -452,23 +452,25 @@ export function AtlasCollegeCounseling() {
             </div>
 
             <div className="atlas-credential-list">
-              {[
+              {(
                 [
-                  "Former Admissions Experience",
-                  "Former officers from top colleges who know what schools look for.",
-                  ShieldCheck,
-                ],
-                [
-                  "Certified &amp; Credentialed",
-                  "Members of respected counseling organizations with real-world experience.",
-                  Award,
-                ],
-                [
-                  "Personalized, Student-First",
-                  "Plans shaped around your student’s strengths, goals, and timeline.",
-                  Compass,
-                ],
-              ].map(([title, text, Icon]) => (
+                  [
+                    "Former Admissions Experience",
+                    "Former officers from top colleges who know what schools look for.",
+                    ShieldCheck,
+                  ],
+                  [
+                    "Certified & Credentialed",
+                    "Members of respected counseling organizations with real-world experience.",
+                    Award,
+                  ],
+                  [
+                    "Personalized, Student-First",
+                    "Plans shaped around your student’s strengths, goals, and timeline.",
+                    Compass,
+                  ],
+                ] as [string, string, React.ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>][]
+              ).map(([title, text, Icon]) => (
                 <div key={title} className="atlas-credential-item">
                   <div className="atlas-credential-icon">
                     <Icon aria-hidden="true" />

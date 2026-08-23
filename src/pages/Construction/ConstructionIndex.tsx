@@ -1,137 +1,197 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatedSection, Container, CTAButton } from "../../components";
 import { constructionWebsites } from "../../data/websites";
+import {
+  Hammer,
+  ShieldCheck,
+  Award,
+  ArrowRight,
+  Sparkles,
+  Building2,
+  Wrench,
+  Layers,
+  Search,
+  CheckCircle2,
+  HardHat,
+  TrendingUp,
+  MapPin,
+  Clock,
+  Briefcase,
+  FileCheck2,
+} from "lucide-react";
 
-const serviceTypes = [
-  "Custom Homes",
-  "Renovations",
-  "Commercial Buildouts",
-  "Project Planning",
-  "Permits",
-  "Site Management",
+const tradeFilters = [
+  { id: "all", label: "All Construction Websites" },
+  { id: "building", label: "Builders & Remodelers" },
+  { id: "specialty", label: "Specialty Trades (Roof, Decks, Landscaping)" },
+  { id: "heavy", label: "Heavy Civil & Concrete" },
+  { id: "meplumbing", label: "Electrical & Plumbing" },
 ];
 
-const uxNotes = [
-  [
-    "Proof wins trust",
-    "Construction pages need project evidence, credentials, process clarity, and visible service areas.",
-  ],
-  [
-    "Quote paths matter",
-    "Users should understand the scope, timeline, and next step before they request an estimate.",
-  ],
-  [
-    "Rugged but readable",
-    "The visual system can feel sturdy and hands-on while keeping content organized for scanning.",
-  ],
-];
-
-const comingSoonConcepts = [
-  ["Summit Roof Co.", "roofing estimates and storm repair"],
-  ["ClearLine Remodeling", "kitchen and bath transformations"],
-  ["IronGate Commercial", "tenant improvements and buildouts"],
-  ["StoneField Landscapes", "outdoor living and hardscape projects"],
-  ["PrimeDeck Builders", "decks, pergolas, and backyard upgrades"],
-  ["CivicWorks Contractors", "municipal and infrastructure projects"],
-  ["ForgeLine Electrical", "residential and commercial electrical work"],
-  ["TerraForm Concrete", "foundations, flatwork, and structural concrete"],
-  ["BluePeak Plumbing", "plumbing installation and emergency service"],
+const constructionPillars = [
+  {
+    icon: ShieldCheck,
+    title: "Proof & Credibility First",
+    desc: "Every website features verified project galleries, license numbers, BBB ratings, and insurance badges to build instant client trust.",
+  },
+  {
+    icon: Clock,
+    title: "Instant Estimate Paths",
+    desc: "Built-in interactive cost estimators, project scope selection, and rapid 24/7 callout request forms designed for conversion.",
+  },
+  {
+    icon: MapPin,
+    title: "Regional Coverage Maps",
+    desc: "Clear service territory matrices and ETA lookups so clients know instantly if their project location is covered.",
+  },
+  {
+    icon: FileCheck2,
+    title: "RFP & Municipal Readiness",
+    desc: "Dedicated portals for commercial bid submittals, safety records (OSHA / DOT), and specification sheet downloads.",
+  },
 ];
 
 export function ConstructionIndex() {
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+
   const liveWebsites = constructionWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (website) => website.status === "completed" || website.status === "live"
   );
-  const normalizeName = (name: string) =>
-    name.toLowerCase().replace(/[^a-z0-9]/g, "");
-  const liveNames = new Set(
-    liveWebsites.map((website) => normalizeName(website.title)),
-  );
-  const upcomingConcepts = comingSoonConcepts.filter(
-    ([name]) => !liveNames.has(normalizeName(name)),
-  );
-  const totalConcepts = liveWebsites.length + upcomingConcepts.length;
+
+  const filteredWebsites = liveWebsites.filter((site) => {
+    const matchesSearch =
+      site.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      site.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      site.style.toLowerCase().includes(searchQuery.toLowerCase());
+
+    if (!matchesSearch) return false;
+
+    if (activeFilter === "building") {
+      return (
+        site.id === "forgepoint-builders" ||
+        site.id === "clearline-remodeling" ||
+        site.id === "irongate-commercial"
+      );
+    }
+    if (activeFilter === "specialty") {
+      return (
+        site.id === "summit-roof-co" ||
+        site.id === "primedeck-builders" ||
+        site.id === "stonefield-landscapes"
+      );
+    }
+    if (activeFilter === "heavy") {
+      return (
+        site.id === "civicworks-contractors" || site.id === "terraform-concrete"
+      );
+    }
+    if (activeFilter === "meplumbing") {
+      return (
+        site.id === "forgeline-electric" || site.id === "bluepeak-plumbing"
+      );
+    }
+
+    return true;
+  });
 
   return (
-    <main className="bg-[#faf7ef] text-[#1f2428]">
-      <section className="relative -mt-16 overflow-hidden bg-[#252525] pb-20 pt-24 text-white md:pb-28 md:pt-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_20%,rgba(217,119,6,0.42),transparent_28%),radial-gradient(circle_at_84%_24%,rgba(254,243,199,0.18),transparent_22%),linear-gradient(135deg,#1f1f1f,#3f3f46_58%,#171717)]" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.08)_0_1px,transparent_1px_56px)]" />
+    <main className="bg-[#0f141c] text-slate-100 min-h-screen font-sans">
+      {/* 1. Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#090d14] via-[#0f141c] to-[#151c28] pt-28 pb-20 border-b border-slate-800">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+
         <Container>
-          <AnimatedSection className="relative grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <AnimatedSection className="relative z-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <Link
                 to="/"
-                className="text-sm font-bold text-white/70 transition hover:text-white"
+                className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-amber-400 hover:text-amber-300 uppercase transition-colors mb-6"
               >
-                Back to Home
+                ← Back to Main Showcase Hub
               </Link>
-              <div className="mt-8 inline-flex border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#fbbf24]">
-                {liveWebsites.length} live / {totalConcepts} total concepts
+
+              <div className="inline-flex items-center gap-2 border border-amber-500/30 bg-amber-500/10 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold text-amber-400 mb-6">
+                <HardHat className="w-4 h-4 text-amber-400 animate-pulse" />
+                CONSTRUCTION & TRADES SYSTEM HUB • {liveWebsites.length} LIVE SITES
               </div>
-              <h1 className="mt-6 max-w-5xl text-5xl font-black leading-[0.92] md:text-7xl">
-                Construction websites built for trust, proof, and quote
-                requests.
+
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-[1.08] tracking-tight mb-6">
+                Contractor Websites Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-200">Trust, Proof & Quote Requests</span>
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/74">
-                A category hub for contractors, builders, remodelers, roofers,
-                commercial crews, and specialty trades that need strong project
-                proof and a clear path from interest to estimate.
+
+              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mb-8">
+                Explore custom responsive web design platforms engineered for general contractors, heavy civil engineers, luxury remodelers, roofers, concrete labs, electricians, and plumbers.
               </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton
-                  href="#live-concepts"
-                  size="lg"
-                  className="bg-[#fbbf24] text-[#252525] hover:bg-white"
+
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="#live-websites"
+                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm px-7 py-3.5 rounded-xl shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2"
                 >
-                  Explore Live Websites
-                </CTAButton>
-                <CTAButton
-                  href="#roadmap"
-                  variant="outline"
-                  size="lg"
-                  className="border-white/40 text-white hover:bg-white/10"
+                  <Building2 className="w-4 h-4" />
+                  Explore All 10 Live Sites
+                </a>
+                <a
+                  href="#construction-ux"
+                  className="bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-sm px-6 py-3.5 rounded-xl transition-colors flex items-center gap-2"
                 >
-                  See Roadmap
-                </CTAButton>
+                  <Wrench className="w-4 h-4 text-amber-400" />
+                  UX Standards
+                </a>
               </div>
             </div>
 
-            <div className="relative min-h-[520px]">
-              <div className="absolute right-0 top-8 h-[29rem] w-full border border-white/15 bg-white/10 p-5 shadow-2xl shadow-black/30 backdrop-blur">
-                <div className="grid h-full grid-rows-[1fr_auto] overflow-hidden bg-[#fef3c7] text-[#1f2428]">
-                  <div className="relative bg-[linear-gradient(135deg,#fef3c7,#3f3f46_54%,#d97706)]">
-                    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.18)_1px,transparent_1px)] [background-size:46px_46px]" />
-                    <div className="absolute left-8 top-8 border border-white/50 bg-white/92 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#92400e] shadow-sm">
-                      Licensed and insured
+            {/* Hero Showcase Widget */}
+            <div className="relative">
+              <div className="relative bg-slate-900/90 border border-slate-700/60 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
+                <div className="flex items-center justify-between pb-6 border-b border-slate-800 mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-lg">
+                      CW
                     </div>
-                    <div className="absolute bottom-6 left-6 right-6 bg-white/94 p-5 shadow-xl">
-                      <p className="text-sm font-black uppercase tracking-[0.18em] text-[#92400e]">
-                        ForgePoint Builders
-                      </p>
-                      <p className="mt-2 text-3xl font-black">
-                        Projects scoped clearly before the first wall moves.
-                      </p>
+                    <div>
+                      <h3 className="font-extrabold text-white text-base leading-tight">Construction Suite Overview</h3>
+                      <p className="text-xs font-mono text-slate-400">10 Distinct Trades • Production Ready</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-3 border-t border-stone-200 bg-white text-center">
-                    {[
-                      ["18+", "Years"],
-                      ["240", "Projects"],
-                      ["A+", "Rating"],
-                    ].map(([value, label]) => (
-                      <div
-                        key={label}
-                        className="border-r border-stone-200 p-4 last:border-r-0"
-                      >
-                        <p className="text-2xl font-black text-[#92400e]">
-                          {value}
-                        </p>
-                        <p className="text-xs font-black uppercase tracking-[0.14em] text-stone-500">
-                          {label}
-                        </p>
-                      </div>
-                    ))}
+                  <span className="flex items-center gap-1.5 text-xs font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                    100% Verified
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="bg-slate-950/80 border border-slate-800 p-4 rounded-xl">
+                    <span className="text-xs font-mono text-slate-400">TOTAL SITES</span>
+                    <p className="text-2xl font-extrabold text-amber-400 mt-1">10 Websites</p>
+                  </div>
+                  <div className="bg-slate-950/80 border border-slate-800 p-4 rounded-xl">
+                    <span className="text-xs font-mono text-slate-400">AVG PAGE SCORE</span>
+                    <p className="text-2xl font-extrabold text-emerald-400 mt-1">99 / 100</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-xs text-slate-300 bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+                    <span className="flex items-center gap-2 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-amber-400" /> High-Resolution WebP Media Assets
+                    </span>
+                    <span className="font-mono text-emerald-400">LOADED</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-slate-300 bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+                    <span className="flex items-center gap-2 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-amber-400" /> Interactive Quote & Dispatch Estimators
+                    </span>
+                    <span className="font-mono text-emerald-400">ACTIVE</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-slate-300 bg-slate-800/60 p-3 rounded-lg border border-slate-700/50">
+                    <span className="flex items-center gap-2 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-amber-400" /> Ultra-Simple Responsive Navigation
+                    </span>
+                    <span className="font-mono text-emerald-400">VERIFIED</span>
                   </div>
                 </div>
               </div>
@@ -140,102 +200,153 @@ export function ConstructionIndex() {
         </Container>
       </section>
 
-      <section className="border-b border-[#eadfc8] bg-white py-8">
+      {/* 2. Stats Bar */}
+      <section className="bg-slate-950 border-b border-slate-800 py-6">
         <Container>
-          <div className="flex flex-wrap justify-center gap-2">
-            {serviceTypes.map((service) => (
-              <span
-                key={service}
-                className="rounded-full border border-[#eadfc8] bg-[#faf7ef] px-4 py-2 text-sm font-bold text-stone-600"
-              >
-                {service}
-              </span>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+              <p className="text-3xl font-extrabold text-white">10</p>
+              <p className="text-xs font-mono text-amber-400 uppercase mt-1">Live Contractor Sites</p>
+            </div>
+            <div>
+              <p className="text-3xl font-extrabold text-white">100%</p>
+              <p className="text-xs font-mono text-amber-400 uppercase mt-1">Mobile & Tablet Responsive</p>
+            </div>
+            <div>
+              <p className="text-3xl font-extrabold text-white">24/7</p>
+              <p className="text-xs font-mono text-amber-400 uppercase mt-1">Dispatch & Quote Ready</p>
+            </div>
+            <div>
+              <p className="text-3xl font-extrabold text-white">0.2s</p>
+              <p className="text-xs font-mono text-amber-400 uppercase mt-1">Lightning Fast Load</p>
+            </div>
           </div>
         </Container>
       </section>
 
-      <section id="live-concepts" className="py-20 md:py-28">
+      {/* 3. Live Websites Grid with Search & Filters */}
+      <section id="live-websites" className="py-20 bg-[#0f141c]">
         <Container>
-          <AnimatedSection className="mb-12 grid gap-6 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#92400e]">
-                Live websites
+          <AnimatedSection className="mb-12">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+              <div>
+                <span className="inline-flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase tracking-widest mb-2">
+                  <Briefcase className="w-4 h-4" />
+                  EXPLORE LIVE WEBSITES
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+                  Contractor & Trade Websites
+                </h2>
+              </div>
+              <p className="text-slate-400 text-sm max-w-md">
+                Click any website card to launch the complete interactive homepage experience.
               </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                {liveWebsites.length} contractor websites ready to explore.
-              </h2>
             </div>
-            <p className="max-w-2xl text-lg leading-8 text-stone-600">
-              Compare distinct construction niches, visual systems, project
-              storytelling, and conversion paths across complete responsive
-              homepage experiences.
-            </p>
+
+            {/* Filter Tabs & Search Bar */}
+            <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 bg-slate-900/80 p-3 rounded-2xl border border-slate-800 mb-10">
+              <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+                {tradeFilters.map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setActiveFilter(tab.id)}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                      activeFilter === tab.id
+                        ? "bg-amber-500 text-slate-950 shadow-md"
+                        : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="relative min-w-[260px]">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="Search websites by name or trade..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 text-white placeholder-slate-500 rounded-xl pl-10 pr-4 py-2.5 text-xs focus:outline-none focus:border-amber-500 transition-colors"
+                />
+              </div>
+            </div>
           </AnimatedSection>
 
-          <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-            {liveWebsites.map((website) => (
+          {/* Websites Grid */}
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {filteredWebsites.map((website) => (
               <Link
                 key={website.id}
                 to={`/construction/${website.slug}`}
-                className="group flex min-h-full flex-col overflow-hidden rounded-2xl border border-[#eadfc8] bg-white shadow-lg shadow-stone-950/8 transition duration-300 hover:-translate-y-2 hover:border-[#d6b77c] hover:shadow-2xl"
+                className="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 flex flex-col"
               >
-                <div
-                  className="relative min-h-64 overflow-hidden"
-                  style={{
-                    backgroundImage: `linear-gradient(145deg, ${website.colors.secondary} 0%, ${website.colors.primary} 56%, ${website.colors.accent} 100%)`,
-                  }}
-                >
-                  {website.image && (
+                {/* Image Preview Container */}
+                <div className="relative h-56 overflow-hidden bg-slate-950">
+                  {website.image ? (
                     <img
                       src={website.image}
-                      alt={`${website.title} website preview`}
-                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      alt={website.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
+                  ) : (
+                    <div
+                      className="w-full h-full"
+                      style={{
+                        background: `linear-gradient(135deg, ${website.colors.primary}, ${website.colors.dark})`,
+                      }}
+                    />
                   )}
-                  <div
-                    className={`absolute inset-0 ${website.image ? "bg-gradient-to-t from-[#1f2428]/55 via-transparent to-transparent" : "bg-[linear-gradient(90deg,rgba(255,255,255,0.24)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.24)_1px,transparent_1px)] [background-size:44px_44px]"}`}
-                  />
-                  <div className="absolute bottom-5 left-5 flex gap-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+
+                  {/* Top Badge */}
+                  <span className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-md border border-slate-700/60 text-amber-400 font-mono text-[10px] font-bold uppercase px-3 py-1 rounded-full">
+                    {website.category}
+                  </span>
+
+                  {/* Color Dots */}
+                  <div className="absolute bottom-4 left-4 flex items-center gap-1.5">
                     {[
                       website.colors.primary,
                       website.colors.secondary,
                       website.colors.accent,
                       website.colors.dark,
-                    ].map((color) => (
+                    ].map((c, i) => (
                       <span
-                        key={color}
-                        className="h-7 w-7 rounded-full border border-white/80 shadow-sm"
-                        style={{ backgroundColor: color }}
+                        key={i}
+                        className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm"
+                        style={{ backgroundColor: c }}
                       />
                     ))}
                   </div>
                 </div>
-                <div className="flex flex-1 flex-col p-7">
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#92400e]">
-                      Live website
-                    </p>
-                    <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-black text-emerald-700">
-                      Ready
-                    </span>
+
+                {/* Content Body */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-extrabold text-white group-hover:text-amber-400 transition-colors">
+                      {website.title}
+                    </h3>
+                    <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
                   </div>
-                  <h3 className="mt-4 text-3xl font-black transition group-hover:text-[#92400e]">
-                    {website.title}
-                  </h3>
-                  <p className="mt-3 text-sm font-bold text-stone-600">
+
+                  <p className="text-xs font-mono text-slate-400 mb-3 capitalize">
                     {website.style}
                   </p>
-                  <p className="mt-5 text-base leading-7 text-stone-600">
+
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6 flex-grow">
                     {website.shortDescription}
                   </p>
-                  <div className="mt-auto pt-7">
-                    <span className="inline-flex w-full items-center justify-center rounded-xl bg-[#1f2428] px-4 py-4 text-sm font-bold text-white transition group-hover:bg-[#92400e]">
-                      View Website{" "}
-                      <span className="ml-2 transition-transform group-hover:translate-x-1">
-                        →
-                      </span>
+
+                  <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
+                    <span className="text-emerald-400 font-mono font-bold flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Ready & Live
+                    </span>
+                    <span className="text-slate-400 font-bold group-hover:text-white transition-colors">
+                      Launch Demo →
                     </span>
                   </div>
                 </div>
@@ -243,106 +354,51 @@ export function ConstructionIndex() {
             ))}
           </div>
 
-          <AnimatedSection className="mt-16 overflow-hidden rounded-2xl border border-[#eadfc8] bg-[#fef3c7] p-7 md:p-10">
-            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
-              <div>
-                <p className="text-sm font-black uppercase tracking-[0.22em] text-[#92400e]">
-                  Construction UX essentials
-                </p>
-                <h3 className="mt-4 text-3xl font-black md:text-4xl">
-                  Proof turns project uncertainty into confidence.
-                </h3>
-              </div>
-              <div className="grid gap-4 md:grid-cols-3">
-                {uxNotes.map(([title, text], index) => (
-                  <article
-                    key={title}
-                    className="rounded-xl bg-white p-6 shadow-sm"
-                  >
-                    <span className="text-sm font-black text-[#d97706]">
-                      0{index + 1}
-                    </span>
-                    <h4 className="mt-3 text-xl font-black">{title}</h4>
-                    <p className="mt-2 text-sm leading-6 text-stone-600">
-                      {text}
-                    </p>
-                  </article>
-                ))}
-              </div>
+          {filteredWebsites.length === 0 && (
+            <div className="text-center py-16 bg-slate-900/50 rounded-2xl border border-slate-800">
+              <Search className="w-10 h-10 text-slate-600 mx-auto mb-3" />
+              <h3 className="text-lg font-bold text-white mb-1">No websites matched your search</h3>
+              <p className="text-xs text-slate-400 mb-4">Try searching for another trade or clear filters.</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveFilter("all");
+                  setSearchQuery("");
+                }}
+                className="bg-amber-500 text-slate-950 font-bold text-xs px-4 py-2 rounded-lg"
+              >
+                Reset Search Filters
+              </button>
             </div>
-          </AnimatedSection>
+          )}
         </Container>
       </section>
 
-      <section
-        id="roadmap"
-        className="border-y border-[#eadfc8] bg-white py-20 md:py-28"
-      >
+      {/* 4. Construction UX Standards Section */}
+      <section id="construction-ux" className="py-20 bg-slate-950 border-t border-slate-800">
         <Container>
-          <AnimatedSection className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#92400e]">
-                Roadmap
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                More trade and contractor niches can follow.
-              </h2>
-            </div>
-            <p className="max-w-md text-sm leading-6 text-stone-600">
-              Upcoming concepts stay here until their status becomes live or
-              completed. Published websites are removed automatically.
+          <AnimatedSection className="max-w-3xl mx-auto text-center mb-16">
+            <span className="inline-flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase tracking-widest mb-3">
+              <Layers className="w-4 h-4" />
+              CONSTRUCTION UX ESSENTIALS
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+              Designed Around Proof, Speed & Conversion
+            </h2>
+            <p className="text-slate-400 text-base">
+              Commercial and residential clients evaluate contractors differently than standard ecommerce shoppers. Here is how our templates drive conversion:
             </p>
           </AnimatedSection>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {upcomingConcepts.map(([name, focus], index) => (
-              <article
-                key={name}
-                className="group overflow-hidden border border-[#eadfc8] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                <div className="relative h-40 overflow-hidden bg-[linear-gradient(145deg,#faf7ef,#3f3f46_58%,#d97706)]">
-                  <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(90deg,white_1px,transparent_1px),linear-gradient(white_1px,transparent_1px)] [background-size:32px_32px]" />
-                  <div className="absolute bottom-0 left-[12%] h-[50%] w-[28%] bg-white/20" />
-                  <div className="absolute bottom-0 right-[16%] h-[75%] w-[34%] bg-white/30 [clip-path:polygon(50%_0,100%_36%,100%_100%,0_100%,0_36%)]" />
-                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#92400e]">
-                    Coming soon
-                  </div>
-                  <span className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">
-                    Concept{" "}
-                    {String(index + liveWebsites.length + 1).padStart(2, "0")}
-                  </span>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {constructionPillars.map((pillar, idx) => (
+              <div key={idx} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+                <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-5">
+                  <pillar.icon className="w-6 h-6" />
                 </div>
-                <div className="p-6">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#92400e]">
-                    Trade & contractor
-                  </p>
-                  <h3 className="mt-3 text-2xl font-black">{name}</h3>
-                  <p className="mt-2 text-sm font-bold capitalize text-stone-500">
-                    {focus}
-                  </p>
-                  <p className="mt-4 text-sm leading-6 text-stone-600">
-                    A proof-led contractor concept featuring services, completed
-                    work, credentials, service areas, and a straightforward
-                    quote request.
-                  </p>
-                  <div className="mt-5 flex gap-2 border-t border-stone-200 pt-5">
-                    {["#3f3f46", "#faf7ef", "#d97706", "#171717"].map(
-                      (color) => (
-                        <span
-                          key={color}
-                          className="h-6 w-6 rounded-full border border-stone-300"
-                          style={{ backgroundColor: color }}
-                        />
-                      ),
-                    )}
-                  </div>
-                  <Link to="/construction/coming-soon">
-                    <span className="mt-5 inline-flex w-full  items-center justify-center rounded-lg bg-stone-100 px-4 py-3 text-sm font-bold text-stone-500">
-                      Coming Soon
-                    </span>
-                  </Link>
-                </div>
-              </article>
+                <h3 className="text-lg font-extrabold text-white mb-2">{pillar.title}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">{pillar.desc}</p>
+              </div>
             ))}
           </div>
         </Container>

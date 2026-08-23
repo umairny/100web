@@ -9,7 +9,7 @@ export const constructionWebsites: WebsiteDesign[] = [
     shortDescription:
       "General contractor homepage with project proof, service clarity, process steps, and estimate conversion",
     slug: "forgepoint-builders",
-    image: imageUrl("home/construction-preview.webp"),
+    image: imageUrl("Construction/forgepoint/hero.webp"),
     colors: {
       primary: "#3f3f46",
       secondary: "#fef3c7",
