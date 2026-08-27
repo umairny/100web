@@ -21,13 +21,17 @@ import {
 } from "lucide-react";
 import "./BluePeakPlumbing.css";
 
-// WebP Image Imports
-import heroImg from "../../assets/optimized/Construction/bluepeak/hero.webp";
-import emergencyImg from "../../assets/optimized/Construction/bluepeak/emergency.webp";
-import repipeImg from "../../assets/optimized/Construction/bluepeak/repipe.webp";
-import commercialImg from "../../assets/optimized/Construction/bluepeak/commercial.webp";
-import waterheaterImg from "../../assets/optimized/Construction/bluepeak/waterheater.webp";
-import drainImg from "../../assets/optimized/Construction/bluepeak/drain.webp";
+import { imageUrl } from "../../assets/images";
+
+const fallbackBluepeak = imageUrl("Construction/bluepeak.webp") || "/images/Construction/bluepeak.webp";
+
+// WebP Image Imports via imageUrl helper with fallback
+const heroImg = imageUrl("Construction/bluepeak/hero.webp") || fallbackBluepeak;
+const emergencyImg = imageUrl("Construction/bluepeak/emergency.webp") || fallbackBluepeak;
+const repipeImg = imageUrl("Construction/bluepeak/repipe.webp") || fallbackBluepeak;
+const commercialImg = imageUrl("Construction/bluepeak/commercial.webp") || fallbackBluepeak;
+const waterheaterImg = imageUrl("Construction/bluepeak/waterheater.webp") || fallbackBluepeak;
+const drainImg = imageUrl("Construction/bluepeak/drain.webp") || fallbackBluepeak;
 
 const navItems = [
   { id: "bp-services", label: "Core Services" },

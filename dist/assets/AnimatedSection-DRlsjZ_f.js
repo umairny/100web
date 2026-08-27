@@ -1,1 +1,0 @@
-import{j as d}from"./index-Bw_6gq56.js";const t={fade:"fade-in","fade-up":"fade-in-up","fade-down":"fade-in-down","scale-in":"scale-in","slide-left":"slide-in-left","slide-right":"slide-in-right"};function l({children:e,className:i="",animation:a="fade-up",delay:n="",as:s="div"}){return d.jsx(s,{className:`${t[a]} ${n} ${i}`,children:e})}export{l as A};
