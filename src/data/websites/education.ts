@@ -106,4 +106,72 @@ export const educationWebsites: WebsiteDesign[] = [
     },
     status: "completed",
   },
+  {
+    id: "tutorloop",
+    title: "TutorLoop",
+    category: "Education",
+    style: "trusted, structured, goal-oriented, marketplace-focused",
+    shortDescription:
+      "A trusted marketplace that helps families compare tutors, book sessions, and track learning goals.",
+    slug: "tutorloop",
+    image: imageUrl("home/education-preview.webp"),
+    colors: {
+      primary: "#064e3b",
+      secondary: "#ecfdf5",
+      accent: "#f59e0b",
+      dark: "#062319",
+    },
+    status: "completed",
+  },
+  {
+    id: "skillforge",
+    title: "SkillForge",
+    category: "Education",
+    style: "practical, instructor-led, career-focused, high-impact",
+    shortDescription:
+      "Practical, instructor-led workshops focused on skills learners can apply immediately at work.",
+    slug: "skillforge",
+    image: imageUrl("home/education-preview.webp"),
+    colors: {
+      primary: "#f97316",
+      secondary: "#fff7ed",
+      accent: "#0284c7",
+      dark: "#0a0f1d",
+    },
+    status: "completed",
+  },
+  {
+    id: "scholarspring",
+    title: "ScholarSpring",
+    category: "Education",
+    style: "warm, nurturing, playful, family-centered",
+    shortDescription:
+      "A warm preschool enrollment experience built around play, safety, routines, and family trust.",
+    slug: "scholarspring",
+    image: imageUrl("home/education-preview.webp"),
+    colors: {
+      primary: "#fb7185",
+      secondary: "#f0fdf4",
+      accent: "#f59e0b",
+      dark: "#0f172a",
+    },
+    status: "completed",
+  },
+  {
+    id: "protrack",
+    title: "ProTrack Trades",
+    category: "Education",
+    style: "industrial, hands-on, credentialed, job-focused",
+    shortDescription:
+      "A direct enrollment experience for practical training, certifications, apprenticeships, and job placement.",
+    slug: "protrack",
+    image: imageUrl("home/education-preview.webp"),
+    colors: {
+      primary: "#f59e0b",
+      secondary: "#0f172a",
+      accent: "#fbbf24",
+      dark: "#080d1a",
+    },
+    status: "completed",
+  },
 ];

@@ -1,373 +1,532 @@
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  ArrowUpRight,
+  Award,
   BookOpen,
   Check,
+  CheckCircle2,
+  ChevronRight,
+  Code2,
+  Compass,
+  Filter,
   GraduationCap,
+  Hammer,
+  HardHat,
+  Heart,
+  HelpCircle,
+  Laptop,
+  Layers,
   LayoutGrid,
+  Lightbulb,
+  MapPin,
+  MoveRight,
   School,
+  Search,
+  ShieldCheck,
+  Smile,
   Sparkles,
+  Star,
+  Target,
+  Trophy,
   Users,
+  Wrench,
+  Zap,
 } from "lucide-react";
-import { educationWebsites } from "../../data/websites";
 import "./EducationIndex.css";
-import fluentPathImage from "../../assets/optimized/education/fluentpath.webp";
-import tutorLoopImage from "../../assets/optimized/education/tutorloop.webp";
-import skillForgeImage from "../../assets/optimized/education/skillforge.webp";
-import scholarSpringImage from "../../assets/optimized/education/scholarspring.webp";
-import atlasCollegeImage from "../../assets/optimized/education/atlascollege.webp";
-import proTrackImage from "../../assets/optimized/education/protrack.webp";
-import examEdgeImage from "../../assets/optimized/education/examedge.webp";
 
-const categories = [
-  [GraduationCap, "Online Academies"],
-  [School, "Private Schools"],
-  [BookOpen, "Tutoring & Prep"],
-  [Users, "Student Communities"],
-  [Sparkles, "Workshops"],
-  [LayoutGrid, "Learning Portals"],
+// Individual Webpage Preview Images
+import brightBridgeImg from "../../assets/optimized/education/brightbridge.webp";
+import atlasCollegeImg from "../../assets/optimized/education/atlascollege.webp";
+import codeNestImg from "../../assets/optimized/education/codenest.webp";
+import examEdgeImg from "../../assets/optimized/education/examedge.webp";
+import fluentPathImg from "../../assets/optimized/education/fluentpath.webp";
+import tutorLoopImg from "../../assets/optimized/education/tutorloop.webp";
+import skillForgeImg from "../../assets/optimized/education/skillforge.webp";
+import scholarSpringImg from "../../assets/optimized/education/scholarspring.webp";
+import proTrackImg from "../../assets/optimized/education/protrack.webp";
+
+// Education Websites Full Dataset
+const educationDirectory = [
+  {
+    id: "brightbridge",
+    title: "BrightBridge Academy",
+    badge: "K-12 Hybrid Academy",
+    category: "k12",
+    categoryName: "Online & Hybrid Academies",
+    slug: "brightbridge-academy",
+    image: brightBridgeImg,
+    description: "A modern private hybrid school experience built for flexible schedules, STEM excellence, and university readiness.",
+    audience: "K-12 Families & Students",
+    style: "Academic, Trustworthy, Modern Navy & Amber",
+    colors: ["#1e3a8a", "#f59e0b", "#10b981", "#0f172a"],
+    tags: ["Hybrid K-12", "STEM Curriculum", "Campus Tours"],
+    metrics: "98% College Acceptance • 12:1 Student Ratio",
+  },
+  {
+    id: "atlascollege",
+    title: "Atlas College Counseling",
+    badge: "Admissions Guidance",
+    category: "counseling",
+    categoryName: "College Counseling & Prep",
+    slug: "atlas-college-counseling",
+    image: atlasCollegeImg,
+    description: "Personalized Ivy League and top-tier university admissions counseling, essay workshops, and holistic roadmap planning.",
+    audience: "High Schoolers & Parents",
+    style: "Prestigious, Refined, Deep Indigo & Gold",
+    colors: ["#1e1b4b", "#fbbf24", "#3b82f6", "#090d16"],
+    tags: ["Ivy League Strategy", "1:1 Essay Mentorship", "Scholarship Guidance"],
+    metrics: "94% Top-30 Admission • $4.2M Scholarships",
+  },
+  {
+    id: "codenest",
+    title: "CodeNest Kids",
+    badge: "Kids Coding Academy",
+    category: "k12",
+    categoryName: "Online & Hybrid Academies",
+    slug: "codenest-kids",
+    image: codeNestImg,
+    description: "Gamified, project-based programming for young creators aged 6-16 with Scratch, Python, Roblox Studio, and web apps.",
+    audience: "Ages 6 – 16 & Parents",
+    style: "Playful, Energetic, Electric Indigo & Neon Teal",
+    colors: ["#6366f1", "#06b6d4", "#ec4899", "#0f172a"],
+    tags: ["Roblox & Scratch", "Live Mentors", "Game Projects"],
+    metrics: "18,000+ Young Creators • 450+ Games Built",
+  },
+  {
+    id: "examedge",
+    title: "ExamEdge Prep",
+    badge: "Test Prep & Tutoring",
+    category: "counseling",
+    categoryName: "College Counseling & Prep",
+    slug: "exam-edge-prep",
+    image: examEdgeImg,
+    description: "Adaptive SAT, ACT & AP test preparation platform with simulated exams, pinpoint weak-spot diagnostics, and score guarantees.",
+    audience: "Standardized Test Takers",
+    style: "High-Performance, Data-Driven, Navy & Cyan",
+    colors: ["#0f172a", "#06b6d4", "#3b82f6", "#f59e0b"],
+    tags: ["+180 Pt Guarantee", "Full-Length Mocks", "1:1 Coaching"],
+    metrics: "+195 Avg SAT Leap • 98% 4+ on APs",
+  },
+  {
+    id: "fluentpath",
+    title: "FluentPath Languages",
+    badge: "Language Immersion",
+    category: "tutoring",
+    categoryName: "Tutoring & Marketplaces",
+    slug: "fluentpath-languages",
+    image: fluentPathImg,
+    description: "Live 1-on-1 language immersion with certified native tutors, CEFR milestones, business fluency, and real conversations.",
+    audience: "Adult Learners & Professionals",
+    style: "Warm, Sophisticated, Crimson, Emerald & Gold",
+    colors: ["#e11d48", "#059669", "#d97706", "#0f172a"],
+    tags: ["CEFR Alignment", "Native Tutors", "Accent Coaching"],
+    metrics: "25+ Languages • 14,000+ Fluent Learners",
+  },
+  {
+    id: "tutorloop",
+    title: "TutorLoop Marketplace",
+    badge: "Tutoring Marketplace",
+    category: "tutoring",
+    categoryName: "Tutoring & Marketplaces",
+    slug: "tutorloop",
+    image: tutorLoopImg,
+    description: "A trusted marketplace to compare vetted subject tutors, book flexible sessions, simulate grade jumps, and track learning goals.",
+    audience: "K-12 & College Students",
+    style: "Futuristic, High-Tech, Cyber Indigo & Hyperlime",
+    colors: ["#4f46e5", "#84cc16", "#06b6d4", "#030712"],
+    tags: ["Smart Matching", "Grade Leap Predictor", "Instant Booking"],
+    metrics: "1,200+ Vetted Tutors • 4.9/5 Rating",
+  },
+  {
+    id: "skillforge",
+    title: "SkillForge Workshops",
+    badge: "Career Workshops",
+    category: "career",
+    categoryName: "Career Workshops & Trades",
+    slug: "skillforge",
+    image: skillForgeImg,
+    description: "Practical, instructor-led career workshops focused on high-demand skills in UX, Data, AI, and Product with live cohort feedback.",
+    audience: "Working Professionals & Switchers",
+    style: "Industrial Cyber, Midnight Slate & Vivid Orange",
+    colors: ["#f97316", "#06b6d4", "#8b5cf6", "#0a0f1d"],
+    tags: ["Live Cohorts", "Portfolio Reviews", "Hiring Referrals"],
+    metrics: "+41% Salary Growth • 92% Completion",
+  },
+  {
+    id: "scholarspring",
+    title: "ScholarSpring Preschool",
+    badge: "Early Learning",
+    category: "early",
+    categoryName: "Early Learning & Preschool",
+    slug: "scholarspring",
+    image: scholarSpringImg,
+    description: "A warm preschool enrollment experience built around play, safety, daily routine transparency, and joyful childhood discovery.",
+    audience: "Toddlers (18m) to Pre-K (5y)",
+    style: "Joyful, Pastel, Coral Watermelon & Sage Mint",
+    colors: ["#fb7185", "#22c55e", "#f59e0b", "#0f172a"],
+    tags: ["1:6 Low Ratio", "Daily Parent App", "Organic Meals"],
+    metrics: "96% Kindergarten Ready • 98% Parent Trust",
+  },
+  {
+    id: "protrack",
+    title: "ProTrack Trades",
+    badge: "Skilled-Trade Training",
+    category: "career",
+    categoryName: "Career Workshops & Trades",
+    slug: "protrack",
+    image: proTrackImg,
+    description: "Direct enrollment experience for technical trades (Electrical, HVAC, Welding, Plumbing) with hands-on labs and job placement.",
+    audience: "Career Starters & Apprentices",
+    style: "Heavy Industrial, Construction Navy & Amber",
+    colors: ["#f59e0b", "#0f172a", "#22c55e", "#080d1a"],
+    tags: ["OSHA & NCCER Certs", "Evening Labs", "Apprenticeships"],
+    metrics: "92% Job Placement • $18K Wage Growth",
+  },
 ];
 
-const principles = [
-  [
-    "01",
-    "Make the path visible",
-    "Show programs, curriculum, schedules, and the next enrollment step without making families search.",
-  ],
-  [
-    "02",
-    "Build trust early",
-    "Lead with outcomes, faculty credibility, student support, and specific proof of learning.",
-  ],
-  [
-    "03",
-    "Design for decisions",
-    "Give every visitor a clear route based on their goals, age, learning style, and timeline.",
-  ],
-];
-
-const upcoming = [
+// UX Principles
+const uxPrinciples = [
   {
-    name: "TutorLoop",
-    focus: "Tutoring marketplace",
-    audience: "Students & families",
-    format: "One-to-one sessions",
-    image: tutorLoopImage,
-    description:
-      "A trusted marketplace that helps families compare tutors, book sessions, and track learning goals.",
-    features: ["Verified tutors", "Smart matching", "Session dashboard"],
-    status: "Design ready",
+    num: "01",
+    title: "Make the Path Visible",
+    desc: "Show clear programs, transparent tuition, weekly schedules, and the immediate next step without friction.",
+    icon: Compass,
+    accent: "icon-indigo",
   },
   {
-    name: "SkillForge",
-    focus: "Career workshops",
-    audience: "Career switchers",
-    format: "Short intensives",
-    image: skillForgeImage,
-    description:
-      "Practical, instructor-led workshops focused on skills learners can apply immediately at work.",
-    features: ["Workshop calendar", "Skill pathways", "Completion badges"],
-    status: "In planning",
+    num: "02",
+    title: "Build Trust Early",
+    desc: "Lead with verified outcomes, faculty credentials, real learner projects, and transparent guarantees.",
+    icon: ShieldCheck,
+    accent: "icon-teal",
   },
   {
-    name: "ScholarSpring",
-    focus: "Early learning",
-    audience: "Children & parents",
-    format: "Campus programs",
-    image: scholarSpringImage,
-    description:
-      "A warm preschool enrollment experience built around play, safety, routines, and family trust.",
-    features: ["Program comparison", "Family resources", "Visit scheduling"],
-    status: "In planning",
-  },
-  {
-    name: "ProTrack Trades",
-    focus: "Skilled-trade training",
-    audience: "Career starters",
-    format: "Hands-on programs",
-    image: proTrackImage,
-    description:
-      "A direct enrollment experience for practical training, certifications, apprenticeships, and job placement.",
-    features: ["Trade pathways", "Facility tours", "Career outcomes"],
-    status: "Researching",
+    num: "03",
+    title: "Design for Decisions",
+    desc: "Provide interactive filters, self-assessment simulators, and personalized booking flows for every family.",
+    icon: Target,
+    accent: "icon-amber",
   },
 ];
 
 export function EducationIndex() {
-  const liveWebsites = educationWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
-  );
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  // Filtered List
+  const filteredWebsites = useMemo(() => {
+    return educationDirectory.filter((site) => {
+      const matchesCategory =
+        activeCategory === "all" || site.category === activeCategory;
+      const matchesSearch =
+        site.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        site.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        site.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        site.categoryName.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
 
   return (
-    <main className="edu-index">
-      <section className="edu-hero">
-        <div className="edu-orb orb-one" />
-        <div className="edu-orb orb-two" />
-        <div className="edu-shell hero-layout">
-          <div className="hero-content">
-            <Link to="/" className="back-link">
-              ← Back to all categories
+    <main className="edu-idx-app" id="top" tabIndex={-1}>
+      {/* Hero Studio Banner */}
+      <section className="edu-idx-hero">
+        <div className="edu-idx-orb orb-1" />
+        <div className="edu-idx-orb orb-2" />
+        <div className="edu-idx-grid-overlay" />
+
+        <div className="edu-idx-wrap hero-inner-grid">
+          {/* Left Hero Content */}
+          <div className="edu-idx-hero-copy">
+            <Link to="/" className="edu-idx-back-link">
+              ← Back to all 100 website categories
             </Link>
-            <span className="hero-label">
-              <span>{liveWebsites.length}</span> live education experiences
-            </span>
-            <h1>Education websites that make the next step feel clear.</h1>
-            <p>
-              Explore thoughtful digital experiences for online academies,
-              private schools, tutors, and learning communities—each designed
-              around trust, momentum, and enrollment.
+
+            <div className="edu-idx-live-badge">
+              <span className="live-dot" />
+              <span>{educationDirectory.length} COMPLETED EDUCATION PLATFORMS</span>
+            </div>
+
+            <h1 className="edu-idx-hero-title">
+              Education experiences engineered for clarity, trust & enrollment.
+            </h1>
+
+            <p className="edu-idx-hero-desc">
+              Explore bespoke web architectures for private academies, admissions counseling, tutoring marketplaces, early learning preschools, and skilled-trade institutes.
             </p>
-            <div className="hero-actions">
-              <a href="#live-websites" className="edu-button primary">
-                Explore websites <ArrowRight />
+
+            <div className="edu-idx-hero-actions">
+              <a href="#directory" className="edu-idx-btn-primary">
+                <span>Explore All 9 Websites</span>
+                <ArrowRight size={17} />
               </a>
-              <a href="#approach" className="edu-button secondary">
-                Our UX approach
+              <a href="#principles" className="edu-idx-btn-secondary">
+                <span>Our UX Principles</span>
               </a>
             </div>
-            <div className="hero-proof">
-              <span>
-                <Check /> Responsive by design
-              </span>
-              <span>
-                <Check /> Real enrollment flows
-              </span>
-              <span>
-                <Check /> Accessible structure
-              </span>
+
+            <div className="edu-idx-hero-badges">
+              <div className="edu-idx-badge-item">
+                <CheckCircle2 size={16} className="text-emerald" />
+                <span>100% Fully Responsive</span>
+              </div>
+              <div className="edu-idx-badge-item">
+                <CheckCircle2 size={16} className="text-emerald" />
+                <span>Real Modals & Workflows</span>
+              </div>
+              <div className="edu-idx-badge-item">
+                <CheckCircle2 size={16} className="text-emerald" />
+                <span>WCAG Accessible</span>
+              </div>
             </div>
           </div>
 
-          <div className="hero-showcase" aria-hidden="true">
-            {liveWebsites.slice(0, 2).map((website, index) => (
-              <div
-                className={`showcase-card card-${index + 1}`}
-                key={website.id}
+          {/* Right Hero Interactive Visual Showcase */}
+          <div className="edu-idx-hero-showcase">
+            <div className="edu-idx-preview-deck">
+              <div className="edu-idx-preview-card card-front">
+                <img src={tutorLoopImg} alt="TutorLoop Platform Preview" />
+                <div className="edu-idx-card-foot">
+                  <div>
+                    <small>FEATURED PLATFORM</small>
+                    <strong>TutorLoop Marketplace</strong>
+                  </div>
+                  <span className="edu-idx-live-tag">LIVE</span>
+                </div>
+              </div>
+
+              <div className="edu-idx-preview-card card-back">
+                <img src={skillForgeImg} alt="SkillForge Platform Preview" />
+                <div className="edu-idx-card-foot">
+                  <div>
+                    <small>FEATURED PLATFORM</small>
+                    <strong>SkillForge Workshops</strong>
+                  </div>
+                  <span className="edu-idx-live-tag">LIVE</span>
+                </div>
+              </div>
+
+              <div className="edu-idx-floating-trust-pill">
+                <Sparkles size={18} className="text-amber" />
+                <div>
+                  <strong>Engineered for Momentum</strong>
+                  <small>From first impression to enrollment</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Category Navigation Bar & Search Strip */}
+      <section className="edu-idx-filter-bar" id="directory">
+        <div className="edu-idx-wrap filter-inner-row">
+          {/* Category Filter Pills */}
+          <div className="edu-idx-category-pills">
+            {[
+              { id: "all", label: "All Platforms", count: educationDirectory.length },
+              { id: "k12", label: "Academies & K-12", count: 2 },
+              { id: "counseling", label: "Counseling & Test Prep", count: 2 },
+              { id: "tutoring", label: "Tutoring & Languages", count: 2 },
+              { id: "career", label: "Career & Trades", count: 2 },
+              { id: "early", label: "Preschool", count: 1 },
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                className={`edu-idx-cat-pill ${activeCategory === cat.id ? "active" : ""}`}
+                onClick={() => setActiveCategory(cat.id)}
               >
-                <img src={website.image} alt="" />
-                <div>
-                  <span>Live concept</span>
-                  <strong>{website.title}</strong>
-                </div>
-              </div>
+                <span>{cat.label}</span>
+                <span className="pill-count">{cat.count}</span>
+              </button>
             ))}
-            <div className="showcase-badge">
-              <Sparkles />
-              <strong>Designed for clarity</strong>
-              <span>From first visit to enrollment</span>
-            </div>
+          </div>
+
+          {/* Search Box */}
+          <div className="edu-idx-search-box">
+            <Search size={16} className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search by name, trade, or subject..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button
+                className="clear-search"
+                onClick={() => setSearchQuery("")}
+                aria-label="Clear search"
+              >
+                ×
+              </button>
+            )}
           </div>
         </div>
       </section>
 
-      <section className="category-strip">
-        <div className="edu-shell category-list">
-          {categories.map(([Icon, label]) => (
-            <div key={String(label)}>
-              <Icon />
-              <span>{String(label)}</span>
+      {/* Directory Grid of Live Education Websites */}
+      <section className="edu-idx-grid-section">
+        <div className="edu-idx-wrap">
+          <div className="edu-idx-section-head">
+            <div>
+              <span className="edu-idx-eyebrow">LIVE DIRECTORY</span>
+              <h2 className="edu-idx-heading">Explore Live Education Experiences</h2>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="live-section edu-shell" id="live-websites">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">Live websites</span>
-            <h2>Distinct ways to inspire learners.</h2>
+            <p className="edu-idx-sub">
+              Showing <strong>{filteredWebsites.length}</strong> crafted web platforms with tailored design systems, schedules, and conversion journeys.
+            </p>
           </div>
-          <p>
-            Explore experiences for online learners, private-school families,
-            and young creators taking their first steps with code.
-          </p>
-        </div>
 
-        <div className="live-grid">
-          {liveWebsites.map((website, index) => (
-            <Link
-              to={`/education/${website.slug}`}
-              className="website-card"
-              key={website.id}
-            >
-              <div className="browser-frame">
-                <div className="browser-bar">
-                  <span />
-                  <span />
-                  <span />
-                  <b>{website.slug}.edu</b>
-                </div>
-                <div className="preview-window">
-                  <img
-                    src={website.image}
-                    alt={`${website.title} homepage preview`}
-                    loading="lazy"
-                  />
-                </div>
-                <span className="live-pill">Live</span>
-              </div>
-              <div className="website-copy">
-                <div className="website-number">0{index + 1}</div>
-                <div>
-                  <span className="website-type">
-                    {website.slug === "codenest-kids"
-                      ? "Coding academy for kids"
-                      : index === 0
-                        ? "Online learning platform"
-                        : "Private school admissions"}
-                  </span>
-                  <h3>{website.title}</h3>
-                  <p>{website.shortDescription}</p>
-                  <div className="style-row">
-                    <span>{website.style}</span>
-                    <div className="swatches">
-                      {Object.values(website.colors).map((color) => (
-                        <i key={color} style={{ backgroundColor: color }} />
+          {filteredWebsites.length > 0 ? (
+            <div className="edu-idx-cards-grid">
+              {filteredWebsites.map((site, index) => (
+                <article key={site.id} className="edu-idx-site-card">
+                  {/* Browser Mockup Header */}
+                  <div className="edu-idx-browser-bar">
+                    <div className="edu-idx-browser-dots">
+                      <span className="dot dot-red" />
+                      <span className="dot dot-yellow" />
+                      <span className="dot dot-green" />
+                    </div>
+                    <span className="edu-idx-browser-url">https://{site.slug}.edu</span>
+                    <span className="edu-idx-card-status">LIVE</span>
+                  </div>
+
+                  {/* Thumbnail Window with Hover Zoom */}
+                  <Link to={`/education/${site.slug}`} className="edu-idx-thumb-link">
+                    <div className="edu-idx-thumb-wrap">
+                      <img src={site.image} alt={`${site.title} preview`} loading="lazy" />
+                      <div className="edu-idx-thumb-overlay">
+                        <span className="edu-idx-btn-hover-open">
+                          <span>Launch Live Website</span>
+                          <ArrowUpRight size={16} />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+
+                  {/* Card Content Body */}
+                  <div className="edu-idx-card-body">
+                    <div className="edu-idx-card-top-meta">
+                      <span className="edu-idx-cat-tag">{site.badge}</span>
+                      <span className="edu-idx-num-tag">0{index + 1}</span>
+                    </div>
+
+                    <h3 className="edu-idx-card-title">
+                      <Link to={`/education/${site.slug}`}>{site.title}</Link>
+                    </h3>
+
+                    <p className="edu-idx-card-desc">{site.description}</p>
+
+                    <div className="edu-idx-card-metric-strip">
+                      <Award size={14} className="text-indigo" />
+                      <span>{site.metrics}</span>
+                    </div>
+
+                    {/* Tag Pills */}
+                    <div className="edu-idx-tags-row">
+                      {site.tags.map((tag) => (
+                        <span key={tag} className="edu-idx-tag-chip">
+                          {tag}
+                        </span>
                       ))}
                     </div>
+
+                    {/* Footer Row with Palette Swatches and Direct Link */}
+                    <div className="edu-idx-card-footer">
+                      <div className="edu-idx-swatches">
+                        {site.colors.map((c) => (
+                          <span
+                            key={c}
+                            className="swatch-dot"
+                            style={{ backgroundColor: c }}
+                            title={c}
+                          />
+                        ))}
+                      </div>
+
+                      <Link to={`/education/${site.slug}`} className="edu-idx-open-link">
+                        <span>View Website</span>
+                        <ArrowRight size={15} />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <span className="open-site">
-                  View full website <ArrowRight />
-                </span>
-              </div>
-            </Link>
-          ))}
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="edu-idx-no-results">
+              <BookOpen size={48} className="text-muted" />
+              <h3>No education platforms found</h3>
+              <p>Try searching for a different term or resetting the category filter.</p>
+              <button
+                onClick={() => {
+                  setActiveCategory("all");
+                  setSearchQuery("");
+                }}
+                className="edu-idx-btn-primary"
+              >
+                Reset Filters
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
-      <section className="approach-section" id="approach">
-        <div className="edu-shell">
-          <div className="section-heading light">
-            <div>
-              <span className="eyebrow">Education UX approach</span>
-              <h2>Good design reduces enrollment anxiety.</h2>
-            </div>
-            <p>
-              Education decisions carry weight. The interface should answer
-              practical questions while making the experience feel welcoming and
-              credible.
+      {/* UX Principles & Design Architecture */}
+      <section className="edu-idx-principles-section" id="principles">
+        <div className="edu-idx-wrap">
+          <div className="edu-idx-section-head light text-center">
+            <span className="edu-idx-eyebrow text-emerald">DESIGN PHILOSOPHY</span>
+            <h2 className="edu-idx-heading text-white">How Good UX Reduces Enrollment Anxiety</h2>
+            <p className="edu-idx-sub text-muted">
+              Education decisions carry significant personal, financial, and emotional weight. Our interface design answers practical questions immediately while building lasting family trust.
             </p>
           </div>
-          <div className="principle-grid">
-            {principles.map(([number, title, text]) => (
-              <article key={number}>
-                <span>{number}</span>
-                <div className="principle-icon">
-                  {number === "01" ? (
-                    <LayoutGrid />
-                  ) : number === "02" ? (
-                    <Users />
-                  ) : (
-                    <ArrowRight />
-                  )}
-                </div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="roadmap-section edu-shell" id="roadmap">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">Coming next</span>
-            <h2>More learning experiences are taking shape.</h2>
-          </div>
-          <p>
-            The roadmap expands beyond academies and schools into focused tools
-            for tutoring, test preparation, language learning, and career
-            growth.
-          </p>
-        </div>
-        <div className="roadmap-summary">
-          <span>
-            <strong>{upcoming.length}</strong> concepts in the pipeline
-          </span>
-          <span>
-            <strong>5</strong> learning audiences
-          </span>
-          <span>
-            <strong>3</strong> delivery models
-          </span>
-        </div>
-        <div className="roadmap-grid">
-          {upcoming.map((concept, index) => (
-            <article key={concept.name}>
-              <div className="concept-art">
-                {concept.image ? (
-                  <img
-                    src={concept.image}
-                    alt={`${concept.name} website preview`}
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="examedge-preview">
-                    <span>1540</span>
-                    <i />
-                    <i />
-                    <i />
-                    <strong>Score progress</strong>
+          <div className="edu-idx-principles-grid">
+            {uxPrinciples.map((p) => {
+              const IconComp = p.icon;
+              return (
+                <div key={p.num} className="edu-idx-principle-card">
+                  <div className="principle-card-head">
+                    <span className="principle-num">{p.num}</span>
+                    <div className={`principle-icon-box ${p.accent}`}>
+                      <IconComp size={22} />
+                    </div>
                   </div>
-                )}
-                <span className="concept-number">0{index + 3}</span>
-                <span
-                  className={`concept-status status-${concept.status.toLowerCase().replace(/\s+/g, "-")}`}
-                >
-                  {concept.status}
-                </span>
-              </div>
-              <div className="concept-copy">
-                <Link
-                  to={`/education/${concept.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                  className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-slate-600 transition hover:border-slate-400 hover:text-slate-900"
-                >
-                  Coming soon
-                </Link>
-                <h3>{concept.name}</h3>
-                <strong>{concept.focus}</strong>
-                <p>{concept.description}</p>
-                <div className="concept-meta">
-                  <span>
-                    <b>For</b>
-                    {concept.audience}
-                  </span>
-                  <span>
-                    <b>Format</b>
-                    {concept.format}
-                  </span>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
                 </div>
-                <ul>
-                  {concept.features.map((feature) => (
-                    <li key={feature}>
-                      <Check />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <div className="concept-footer">
-                  <span>Concept preview</span>
-                  <BookOpen />
-                </div>
-              </div>
-            </article>
-          ))}
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      <section className="edu-cta">
-        <div className="edu-shell">
-          <div>
-            <span className="eyebrow">Explore the collection</span>
-            <h2>Find a design direction for your next education experience.</h2>
+      {/* Bottom CTA Strip */}
+      <section className="edu-idx-cta-section">
+        <div className="edu-idx-wrap edu-idx-cta-box">
+          <div className="edu-idx-cta-copy">
+            <span className="edu-idx-eyebrow text-indigo">EXPLORE THE COMPLETE SUITE</span>
+            <h2>Ready to explore tailored learning platforms?</h2>
+            <p>From private schools to vocational trade apprenticeships, discover all 9 education web concepts.</p>
           </div>
-          <a href="#live-websites" className="edu-button primary">
-            View live websites <ArrowRight />
-          </a>
+          <div className="edu-idx-cta-buttons">
+            <a href="#directory" className="edu-idx-btn-primary">
+              <span>Back to Top</span>
+              <ArrowUpRight size={17} />
+            </a>
+            <Link to="/" className="edu-idx-btn-secondary">
+              <span>All Categories</span>
+            </Link>
+          </div>
         </div>
       </section>
     </main>
   );
 }
+
+export default EducationIndex;

@@ -40,6 +40,10 @@ const AtlasCollegeCounseling = lazy(() => import("./pages/Education/AtlasCollege
 const CodeNestKids = lazy(() => import("./pages/Education/CodeNestKids").then((m) => ({ default: m.CodeNestKids })));
 const ExamEdgePrep = lazy(() => import("./pages/Education/ExamEdgePrep").then((m) => ({ default: m.ExamEdgePrep })));
 const FluentPathLanguages = lazy(() => import("./pages/Education/FluentPathLanguages").then((m) => ({ default: m.FluentPathLanguages })));
+const TutorLoop = lazy(() => import("./pages/Education/TutorLoop").then((m) => ({ default: m.TutorLoop })));
+const SkillForge = lazy(() => import("./pages/Education/SkillForge").then((m) => ({ default: m.SkillForge })));
+const ScholarSpring = lazy(() => import("./pages/Education/ScholarSpring").then((m) => ({ default: m.ScholarSpring })));
+const ProTrackTrades = lazy(() => import("./pages/Education/ProTrackTrades").then((m) => ({ default: m.ProTrackTrades })));
 
 // Fitness
 const FitnessIndex = lazy(() => import("./pages/Fitness/FitnessIndexKinetic").then((m) => ({ default: m.FitnessIndex })));
@@ -481,6 +485,14 @@ function AppShell() {
               path="/education/fluentpath-languages"
               element={<FluentPathLanguages />}
             />
+            <Route path="/education/tutorloop" element={<TutorLoop />} />
+            <Route path="/education/tutor-loop" element={<TutorLoop />} />
+            <Route path="/education/skillforge" element={<SkillForge />} />
+            <Route path="/education/skillforge-workshops" element={<SkillForge />} />
+            <Route path="/education/scholarspring" element={<ScholarSpring />} />
+            <Route path="/education/scholar-spring" element={<ScholarSpring />} />
+            <Route path="/education/protrack" element={<ProTrackTrades />} />
+            <Route path="/education/protrack-trades" element={<ProTrackTrades />} />
             <Route path="/e-commerce" element={<EcommerceIndex />} />
             <Route
               path="/e-commerce/cartbloom-market"

@@ -312,14 +312,14 @@ export function AtlasCollegeCounseling() {
   // Sticky navbar scroll listener & active nav scrollspy
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
+      if (window.scrollY > 30) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
 
       const sections = navLinks.map((link) => link.href.substring(1));
-      const scrollPosition = window.scrollY + 130;
+      const scrollPosition = window.scrollY + 140;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
@@ -340,6 +340,36 @@ export function AtlasCollegeCounseling() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle body scroll lock, Escape key, and resize on mobile menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth > 1180 && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setActiveNav(href);
@@ -348,7 +378,7 @@ export function AtlasCollegeCounseling() {
     const targetId = href.substring(1);
     const targetEl = document.getElementById(targetId);
     if (targetEl) {
-      const headerOffset = 80;
+      const headerOffset = 90;
       const elementPosition = targetEl.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -395,61 +425,114 @@ export function AtlasCollegeCounseling() {
 
   return (
     <main className="atlas-app" id="about">
-      {/* Top Banner Notice */}
-      <div className="atlas-top-bar">
-        <div className="atlas-container atlas-top-bar-content">
-          <span>
-            <Sparkles className="icon-gold" /> <strong>Fall 2026 Admissions Counseling Cohort Now Open</strong> — Limited spots available per counselor.
-          </span>
-          <button onClick={() => setIsBookingOpen(true)} className="atlas-top-bar-btn">
-            Reserve Your Consultation <ArrowRight />
-          </button>
-        </div>
-      </div>
-
-      {/* Main Navigation - STICKY & RESPONSIVE WITH ACTIVE CLASS */}
-      <nav className={`atlas-header ${isScrolled ? "scrolled" : ""}`}>
-        <div className="atlas-container atlas-nav-inner">
-          <a
-            href="#about"
-            className="atlas-brand"
-            onClick={(e) => handleNavClick(e, "#about")}
-          >
-            <div className="atlas-brand-badge">✧</div>
-            <div className="atlas-brand-text">
-              <span className="atlas-brand-title">ATLAS</span>
-              <span className="atlas-brand-sub">COLLEGE COUNSELING</span>
+      {/* Top Banner Notice & Sticky Header Wrapper */}
+      <header className={`atlas-header-wrapper ${isScrolled ? "scrolled" : ""}`}>
+        {/* Top Banner Notice */}
+        <div className="atlas-top-bar">
+          <div className="atlas-container atlas-top-bar-content">
+            <div className="atlas-top-bar-text">
+              <Sparkles className="icon-gold icon-sparkle-spin" />
+              <span>
+                <strong>Fall 2026 Admissions Cohort Open</strong>
+                <span className="atlas-top-bar-subtext"> — Limited spots available per counselor</span>
+              </span>
             </div>
-          </a>
-
-          {/* Desktop Nav Links */}
-          <div className="atlas-nav-links">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`atlas-nav-link ${activeNav === link.href ? "active" : ""}`}
-                onClick={(e) => handleNavClick(e, link.href)}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-
-          <div className="atlas-nav-cta">
             <button
-              className="atlas-mobile-toggle"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle navigation menu"
+              onClick={() => setIsBookingOpen(true)}
+              className="atlas-top-bar-btn"
+              aria-label="Reserve Your Consultation"
             >
-              {mobileMenuOpen ? <X /> : <Menu />}
+              <span>Reserve Consultation</span>
+              <ArrowRight className="top-btn-arrow" />
             </button>
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
-        {mobileMenuOpen && (
-          <div className="atlas-mobile-menu">
+        {/* Main Sticky Navigation Bar */}
+        <nav className="atlas-header" aria-label="Main Navigation">
+          <div className="atlas-container atlas-nav-inner">
+            <a
+              href="#about"
+              className="atlas-brand"
+              onClick={(e) => handleNavClick(e, "#about")}
+              aria-label="Atlas College Counseling Home"
+            >
+              <div className="atlas-brand-badge">✧</div>
+              <div className="atlas-brand-text">
+                <span className="atlas-brand-title">ATLAS</span>
+                <span className="atlas-brand-sub">COLLEGE COUNSELING</span>
+              </div>
+            </a>
+
+            {/* Desktop Nav Links */}
+            <div className="atlas-nav-links">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`atlas-nav-link ${activeNav === link.href ? "active" : ""}`}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+
+            {/* Nav Actions & Mobile Toggle */}
+            <div className="atlas-nav-cta">
+              <button
+                onClick={() => setIsBookingOpen(true)}
+                className="atlas-btn-gold atlas-nav-desktop-btn"
+              >
+                <CalendarDays size={16} />
+                <span>Book Consultation</span>
+              </button>
+
+              <button
+                className={`atlas-mobile-toggle ${mobileMenuOpen ? "open" : ""}`}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile Drawer Overlay Backdrop */}
+      <div
+        className={`atlas-mobile-backdrop ${mobileMenuOpen ? "is-visible" : ""}`}
+        onClick={() => setMobileMenuOpen(false)}
+        aria-hidden={!mobileMenuOpen}
+      />
+
+      {/* Mobile Off-Canvas Drawer */}
+      <div
+        className={`atlas-mobile-drawer ${mobileMenuOpen ? "is-open" : ""}`}
+        aria-hidden={!mobileMenuOpen}
+      >
+        <div className="atlas-mobile-drawer-header">
+          <div className="atlas-brand-mini">
+            <div className="atlas-brand-badge-mini">✧</div>
+            <div className="atlas-brand-text-mini">
+              <span className="atlas-brand-title-mini">ATLAS</span>
+              <span className="atlas-brand-sub-mini">COLLEGE COUNSELING</span>
+            </div>
+          </div>
+          <button
+            className="atlas-mobile-close-btn"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close navigation drawer"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="atlas-mobile-drawer-body">
+          <div className="atlas-mobile-menu-label">Navigation</div>
+          <div className="atlas-mobile-menu-links">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -457,12 +540,36 @@ export function AtlasCollegeCounseling() {
                 className={`atlas-mobile-link ${activeNav === link.href ? "active" : ""}`}
                 onClick={(e) => handleNavClick(e, link.href)}
               >
-                {link.name}
+                <span>{link.name}</span>
+                <ArrowRight className="mobile-link-arrow" size={15} />
               </a>
             ))}
           </div>
-        )}
-      </nav>
+        </div>
+
+        <div className="atlas-mobile-drawer-footer">
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setIsBookingOpen(true);
+            }}
+            className="atlas-btn-gold atlas-mobile-cta-btn"
+          >
+            <CalendarDays size={16} />
+            <span>Book Free Consultation</span>
+          </button>
+
+          <div className="atlas-mobile-contact-card">
+            <div className="atlas-mobile-contact-badge">
+              <Sparkles size={13} className="icon-gold" />
+              <span>Fall 2026 Admissions Open</span>
+            </div>
+            <div className="atlas-mobile-contact-note">
+              Comprehensive Ivy & Elite College Counseling
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Hero Section */}
       <section className="atlas-hero-section">
