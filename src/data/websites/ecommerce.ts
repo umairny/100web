@@ -7,9 +7,10 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     category: "E-commerce",
     style: "polished, shoppable, conversion-focused, editorial retail",
     shortDescription:
-      "Curated online store homepage with product discovery, bundle offers, reviews, and checkout momentum",
+      "Curated online store homepage with product discovery, bundle offers, reviews, and checkout momentum.",
     slug: "cartbloom-market",
-    image: imageUrl("home/ecommerce-preview.webp"),
+    marketLabel: "DTC Lifestyle Market",
+    image: imageUrl("ecommerce/cartbloom.webp"),
     colors: {
       primary: "#424b33",
       secondary: "#f5f2eb",
@@ -26,7 +27,8 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     shortDescription:
       "Premium cycling equipment store with carbon wheelsets, MIPS helmets, aero kits, and custom bike configuration.",
     slug: "cyclebox-gear",
-    image: imageUrl("home/ecommerce-preview.webp"),
+    marketLabel: "Technical Cycling",
+    image: imageUrl("ecommerce/cyclebox.webp"),
     colors: {
       primary: "#0f172a",
       secondary: "#f8f7f2",
@@ -43,7 +45,8 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     shortDescription:
       "Design-focused home office store featuring solid walnut monitor stands, ergonomic task chairs, and workspace configurators.",
     slug: "desknest-supply",
-    image: imageUrl("home/ecommerce-preview.webp"),
+    marketLabel: "Ergonomic Workspace",
+    image: imageUrl("ecommerce/desknest.webp"),
     colors: {
       primary: "#181a1b",
       secondary: "#faf8f5",
@@ -60,7 +63,8 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     shortDescription:
       "Botanical daily skincare collection with morning/evening rituals, Kakadu plum Vitamin C serums, and custom routine builder.",
     slug: "fieldnote-skincare",
-    image: imageUrl("home/ecommerce-preview.webp"),
+    marketLabel: "Botanical Rituals",
+    image: imageUrl("ecommerce/fieldnote.webp"),
     colors: {
       primary: "#1a3b2b",
       secondary: "#faf8f4",
@@ -77,7 +81,8 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     shortDescription:
       "Cosmetics product launch page featuring The Dewy Elixir serum, shade matcher, and glass skin routine builder.",
     slug: "glowcart-beauty",
-    image: imageUrl("home/ecommerce-preview.webp"),
+    marketLabel: "Luxe Cosmetics",
+    image: imageUrl("ecommerce/glowcart.webp"),
     colors: {
       primary: "#181a1b",
       secondary: "#fbf8f5",
@@ -94,7 +99,8 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     shortDescription:
       "Curated home textiles and artisanal decor store with French flax bedding, mudcloth pillows, and bedroom layering studio.",
     slug: "hearth-linen",
-    image: imageUrl("home/ecommerce-preview.webp"),
+    marketLabel: "Artisanal Living",
+    image: imageUrl("ecommerce/hearthlinen.webp"),
     colors: {
       primary: "#2c2a29",
       secondary: "#faf8f5",
@@ -111,7 +117,8 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     shortDescription:
       "Curated sustainable toys store with wooden rainbows, Stapelstein stepping stones, and milestone toy matcher.",
     slug: "little-sprout",
-    image: imageUrl("home/ecommerce-preview.webp"),
+    marketLabel: "Montessori Toys",
+    image: imageUrl("ecommerce/littlesprout.webp"),
     colors: {
       primary: "#28534e",
       secondary: "#faf8f4",
@@ -128,7 +135,8 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     shortDescription:
       "Technical outdoor apparel store featuring GORE-TEX Pro hardshells, alpine layering system builder, and polartec fleece.",
     slug: "north-kind",
-    image: imageUrl("home/ecommerce-preview.webp"),
+    marketLabel: "Technical Outerwear",
+    image: imageUrl("ecommerce/northkind.webp"),
     colors: {
       primary: "#1a222c",
       secondary: "#f8f9fa",
@@ -145,12 +153,31 @@ export const ecommerceWebsites: WebsiteDesign[] = [
     shortDescription:
       "Curated specialty grocery store with artisan oils, San Marzano tomatoes, farm fresh produce, and weeknight meal kits.",
     slug: "pantry-pilot",
-    image: imageUrl("home/ecommerce-preview.webp"),
+    marketLabel: "Specialty Grocery",
+    image: imageUrl("ecommerce/pantrypilot.webp"),
     colors: {
       primary: "#0f4c5c",
       secondary: "#faf8f4",
       accent: "#f5b722",
       dark: "#0a3642",
+    },
+    status: "completed",
+  },
+  {
+    id: "paw-parcel",
+    title: "PawParcel Pets",
+    category: "E-commerce",
+    style: "playful, pet subscription, nutrition & enrichment, premium care",
+    shortDescription:
+      "Pet essentials subscription shop combining customizable quarterly surprise boxes, grain-free nutrition, and vet-approved toys.",
+    slug: "paw-parcel",
+    marketLabel: "Pet Subscription",
+    image: imageUrl("ecommerce/pawparcel.webp"),
+    colors: {
+      primary: "#1b3b6f",
+      secondary: "#faf8f5",
+      accent: "#f5a623",
+      dark: "#0e274d",
     },
     status: "completed",
   },

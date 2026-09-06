@@ -40,6 +40,7 @@ const HearthLinenLiving = lazy(() => import("./pages/Ecommerce/HearthLinenLiving
 const LittleSproutToys = lazy(() => import("./pages/Ecommerce/LittleSproutToys").then((m) => ({ default: m.LittleSproutToys })));
 const NorthKindOutdoor = lazy(() => import("./pages/Ecommerce/NorthKindOutdoor").then((m) => ({ default: m.NorthKindOutdoor })));
 const PantryPilotGrocery = lazy(() => import("./pages/Ecommerce/PantryPilotGrocery").then((m) => ({ default: m.PantryPilotGrocery })));
+const PawParcelPets = lazy(() => import("./pages/Ecommerce/PawParcelPets").then((m) => ({ default: m.PawParcelPets })));
 const EcommerceIndex = lazy(() => import("./pages/Ecommerce/EcommerceIndex").then((m) => ({ default: m.EcommerceIndex })));
 const EducationIndex = lazy(() => import("./pages/Education/EducationIndex").then((m) => ({ default: m.EducationIndex })));
 const LearnSphereAcademy = lazy(() => import("./pages/Education/LearnSphereAcademy").then((m) => ({ default: m.LearnSphereAcademy })));
@@ -650,6 +651,22 @@ function AppShell() {
             <Route
               path="/ecommerce/pantrypilot"
               element={<PantryPilotGrocery />}
+            />
+            <Route
+              path="/e-commerce/paw-parcel"
+              element={<PawParcelPets />}
+            />
+            <Route
+              path="/e-commerce/pawparcel"
+              element={<PawParcelPets />}
+            />
+            <Route
+              path="/ecommerce/paw-parcel"
+              element={<PawParcelPets />}
+            />
+            <Route
+              path="/ecommerce/pawparcel"
+              element={<PawParcelPets />}
             />
             <Route path="/portfolio" element={<PortfolioIndex />} />
             <Route
