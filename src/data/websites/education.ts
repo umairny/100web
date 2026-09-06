@@ -1,8 +1,15 @@
 import brightBridgeImage from "../../assets/optimized/education/brightbridge.webp";
 import atlasCollegeImage from "../../assets/optimized/education/atlascollege.webp";
 import codeNestImage from "../../assets/optimized/education/codenest.webp";
-import { imageUrl } from "../../assets/optimized";
+import examEdgeImage from "../../assets/optimized/education/examedge.webp";
+import fluentPathImage from "../../assets/optimized/education/fluentpath.webp";
+import tutorLoopImage from "../../assets/optimized/education/tutorloop.webp";
+import skillForgeImage from "../../assets/optimized/education/skillforge.webp";
+import scholarSpringImage from "../../assets/optimized/education/scholarspring.webp";
+import proTrackImage from "../../assets/optimized/education/protrack.webp";
+import learnSphereImage from "../../assets/optimized/education/leansphere.webp";
 import type { WebsiteDesign } from "../websites";
+
 export const educationWebsites: WebsiteDesign[] = [
   {
     id: "learnsphere-academy",
@@ -12,12 +19,12 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "Online academy homepage with curriculum previews, mentor trust, student outcomes, and enrollment flow",
     slug: "learnsphere-academy",
-    image: imageUrl("home/education-preview.webp"),
+    image: learnSphereImage,
     colors: {
-      primary: "#3730a3",
-      secondary: "#e0e7ff",
-      accent: "#22c55e",
-      dark: "#111827",
+      primary: "#2563eb",
+      secondary: "#eff6ff",
+      accent: "#10b981",
+      dark: "#0b1329",
     },
     status: "completed",
   },
@@ -80,7 +87,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "Exam preparation homepage with course offerings, study plans, tutor trust, and enrollment conversion",
     slug: "exam-edge-prep",
-    image: imageUrl("home/education-preview.webp"),
+    image: examEdgeImage,
     colors: {
       primary: "#1a202c",
       secondary: "#edf2f7",
@@ -97,7 +104,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "Language learning homepage with course offerings, immersive experiences, tutor trust, and enrollment conversion",
     slug: "fluentpath-languages",
-    image: imageUrl("home/education-preview.webp"),
+    image: fluentPathImage,
     colors: {
       primary: "#2c5282",
       secondary: "#bee3f8",
@@ -114,7 +121,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "A trusted marketplace that helps families compare tutors, book sessions, and track learning goals.",
     slug: "tutorloop",
-    image: imageUrl("home/education-preview.webp"),
+    image: tutorLoopImage,
     colors: {
       primary: "#064e3b",
       secondary: "#ecfdf5",
@@ -131,7 +138,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "Practical, instructor-led workshops focused on skills learners can apply immediately at work.",
     slug: "skillforge",
-    image: imageUrl("home/education-preview.webp"),
+    image: skillForgeImage,
     colors: {
       primary: "#f97316",
       secondary: "#fff7ed",
@@ -148,7 +155,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "A warm preschool enrollment experience built around play, safety, routines, and family trust.",
     slug: "scholarspring",
-    image: imageUrl("home/education-preview.webp"),
+    image: scholarSpringImage,
     colors: {
       primary: "#fb7185",
       secondary: "#f0fdf4",
@@ -165,7 +172,7 @@ export const educationWebsites: WebsiteDesign[] = [
     shortDescription:
       "A direct enrollment experience for practical training, certifications, apprenticeships, and job placement.",
     slug: "protrack",
-    image: imageUrl("home/education-preview.webp"),
+    image: proTrackImage,
     colors: {
       primary: "#f59e0b",
       secondary: "#0f172a",

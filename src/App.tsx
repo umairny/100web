@@ -32,6 +32,14 @@ const CivicWorksContractors = lazy(() => import("./pages/Construction/CivicWorks
 
 // Ecommerce & Education
 const CartBloomMarket = lazy(() => import("./pages/Ecommerce/CartBloomMarket").then((m) => ({ default: m.CartBloomMarket })));
+const CycleBoxGear = lazy(() => import("./pages/Ecommerce/CycleBoxGear").then((m) => ({ default: m.CycleBoxGear })));
+const DeskNestSupply = lazy(() => import("./pages/Ecommerce/DeskNestSupply").then((m) => ({ default: m.DeskNestSupply })));
+const FieldNoteSkincare = lazy(() => import("./pages/Ecommerce/FieldNoteSkincare").then((m) => ({ default: m.FieldNoteSkincare })));
+const GlowCartBeauty = lazy(() => import("./pages/Ecommerce/GlowCartBeauty").then((m) => ({ default: m.GlowCartBeauty })));
+const HearthLinenLiving = lazy(() => import("./pages/Ecommerce/HearthLinenLiving").then((m) => ({ default: m.HearthLinenLiving })));
+const LittleSproutToys = lazy(() => import("./pages/Ecommerce/LittleSproutToys").then((m) => ({ default: m.LittleSproutToys })));
+const NorthKindOutdoor = lazy(() => import("./pages/Ecommerce/NorthKindOutdoor").then((m) => ({ default: m.NorthKindOutdoor })));
+const PantryPilotGrocery = lazy(() => import("./pages/Ecommerce/PantryPilotGrocery").then((m) => ({ default: m.PantryPilotGrocery })));
 const EcommerceIndex = lazy(() => import("./pages/Ecommerce/EcommerceIndex").then((m) => ({ default: m.EcommerceIndex })));
 const EducationIndex = lazy(() => import("./pages/Education/EducationIndex").then((m) => ({ default: m.EducationIndex })));
 const LearnSphereAcademy = lazy(() => import("./pages/Education/LearnSphereAcademy").then((m) => ({ default: m.LearnSphereAcademy })));
@@ -472,6 +480,10 @@ function AppShell() {
               element={<LearnSphereAcademy />}
             />
             <Route
+              path="/education/learnsphere"
+              element={<LearnSphereAcademy />}
+            />
+            <Route
               path="/education/brightbridge-academy"
               element={<BrightBridgeAcademy />}
             />
@@ -494,9 +506,150 @@ function AppShell() {
             <Route path="/education/protrack" element={<ProTrackTrades />} />
             <Route path="/education/protrack-trades" element={<ProTrackTrades />} />
             <Route path="/e-commerce" element={<EcommerceIndex />} />
+            <Route path="/ecommerce" element={<EcommerceIndex />} />
             <Route
               path="/e-commerce/cartbloom-market"
               element={<CartBloomMarket />}
+            />
+            <Route
+              path="/e-commerce/cartbloom"
+              element={<CartBloomMarket />}
+            />
+            <Route
+              path="/ecommerce/cartbloom-market"
+              element={<CartBloomMarket />}
+            />
+            <Route
+              path="/ecommerce/cartbloom"
+              element={<CartBloomMarket />}
+            />
+            <Route
+              path="/e-commerce/cyclebox-gear"
+              element={<CycleBoxGear />}
+            />
+            <Route
+              path="/e-commerce/cyclebox"
+              element={<CycleBoxGear />}
+            />
+            <Route
+              path="/ecommerce/cyclebox-gear"
+              element={<CycleBoxGear />}
+            />
+            <Route
+              path="/ecommerce/cyclebox"
+              element={<CycleBoxGear />}
+            />
+            <Route
+              path="/e-commerce/desknest-supply"
+              element={<DeskNestSupply />}
+            />
+            <Route
+              path="/e-commerce/desknest"
+              element={<DeskNestSupply />}
+            />
+            <Route
+              path="/ecommerce/desknest-supply"
+              element={<DeskNestSupply />}
+            />
+            <Route
+              path="/ecommerce/desknest"
+              element={<DeskNestSupply />}
+            />
+            <Route
+              path="/e-commerce/fieldnote-skincare"
+              element={<FieldNoteSkincare />}
+            />
+            <Route
+              path="/e-commerce/fieldnote"
+              element={<FieldNoteSkincare />}
+            />
+            <Route
+              path="/ecommerce/fieldnote-skincare"
+              element={<FieldNoteSkincare />}
+            />
+            <Route
+              path="/ecommerce/fieldnote"
+              element={<FieldNoteSkincare />}
+            />
+            <Route
+              path="/e-commerce/glowcart-beauty"
+              element={<GlowCartBeauty />}
+            />
+            <Route
+              path="/e-commerce/glowcart"
+              element={<GlowCartBeauty />}
+            />
+            <Route
+              path="/ecommerce/glowcart-beauty"
+              element={<GlowCartBeauty />}
+            />
+            <Route
+              path="/ecommerce/glowcart"
+              element={<GlowCartBeauty />}
+            />
+            <Route
+              path="/e-commerce/hearth-linen"
+              element={<HearthLinenLiving />}
+            />
+            <Route
+              path="/e-commerce/hearthlinen"
+              element={<HearthLinenLiving />}
+            />
+            <Route
+              path="/ecommerce/hearth-linen"
+              element={<HearthLinenLiving />}
+            />
+            <Route
+              path="/ecommerce/hearthlinen"
+              element={<HearthLinenLiving />}
+            />
+            <Route
+              path="/e-commerce/little-sprout"
+              element={<LittleSproutToys />}
+            />
+            <Route
+              path="/e-commerce/littlesprout"
+              element={<LittleSproutToys />}
+            />
+            <Route
+              path="/ecommerce/little-sprout"
+              element={<LittleSproutToys />}
+            />
+            <Route
+              path="/ecommerce/littlesprout"
+              element={<LittleSproutToys />}
+            />
+            <Route
+              path="/e-commerce/north-kind"
+              element={<NorthKindOutdoor />}
+            />
+            <Route
+              path="/e-commerce/northkind"
+              element={<NorthKindOutdoor />}
+            />
+            <Route
+              path="/ecommerce/north-kind"
+              element={<NorthKindOutdoor />}
+            />
+            <Route
+              path="/ecommerce/northkind"
+              element={<NorthKindOutdoor />}
+            />
+            <Route
+              path="/e-commerce/pantry-pilot"
+              element={<PantryPilotGrocery />}
+            />
+            <Route
+              path="/e-commerce/pantrypilot"
+              element={<PantryPilotGrocery />}
+            />
+            <Route
+              path="/ecommerce/pantry-pilot"
+              element={<PantryPilotGrocery />}
+            />
+            <Route
+              path="/ecommerce/pantrypilot"
+              element={<PantryPilotGrocery />}
             />
             <Route path="/portfolio" element={<PortfolioIndex />} />
             <Route
