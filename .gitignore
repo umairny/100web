@@ -19,6 +19,8 @@
 
 # production
 /build
+/dist
+dist/
 
 # misc
 .DS_Store
@@ -41,3 +43,6 @@ yarn-error.log*
 next-env.d.ts
 # source images; commit optimized assets instead
 /src/assets/images/
+*.png
+*.jpg
+*.jpeg
