@@ -51,9 +51,9 @@ import bannerBundleSaveImg from "../../assets/optimized/ecommerce/cartbloom/bann
 import bannerFreeShippingImg from "../../assets/optimized/ecommerce/cartbloom/banner-free-shipping.webp";
 import newsletterGiftImg from "../../assets/optimized/ecommerce/cartbloom/newsletter-gift.webp";
 
-import avatarSarahImg from "../../assets/optimized/ecommerce/cartbloom/avatar-sarah.jpg";
-import avatarJasonImg from "../../assets/optimized/ecommerce/cartbloom/avatar-jason.jpg";
-import avatarPriyaImg from "../../assets/optimized/ecommerce/cartbloom/avatar-priya.jpg";
+import avatarSarahImg from "../../assets/optimized/ecommerce/cartbloom/avatar-sarah.webp";
+import avatarJasonImg from "../../assets/optimized/ecommerce/cartbloom/avatar-jason.webp";
+import avatarPriyaImg from "../../assets/optimized/ecommerce/cartbloom/avatar-priya.webp";
 
 // CartBloom Plant Pot Logo SVG
 function CartBloomLogo({ size = 32 }: { size?: number }) {
