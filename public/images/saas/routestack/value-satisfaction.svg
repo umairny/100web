@@ -1,0 +1,62 @@
+<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="boxFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="boxSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+    <linearGradient id="boxTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7" />
+      <stop offset="100%" stop-color="#FCD34D" />
+    </linearGradient>
+    <linearGradient id="smileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="100%" stop-color="#EAB308" />
+    </linearGradient>
+  </defs>
+
+  <!-- 3D Cardboard Parcel Box -->
+  <g transform="translate(15, 30)">
+    <!-- Box Shadow -->
+    <ellipse cx="65" cy="105" rx="55" ry="16" fill="#000000" opacity="0.12" />
+
+    <!-- Isometric Box Top Face -->
+    <path d="M50 0 L100 22 L50 44 L0 22 Z" fill="url(#boxTop)" stroke="#B45309" stroke-width="1.5" />
+    <!-- Box Left Face -->
+    <path d="M0 22 L50 44 L50 95 L0 73 Z" fill="url(#boxFront)" stroke="#B45309" stroke-width="1.5" />
+    <!-- Box Right Face -->
+    <path d="M50 44 L100 22 L100 73 L50 95 Z" fill="url(#boxSide)" stroke="#92400E" stroke-width="1.5" />
+
+    <!-- Packaging Tape -->
+    <path d="M42 0 L58 7 L58 44 L42 37 Z" fill="#92400E" opacity="0.4" />
+    <path d="M44 41 L56 36 L56 95 L44 95 Z" fill="#92400E" opacity="0.4" />
+
+    <!-- Shipping Label on Left Face -->
+    <path d="M12 40 L35 50 L35 68 L12 58 Z" fill="#FFFFFF" opacity="0.9" />
+    <line x1="16" y1="46" x2="30" y2="52" stroke="#64748B" stroke-width="1.5" />
+    <line x1="16" y1="52" x2="26" y2="56" stroke="#64748B" stroke-width="1.5" />
+    <line x1="16" y1="58" x2="32" y2="65" stroke="#0284C7" stroke-width="2" />
+  </g>
+
+  <!-- Floating Happy Customer Smiley Face Icon (Bottom Right) -->
+  <g transform="translate(100, 75)">
+    <!-- Glow -->
+    <circle cx="25" cy="25" r="24" fill="#000000" opacity="0.15" />
+    <!-- Face Circle -->
+    <circle cx="25" cy="25" r="23" fill="url(#smileGrad)" stroke="#CA8A04" stroke-width="2" />
+    
+    <!-- Eyes -->
+    <ellipse cx="17" cy="20" rx="2.5" ry="3.5" fill="#713F12" />
+    <ellipse cx="33" cy="20" rx="2.5" ry="3.5" fill="#713F12" />
+
+    <!-- Blushing Cheeks -->
+    <circle cx="12" cy="26" r="3" fill="#F87171" opacity="0.6" />
+    <circle cx="38" cy="26" r="3" fill="#F87171" opacity="0.6" />
+
+    <!-- Wide Happy Smile -->
+    <path d="M16 26 Q25 38 34 26" stroke="#713F12" stroke-width="3" stroke-linecap="round" fill="none" />
+  </g>
+</svg>

@@ -1,0 +1,108 @@
+<svg viewBox="0 0 600 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <filter id="hubGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Canvas Subtle Rings -->
+  <circle cx="300" cy="210" r="160" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="6 6" />
+  <circle cx="300" cy="210" r="100" stroke="#CBD5E1" stroke-width="1" />
+
+  <!-- Spokes connecting Center to Outer Nodes -->
+  <!-- Spoke 1: Top-Left (Shopify) -->
+  <line x1="300" y1="210" x2="180" y2="90" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+  <!-- Spoke 2: Top-Center (Cart 1) -->
+  <line x1="300" y1="210" x2="300" y2="60" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+  <!-- Spoke 3: Top-Right (SAP) -->
+  <line x1="300" y1="210" x2="440" y2="90" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+  <!-- Spoke 4: Mid-Left (Oracle) -->
+  <line x1="300" y1="210" x2="140" y2="210" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+  <!-- Spoke 5: Mid-Right (Sage) -->
+  <line x1="300" y1="210" x2="470" y2="210" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+  <!-- Spoke 6: Bottom-Left (Sage 2 / WooCommerce) -->
+  <line x1="300" y1="210" x2="180" y2="330" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+  <!-- Spoke 7: Bottom-Center (Cart 2) -->
+  <line x1="300" y1="210" x2="300" y2="350" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+  <!-- Spoke 8: Bottom-Right (Salesforce) -->
+  <line x1="300" y1="210" x2="440" y2="320" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Outer Spoke Nodes / Integration Cards -->
+
+  <!-- Node 1: Shopify (Top-Left) -->
+  <g transform="translate(130, 65)">
+    <rect x="0" y="0" width="105" height="46" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))" />
+    <!-- Shopify Bag Icon -->
+    <path d="M22 23 C22 20 25 18 28 18 C31 18 34 20 34 23 L37 23 L33 34 L19 34 L17 23 Z" fill="#95BF47" />
+    <text x="44" y="28" fill="#1E293B" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">shopify</text>
+  </g>
+
+  <!-- Node 2: Top Cart (Top-Center) -->
+  <g transform="translate(275, 35)">
+    <circle cx="25" cy="25" r="22" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <path d="M16 18 L19 18 L22 28 L32 28 L34 21 L21 21" stroke="#0284C7" stroke-width="2" fill="none" stroke-linecap="round" />
+    <circle cx="23" cy="31" r="2" fill="#0284C7" />
+    <circle cx="31" cy="31" r="2" fill="#0284C7" />
+  </g>
+
+  <!-- Node 3: SAP (Top-Right) -->
+  <g transform="translate(395, 65)">
+    <rect x="0" y="0" width="95" height="46" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))" />
+    <rect x="14" y="12" width="24" height="22" rx="3" fill="#008FD3" />
+    <text x="26" y="27" fill="#FFFFFF" font-family="sans-serif" font-size="9" font-weight="900" text-anchor="middle">SAP</text>
+    <text x="46" y="28" fill="#008FD3" font-family="system-ui, sans-serif" font-size="13" font-weight="800">SAP</text>
+  </g>
+
+  <!-- Node 4: Oracle (Mid-Left) -->
+  <g transform="translate(75, 187)">
+    <rect x="0" y="0" width="115" height="46" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))" />
+    <text x="57.5" y="28" fill="#C74634" font-family="system-ui, sans-serif" font-size="13" font-weight="800" text-anchor="middle" letter-spacing="2">ORACLE</text>
+  </g>
+
+  <!-- Node 5: Sage (Mid-Right) -->
+  <g transform="translate(425, 187)">
+    <rect x="0" y="0" width="105" height="46" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))" />
+    <text x="52.5" y="29" fill="#00DC00" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle">sage</text>
+  </g>
+
+  <!-- Node 6: Sage ERP (Bottom-Left) -->
+  <g transform="translate(130, 307)">
+    <rect x="0" y="0" width="105" height="46" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))" />
+    <text x="52.5" y="29" fill="#00DC00" font-family="system-ui, sans-serif" font-size="15" font-weight="800" text-anchor="middle">Sage</text>
+  </g>
+
+  <!-- Node 7: Bottom Cart (Bottom-Center) -->
+  <g transform="translate(275, 325)">
+    <circle cx="25" cy="25" r="22" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <path d="M16 18 L19 18 L22 28 L32 28 L34 21 L21 21" stroke="#EA580C" stroke-width="2" fill="none" stroke-linecap="round" />
+    <circle cx="23" cy="31" r="2" fill="#EA580C" />
+    <circle cx="31" cy="31" r="2" fill="#EA580C" />
+  </g>
+
+  <!-- Node 8: Salesforce (Bottom-Right) -->
+  <g transform="translate(395, 297)">
+    <rect x="0" y="0" width="115" height="46" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))" />
+    <path d="M22 25 C22 22 24 20 27 20 C29 18 32 18 34 20 C36 19 39 20 40 22 C42 22 43 24 43 26 C43 28 41 30 39 30 L23 30 C21 30 20 28 20 27 C20 26 21 25 22 25 Z" fill="#00A1E0" />
+    <text x="50" y="28" fill="#00A1E0" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">salesforce</text>
+  </g>
+
+  <!-- Central RouteStack Navigation Compass Hub -->
+  <g transform="translate(300, 210)" filter="url(#hubGlow)">
+    <!-- Outer Glow Ring -->
+    <circle cx="0" cy="0" r="52" fill="#0F172A" stroke="#38BDF8" stroke-width="3" />
+    <circle cx="0" cy="0" r="42" fill="url(#hubGrad)" />
+    
+    <!-- Compass Degree Ring -->
+    <circle cx="0" cy="0" r="34" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="3 3" fill="none" opacity="0.8" />
+    
+    <!-- Compass Needle (North-East to South-West) -->
+    <polygon points="0,-26 6,0 0,5 -6,0" fill="#38BDF8" />
+    <polygon points="0,26 6,0 0,-5 -6,0" fill="#FFFFFF" opacity="0.8" />
+    <circle cx="0" cy="0" r="4" fill="#0F172A" stroke="#38BDF8" stroke-width="2" />
+  </g>
+</svg>

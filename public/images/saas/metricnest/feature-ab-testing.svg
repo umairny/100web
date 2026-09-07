@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" width="100%" height="100%" fill="none">
+  <rect width="360" height="220" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <rect x="0" y="0" width="360" height="36" rx="12" fill="#F8FAFC"/>
+  <circle cx="16" cy="18" r="3.5" fill="#EF4444"/>
+  <circle cx="28" cy="18" r="3.5" fill="#F59E0B"/>
+  <circle cx="40" cy="18" r="3.5" fill="#10B981"/>
+  <text x="60" y="22" font-family="sans-serif" font-size="9" fill="#64748B" font-weight="600">A/B Testing Statistical Significance</text>
+
+  <!-- Graphs -->
+  <g transform="translate(25, 60)">
+    <!-- Axes -->
+    <line x1="10" y1="90" x2="300" y2="90" stroke="#E2E8F0" stroke-width="1.5"/>
+    <line x1="10" y1="10" x2="10" y2="90" stroke="#E2E8F0" stroke-width="1.5"/>
+
+    <!-- Curve 1 (Variant A Control) -->
+    <path d="M10 80 C 60 75, 120 70, 180 68 C 230 66, 270 65, 300 64" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4 4"/>
+
+    <!-- Curve 2 (Variant B Treatment) -->
+    <path d="M10 80 C 60 55, 120 35, 180 25 C 230 18, 270 14, 300 12" stroke="#10B981" stroke-width="3"/>
+
+    <!-- Winning badge flag -->
+    <circle cx="240" cy="17" r="4" fill="#10B981" stroke="#FFF" stroke-width="2"/>
+    <rect x="220" y="28" width="80" height="20" rx="4" fill="#ECFDF5" stroke="#A7F3D0"/>
+    <text x="226" y="42" font-family="sans-serif" font-size="8" fill="#065F46" font-weight="bold">+32.4% Lift ✓</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(30, 182)">
+    <circle cx="8" cy="8" r="4" fill="#10B981"/>
+    <text x="18" y="11" font-family="sans-serif" font-size="8.5" fill="#0F172A" font-weight="bold">Variant B (New Flow)</text>
+
+    <circle cx="160" cy="8" r="4" fill="#94A3B8"/>
+    <text x="170" y="11" font-family="sans-serif" font-size="8.5" fill="#64748B">Variant A (Control)</text>
+  </g>
+</svg>

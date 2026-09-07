@@ -1,0 +1,244 @@
+<svg width="1080" height="640" viewBox="0 0 1080 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="heroShadow" x="-20" y="-10" width="1120" height="680" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#0F172A" flood-opacity="0.12" />
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.04" />
+    </filter>
+
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="640" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F0F9FF" />
+      <stop offset="60%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#ECFDF5" />
+    </linearGradient>
+
+    <linearGradient id="planeGrad" x1="60" y1="200" x2="280" y2="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E0F2FE" />
+    </linearGradient>
+
+    <linearGradient id="dashboardBg" x1="500" y1="180" x2="1040" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F8FAFC" />
+    </linearGradient>
+
+    <linearGradient id="emeraldBar" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <linearGradient id="blueBar" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1080" height="640" rx="20" fill="url(#skyGrad)" stroke="#E2E8F0" stroke-width="1.5" />
+
+  <!-- City Skyline Illustration (Background layer) -->
+  <g opacity="0.85">
+    <!-- Skyscraper 1 -->
+    <rect x="180" y="320" width="46" height="240" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="1.5" />
+    <line x1="195" y1="340" x2="195" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 8" />
+    <line x1="210" y1="340" x2="210" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 8" />
+
+    <!-- Skyscraper 2 -->
+    <rect x="235" y="270" width="58" height="290" fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.5" />
+    <line x1="250" y1="290" x2="250" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 8" />
+    <line x1="270" y1="290" x2="270" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 8" />
+
+    <!-- Skyscraper 3 -->
+    <rect x="300" y="310" width="52" height="250" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="1.5" />
+    <line x1="316" y1="330" x2="316" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 8" />
+    <line x1="336" y1="330" x2="336" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 8" />
+
+    <!-- Skyscraper 4 (Tall Spire) -->
+    <rect x="360" y="220" width="68" height="340" fill="#94A3B8" stroke="#64748B" stroke-width="1.5" />
+    <polygon points="394,180 388,220 400,220" fill="#64748B" />
+    <line x1="394" y1="165" x2="394" y2="180" stroke="#0F172A" stroke-width="2" />
+    <circle cx="394" cy="165" r="2.5" fill="#EF4444" />
+    <line x1="380" y1="240" x2="380" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="6 6" />
+    <line x1="408" y1="240" x2="408" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="6 6" />
+
+    <!-- Skyscraper 5 -->
+    <rect x="435" y="300" width="50" height="260" fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.5" />
+    <line x1="452" y1="320" x2="452" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 8" />
+    <line x1="468" y1="320" x2="468" y2="550" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 8" />
+
+    <!-- Cloud in sky -->
+    <path d="M380 140C380 128 390 118 402 118C405 118 408 119 411 120C417 110 427 104 440 104C458 104 472 118 472 135C479 135 486 142 486 150C486 158 479 164 472 164H388C378 164 370 156 370 146C370 143 371 140 373 138" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Green Trees at base -->
+    <circle cx="160" cy="550" r="16" fill="#34D399" />
+    <circle cx="180" cy="554" r="14" fill="#10B981" />
+    <circle cx="495" cy="550" r="18" fill="#10B981" />
+    <circle cx="515" cy="554" r="14" fill="#059669" />
+  </g>
+
+  <!-- Green Target Dartboard on the left -->
+  <g transform="translate(60, 420)">
+    <!-- Tripod stand -->
+    <line x1="30" y1="50" x2="10" y2="100" stroke="#334155" stroke-width="3" stroke-linecap="round" />
+    <line x1="30" y1="50" x2="50" y2="100" stroke="#334155" stroke-width="3" stroke-linecap="round" />
+    <line x1="30" y1="50" x2="30" y2="105" stroke="#334155" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Outer rings -->
+    <circle cx="30" cy="35" r="32" fill="#FFFFFF" stroke="#059669" stroke-width="4" />
+    <circle cx="30" cy="35" r="23" fill="#ECFDF5" stroke="#10B981" stroke-width="3" />
+    <circle cx="30" cy="35" r="14" fill="#FFFFFF" stroke="#059669" stroke-width="3" />
+    <!-- Bullseye -->
+    <circle cx="30" cy="35" r="6" fill="#059669" />
+
+    <!-- Arrow in bullseye -->
+    <line x1="4" y1="9" x2="28" y2="33" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" />
+    <polygon points="4,9 0,2 7,5" fill="#EF4444" />
+    <polygon points="4,9 8,16 2,12" fill="#EF4444" />
+  </g>
+
+  <!-- FLYING ORIGAMI INVOICE PAPER AIRPLANE -->
+  <g transform="translate(45, 175)">
+    <!-- Wind flight motion lines -->
+    <path d="M-10 140L40 100" stroke="#0284C7" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6" opacity="0.6" />
+    <path d="M0 160L55 120" stroke="#0284C7" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 8" opacity="0.7" />
+    <path d="M20 185L80 140" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 7" opacity="0.8" />
+
+    <!-- Origami Airplane Body -->
+    <!-- Lower wing / fold shadow -->
+    <polygon points="120,80 50,165 240,40" fill="#BAE6FD" stroke="#0284C7" stroke-width="2" stroke-linejoin="round" />
+    
+    <!-- Central Fuselage / Fold -->
+    <polygon points="120,80 240,40 85,200" fill="#E0F2FE" stroke="#0284C7" stroke-width="2" stroke-linejoin="round" />
+    
+    <!-- Main Top Wing (Styled like an Invoice) -->
+    <polygon points="65,95 240,40 130,5" fill="url(#planeGrad)" stroke="#0284C7" stroke-width="2.5" stroke-linejoin="round" />
+
+    <!-- Invoice Lines on Wing -->
+    <g transform="rotate(-15 150 50)">
+      <text x="110" y="28" fill="#0F172A" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">INVOICE</text>
+      <rect x="110" y="34" width="35" height="3" rx="1.5" fill="#94A3B8" />
+      <rect x="110" y="40" width="45" height="3" rx="1.5" fill="#94A3B8" />
+      <rect x="110" y="46" width="30" height="3" rx="1.5" fill="#94A3B8" />
+    </g>
+
+    <!-- Emerald Dollar Coin Badge attached to airplane -->
+    <circle cx="150" cy="115" r="18" fill="#10B981" stroke="#FFFFFF" stroke-width="3" />
+    <circle cx="150" cy="115" r="15" fill="#059669" />
+    <text x="144" y="122" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="17" font-weight="900">$</text>
+  </g>
+
+  <!-- FLOATING INVOICEPILOT DASHBOARD MOCKUP (Right Side) -->
+  <g filter="url(#heroShadow)">
+    <rect x="520" y="80" width="520" height="490" rx="16" fill="url(#dashboardBg)" stroke="#CBD5E1" stroke-width="2" />
+
+    <!-- App Top Bar (Dark Navy Header) -->
+    <path d="M520 96C520 87.1634 527.163 80 536 80H1024C1032.84 80 1040 87.1634 1040 96V126H520V96Z" fill="#0F172A" />
+    
+    <!-- Window circles -->
+    <circle cx="542" cy="103" r="4.5" fill="#EF4444" />
+    <circle cx="556" cy="103" r="4.5" fill="#F59E0B" />
+    <circle cx="570" cy="103" r="4.5" fill="#10B981" />
+
+    <!-- App Logo in Header -->
+    <path d="M600 97L612 93L608 107L600 97Z" fill="#38BDF8" />
+    <text x="618" y="107" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="800">
+      InvoicePilot <tspan fill="#38BDF8" font-size="10">Cloud</tspan>
+    </text>
+
+    <!-- App Header Tabs -->
+    <text x="760" y="106" fill="#38BDF8" font-family="sans-serif" font-size="11" font-weight="700">Dashboard</text>
+    <text x="840" y="106" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="500">Subscriptions</text>
+    <text x="935" y="106" fill="#94A3B8" font-family="sans-serif" font-size="11" font-weight="500">Invoices</text>
+
+    <!-- Left Sidebar in Dashboard -->
+    <rect x="520" y="126" width="120" height="444" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+    <text x="536" y="152" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="700">MAIN MENU</text>
+
+    <rect x="528" y="162" width="104" height="26" rx="6" fill="#EFF6FF" />
+    <text x="546" y="179" fill="#0284C7" font-family="sans-serif" font-size="11" font-weight="700">Overview</text>
+
+    <text x="546" y="210" fill="#475569" font-family="sans-serif" font-size="11" font-weight="500">Customers</text>
+    <text x="546" y="240" fill="#475569" font-family="sans-serif" font-size="11" font-weight="500">Billing Plans</text>
+    <text x="546" y="270" fill="#475569" font-family="sans-serif" font-size="11" font-weight="500">Gateways</text>
+    <text x="546" y="300" fill="#475569" font-family="sans-serif" font-size="11" font-weight="500">Dunning &amp; Churn</text>
+    <text x="546" y="330" fill="#475569" font-family="sans-serif" font-size="11" font-weight="500">Audit Logs</text>
+
+    <!-- MAIN CONTENT AREA -->
+    <!-- Dashboard Subheader -->
+    <text x="656" y="156" fill="#0F172A" font-family="sans-serif" font-size="16" font-weight="800">
+      Billing Dashboard
+    </text>
+    <rect x="940" y="142" width="85" height="24" rx="6" fill="#0284C7" />
+    <text x="952" y="158" fill="#FFFFFF" font-family="sans-serif" font-size="10" font-weight="700">+ Create Plan</text>
+
+    <!-- KPI Metric Cards (Row 1) -->
+    <!-- KPI 1: MRR -->
+    <rect x="656" y="178" width="112" height="66" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="668" y="196" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="600">MONTHLY RECURRING</text>
+    <text x="668" y="222" fill="#0F172A" font-family="sans-serif" font-size="15" font-weight="800">$34,250.00</text>
+    <rect x="668" y="228" width="46" height="12" rx="4" fill="#DCFCE7" />
+    <text x="672" y="237" fill="#166534" font-family="sans-serif" font-size="8" font-weight="700">+18.4% MoM</text>
+
+    <!-- KPI 2: ARR -->
+    <rect x="778" y="178" width="112" height="66" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="790" y="196" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="600">ANNUAL RUN-RATE</text>
+    <text x="790" y="222" fill="#0F172A" font-family="sans-serif" font-size="15" font-weight="800">$412,890.00</text>
+    <text x="790" y="237" fill="#0284C7" font-family="sans-serif" font-size="9" font-weight="600">Auto-renew 96%</text>
+
+    <!-- KPI 3: Active Subs -->
+    <rect x="900" y="178" width="124" height="66" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="912" y="196" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="600">ACTIVE SUBSCRIPTIONS</text>
+    <text x="912" y="222" fill="#0F172A" font-family="sans-serif" font-size="15" font-weight="800">1,248 Accounts</text>
+    <circle cx="916" cy="235" r="3" fill="#10B981" />
+    <text x="924" y="238" fill="#166534" font-family="sans-serif" font-size="8" font-weight="700">0.8% Churn Rate</text>
+
+    <!-- Revenue Analytics Chart (Right of row 2) -->
+    <rect x="850" y="256" width="174" height="154" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="862" y="274" fill="#0F172A" font-family="sans-serif" font-size="11" font-weight="700">Revenue Analytics</text>
+    
+    <!-- Bar charts -->
+    <rect x="866" y="340" width="12" height="50" rx="3" fill="#BAE6FD" />
+    <rect x="886" y="320" width="12" height="70" rx="3" fill="#38BDF8" />
+    <rect x="906" y="310" width="12" height="80" rx="3" fill="#0284C7" />
+    <rect x="926" y="295" width="12" height="95" rx="3" fill="#0284C7" />
+    <rect x="946" y="290" width="12" height="100" rx="3" fill="#059669" />
+    <rect x="966" y="280" width="12" height="110" rx="3" fill="#10B981" />
+    <rect x="986" y="270" width="12" height="120" rx="3" fill="#10B981" />
+
+    <!-- Invoices Status Table (Left of row 2) -->
+    <rect x="656" y="256" width="184" height="154" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="668" y="274" fill="#0F172A" font-family="sans-serif" font-size="11" font-weight="700">Recent Invoices</text>
+    
+    <!-- Invoice Row 1 -->
+    <line x1="668" y1="286" x2="828" y2="286" stroke="#F1F5F9" stroke-width="1" />
+    <text x="668" y="302" fill="#0F172A" font-family="sans-serif" font-size="10" font-weight="600">Acme SaaS Corp</text>
+    <text x="668" y="313" fill="#64748B" font-family="sans-serif" font-size="8">INV-2048 • $2,400</text>
+    <rect x="784" y="294" width="44" height="16" rx="4" fill="#DCFCE7" />
+    <text x="792" y="305" fill="#166534" font-family="sans-serif" font-size="8" font-weight="700">PAID</text>
+
+    <!-- Invoice Row 2 -->
+    <line x1="668" y1="324" x2="828" y2="324" stroke="#F1F5F9" stroke-width="1" />
+    <text x="668" y="340" fill="#0F172A" font-family="sans-serif" font-size="10" font-weight="600">Starlight AI Inc</text>
+    <text x="668" y="351" fill="#64748B" font-family="sans-serif" font-size="8">INV-2049 • $1,250</text>
+    <rect x="784" y="332" width="44" height="16" rx="4" fill="#DCFCE7" />
+    <text x="792" y="343" fill="#166534" font-family="sans-serif" font-size="8" font-weight="700">PAID</text>
+
+    <!-- Invoice Row 3 -->
+    <line x1="668" y1="362" x2="828" y2="362" stroke="#F1F5F9" stroke-width="1" />
+    <text x="668" y="378" fill="#0F172A" font-family="sans-serif" font-size="10" font-weight="600">Apex Retail Labs</text>
+    <text x="668" y="389" fill="#64748B" font-family="sans-serif" font-size="8">INV-2050 • $4,890</text>
+    <rect x="774" y="370" width="54" height="16" rx="4" fill="#FEF3C7" />
+    <text x="780" y="381" fill="#D97706" font-family="sans-serif" font-size="8" font-weight="700">PENDING</text>
+
+    <!-- Dunning & Recovery Bottom Banner inside Dashboard -->
+    <rect x="656" y="420" width="368" height="74" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1" />
+    <circle cx="678" cy="457" r="12" fill="#0284C7" />
+    <path d="M674 457L677 460L683 454" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" fill="none" />
+    <text x="698" y="450" fill="#0369A1" font-family="sans-serif" font-size="11" font-weight="700">Automated Smart Dunning Active</text>
+    <text x="698" y="468" fill="#0284C7" font-family="sans-serif" font-size="9">Recovered $14,820 this month via intelligent retry cadences (94.2% recovery rate).</text>
+
+    <!-- Bottom sync ticker -->
+    <rect x="656" y="504" width="368" height="42" rx="6" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1" />
+    <circle cx="674" cy="525" r="4" fill="#10B981" />
+    <text x="686" y="528" fill="#475569" font-family="sans-serif" font-size="10" font-weight="600">Synced with Stripe &amp; QuickBooks • 2 seconds ago</text>
+  </g>
+</svg>

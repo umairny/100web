@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" width="100%" height="100%" fill="none">
+  <defs>
+    <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.35" />
+      <stop offset="60%" stop-color="#0284C7" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0" />
+    </radialGradient>
+    <filter id="hubShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0284C7" flood-opacity="0.2" />
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow & Concentric Guide Rings -->
+  <circle cx="360" cy="260" r="220" fill="url(#hubGlow)" />
+  <circle cx="360" cy="260" r="180" stroke="#0284C7" stroke-opacity="0.15" stroke-width="1.5" stroke-dasharray="6 6" />
+  <circle cx="360" cy="260" r="130" stroke="#38BDF8" stroke-opacity="0.25" stroke-width="1.2" />
+
+  <!-- ==================== RADIAL CONNECTING LINES ==================== -->
+  <!-- Left connections -->
+  <!-- 1. AWS (Top Left) -->
+  <path d="M 330 220 L 250 120 L 155 120" stroke="#0284C7" stroke-width="2" stroke-dasharray="4 4" stroke-opacity="0.7" />
+  <!-- 2. Google Cloud (Mid Top Left) -->
+  <path d="M 320 240 L 220 180 L 140 180" stroke="#38BDF8" stroke-width="2" stroke-opacity="0.8" />
+  <!-- 3. Microsoft Azure (Mid Left) -->
+  <path d="M 310 260 L 210 250 L 130 250" stroke="#0284C7" stroke-width="2" stroke-opacity="0.8" />
+  <!-- 4. Okta (Mid Bottom Left) -->
+  <path d="M 320 280 L 220 330 L 140 330" stroke="#38BDF8" stroke-width="2" stroke-opacity="0.8" />
+  <!-- 5. Slack (Bottom Left) -->
+  <path d="M 330 300 L 250 400 L 160 400" stroke="#0284C7" stroke-width="2" stroke-dasharray="4 4" stroke-opacity="0.7" />
+
+  <!-- Right connections -->
+  <!-- 6. Jira (Top Right) -->
+  <path d="M 390 220 L 470 120 L 565 120" stroke="#0284C7" stroke-width="2" stroke-dasharray="4 4" stroke-opacity="0.7" />
+  <!-- 7. HubSpot (Mid Top Right) -->
+  <path d="M 400 240 L 500 180 L 580 180" stroke="#38BDF8" stroke-width="2" stroke-opacity="0.8" />
+  <!-- 8. GitHub (Mid Right) -->
+  <path d="M 410 260 L 510 250 L 590 250" stroke="#0284C7" stroke-width="2" stroke-opacity="0.8" />
+  <!-- 9. GitLab (Mid Bottom Right) -->
+  <path d="M 400 280 L 500 330 L 580 330" stroke="#38BDF8" stroke-width="2" stroke-opacity="0.8" />
+  <!-- 10. Asana (Bottom Mid-Right) -->
+  <path d="M 390 300 L 470 390 L 550 390" stroke="#0284C7" stroke-width="2" stroke-opacity="0.8" />
+  <!-- 11. Jamf (Bottom Right Far) -->
+  <path d="M 380 320 L 450 450 L 530 450" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4 4" stroke-opacity="0.7" />
+
+  <!-- ==================== LEFT INTEGRATION NODES ==================== -->
+  <!-- 1. AWS -->
+  <g transform="translate(130, 120)" filter="url(#hubShadow)">
+    <rect x="-45" y="-18" width="90" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="0" y="5" fill="#FF9900" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">aws</text>
+  </g>
+
+  <!-- 2. Google Cloud -->
+  <g transform="translate(110, 180)" filter="url(#hubShadow)">
+    <rect x="-65" y="-18" width="130" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <circle cx="-42" cy="0" r="7" fill="#4285F4" />
+    <text x="6" y="5" fill="#1E293B" font-family="system-ui, sans-serif" font-size="12" font-weight="700" text-anchor="middle">Google Cloud</text>
+  </g>
+
+  <!-- 3. Microsoft Azure -->
+  <g transform="translate(100, 250)" filter="url(#hubShadow)">
+    <rect x="-60" y="-18" width="120" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <rect x="-44" y="-7" width="6" height="6" fill="#F25022" />
+    <rect x="-36" y="-7" width="6" height="6" fill="#7FBA00" />
+    <rect x="-44" y="1" width="6" height="6" fill="#00A4EF" />
+    <rect x="-36" y="1" width="6" height="6" fill="#FFB900" />
+    <text x="8" y="5" fill="#1E293B" font-family="system-ui, sans-serif" font-size="12" font-weight="700" text-anchor="middle">Microsoft</text>
+  </g>
+
+  <!-- 4. Okta -->
+  <g transform="translate(115, 330)" filter="url(#hubShadow)">
+    <rect x="-48" y="-18" width="96" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <circle cx="-28" cy="0" r="6" fill="#007DC1" />
+    <text x="6" y="5" fill="#007DC1" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">okta</text>
+  </g>
+
+  <!-- 5. Slack -->
+  <g transform="translate(135, 400)" filter="url(#hubShadow)">
+    <rect x="-48" y="-18" width="96" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="0" y="5" fill="#4A154B" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" text-anchor="middle"># slack</text>
+  </g>
+
+  <!-- ==================== RIGHT INTEGRATION NODES ==================== -->
+  <!-- 6. Jira -->
+  <g transform="translate(585, 120)" filter="url(#hubShadow)">
+    <rect x="-48" y="-18" width="96" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="0" y="5" fill="#0052CC" font-family="system-ui, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">◆ Jira</text>
+  </g>
+
+  <!-- 7. HubSpot -->
+  <g transform="translate(605, 180)" filter="url(#hubShadow)">
+    <rect x="-56" y="-18" width="112" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="0" y="5" fill="#FF7A59" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">HubSpot</text>
+  </g>
+
+  <!-- 8. GitHub -->
+  <g transform="translate(615, 250)" filter="url(#hubShadow)">
+    <rect x="-52" y="-18" width="104" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <circle cx="-30" cy="0" r="6" fill="#24292F" />
+    <text x="6" y="5" fill="#24292F" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">GitHub</text>
+  </g>
+
+  <!-- 9. GitLab -->
+  <g transform="translate(605, 330)" filter="url(#hubShadow)">
+    <rect x="-50" y="-18" width="100" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="0" y="5" fill="#FC6D26" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">🦊 GitLab</text>
+  </g>
+
+  <!-- 10. Asana -->
+  <g transform="translate(575, 390)" filter="url(#hubShadow)">
+    <rect x="-48" y="-18" width="96" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="0" y="5" fill="#F06A6A" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">asana</text>
+  </g>
+
+  <!-- 11. Jamf -->
+  <g transform="translate(545, 450)" filter="url(#hubShadow)">
+    <rect x="-44" y="-18" width="88" height="36" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="0" y="5" fill="#007AB8" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">jamf</text>
+  </g>
+
+  <!-- ==================== CENTRAL HUB SHIELD ==================== -->
+  <g transform="translate(360, 260)">
+    <!-- Central base gear -->
+    <g transform="translate(0, 32)">
+      <circle cx="0" cy="0" r="38" fill="#0F172A" stroke="#0284C7" stroke-width="2" />
+      <circle cx="0" cy="0" r="16" fill="#0284C7" />
+    </g>
+
+    <!-- Outer shield border -->
+    <path d="M 0 -68 L 54 -34 C 54 22 34 66 0 84 C -34 66 -54 22 -54 -34 Z"
+          fill="#0284C7" stroke="#38BDF8" stroke-width="2.5" filter="url(#hubShadow)" />
+
+    <!-- Inner shield -->
+    <path d="M 0 -58 L 46 -28 C 46 16 28 54 0 70 C -28 54 -46 16 -46 -28 Z"
+          fill="#0F172A" stroke="#0EA5E9" stroke-width="1.5" />
+
+    <!-- Glowing Core checkmark -->
+    <path d="M -15 2 L -4 13 L 18 -9"
+          stroke="#10B981" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M -15 2 L -4 13 L 18 -9"
+          stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

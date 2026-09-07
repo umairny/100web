@@ -1,0 +1,1264 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================================================
+   ARTISAN OBJECTS - DESIGN TOKENS & RESET
+   ========================================================================== */
+.artisan-page {
+  --bg-sand: #fbf8f3;
+  --bg-card: #f5f0e8;
+  --bg-dark: #191b1c;
+  --bg-terracotta: #a8522d;
+  --terracotta-dark: #8c3f1f;
+  --terracotta-light: #c2693f;
+  
+  --text-dark: #222220;
+  --text-muted: #6e6b66;
+  --text-light: #fbf8f3;
+  --text-dim: #c5c0b8;
+
+  --border-light: rgba(0, 0, 0, 0.08);
+  --border-dark: rgba(255, 255, 255, 0.12);
+  --border-gold: rgba(212, 175, 55, 0.4);
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-heading: 'Cinzel', 'Playfair Display', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  background-color: var(--bg-sand);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   NAVIGATION BAR
+   ========================================================================== */
+.artisan-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 24px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.artisan-nav.scrolled {
+  position: fixed;
+  background: rgba(25, 27, 28, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 16px 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.artisan-logo {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.artisan-logo .logo-main {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.artisan-logo .logo-sub {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+.artisan-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.artisan-nav-links a {
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.artisan-nav-links a:hover,
+.artisan-nav-links a.active {
+  color: #ffffff;
+}
+
+.artisan-btn-bespoke {
+  background: var(--bg-terracotta);
+  color: #ffffff !important;
+  padding: 9px 22px;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.artisan-btn-bespoke:hover {
+  background: var(--terracotta-dark);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.artisan-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 8px;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.artisan-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #181716;
+  overflow: hidden;
+}
+
+.artisan-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0.88;
+  transform: scale(1.02);
+  transition: transform 10s ease-out;
+}
+
+.artisan-hero:hover .artisan-hero-bg {
+  transform: scale(1.05);
+}
+
+.artisan-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(16, 17, 18, 0.3) 0%, rgba(16, 17, 18, 0.75) 80%, rgba(16, 17, 18, 0.95) 100%);
+  pointer-events: none;
+}
+
+.artisan-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+  padding: 120px 24px 60px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.artisan-hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.3rem, 5.2vw, 4rem);
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.artisan-hero-subtitle {
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 32px;
+  letter-spacing: 0.04em;
+}
+
+.artisan-btn-outline {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.96);
+  color: #191b1c;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 13px 34px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.artisan-btn-outline:hover {
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   POSITIONING / MANIFESTO SECTION
+   ========================================================================== */
+.artisan-positioning {
+  background: var(--bg-sand);
+  padding: 70px 24px 0;
+  text-align: center;
+}
+
+.artisan-section-label {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  color: #1f1f1e;
+  margin: 0 0 4px;
+  text-transform: uppercase;
+}
+
+.artisan-section-sublabel {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin: 0 0 48px;
+  text-transform: uppercase;
+}
+
+.artisan-manifesto-banner {
+  background: var(--bg-terracotta);
+  color: #ffffff;
+  padding: 60px 48px;
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.artisan-manifesto-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+}
+
+.artisan-manifesto-card:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.artisan-manifesto-icon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 20px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.artisan-manifesto-card:hover .artisan-manifesto-icon {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.artisan-manifesto-title {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  color: #ffffff;
+}
+
+.artisan-manifesto-desc {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+  max-width: 280px;
+}
+
+/* ==========================================================================
+   SELECTED WORK / COLLECTIONS
+   ========================================================================== */
+.artisan-work {
+  padding: 90px 48px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.artisan-work-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.artisan-work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+.artisan-work-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s ease;
+}
+
+.artisan-work-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.09);
+}
+
+.artisan-work-card.featured {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.artisan-work-card.featured .artisan-work-img-wrap {
+  height: 520px;
+}
+
+.artisan-work-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 310px;
+  overflow: hidden;
+  background: #e8e2d8;
+}
+
+.artisan-work-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.artisan-work-card:hover .artisan-work-img {
+  transform: scale(1.04);
+}
+
+.artisan-work-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(16, 17, 18, 0.85) 0%, rgba(16, 17, 18, 0.2) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 36px;
+  color: #ffffff;
+}
+
+.artisan-work-overlay h3 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.artisan-work-overlay p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+}
+
+.artisan-work-info {
+  padding: 24px 28px 32px;
+  background: #ffffff;
+}
+
+.artisan-work-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-dark);
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.artisan-work-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.artisan-work-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #1f1f1e;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.artisan-work-link:hover {
+  color: var(--bg-terracotta);
+}
+
+.artisan-textiles-banner {
+  margin-top: 36px;
+  position: relative;
+  overflow: hidden;
+  height: 240px;
+  border-radius: 2px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.artisan-textiles-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.artisan-textiles-banner:hover .artisan-textiles-img {
+  transform: scale(1.03);
+}
+
+.artisan-textiles-content {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 23, 24, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.artisan-textiles-banner:hover .artisan-textiles-content {
+  background: rgba(22, 23, 24, 0.5);
+}
+
+.artisan-textiles-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: #ffffff;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   THE PROCESS (THE JOURNEY)
+   ========================================================================== */
+.artisan-process {
+  padding: 100px 48px;
+  background: var(--bg-sand);
+  text-align: center;
+}
+
+.artisan-process-header {
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.artisan-process-bigtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.8vw, 2.7rem);
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  color: #1f1f1e;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.artisan-process-journey {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.artisan-process-curve-svg {
+  width: 100%;
+  height: 90px;
+  position: absolute;
+  top: 90px;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.artisan-process-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.artisan-step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 12px 8px;
+  border-radius: 8px;
+  transition: transform 0.25s ease;
+}
+
+.artisan-step-card:hover {
+  transform: translateY(-4px);
+}
+
+.artisan-step-card.active .artisan-step-num {
+  background: var(--bg-terracotta);
+  color: #ffffff;
+  border-color: var(--bg-terracotta);
+}
+
+.artisan-step-badge-wrap {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.artisan-step-num {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--bg-terracotta);
+  color: var(--bg-terracotta);
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.artisan-step-illustration {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
+}
+
+.artisan-step-card:hover .artisan-step-illustration {
+  transform: scale(1.08);
+}
+
+.artisan-step-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1f1f1e;
+  margin: 10px 0 6px;
+}
+
+.artisan-step-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+  max-width: 170px;
+}
+
+/* Detailed inspector popup/box for interactive experience */
+.artisan-process-inspector {
+  margin-top: 48px;
+  background: #ffffff;
+  border: 1px solid rgba(168, 82, 45, 0.25);
+  border-radius: 6px;
+  padding: 28px 36px;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  animation: fadeIn 0.4s ease;
+}
+
+.artisan-inspector-img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.artisan-inspector-text h4 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--bg-terracotta);
+  margin: 0 0 6px;
+  letter-spacing: 0.04em;
+}
+
+.artisan-inspector-text p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   CREDIBLE OUTCOMES (IMPACT & LEGACY)
+   ========================================================================== */
+.artisan-outcomes {
+  background: var(--bg-terracotta);
+  color: #ffffff;
+  padding: 85px 36px 90px;
+  text-align: center;
+}
+
+.artisan-outcomes-header h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 4px;
+  font-weight: 500;
+}
+
+.artisan-outcomes-header p {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 44px;
+}
+
+.artisan-commissions-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 24px;
+}
+
+.artisan-client-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 60px;
+  opacity: 0.85;
+}
+
+.artisan-client-name {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.artisan-testimonial-card {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  text-align: left;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding-top: 48px;
+}
+
+.artisan-testimonial-content {
+  flex: 1;
+}
+
+.artisan-quote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+  line-height: 1.35;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+  color: #ffffff;
+}
+
+.artisan-quote-author {
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+}
+
+.artisan-testimonial-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   FEATURED IN PRESS STRIP
+   ========================================================================== */
+.artisan-press {
+  background: var(--bg-sand);
+  padding: 50px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.artisan-press-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.artisan-press-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.artisan-press-item {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #2b2b29;
+}
+
+.artisan-press-item.dezeen {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+
+.artisan-press-item.interiors {
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   CONFIDENT INQUIRY PATH (COMMISSION A BESPOKE PIECE)
+   ========================================================================== */
+.artisan-inquiry {
+  background: var(--bg-dark);
+  color: #ffffff;
+  padding: 100px 48px;
+}
+
+.artisan-inquiry-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.artisan-inquiry-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.artisan-inquiry-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 6px;
+}
+
+.artisan-inquiry-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.artisan-inquiry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.artisan-inquiry-photo-wrap {
+  width: 100%;
+  height: 480px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.artisan-inquiry-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.artisan-inquiry-photo-wrap:hover .artisan-inquiry-photo {
+  transform: scale(1.03);
+}
+
+.artisan-form-wrap {
+  padding: 10px 0;
+}
+
+.artisan-form-heading {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 24px;
+}
+
+.artisan-form-group {
+  margin-bottom: 20px;
+}
+
+.artisan-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 6px;
+}
+
+.artisan-input,
+.artisan-select,
+.artisan-textarea {
+  width: 100%;
+  background: #fbf8f3;
+  color: #1f1f1e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  border-radius: 2px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.artisan-input:focus,
+.artisan-select:focus,
+.artisan-textarea:focus {
+  border-color: var(--bg-terracotta);
+  box-shadow: 0 0 0 3px rgba(168, 82, 45, 0.35);
+}
+
+.artisan-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.artisan-btn-submit {
+  width: 100%;
+  background: var(--bg-terracotta);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.artisan-btn-submit:hover {
+  background: var(--terracotta-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 82, 45, 0.4);
+}
+
+.artisan-form-success {
+  background: rgba(168, 82, 45, 0.15);
+  border: 1px solid var(--bg-terracotta);
+  border-radius: 2px;
+  padding: 24px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.artisan-form-success h4 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  margin: 0 0 8px;
+  color: #ffffff;
+}
+
+.artisan-form-success p {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0 0 16px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.artisan-footer {
+  background: var(--bg-sand);
+  padding: 48px 48px 36px;
+  border-top: 1px solid var(--border-light);
+}
+
+.artisan-footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.artisan-footer-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.artisan-footer-links a {
+  color: #2d2d2c;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.artisan-footer-links a:hover {
+  color: var(--bg-terracotta);
+}
+
+.artisan-social-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.artisan-social-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  color: #2b2b29;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.artisan-social-btn:hover {
+  background: var(--bg-terracotta);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.artisan-footer-bottom {
+  padding-top: 24px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.artisan-footer-copy {
+  margin: 0 0 6px;
+  letter-spacing: 0.04em;
+}
+
+.artisan-footer-credits {
+  margin: 0;
+  font-size: 0.7rem;
+  color: #99948d;
+}
+
+/* ==========================================================================
+   CASE STUDY MODAL
+   ========================================================================== */
+.artisan-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 17, 18, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+.artisan-modal-content {
+  background: #ffffff;
+  max-width: 680px;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.artisan-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.artisan-modal-close:hover {
+  background: var(--bg-terracotta);
+}
+
+.artisan-modal-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.artisan-modal-body {
+  padding: 32px 36px;
+}
+
+.artisan-modal-body h3 {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  margin: 0 0 8px;
+  color: var(--text-dark);
+}
+
+.artisan-modal-meta {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bg-terracotta);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.artisan-modal-body p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.artisan-modal-specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+  background: var(--bg-sand);
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.artisan-spec-item {
+  font-size: 0.78rem;
+}
+
+.artisan-spec-title {
+  font-weight: 700;
+  color: #1f1f1e;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.artisan-spec-val {
+  color: var(--text-muted);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 992px) {
+  .artisan-nav {
+    padding: 20px 24px;
+  }
+  .artisan-manifesto-banner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 48px 24px;
+  }
+  .artisan-manifesto-card:not(:last-child)::after {
+    display: none;
+  }
+  .artisan-work-grid {
+    grid-template-columns: 1fr;
+  }
+  .artisan-work-card.featured {
+    grid-row: span 1;
+  }
+  .artisan-process-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .artisan-process-curve-svg {
+    display: none;
+  }
+  .artisan-inquiry-grid {
+    grid-template-columns: 1fr;
+  }
+  .artisan-inquiry-photo-wrap {
+    height: 340px;
+  }
+}
+
+@media (max-width: 768px) {
+  .artisan-nav-links {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: rgba(25, 27, 28, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 36px 24px;
+    gap: 24px;
+    transform: translateY(-120%);
+    transition: transform 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .artisan-nav-links.open {
+    transform: translateY(0);
+  }
+  .artisan-mobile-toggle {
+    display: block;
+  }
+  .artisan-hero-content {
+    padding-top: 100px;
+  }
+  .artisan-process-steps {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .artisan-testimonial-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .artisan-press-strip {
+    gap: 32px;
+  }
+  .artisan-footer-top {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .artisan-footer-links {
+    justify-content: center;
+  }
+}

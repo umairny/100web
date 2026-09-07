@@ -83,6 +83,16 @@ const ClearSkinDermatology = lazy(() => import("./pages/Medical/ClearSkinDermato
 // Portfolio & Real Estate
 const PortfolioIndex = lazy(() => import("./pages/Portfolio/PortfolioIndex").then((m) => ({ default: m.PortfolioIndex })));
 const StudioValeCreative = lazy(() => import("./pages/Portfolio/StudioValeCreative").then((m) => ({ default: m.StudioValeCreative })));
+const AxiomLabs = lazy(() => import("./pages/Portfolio/AxiomLabs").then((m) => ({ default: m.AxiomLabs })));
+const ValeInteriorStudio = lazy(() => import("./pages/Portfolio/ValeInteriorStudio").then((m) => ({ default: m.ValeInteriorStudio })));
+const SignalBrandDesigner = lazy(() => import("./pages/Portfolio/SignalBrandDesigner").then((m) => ({ default: m.SignalBrandDesigner })));
+const NorthlineDeveloper = lazy(() => import("./pages/Portfolio/NorthlineDeveloper").then((m) => ({ default: m.NorthlineDeveloper })));
+const MotionDeskStudio = lazy(() => import("./pages/Portfolio/MotionDeskStudio").then((m) => ({ default: m.MotionDeskStudio })));
+const InkhouseCopy = lazy(() => import("./pages/Portfolio/InkhouseCopy").then((m) => ({ default: m.InkhouseCopy })));
+const FrameLabPhoto = lazy(() => import("./pages/Portfolio/FrameLabPhoto").then((m) => ({ default: m.FrameLabPhoto })));
+const CedarUXConsultant = lazy(() => import("./pages/Portfolio/CedarUXConsultant").then((m) => ({ default: m.CedarUXConsultant })));
+const AtelierNorthArchitecture = lazy(() => import("./pages/Portfolio/AtelierNorthArchitecture").then((m) => ({ default: m.AtelierNorthArchitecture })));
+const ArtisanObjects = lazy(() => import("./pages/Portfolio/ArtisanObjects").then((m) => ({ default: m.ArtisanObjects })));
 const RealEstateIndex = lazy(() => import("./pages/RealEstate/RealEstateIndex").then((m) => ({ default: m.RealEstateIndex })));
 const SkylineRealtyGroup = lazy(() => import("./pages/RealEstate/SkylineRealtyGroup").then((m) => ({ default: m.SkylineRealtyGroup })));
 const HarborKeyHomes = lazy(() => import("./pages/RealEstate/HarborKeyHomes").then((m) => ({ default: m.HarborKeyHomes })));
@@ -98,6 +108,66 @@ const KeyStartRealty = lazy(() => import("./pages/RealEstate/KeyStartRealtyEdito
 // SaaS & Restaurants
 const SaaSIndex = lazy(() => import("./pages/SaaS/SaaSIndex").then((m) => ({ default: m.SaaSIndex })));
 const FlowPilotCRM = lazy(() => import("./pages/SaaS/FlowPilotCRM").then((m) => ({ default: m.FlowPilotCRM })));
+const FlowPilotFeatures = lazy(() => import("./pages/SaaS/FlowPilotCRM").then((m) => ({ default: m.FlowPilotFeatures })));
+const FlowPilotBenefits = lazy(() => import("./pages/SaaS/FlowPilotCRM").then((m) => ({ default: m.FlowPilotBenefits })));
+const FlowPilotIntegrations = lazy(() => import("./pages/SaaS/FlowPilotCRM").then((m) => ({ default: m.FlowPilotIntegrations })));
+const FlowPilotPricing = lazy(() => import("./pages/SaaS/FlowPilotCRM").then((m) => ({ default: m.FlowPilotPricing })));
+const FlowPilotTrial = lazy(() => import("./pages/SaaS/FlowPilotCRM").then((m) => ({ default: m.FlowPilotTrial })));
+const MetricNestAnalytics = lazy(() => import("./pages/SaaS/MetricNestAnalytics").then((m) => ({ default: m.MetricNestAnalytics })));
+const MetricNestFeatures = lazy(() => import("./pages/SaaS/MetricNestAnalytics").then((m) => ({ default: m.MetricNestFeatures })));
+const MetricNestSolutions = lazy(() => import("./pages/SaaS/MetricNestAnalytics").then((m) => ({ default: m.MetricNestSolutions })));
+const MetricNestIntegrations = lazy(() => import("./pages/SaaS/MetricNestAnalytics").then((m) => ({ default: m.MetricNestIntegrations })));
+const MetricNestPricing = lazy(() => import("./pages/SaaS/MetricNestAnalytics").then((m) => ({ default: m.MetricNestPricing })));
+const MetricNestDemo = lazy(() => import("./pages/SaaS/MetricNestAnalytics").then((m) => ({ default: m.MetricNestDemo })));
+const SupportDockAI = lazy(() => import("./pages/SaaS/SupportDockAI").then((m) => ({ default: m.SupportDockAI })));
+const SupportDockFeatures = lazy(() => import("./pages/SaaS/SupportDockAI").then((m) => ({ default: m.SupportDockFeatures })));
+const SupportDockPricing = lazy(() => import("./pages/SaaS/SupportDockAI").then((m) => ({ default: m.SupportDockPricing })));
+const SupportDockIntegrations = lazy(() => import("./pages/SaaS/SupportDockAI").then((m) => ({ default: m.SupportDockIntegrations })));
+const SupportDockBlog = lazy(() => import("./pages/SaaS/SupportDockAI").then((m) => ({ default: m.SupportDockBlog })));
+const SupportDockTrial = lazy(() => import("./pages/SaaS/SupportDockAI").then((m) => ({ default: m.SupportDockTrial })));
+const LaunchGridPM = lazy(() => import("./pages/SaaS/LaunchGridPM").then((m) => ({ default: m.LaunchGridPM })));
+const LaunchGridFeatures = lazy(() => import("./pages/SaaS/LaunchGridPM").then((m) => ({ default: m.LaunchGridFeatures })));
+const LaunchGridIntegrations = lazy(() => import("./pages/SaaS/LaunchGridPM").then((m) => ({ default: m.LaunchGridIntegrations })));
+const LaunchGridPricing = lazy(() => import("./pages/SaaS/LaunchGridPM").then((m) => ({ default: m.LaunchGridPricing })));
+const LaunchGridDemo = lazy(() => import("./pages/SaaS/LaunchGridPM").then((m) => ({ default: m.LaunchGridDemo })));
+const LaunchGridTrial = lazy(() => import("./pages/SaaS/LaunchGridPM").then((m) => ({ default: m.LaunchGridTrial })));
+const InvoicePilot = lazy(() => import("./pages/SaaS/InvoicePilot").then((m) => ({ default: m.InvoicePilot })));
+const InvoicePilotFeatures = lazy(() => import("./pages/SaaS/InvoicePilot").then((m) => ({ default: m.InvoicePilotFeatures })));
+const InvoicePilotPricing = lazy(() => import("./pages/SaaS/InvoicePilot").then((m) => ({ default: m.InvoicePilotPricing })));
+const InvoicePilotIntegrations = lazy(() => import("./pages/SaaS/InvoicePilot").then((m) => ({ default: m.InvoicePilotIntegrations })));
+const InvoicePilotBlog = lazy(() => import("./pages/SaaS/InvoicePilot").then((m) => ({ default: m.InvoicePilotBlog })));
+const InvoicePilotTrial = lazy(() => import("./pages/SaaS/InvoicePilot").then((m) => ({ default: m.InvoicePilotTrial })));
+const RecruitFlow = lazy(() => import("./pages/SaaS/RecruitFlow").then((m) => ({ default: m.RecruitFlow })));
+const RecruitFlowFeatures = lazy(() => import("./pages/SaaS/RecruitFlow").then((m) => ({ default: m.RecruitFlowFeatures })));
+const RecruitFlowPricing = lazy(() => import("./pages/SaaS/RecruitFlow").then((m) => ({ default: m.RecruitFlowPricing })));
+const RecruitFlowIntegrations = lazy(() => import("./pages/SaaS/RecruitFlow").then((m) => ({ default: m.RecruitFlowIntegrations })));
+const RecruitFlowCareers = lazy(() => import("./pages/SaaS/RecruitFlow").then((m) => ({ default: m.RecruitFlowCareers })));
+const RecruitFlowTrial = lazy(() => import("./pages/SaaS/RecruitFlow").then((m) => ({ default: m.RecruitFlowTrial })));
+const SecureLayer = lazy(() => import("./pages/SaaS/SecureLayer").then((m) => ({ default: m.SecureLayer })));
+const SecureLayerFeatures = lazy(() => import("./pages/SaaS/SecureLayer").then((m) => ({ default: m.SecureLayerFeatures })));
+const SecureLayerSolutions = lazy(() => import("./pages/SaaS/SecureLayer").then((m) => ({ default: m.SecureLayerSolutions })));
+const SecureLayerIntegrations = lazy(() => import("./pages/SaaS/SecureLayer").then((m) => ({ default: m.SecureLayerIntegrations })));
+const SecureLayerTrust = lazy(() => import("./pages/SaaS/SecureLayer").then((m) => ({ default: m.SecureLayerTrust })));
+const SecureLayerPricing = lazy(() => import("./pages/SaaS/SecureLayer").then((m) => ({ default: m.SecureLayerPricing })));
+const SecureLayerTrial = lazy(() => import("./pages/SaaS/SecureLayer").then((m) => ({ default: m.SecureLayerTrial })));
+const PeoplePulseHR = lazy(() => import("./pages/SaaS/PeoplePulseHR").then((m) => ({ default: m.PeoplePulseHR })));
+const PeoplePulseFeatures = lazy(() => import("./pages/SaaS/PeoplePulseHR").then((m) => ({ default: m.PeoplePulseFeatures })));
+const PeoplePulseProduct = lazy(() => import("./pages/SaaS/PeoplePulseHR").then((m) => ({ default: m.PeoplePulseProduct })));
+const PeoplePulseIntegrations = lazy(() => import("./pages/SaaS/PeoplePulseHR").then((m) => ({ default: m.PeoplePulseIntegrations })));
+const PeoplePulsePricing = lazy(() => import("./pages/SaaS/PeoplePulseHR").then((m) => ({ default: m.PeoplePulsePricing })));
+const PeoplePulseTrial = lazy(() => import("./pages/SaaS/PeoplePulseHR").then((m) => ({ default: m.PeoplePulseTrial })));
+const ConsentLayerPrivacy = lazy(() => import("./pages/SaaS/ConsentLayerPrivacy").then((m) => ({ default: m.ConsentLayerPrivacy })));
+const ConsentLayerFeatures = lazy(() => import("./pages/SaaS/ConsentLayerPrivacy").then((m) => ({ default: m.ConsentLayerFeatures })));
+const ConsentLayerProduct = lazy(() => import("./pages/SaaS/ConsentLayerPrivacy").then((m) => ({ default: m.ConsentLayerProduct })));
+const ConsentLayerIntegrations = lazy(() => import("./pages/SaaS/ConsentLayerPrivacy").then((m) => ({ default: m.ConsentLayerIntegrations })));
+const ConsentLayerPricing = lazy(() => import("./pages/SaaS/ConsentLayerPrivacy").then((m) => ({ default: m.ConsentLayerPricing })));
+const ConsentLayerTrial = lazy(() => import("./pages/SaaS/ConsentLayerPrivacy").then((m) => ({ default: m.ConsentLayerTrial })));
+const RouteStackLogistics = lazy(() => import("./pages/SaaS/RouteStackLogistics").then((m) => ({ default: m.RouteStackLogistics })));
+const RouteStackFeatures = lazy(() => import("./pages/SaaS/RouteStackLogistics").then((m) => ({ default: m.RouteStackFeatures })));
+const RouteStackProduct = lazy(() => import("./pages/SaaS/RouteStackLogistics").then((m) => ({ default: m.RouteStackProduct })));
+const RouteStackIntegrations = lazy(() => import("./pages/SaaS/RouteStackLogistics").then((m) => ({ default: m.RouteStackIntegrations })));
+const RouteStackPricing = lazy(() => import("./pages/SaaS/RouteStackLogistics").then((m) => ({ default: m.RouteStackPricing })));
+const RouteStackTrial = lazy(() => import("./pages/SaaS/RouteStackLogistics").then((m) => ({ default: m.RouteStackTrial })));
 const RestaurantIndex = lazy(() => import("./pages/Restaurant/RestaurantIndex").then((m) => ({ default: m.RestaurantIndex })));
 const BrewNestCoffee = lazy(() => import("./pages/Restaurant/BrewNestCoffee").then((m) => ({ default: m.BrewNestCoffee })));
 const BurgerCraft = lazy(() => import("./pages/Restaurant/BurgerCraft").then((m) => ({ default: m.BurgerCraft })));
@@ -165,7 +235,17 @@ function AppShell() {
     (pathname.startsWith("/education/") && pathname !== "/education") ||
     (pathname.startsWith("/e-commerce/") && pathname !== "/e-commerce") ||
     (pathname.startsWith("/portfolio/") && pathname !== "/portfolio") ||
-    (pathname.startsWith("/saas/") && pathname !== "/saas");
+    (pathname.startsWith("/saas/") && pathname !== "/saas") ||
+    pathname.startsWith("/flowpilot") ||
+    pathname.startsWith("/metricnest") ||
+    pathname.startsWith("/supportdock") ||
+    pathname.startsWith("/launchgrid") ||
+    pathname.startsWith("/invoicepilot") ||
+    pathname.startsWith("/recruitflow") ||
+    pathname.startsWith("/securelayer") ||
+    pathname.startsWith("/peoplepulse") ||
+    pathname.startsWith("/consentlayer") ||
+    pathname.startsWith("/routestack");
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
@@ -673,8 +753,289 @@ function AppShell() {
               path="/portfolio/studio-vale-creative"
               element={<StudioValeCreative />}
             />
+            <Route
+              path="/portfolio/axiom-labs"
+              element={<AxiomLabs />}
+            />
+            <Route
+              path="/portfolio/axiomlabs"
+              element={<AxiomLabs />}
+            />
+            <Route
+              path="/axiom-labs"
+              element={<AxiomLabs />}
+            />
+            <Route
+              path="/axiomlabs"
+              element={<AxiomLabs />}
+            />
+            <Route
+              path="/portfolio/vale-interior-studio"
+              element={<ValeInteriorStudio />}
+            />
+            <Route
+              path="/portfolio/vale"
+              element={<ValeInteriorStudio />}
+            />
+            <Route
+              path="/vale-interior-studio"
+              element={<ValeInteriorStudio />}
+            />
+            <Route
+              path="/vale"
+              element={<ValeInteriorStudio />}
+            />
+            <Route
+              path="/portfolio/signal-brand-designer"
+              element={<SignalBrandDesigner />}
+            />
+            <Route
+              path="/portfolio/signal"
+              element={<SignalBrandDesigner />}
+            />
+            <Route
+              path="/signal-brand-designer"
+              element={<SignalBrandDesigner />}
+            />
+            <Route
+              path="/signal"
+              element={<SignalBrandDesigner />}
+            />
+            <Route
+              path="/portfolio/northline-developer"
+              element={<NorthlineDeveloper />}
+            />
+            <Route
+              path="/portfolio/northline"
+              element={<NorthlineDeveloper />}
+            />
+            <Route
+              path="/northline-developer"
+              element={<NorthlineDeveloper />}
+            />
+            <Route
+              path="/northline"
+              element={<NorthlineDeveloper />}
+            />
+            <Route
+              path="/portfolio/motiondesk-studio"
+              element={<MotionDeskStudio />}
+            />
+            <Route
+              path="/portfolio/motiondesk"
+              element={<MotionDeskStudio />}
+            />
+            <Route
+              path="/motiondesk-studio"
+              element={<MotionDeskStudio />}
+            />
+            <Route
+              path="/motiondesk"
+              element={<MotionDeskStudio />}
+            />
+            <Route
+              path="/portfolio/inkhouse-copy"
+              element={<InkhouseCopy />}
+            />
+            <Route
+              path="/portfolio/inkhouse"
+              element={<InkhouseCopy />}
+            />
+            <Route
+              path="/inkhouse-copy"
+              element={<InkhouseCopy />}
+            />
+            <Route
+              path="/inkhouse"
+              element={<InkhouseCopy />}
+            />
+            <Route
+              path="/portfolio/framelab-photo"
+              element={<FrameLabPhoto />}
+            />
+            <Route
+              path="/portfolio/framelab"
+              element={<FrameLabPhoto />}
+            />
+            <Route
+              path="/framelab-photo"
+              element={<FrameLabPhoto />}
+            />
+            <Route
+              path="/framelab"
+              element={<FrameLabPhoto />}
+            />
+            <Route
+              path="/portfolio/cedar-ux-consultant"
+              element={<CedarUXConsultant />}
+            />
+            <Route
+              path="/portfolio/cedar"
+              element={<CedarUXConsultant />}
+            />
+            <Route
+              path="/cedar-ux-consultant"
+              element={<CedarUXConsultant />}
+            />
+            <Route
+              path="/cedar"
+              element={<CedarUXConsultant />}
+            />
+            <Route
+              path="/portfolio/atelier-north-architecture"
+              element={<AtelierNorthArchitecture />}
+            />
+            <Route
+              path="/portfolio/atelier-north"
+              element={<AtelierNorthArchitecture />}
+            />
+            <Route
+              path="/atelier-north-architecture"
+              element={<AtelierNorthArchitecture />}
+            />
+            <Route
+              path="/atelier-north"
+              element={<AtelierNorthArchitecture />}
+            />
+            <Route
+              path="/portfolio/artisan-objects"
+              element={<ArtisanObjects />}
+            />
+            <Route
+              path="/portfolio/artisan"
+              element={<ArtisanObjects />}
+            />
+            <Route
+              path="/artisan-objects"
+              element={<ArtisanObjects />}
+            />
+            <Route
+              path="/artisan"
+              element={<ArtisanObjects />}
+            />
             <Route path="/saas" element={<SaaSIndex />} />
             <Route path="/saas/flowpilot-crm" element={<FlowPilotCRM />} />
+            <Route path="/saas/flowpilot-crm/features" element={<FlowPilotFeatures />} />
+            <Route path="/saas/flowpilot-crm/benefits" element={<FlowPilotBenefits />} />
+            <Route path="/saas/flowpilot-crm/integrations" element={<FlowPilotIntegrations />} />
+            <Route path="/saas/flowpilot-crm/pricing" element={<FlowPilotPricing />} />
+            <Route path="/saas/flowpilot-crm/trial" element={<FlowPilotTrial />} />
+            <Route path="/flowpilot" element={<FlowPilotCRM />} />
+            <Route path="/flowpilot/features" element={<FlowPilotFeatures />} />
+            <Route path="/flowpilot/benefits" element={<FlowPilotBenefits />} />
+            <Route path="/flowpilot/integrations" element={<FlowPilotIntegrations />} />
+            <Route path="/flowpilot/pricing" element={<FlowPilotPricing />} />
+            <Route path="/flowpilot/trial" element={<FlowPilotTrial />} />
+            <Route path="/saas/metricnest-analytics" element={<MetricNestAnalytics />} />
+            <Route path="/saas/metricnest-analytics/features" element={<MetricNestFeatures />} />
+            <Route path="/saas/metricnest-analytics/solutions" element={<MetricNestSolutions />} />
+            <Route path="/saas/metricnest-analytics/integrations" element={<MetricNestIntegrations />} />
+            <Route path="/saas/metricnest-analytics/pricing" element={<MetricNestPricing />} />
+            <Route path="/saas/metricnest-analytics/demo" element={<MetricNestDemo />} />
+            <Route path="/metricnest" element={<MetricNestAnalytics />} />
+            <Route path="/metricnest/features" element={<MetricNestFeatures />} />
+            <Route path="/metricnest/solutions" element={<MetricNestSolutions />} />
+            <Route path="/metricnest/integrations" element={<MetricNestIntegrations />} />
+            <Route path="/metricnest/pricing" element={<MetricNestPricing />} />
+            <Route path="/metricnest/demo" element={<MetricNestDemo />} />
+            <Route path="/saas/supportdock-ai" element={<SupportDockAI />} />
+            <Route path="/saas/supportdock-ai/features" element={<SupportDockFeatures />} />
+            <Route path="/saas/supportdock-ai/pricing" element={<SupportDockPricing />} />
+            <Route path="/saas/supportdock-ai/integrations" element={<SupportDockIntegrations />} />
+            <Route path="/saas/supportdock-ai/blog" element={<SupportDockBlog />} />
+            <Route path="/saas/supportdock-ai/trial" element={<SupportDockTrial />} />
+            <Route path="/supportdock" element={<SupportDockAI />} />
+            <Route path="/supportdock/features" element={<SupportDockFeatures />} />
+            <Route path="/supportdock/pricing" element={<SupportDockPricing />} />
+            <Route path="/supportdock/integrations" element={<SupportDockIntegrations />} />
+            <Route path="/supportdock/blog" element={<SupportDockBlog />} />
+            <Route path="/supportdock/trial" element={<SupportDockTrial />} />
+            <Route path="/saas/launchgrid-pm" element={<LaunchGridPM />} />
+            <Route path="/saas/launchgrid-pm/features" element={<LaunchGridFeatures />} />
+            <Route path="/saas/launchgrid-pm/integrations" element={<LaunchGridIntegrations />} />
+            <Route path="/saas/launchgrid-pm/pricing" element={<LaunchGridPricing />} />
+            <Route path="/saas/launchgrid-pm/demo" element={<LaunchGridDemo />} />
+            <Route path="/saas/launchgrid-pm/trial" element={<LaunchGridTrial />} />
+            <Route path="/launchgrid" element={<LaunchGridPM />} />
+            <Route path="/launchgrid/features" element={<LaunchGridFeatures />} />
+            <Route path="/launchgrid/integrations" element={<LaunchGridIntegrations />} />
+            <Route path="/launchgrid/pricing" element={<LaunchGridPricing />} />
+            <Route path="/launchgrid/demo" element={<LaunchGridDemo />} />
+            <Route path="/launchgrid/trial" element={<LaunchGridTrial />} />
+            <Route path="/saas/invoicepilot" element={<InvoicePilot />} />
+            <Route path="/saas/invoicepilot/features" element={<InvoicePilotFeatures />} />
+            <Route path="/saas/invoicepilot/pricing" element={<InvoicePilotPricing />} />
+            <Route path="/saas/invoicepilot/integrations" element={<InvoicePilotIntegrations />} />
+            <Route path="/saas/invoicepilot/blog" element={<InvoicePilotBlog />} />
+            <Route path="/saas/invoicepilot/trial" element={<InvoicePilotTrial />} />
+            <Route path="/invoicepilot" element={<InvoicePilot />} />
+            <Route path="/invoicepilot/features" element={<InvoicePilotFeatures />} />
+            <Route path="/invoicepilot/pricing" element={<InvoicePilotPricing />} />
+            <Route path="/invoicepilot/integrations" element={<InvoicePilotIntegrations />} />
+            <Route path="/invoicepilot/blog" element={<InvoicePilotBlog />} />
+            <Route path="/invoicepilot/trial" element={<InvoicePilotTrial />} />
+            <Route path="/saas/recruitflow" element={<RecruitFlow />} />
+            <Route path="/saas/recruitflow/features" element={<RecruitFlowFeatures />} />
+            <Route path="/saas/recruitflow/integrations" element={<RecruitFlowIntegrations />} />
+            <Route path="/saas/recruitflow/pricing" element={<RecruitFlowPricing />} />
+            <Route path="/saas/recruitflow/careers" element={<RecruitFlowCareers />} />
+            <Route path="/saas/recruitflow/trial" element={<RecruitFlowTrial />} />
+            <Route path="/recruitflow" element={<RecruitFlow />} />
+            <Route path="/recruitflow/features" element={<RecruitFlowFeatures />} />
+            <Route path="/recruitflow/integrations" element={<RecruitFlowIntegrations />} />
+            <Route path="/recruitflow/pricing" element={<RecruitFlowPricing />} />
+            <Route path="/recruitflow/careers" element={<RecruitFlowCareers />} />
+            <Route path="/recruitflow/trial" element={<RecruitFlowTrial />} />
+            <Route path="/saas/securelayer" element={<SecureLayer />} />
+            <Route path="/saas/securelayer/features" element={<SecureLayerFeatures />} />
+            <Route path="/saas/securelayer/solutions" element={<SecureLayerSolutions />} />
+            <Route path="/saas/securelayer/integrations" element={<SecureLayerIntegrations />} />
+            <Route path="/saas/securelayer/trust" element={<SecureLayerTrust />} />
+            <Route path="/saas/securelayer/pricing" element={<SecureLayerPricing />} />
+            <Route path="/saas/securelayer/trial" element={<SecureLayerTrial />} />
+            <Route path="/securelayer" element={<SecureLayer />} />
+            <Route path="/securelayer/features" element={<SecureLayerFeatures />} />
+            <Route path="/securelayer/solutions" element={<SecureLayerSolutions />} />
+            <Route path="/securelayer/integrations" element={<SecureLayerIntegrations />} />
+            <Route path="/securelayer/trust" element={<SecureLayerTrust />} />
+            <Route path="/securelayer/pricing" element={<SecureLayerPricing />} />
+            <Route path="/securelayer/trial" element={<SecureLayerTrial />} />
+            <Route path="/saas/peoplepulse-hr" element={<PeoplePulseHR />} />
+            <Route path="/saas/peoplepulse-hr/features" element={<PeoplePulseFeatures />} />
+            <Route path="/saas/peoplepulse-hr/product" element={<PeoplePulseProduct />} />
+            <Route path="/saas/peoplepulse-hr/integrations" element={<PeoplePulseIntegrations />} />
+            <Route path="/saas/peoplepulse-hr/pricing" element={<PeoplePulsePricing />} />
+            <Route path="/saas/peoplepulse-hr/trial" element={<PeoplePulseTrial />} />
+            <Route path="/peoplepulse" element={<PeoplePulseHR />} />
+            <Route path="/peoplepulse/features" element={<PeoplePulseFeatures />} />
+            <Route path="/peoplepulse/product" element={<PeoplePulseProduct />} />
+            <Route path="/peoplepulse/integrations" element={<PeoplePulseIntegrations />} />
+            <Route path="/peoplepulse/pricing" element={<PeoplePulsePricing />} />
+            <Route path="/peoplepulse/trial" element={<PeoplePulseTrial />} />
+            <Route path="/saas/consentlayer-privacy" element={<ConsentLayerPrivacy />} />
+            <Route path="/saas/consentlayer-privacy/features" element={<ConsentLayerFeatures />} />
+            <Route path="/saas/consentlayer-privacy/product" element={<ConsentLayerProduct />} />
+            <Route path="/saas/consentlayer-privacy/integrations" element={<ConsentLayerIntegrations />} />
+            <Route path="/saas/consentlayer-privacy/pricing" element={<ConsentLayerPricing />} />
+            <Route path="/saas/consentlayer-privacy/trial" element={<ConsentLayerTrial />} />
+            <Route path="/consentlayer" element={<ConsentLayerPrivacy />} />
+            <Route path="/consentlayer/features" element={<ConsentLayerFeatures />} />
+            <Route path="/consentlayer/product" element={<ConsentLayerProduct />} />
+            <Route path="/consentlayer/integrations" element={<ConsentLayerIntegrations />} />
+            <Route path="/consentlayer/pricing" element={<ConsentLayerPricing />} />
+            <Route path="/consentlayer/trial" element={<ConsentLayerTrial />} />
+            <Route path="/saas/routestack-logistics" element={<RouteStackLogistics />} />
+            <Route path="/saas/routestack-logistics/features" element={<RouteStackFeatures />} />
+            <Route path="/saas/routestack-logistics/product" element={<RouteStackProduct />} />
+            <Route path="/saas/routestack-logistics/integrations" element={<RouteStackIntegrations />} />
+            <Route path="/saas/routestack-logistics/pricing" element={<RouteStackPricing />} />
+            <Route path="/saas/routestack-logistics/trial" element={<RouteStackTrial />} />
+            <Route path="/routestack" element={<RouteStackLogistics />} />
+            <Route path="/routestack/features" element={<RouteStackFeatures />} />
+            <Route path="/routestack/product" element={<RouteStackProduct />} />
+            <Route path="/routestack/integrations" element={<RouteStackIntegrations />} />
+            <Route path="/routestack/pricing" element={<RouteStackPricing />} />
+            <Route path="/routestack/trial" element={<RouteStackTrial />} />
             <Route path="/restaurant" element={<RestaurantIndex />} />
             <Route
               path="/restaurant/brewnest-coffee"

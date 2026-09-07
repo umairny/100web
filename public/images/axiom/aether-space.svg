@@ -1,0 +1,93 @@
+<svg width="800" height="480" viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="ae-bg" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="40%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </radialGradient>
+    <radialGradient id="ae-nebula" cx="50%" cy="35%" r="45%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45"/>
+      <stop offset="45%" stop-color="#6366f1" stop-opacity="0.25"/>
+      <stop offset="80%" stop-color="#0284c7" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#090d16" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="ae-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="480" fill="url(#ae-bg)"/>
+  <rect width="800" height="480" fill="url(#ae-nebula)"/>
+
+  <!-- Starry Background Points -->
+  <g fill="#ffffff">
+    <circle cx="120" cy="80" r="1.5" opacity="0.6"/>
+    <circle cx="210" cy="140" r="1.2" opacity="0.7"/>
+    <circle cx="340" cy="65" r="2" opacity="0.85"/>
+    <circle cx="470" cy="90" r="1.8" opacity="0.8"/>
+    <circle cx="610" cy="110" r="1.5" opacity="0.6"/>
+    <circle cx="720" cy="60" r="2" opacity="0.9"/>
+    <circle cx="680" cy="200" r="1.2" opacity="0.5"/>
+    <circle cx="750" cy="320" r="1.6" opacity="0.7"/>
+    <circle cx="100" cy="380" r="1.4" opacity="0.5"/>
+    <circle cx="150" cy="280" r="2.2" opacity="0.9"/>
+    <circle cx="270" cy="410" r="1.3" opacity="0.6"/>
+    <circle cx="550" cy="420" r="1.8" opacity="0.8"/>
+    <circle cx="670" cy="390" r="1.2" opacity="0.5"/>
+  </g>
+
+  <!-- Celestial Perspective Rays from Apex -->
+  <g stroke="#38bdf8" stroke-width="1.2" opacity="0.45">
+    <line x1="400" y1="80" x2="80" y2="460"/>
+    <line x1="400" y1="80" x2="180" y2="460"/>
+    <line x1="400" y1="80" x2="280" y2="460"/>
+    <line x1="400" y1="80" x2="360" y2="460"/>
+    <line x1="400" y1="80" x2="440" y2="460"/>
+    <line x1="400" y1="80" x2="520" y2="460"/>
+    <line x1="400" y1="80" x2="620" y2="460"/>
+    <line x1="400" y1="80" x2="720" y2="460"/>
+  </g>
+
+  <!-- Orbital Conic Arcs -->
+  <g fill="none" stroke="#60a5fa" stroke-width="1.4" opacity="0.55">
+    <path d="M 220 280 A 240 100 0 0 1 580 280"/>
+    <path d="M 160 340 A 320 130 0 0 1 640 340" stroke="#38bdf8" stroke-width="1.8"/>
+    <path d="M 100 410 A 420 160 0 0 1 700 410" stroke="#93c5fd" stroke-width="1.2"/>
+  </g>
+
+  <!-- Constellation Nodes & Connecting Wireframe -->
+  <g stroke="#7dd3fc" stroke-width="1.4" opacity="0.65" fill="none">
+    <polyline points="290,160 350,130 400,80 450,130 510,160"/>
+    <polyline points="220,240 290,160 360,210 440,210 510,160 580,240"/>
+    <polyline points="260,320 330,290 400,320 470,290 540,320"/>
+  </g>
+
+  <!-- Bright Star Quasar / Origin Core -->
+  <g transform="translate(400, 80)" filter="url(#ae-glow)">
+    <circle cx="0" cy="0" r="28" fill="#38bdf8" opacity="0.4"/>
+    <circle cx="0" cy="0" r="14" fill="#67e8f9" opacity="0.8"/>
+    <circle cx="0" cy="0" r="5" fill="#ffffff"/>
+    <!-- 4-point star spike -->
+    <path d="M 0 -35 L 3 -6 L 35 0 L 3 6 L 0 35 L -3 6 L -35 0 L -3 -6 Z" fill="#ffffff" opacity="0.9"/>
+  </g>
+
+  <!-- Constellation Pin Points -->
+  <g fill="#ffffff" filter="url(#ae-glow)">
+    <circle cx="290" cy="160" r="3.5"/>
+    <circle cx="510" cy="160" r="3.5"/>
+    <circle cx="360" cy="210" r="3"/>
+    <circle cx="440" cy="210" r="3"/>
+    <circle cx="220" cy="240" r="4"/>
+    <circle cx="580" cy="240" r="4"/>
+    <circle cx="330" cy="290" r="3.5"/>
+    <circle cx="470" cy="290" r="3.5"/>
+  </g>
+
+  <!-- Inner Holographic Text Overlay -->
+  <text x="400" y="232" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="900" letter-spacing="3" fill="#ffffff" text-anchor="middle">AETHER</text>
+  <text x="400" y="264" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="900" letter-spacing="3" fill="#ffffff" text-anchor="middle">SPACE</text>
+</svg>

@@ -1,0 +1,139 @@
+<svg width="680" height="420" viewBox="0 0 680 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="heroDrop" x="-10" y="-10" width="700" height="440" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#1E3A8A" flood-opacity="0.08" />
+    </filter>
+    <linearGradient id="deskGrad" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E2E8F0" />
+      <stop offset="100%" stop-color="#CBD5E1" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#heroDrop)">
+    <!-- Canvas background card -->
+    <rect x="10" y="10" width="660" height="400" rx="20" fill="#FFFFFF" stroke="#E0EFFF" stroke-width="1.5" />
+
+    <!-- CANDIDATE NETWORK TREE (Top Right & Center) -->
+    <!-- Node 1 (Top Blue) -->
+    <circle cx="270" cy="70" r="22" fill="#DBEAFE" stroke="#2563EB" stroke-width="2" />
+    <circle cx="270" cy="65" r="9" fill="#2563EB" />
+    <path d="M256 83C256 75 262 73 270 73C278 73 284 75 284 83" fill="#2563EB" />
+
+    <!-- Node 2 (Left Orange) -->
+    <circle cx="270" cy="135" r="22" fill="#FFEDD5" stroke="#EA580C" stroke-width="2" />
+    <circle cx="270" cy="130" r="9" fill="#EA580C" />
+    <path d="M256 148C256 140 262 138 270 138C278 138 284 140 284 148" fill="#EA580C" />
+
+    <!-- Node 3 (Left Teal) -->
+    <circle cx="270" cy="200" r="22" fill="#CCFBF1" stroke="#0D9488" stroke-width="2" />
+    <circle cx="270" cy="195" r="9" fill="#0D9488" />
+    <path d="M256 213C256 205 262 203 270 203C278 203 284 205 284 213" fill="#0D9488" />
+
+    <!-- Branch Lines to Center -->
+    <path d="M292 70 C 330 70, 335 135, 360 135" stroke="#3B82F6" stroke-width="2.5" fill="none" stroke-linecap="round" />
+    <path d="M292 135 H 360" stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round" />
+    <path d="M292 200 C 330 200, 335 135, 360 135" stroke="#0D9488" stroke-width="2.5" fill="none" stroke-linecap="round" />
+
+    <!-- Central Sourced Candidate Node -->
+    <circle cx="380" cy="135" r="26" fill="#1D4ED8" stroke="#FFFFFF" stroke-width="3" />
+    <circle cx="380" cy="128" r="10" fill="#FFFFFF" />
+    <path d="M365 150C365 142 371 139 380 139C389 139 395 142 395 150" fill="#FFFFFF" />
+    <circle cx="398" cy="120" r="7" fill="#10B981" stroke="#FFFFFF" stroke-width="1.5" />
+    <path d="M396 120L397.5 121.5L400.5 118.5" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+
+    <!-- Branch from central node to Top Right Final Candidate -->
+    <path d="M406 135 C 430 135, 435 85, 470 85" stroke="#3B82F6" stroke-width="2.5" fill="none" stroke-linecap="round" />
+    <path d="M406 135 C 430 135, 435 185, 470 185" stroke="#10B981" stroke-width="2.5" fill="none" stroke-linecap="round" />
+
+    <!-- Top Right Candidate Node -->
+    <circle cx="490" cy="85" r="22" fill="#DCFCE7" stroke="#16A34A" stroke-width="2" />
+    <circle cx="490" cy="80" r="9" fill="#16A34A" />
+    <path d="M476 98C476 90 482 88 490 88C498 88 504 90 504 98" fill="#16A34A" />
+
+    <!-- Lower Right Candidate Node -->
+    <circle cx="490" cy="185" r="22" fill="#FEF3C7" stroke="#D97706" stroke-width="2" />
+    <circle cx="490" cy="180" r="9" fill="#D97706" />
+    <path d="M476 198C476 190 482 188 490 188C498 188 504 190 504 198" fill="#D97706" />
+
+    <!-- Potted Plant on the right -->
+    <g transform="translate(560, 240)">
+      <path d="M30 60L22 110H48L40 60Z" fill="#F97316" stroke="#C2410C" stroke-width="1.5" />
+      <path d="M30 60C15 45, 10 20, 25 15C32 28, 30 45, 30 60Z" fill="#16A34A" />
+      <path d="M35 60C45 40, 55 25, 60 30C52 42, 42 52, 35 60Z" fill="#22C55E" />
+      <path d="M32 60C28 35, 35 15, 40 5C45 20, 42 45, 32 60Z" fill="#15803D" />
+    </g>
+
+    <!-- COLLABORATIVE INTERVIEW CONFERENCE SCENE (Bottom) -->
+    <!-- Conference Desk -->
+    <rect x="230" y="300" width="260" height="65" rx="6" fill="#F1F5F9" stroke="#94A3B8" stroke-width="2" />
+    <!-- Desk Legs -->
+    <line x1="250" y1="365" x2="250" y2="400" stroke="#64748B" stroke-width="3" />
+    <line x1="470" y1="365" x2="470" y2="400" stroke="#64748B" stroke-width="3" />
+    <line x1="360" y1="365" x2="360" y2="400" stroke="#64748B" stroke-width="2" />
+
+    <!-- Team Member 1 (Left - Green Shirt) -->
+    <g transform="translate(210, 240)">
+      <!-- Chair back -->
+      <path d="M5 40L-5 110" stroke="#334155" stroke-width="3" />
+      <!-- Head & Hair -->
+      <circle cx="30" cy="18" r="13" fill="#FCD34D" />
+      <path d="M18 16C18 8, 24 6, 33 6C40 6, 42 10, 42 16C37 14, 30 14, 25 18Z" fill="#1E293B" />
+      <!-- Body / Green Shirt -->
+      <path d="M16 38C16 30, 22 28, 30 28C38 28, 44 30, 44 38L48 65H12L16 38Z" fill="#10B981" />
+      <!-- Laptop -->
+      <rect x="36" y="52" width="28" height="18" rx="2" fill="#64748B" stroke="#334155" stroke-width="1.5" />
+      <line x1="32" y1="70" x2="68" y2="70" stroke="#334155" stroke-width="2" />
+    </g>
+
+    <!-- Team Member 2 (Center - Dark Blue Shirt) -->
+    <g transform="translate(285, 245)">
+      <!-- Head & Hair -->
+      <circle cx="30" cy="16" r="13" fill="#FBBF24" />
+      <path d="M17 14C17 6, 24 5, 33 5C41 5, 43 9, 43 14C36 12, 28 13, 23 16Z" fill="#78350F" />
+      <!-- Body / Dark Blue Shirt -->
+      <path d="M15 36C15 28, 22 26, 30 26C38 26, 45 28, 45 36L48 60H12L15 36Z" fill="#1E3A8A" />
+      <!-- Laptop screen open -->
+      <rect x="22" y="48" width="26" height="17" rx="2" fill="#0284C7" stroke="#0F172A" stroke-width="1.5" />
+      <line x1="18" y1="65" x2="52" y2="65" stroke="#0F172A" stroke-width="2" />
+    </g>
+
+    <!-- Team Member 3 (Right at Desk - Slate Shirt) -->
+    <g transform="translate(365, 245)">
+      <!-- Head & Hair -->
+      <circle cx="30" cy="16" r="13" fill="#F87171" />
+      <path d="M18 15C18 7, 25 5, 33 5C41 5, 42 9, 42 15C36 13, 29 13, 23 17Z" fill="#0F172A" />
+      <!-- Body / Slate Shirt -->
+      <path d="M16 36C16 28, 23 26, 30 26C37 26, 44 28, 44 36L47 60H13L16 36Z" fill="#475569" />
+      <!-- Laptop -->
+      <rect x="24" y="50" width="26" height="17" rx="2" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5" />
+      <line x1="20" y1="67" x2="54" y2="67" stroke="#64748B" stroke-width="2" />
+    </g>
+
+    <!-- Standing Candidate (Far Right - Orange Shirt & Tablet) -->
+    <g transform="translate(500, 215)">
+      <!-- Head & Hair -->
+      <circle cx="25" cy="18" r="14" fill="#FDE047" />
+      <path d="M12 16C12 7, 20 5, 28 5C37 5, 39 9, 39 16C32 14, 25 14, 20 18Z" fill="#0F172A" />
+      <!-- Body / Orange Polo -->
+      <path d="M10 40C10 30, 18 28, 26 28C34 28, 42 30, 42 40L45 100H7L10 40Z" fill="#EA580C" stroke="#C2410C" stroke-width="1" />
+      <!-- Legs / Trousers -->
+      <rect x="12" y="100" width="12" height="75" fill="#1E40AF" />
+      <rect x="26" y="100" width="12" height="75" fill="#1E3A8A" />
+      <!-- Shoes -->
+      <path d="M10 175H24V182H8C8 178, 9 175, 10 175Z" fill="#334155" />
+      <path d="M24 175H38V182H22C22 178, 23 175, 24 175Z" fill="#334155" />
+      <!-- Tablet held in hand -->
+      <rect x="2" y="60" width="20" height="28" rx="2" fill="#38BDF8" stroke="#0284C7" stroke-width="1.5" />
+      <circle cx="12" cy="84" r="1.5" fill="#FFFFFF" />
+      <!-- Hand -->
+      <circle cx="20" cy="74" r="4" fill="#FDE047" />
+    </g>
+
+    <!-- Top Left Trust Badge inside graphic -->
+    <rect x="30" y="30" width="180" height="34" rx="8" fill="#F0F7FF" stroke="#BFDBFE" stroke-width="1" />
+    <circle cx="48" cy="47" r="4" fill="#10B981" />
+    <text x="60" y="51" fill="#1E40AF" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">
+      Multi-Board Sync Active
+    </text>
+  </g>
+</svg>

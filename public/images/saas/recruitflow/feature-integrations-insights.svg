@@ -1,0 +1,43 @@
+<svg width="220" height="150" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card Background -->
+  <rect width="220" height="150" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+
+  <!-- Gear (Blue) -->
+  <g transform="translate(30, 35)">
+    <circle cx="30" cy="30" r="26" fill="#EFF6FF" stroke="#0284C7" stroke-width="2.5" />
+    <circle cx="30" cy="30" r="12" fill="#FFFFFF" stroke="#0284C7" stroke-width="2" />
+    <!-- Gear teeth -->
+    <rect x="27" y="0" width="6" height="8" rx="2" fill="#0284C7" />
+    <rect x="27" y="52" width="6" height="8" rx="2" fill="#0284C7" />
+    <rect x="0" y="27" width="8" height="6" rx="2" fill="#0284C7" />
+    <rect x="52" y="27" width="8" height="6" rx="2" fill="#0284C7" />
+    <rect x="9" y="9" width="6" height="8" rx="2" fill="#0284C7" transform="rotate(-45 12 13)" />
+    <rect x="45" y="45" width="6" height="8" rx="2" fill="#0284C7" transform="rotate(-45 48 49)" />
+  </g>
+
+  <!-- Connective arrow -->
+  <path d="M95 65 H 115" stroke="#64748B" stroke-width="2" stroke-dasharray="3 3" />
+  <polygon points="115,62 122,65 115,68" fill="#64748B" />
+
+  <!-- Analytics Chart Widget (Right) -->
+  <g transform="translate(126, 25)">
+    <rect width="70" height="95" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    
+    <!-- Mini Donut / Pie chart -->
+    <circle cx="35" cy="28" r="14" fill="none" stroke="#E2E8F0" stroke-width="5" />
+    <circle cx="35" cy="28" r="14" fill="none" stroke="#10B981" stroke-width="5" stroke-dasharray="45 100" transform="rotate(-90 35 28)" />
+    <circle cx="35" cy="28" r="14" fill="none" stroke="#0284C7" stroke-width="5" stroke-dasharray="30 100" stroke-dashoffset="-45" transform="rotate(-90 35 28)" />
+
+    <!-- Velocity Bar Graph below -->
+    <rect x="12" y="68" width="8" height="18" rx="2" fill="#BAE6FD" />
+    <rect x="24" y="60" width="8" height="26" rx="2" fill="#38BDF8" />
+    <rect x="36" y="52" width="8" height="34" rx="2" fill="#0284C7" />
+    <rect x="48" y="46" width="8" height="40" rx="2" fill="#10B981" />
+  </g>
+
+  <!-- Bottom Metric Tag -->
+  <rect x="30" y="116" width="160" height="20" rx="10" fill="#DCFCE7" />
+  <text x="44" y="130" fill="#166534" font-family="sans-serif" font-size="8" font-weight="700">
+    Time-to-Hire: 14 Days (Down 58%)
+  </text>
+</svg>

@@ -1,0 +1,94 @@
+<svg width="800" height="480" viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sy-bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#082f49"/>
+      <stop offset="55%" stop-color="#041829"/>
+      <stop offset="100%" stop-color="#020811"/>
+    </radialGradient>
+    <radialGradient id="sy-aura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#0284c7" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#082f49" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="sy-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="sy-pulse" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="14" result="pulse"/>
+      <feMerge>
+        <feMergeNode in="pulse"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="480" fill="url(#sy-bg)"/>
+  <circle cx="400" cy="240" r="220" fill="url(#sy-aura)"/>
+
+  <!-- Neural Synapse Filaments / Axon Paths -->
+  <g stroke="#0ea5e9" stroke-width="1.8" opacity="0.65" fill="none" filter="url(#sy-glow)">
+    <!-- Primary Bridges -->
+    <path d="M 120 180 Q 240 140 330 200"/>
+    <path d="M 140 320 Q 250 300 320 260"/>
+    <path d="M 330 200 Q 400 130 470 190"/>
+    <path d="M 320 260 Q 400 330 480 270"/>
+    <path d="M 470 190 Q 560 140 680 180"/>
+    <path d="M 480 270 Q 580 320 670 290"/>
+    <!-- Cross Dendrites -->
+    <path d="M 330 200 L 320 260" stroke="#22d3ee" stroke-width="2"/>
+    <path d="M 470 190 L 480 270" stroke="#22d3ee" stroke-width="2"/>
+    <path d="M 330 200 L 480 270" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <path d="M 320 260 L 470 190" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <!-- Peripheral Branching -->
+    <path d="M 210 90 L 330 200 L 260 220"/>
+    <path d="M 470 190 L 530 110"/>
+    <path d="M 400 90 L 400 160"/>
+    <path d="M 400 380 L 400 300"/>
+    <path d="M 220 380 L 320 260"/>
+    <path d="M 590 380 L 480 270"/>
+    <path d="M 680 180 L 730 120"/>
+    <path d="M 670 290 L 740 350"/>
+    <path d="M 120 180 L 60 140"/>
+    <path d="M 140 320 L 70 360"/>
+  </g>
+
+  <!-- Bioluminescent Secondary Network Lines -->
+  <g stroke="#38bdf8" stroke-width="1" opacity="0.4" fill="none">
+    <path d="M 180 210 Q 280 170 380 210 T 580 210"/>
+    <path d="M 200 270 Q 300 310 400 270 T 600 270"/>
+    <path d="M 300 110 Q 400 180 500 110"/>
+    <path d="M 300 370 Q 400 300 500 370"/>
+  </g>
+
+  <!-- Glowing Bio-Synapse Nodes -->
+  <g filter="url(#sy-pulse)">
+    <circle cx="330" cy="200" r="7" fill="#67e8f9"/>
+    <circle cx="320" cy="260" r="7.5" fill="#22d3ee"/>
+    <circle cx="470" cy="190" r="7" fill="#67e8f9"/>
+    <circle cx="480" cy="270" r="7.5" fill="#22d3ee"/>
+
+    <circle cx="120" cy="180" r="5" fill="#38bdf8"/>
+    <circle cx="140" cy="320" r="5.5" fill="#34d399"/>
+    <circle cx="680" cy="180" r="5.5" fill="#34d399"/>
+    <circle cx="670" cy="290" r="5" fill="#38bdf8"/>
+
+    <circle cx="210" cy="90" r="4.5" fill="#67e8f9"/>
+    <circle cx="530" cy="110" r="4" fill="#a7f3d0"/>
+    <circle cx="400" cy="90" r="4" fill="#38bdf8"/>
+    <circle cx="400" cy="380" r="4" fill="#38bdf8"/>
+    <circle cx="220" cy="380" r="4" fill="#22d3ee"/>
+    <circle cx="590" cy="380" r="4.5" fill="#67e8f9"/>
+  </g>
+
+  <!-- Center Core Aura -->
+  <circle cx="400" cy="240" r="85" fill="#021422" stroke="#0ea5e9" stroke-width="1.8" opacity="0.8"/>
+  <circle cx="400" cy="240" r="75" fill="#042035" opacity="0.6"/>
+
+  <!-- Inner Holographic Text Overlay -->
+  <text x="400" y="232" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="900" letter-spacing="3" fill="#ffffff" text-anchor="middle">SYNAPSE</text>
+  <text x="400" y="264" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="900" letter-spacing="3" fill="#ffffff" text-anchor="middle">HEALTH</text>
+</svg>

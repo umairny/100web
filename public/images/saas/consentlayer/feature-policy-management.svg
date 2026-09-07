@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 140" width="100%" height="100%" fill="none">
+  <defs>
+    <filter id="featSh2" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0D9488" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <g transform="translate(80, 70)" filter="url(#featSh2)">
+    <!-- Policy Document Base -->
+    <rect x="-42" y="-45" width="84" height="90" rx="10" fill="#FFFFFF" stroke="#0D9488" stroke-width="2" />
+    <rect x="-32" y="-34" width="40" height="5" rx="2.5" fill="#0D9488" />
+    <rect x="-32" y="-22" width="56" height="4" rx="2" fill="#E2E8F0" />
+    <rect x="-32" y="-12" width="48" height="4" rx="2" fill="#E2E8F0" />
+    <rect x="-32" y="-2" width="52" height="4" rx="2" fill="#E2E8F0" />
+
+    <!-- Attached Mechanical Gear on Top Right -->
+    <g transform="translate(24, -26)">
+      <circle cx="0" cy="0" r="16" fill="#0D9488" stroke="#FFFFFF" stroke-width="2" />
+      <circle cx="0" cy="0" r="6" fill="#FFFFFF" />
+      <!-- Gear Teeth -->
+      <rect x="-3" y="-19" width="6" height="4" fill="#0D9488" />
+      <rect x="-3" y="15" width="6" height="4" fill="#0D9488" />
+      <rect x="-19" y="-3" width="4" height="6" fill="#0D9488" />
+      <rect x="15" y="-3" width="4" height="6" fill="#0D9488" />
+    </g>
+
+    <!-- Jurisdictions Pill Tag on Bottom -->
+    <g transform="translate(0, 22)">
+      <rect x="-36" y="0" width="72" height="16" rx="8" fill="#CCFBF1" stroke="#99F6E4" />
+      <text x="0" y="11" fill="#0F766E" font-family="system-ui, sans-serif" font-size="7.5" font-weight="bold" text-anchor="middle">GDPR • CCPA</text>
+    </g>
+  </g>
+</svg>

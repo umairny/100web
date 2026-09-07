@@ -1,0 +1,24 @@
+<svg width="220" height="150" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card Background -->
+  <rect width="220" height="150" rx="14" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" />
+
+  <!-- Node 1: Applied (Blue) -->
+  <rect x="25" y="30" width="60" height="24" rx="12" fill="#0284C7" />
+  <text x="38" y="46" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="10" font-weight="700">Applied</text>
+
+  <!-- Node 2: Screen (Emerald) -->
+  <rect x="80" y="65" width="60" height="24" rx="12" fill="#10B981" />
+  <text x="94" y="81" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="10" font-weight="700">Offer</text>
+
+  <!-- Node 3: Hired (Amber) -->
+  <rect x="135" y="100" width="60" height="24" rx="12" fill="#F59E0B" />
+  <text x="149" y="116" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="10" font-weight="700">Hired</text>
+
+  <!-- Curved connector paths -->
+  <path d="M85 42 C 100 42, 70 65, 80 77" stroke="#0284C7" stroke-width="2" stroke-dasharray="3 3" fill="none" />
+  <path d="M140 77 C 155 77, 125 100, 135 112" stroke="#10B981" stroke-width="2" stroke-dasharray="3 3" fill="none" />
+
+  <!-- Checkmark pulse badge -->
+  <circle cx="190" cy="38" r="10" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5" />
+  <path d="M186 38L189 41L195 35" stroke="#16A34A" stroke-width="2" stroke-linecap="round" fill="none" />
+</svg>

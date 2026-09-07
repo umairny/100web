@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 280" width="100%" height="100%" fill="none">
+  <!-- Container with subtle border -->
+  <rect width="520" height="280" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- Left: Slow Process -->
+  <g transform="translate(30, 30)">
+    <!-- Background card tint -->
+    <rect width="210" height="220" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+
+    <!-- Ticking Clock in background -->
+    <circle cx="160" cy="50" r="18" fill="#FEE2E2" stroke="#EF4444" stroke-width="1.5"/>
+    <line x1="160" y1="50" x2="160" y2="40" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
+    <line x1="160" y1="50" x2="168" y2="50" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Giant Manual Clipboard Checklist -->
+    <rect x="25" y="45" width="70" height="95" rx="5" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+    <rect x="45" y="38" width="30" height="12" rx="3" fill="#64748B"/>
+    <!-- Checklist items (Messy lines) -->
+    <line x1="35" y1="60" x2="80" y2="60" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="35" y1="72" x2="75" y2="72" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="35" y1="84" x2="82" y2="84" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="35" y1="96" x2="70" y2="96" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="35" y1="108" x2="78" y2="108" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="35" y1="120" x2="65" y2="120" stroke="#CBD5E1" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Stressed Agent Illustration -->
+    <!-- Head -->
+    <circle cx="125" cy="85" r="12" fill="#FED7AA"/>
+    <!-- Hair -->
+    <path d="M113 83 C 113 72, 137 72, 137 83 Z" fill="#0F172A"/>
+    <!-- Stressed Eyebrows -->
+    <line x1="118" y1="80" x2="123" y2="82" stroke="#0F172A" stroke-width="1.5"/>
+    <line x1="132" y1="82" x2="127" y2="80" stroke="#0F172A" stroke-width="1.5"/>
+    <!-- Sweat drop -->
+    <path d="M138 78 C 140 82, 136 84, 138 86 C 140 86, 142 84, 140 80 Z" fill="#38BDF8"/>
+    <!-- Body -->
+    <path d="M110 125 C 110 102, 140 102, 140 125 Z" fill="#3B82F6"/>
+    <!-- Overworked Legs/Table -->
+    <rect x="105" y="125" width="40" height="20" fill="#1E293B"/>
+
+    <!-- Slow Process Pill Label -->
+    <rect x="55" y="175" width="100" height="26" rx="13" fill="#94A3B8"/>
+    <text x="105" y="192" font-family="sans-serif" font-size="10" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Slow process</text>
+  </g>
+
+  <!-- Center Arrow -->
+  <g transform="translate(248, 120)">
+    <circle cx="12" cy="12" r="14" fill="#ECFDF5" stroke="#10B981" stroke-width="1.5"/>
+    <path d="M8 12 H16 M13 9 L16 12 L13 15" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Right: Fast Automated Process -->
+  <g transform="translate(280, 30)">
+    <rect width="210" height="220" rx="12" fill="#F0FDF4" stroke="#BBF7D0"/>
+
+    <!-- Computer Screen with Automated AI Resolution -->
+    <rect x="25" y="45" width="85" height="60" rx="6" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+    <rect x="25" y="45" width="85" height="15" rx="6" fill="#ECFDF5"/>
+    <circle cx="34" cy="52" r="2.5" fill="#10B981"/>
+    <circle cx="42" cy="52" r="2.5" fill="#34D399"/>
+    <!-- Resolved message box -->
+    <rect x="32" y="68" width="55" height="10" rx="3" fill="#D1FAE5"/>
+    <rect x="32" y="82" width="70" height="12" rx="3" fill="#10B981"/>
+    <text x="36" y="91" font-family="sans-serif" font-size="6.5" font-weight="bold" fill="#FFFFFF">Auto-Resolved ✓</text>
+    <!-- Stand -->
+    <rect x="62" y="105" width="12" height="10" fill="#64748B"/>
+    <rect x="52" y="115" width="32" height="4" rx="2" fill="#64748B"/>
+
+    <!-- Delighted Relaxed Agent Illustration -->
+    <!-- Head -->
+    <circle cx="145" cy="80" r="12" fill="#FED7AA"/>
+    <!-- Hair -->
+    <path d="M133 78 C 133 68, 157 68, 157 78 Z" fill="#0D9488"/>
+    <!-- Happy Eyes -->
+    <path d="M138 78 C 139 76, 142 76, 143 78" stroke="#0F172A" stroke-width="1.5" fill="none"/>
+    <path d="M147 78 C 148 76, 151 76, 152 78" stroke="#0F172A" stroke-width="1.5" fill="none"/>
+    <!-- Smiling Mouth -->
+    <path d="M142 85 C 144 87, 146 87, 148 85" stroke="#0F172A" stroke-width="1.5" fill="none"/>
+    <!-- Body in Green -->
+    <path d="M130 120 C 130 98, 160 98, 160 120 Z" fill="#059669"/>
+    <!-- Thumbs up gesture -->
+    <circle cx="125" cy="100" r="5" fill="#FED7AA"/>
+    <line x1="125" y1="95" x2="125" y2="100" stroke="#FED7AA" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- Fast, automated Pill Label -->
+    <rect x="55" y="175" width="100" height="26" rx="13" fill="#10B981"/>
+    <text x="105" y="192" font-family="sans-serif" font-size="10" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Fast, automated</text>
+  </g>
+</svg>

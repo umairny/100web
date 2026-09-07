@@ -1,0 +1,7 @@
+export { SupportDockHome as SupportDockAI } from './supportdock/SupportDockHome'
+export { SupportDockHome } from './supportdock/SupportDockHome'
+export { SupportDockFeatures } from './supportdock/SupportDockFeatures'
+export { SupportDockPricing } from './supportdock/SupportDockPricing'
+export { SupportDockIntegrations } from './supportdock/SupportDockIntegrations'
+export { SupportDockBlog } from './supportdock/SupportDockBlog'
+export { SupportDockTrial } from './supportdock/SupportDockTrial'

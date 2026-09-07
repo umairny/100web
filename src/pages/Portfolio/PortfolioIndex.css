@@ -1,0 +1,751 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Cinzel:wght@600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* ==========================================================================
+   PORTFOLIO CATEGORY HUB - LUXURY EDITORIAL SYSTEM
+   ========================================================================== */
+.portfolio-hub {
+  --hub-bg: #090b0e;
+  --hub-card-bg: #12151b;
+  --hub-card-hover: #181d26;
+  --hub-border: rgba(255, 255, 255, 0.08);
+  --hub-border-hover: rgba(255, 255, 255, 0.2);
+  --hub-text-main: #f8fafc;
+  --hub-text-muted: #94a3b8;
+  --hub-text-dim: #64748b;
+  --hub-accent-blue: #38bdf8;
+  --hub-accent-cyan: #22d3ee;
+  --hub-accent-gold: #eab308;
+  --hub-accent-terracotta: #a8522d;
+
+  background-color: var(--hub-bg);
+  color: var(--hub-text-main);
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Ambient noise and glow effects */
+.portfolio-hub::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 85% 25%, rgba(168, 82, 45, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(34, 211, 238, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   HERO BANNER
+   ========================================================================== */
+.portfolio-hub-hero {
+  position: relative;
+  z-index: 1;
+  padding: 100px 24px 60px;
+  border-bottom: 1px solid var(--hub-border);
+}
+
+.portfolio-hub-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.portfolio-hub-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.portfolio-hub-crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--hub-accent-blue);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.portfolio-hub-crumb:hover {
+  color: #ffffff;
+  transform: translateX(-3px);
+}
+
+.portfolio-hub-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--hub-border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #38bdf8;
+}
+
+.portfolio-hub-counter .pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #10b981;
+  animation: hubPulse 2s infinite;
+}
+
+@keyframes hubPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 16px #10b981; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.portfolio-hub-title-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 48px;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.portfolio-hub-h1 {
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.portfolio-hub-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--hub-text-muted);
+  margin: 0 0 24px;
+}
+
+.portfolio-hub-metrics {
+  display: flex;
+  gap: 32px;
+  border-top: 1px solid var(--hub-border);
+  padding-top: 20px;
+}
+
+.portfolio-metric-num {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1;
+}
+
+.portfolio-metric-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hub-text-dim);
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   FILTER & SEARCH CONTROLS
+   ========================================================================== */
+.portfolio-controls-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(9, 11, 14, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--hub-border);
+  padding: 18px 24px;
+}
+
+.portfolio-controls-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.portfolio-filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.portfolio-filter-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--hub-border);
+  color: var(--hub-text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.portfolio-filter-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.portfolio-filter-btn.active {
+  background: #ffffff;
+  color: #090b0e;
+  border-color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+}
+
+.portfolio-search-box {
+  position: relative;
+  min-width: 260px;
+}
+
+.portfolio-search-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--hub-border);
+  border-radius: 999px;
+  padding: 8px 16px 8px 36px;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.portfolio-search-input:focus {
+  border-color: var(--hub-accent-blue);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+.portfolio-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--hub-text-dim);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   FEATURED HERO HIGHLIGHT
+   ========================================================================== */
+.portfolio-spotlight-section {
+  padding: 48px 24px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.portfolio-spotlight-card {
+  background: linear-gradient(135deg, rgba(24, 29, 38, 0.8) 0%, rgba(18, 21, 27, 0.95) 100%);
+  border: 1px solid var(--hub-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  color: inherit;
+}
+
+.portfolio-spotlight-card:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+}
+
+.portfolio-spotlight-preview {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  background: #000;
+}
+
+.portfolio-spotlight-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-spotlight-card:hover .portfolio-spotlight-img {
+  transform: scale(1.04);
+}
+
+.portfolio-spotlight-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(9, 11, 14, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #facc15;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.portfolio-spotlight-palette {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 8px;
+  background: rgba(9, 11, 14, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.portfolio-color-chip {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.portfolio-spotlight-content {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.portfolio-spotlight-meta {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hub-accent-blue);
+  margin-bottom: 12px;
+}
+
+.portfolio-spotlight-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: #ffffff;
+}
+
+.portfolio-spotlight-style {
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.portfolio-spotlight-desc {
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--hub-text-muted);
+  margin: 0 0 32px;
+}
+
+.portfolio-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #090b0e;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  width: fit-content;
+}
+
+.portfolio-spotlight-card:hover .portfolio-btn-primary {
+  background: var(--hub-accent-blue);
+  color: #090b0e;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+/* ==========================================================================
+   GRID OF WEBSITES
+   ========================================================================== */
+.portfolio-grid-section {
+  padding: 36px 24px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.portfolio-grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.portfolio-grid-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.portfolio-results-count {
+  font-size: 0.8rem;
+  color: var(--hub-text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.portfolio-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 28px;
+}
+
+.portfolio-website-card {
+  background: var(--hub-card-bg);
+  border: 1px solid var(--hub-border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.portfolio-website-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--hub-border-hover);
+  background: var(--hub-card-hover);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.portfolio-card-media {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background: #0e1116;
+}
+
+.portfolio-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-website-card:hover .portfolio-card-img {
+  transform: scale(1.06);
+}
+
+.portfolio-card-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(18, 21, 27, 0.95) 0%, rgba(18, 21, 27, 0.2) 60%, transparent 100%);
+  pointer-events: none;
+}
+
+.portfolio-card-status {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(9, 11, 14, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.portfolio-card-colors {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: flex;
+  gap: 6px;
+  background: rgba(9, 11, 14, 0.65);
+  backdrop-filter: blur(8px);
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.portfolio-card-body {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0 0 6px;
+  transition: color 0.2s ease;
+}
+
+.portfolio-website-card:hover .portfolio-card-title {
+  color: var(--hub-accent-blue);
+}
+
+.portfolio-card-style {
+  font-size: 0.78rem;
+  color: var(--hub-accent-cyan);
+  margin-bottom: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.portfolio-card-desc {
+  font-size: 0.88rem;
+  color: var(--hub-text-muted);
+  line-height: 1.6;
+  margin: 0 0 20px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.portfolio-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--hub-border);
+  padding-top: 16px;
+  margin-top: auto;
+}
+
+.portfolio-view-link {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.portfolio-website-card:hover .portfolio-view-link {
+  color: var(--hub-accent-blue);
+}
+
+.portfolio-slug-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--hub-text-dim);
+}
+
+/* ==========================================================================
+   UX BLUEPRINT SECTION
+   ========================================================================== */
+.portfolio-blueprint-section {
+  background: rgba(18, 21, 27, 0.5);
+  border-top: 1px solid var(--hub-border);
+  border-bottom: 1px solid var(--hub-border);
+  padding: 80px 24px;
+}
+
+.portfolio-blueprint-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+}
+
+.portfolio-blueprint-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--hub-accent-blue);
+  margin-bottom: 8px;
+}
+
+.portfolio-blueprint-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: #ffffff;
+}
+
+.portfolio-blueprint-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.portfolio-blueprint-card {
+  background: var(--hub-card-bg);
+  border: 1px solid var(--hub-border);
+  border-radius: 8px;
+  padding: 32px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.portfolio-blueprint-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+.portfolio-blueprint-card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--hub-accent-blue);
+  margin-bottom: 16px;
+}
+
+.portfolio-blueprint-card h4 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 10px;
+}
+
+.portfolio-blueprint-card p {
+  font-size: 0.9rem;
+  color: var(--hub-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==========================================================================
+   ROADMAP SECTION
+   ========================================================================== */
+.portfolio-roadmap-section {
+  padding: 80px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.portfolio-roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.portfolio-roadmap-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 24px;
+  transition: all 0.25s ease;
+}
+
+.portfolio-roadmap-card:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.portfolio-roadmap-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #eab308;
+  margin-bottom: 8px;
+}
+
+.portfolio-roadmap-card h4 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px;
+}
+
+.portfolio-roadmap-card p {
+  font-size: 0.84rem;
+  color: var(--hub-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE QUERIES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .portfolio-hub-title-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .portfolio-spotlight-card {
+    grid-template-columns: 1fr;
+  }
+  .portfolio-spotlight-preview {
+    min-height: 320px;
+  }
+  .portfolio-spotlight-content {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .portfolio-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .portfolio-controls-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .portfolio-search-box {
+    width: 100%;
+  }
+  .portfolio-spotlight-title {
+    font-size: 1.8rem;
+  }
+}

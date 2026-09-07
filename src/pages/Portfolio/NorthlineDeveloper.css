@@ -1,0 +1,189 @@
+/* Northline Developer Stylesheet */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+.northline-container {
+  background-color: #0b0f19;
+  color: #f1f5f9;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: clip;
+  position: relative;
+}
+
+.northline-display {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.northline-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sticky Navigation */
+.northline-navbar-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(11, 15, 25, 0.88);
+  border-bottom: 1px solid rgba(30, 41, 59, 0.8);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.northline-navbar-scrolled {
+  background-color: rgba(11, 15, 25, 0.96);
+  border-bottom-color: rgba(51, 65, 85, 0.8);
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.6), 0 0 15px -3px rgba(37, 99, 235, 0.15);
+}
+
+/* Nav Pill Capsule */
+.northline-nav-capsule {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  padding: 4px;
+}
+
+.northline-nav-active {
+  background: rgba(30, 41, 59, 0.9) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-color: rgba(71, 85, 105, 0.9) !important;
+  box-shadow: 0 0 14px -2px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.northline-nav-item {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #94a3b8;
+  border-radius: 9999px;
+}
+
+.northline-nav-item:hover {
+  color: #ffffff;
+  background-color: rgba(30, 41, 59, 0.5);
+}
+
+/* Card and container glows */
+.northline-card-glow {
+  box-shadow: 0 0 25px -5px rgba(37, 99, 235, 0.12), 0 0 10px -2px rgba(59, 130, 246, 0.1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.northline-card-glow:hover {
+  box-shadow: 0 0 35px -5px rgba(37, 99, 235, 0.25), 0 0 15px -2px rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Input Fields */
+.northline-input {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(51, 65, 85, 0.7);
+  color: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.northline-input:focus {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: #3b82f6;
+  box-shadow: 0 0 15px -2px rgba(59, 130, 246, 0.35);
+  outline: none;
+}
+
+/* Code watermark texture */
+.northline-code-watermark {
+  background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.1) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+/* Process connector line animation */
+@keyframes northline-pulse-flow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.northline-flow-anim {
+  animation: northline-pulse-flow 2.5s infinite ease-in-out;
+}
+
+/* Modal Animation */
+@keyframes northline-modal-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.northline-modal-anim {
+  animation: northline-modal-appear 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom scrollbar */
+.northline-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.northline-scroll::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.northline-scroll::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+
+.northline-scroll::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* Custom range slider styling */
+.northline-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #1e293b;
+  border-radius: 9999px;
+  outline: none;
+}
+
+.northline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
+  border: 2px solid #ffffff;
+  transition: transform 0.15s ease;
+}
+
+.northline-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Pulse beacon */
+@keyframes beacon-ping {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.northline-beacon {
+  animation: beacon-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+

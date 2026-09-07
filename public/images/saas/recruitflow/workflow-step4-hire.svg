@@ -1,0 +1,28 @@
+<svg width="180" height="130" viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Step circle badge -->
+  <circle cx="24" cy="24" r="14" fill="#2563EB" />
+  <text x="20" y="29" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="12" font-weight="900">4</text>
+
+  <!-- Handshake Illustration -->
+  <g transform="translate(45, 30)">
+    <!-- Left Hand / Cuff (Blue shirt) -->
+    <path d="M5 28L20 28L32 40L24 48L12 42L5 42Z" fill="#1D4ED8" />
+    <!-- Left Hand Flesh -->
+    <path d="M20 28L32 36L42 42L36 48L24 48Z" fill="#FBBF24" />
+
+    <!-- Right Hand / Cuff (Dark shirt) -->
+    <path d="M80 28L65 28L53 40L61 48L73 42L80 42Z" fill="#0F172A" />
+    <!-- Right Hand Flesh Clasping -->
+    <path d="M65 28L53 36L43 42L49 48L61 48Z" fill="#F59E0B" />
+
+    <!-- Interlocked fingers -->
+    <ellipse cx="43" cy="42" rx="6" ry="4" fill="#D97706" />
+
+    <!-- Performance Bars Rising in background -->
+    <rect x="75" y="0" width="6" height="18" rx="2" fill="#BAE6FD" />
+    <rect x="84" y="-8" width="6" height="26" rx="2" fill="#38BDF8" />
+    <rect x="93" y="-18" width="6" height="36" rx="2" fill="#10B981" />
+    <path d="M72 10L98 -16" stroke="#10B981" stroke-width="2" stroke-linecap="round" />
+    <polygon points="98,-16 93,-16 98,-11" fill="#10B981" />
+  </g>
+</svg>

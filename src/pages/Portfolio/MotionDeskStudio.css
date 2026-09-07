@@ -1,0 +1,152 @@
+/* MotionDesk Studio Stylesheet */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+.motiondesk-container {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: clip;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+.motiondesk-display {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.motiondesk-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Glass & Glow Elements */
+.motiondesk-glass-dark {
+  background: rgba(13, 17, 28, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.motiondesk-nav-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(7, 10, 19, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motiondesk-nav-scrolled {
+  background-color: rgba(5, 8, 15, 0.95);
+  border-bottom-color: rgba(59, 130, 246, 0.2);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+}
+
+.motiondesk-nav-active {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.5);
+}
+
+/* Play Button Pulse Animation */
+@keyframes motiondesk-pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 18px rgba(37, 99, 235, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+.motiondesk-play-pulse {
+  animation: motiondesk-pulse-ring 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Fluid Ribbon Floating Animation */
+@keyframes motiondesk-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.01);
+  }
+}
+
+.motiondesk-float-anim {
+  animation: motiondesk-float 6s ease-in-out infinite;
+}
+
+/* Interactive Card Hover Elevation */
+.motiondesk-card {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motiondesk-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3), 0 0 25px -5px rgba(37, 99, 235, 0.2);
+}
+
+/* Modal Fade Animation */
+@keyframes motiondesk-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.motiondesk-modal-anim {
+  animation: motiondesk-modal-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Scrollbar for Carousel */
+.motiondesk-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.motiondesk-hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Bento Card Glows */
+.motiondesk-bento-card {
+  background: #090d18;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.motiondesk-bento-card:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5), 0 0 25px -5px rgba(37, 99, 235, 0.25);
+  transform: translateY(-3px);
+}
+
+/* Before/After Comparison Split Slider */
+.motiondesk-compare-container {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  border-radius: 1rem;
+}
+
+.motiondesk-code-box {
+  background: #030712;
+  border: 1px solid #1e293b;
+  font-family: 'JetBrains Mono', monospace;
+}
+

@@ -1,0 +1,71 @@
+<svg width="440" height="280" viewBox="0 0 440 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="autoGlow" x="-10" y="-10" width="460" height="300" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#8B5CF6" flood-opacity="0.08" />
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.04" />
+    </filter>
+    <linearGradient id="autoBg" x1="0" y1="0" x2="440" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#FAF5FF" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#autoGlow)">
+    <rect x="15" y="15" width="410" height="250" rx="14" fill="url(#autoBg)" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Window top bar -->
+    <rect x="15" y="15" width="410" height="36" rx="14" fill="#F8FAFC" />
+    <circle cx="34" cy="33" r="4" fill="#EF4444" />
+    <circle cx="48" cy="33" r="4" fill="#F59E0B" />
+    <circle cx="62" cy="33" r="4" fill="#10B981" />
+    <text x="80" y="37" fill="#0F172A" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">Automation Recipe: Blocker Triage</text>
+
+    <!-- Node 1: Trigger (Top Center) -->
+    <rect x="160" y="58" width="120" height="38" rx="8" fill="#FFFFFF" stroke="#3B82F6" stroke-width="1.5" />
+    <circle cx="174" cy="77" r="4" fill="#3B82F6" />
+    <text x="184" y="73" fill="#64748B" font-family="sans-serif" font-size="8" font-weight="600">WHEN TRIGGER</text>
+    <text x="184" y="86" fill="#0F172A" font-family="sans-serif" font-size="10" font-weight="700">Task Status: Blocked</text>
+
+    <!-- Connector line 1 down to central Condition -->
+    <line x1="220" y1="96" x2="220" y2="120" stroke="#3B82F6" stroke-width="2" />
+    <polygon points="220,123 216,117 224,117" fill="#3B82F6" />
+
+    <!-- Node 2: Central Condition / Router -->
+    <rect x="150" y="124" width="140" height="42" rx="8" fill="#2563EB" />
+    <text x="168" y="141" fill="#DBEAFE" font-family="sans-serif" font-size="8" font-weight="700">SMART CONDITION</text>
+    <text x="168" y="155" fill="#FFFFFF" font-family="sans-serif" font-size="10" font-weight="700">Priority is High / Critical</text>
+
+    <!-- Split branching lines -->
+    <!-- Branch Left -->
+    <path d="M150 145H75V190" stroke="#8B5CF6" stroke-width="2" fill="none" />
+    <polygon points="75,193 71,187 79,187" fill="#8B5CF6" />
+
+    <!-- Branch Center -->
+    <line x1="220" y1="166" x2="220" y2="190" stroke="#10B981" stroke-width="2" />
+    <polygon points="220,193 216,187 224,187" fill="#10B981" />
+
+    <!-- Branch Right -->
+    <path d="M290 145H365V190" stroke="#F59E0B" stroke-width="2" fill="none" />
+    <polygon points="365,193 361,187 369,187" fill="#F59E0B" />
+
+    <!-- Action Node 1 (Left): Slack -->
+    <rect x="25" y="195" width="100" height="46" rx="8" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="1.5" />
+    <rect x="33" y="203" width="14" height="14" rx="3" fill="#7C3AED" />
+    <text x="36" y="213" fill="#FFFFFF" font-family="sans-serif" font-size="9" font-weight="700">#</text>
+    <text x="52" y="212" fill="#0F172A" font-family="sans-serif" font-size="9" font-weight="700">Post to Slack</text>
+    <text x="33" y="230" fill="#64748B" font-family="sans-serif" font-size="8">Alert #sprint-help</text>
+
+    <!-- Action Node 2 (Center): Reassign Lead -->
+    <rect x="165" y="195" width="110" height="46" rx="8" fill="#FFFFFF" stroke="#10B981" stroke-width="1.5" />
+    <circle cx="178" cy="212" r="7" fill="#10B981" />
+    <path d="M175 212L177 214L181 210" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" fill="none" />
+    <text x="190" y="212" fill="#0F172A" font-family="sans-serif" font-size="9" font-weight="700">Reassign Task</text>
+    <text x="172" y="230" fill="#64748B" font-family="sans-serif" font-size="8">Assign On-Call Lead</text>
+
+    <!-- Action Node 3 (Right): Jira Sync -->
+    <rect x="315" y="195" width="100" height="46" rx="8" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5" />
+    <polygon points="325,205 335,212 325,219" fill="#0052CC" />
+    <text x="342" y="212" fill="#0F172A" font-family="sans-serif" font-size="9" font-weight="700">Sync Jira</text>
+    <text x="325" y="230" fill="#64748B" font-family="sans-serif" font-size="8">Flag Blocker Flag</text>
+  </g>
+</svg>

@@ -1,0 +1,51 @@
+<svg width="340" height="240" viewBox="0 0 340 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="paidGlow" x="-10" y="-10" width="360" height="260" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#059669" flood-opacity="0.08" />
+    </filter>
+    <linearGradient id="growthBar" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#paidGlow)">
+    <rect x="15" y="15" width="310" height="210" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Top Window Title -->
+    <rect x="15" y="15" width="310" height="32" rx="12" fill="#059669" />
+    <circle cx="32" cy="31" r="3" fill="#A7F3D0" />
+    <circle cx="44" cy="31" r="3" fill="#A7F3D0" />
+    <circle cx="56" cy="31" r="3" fill="#A7F3D0" />
+    <text x="75" y="35" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="10" font-weight="700">Automated Settlement Engine</text>
+
+    <!-- Rising Growth Bars -->
+    <rect x="40" y="125" width="22" height="45" rx="4" fill="#E2E8F0" />
+    <rect x="75" y="105" width="22" height="65" rx="4" fill="#BAE6FD" />
+    <rect x="110" y="85" width="22" height="85" rx="4" fill="#38BDF8" />
+    <rect x="145" y="65" width="22" height="105" rx="4" fill="url(#growthBar)" />
+
+    <!-- Trend Arrow -->
+    <path d="M45 115 C 80 95, 115 75, 160 55" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none" />
+    <polygon points="160,50 168,54 163,60" fill="#10B981" />
+
+    <!-- Big Paid Badge on Right -->
+    <g transform="translate(195, 65)">
+      <!-- Outer circle ring -->
+      <circle cx="50" cy="50" r="38" fill="#ECFDF5" stroke="#10B981" stroke-width="2" />
+      <circle cx="50" cy="50" r="28" fill="#10B981" />
+      <text x="43" y="58" fill="#FFFFFF" font-family="sans-serif" font-size="24" font-weight="900">$</text>
+      
+      <!-- Small checkmark -->
+      <circle cx="72" cy="32" r="10" fill="#059669" stroke="#FFFFFF" stroke-width="2" />
+      <path d="M68 32L71 35L76 29" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" fill="none" />
+    </g>
+
+    <!-- Success Message Strip -->
+    <rect x="35" y="180" width="270" height="30" rx="6" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1" />
+    <circle cx="50" cy="195" r="5" fill="#10B981" />
+    <text x="62" y="199" fill="#15803D" font-family="sans-serif" font-size="9" font-weight="700">
+      Invoice #8410 settled automatically • 0 manual intervention
+    </text>
+  </g>
+</svg>

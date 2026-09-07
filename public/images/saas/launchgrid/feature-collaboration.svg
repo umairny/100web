@@ -1,0 +1,54 @@
+<svg width="440" height="280" viewBox="0 0 440 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="msgGlow" x="-10" y="-10" width="460" height="300" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#10B981" flood-opacity="0.08" />
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.04" />
+    </filter>
+    <linearGradient id="collabBg" x1="0" y1="0" x2="440" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F0FDF4" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#msgGlow)">
+    <rect x="15" y="15" width="410" height="250" rx="14" fill="url(#collabBg)" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Chat Header Bar -->
+    <rect x="15" y="15" width="410" height="36" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <circle cx="36" cy="33" r="7" fill="#10B981" />
+    <circle cx="36" cy="33" r="3" fill="#FFFFFF" />
+    <text x="50" y="37" fill="#0F172A" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">Sprint 2 Standup #engineering</text>
+    <rect x="340" y="24" width="70" height="18" rx="4" fill="#DCFCE7" />
+    <text x="348" y="36" fill="#166534" font-family="sans-serif" font-size="9" font-weight="600">4 Active Now</text>
+
+    <!-- Message 1 (Left) -->
+    <circle cx="45" cy="78" r="14" fill="#93C5FD" />
+    <text x="39" y="82" fill="#1E3A8A" font-family="sans-serif" font-size="10" font-weight="700">SL</text>
+    
+    <rect x="68" y="64" width="260" height="52" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="80" y="80" fill="#0F172A" font-family="sans-serif" font-size="11" font-weight="600">Sarah Lee</text>
+    <text x="140" y="80" fill="#94A3B8" font-family="sans-serif" font-size="9">10:42 AM</text>
+    <text x="80" y="98" fill="#475569" font-family="sans-serif" font-size="11">Sprint v2.4 dependencies are linked! Ready for QA review.</text>
+
+    <!-- Message 2: File Attachment card -->
+    <rect x="90" y="124" width="220" height="38" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1" />
+    <rect x="98" y="132" width="22" height="22" rx="4" fill="#3B82F6" />
+    <path d="M104 140H114M104 144H110" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+    <text x="126" y="142" fill="#1E40AF" font-family="sans-serif" font-size="10" font-weight="600">design-system-spec-v2.fig</text>
+    <text x="126" y="154" fill="#64748B" font-family="sans-serif" font-size="9">24.8 MB • Updated 4m ago</text>
+
+    <!-- Message 3 (Right, from user) -->
+    <rect x="140" y="172" width="240" height="46" rx="10" fill="#2563EB" />
+    <text x="152" y="188" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="600">Marcus Chen</text>
+    <text x="152" y="205" fill="#DBEAFE" font-family="sans-serif" font-size="11">Approved on Figma! Merging pull request now.</text>
+    <circle cx="395" cy="186" r="14" fill="#FCD34D" />
+    <text x="390" y="190" fill="#78350F" font-family="sans-serif" font-size="10" font-weight="700">MC</text>
+
+    <!-- Bottom typing indicator -->
+    <rect x="28" y="226" width="110" height="24" rx="12" fill="#F1F5F9" />
+    <circle cx="42" cy="238" r="3" fill="#94A3B8" />
+    <circle cx="52" cy="238" r="3" fill="#64748B" />
+    <circle cx="62" cy="238" r="3" fill="#94A3B8" />
+    <text x="72" y="242" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="500">Alex is typing...</text>
+  </g>
+</svg>

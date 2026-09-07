@@ -1,0 +1,76 @@
+<svg width="440" height="280" viewBox="0 0 440 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="anaGlow" x="-10" y="-10" width="460" height="300" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#3B82F6" flood-opacity="0.08" />
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.04" />
+    </filter>
+    <linearGradient id="anaBg" x1="0" y1="0" x2="440" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F8FAFC" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#anaGlow)">
+    <rect x="15" y="15" width="410" height="250" rx="14" fill="url(#anaBg)" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Header bar -->
+    <rect x="15" y="15" width="410" height="36" rx="14" fill="#F8FAFC" />
+    <circle cx="34" cy="33" r="4" fill="#EF4444" />
+    <circle cx="48" cy="33" r="4" fill="#F59E0B" />
+    <circle cx="62" cy="33" r="4" fill="#10B981" />
+    <text x="80" y="37" fill="#0F172A" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">Project Velocity &amp; Burn-Down</text>
+
+    <!-- Stat Pills -->
+    <rect x="28" y="58" width="116" height="48" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="38" y="74" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="600">SPRINT VELOCITY</text>
+    <text x="38" y="96" fill="#0F172A" font-family="sans-serif" font-size="16" font-weight="800">42 pts</text>
+    <text x="86" y="96" fill="#16A34A" font-family="sans-serif" font-size="10" font-weight="700">+14%</text>
+
+    <rect x="154" y="58" width="116" height="48" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="164" y="74" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="600">ON-TIME DELIVERY</text>
+    <text x="164" y="96" fill="#0F172A" font-family="sans-serif" font-size="16" font-weight="800">98.2%</text>
+
+    <rect x="280" y="58" width="132" height="48" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="290" y="74" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="600">PREDICTED DATE</text>
+    <text x="290" y="96" fill="#2563EB" font-family="sans-serif" font-size="14" font-weight="700">Nov 04, 2026</text>
+
+    <!-- Velocity Bar Chart (Left) -->
+    <rect x="28" y="116" width="242" height="136" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="38" y="134" fill="#334155" font-family="sans-serif" font-size="10" font-weight="700">Weekly Throughput</text>
+    
+    <!-- Chart Bars -->
+    <rect x="44" y="180" width="18" height="52" rx="4" fill="#E2E8F0" />
+    <text x="46" y="244" fill="#94A3B8" font-family="sans-serif" font-size="9">W1</text>
+    
+    <rect x="74" y="162" width="18" height="70" rx="4" fill="#93C5FD" />
+    <text x="76" y="244" fill="#94A3B8" font-family="sans-serif" font-size="9">W2</text>
+
+    <rect x="104" y="148" width="18" height="84" rx="4" fill="#60A5FA" />
+    <text x="106" y="244" fill="#94A3B8" font-family="sans-serif" font-size="9">W3</text>
+
+    <rect x="134" y="138" width="18" height="94" rx="4" fill="#2563EB" />
+    <text x="136" y="244" fill="#2563EB" font-family="sans-serif" font-size="9" font-weight="700">W4</text>
+
+    <rect x="164" y="152" width="18" height="80" rx="4" fill="#38BDF8" />
+    <text x="166" y="244" fill="#94A3B8" font-family="sans-serif" font-size="9">W5</text>
+
+    <rect x="194" y="166" width="18" height="66" rx="4" fill="#93C5FD" />
+    <text x="196" y="244" fill="#94A3B8" font-family="sans-serif" font-size="9">W6</text>
+
+    <rect x="224" y="142" width="18" height="90" rx="4" fill="#10B981" />
+    <text x="226" y="244" fill="#10B981" font-family="sans-serif" font-size="9" font-weight="700">W7</text>
+
+    <!-- Donut Chart & Allocation (Right) -->
+    <rect x="280" y="116" width="132" height="136" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="290" y="134" fill="#334155" font-family="sans-serif" font-size="10" font-weight="700">Workload Mix</text>
+
+    <!-- Ring circle -->
+    <circle cx="346" cy="184" r="32" stroke="#F1F5F9" stroke-width="10" fill="none" />
+    <circle cx="346" cy="184" r="32" stroke="#2563EB" stroke-width="10" stroke-dasharray="80 150" fill="none" transform="rotate(-90 346 184)" />
+    <circle cx="346" cy="184" r="32" stroke="#10B981" stroke-width="10" stroke-dasharray="55 150" stroke-dashoffset="-85" fill="none" transform="rotate(-90 346 184)" />
+    <circle cx="346" cy="184" r="32" stroke="#F59E0B" stroke-width="10" stroke-dasharray="35 150" stroke-dashoffset="-145" fill="none" transform="rotate(-90 346 184)" />
+    
+    <text x="340" y="188" fill="#0F172A" font-family="sans-serif" font-size="10" font-weight="700">88%</text>
+    <text x="330" y="238" fill="#64748B" font-family="sans-serif" font-size="9">Optimal load</text>
+  </g>
+</svg>

@@ -1,0 +1,108 @@
+<svg viewBox="0 0 380 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <filter id="gpsPulse" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="380" height="240" rx="16" fill="#0B1528" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- Dispatch Board Table Window (Left) -->
+  <g transform="translate(25, 30)">
+    <!-- Window Frame -->
+    <rect x="0" y="0" width="130" height="175" rx="10" fill="#0F172A" stroke="#334155" stroke-width="1.5" />
+    <!-- Header Bar -->
+    <rect x="0" y="0" width="130" height="26" rx="10" fill="#1E293B" />
+    <circle cx="12" cy="13" r="3.5" fill="#EF4444" />
+    <circle cx="22" cy="13" r="3.5" fill="#F59E0B" />
+    <circle cx="32" cy="13" r="3.5" fill="#10B981" />
+    <text x="75" y="17" fill="#94A3B8" font-family="sans-serif" font-size="9" font-weight="bold" text-anchor="middle">Dispatch Grid</text>
+
+    <!-- Calendar Time Matrix Columns -->
+    <g transform="translate(10, 36)">
+      <!-- Grid Rows -->
+      <rect x="0" y="0" width="110" height="18" rx="3" fill="#1E293B" />
+      <text x="6" y="12" fill="#38BDF8" font-size="8" font-family="monospace">VAN #1</text>
+      <rect x="42" y="3" width="32" height="12" rx="2" fill="#10B981" />
+      <rect x="78" y="3" width="28" height="12" rx="2" fill="#0284C7" />
+
+      <rect x="0" y="24" width="110" height="18" rx="3" fill="#1E293B" />
+      <text x="6" y="36" fill="#38BDF8" font-size="8" font-family="monospace">VAN #2</text>
+      <rect x="42" y="27" width="45" height="12" rx="2" fill="#EA580C" />
+
+      <rect x="0" y="48" width="110" height="18" rx="3" fill="#1E293B" />
+      <text x="6" y="60" fill="#38BDF8" font-size="8" font-family="monospace">VAN #3</text>
+      <rect x="55" y="51" width="50" height="12" rx="2" fill="#10B981" />
+
+      <rect x="0" y="72" width="110" height="18" rx="3" fill="#1E293B" />
+      <text x="6" y="84" fill="#38BDF8" font-size="8" font-family="monospace">TRK #4</text>
+      <rect x="42" y="75" width="25" height="12" rx="2" fill="#8B5CF6" />
+      <rect x="71" y="75" width="35" height="12" rx="2" fill="#10B981" />
+
+      <rect x="0" y="96" width="110" height="18" rx="3" fill="#1E293B" />
+      <text x="6" y="108" fill="#38BDF8" font-size="8" font-family="monospace">TRK #5</text>
+      <rect x="42" y="99" width="64" height="12" rx="2" fill="#0284C7" />
+    </g>
+  </g>
+
+  <!-- Mobile Driver App Smartphone (Center) -->
+  <g transform="translate(180, 25)">
+    <!-- Smartphone body -->
+    <rect x="0" y="0" width="80" height="165" rx="14" fill="url(#phoneGrad)" stroke="#38BDF8" stroke-width="2" />
+    <!-- Screen Area -->
+    <rect x="5" y="10" width="70" height="145" rx="10" fill="#071220" />
+    <!-- Speaker and Camera notch -->
+    <rect x="30" y="5" width="20" height="3" rx="1.5" fill="#64748B" />
+
+    <!-- Map UI inside phone -->
+    <g transform="translate(10, 18)">
+      <!-- Mini roads -->
+      <path d="M0 30 L60 15" stroke="#1E3A5F" stroke-width="6" />
+      <path d="M20 0 L25 100" stroke="#1E3A5F" stroke-width="6" />
+      <path d="M10 70 L50 85" stroke="#1E3A5F" stroke-width="6" />
+
+      <!-- GPS Route Cyan Line -->
+      <path d="M22 10 L22 45 L50 38" stroke="#38BDF8" stroke-width="3" fill="none" stroke-linecap="round" />
+      
+      <!-- Current GPS Vehicle Blip -->
+      <circle cx="22" cy="45" r="7" fill="#10B981" filter="url(#gpsPulse)" />
+      <circle cx="22" cy="45" r="3" fill="#FFFFFF" />
+
+      <!-- Driver Next Turn Banner -->
+      <rect x="2" y="100" width="56" height="25" rx="4" fill="#0284C7" />
+      <text x="6" y="112" fill="#FFFFFF" font-size="7" font-weight="bold" font-family="sans-serif">In 300 ft</text>
+      <text x="6" y="121" fill="#BAE6FD" font-size="6" font-family="sans-serif">Turn Right on Main</text>
+    </g>
+  </g>
+
+  <!-- GPS Antenna and Green Truck (Right) -->
+  <g transform="translate(275, 100)">
+    <!-- Radiating GPS Radio Waves -->
+    <path d="M15 -10 A 15 15 0 0 1 30 5" stroke="#10B981" stroke-width="2" fill="none" stroke-linecap="round" />
+    <path d="M10 -15 A 25 25 0 0 1 35 10" stroke="#10B981" stroke-width="2" fill="none" stroke-dasharray="3 3" />
+    
+    <!-- GPS Antenna Pole -->
+    <line x1="12" y1="10" x2="12" y2="32" stroke="#64748B" stroke-width="2" />
+    <circle cx="12" cy="10" r="3.5" fill="#38BDF8" />
+
+    <!-- Green Delivery Truck -->
+    <g transform="translate(0, 32)">
+      <!-- Truck Cargo Box -->
+      <rect x="0" y="0" width="52" height="32" rx="4" fill="#10B981" stroke="#059669" stroke-width="1.5" />
+      <text x="26" y="20" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="8" font-weight="bold" text-anchor="middle">GPS LIVE</text>
+      <!-- Cab -->
+      <path d="M52 10 L68 10 L75 22 L75 32 L52 32 Z" fill="#047857" />
+      <rect x="56" y="13" width="10" height="9" rx="2" fill="#93C5FD" />
+      <!-- Wheels -->
+      <circle cx="16" cy="35" r="7" fill="#0F172A" />
+      <circle cx="16" cy="35" r="3" fill="#64748B" />
+      <circle cx="62" cy="35" r="7" fill="#0F172A" />
+      <circle cx="62" cy="35" r="3" fill="#64748B" />
+    </g>
+  </g>
+</svg>

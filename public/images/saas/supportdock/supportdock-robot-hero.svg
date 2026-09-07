@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" width="100%" height="100%" fill="none">
+  <defs>
+    <filter id="robotGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#10B981" flood-opacity="0.18" />
+    </filter>
+    <linearGradient id="robotBodyGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#EDF6F9" />
+    </linearGradient>
+    <linearGradient id="visorGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2942" />
+      <stop offset="100%" stop-color="#0A192F" />
+    </linearGradient>
+    <linearGradient id="tealCore" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Soft Glow behind Robot -->
+  <circle cx="380" cy="210" r="160" fill="#ECFDF5" opacity="0.8" />
+  <circle cx="380" cy="210" r="100" fill="#D1FAE5" opacity="0.5" />
+
+  <!-- Left Connecting Inbound Lines -->
+  <path d="M120 145 C 200 145, 230 190, 300 200" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M120 210 C 200 210, 230 210, 300 210" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M120 280 C 200 280, 230 230, 300 220" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <!-- Left Floating Channel Badges (Matching Screenshot) -->
+  <!-- 1. Email (Top Left) -->
+  <g transform="translate(70, 125)">
+    <rect width="40" height="36" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))"/>
+    <path d="M10 12 L20 19 L30 12 M10 12 V24 H30 V12 H10 Z" stroke="#3B82F6" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- 2. Chat / SMS (Middle Top Left) -->
+  <g transform="translate(45, 192)">
+    <rect width="38" height="34" rx="8" fill="#FEF3C7" stroke="#FDE68A" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))"/>
+    <path d="M10 11 H28 V21 H16 L11 25 V21 H10 Z" fill="#F59E0B"/>
+  </g>
+
+  <!-- 3. WhatsApp (Middle Left) -->
+  <g transform="translate(95, 192)">
+    <rect width="38" height="34" rx="8" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))"/>
+    <circle cx="19" cy="17" r="10" fill="#10B981"/>
+    <path d="M15 14 C15 16.5 17 19 19.5 19 C20.5 19 21.5 18 22 17.5 L20 16 L18.5 17 C17.5 16 17 15.5 16 14.5 L17 13 L15.5 11 C15 11.5 15 13 15 14 Z" fill="white"/>
+  </g>
+
+  <!-- 4. Facebook (Bottom Left) -->
+  <g transform="translate(60, 260)">
+    <rect width="36" height="34" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))"/>
+    <circle cx="18" cy="17" r="9" fill="#1D4ED8"/>
+    <text x="18" y="21" font-family="sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">f</text>
+  </g>
+
+  <!-- 5. TikTok (Bottom Right Left) -->
+  <g transform="translate(110, 260)">
+    <rect width="36" height="34" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1.5" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.05))"/>
+    <circle cx="18" cy="17" r="8" fill="#000000"/>
+    <path d="M17 12 V18 C17 19.5 15.5 20.5 14 20 C13 19.5 12 18 13 16.5 C13.5 15.5 15 15 16 15.5 V13.5 C17.5 14 18.5 15.5 19 16 V14 C18.5 13.5 18 12.5 18 12 H17 Z" fill="#22D3EE"/>
+  </g>
+
+  <!-- Center Friendly AI Support Robot Character -->
+  <g transform="translate(290, 80)" filter="url(#robotGlow)">
+    <!-- Antenna -->
+    <line x1="90" y1="40" x2="90" y2="18" stroke="#0F2942" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="90" cy="14" r="6" fill="#10B981" stroke="#0F2942" stroke-width="2"/>
+    <circle cx="90" cy="14" r="3" fill="#A7F3D0"/>
+
+    <!-- Left Ear / Headphone -->
+    <rect x="24" y="65" width="12" height="36" rx="6" fill="#0F2942"/>
+    <rect x="28" y="72" width="5" height="22" rx="2.5" fill="#10B981"/>
+
+    <!-- Right Ear / Headphone -->
+    <rect x="144" y="65" width="12" height="36" rx="6" fill="#0F2942"/>
+    <rect x="147" y="72" width="5" height="22" rx="2.5" fill="#10B981"/>
+
+    <!-- Robot Head -->
+    <rect x="32" y="38" width="116" height="88" rx="38" fill="url(#robotBodyGrad)" stroke="#0F2942" stroke-width="3.5"/>
+
+    <!-- Face Visor Screen -->
+    <rect x="46" y="52" width="88" height="58" rx="24" fill="url(#visorGrad)"/>
+
+    <!-- Glowing Digital Eyes (Happy Arc) -->
+    <!-- Left Eye -->
+    <path d="M62 76 C 62 70, 72 70, 72 76" stroke="#22D3EE" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <!-- Right Eye -->
+    <path d="M108 76 C 108 70, 118 70, 118 76" stroke="#22D3EE" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+
+    <!-- Friendly Smile -->
+    <path d="M84 94 C 87 97, 93 97, 96 94" stroke="#22D3EE" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- Neck Connector -->
+    <rect x="80" y="126" width="20" height="12" rx="4" fill="#64748B" stroke="#0F2942" stroke-width="2"/>
+
+    <!-- Robot Body / Torso -->
+    <path d="M50 138 C 50 138, 70 134, 90 134 C 110 134, 130 138, 130 138 C 145 142, 150 160, 146 195 C 142 225, 128 235, 90 235 C 52 235, 38 225, 34 195 C 30 160, 35 142, 50 138 Z" fill="url(#robotBodyGrad)" stroke="#0F2942" stroke-width="3.5"/>
+
+    <!-- Glowing Center Chest Core / Emblem -->
+    <circle cx="90" cy="178" r="16" fill="url(#tealCore)" stroke="#0F2942" stroke-width="2"/>
+    <path d="M90 168 L93 175 L100 178 L93 181 L90 188 L87 181 L80 178 L87 175 Z" fill="#FFFFFF"/>
+
+    <!-- Left Outstretched Greeting Hand (Waving) -->
+    <path d="M40 160 C 25 155, 10 148, 5 138 C 2 130, 8 126, 14 132 C 18 136, 26 146, 36 154" stroke="#0F2942" stroke-width="3.5" stroke-linecap="round" fill="url(#robotBodyGrad)"/>
+    <circle cx="8" cy="132" r="7" fill="url(#robotBodyGrad)" stroke="#0F2942" stroke-width="2.5"/>
+
+    <!-- Right Hand (Guiding to Resolved Customers) -->
+    <path d="M140 160 C 158 158, 175 152, 185 146 C 190 142, 194 146, 188 154 C 182 160, 168 172, 145 178" stroke="#0F2942" stroke-width="3.5" stroke-linecap="round" fill="url(#robotBodyGrad)"/>
+    <circle cx="188" cy="148" r="7" fill="url(#robotBodyGrad)" stroke="#0F2942" stroke-width="2.5"/>
+  </g>
+
+  <!-- Right Side: Green Checkmark Signal Badge -->
+  <g transform="translate(500, 190)">
+    <rect width="36" height="36" rx="10" fill="#10B981" stroke="#0F2942" stroke-width="2" filter="drop-shadow(0 4px 10px rgba(16,185,129,0.3))"/>
+    <path d="M11 18 L16 23 L25 13" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Right Connecting Outbound Lines to Satisfied Customers -->
+  <path d="M536 208 C 570 208, 580 165, 620 165" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M536 208 C 570 208, 580 255, 620 255" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <!-- Customer Avatar 1 (Top Right - Delighted Customer) -->
+  <g transform="translate(620, 135)">
+    <circle cx="30" cy="30" r="28" fill="#ECFDF5" stroke="#10B981" stroke-width="2.5"/>
+    <!-- Face / Avatar Illustration -->
+    <circle cx="30" cy="24" r="11" fill="#FDE68A"/>
+    <!-- Hair -->
+    <path d="M19 24 C 19 14, 41 14, 41 24 C 41 26, 39 30, 39 30 L 21 30 Z" fill="#0F172A"/>
+    <!-- Body -->
+    <path d="M16 48 C 16 38, 44 38, 44 48 Z" fill="#0284C7"/>
+    <!-- Satisfied Badge -->
+    <circle cx="48" cy="46" r="8" fill="#10B981"/>
+    <path d="M45 46 L47 48 L51 44" stroke="#FFF" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+
+  <!-- Customer Avatar 2 (Bottom Right - Satisfied User) -->
+  <g transform="translate(620, 225)">
+    <circle cx="30" cy="30" r="28" fill="#EFF6FF" stroke="#0284C7" stroke-width="2.5"/>
+    <!-- Face -->
+    <circle cx="30" cy="24" r="11" fill="#FDE68A"/>
+    <!-- Hair -->
+    <path d="M20 20 C 22 14, 38 14, 40 20 Z" fill="#78350F"/>
+    <!-- Body -->
+    <path d="M16 48 C 16 38, 44 38, 44 48 Z" fill="#10B981"/>
+    <!-- Star Rating Badge -->
+    <circle cx="48" cy="46" r="8" fill="#F59E0B"/>
+    <text x="48" y="49" font-family="sans-serif" font-size="8" fill="#FFF" font-weight="bold" text-anchor="middle">★</text>
+  </g>
+</svg>

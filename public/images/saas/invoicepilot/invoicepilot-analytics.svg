@@ -1,0 +1,72 @@
+<svg width="600" height="380" viewBox="0 0 600 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="anaDrop" x="-10" y="-10" width="620" height="400" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#0284C7" flood-opacity="0.08" />
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#0F172A" flood-opacity="0.04" />
+    </filter>
+    <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0.0" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#anaDrop)">
+    <rect x="15" y="15" width="570" height="350" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+    <!-- Window top bar -->
+    <rect x="15" y="15" width="570" height="36" rx="14" fill="#F8FAFC" />
+    <circle cx="35" cy="33" r="4" fill="#EF4444" />
+    <circle cx="49" cy="33" r="4" fill="#F59E0B" />
+    <circle cx="63" cy="33" r="4" fill="#10B981" />
+    <text x="82" y="37" fill="#64748B" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">Invoicing Revenue Analytics</text>
+
+    <!-- Top KPI Row -->
+    <rect x="30" y="60" width="165" height="58" rx="8" fill="#F0F9FF" stroke="#BAE6FD" stroke-width="1" />
+    <text x="42" y="78" fill="#0369A1" font-family="sans-serif" font-size="9" font-weight="700">MRR REVENUE</text>
+    <text x="42" y="103" fill="#0F172A" font-family="sans-serif" font-size="18" font-weight="800">$74,800</text>
+    <text x="126" y="103" fill="#16A34A" font-family="sans-serif" font-size="10" font-weight="700">+22.4%</text>
+
+    <rect x="210" y="60" width="165" height="58" rx="8" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1" />
+    <text x="222" y="78" fill="#15803D" font-family="sans-serif" font-size="9" font-weight="700">ACTIVE SUBSCRIBERS</text>
+    <text x="222" y="103" fill="#0F172A" font-family="sans-serif" font-size="18" font-weight="800">2,420</text>
+    <text x="286" y="103" fill="#15803D" font-family="sans-serif" font-size="10" font-weight="700">+140 this mo</text>
+
+    <rect x="390" y="60" width="180" height="58" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <text x="402" y="78" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="700">COLLECTION RATE</text>
+    <text x="402" y="103" fill="#0F172A" font-family="sans-serif" font-size="18" font-weight="800">99.1%</text>
+    <text x="470" y="103" fill="#0284C7" font-family="sans-serif" font-size="10" font-weight="700">Instant ACH</text>
+
+    <!-- MRR Area Growth Chart -->
+    <rect x="30" y="130" width="540" height="130" rx="8" fill="#FAFCFF" stroke="#E2E8F0" stroke-width="1" />
+    
+    <!-- Area gradient -->
+    <path d="M45 230 C 120 220, 180 190, 260 180 C 340 170, 420 155, 545 145 L 545 245 L 45 245 Z" fill="url(#areaGrad)" />
+    <!-- Line curve -->
+    <path d="M45 230 C 120 220, 180 190, 260 180 C 340 170, 420 155, 545 145" stroke="#0284C7" stroke-width="3" fill="none" />
+    
+    <circle cx="260" cy="180" r="4" fill="#0284C7" stroke="#FFFFFF" stroke-width="2" />
+    <circle cx="545" cy="145" r="5" fill="#10B981" stroke="#FFFFFF" stroke-width="2" />
+    
+    <!-- Floating point label -->
+    <rect x="475" y="122" width="70" height="20" rx="4" fill="#0F172A" />
+    <text x="483" y="136" fill="#FFFFFF" font-family="sans-serif" font-size="10" font-weight="700">$74,800</text>
+
+    <!-- Invoices Summary Table at bottom -->
+    <rect x="30" y="270" width="540" height="80" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    
+    <text x="46" y="295" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="700">INVOICE</text>
+    <text x="140" y="295" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="700">CUSTOMER</text>
+    <text x="290" y="295" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="700">AMOUNT</text>
+    <text x="400" y="295" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="700">GATEWAY</text>
+    <text x="500" y="295" fill="#64748B" font-family="sans-serif" font-size="9" font-weight="700">STATUS</text>
+
+    <line x1="30" y1="305" x2="570" y2="305" stroke="#F1F5F9" stroke-width="1" />
+
+    <text x="46" y="328" fill="#0F172A" font-family="sans-serif" font-size="10" font-weight="600">#INV-8402</text>
+    <text x="140" y="328" fill="#0F172A" font-family="sans-serif" font-size="10" font-weight="600">TechCorp Global</text>
+    <text x="290" y="328" fill="#0F172A" font-family="sans-serif" font-size="10" font-weight="700">$12,450.00</text>
+    <text x="400" y="328" fill="#0284C7" font-family="sans-serif" font-size="10">Stripe ACH</text>
+    <rect x="495" y="316" width="46" height="18" rx="4" fill="#DCFCE7" />
+    <text x="504" y="329" fill="#166534" font-family="sans-serif" font-size="8" font-weight="700">PAID</text>
+  </g>
+</svg>

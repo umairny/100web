@@ -1,0 +1,136 @@
+/* Vale Interior Studio Stylesheet - High-End Luxury Polish */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+.vale-container {
+  background-color: #fcfbf9;
+  color: #292524;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.vale-serif {
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+}
+
+/* Warm luxury card shadows */
+.vale-card-shadow {
+  box-shadow: 0 10px 30px -10px rgba(68, 57, 45, 0.08), 0 4px 12px -4px rgba(68, 57, 45, 0.04);
+}
+
+.vale-card-shadow-lg {
+  box-shadow: 0 24px 48px -12px rgba(68, 57, 45, 0.12), 0 8px 20px -6px rgba(68, 57, 45, 0.06);
+}
+
+.vale-card-shadow-xl {
+  box-shadow: 0 32px 64px -16px rgba(56, 45, 32, 0.18), 0 12px 28px -8px rgba(56, 45, 32, 0.08);
+}
+
+/* Glassmorphic warm luxury card */
+.vale-glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(231, 226, 216, 0.95);
+}
+
+/* Custom Scrollbars */
+.vale-carousel-track::-webkit-scrollbar {
+  height: 4px;
+}
+
+.vale-carousel-track::-webkit-scrollbar-track {
+  background: #ede8df;
+  border-radius: 9999px;
+}
+
+.vale-carousel-track::-webkit-scrollbar-thumb {
+  background: #a89f91;
+  border-radius: 9999px;
+}
+
+.vale-carousel-track::-webkit-scrollbar-thumb:hover {
+  background: #525b44;
+}
+
+/* Form input styling */
+.vale-input {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #d5cec2;
+  color: #292524;
+  transition: all 0.2s ease;
+}
+
+.vale-input:focus {
+  background: #ffffff;
+  border-color: #525b44;
+  box-shadow: 0 0 0 3px rgba(82, 91, 68, 0.15);
+  outline: none;
+}
+
+/* Range slider styling */
+.vale-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: #c5beaf;
+  border-radius: 9999px;
+  outline: none;
+}
+
+.vale-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #475138;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+  transition: transform 0.15s ease;
+}
+
+.vale-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.vale-range-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #475138;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+/* Animations */
+@keyframes vale-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.vale-animate-in {
+  animation: vale-fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes vale-dash {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+.vale-animated-arc {
+  stroke-dasharray: 6 6;
+  animation: vale-dash 2s linear infinite;
+}
+
+/* Smooth Image Scale on Hover */
+.vale-zoom-image {
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.group:hover .vale-zoom-image {
+  transform: scale(1.05);
+}
