@@ -20,6 +20,7 @@ import { useFavorites, getShareableShortlistUrl } from '../utils/favorites'
 import { prefetchRoute } from '../utils/routePrefetch'
 import { useLockBodyScroll } from '../hooks/useLockBodyScroll'
 import { useEventListener } from '../hooks/useEventListener'
+import { LiveSplitCompareModal } from './LiveSplitCompareModal'
 
 interface ShortlistDrawerProps {
   isOpen: boolean
@@ -35,6 +36,7 @@ export function ShortlistDrawer({ isOpen, onClose }: ShortlistDrawerProps) {
   const [copiedLink, setCopiedLink] = useState(false)
   const [copiedBrief, setCopiedBrief] = useState(false)
   const [compareMode, setCompareMode] = useState(false)
+  const [isLiveSplitOpen, setIsLiveSplitOpen] = useState(false)
   const [selectedForCompare, setSelectedForCompare] = useState<string[]>([])
   const [activeEditingNoteId, setActiveEditingNoteId] = useState<string | null>(null)
   const [editingNoteText, setEditingNoteText] = useState('')
@@ -153,19 +155,30 @@ export function ShortlistDrawer({ isOpen, onClose }: ShortlistDrawerProps) {
 
           <div className="flex items-center gap-2">
             {favoritedWebsites.length > 1 && (
-              <button
-                type="button"
-                onClick={() => setCompareMode((prev) => !prev)}
-                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition ${
-                  compareMode
-                    ? 'bg-amber-500 text-slate-950 font-black'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
-                }`}
-                title="Compare templates side-by-side"
-              >
-                <Columns className="h-3.5 w-3.5" />
-                <span>{compareMode ? 'Exit Compare' : 'Compare'}</span>
-              </button>
+              <>
+                <button
+                  type="button"
+                  onClick={() => setIsLiveSplitOpen(true)}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-400 px-3 py-1.5 text-xs font-black text-slate-950 hover:brightness-110 transition shadow-sm active:scale-95"
+                  title="Compare 2 templates live in interactive split-screen"
+                >
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span>Split Live</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCompareMode((prev) => !prev)}
+                  className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition ${
+                    compareMode
+                      ? 'bg-amber-500 text-slate-950 font-black'
+                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
+                  }`}
+                  title="Compare specifications table"
+                >
+                  <Columns className="h-3.5 w-3.5" />
+                  <span>{compareMode ? 'Exit Table' : 'Compare'}</span>
+                </button>
+              </>
             )}
 
             <button
@@ -270,11 +283,23 @@ export function ShortlistDrawer({ isOpen, onClose }: ShortlistDrawerProps) {
           ) : compareMode ? (
             /* Side-by-Side Compare Mode */
             <div className="space-y-6">
-              <div className="rounded-xl bg-amber-500/10 border border-amber-500/20 p-4 text-xs text-amber-200 flex items-center justify-between">
-                <span>
-                  Comparing <strong>{comparedWebsites.length}</strong> template{comparedWebsites.length === 1 ? '' : 's'}. Click on any card below to select or deselect.
-                </span>
-                <span className="text-[11px] font-mono text-amber-400">Max 3</span>
+              <div className="rounded-xl bg-amber-500/10 border border-amber-500/20 p-4 text-xs text-amber-200 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <span>
+                    Comparing <strong>{comparedWebsites.length}</strong> template{comparedWebsites.length === 1 ? '' : 's'}. Click on any pill to customize selection.
+                  </span>
+                  <span className="block text-[11px] text-amber-300/70 mt-0.5">
+                    Launch live interactive preview to see candidate designs side-by-side.
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsLiveSplitOpen(true)}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-amber-500 px-3.5 py-1.5 font-bold text-slate-950 hover:bg-amber-400 transition shadow-sm active:scale-95"
+                >
+                  <Columns className="h-3.5 w-3.5" />
+                  <span>Split-Screen Live</span>
+                </button>
               </div>
 
               {/* Selection Pills */}
@@ -610,6 +635,15 @@ export function ShortlistDrawer({ isOpen, onClose }: ShortlistDrawerProps) {
           </button>
         </div>
       </div>
+
+      {/* Full-Screen Live Split-Screen Comparison Modal */}
+      <LiveSplitCompareModal
+        isOpen={isLiveSplitOpen}
+        onClose={() => setIsLiveSplitOpen(false)}
+        initialSiteA={comparedWebsites[0] || favoritedWebsites[0]}
+        initialSiteB={comparedWebsites[1] || favoritedWebsites[1]}
+        availableSites={favoritedWebsites.length > 0 ? favoritedWebsites : allWebsites}
+      />
     </div>
   )
 }
