@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '../../components'
-import { saasWebsites } from '../../data/websites'
+import { saasWebsites, WebsiteDesign } from '../../data/websites'
+import { useFavorites } from '../../utils/favorites'
+import { prefetchRoute } from '../../utils/routePrefetch'
 import { 
   Search, 
   Sparkles, 
@@ -19,11 +21,12 @@ import {
   ChevronRight,
   TrendingUp,
   Activity,
-  Filter
+  Filter,
+  Heart
 } from 'lucide-react'
 
 // Categorization helper for filter pills
-const categories = [
+const baseCategories = [
   { id: 'all', label: 'All Platforms (10)' },
   { id: 'crm', label: 'CRM & Sales' },
   { id: 'analytics', label: 'Analytics & BI' },
@@ -82,15 +85,151 @@ const uxPlaybook = [
   }
 ]
 
+function SaaSCard({ website, index }: { website: WebsiteDesign; index: number }) {
+  const { isFavorited, toggle } = useFavorites(website.id)
+  const routePath = `/saas/${website.slug}`
+
+  return (
+    <div
+      onMouseEnter={() => prefetchRoute(routePath)}
+      onTouchStart={() => prefetchRoute(routePath)}
+      className="group bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-sky-400 transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-1.5"
+    >
+      {/* Card Image Banner */}
+      <div>
+        <div className="relative h-56 bg-slate-900 overflow-hidden border-b border-slate-100">
+          <img
+            src={website.image || '/images/saas/flowpilot-clean-queue.svg'}
+            alt={website.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
+
+          {/* Number Tag & Live Badge */}
+          <div className="absolute top-3 left-3 right-14 flex items-center justify-between">
+            <span className="px-2.5 py-1 rounded-full bg-slate-950/80 text-white font-mono text-[10px] font-bold border border-white/20 backdrop-blur">
+              #{String(index + 1).padStart(2, '0')}
+            </span>
+            <span className="px-2.5 py-1 rounded-full bg-emerald-500/90 text-slate-950 font-black text-[10px] uppercase tracking-wider shadow-xs">
+              ● Live &amp; Complete
+            </span>
+          </div>
+
+          {/* Shortlist Heart Button */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              toggle()
+            }}
+            title={isFavorited ? 'Remove from shortlist' : 'Save to shortlist'}
+            className={`absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-sm transition hover:scale-110 active:scale-95 ${
+              isFavorited
+                ? 'bg-rose-500 text-white shadow-rose-500/30'
+                : 'bg-slate-950/80 text-white/80 hover:bg-slate-900 hover:text-rose-400 border border-white/20'
+            }`}
+          >
+            <Heart className={`h-4 w-4 ${isFavorited ? 'fill-white' : ''}`} />
+          </button>
+
+          {/* Palette Dots */}
+          <div className="absolute bottom-3 left-3 flex gap-1.5">
+            {[website.colors.primary, website.colors.accent, website.colors.secondary, website.colors.dark].map((col, cIdx) => (
+              <span
+                key={cIdx}
+                className="w-3.5 h-3.5 rounded-full border border-white/80 shadow-xs"
+                style={{ backgroundColor: col }}
+                title={col}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Card Body */}
+        <div className="p-6">
+          <div className="text-[10px] font-extrabold uppercase tracking-widest text-sky-700 mb-1.5">
+            {website.style.split(',')[0]}
+          </div>
+          <h3 className="text-2xl font-black text-slate-900 group-hover:text-sky-700 transition-colors">
+            {website.title}
+          </h3>
+          <p className="mt-2 text-xs text-slate-600 leading-relaxed line-clamp-3">
+            {website.shortDescription}
+          </p>
+
+          {/* Sub-Pages Quick Access Matrix */}
+          <div className="mt-5 pt-4 border-t border-slate-100 grid grid-cols-4 gap-1 text-center">
+            <Link
+              to={`/saas/${website.slug}`}
+              onMouseEnter={() => prefetchRoute(`/saas/${website.slug}`)}
+              className="p-1.5 rounded-lg bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 text-[10px] font-bold transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              to={`/saas/${website.slug}/features`}
+              onMouseEnter={() => prefetchRoute(`/saas/${website.slug}/features`)}
+              className="p-1.5 rounded-lg bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 text-[10px] font-bold transition-colors"
+            >
+              Features
+            </Link>
+            <Link
+              to={`/saas/${website.slug}/pricing`}
+              onMouseEnter={() => prefetchRoute(`/saas/${website.slug}/pricing`)}
+              className="p-1.5 rounded-lg bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 text-[10px] font-bold transition-colors"
+            >
+              Pricing
+            </Link>
+            <Link
+              to={`/saas/${website.slug}/trial`}
+              onMouseEnter={() => prefetchRoute(`/saas/${website.slug}/trial`)}
+              className="p-1.5 rounded-lg bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 text-[10px] font-bold transition-colors"
+            >
+              Trial
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Card Bottom CTA */}
+      <div className="p-6 pt-0">
+        <Link
+          to={`/saas/${website.slug}`}
+          className="w-full py-3 px-4 rounded-xl bg-slate-900 group-hover:bg-[#0284C7] text-white font-bold text-xs uppercase tracking-widest text-center transition-all flex items-center justify-center gap-1.5 shadow-sm"
+        >
+          Launch Platform <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 export function SaaSIndex() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [activeSpotlightIdx, setActiveSpotlightIdx] = useState(0)
   const [activePlaybookTab, setActivePlaybookTab] = useState(0)
+  const { favoriteIds } = useFavorites()
 
   const liveWebsites = saasWebsites.filter((website) => website.status === 'completed' || website.status === 'live')
 
+  const shortlistedCount = liveWebsites.filter((site) => favoriteIds.includes(site.id)).length
+
+  const categories = [
+    baseCategories[0],
+    { id: 'shortlist', label: `Shortlisted (${shortlistedCount})` },
+    ...baseCategories.slice(1),
+  ]
+
   const filteredWebsites = liveWebsites.filter((site) => {
+    if (selectedCategory === 'shortlist') {
+      const matchesSearch = site.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            site.shortDescription.toLowerCase().includes(searchQuery.toLowerCase())
+      return favoriteIds.includes(site.id) && matchesSearch
+    }
     const siteCat = getCategoryForSlug(site.slug)
     const matchesCategory = selectedCategory === 'all' || siteCat === selectedCategory
     const matchesSearch = site.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -299,108 +438,28 @@ export function SaaSIndex() {
 
           {/* 10 SaaS Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredWebsites.map((website, index) => {
-              const primaryColor = website.colors.primary || '#0284C7'
-              return (
-                <div
-                  key={website.id}
-                  className="group bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-sky-400 transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-1.5"
-                >
-                  {/* Card Image Banner */}
-                  <div>
-                    <div className="relative h-56 bg-slate-900 overflow-hidden border-b border-slate-100">
-                      <img
-                        src={website.image || '/images/saas/flowpilot-clean-queue.svg'}
-                        alt={website.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
-
-                      {/* Number Tag & Live Badge */}
-                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                        <span className="px-2.5 py-1 rounded-full bg-slate-950/80 text-white font-mono text-[10px] font-bold border border-white/20 backdrop-blur">
-                          #{String(index + 1).padStart(2, '0')}
-                        </span>
-                        <span className="px-2.5 py-1 rounded-full bg-emerald-500/90 text-slate-950 font-black text-[10px] uppercase tracking-wider shadow-xs">
-                          ● Live &amp; Complete
-                        </span>
-                      </div>
-
-                      {/* Palette Dots */}
-                      <div className="absolute bottom-3 left-3 flex gap-1.5">
-                        {[website.colors.primary, website.colors.accent, website.colors.secondary, website.colors.dark].map((col, cIdx) => (
-                          <span
-                            key={cIdx}
-                            className="w-3.5 h-3.5 rounded-full border border-white/80 shadow-xs"
-                            style={{ backgroundColor: col }}
-                            title={col}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Card Body */}
-                    <div className="p-6">
-                      <div className="text-[10px] font-extrabold uppercase tracking-widest text-sky-700 mb-1.5">
-                        {website.style.split(',')[0]}
-                      </div>
-                      <h3 className="text-2xl font-black text-slate-900 group-hover:text-sky-700 transition-colors">
-                        {website.title}
-                      </h3>
-                      <p className="mt-2 text-xs text-slate-600 leading-relaxed line-clamp-3">
-                        {website.shortDescription}
-                      </p>
-
-                      {/* Sub-Pages Quick Access Matrix */}
-                      <div className="mt-5 pt-4 border-t border-slate-100 grid grid-cols-4 gap-1 text-center">
-                        <Link
-                          to={`/saas/${website.slug}`}
-                          className="p-1.5 rounded-lg bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 text-[10px] font-bold transition-colors"
-                        >
-                          Home
-                        </Link>
-                        <Link
-                          to={`/saas/${website.slug}/features`}
-                          className="p-1.5 rounded-lg bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 text-[10px] font-bold transition-colors"
-                        >
-                          Features
-                        </Link>
-                        <Link
-                          to={`/saas/${website.slug}/pricing`}
-                          className="p-1.5 rounded-lg bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 text-[10px] font-bold transition-colors"
-                        >
-                          Pricing
-                        </Link>
-                        <Link
-                          to={`/saas/${website.slug}/trial`}
-                          className="p-1.5 rounded-lg bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 text-[10px] font-bold transition-colors"
-                        >
-                          Trial
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card Bottom CTA */}
-                  <div className="p-6 pt-0">
-                    <Link
-                      to={`/saas/${website.slug}`}
-                      className="w-full py-3 px-4 rounded-xl bg-slate-900 group-hover:bg-[#0284C7] text-white font-bold text-xs uppercase tracking-widest text-center transition-all flex items-center justify-center gap-1.5 shadow-sm"
-                    >
-                      Launch Platform <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
+            {filteredWebsites.map((website, index) => (
+              <SaaSCard key={website.id} website={website} index={index} />
+            ))}
           </div>
 
           {filteredWebsites.length === 0 && (
             <div className="text-center py-20 bg-slate-50 rounded-3xl border border-dashed border-slate-300">
-              <Search className="w-10 h-10 text-slate-400 mx-auto mb-3" />
-              <p className="text-base font-bold text-slate-800">No SaaS platforms match "{searchQuery}"</p>
-              <p className="text-xs text-slate-500 mt-1">Try clearing your search query or selecting "All Platforms".</p>
+              <p className="text-base font-bold text-slate-800">No platforms match this view</p>
+              <p className="text-xs text-slate-500 mt-1">
+                {selectedCategory === 'shortlist'
+                  ? 'Click the heart icon on any SaaS platform card to save it to your shortlist.'
+                  : 'Try clearing your search or selecting a different category.'}
+              </p>
+              <button
+                onClick={() => {
+                  setSelectedCategory('all')
+                  setSearchQuery('')
+                }}
+                className="mt-4 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-sky-600 transition-colors"
+              >
+                Reset Filters
+              </button>
             </div>
           )}
         </Container>

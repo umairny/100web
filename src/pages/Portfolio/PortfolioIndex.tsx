@@ -1,10 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { portfolioWebsites } from '../../data/websites';
+import { Heart } from 'lucide-react';
+import { portfolioWebsites, WebsiteDesign } from '../../data/websites';
+import { useFavorites } from '../../utils/favorites';
+import { prefetchRoute } from '../../utils/routePrefetch';
 import './PortfolioIndex.css';
 
 const SPECIALTIES = [
   'All',
+  'Shortlisted',
   'Design & Brand',
   'Software & Systems',
   'Architecture & Interiors',
@@ -53,9 +57,97 @@ const ROADMAP_CONCEPTS = [
   },
 ];
 
+function PortfolioCard({ website }: { website: WebsiteDesign }) {
+  const { isFavorited, toggle } = useFavorites(website.id);
+  const routePath = `/portfolio/${website.slug}`;
+
+  return (
+    <div className="portfolio-website-card relative flex flex-col justify-between">
+      <div className="portfolio-card-media relative">
+        {website.image ? (
+          <img
+            src={website.image}
+            alt={website.title}
+            className="portfolio-card-img"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              background: `linear-gradient(135deg, ${website.colors.primary}, ${website.colors.secondary})`,
+            }}
+          />
+        )}
+        <div className="portfolio-card-media-overlay" />
+        <div className="portfolio-card-status">
+          <span
+            style={{
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              background: '#38bdf8',
+            }}
+          />
+          Live Concept
+        </div>
+
+        {/* Shortlist Heart Button */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle();
+          }}
+          title={isFavorited ? 'Remove from shortlist' : 'Save to shortlist'}
+          className={`absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-md transition hover:scale-110 active:scale-95 ${
+            isFavorited
+              ? 'bg-rose-500 text-white shadow-rose-500/30'
+              : 'bg-black/40 text-white/80 hover:bg-black/60 hover:text-rose-400 border border-white/20'
+          }`}
+        >
+          <Heart size={14} className={isFavorited ? 'fill-white' : ''} />
+        </button>
+
+        <div className="portfolio-card-colors">
+          {Object.values(website.colors).map((color, idx) => (
+            <span
+              key={idx}
+              className="portfolio-color-chip"
+              style={{ backgroundColor: color }}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="portfolio-card-body">
+        <h4 className="portfolio-card-title">{website.title}</h4>
+        <div className="portfolio-card-style">{website.style}</div>
+        <p className="portfolio-card-desc">{website.shortDescription}</p>
+
+        <div className="portfolio-card-footer">
+          <Link
+            to={routePath}
+            onMouseEnter={() => prefetchRoute(routePath)}
+            onTouchStart={() => prefetchRoute(routePath)}
+            className="portfolio-view-link"
+          >
+            View Live Site →
+          </Link>
+          <span className="portfolio-slug-tag">/{website.slug}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export const PortfolioIndex: React.FC = () => {
   const [selectedSpecialty, setSelectedSpecialty] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const { favoriteIds } = useFavorites();
 
   // Live completed websites
   const liveWebsites = useMemo(() => {
@@ -63,6 +155,8 @@ export const PortfolioIndex: React.FC = () => {
       (website) => website.status === 'completed' || website.status === 'live'
     );
   }, []);
+
+  const shortlistedCount = liveWebsites.filter((w) => favoriteIds.includes(w.id)).length;
 
   // Spotlight website: Artisan Objects or the latest featured
   const spotlight = useMemo(() => {
@@ -83,6 +177,9 @@ export const PortfolioIndex: React.FC = () => {
       if (!matchesSearch) return false;
       if (selectedSpecialty === 'All') return true;
 
+      if (selectedSpecialty === 'Shortlisted') {
+        return favoriteIds.includes(website.id);
+      }
       if (selectedSpecialty === 'Design & Brand') {
         return (
           website.slug.includes('brand') ||
@@ -117,7 +214,7 @@ export const PortfolioIndex: React.FC = () => {
 
       return true;
     });
-  }, [liveWebsites, selectedSpecialty, searchQuery]);
+  }, [liveWebsites, selectedSpecialty, searchQuery, favoriteIds]);
 
   return (
     <main className="portfolio-hub">
@@ -167,17 +264,27 @@ export const PortfolioIndex: React.FC = () => {
       <div className="portfolio-controls-bar">
         <div className="portfolio-controls-inner">
           <div className="portfolio-filter-pills">
-            {SPECIALTIES.map((specialty) => (
-              <button
-                key={specialty}
-                className={`portfolio-filter-btn ${
-                  selectedSpecialty === specialty ? 'active' : ''
-                }`}
-                onClick={() => setSelectedSpecialty(specialty)}
-              >
-                {specialty}
-              </button>
-            ))}
+            {SPECIALTIES.map((specialty) => {
+              const isShortlist = specialty === 'Shortlisted';
+              const label = isShortlist ? `Shortlisted (${shortlistedCount})` : specialty;
+              return (
+                <button
+                  key={specialty}
+                  className={`portfolio-filter-btn flex items-center gap-1.5 ${
+                    selectedSpecialty === specialty ? 'active' : ''
+                  }`}
+                  onClick={() => setSelectedSpecialty(specialty)}
+                >
+                  {isShortlist && (
+                    <Heart
+                      size={13}
+                      className={selectedSpecialty === 'Shortlisted' ? 'fill-white text-white' : 'text-rose-400'}
+                    />
+                  )}
+                  <span>{label}</span>
+                </button>
+              );
+            })}
           </div>
 
           <div className="portfolio-search-box">
@@ -209,6 +316,8 @@ export const PortfolioIndex: React.FC = () => {
         <section className="portfolio-spotlight-section">
           <Link
             to={`/portfolio/${spotlight.slug}`}
+            onMouseEnter={() => prefetchRoute(`/portfolio/${spotlight.slug}`)}
+            onTouchStart={() => prefetchRoute(`/portfolio/${spotlight.slug}`)}
             className="portfolio-spotlight-card"
           >
             <div className="portfolio-spotlight-preview">
@@ -255,68 +364,29 @@ export const PortfolioIndex: React.FC = () => {
           </span>
         </div>
 
-        <div className="portfolio-cards-grid">
-          {filteredWebsites.map((website) => (
-            <Link
-              key={website.id}
-              to={`/portfolio/${website.slug}`}
-              className="portfolio-website-card"
+        {filteredWebsites.length === 0 ? (
+          <div className="py-16 text-center text-slate-400">
+            <Heart size={36} className="mx-auto mb-3 text-rose-400/60" />
+            <h3 className="text-xl font-bold text-white mb-2">No portfolios found</h3>
+            <p className="text-sm text-slate-400 mb-6">
+              {selectedSpecialty === 'Shortlisted'
+                ? 'Click the heart button on any portfolio card to save it to your shortlist.'
+                : 'Try searching for different keywords or clear filters.'}
+            </p>
+            <button
+              onClick={() => { setSelectedSpecialty('All'); setSearchQuery(''); }}
+              className="rounded-full bg-white px-5 py-2.5 text-xs font-bold text-black hover:bg-slate-200"
             >
-              <div className="portfolio-card-media">
-                {website.image ? (
-                  <img
-                    src={website.image}
-                    alt={website.title}
-                    className="portfolio-card-img"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      background: `linear-gradient(135deg, ${website.colors.primary}, ${website.colors.secondary})`,
-                    }}
-                  />
-                )}
-                <div className="portfolio-card-media-overlay" />
-                <div className="portfolio-card-status">
-                  <span
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: '#38bdf8',
-                    }}
-                  />
-                  Live Concept
-                </div>
-                <div className="portfolio-card-colors">
-                  {Object.values(website.colors).map((color, idx) => (
-                    <span
-                      key={idx}
-                      className="portfolio-color-chip"
-                      style={{ backgroundColor: color }}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div className="portfolio-card-body">
-                <h4 className="portfolio-card-title">{website.title}</h4>
-                <div className="portfolio-card-style">{website.style}</div>
-                <p className="portfolio-card-desc">{website.shortDescription}</p>
-
-                <div className="portfolio-card-footer">
-                  <span className="portfolio-view-link">
-                    View Live Site →
-                  </span>
-                  <span className="portfolio-slug-tag">/{website.slug}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              View All Portfolios
+            </button>
+          </div>
+        ) : (
+          <div className="portfolio-cards-grid">
+            {filteredWebsites.map((website) => (
+              <PortfolioCard key={website.id} website={website} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* ================= UX BLUEPRINT SECTION ================= */}

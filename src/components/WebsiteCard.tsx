@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 import { WebsiteDesign } from '../data/websites'
+import { prefetchRoute } from '../utils/routePrefetch'
+import { useFavorites } from '../utils/favorites'
+import { Heart } from 'lucide-react'
 
 interface WebsiteCardProps {
   website: WebsiteDesign
@@ -9,14 +12,44 @@ export function WebsiteCard({ website }: WebsiteCardProps) {
   const isCompleted = website.status === 'completed' || website.status === 'live'
   const categoryPath = website.category.toLowerCase().replace(/\s+/g, '-')
   const routePath = `/${categoryPath}/${website.slug}`
+  const { isFavorited, toggle } = useFavorites(website.id)
+
+  const handlePrefetch = () => {
+    if (isCompleted) {
+      prefetchRoute(routePath)
+    }
+  }
 
   return (
-    <div className={`group reveal-card relative overflow-hidden rounded-xl border bg-white transition-all duration-300 ease-out ${
+    <div 
+      onMouseEnter={handlePrefetch}
+      onTouchStart={handlePrefetch}
+      className={`group reveal-card relative overflow-hidden rounded-xl border bg-white transition-all duration-300 ease-out ${
       isCompleted
         ? 'border-gray-200 shadow-md hover:-translate-y-1 hover:border-coffee-200 hover:shadow-2xl'
         : 'border-gray-100 shadow-sm opacity-80'
     }`}>
-      <div className="absolute right-4 top-4 z-10">
+      {/* Shortlist / Favorite button */}
+      <div className="absolute left-3 top-3 z-10">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            toggle()
+          }}
+          title={isFavorited ? 'Remove from shortlist' : 'Save to shortlist'}
+          className={`flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-sm transition hover:scale-110 active:scale-95 ${
+            isFavorited
+              ? 'bg-rose-500 text-white shadow-rose-500/30'
+              : 'bg-white/90 text-gray-400 hover:text-rose-500 hover:bg-white'
+          }`}
+        >
+          <Heart className={`h-4 w-4 ${isFavorited ? 'fill-white' : ''}`} />
+        </button>
+      </div>
+
+      <div className="absolute right-3 top-3 z-10">
         <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${
           isCompleted
             ? 'bg-white text-emerald-700 shadow-sm'
@@ -38,6 +71,7 @@ export function WebsiteCard({ website }: WebsiteCardProps) {
             alt={`${website.title} website preview`}
             className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
             loading="lazy"
+            decoding="async"
           />
         )}
         <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-black/45 via-black/5 to-transparent' : 'bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.35),transparent_24%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.22),transparent_28%)]'}`} />
@@ -65,6 +99,7 @@ export function WebsiteCard({ website }: WebsiteCardProps) {
         {isCompleted ? (
           <Link
             to={routePath}
+            onFocus={handlePrefetch}
             className="inline-flex w-full items-center justify-center rounded-lg bg-gray-950 px-4 py-3 text-sm font-bold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-coffee-700 hover:shadow-lg hover:shadow-coffee-700/20"
           >
             View Design

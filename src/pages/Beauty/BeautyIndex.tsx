@@ -1,6 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { beautyWebsites } from "../../data/websites";
+import { Heart } from "lucide-react";
+import { beautyWebsites, WebsiteDesign } from "../../data/websites";
+import { useSafeInterval } from "../../hooks/useSafeInterval";
+import { useFavorites } from "../../utils/favorites";
+import { prefetchRoute } from "../../utils/routePrefetch";
 
 const tags: Record<string, string> = {
   "glowhaus-salon": "Hair",
@@ -33,6 +37,100 @@ const principles = [
   ],
 ];
 
+function BeautyCard({
+  website,
+  index,
+  websites,
+}: {
+  website: WebsiteDesign;
+  index: number;
+  websites: WebsiteDesign[];
+}) {
+  const { isFavorited, toggle } = useFavorites(website.id);
+  const routePath = `/beauty/${website.slug}`;
+
+  return (
+    <Link
+      to={routePath}
+      onMouseEnter={() => prefetchRoute(routePath)}
+      onTouchStart={() => prefetchRoute(routePath)}
+      className={`group block ${index % 3 === 1 ? "xl:translate-y-10" : ""}`}
+    >
+      <article className="overflow-hidden bg-white shadow-[0_12px_40px_rgba(54,42,36,.08)] transition duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_28px_70px_rgba(54,42,36,.16)]">
+        <div className="relative aspect-[16/11] overflow-hidden bg-[#ddd3cc]">
+          <img
+            src={website.image}
+            alt={`${website.title} website preview`}
+            className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.035]"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+          <span className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1.5 text-[.65rem] font-black uppercase tracking-[.14em] text-[#282220] backdrop-blur">
+            {tags[website.slug]}
+          </span>
+
+          {/* Shortlist Heart Button */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggle();
+            }}
+            title={isFavorited ? "Remove from shortlist" : "Save to shortlist"}
+            className={`absolute right-5 top-5 z-10 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-sm transition hover:scale-110 active:scale-95 ${
+              isFavorited
+                ? "bg-rose-500 text-white shadow-rose-500/30"
+                : "bg-white/85 text-gray-700 hover:bg-white hover:text-rose-500"
+            }`}
+          >
+            <Heart className={`h-4 w-4 ${isFavorited ? "fill-white" : ""}`} />
+          </button>
+
+          <span className="absolute bottom-5 right-5 grid h-12 w-12 place-items-center rounded-full bg-white text-xl text-black transition duration-300 group-hover:rotate-[-30deg] group-hover:bg-[#edb29d]">
+            ↗
+          </span>
+        </div>
+        <div className="p-6 sm:p-7">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[.68rem] font-black uppercase tracking-[.16em] text-[#a25f58]">
+                0{websites.indexOf(website) + 1} / Live
+              </p>
+              <h3 className="beauty-display mt-2 text-3xl tracking-[-.035em] sm:text-[2.15rem]">
+                {website.title}
+              </h3>
+            </div>
+            <div className="mt-1 flex -space-x-1">
+              {[
+                website.colors.primary,
+                website.colors.accent,
+                website.colors.dark,
+              ].map((color) => (
+                <span
+                  key={color}
+                  className="h-5 w-5 rounded-full border-2 border-white"
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </div>
+          </div>
+          <p className="mt-4 min-h-14 text-sm leading-6 text-[#6e6560]">
+            {website.shortDescription}.
+          </p>
+          <div className="mt-6 flex items-center justify-between border-t border-[#e5ddd7] pt-4 text-xs font-bold uppercase tracking-[.1em]">
+            <span className="capitalize text-[#827873]">
+              {website.style.split(",").slice(0, 2).join(" ·")}
+            </span>
+            <span>Open site →</span>
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
+}
+
 export function BeautyIndex() {
   const websites = beautyWebsites.filter(
     (website) => website.status === "completed" || website.status === "live",
@@ -41,27 +139,32 @@ export function BeautyIndex() {
   const [paused, setPaused] = useState(false);
   const [filter, setFilter] = useState("All");
   const touchStart = useRef<number | null>(null);
+  const { favoriteIds } = useFavorites();
+
+  const shortlistedCount = websites.filter((w) => favoriteIds.includes(w.id)).length;
+
   const filters = [
     "All",
+    `Shortlisted (${shortlistedCount})`,
     ...Array.from(new Set(websites.map((website) => tags[website.slug]))),
   ];
+
   const filteredWebsites = useMemo(
-    () =>
-      filter === "All"
-        ? websites
-        : websites.filter((website) => tags[website.slug] === filter),
-    [filter, websites],
+    () => {
+      if (filter === "All") return websites;
+      if (filter.startsWith("Shortlisted")) {
+        return websites.filter((website) => favoriteIds.includes(website.id));
+      }
+      return websites.filter((website) => tags[website.slug] === filter);
+    },
+    [filter, websites, favoriteIds],
   );
   const featured = websites[activeSlide];
 
-  useEffect(() => {
+  useSafeInterval(() => {
     if (paused) return;
-    const interval = window.setInterval(
-      () => setActiveSlide((slide) => (slide + 1) % websites.length),
-      6500,
-    );
-    return () => window.clearInterval(interval);
-  }, [paused, websites.length]);
+    setActiveSlide((slide) => (slide + 1) % websites.length);
+  }, 6500);
 
   const moveSlide = (direction: number) =>
     setActiveSlide(
@@ -264,68 +367,36 @@ export function BeautyIndex() {
             ))}
           </div>
 
-          <div className="grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
-            {filteredWebsites.map((website, index) => (
-              <Link
-                key={website.id}
-                to={`/beauty/${website.slug}`}
-                className={`group block ${index % 3 === 1 ? "xl:translate-y-10" : ""}`}
-              >
-                <article className="overflow-hidden bg-white shadow-[0_12px_40px_rgba(54,42,36,.08)] transition duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_28px_70px_rgba(54,42,36,.16)]">
-                  <div className="relative aspect-[16/11] overflow-hidden bg-[#ddd3cc]">
-                    <img
-                      src={website.image}
-                      alt={`${website.title} website preview`}
-                      className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.035]"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                    <span className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1.5 text-[.65rem] font-black uppercase tracking-[.14em] text-[#282220] backdrop-blur">
-                      {tags[website.slug]}
-                    </span>
-                    <span className="absolute bottom-5 right-5 grid h-12 w-12 place-items-center rounded-full bg-white text-xl text-black transition duration-300 group-hover:rotate-[-30deg] group-hover:bg-[#edb29d]">
-                      ↗
-                    </span>
-                  </div>
-                  <div className="p-6 sm:p-7">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <p className="text-[.68rem] font-black uppercase tracking-[.16em] text-[#a25f58]">
-                          0{websites.indexOf(website) + 1} / Live
-                        </p>
-                        <h3 className="beauty-display mt-2 text-3xl tracking-[-.035em] sm:text-[2.15rem]">
-                          {website.title}
-                        </h3>
-                      </div>
-                      <div className="mt-1 flex -space-x-1">
-                        {[
-                          website.colors.primary,
-                          website.colors.accent,
-                          website.colors.dark,
-                        ].map((color) => (
-                          <span
-                            key={color}
-                            className="h-5 w-5 rounded-full border-2 border-white"
-                            style={{ backgroundColor: color }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <p className="mt-4 min-h-14 text-sm leading-6 text-[#6e6560]">
-                      {website.shortDescription}.
-                    </p>
-                    <div className="mt-6 flex items-center justify-between border-t border-[#e5ddd7] pt-4 text-xs font-bold uppercase tracking-[.1em]">
-                      <span className="capitalize text-[#827873]">
-                        {website.style.split(",").slice(0, 2).join(" ·")}
-                      </span>
-                      <span>Open site →</span>
-                    </div>
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
+          {filteredWebsites.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-[#cfc4bc] bg-white/70 p-12 text-center my-6">
+              <p className="font-extrabold text-lg text-[#181514]">No concepts in this view</p>
+              <p className="text-sm text-[#665e59] mt-1">
+                {filter.startsWith("Shortlisted")
+                  ? "Click the heart icon on any beauty card to save your favorite concepts to this list."
+                  : "Try selecting a different filter."}
+              </p>
+              {filter.startsWith("Shortlisted") && (
+                <button
+                  type="button"
+                  onClick={() => setFilter("All")}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#181514] px-5 py-2 text-xs font-bold text-white transition hover:bg-[#a25f58]"
+                >
+                  Browse all beauty concepts
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
+              {filteredWebsites.map((website, index) => (
+                <BeautyCard
+                  key={website.id}
+                  website={website}
+                  index={index}
+                  websites={websites}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

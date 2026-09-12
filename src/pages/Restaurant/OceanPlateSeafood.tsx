@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { imageUrl } from "../../assets/optimized";
+import { useSafeTimeout } from "../../hooks";
 
 const oceanImages = {
   hero: imageUrl("restaurent/oceanplate/hero.webp"),
@@ -153,6 +154,7 @@ function Eyebrow({
 export function OceanPlateSeafood() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { setSafeTimeout } = useSafeTimeout();
 
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>(
@@ -179,7 +181,7 @@ export function OceanPlateSeafood() {
   const handleReservation = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitted(true);
-    window.setTimeout(() => setSubmitted(false), 4200);
+    setSafeTimeout(() => setSubmitted(false), 4200);
   };
 
   return (

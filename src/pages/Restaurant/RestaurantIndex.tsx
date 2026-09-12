@@ -1,31 +1,117 @@
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Heart } from 'lucide-react'
 import { AnimatedSection, Container, CTAButton } from '../../components'
-import { restaurantWebsites } from '../../data/websites'
+import { restaurantWebsites, WebsiteDesign } from '../../data/websites'
+import { prefetchRoute } from '../../utils/routePrefetch'
+import { useFavorites } from '../../utils/favorites'
+import { useEventListener } from '../../hooks/useEventListener'
+import { useSafeInterval } from '../../hooks/useSafeInterval'
+
+function RestaurantCard({ website, index }: { website: WebsiteDesign; index: number }) {
+  const { isFavorited, toggle } = useFavorites(website.id)
+  const routePath = `/restaurant/${website.slug}`
+
+  return (
+    <Link
+      to={routePath}
+      onMouseEnter={() => prefetchRoute(routePath)}
+      onTouchStart={() => prefetchRoute(routePath)}
+      className={`group reveal-card relative overflow-hidden border border-[#eadfc8] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
+        index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : ''
+      }`}
+    >
+      <div
+        className="relative h-44 overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 52%, ${website.colors.accent} 100%)`,
+        }}
+      >
+        {website.image && (
+          <img
+            src={website.image}
+            alt={`${website.title} website preview`}
+            className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+        <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-[#171512]/70 via-[#171512]/10 to-transparent' : 'bg-[radial-gradient(circle_at_22%_24%,rgba(255,255,255,0.55),transparent_22%),radial-gradient(circle_at_76%_70%,rgba(255,255,255,0.25),transparent_26%)]'}`} />
+        
+        <div className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#171512] shadow-sm">
+          {website.status === 'completed' ? 'Live' : 'Queued'}
+        </div>
+
+        {/* Shortlist Heart Button */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            toggle()
+          }}
+          title={isFavorited ? 'Remove from shortlist' : 'Save to shortlist'}
+          className={`absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-sm transition hover:scale-110 active:scale-95 ${
+            isFavorited
+              ? 'bg-rose-500 text-white shadow-rose-500/30'
+              : 'bg-white/80 text-gray-700 hover:bg-white hover:text-rose-500'
+          }`}
+        >
+          <Heart className={`h-4 w-4 ${isFavorited ? 'fill-white' : ''}`} />
+        </button>
+      </div>
+      <div className="p-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#9a5b25]">{website.category}</p>
+        <div className="mt-3 flex items-start justify-between gap-4">
+          <h3 className="restaurant-cinematic-title text-3xl font-semibold text-[#171512] transition group-hover:text-[#9a5b25]">
+            {website.title}
+          </h3>
+          <span className="text-sm font-semibold tracking-[0.12em] text-[#9a5b25]">0{index + 1}</span>
+        </div>
+        <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-[#6d6254]">{website.style}</p>
+        <p className="mt-4 min-h-12 text-sm leading-6 text-[#6d6254]">{website.shortDescription}</p>
+        <div className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[#171512] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#9a5b25]">
+          View Design
+        </div>
+      </div>
+    </Link>
+  )
+}
 
 export function RestaurantIndex() {
   const completedCount = restaurantWebsites.filter((website) => website.status === 'completed').length
   const carouselRestaurants = restaurantWebsites.filter((website) => website.status === 'completed' && website.image)
   const [activeSlide, setActiveSlide] = useState(0)
   const [isCarouselPaused, setIsCarouselPaused] = useState(false)
+  const [activeFilter, setActiveFilter] = useState<'all' | 'cozy' | 'modern' | 'flavor' | 'shortlist'>('all')
+  const { favoriteIds } = useFavorites()
   const activeRestaurant = carouselRestaurants[activeSlide] ?? restaurantWebsites[0]
 
-  useEffect(() => {
+  useSafeInterval(() => {
     if (isCarouselPaused || carouselRestaurants.length < 2) return
-    const interval = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % carouselRestaurants.length)
-    }, 6000)
-    return () => window.clearInterval(interval)
-  }, [carouselRestaurants.length, isCarouselPaused])
+    setActiveSlide((current) => (current + 1) % carouselRestaurants.length)
+  }, 6000)
 
-  useEffect(() => {
-    const handleKeyboard = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowRight') setActiveSlide((current) => (current + 1) % carouselRestaurants.length)
-      if (event.key === 'ArrowLeft') setActiveSlide((current) => (current - 1 + carouselRestaurants.length) % carouselRestaurants.length)
+  useEventListener('keydown', (event: KeyboardEvent) => {
+    if (event.key === 'ArrowRight') setActiveSlide((current) => (current + 1) % carouselRestaurants.length)
+    if (event.key === 'ArrowLeft') setActiveSlide((current) => (current - 1 + carouselRestaurants.length) % carouselRestaurants.length)
+  })
+
+  const filteredRestaurants = useMemo(() => {
+    if (activeFilter === 'shortlist') {
+      return restaurantWebsites.filter((w) => favoriteIds.includes(w.id))
     }
-    window.addEventListener('keydown', handleKeyboard)
-    return () => window.removeEventListener('keydown', handleKeyboard)
-  }, [carouselRestaurants.length])
+    if (activeFilter === 'cozy') {
+      return restaurantWebsites.filter((w) => w.style.includes('warm') || w.style.includes('cozy') || w.style.includes('handcrafted'))
+    }
+    if (activeFilter === 'modern') {
+      return restaurantWebsites.filter((w) => w.style.includes('modern') || w.style.includes('urban') || w.style.includes('bold'))
+    }
+    if (activeFilter === 'flavor') {
+      return restaurantWebsites.filter((w) => w.style.includes('flavor') || w.style.includes('cultural') || w.style.includes('rich'))
+    }
+    return restaurantWebsites
+  }, [activeFilter, favoriteIds])
 
   const moveSlide = (direction: number) => {
     setActiveSlide((current) => (current + direction + carouselRestaurants.length) % carouselRestaurants.length)
@@ -161,51 +247,55 @@ export function RestaurantIndex() {
               Each card uses real concept artwork so the collection reads like a visual menu of distinct restaurant experiences.
             </p>
           </AnimatedSection>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {restaurantWebsites.map((website, index) => (
-              <Link
-                key={website.id}
-                to={`/restaurant/${website.slug}`}
-                className={`group reveal-card overflow-hidden border border-[#eadfc8] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
-                  index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : ''
+          {/* Mood & Shortlist Filter Tabs */}
+          <div className="mb-8 flex flex-wrap items-center gap-2">
+            {[
+              { id: 'all', label: `All Concepts (${restaurantWebsites.length})` },
+              { id: 'cozy', label: 'Warm & Handcrafted' },
+              { id: 'modern', label: 'Modern & Urban' },
+              { id: 'flavor', label: 'Cultural & Flavor' },
+              { id: 'shortlist', label: `Shortlisted (${restaurantWebsites.filter((w) => favoriteIds.includes(w.id)).length})` },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveFilter(tab.id as any)}
+                className={`rounded-full px-4 py-2 text-xs font-bold transition ${
+                  activeFilter === tab.id
+                    ? 'bg-[#171512] text-white shadow-sm'
+                    : 'bg-[#eadfc8]/50 text-[#6d6254] hover:bg-[#eadfc8] hover:text-[#171512]'
                 }`}
               >
-                <div
-                  className="relative h-44 overflow-hidden"
-                  style={{
-                    backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 52%, ${website.colors.accent} 100%)`,
-                  }}
-                >
-                  {website.image && (
-                    <img
-                      src={website.image}
-                      alt={`${website.title} website preview`}
-                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  )}
-                  <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-[#171512]/70 via-[#171512]/10 to-transparent' : 'bg-[radial-gradient(circle_at_22%_24%,rgba(255,255,255,0.55),transparent_22%),radial-gradient(circle_at_76%_70%,rgba(255,255,255,0.25),transparent_26%)]'}`} />
-                  <div className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#171512] shadow-sm">
-                    {website.status === 'completed' ? 'Live' : 'Queued'}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#9a5b25]">{website.category}</p>
-                  <div className="mt-3 flex items-start justify-between gap-4">
-                    <h3 className="restaurant-cinematic-title text-3xl font-semibold text-[#171512] transition group-hover:text-[#9a5b25]">
-                      {website.title}
-                    </h3>
-                    <span className="text-sm font-semibold tracking-[0.12em] text-[#9a5b25]">0{index + 1}</span>
-                  </div>
-                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-[#6d6254]">{website.style}</p>
-                  <p className="mt-4 min-h-12 text-sm leading-6 text-[#6d6254]">{website.shortDescription}</p>
-                  <div className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[#171512] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#9a5b25]">
-                    View Design
-                  </div>
-                </div>
-              </Link>
+                {tab.label}
+              </button>
             ))}
           </div>
+
+          {filteredRestaurants.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-[#eadfc8] bg-white/70 p-12 text-center">
+              <p className="font-extrabold text-lg text-[#171512]">No concepts in this view</p>
+              <p className="text-sm text-[#6d6254] mt-1">
+                {activeFilter === 'shortlist'
+                  ? 'Click the heart icon on any restaurant card to save your favorite concepts to this list.'
+                  : 'Try selecting a different filter.'}
+              </p>
+              {activeFilter === 'shortlist' && (
+                <button
+                  type="button"
+                  onClick={() => setActiveFilter('all')}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#171512] px-5 py-2 text-xs font-bold text-white transition hover:bg-[#9a5b25]"
+                >
+                  Browse all restaurants
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {filteredRestaurants.map((website, index) => (
+                <RestaurantCard key={website.id} website={website} index={index} />
+              ))}
+            </div>
+          )}
         </Container>
       </section>
 

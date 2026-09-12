@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { CategoryInfo } from '../data/websites'
+import { prefetchRoute } from '../utils/routePrefetch'
 
 interface CategoryCardProps {
   category: CategoryInfo
@@ -10,6 +11,12 @@ export function CategoryCard({ category }: CategoryCardProps) {
   const [hasImage, setHasImage] = useState(Boolean(category.image))
   const canShowImage = Boolean(category.image && hasImage)
 
+  const handlePrefetch = () => {
+    if (category.href) {
+      prefetchRoute(category.href)
+    }
+  }
+
   const content = (
     <div className={`relative flex h-full min-h-[320px] flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br ${category.color} p-6 text-white md:p-7`}>
       {category.image && hasImage && (
@@ -17,6 +24,8 @@ export function CategoryCard({ category }: CategoryCardProps) {
           src={category.image}
           alt={`${category.name} website concept preview`}
           className="absolute inset-0 h-full w-full scale-105 object-cover opacity-0 transition-all duration-500 ease-out group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100 group-focus-within:scale-100 group-focus-within:opacity-100"
+          loading="lazy"
+          decoding="async"
           onError={() => setHasImage(false)}
         />
       )}
@@ -47,7 +56,13 @@ export function CategoryCard({ category }: CategoryCardProps) {
 
   if (category.href) {
     return (
-      <Link to={category.href} className="group reveal-card relative block h-full rounded-2xl border border-gray-100 bg-white shadow-lg transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white hover:shadow-2xl focus:outline-none focus-visible:ring-4 focus-visible:ring-coffee-300/45">
+      <Link 
+        to={category.href} 
+        onMouseEnter={handlePrefetch}
+        onTouchStart={handlePrefetch}
+        onFocus={handlePrefetch}
+        className="group reveal-card relative block h-full rounded-2xl border border-gray-100 bg-white shadow-lg transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white hover:shadow-2xl focus:outline-none focus-visible:ring-4 focus-visible:ring-coffee-300/45"
+      >
         {content}
       </Link>
     )

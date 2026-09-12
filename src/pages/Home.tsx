@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
+import { ChevronLeft, ChevronRight, Heart, Search, X, Sparkles } from "lucide-react";
+import { useEffect, useState, useMemo, type ReactNode } from "react";
 import { AnimatedSection, Container, CTAButton } from "../components";
 import { imageUrl } from "../assets/optimized";
+import { useFavorites } from "../utils/favorites";
+import { useSafeInterval } from "../hooks/useSafeInterval";
+import { prefetchRoute } from "../utils/routePrefetch";
 import {
+  allWebsites,
   beautyWebsites,
   categories,
   constructionWebsites,
@@ -303,15 +307,61 @@ export function Home() {
   const [isHeroPaused, setIsHeroPaused] = useState(false);
   const activeHeroSlide = heroSlides[activeHeroIndex];
 
-  useEffect(() => {
+  const { favoriteIds, toggle } = useFavorites();
+  const [featuredTab, setFeaturedTab] = useState<'featured' | 'all' | 'shortlist'>('featured');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const shortlistedWebsites = useMemo(() => {
+    return allWebsites.filter((site) => favoriteIds.includes(site.id));
+  }, [favoriteIds]);
+
+  const categoryFilters = useMemo(() => [
+    { id: 'all', label: 'All Categories' },
+    { id: 'restaurant', label: 'Restaurant' },
+    { id: 'beauty', label: 'Beauty' },
+    { id: 'real estate', label: 'Real Estate' },
+    { id: 'fitness', label: 'Fitness' },
+    { id: 'medical', label: 'Medical' },
+    { id: 'construction', label: 'Construction' },
+    { id: 'education', label: 'Education' },
+    { id: 'e-commerce', label: 'E-Commerce' },
+    { id: 'portfolio', label: 'Portfolio' },
+    { id: 'saas', label: 'SaaS' },
+  ], []);
+
+  const displayedWebsites = useMemo(() => {
+    let list =
+      featuredTab === 'shortlist'
+        ? shortlistedWebsites
+        : featuredTab === 'featured'
+        ? featuredWebsites
+        : allWebsites;
+
+    if (selectedCategory !== 'all') {
+      list = list.filter((site) =>
+        site.category.toLowerCase().includes(selectedCategory.toLowerCase())
+      );
+    }
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      list = list.filter(
+        (site) =>
+          site.title.toLowerCase().includes(q) ||
+          site.shortDescription.toLowerCase().includes(q) ||
+          site.category.toLowerCase().includes(q)
+      );
+    }
+
+    return list;
+  }, [featuredTab, selectedCategory, searchQuery, featuredWebsites, shortlistedWebsites]);
+
+  // Safe timer for hero carousel to avoid unmount memory leaks
+  useSafeInterval(() => {
     if (isHeroPaused || heroSlides.length < 2) return;
-
-    const timer = window.setInterval(() => {
-      setActiveHeroIndex((current) => (current + 1) % heroSlides.length);
-    }, 5500);
-
-    return () => window.clearInterval(timer);
-  }, [heroSlides.length, isHeroPaused]);
+    setActiveHeroIndex((current) => (current + 1) % heroSlides.length);
+  }, 5500);
 
   const moveHeroSlide = (direction: -1 | 1) => {
     setActiveHeroIndex(
@@ -565,69 +615,215 @@ export function Home() {
             </p>
           </AnimatedSection>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-            {featuredWebsites.map((website, index) => (
-              <Link
-                key={website.id}
-                to={`/${website.category.toLowerCase().replace(/\s+/g, "-")}/${website.slug}`}
-                className={`group reveal-card overflow-hidden bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
-                  index === 1
-                    ? "delay-100"
-                    : index === 2
-                      ? "delay-200"
-                      : index === 3
-                        ? "delay-300"
-                        : ""
-                }`}
-              >
-                <div
-                  className="relative h-40 overflow-hidden"
-                  style={{
-                    backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 55%, ${website.colors.accent} 100%)`,
+          {/* Tab, Search & Filter Controls */}
+          <div className="mb-8 space-y-4 border-b border-[#ddd2c0] pb-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              {/* Primary Mode Tabs */}
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFeaturedTab('featured');
+                    setSelectedCategory('all');
                   }}
+                  className={`rounded-full px-5 py-2.5 text-xs font-black uppercase tracking-wider transition ${
+                    featuredTab === 'featured'
+                      ? 'bg-[#10201c] text-white shadow-sm'
+                      : 'bg-white text-[#5f6963] border border-[#ddd2c0] hover:bg-[#fff7ec]'
+                  }`}
                 >
-                  {website.image && (
-                    <img
-                      src={website.image}
-                      alt={`${website.title} website preview`}
-                      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  )}
-                  <div
-                    className={`absolute inset-0 ${website.image ? "bg-gradient-to-t from-black/50 via-black/5 to-transparent" : "bg-[radial-gradient(circle_at_24%_24%,rgba(255,255,255,0.58),transparent_25%),radial-gradient(circle_at_78%_76%,rgba(255,255,255,0.26),transparent_28%)]"}`}
-                  />
-                  <div className="absolute bottom-4 left-4 flex gap-2">
-                    {[
-                      website.colors.primary,
-                      website.colors.secondary,
-                      website.colors.accent,
-                    ].map((color) => (
-                      <span
-                        key={color}
-                        className="h-5 w-5 rounded-full border border-white/75"
-                        style={{ backgroundColor: color }}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="p-5">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#1e8b79]">
-                    {website.category}
-                  </p>
-                  <h3 className="mt-3 text-xl font-black transition group-hover:text-[#1e8b79]">
-                    {website.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-[#5f6963]">
-                    {website.shortDescription}
-                  </p>
-                  <div className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-[#10201c] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#1e8b79]">
-                    Open design
-                  </div>
-                </div>
-              </Link>
-            ))}
+                  Featured Samples ({featuredWebsites.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFeaturedTab('all')}
+                  className={`flex items-center gap-1.5 rounded-full px-5 py-2.5 text-xs font-black uppercase tracking-wider transition ${
+                    featuredTab === 'all'
+                      ? 'bg-[#10201c] text-white shadow-sm'
+                      : 'bg-white text-[#5f6963] border border-[#ddd2c0] hover:bg-[#fff7ec]'
+                  }`}
+                >
+                  <Sparkles className="h-3.5 w-3.5 text-[#f0c76a]" />
+                  <span>All 100 Templates</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFeaturedTab('shortlist')}
+                  className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-black uppercase tracking-wider transition ${
+                    featuredTab === 'shortlist'
+                      ? 'bg-rose-600 text-white shadow-md shadow-rose-600/25'
+                      : 'bg-white text-[#5f6963] border border-[#ddd2c0] hover:bg-[#fff7ec]'
+                  }`}
+                >
+                  <Heart className={`h-3.5 w-3.5 ${featuredTab === 'shortlist' ? 'fill-white' : 'text-rose-500'}`} />
+                  <span>Your Shortlist ({shortlistedWebsites.length})</span>
+                </button>
+              </div>
+
+              {/* Quick Search Input */}
+              <div className="relative w-full sm:w-72">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#5f6963]" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Filter by name or style..."
+                  className="w-full rounded-full border border-[#ddd2c0] bg-white pl-10 pr-9 py-2 text-xs font-semibold text-[#17211d] placeholder-[#9ca3af] focus:border-[#10201c] focus:outline-none shadow-2xs"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+                    aria-label="Clear search"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Category Filter Pills (visible in 'all' or 'featured' modes) */}
+            {featuredTab !== 'shortlist' && (
+              <div className="flex flex-wrap items-center gap-1.5 pt-2">
+                {categoryFilters.map((cat) => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`rounded-full px-3.5 py-1.5 text-[11px] font-bold transition ${
+                      selectedCategory === cat.id
+                        ? 'bg-[#1e8b79] text-white shadow-xs'
+                        : 'bg-white/80 text-[#5f6963] border border-[#e5dcd0] hover:bg-white hover:text-[#17211d]'
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
+
+          {featuredTab === 'shortlist' && shortlistedWebsites.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-[#ddd2c0] bg-white/70 p-12 text-center">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-rose-50 text-rose-500 shadow-xs">
+                <Heart className="h-6 w-6" />
+              </div>
+              <h3 className="text-xl font-black text-[#17211d]">Your Shortlist is Empty</h3>
+              <p className="mx-auto mt-2 max-w-md text-sm text-[#5f6963] leading-relaxed">
+                Click the <span className="font-bold text-rose-600">❤️ Heart button</span> on any website card or the floating toolbar to shortlist your favorite templates for quick review.
+              </p>
+            </div>
+          ) : displayedWebsites.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-[#ddd2c0] bg-white/70 p-12 text-center">
+              <h3 className="text-lg font-black text-[#17211d]">No templates match your criteria</h3>
+              <p className="mx-auto mt-2 max-w-md text-xs text-[#5f6963]">
+                Try adjusting your search query or selecting "All Categories".
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('all');
+                }}
+                className="mt-4 rounded-full bg-[#10201c] px-4 py-2 text-xs font-bold text-white hover:bg-[#1e8b79] transition"
+              >
+                Reset Filters
+              </button>
+            </div>
+          ) : (
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+              {displayedWebsites.map((website, index) => {
+                const categoryPath = website.category.toLowerCase().replace(/\s+/g, '-');
+                const routePath = `/${categoryPath}/${website.slug}`;
+                const favorited = favoriteIds.includes(website.id);
+
+                return (
+                  <Link
+                    key={website.id}
+                    to={routePath}
+                    onMouseEnter={() => prefetchRoute(routePath)}
+                    onTouchStart={() => prefetchRoute(routePath)}
+                    className={`group reveal-card overflow-hidden bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
+                      index % 5 === 1
+                        ? "delay-100"
+                        : index % 5 === 2
+                          ? "delay-200"
+                          : index % 5 === 3
+                            ? "delay-300"
+                            : ""
+                    }`}
+                  >
+                    <div
+                      className="relative h-40 overflow-hidden"
+                      style={{
+                        backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 55%, ${website.colors.accent} 100%)`,
+                      }}
+                    >
+                      {website.image && (
+                        <img
+                          src={website.image}
+                          alt={`${website.title} website preview`}
+                          className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      )}
+                      <div
+                        className={`absolute inset-0 ${website.image ? "bg-gradient-to-t from-black/50 via-black/5 to-transparent" : "bg-[radial-gradient(circle_at_24%_24%,rgba(255,255,255,0.58),transparent_25%),radial-gradient(circle_at_78%_76%,rgba(255,255,255,0.26),transparent_28%)]"}`}
+                      />
+
+                      {/* Interactive Heart Toggle on Homepage Card */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggle(website.id);
+                        }}
+                        aria-label={favorited ? "Remove from shortlist" : "Save to shortlist"}
+                        className={`absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full shadow-md backdrop-blur-md transition hover:scale-110 active:scale-95 ${
+                          favorited
+                            ? 'bg-rose-500 text-white shadow-rose-500/30'
+                            : 'bg-black/40 text-white/90 hover:bg-black/60'
+                        }`}
+                      >
+                        <Heart className={`h-4 w-4 ${favorited ? 'fill-white' : ''}`} />
+                      </button>
+
+                      <div className="absolute bottom-4 left-4 flex gap-2">
+                        {[
+                          website.colors.primary,
+                          website.colors.secondary,
+                          website.colors.accent,
+                        ].map((color) => (
+                          <span
+                            key={color}
+                            className="h-5 w-5 rounded-full border border-white/75"
+                            style={{ backgroundColor: color }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#1e8b79]">
+                        {website.category}
+                      </p>
+                      <h3 className="mt-3 text-xl font-black transition group-hover:text-[#1e8b79]">
+                        {website.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-6 text-[#5f6963] line-clamp-2">
+                        {website.shortDescription}
+                      </p>
+                      <div className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-[#10201c] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#1e8b79]">
+                        Open design
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </Container>
       </section>
 

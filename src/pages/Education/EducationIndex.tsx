@@ -38,6 +38,8 @@ import {
   Zap,
 } from "lucide-react";
 import "./EducationIndex.css";
+import { useFavorites } from "../../utils/favorites";
+import { prefetchRoute } from "../../utils/routePrefetch";
 
 // Individual Webpage Preview Images
 import brightBridgeImg from "../../assets/optimized/education/brightbridge.webp";
@@ -274,6 +276,9 @@ export function EducationIndex() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [sortBy, setSortBy] = useState<"featured" | "az" | "metrics">("featured");
   const [previewModalSite, setPreviewModalSite] = useState<EducationPlatform | null>(null);
+  const { favoriteIds, toggle } = useFavorites();
+
+  const shortlistedCount = educationDirectory.filter((site) => favoriteIds.includes(site.slug)).length;
 
   // Category counts calculation
   const categoryCounts = useMemo(() => {
@@ -296,8 +301,14 @@ export function EducationIndex() {
   // Filtered & Sorted List
   const filteredWebsites = useMemo(() => {
     const list = educationDirectory.filter((site) => {
-      const matchesCategory =
-        activeCategory === "all" || site.category === activeCategory;
+      if (activeCategory === "shortlist") {
+        if (!favoriteIds.includes(site.slug)) return false;
+      } else {
+        const matchesCategory =
+          activeCategory === "all" || site.category === activeCategory;
+        if (!matchesCategory) return false;
+      }
+
       const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !q ||
@@ -306,14 +317,14 @@ export function EducationIndex() {
         site.tags.some((t) => t.toLowerCase().includes(q)) ||
         site.badge.toLowerCase().includes(q) ||
         site.categoryName.toLowerCase().includes(q);
-      return matchesCategory && matchesSearch;
+      return matchesSearch;
     });
 
     if (sortBy === "az") {
       return list.sort((a, b) => a.title.localeCompare(b.title));
     }
     return list;
-  }, [activeCategory, searchQuery, sortBy]);
+  }, [activeCategory, searchQuery, sortBy, favoriteIds]);
 
   return (
     <main className="edu-idx-app" id="top" tabIndex={-1}>
@@ -439,6 +450,7 @@ export function EducationIndex() {
           <div className="edu-idx-category-pills">
             {[
               { id: "all", label: "All Platforms", count: categoryCounts.all },
+              { id: "shortlist", label: "Shortlisted", count: shortlistedCount },
               { id: "online", label: "Academies & K-12", count: categoryCounts.online },
               { id: "counseling", label: "Counseling & Test Prep", count: categoryCounts.counseling },
               { id: "tutoring", label: "Tutoring & Languages", count: categoryCounts.tutoring },
@@ -450,6 +462,14 @@ export function EducationIndex() {
                 className={`edu-idx-cat-pill ${activeCategory === cat.id ? "active" : ""}`}
                 onClick={() => setActiveCategory(cat.id)}
               >
+                {cat.id === "shortlist" && (
+                  <Heart
+                    size={13}
+                    className={`mr-1 inline-block ${
+                      activeCategory === "shortlist" ? "fill-white text-white" : "text-rose-500"
+                    }`}
+                  />
+                )}
                 <span>{cat.label}</span>
                 <span className="pill-count">{cat.count}</span>
               </button>
@@ -531,17 +551,42 @@ export function EducationIndex() {
                     </div>
 
                     {/* Thumbnail Window with Hover Zoom */}
-                    <Link to={`/education/${site.slug}`} className="edu-idx-thumb-link">
-                      <div className="edu-idx-thumb-wrap">
-                        <img src={site.image} alt={`${site.title} preview`} loading="lazy" />
-                        <div className="edu-idx-thumb-overlay">
-                          <span className="edu-idx-btn-hover-open">
-                            <span>Launch Live Website</span>
-                            <ArrowUpRight size={16} />
-                          </span>
+                    <div className="relative">
+                      <Link
+                        to={`/education/${site.slug}`}
+                        onMouseEnter={() => prefetchRoute(`/education/${site.slug}`)}
+                        onTouchStart={() => prefetchRoute(`/education/${site.slug}`)}
+                        className="edu-idx-thumb-link"
+                      >
+                        <div className="edu-idx-thumb-wrap">
+                          <img src={site.image} alt={`${site.title} preview`} loading="lazy" decoding="async" />
+                          <div className="edu-idx-thumb-overlay">
+                            <span className="edu-idx-btn-hover-open">
+                              <span>Launch Live Website</span>
+                              <ArrowUpRight size={16} />
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+
+                      {/* Shortlist Heart Button */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggle(site.slug);
+                        }}
+                        title={favoriteIds.includes(site.slug) ? "Remove from shortlist" : "Save to shortlist"}
+                        className={`absolute top-3 right-3 z-20 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-md transition hover:scale-110 active:scale-95 ${
+                          favoriteIds.includes(site.slug)
+                            ? "bg-rose-500 text-white shadow-rose-500/30"
+                            : "bg-black/50 text-white/80 hover:bg-black/70 hover:text-rose-400 border border-white/20"
+                        }`}
+                      >
+                        <Heart size={14} className={favoriteIds.includes(site.slug) ? "fill-white" : ""} />
+                      </button>
+                    </div>
 
                     {/* Card Content Body */}
                     <div className="edu-idx-card-body">
@@ -551,7 +596,13 @@ export function EducationIndex() {
                       </div>
 
                       <h3 className="edu-idx-card-title">
-                        <Link to={`/education/${site.slug}`}>{site.title}</Link>
+                        <Link
+                          to={`/education/${site.slug}`}
+                          onMouseEnter={() => prefetchRoute(`/education/${site.slug}`)}
+                          onTouchStart={() => prefetchRoute(`/education/${site.slug}`)}
+                        >
+                          {site.title}
+                        </Link>
                       </h3>
 
                       <p className="edu-idx-card-desc">{site.description}</p>
@@ -592,7 +643,12 @@ export function EducationIndex() {
                             <Eye size={14} />
                             <span>Quick Info</span>
                           </button>
-                          <Link to={`/education/${site.slug}`} className="edu-idx-open-link">
+                          <Link
+                            to={`/education/${site.slug}`}
+                            onMouseEnter={() => prefetchRoute(`/education/${site.slug}`)}
+                            onTouchStart={() => prefetchRoute(`/education/${site.slug}`)}
+                            className="edu-idx-open-link"
+                          >
                             <span>Launch</span>
                             <ArrowRight size={14} />
                           </Link>
@@ -618,7 +674,12 @@ export function EducationIndex() {
                       <div className="edu-list-col-main">
                         <img src={site.image} alt={site.title} className="edu-list-thumb" />
                         <div>
-                          <Link to={`/education/${site.slug}`} className="edu-list-title">
+                          <Link
+                            to={`/education/${site.slug}`}
+                            onMouseEnter={() => prefetchRoute(`/education/${site.slug}`)}
+                            onTouchStart={() => prefetchRoute(`/education/${site.slug}`)}
+                            className="edu-list-title"
+                          >
                             {site.title}
                           </Link>
                           <small className="edu-list-slug">/education/{site.slug}</small>
@@ -649,12 +710,25 @@ export function EducationIndex() {
 
                       <div className="edu-list-col-actions">
                         <button
+                          type="button"
+                          onClick={() => toggle(site.slug)}
+                          title={favoriteIds.includes(site.slug) ? "Remove from shortlist" : "Save to shortlist"}
+                          className={`edu-idx-quick-btn ${favoriteIds.includes(site.slug) ? "text-rose-500" : ""}`}
+                        >
+                          <Heart size={14} className={favoriteIds.includes(site.slug) ? "fill-rose-500 text-rose-500" : ""} />
+                        </button>
+                        <button
                           onClick={() => setPreviewModalSite(site)}
                           className="edu-idx-quick-btn"
                         >
                           <Eye size={14} />
                         </button>
-                        <Link to={`/education/${site.slug}`} className="edu-idx-btn-primary mini">
+                        <Link
+                          to={`/education/${site.slug}`}
+                          onMouseEnter={() => prefetchRoute(`/education/${site.slug}`)}
+                          onTouchStart={() => prefetchRoute(`/education/${site.slug}`)}
+                          className="edu-idx-btn-primary mini"
+                        >
                           <span>Launch</span>
                           <ArrowRight size={13} />
                         </Link>

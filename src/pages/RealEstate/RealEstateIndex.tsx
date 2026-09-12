@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { Heart, Building2, Sparkles } from 'lucide-react'
 import { AnimatedSection, Container, CTAButton } from '../../components'
-import { realEstateWebsites } from '../../data/websites'
+import { realEstateWebsites, WebsiteDesign } from '../../data/websites'
+import { useSafeInterval } from '../../hooks/useSafeInterval'
+import { useFavorites } from '../../utils/favorites'
+import { prefetchRoute } from '../../utils/routePrefetch'
 
 const marketSignals = ['Luxury listings', 'Seller strategy', 'Neighborhood guides', 'Buyer funnels', 'Open houses', 'Agent trust']
 
@@ -20,6 +24,110 @@ const pageNotes = [
   },
 ]
 
+function RealEstateCard({ website, index }: { website: WebsiteDesign; index: number }) {
+  const { isFavorited, toggle } = useFavorites(website.id)
+  const isLive = website.status === 'completed' || website.status === 'live'
+  const routePath = `/real-estate/${website.slug}`
+
+  return (
+    <article
+      className="group flex h-full flex-col overflow-hidden border border-[#dbe4ef] bg-white shadow-sm transition duration-300 motion-reduce:transition-none motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl relative"
+    >
+      <div
+        className="relative aspect-[16/10] overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(145deg, ${website.colors.secondary} 0%, ${website.colors.primary} 58%, ${website.colors.dark} 100%)`,
+        }}
+      >
+        {website.image ? (
+          <img
+            src={website.image}
+            alt={`${website.title} website preview`}
+            className="absolute inset-0 h-full w-full object-cover transition duration-500 motion-reduce:transition-none motion-safe:group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div
+            role="img"
+            aria-label={`${website.title} conceptual property preview placeholder`}
+            className="absolute inset-0"
+          >
+            <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(90deg,rgba(255,255,255,0.28)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.28)_1px,transparent_1px)] [background-size:32px_32px]" />
+            <div className="absolute bottom-0 left-[10%] h-[42%] w-[30%] bg-white/25 shadow-2xl" />
+            <div className="absolute bottom-0 left-[38%] h-[68%] w-[28%] bg-white/35 shadow-2xl" />
+            <div className="absolute bottom-0 right-[8%] h-[52%] w-[28%] bg-white/20 shadow-2xl" />
+            <div className="absolute left-[44%] top-[23%] h-2 w-[16%] bg-white/55" />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+        <div className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#153e75] shadow-sm">
+          {isLive ? 'Live design' : 'Coming soon'}
+        </div>
+
+        {/* Shortlist Heart Toggle */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            toggle()
+          }}
+          title={isFavorited ? 'Remove from shortlist' : 'Save to shortlist'}
+          className={`absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-sm transition hover:scale-110 active:scale-95 ${
+            isFavorited
+              ? 'bg-rose-500 text-white shadow-rose-500/30'
+              : 'bg-black/40 text-white hover:bg-black/60 hover:text-rose-400'
+          }`}
+        >
+          <Heart className={`h-4 w-4 ${isFavorited ? 'fill-white' : ''}`} />
+        </button>
+
+        <div className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">
+          Concept {String(index + 1).padStart(2, '0')}
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col p-6">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-[#153e75]">
+          {website.marketLabel}
+        </p>
+        <h3 className="mt-3 text-2xl font-black leading-tight">{website.title}</h3>
+        <p className="mt-3 text-sm font-bold leading-6 text-slate-500">{website.style}</p>
+        <p className="mt-4 flex-1 text-sm leading-6 text-slate-600">{website.shortDescription}</p>
+
+        <div className="mt-6 flex items-center gap-2 border-t border-slate-200 pt-5" aria-label={`${website.title} color palette`}>
+          {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => (
+            <span
+              key={color}
+              className="h-6 w-6 rounded-full border border-slate-300 shadow-sm"
+              style={{ backgroundColor: color }}
+            />
+          ))}
+        </div>
+
+        {isLive ? (
+          <Link
+            to={routePath}
+            onMouseEnter={() => prefetchRoute(routePath)}
+            onTouchStart={() => prefetchRoute(routePath)}
+            className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-[#0f172a] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#153e75] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#153e75]"
+          >
+            View Website
+          </Link>
+        ) : (
+          <span
+            aria-disabled="true"
+            className="mt-6 inline-flex min-h-12 w-full cursor-not-allowed items-center justify-center rounded-lg border border-slate-200 bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500"
+          >
+            Coming Soon
+          </span>
+        )}
+      </div>
+    </article>
+  )
+}
+
 export function RealEstateIndex() {
   const liveWebsites = realEstateWebsites.filter(
     (website) => website.status === 'completed' || website.status === 'live',
@@ -35,13 +143,32 @@ export function RealEstateIndex() {
   const [isHeroPaused, setIsHeroPaused] = useState(false)
   const activeHero = carouselWebsites[activeHeroIndex] ?? liveWebsites[0] ?? realEstateWebsites[0]
 
-  useEffect(() => {
+  const { favoriteIds, isFavorited: isHeroFavorited, toggle: toggleHeroFavorite } = useFavorites(activeHero?.id)
+  const [activeFilter, setActiveFilter] = useState<'all' | 'shortlist' | 'residential' | 'commercial'>('all')
+
+  const shortlistedCount = realEstateWebsites.filter((w) => favoriteIds.includes(w.id)).length
+
+  const filteredWebsites = useMemo(() => {
+    if (activeFilter === 'shortlist') {
+      return realEstateWebsites.filter((w) => favoriteIds.includes(w.id))
+    }
+    if (activeFilter === 'residential') {
+      return realEstateWebsites.filter((w) =>
+        ['skyline-realty-group', 'harborkey-homes', 'cedarstone-estates', 'suncrest-vacation-villas', 'metroloft-rentals'].includes(w.id)
+      )
+    }
+    if (activeFilter === 'commercial') {
+      return realEstateWebsites.filter((w) =>
+        ['apex-commercial-realty', 'foundry-property-group', 'nestpath-mortgage', 'oakline-property-management', 'keystart-realty'].includes(w.id)
+      )
+    }
+    return realEstateWebsites
+  }, [activeFilter, favoriteIds])
+
+  useSafeInterval(() => {
     if (isHeroPaused || carouselWebsites.length < 2) return
-    const interval = window.setInterval(() => {
-      setActiveHeroIndex((index) => (index + 1) % carouselWebsites.length)
-    }, 7000)
-    return () => window.clearInterval(interval)
-  }, [carouselWebsites.length, isHeroPaused])
+    setActiveHeroIndex((index) => (index + 1) % carouselWebsites.length)
+  }, 7000)
 
   const moveHero = (direction: number) => {
     setActiveHeroIndex((index) => (index + direction + carouselWebsites.length) % carouselWebsites.length)
@@ -110,6 +237,8 @@ export function RealEstateIndex() {
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <Link
                     to={`/real-estate/${activeHero.slug}`}
+                    onMouseEnter={() => prefetchRoute(`/real-estate/${activeHero.slug}`)}
+                    onTouchStart={() => prefetchRoute(`/real-estate/${activeHero.slug}`)}
                     className="inline-flex min-h-14 items-center justify-center rounded-lg bg-[#fbbf24] px-8 py-4 text-lg font-bold text-[#08111f] transition hover:-translate-y-0.5 hover:bg-white"
                   >
                     Open Concept
@@ -127,6 +256,7 @@ export function RealEstateIndex() {
                       key={website.id}
                       type="button"
                       onClick={() => setActiveHeroIndex(index)}
+                      onMouseEnter={() => prefetchRoute(`/real-estate/${website.slug}`)}
                       aria-label={`Show ${website.title}`}
                       aria-current={index === activeHeroIndex ? 'true' : undefined}
                       className={`group w-full border px-3 py-3 text-left backdrop-blur transition ${index === activeHeroIndex ? 'border-white/60 bg-white text-[#08111f]' : 'border-white/15 bg-white/8 text-white/55 hover:bg-white/15 hover:text-white'}`}
@@ -145,12 +275,34 @@ export function RealEstateIndex() {
                       <div className="absolute left-5 top-5 border border-white/20 bg-[#08111f]/70 px-4 py-2 text-[0.62rem] font-black uppercase tracking-[0.16em] text-white/75 backdrop-blur">
                         Active market
                       </div>
+
+                      {/* Hero Shortlist Heart */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          toggleHeroFavorite()
+                        }}
+                        title={isHeroFavorited ? 'Remove from shortlist' : 'Save to shortlist'}
+                        className={`absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md shadow-lg transition hover:scale-110 active:scale-95 ${
+                          isHeroFavorited
+                            ? 'bg-rose-500 text-white shadow-rose-500/30'
+                            : 'bg-black/40 text-white hover:bg-black/60 hover:text-rose-400 border border-white/20'
+                        }`}
+                      >
+                        <Heart className={`h-5 w-5 ${isHeroFavorited ? 'fill-white' : ''}`} />
+                      </button>
+
                       <Link
                         to={`/real-estate/${activeHero.slug}`}
+                        onMouseEnter={() => prefetchRoute(`/real-estate/${activeHero.slug}`)}
+                        onTouchStart={() => prefetchRoute(`/real-estate/${activeHero.slug}`)}
                         className="absolute bottom-5 right-5 grid h-12 w-12 place-items-center rounded-full text-sm font-black text-[#08111f] transition hover:rotate-[-12deg] hover:bg-white"
                         style={{ backgroundColor: activeHero.colors.accent }}
                         aria-label={`Open ${activeHero.title}`}
-                      >Open
+                      >
+                        Open
                       </Link>
                     </div>
                   </div>
@@ -207,7 +359,7 @@ export function RealEstateIndex() {
 
       <section id="collection" className="py-20 md:py-28">
         <Container>
-          <AnimatedSection className="mb-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <AnimatedSection className="mb-10 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#153e75]">Property collection</p>
               <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
@@ -220,88 +372,80 @@ export function RealEstateIndex() {
             </p>
           </AnimatedSection>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {realEstateWebsites.map((website, index) => {
-              const isLive = website.status === 'completed' || website.status === 'live'
+          {/* Filter Pills */}
+          <div className="mb-10 flex flex-wrap items-center gap-2 border-b border-slate-200 pb-5">
+            <button
+              type="button"
+              onClick={() => setActiveFilter('all')}
+              className={`rounded-full px-4 py-2 text-xs font-bold transition ${
+                activeFilter === 'all'
+                  ? 'bg-[#153e75] text-white shadow-sm'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              All Properties ({realEstateWebsites.length})
+            </button>
 
-              return (
-                <article
-                  key={website.id}
-                  className="group flex h-full flex-col overflow-hidden border border-[#dbe4ef] bg-white shadow-sm transition duration-300 motion-reduce:transition-none motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-xl"
-                >
-                  <div
-                    className="relative aspect-[16/10] overflow-hidden"
-                    style={{
-                      backgroundImage: `linear-gradient(145deg, ${website.colors.secondary} 0%, ${website.colors.primary} 58%, ${website.colors.dark} 100%)`,
-                    }}
-                  >
-                    {website.image ? (
-                      <img
-                        src={website.image}
-                        alt={`${website.title} website preview`}
-                        className="absolute inset-0 h-full w-full object-cover transition duration-500 motion-reduce:transition-none motion-safe:group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div
-                        role="img"
-                        aria-label={`${website.title} conceptual property preview placeholder`}
-                        className="absolute inset-0"
-                      >
-                        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(90deg,rgba(255,255,255,0.28)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.28)_1px,transparent_1px)] [background-size:32px_32px]" />
-                        <div className="absolute bottom-0 left-[10%] h-[42%] w-[30%] bg-white/25 shadow-2xl" />
-                        <div className="absolute bottom-0 left-[38%] h-[68%] w-[28%] bg-white/35 shadow-2xl" />
-                        <div className="absolute bottom-0 right-[8%] h-[52%] w-[28%] bg-white/20 shadow-2xl" />
-                        <div className="absolute left-[44%] top-[23%] h-2 w-[16%] bg-white/55" />
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-                    <div className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#153e75] shadow-sm">
-                      {isLive ? 'Live design' : 'Coming soon'}
-                    </div>
-                    <div className="absolute bottom-4 left-4 text-xs font-black uppercase tracking-[0.16em] text-white">
-                      Concept {String(index + 1).padStart(2, '0')}
-                    </div>
-                  </div>
+            <button
+              type="button"
+              onClick={() => setActiveFilter('shortlist')}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition ${
+                activeFilter === 'shortlist'
+                  ? 'bg-rose-500 text-white shadow-sm shadow-rose-500/20'
+                  : 'bg-white text-slate-600 hover:bg-rose-50 hover:text-rose-600 border border-slate-200'
+              }`}
+            >
+              <Heart className={`h-3.5 w-3.5 ${activeFilter === 'shortlist' ? 'fill-white' : 'text-rose-500'}`} />
+              Shortlisted ({shortlistedCount})
+            </button>
 
-                  <div className="flex flex-1 flex-col p-6">
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-[#153e75]">
-                      {website.marketLabel}
-                    </p>
-                    <h3 className="mt-3 text-2xl font-black leading-tight">{website.title}</h3>
-                    <p className="mt-3 text-sm font-bold leading-6 text-slate-500">{website.style}</p>
-                    <p className="mt-4 flex-1 text-sm leading-6 text-slate-600">{website.shortDescription}</p>
+            <button
+              type="button"
+              onClick={() => setActiveFilter('residential')}
+              className={`rounded-full px-4 py-2 text-xs font-bold transition ${
+                activeFilter === 'residential'
+                  ? 'bg-[#153e75] text-white shadow-sm'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              Residential & Luxury
+            </button>
 
-                    <div className="mt-6 flex items-center gap-2 border-t border-slate-200 pt-5" aria-label={`${website.title} color palette`}>
-                      {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => (
-                        <span
-                          key={color}
-                          className="h-6 w-6 rounded-full border border-slate-300 shadow-sm"
-                          style={{ backgroundColor: color }}
-                        />
-                      ))}
-                    </div>
-
-                    {isLive ? (
-                      <Link
-                        to={`/real-estate/${website.slug}`}
-                        className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-[#0f172a] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#153e75] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#153e75]"
-                      >
-                        View Website
-                      </Link>
-                    ) : (
-                      <span
-                        aria-disabled="true"
-                        className="mt-6 inline-flex min-h-12 w-full cursor-not-allowed items-center justify-center rounded-lg border border-slate-200 bg-slate-100 px-4 py-3 text-sm font-bold text-slate-500"
-                      >
-                        Coming Soon
-                      </span>
-                    )}
-                  </div>
-                </article>
-              )
-            })}
+            <button
+              type="button"
+              onClick={() => setActiveFilter('commercial')}
+              className={`rounded-full px-4 py-2 text-xs font-bold transition ${
+                activeFilter === 'commercial'
+                  ? 'bg-[#153e75] text-white shadow-sm'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              Commercial & Advisory
+            </button>
           </div>
+
+          {filteredWebsites.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-12 text-center">
+              <Heart className="mx-auto h-10 w-10 text-slate-300" />
+              <h3 className="mt-3 text-lg font-bold text-slate-800">No properties in shortlist yet</h3>
+              <p className="mt-1 text-sm text-slate-500">
+                Click the heart icon on any property card to build your review collection.
+              </p>
+              <button
+                type="button"
+                onClick={() => setActiveFilter('all')}
+                className="mt-4 inline-flex items-center rounded-lg bg-[#153e75] px-4 py-2 text-xs font-bold text-white hover:bg-[#0f172a]"
+              >
+                Browse All Properties
+              </button>
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {filteredWebsites.map((website, index) => (
+                <RealEstateCard key={website.id} website={website} index={index} />
+              ))}
+            </div>
+          )}
         </Container>
       </section>
 

@@ -16,13 +16,16 @@ import {
   ShoppingBag,
   RotateCcw,
   Palette,
+  Heart,
 } from "lucide-react";
 import { AnimatedSection, Container, CTAButton } from "../../components";
-import { ecommerceWebsites } from "../../data/websites";
+import { ecommerceWebsites, WebsiteDesign } from "../../data/websites";
+import { useFavorites } from "../../utils/favorites";
+import { prefetchRoute } from "../../utils/routePrefetch";
 import "./EcommerceIndex.css";
 
 // Category taxonomy for quick filtering
-type FilterCategory = "all" | "dtc" | "athletics" | "home" | "gourmet";
+type FilterCategory = "all" | "shortlist" | "dtc" | "athletics" | "home" | "gourmet";
 
 interface CategoryFilterOption {
   id: FilterCategory;
@@ -185,9 +188,145 @@ const conversionPillars = [
   },
 ];
 
+function EcommerceCard({ website }: { website: WebsiteDesign }) {
+  const { isFavorited, toggle } = useFavorites(website.id);
+  const meta = storeFeatureMap[website.id];
+  const routePath = `/e-commerce/${website.slug}`;
+
+  return (
+    <article className="ecom-card relative">
+      {/* Media Aspect Container */}
+      <div className="ecom-card-media relative">
+        {website.image ? (
+          <img
+            src={website.image}
+            alt={`${website.title} website screenshot preview`}
+            className="ecom-card-img"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div
+            className="h-full w-full"
+            style={{
+              background: `linear-gradient(135deg, ${website.colors.primary}, ${website.colors.dark})`,
+            }}
+          />
+        )}
+
+        <div className="ecom-card-media-overlay" />
+
+        {/* Live Status Pill */}
+        <div className="ecom-card-status-pill">
+          <span className="ecom-pulse-dot" />
+          <span>Live Store</span>
+        </div>
+
+        {/* Shortlist Heart Button */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle();
+          }}
+          title={isFavorited ? "Remove from shortlist" : "Save to shortlist"}
+          className={`absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-md transition hover:scale-110 active:scale-95 ${
+            isFavorited
+              ? "bg-rose-500 text-white shadow-rose-500/30"
+              : "bg-black/50 text-white/85 hover:bg-black/70 hover:text-rose-400 border border-white/20"
+          }`}
+        >
+          <Heart className={`h-4 w-4 ${isFavorited ? "fill-white" : ""}`} />
+        </button>
+
+        {/* Market Label Badge */}
+        <div className="ecom-card-badge">
+          {website.marketLabel || "E-Commerce"}
+        </div>
+
+        {/* Color Swatch Dots */}
+        <div
+          className="ecom-card-swatches"
+          title="Curated Brand Palette"
+        >
+          {[
+            website.colors.primary,
+            website.colors.secondary,
+            website.colors.accent,
+            website.colors.dark,
+          ].map((c, i) => (
+            <span
+              key={i}
+              className="ecom-swatch-dot"
+              style={{ backgroundColor: c }}
+              title={`Color: ${c}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Card Content Body */}
+      <div className="ecom-card-body">
+        <div className="flex items-center justify-between gap-2">
+          <span className="ecom-card-category">
+            {website.marketLabel || "Retail Store"}
+          </span>
+          {meta?.rating && (
+            <div className="flex items-center gap-1 text-xs font-black text-amber-600">
+              <Star size={13} className="fill-amber-400 text-amber-400" />
+              <span>{meta.rating}</span>
+              <span className="text-slate-400 font-normal">
+                ({meta.reviewsCount})
+              </span>
+            </div>
+          )}
+        </div>
+
+        <h3 className="ecom-card-title">
+          <Link
+            to={routePath}
+            onMouseEnter={() => prefetchRoute(routePath)}
+            onTouchStart={() => prefetchRoute(routePath)}
+          >
+            {website.title}
+          </Link>
+        </h3>
+
+        <p className="ecom-card-style">{website.style}</p>
+        <p className="ecom-card-desc">{website.shortDescription}</p>
+
+        {/* Feature Tags */}
+        {meta?.tags && (
+          <div className="ecom-card-tags">
+            {meta.tags.map((tag) => (
+              <span key={tag} className="ecom-tag-pill">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Action Button */}
+        <Link
+          to={routePath}
+          onMouseEnter={() => prefetchRoute(routePath)}
+          onTouchStart={() => prefetchRoute(routePath)}
+          className="ecom-card-action"
+          aria-label={`Launch ${website.title} storefront`}
+        >
+          <span>Open Live Storefront</span>
+          <ArrowRight size={17} className="ecom-card-action-icon" />
+        </Link>
+      </div>
+    </article>
+  );
+}
+
 export function EcommerceIndex() {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const { favoriteIds } = useFavorites();
 
   // All completed websites
   const liveWebsites = useMemo(() => {
@@ -196,10 +335,13 @@ export function EcommerceIndex() {
     );
   }, []);
 
+  const shortlistedCount = liveWebsites.filter((w) => favoriteIds.includes(w.id)).length;
+
   // Filter categories with counts
   const categories: CategoryFilterOption[] = useMemo(
     () => [
       { id: "all", label: "All Storefronts", count: liveWebsites.length },
+      { id: "shortlist", label: "Shortlisted", count: shortlistedCount },
       {
         id: "dtc",
         label: "DTC & Subscriptions",
@@ -229,17 +371,21 @@ export function EcommerceIndex() {
         ).length,
       },
     ],
-    [liveWebsites],
+    [liveWebsites, shortlistedCount],
   );
 
   // Filtered websites based on category and search query
   const filteredWebsites = useMemo(() => {
     return liveWebsites.filter((website) => {
-      const cluster = storeFeatureMap[website.id]?.cluster || "dtc";
-      const matchesCategory =
-        activeCategory === "all" || cluster === activeCategory;
+      if (activeCategory === "shortlist") {
+        if (!favoriteIds.includes(website.id)) return false;
+      } else {
+        const cluster = storeFeatureMap[website.id]?.cluster || "dtc";
+        const matchesCategory =
+          activeCategory === "all" || cluster === activeCategory;
 
-      if (!matchesCategory) return false;
+        if (!matchesCategory) return false;
+      }
 
       if (!searchQuery.trim()) return true;
 
@@ -253,7 +399,7 @@ export function EcommerceIndex() {
 
       return matchesTitle || matchesDesc || matchesStyle || matchesMarket || matchesTags;
     });
-  }, [liveWebsites, activeCategory, searchQuery]);
+  }, [liveWebsites, activeCategory, searchQuery, favoriteIds]);
 
   // Featured spotlight store (PawParcel Pets - newest launch)
   const spotlightStore = useMemo(() => {
@@ -364,11 +510,21 @@ export function EcommerceIndex() {
                     activeCategory === cat.id ? "active" : ""
                   }`}
                 >
+                  {cat.id === "shortlist" && (
+                    <Heart
+                      size={13}
+                      className={`mr-1 inline-block ${
+                        activeCategory === "shortlist" ? "fill-white text-white" : "text-rose-500"
+                      }`}
+                    />
+                  )}
                   <span>{cat.label}</span>
                   <span
                     className={`rounded-full px-2 py-0.5 text-xs font-black ${
                       activeCategory === cat.id
                         ? "bg-white/20 text-white"
+                        : cat.id === "shortlist"
+                        ? "bg-rose-100 text-rose-700"
                         : "bg-purple-100 text-purple-800"
                     }`}
                   >
@@ -453,6 +609,8 @@ export function EcommerceIndex() {
                   <div className="mt-8 flex flex-wrap items-center gap-4">
                     <Link
                       to={`/e-commerce/${spotlightStore.slug}`}
+                      onMouseEnter={() => prefetchRoute(`/e-commerce/${spotlightStore.slug}`)}
+                      onTouchStart={() => prefetchRoute(`/e-commerce/${spotlightStore.slug}`)}
                       className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-black text-[#1e1035] shadow-lg transition hover:bg-purple-100"
                     >
                       <span>Launch {spotlightStore.title}</span>
@@ -530,113 +688,9 @@ export function EcommerceIndex() {
 
           {/* Cards Grid */}
           <div className="ecom-cards-grid">
-            {filteredWebsites.map((website) => {
-              const meta = storeFeatureMap[website.id];
-              return (
-                <article key={website.id} className="ecom-card">
-                  {/* Media Aspect Container */}
-                  <div className="ecom-card-media">
-                    {website.image ? (
-                      <img
-                        src={website.image}
-                        alt={`${website.title} website screenshot preview`}
-                        className="ecom-card-img"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div
-                        className="h-full w-full"
-                        style={{
-                          background: `linear-gradient(135deg, ${website.colors.primary}, ${website.colors.dark})`,
-                        }}
-                      />
-                    )}
-
-                    <div className="ecom-card-media-overlay" />
-
-                    {/* Live Status Pill */}
-                    <div className="ecom-card-status-pill">
-                      <span className="ecom-pulse-dot" />
-                      <span>Live Store</span>
-                    </div>
-
-                    {/* Market Label Badge */}
-                    <div className="ecom-card-badge">
-                      {website.marketLabel || "E-Commerce"}
-                    </div>
-
-                    {/* Color Swatch Dots */}
-                    <div
-                      className="ecom-card-swatches"
-                      title="Curated Brand Palette"
-                    >
-                      {[
-                        website.colors.primary,
-                        website.colors.secondary,
-                        website.colors.accent,
-                        website.colors.dark,
-                      ].map((c, i) => (
-                        <span
-                          key={i}
-                          className="ecom-swatch-dot"
-                          style={{ backgroundColor: c }}
-                          title={`Color: ${c}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Card Content Body */}
-                  <div className="ecom-card-body">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="ecom-card-category">
-                        {website.marketLabel || "Retail Store"}
-                      </span>
-                      {meta?.rating && (
-                        <div className="flex items-center gap-1 text-xs font-black text-amber-600">
-                          <Star size={13} className="fill-amber-400 text-amber-400" />
-                          <span>{meta.rating}</span>
-                          <span className="text-slate-400 font-normal">
-                            ({meta.reviewsCount})
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    <h3 className="ecom-card-title">
-                      <Link to={`/e-commerce/${website.slug}`}>
-                        {website.title}
-                      </Link>
-                    </h3>
-
-                    <p className="ecom-card-style">{website.style}</p>
-
-                    <p className="ecom-card-desc">{website.shortDescription}</p>
-
-                    {/* Feature Tags */}
-                    {meta?.tags && (
-                      <div className="ecom-card-tags">
-                        {meta.tags.map((tag) => (
-                          <span key={tag} className="ecom-tag-pill">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Action Button */}
-                    <Link
-                      to={`/e-commerce/${website.slug}`}
-                      className="ecom-card-action"
-                      aria-label={`Launch ${website.title} storefront`}
-                    >
-                      <span>Open Live Storefront</span>
-                      <ArrowRight size={17} className="ecom-card-action-icon" />
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
+            {filteredWebsites.map((website) => (
+              <EcommerceCard key={website.id} website={website} />
+            ))}
           </div>
         </Container>
       </section>

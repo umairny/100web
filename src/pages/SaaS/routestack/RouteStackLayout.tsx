@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { RouteStackLogo } from './RouteStackIcons'
 import { 
@@ -25,6 +25,12 @@ export function RouteStackLayout({ children }: RouteStackLayoutProps) {
   const [productDropdownOpen, setProductDropdownOpen] = useState(false)
   const [featuresDropdownOpen, setFeaturesDropdownOpen] = useState(false)
   const location = useLocation()
+
+  useEffect(() => {
+    setMobileMenuOpen(false)
+    setProductDropdownOpen(false)
+    setFeaturesDropdownOpen(false)
+  }, [location.pathname])
 
   const isShortPath = location.pathname.startsWith('/routestack')
   const basePath = isShortPath ? '/routestack' : '/saas/routestack-logistics'

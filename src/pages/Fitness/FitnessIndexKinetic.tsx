@@ -1,3 +1,4 @@
+import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import {
   ArrowDown,
@@ -8,8 +9,11 @@ import {
   HeartPulse,
   Play,
   TimerReset,
+  Heart
 } from 'lucide-react'
-import { fitnessWebsites } from '../../data/websites'
+import { fitnessWebsites, WebsiteDesign } from '../../data/websites'
+import { useFavorites } from '../../utils/favorites'
+import { prefetchRoute } from '../../utils/routePrefetch'
 
 const trainingPillars = [
   ['01', 'Strength'],
@@ -26,8 +30,136 @@ const uxNotes = [
   ['03', 'Energy with control', 'The interface can feel powerful and urgent without becoming noisy or difficult to use.'],
 ]
 
+function FitnessCard({
+  website,
+  index,
+  total,
+}: {
+  website: WebsiteDesign
+  index: number
+  total: number
+}) {
+  const { isFavorited, toggle } = useFavorites(website.id)
+  const routePath = `/fitness/${website.slug}`
+
+  return (
+    <Link
+      to={routePath}
+      onMouseEnter={() => prefetchRoute(routePath)}
+      onTouchStart={() => prefetchRoute(routePath)}
+      className="group overflow-hidden border border-white/15 bg-[#0d1d13] p-3 transition duration-500 hover:-translate-y-1 hover:border-[#dfff3f] hover:shadow-2xl hover:shadow-black/30 relative"
+    >
+      <div className="relative aspect-[16/10] overflow-hidden">
+        {website.image && (
+          <img
+            src={website.image}
+            alt={`${website.title} website preview`}
+            className="absolute inset-0 h-full w-full object-cover object-center transition duration-700 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#07130c]/85 via-[#07130c]/10 to-transparent" />
+        <span className="absolute left-4 top-4 bg-[#dfff3f] px-3 py-1.5 text-[0.58rem] font-black uppercase tracking-[0.15em] text-[#07130c]">
+          Live 0{index + 1}
+        </span>
+
+        {/* Shortlist Heart Button */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            toggle()
+          }}
+          title={isFavorited ? 'Remove from shortlist' : 'Save to shortlist'}
+          className={`absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-sm transition hover:scale-110 active:scale-95 ${
+            isFavorited
+              ? 'bg-rose-500 text-white shadow-rose-500/30'
+              : 'bg-[#07130c]/80 text-white/80 hover:bg-[#07130c] hover:text-rose-400 border border-white/20'
+          }`}
+        >
+          <Heart className={`h-4 w-4 ${isFavorited ? 'fill-white' : ''}`} />
+        </button>
+
+        <div className="absolute bottom-4 right-4 flex gap-1.5">
+          {[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map(
+            (color) => (
+              <span key={color} className="h-5 w-5 border border-white/60" style={{ backgroundColor: color }} />
+            )
+          )}
+        </div>
+      </div>
+      <div className="p-5 sm:p-6">
+        <p className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-[#dfff3f]">
+          {website.id === 'pulseforge-fitness'
+            ? 'Performance coaching'
+            : website.id === 'corelab-pilates'
+            ? 'Pilates studio'
+            : website.id === 'irondistrict-gym'
+            ? 'Strength facility'
+            : website.id === 'peakrun-coaching'
+            ? 'Running coaching'
+            : website.id === 'flowstate-yoga'
+            ? 'Yoga studio'
+            : website.id === 'vitalform-wellness'
+            ? 'Wellness platform'
+            : website.id === 'ridehaus-cycling'
+            ? 'Cycling studio'
+            : website.id === 'elevate-climbing'
+            ? 'Climbing gym'
+            : website.id === 'reset-recovery-club'
+            ? 'Recovery studio'
+            : 'Boxing studio'}
+        </p>
+        <div className="mt-3 flex items-start justify-between gap-4">
+          <h3 className="text-3xl font-black uppercase leading-none tracking-[-0.05em] sm:text-4xl text-white">
+            {website.title}
+          </h3>
+          <ArrowUpRight className="h-5 w-5 shrink-0 text-[#dfff3f] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+        </div>
+        <p className="mt-4 line-clamp-2 text-sm leading-6 text-white/55">{website.shortDescription}</p>
+        <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4">
+          <span className="text-[0.58rem] font-black uppercase tracking-[0.16em] text-white/38">Open experience</span>
+          <span className="text-xs font-black text-[#dfff3f]">
+            0{index + 1} / 0{total}
+          </span>
+        </div>
+      </div>
+    </Link>
+  )
+}
+
 export function FitnessIndex() {
-  const liveWebsites = fitnessWebsites.filter((website) => website.status === 'completed' || website.status === 'live')
+  const [activeFilter, setActiveFilter] = useState<'all' | 'shortlist' | 'strength' | 'mindful' | 'endurance'>('all')
+  const { favoriteIds } = useFavorites()
+  const liveWebsites = fitnessWebsites.filter(
+    (website) => website.status === 'completed' || website.status === 'live'
+  )
+  const shortlistedCount = liveWebsites.filter((w) => favoriteIds.includes(w.id)).length
+
+  const filteredWebsites = useMemo(() => {
+    if (activeFilter === 'shortlist') {
+      return liveWebsites.filter((w) => favoriteIds.includes(w.id))
+    }
+    if (activeFilter === 'strength') {
+      return liveWebsites.filter((w) =>
+        ['pulseforge-fitness', 'irondistrict-gym', 'boxhouse-training'].includes(w.id)
+      )
+    }
+    if (activeFilter === 'mindful') {
+      return liveWebsites.filter((w) =>
+        ['flowstate-yoga', 'corelab-pilates', 'vitalform-wellness'].includes(w.id)
+      )
+    }
+    if (activeFilter === 'endurance') {
+      return liveWebsites.filter((w) =>
+        ['peakrun-coaching', 'ridehaus-cycling', 'elevate-climbing', 'reset-recovery-club'].includes(w.id)
+      )
+    }
+    return liveWebsites
+  }, [activeFilter, favoriteIds, liveWebsites])
+
   const featured = liveWebsites[0]
 
   return (
@@ -86,24 +218,60 @@ export function FitnessIndex() {
             <p className="max-w-2xl text-lg leading-8 text-white/55">From performance coaching to Pilates, serious lifting, race-ready running, mindful yoga, boxing conditioning, integrated wellness, indoor cycling, bouldering, and recovery, each live concept turns a distinct movement philosophy into a clear digital experience.</p>
           </div>
 
-          <div className="mt-14 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
-            {liveWebsites.map((website, index) => (
-              <Link key={website.id} to={`/fitness/${website.slug}`} className="group overflow-hidden border border-white/15 bg-[#0d1d13] p-3 transition duration-500 hover:-translate-y-1 hover:border-[#dfff3f] hover:shadow-2xl hover:shadow-black/30">
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  {website.image && <img src={website.image} alt={`${website.title} website preview`} className="absolute inset-0 h-full w-full object-cover object-center transition duration-700 group-hover:scale-105" />}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#07130c]/85 via-[#07130c]/10 to-transparent" />
-                  <span className="absolute left-4 top-4 bg-[#dfff3f] px-3 py-1.5 text-[0.58rem] font-black uppercase tracking-[0.15em] text-[#07130c]">Live 0{index + 1}</span>
-                  <div className="absolute bottom-4 right-4 flex gap-1.5">{[website.colors.primary, website.colors.secondary, website.colors.accent, website.colors.dark].map((color) => <span key={color} className="h-5 w-5 border border-white/60" style={{ backgroundColor: color }} />)}</div>
-                </div>
-                <div className="p-5 sm:p-6">
-                  <p className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-[#dfff3f]">{website.id === 'pulseforge-fitness' ? 'Performance coaching' : website.id === 'corelab-pilates' ? 'Pilates studio' : website.id === 'irondistrict-gym' ? 'Strength facility' : website.id === 'peakrun-coaching' ? 'Running coaching' : website.id === 'flowstate-yoga' ? 'Yoga studio' : website.id === 'vitalform-wellness' ? 'Wellness platform' : website.id === 'ridehaus-cycling' ? 'Cycling studio' : website.id === 'elevate-climbing' ? 'Climbing gym' : website.id === 'reset-recovery-club' ? 'Recovery studio' : 'Boxing studio'}</p>
-                  <div className="mt-3 flex items-start justify-between gap-4"><h3 className="text-3xl font-black uppercase leading-none tracking-[-0.05em] sm:text-4xl">{website.title}</h3><ArrowUpRight className="h-5 w-5 shrink-0 text-[#dfff3f] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
-                  <p className="mt-4 line-clamp-2 text-sm leading-6 text-white/55">{website.shortDescription}</p>
-                  <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4"><span className="text-[0.58rem] font-black uppercase tracking-[0.16em] text-white/38">Open experience</span><span className="text-xs font-black text-[#dfff3f]">0{index + 1} / 0{liveWebsites.length}</span></div>
-                </div>
-              </Link>
+          {/* Filter Pills */}
+          <div className="mt-10 flex flex-wrap gap-2">
+            {[
+              { id: 'all', label: `All Fitness (${liveWebsites.length})` },
+              { id: 'shortlist', label: `Shortlisted (${shortlistedCount})` },
+              { id: 'strength', label: 'Strength & Power' },
+              { id: 'mindful', label: 'Mindful & Yoga' },
+              { id: 'endurance', label: 'Endurance & Outdoor' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveFilter(tab.id as any)}
+                className={`px-4 py-2 text-xs font-black uppercase tracking-[0.14em] transition ${
+                  activeFilter === tab.id
+                    ? 'bg-[#dfff3f] text-[#07130c]'
+                    : 'border border-white/20 bg-white/5 text-white/70 hover:border-white/40 hover:text-white'
+                }`}
+              >
+                {tab.label}
+              </button>
             ))}
           </div>
+
+          {filteredWebsites.length === 0 ? (
+            <div className="mt-14 rounded-2xl border border-dashed border-white/20 bg-[#0d1d13] p-12 text-center">
+              <p className="font-extrabold text-lg text-white">No concepts in this view</p>
+              <p className="text-sm text-white/55 mt-1">
+                {activeFilter === 'shortlist'
+                  ? 'Click the heart icon on any fitness concept to save it to your shortlist.'
+                  : 'Try selecting a different filter.'}
+              </p>
+              {activeFilter === 'shortlist' && (
+                <button
+                  type="button"
+                  onClick={() => setActiveFilter('all')}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#dfff3f] px-5 py-2 text-xs font-black uppercase tracking-wider text-[#07130c] transition hover:bg-white"
+                >
+                  Browse all fitness concepts
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="mt-14 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+              {filteredWebsites.map((website, index) => (
+                <FitnessCard
+                  key={website.id}
+                  website={website}
+                  index={index}
+                  total={liveWebsites.length}
+                />
+              ))}
+            </div>
+          )}
 
           <div className="mt-16 grid border-y border-white/15 lg:grid-cols-[.55fr_1.45fr]">
             <div className="border-b border-white/15 py-8 lg:border-b-0 lg:border-r lg:pr-8"><p className="text-[0.62rem] font-black uppercase tracking-[0.22em] text-[#f97316]">Design conditioning</p><h3 className="mt-4 text-3xl font-black uppercase tracking-[-0.05em]">Three rules.<br />No wasted motion.</h3></div>

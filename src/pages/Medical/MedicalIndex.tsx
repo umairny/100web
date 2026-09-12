@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -6,10 +7,13 @@ import {
   HeartPulse,
   ShieldCheck,
   Stethoscope,
+  Heart,
 } from "lucide-react";
 import { AnimatedSection, Container, CTAButton } from "../../components";
 import { imageUrl } from "../../assets/optimized";
-import { medicalWebsites } from "../../data/websites";
+import { medicalWebsites, WebsiteDesign } from "../../data/websites";
+import { useFavorites } from "../../utils/favorites";
+import { prefetchRoute } from "../../utils/routePrefetch";
 
 const careTracks = [
   "Primary Care",
@@ -58,7 +62,76 @@ const gallery = [
 
 const totalMedicalConcepts = 10;
 
+function MedicalCard({ website, index }: { website: WebsiteDesign; index: number }) {
+  const { isFavorited, toggle } = useFavorites(website.id);
+  const routePath = `/medical/${website.slug}`;
+
+  return (
+    <div
+      className="group relative min-h-[25rem] overflow-hidden rounded-[2.5rem] rounded-br-[6rem] bg-white/10 shadow-xl shadow-black/16 ring-1 ring-white/14 transition duration-300 hover:-translate-y-1 hover:ring-[#f3c8bd]/80 flex flex-col justify-between"
+    >
+      {website.image && (
+        <img
+          src={website.image}
+          alt={`${website.title} website preview`}
+          className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
+      <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(24,49,58,0.92)_0%,rgba(24,49,58,0.42)_56%,rgba(24,49,58,0.1)_100%)]" />
+
+      {/* Top Header Row with Concept Pill & Shortlist Heart */}
+      <div className="relative z-10 flex items-center justify-between p-4">
+        <div className="rounded-full bg-white/92 px-3 py-1 text-xs font-black uppercase text-[#8a4d5c] shadow-lg shadow-black/10">
+          Concept {String(index + 1).padStart(2, "0")}
+        </div>
+
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle();
+          }}
+          title={isFavorited ? "Remove from shortlist" : "Save to shortlist"}
+          className={`flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-md shadow-md transition hover:scale-110 active:scale-95 ${
+            isFavorited
+              ? "bg-rose-500 text-white shadow-rose-500/30"
+              : "bg-black/40 text-white hover:bg-black/60 hover:text-rose-400 border border-white/20"
+          }`}
+        >
+          <Heart size={15} className={isFavorited ? "fill-white" : ""} />
+        </button>
+      </div>
+
+      <div className="relative z-10 p-5 pt-0">
+        <span className="text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#f3c8bd]">
+          {website.marketLabel || "Specialty Practice"}
+        </span>
+        <h3 className="mt-1 font-serif text-3xl leading-tight text-white">
+          {website.title}
+        </h3>
+        <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/72">
+          {website.shortDescription}
+        </p>
+        <Link
+          to={routePath}
+          onMouseEnter={() => prefetchRoute(routePath)}
+          onTouchStart={() => prefetchRoute(routePath)}
+          className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-black text-[#8a4d5c] transition group-hover:bg-[#f3c8bd] group-hover:text-[#18313a]"
+        >
+          Open Homepage <ArrowRight aria-hidden="true" size={17} />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export function MedicalIndex() {
+  const { favoriteIds } = useFavorites();
+  const [activeFilter, setActiveFilter] = useState<"all" | "shortlist" | "family" | "specialized">("all");
+
   const liveWebsites = medicalWebsites.filter(
     (website) => website.status === "completed" || website.status === "live",
   );
@@ -66,6 +139,37 @@ export function MedicalIndex() {
     totalMedicalConcepts - liveWebsites.length,
     0,
   );
+
+  const shortlistedCount = liveWebsites.filter((w) => favoriteIds.includes(w.id)).length;
+
+  const filteredWebsites = useMemo(() => {
+    if (activeFilter === "shortlist") {
+      return liveWebsites.filter((w) => favoriteIds.includes(w.id));
+    }
+    if (activeFilter === "family") {
+      return liveWebsites.filter((w) =>
+        [
+          "harbor-health-clinic",
+          "brightpath-pediatrics",
+          "clearview-optometry",
+          "mindwell-counseling",
+          "willow-womens-health",
+        ].includes(w.id),
+      );
+    }
+    if (activeFilter === "specialized") {
+      return liveWebsites.filter((w) =>
+        [
+          "pulseheart-cardiology",
+          "renew-physical-therapy",
+          "clearskin-dermatology",
+          "northstar-dental",
+          "harbor-urgent-care",
+        ].includes(w.id),
+      );
+    }
+    return liveWebsites;
+  }, [activeFilter, favoriteIds, liveWebsites]);
 
   return (
     <main className="bg-[#fff8f2] text-[#18313a]">
@@ -226,39 +330,77 @@ export function MedicalIndex() {
             </div>
           </AnimatedSection>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {liveWebsites.map((website, index) => (
-              <Link
-                key={website.id}
-                to={`/medical/${website.slug}`}
-                className="group relative min-h-[25rem] overflow-hidden rounded-[2.5rem] rounded-br-[6rem] bg-white/10 shadow-xl shadow-black/16 ring-1 ring-white/14 transition duration-300 hover:-translate-y-1 hover:ring-[#f3c8bd]/80"
-              >
-                {website.image && (
-                  <img
-                    src={website.image}
-                    alt={`${website.title} website preview`}
-                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                )}
-                <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(24,49,58,0.92)_0%,rgba(24,49,58,0.42)_56%,rgba(24,49,58,0.1)_100%)]" />
-                <div className="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-xs font-black uppercase text-[#8a4d5c] shadow-lg shadow-black/10">
-                  Concept {String(index + 1).padStart(2, "0")}
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="font-serif text-3xl leading-tight text-white">
-                    {website.title}
-                  </h3>
-                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/72">
-                    {website.shortDescription}
-                  </p>
-                  <span className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sm font-black text-[#8a4d5c] transition group-hover:bg-[#f3c8bd] group-hover:text-[#18313a]">
-                    Open Homepage <ArrowRight aria-hidden="true" size={17} />
-                  </span>
-                </div>
-              </Link>
-            ))}
+          {/* Filter Pills */}
+          <div className="mb-10 flex flex-wrap items-center gap-2 border-b border-white/10 pb-5">
+            <button
+              type="button"
+              onClick={() => setActiveFilter("all")}
+              className={`rounded-full px-4 py-2 text-xs font-bold transition ${
+                activeFilter === "all"
+                  ? "bg-white text-[#18313a] shadow-md"
+                  : "bg-white/10 text-white/80 hover:bg-white/20"
+              }`}
+            >
+              All Practices ({liveWebsites.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveFilter("shortlist")}
+              className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold transition ${
+                activeFilter === "shortlist"
+                  ? "bg-rose-500 text-white shadow-md shadow-rose-500/30"
+                  : "bg-white/10 text-rose-300 hover:bg-white/20"
+              }`}
+            >
+              <Heart size={14} className={activeFilter === "shortlist" ? "fill-white" : ""} />
+              Shortlisted ({shortlistedCount})
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveFilter("family")}
+              className={`rounded-full px-4 py-2 text-xs font-bold transition ${
+                activeFilter === "family"
+                  ? "bg-white text-[#18313a] shadow-md"
+                  : "bg-white/10 text-white/80 hover:bg-white/20"
+              }`}
+            >
+              Family & Primary Care
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveFilter("specialized")}
+              className={`rounded-full px-4 py-2 text-xs font-bold transition ${
+                activeFilter === "specialized"
+                  ? "bg-white text-[#18313a] shadow-md"
+                  : "bg-white/10 text-white/80 hover:bg-white/20"
+              }`}
+            >
+              Specialized & Urgent
+            </button>
           </div>
+
+          {filteredWebsites.length === 0 ? (
+            <div className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-12 text-center text-white">
+              <Heart size={40} className="mx-auto text-rose-400/60" />
+              <h3 className="mt-3 font-serif text-2xl">No practices in shortlist yet</h3>
+              <p className="mt-1 text-sm text-white/60">
+                Click the heart icon on any medical practice concept to save it to your shortlist.
+              </p>
+              <button
+                type="button"
+                onClick={() => setActiveFilter("all")}
+                className="mt-4 inline-flex items-center rounded-full bg-white px-5 py-2.5 text-xs font-bold text-[#18313a] hover:bg-[#f3c8bd]"
+              >
+                View All Practices
+              </button>
+            </div>
+          ) : (
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+              {filteredWebsites.map((website, index) => (
+                <MedicalCard key={website.id} website={website} index={index} />
+              ))}
+            </div>
+          )}
 
           <div className="mt-5 rounded-[2rem] border border-white/12 bg-white/8 p-5">
             <p className="text-sm leading-7 text-white/68">

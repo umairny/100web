@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatedSection, Container, CTAButton } from "../../components";
-import { constructionWebsites } from "../../data/websites";
+import { constructionWebsites, WebsiteDesign } from "../../data/websites";
+import { useFavorites } from "../../utils/favorites";
+import { prefetchRoute } from "../../utils/routePrefetch";
 import {
   Hammer,
   ShieldCheck,
@@ -19,10 +21,12 @@ import {
   Clock,
   Briefcase,
   FileCheck2,
+  Heart,
 } from "lucide-react";
 
 const tradeFilters = [
   { id: "all", label: "All Construction Websites" },
+  { id: "shortlist", label: "Shortlisted" },
   { id: "building", label: "Builders & Remodelers" },
   { id: "specialty", label: "Specialty Trades (Roof, Decks, Landscaping)" },
   { id: "heavy", label: "Heavy Civil & Concrete" },
@@ -52,13 +56,116 @@ const constructionPillars = [
   },
 ];
 
+function ConstructionCard({ website }: { website: WebsiteDesign }) {
+  const { isFavorited, toggle } = useFavorites(website.id);
+  const routePath = `/construction/${website.slug}`;
+
+  return (
+    <Link
+      to={routePath}
+      onMouseEnter={() => prefetchRoute(routePath)}
+      onTouchStart={() => prefetchRoute(routePath)}
+      className="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 flex flex-col relative"
+    >
+      {/* Image Preview Container */}
+      <div className="relative h-56 overflow-hidden bg-slate-950">
+        {website.image ? (
+          <img
+            src={website.image}
+            alt={website.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div
+            className="w-full h-full"
+            style={{
+              background: `linear-gradient(135deg, ${website.colors.primary}, ${website.colors.dark})`,
+            }}
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+
+        {/* Top Badge */}
+        <span className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-md border border-slate-700/60 text-amber-400 font-mono text-[10px] font-bold uppercase px-3 py-1 rounded-full">
+          {website.category}
+        </span>
+
+        {/* Shortlist Heart Button */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle();
+          }}
+          title={isFavorited ? "Remove from shortlist" : "Save to shortlist"}
+          className={`absolute top-4 right-4 z-10 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-md transition hover:scale-110 active:scale-95 ${
+            isFavorited
+              ? "bg-rose-500 text-white shadow-rose-500/30"
+              : "bg-slate-950/80 text-white/80 hover:bg-slate-950 hover:text-rose-400 border border-slate-700/60"
+          }`}
+        >
+          <Heart className={`h-4 w-4 ${isFavorited ? "fill-white" : ""}`} />
+        </button>
+
+        {/* Color Dots */}
+        <div className="absolute bottom-4 left-4 flex items-center gap-1.5">
+          {[
+            website.colors.primary,
+            website.colors.secondary,
+            website.colors.accent,
+            website.colors.dark,
+          ].map((c, i) => (
+            <span
+              key={i}
+              className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm"
+              style={{ backgroundColor: c }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Content Body */}
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-xl font-extrabold text-white group-hover:text-amber-400 transition-colors">
+            {website.title}
+          </h3>
+          <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
+        </div>
+
+        <p className="text-xs font-mono text-slate-400 mb-3 capitalize">
+          {website.style}
+        </p>
+
+        <p className="text-sm text-slate-300 leading-relaxed mb-6 flex-grow">
+          {website.shortDescription}
+        </p>
+
+        <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
+          <span className="text-emerald-400 font-mono font-bold flex items-center gap-1">
+            <CheckCircle2 className="w-3.5 h-3.5" /> Ready & Live
+          </span>
+          <span className="text-slate-400 font-bold group-hover:text-white transition-colors">
+            Launch Demo →
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export function ConstructionIndex() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const { favoriteIds } = useFavorites();
 
   const liveWebsites = constructionWebsites.filter(
     (website) => website.status === "completed" || website.status === "live"
   );
+  const shortlistedCount = liveWebsites.filter((w) => favoriteIds.includes(w.id)).length;
 
   const filteredWebsites = liveWebsites.filter((site) => {
     const matchesSearch =
@@ -68,6 +175,9 @@ export function ConstructionIndex() {
 
     if (!matchesSearch) return false;
 
+    if (activeFilter === "shortlist") {
+      return favoriteIds.includes(site.id);
+    }
     if (activeFilter === "building") {
       return (
         site.id === "forgepoint-builders" ||
@@ -246,20 +356,29 @@ export function ConstructionIndex() {
             {/* Filter Tabs & Search Bar */}
             <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 bg-slate-900/80 p-3 rounded-2xl border border-slate-800 mb-10">
               <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
-                {tradeFilters.map((tab) => (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    onClick={() => setActiveFilter(tab.id)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                      activeFilter === tab.id
-                        ? "bg-amber-500 text-slate-950 shadow-md"
-                        : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
+                {tradeFilters.map((tab) => {
+                  const isShortlist = tab.id === "shortlist";
+                  const label = isShortlist ? `Shortlisted (${shortlistedCount})` : tab.label;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveFilter(tab.id)}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                        activeFilter === tab.id
+                          ? isShortlist
+                            ? "bg-rose-500 text-white shadow-md shadow-rose-500/20"
+                            : "bg-amber-500 text-slate-950 shadow-md"
+                          : isShortlist
+                          ? "bg-slate-800/60 text-rose-400 hover:bg-slate-800"
+                          : "bg-slate-800/60 text-slate-300 hover:bg-slate-800 hover:text-white"
+                      }`}
+                    >
+                      {isShortlist && <Heart className={`w-3.5 h-3.5 ${activeFilter === 'shortlist' ? 'fill-white' : ''}`} />}
+                      {label}
+                    </button>
+                  );
+                })}
               </div>
 
               <div className="relative min-w-[260px]">
@@ -278,79 +397,7 @@ export function ConstructionIndex() {
           {/* Websites Grid */}
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredWebsites.map((website) => (
-              <Link
-                key={website.id}
-                to={`/construction/${website.slug}`}
-                className="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 flex flex-col"
-              >
-                {/* Image Preview Container */}
-                <div className="relative h-56 overflow-hidden bg-slate-950">
-                  {website.image ? (
-                    <img
-                      src={website.image}
-                      alt={website.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div
-                      className="w-full h-full"
-                      style={{
-                        background: `linear-gradient(135deg, ${website.colors.primary}, ${website.colors.dark})`,
-                      }}
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-
-                  {/* Top Badge */}
-                  <span className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-md border border-slate-700/60 text-amber-400 font-mono text-[10px] font-bold uppercase px-3 py-1 rounded-full">
-                    {website.category}
-                  </span>
-
-                  {/* Color Dots */}
-                  <div className="absolute bottom-4 left-4 flex items-center gap-1.5">
-                    {[
-                      website.colors.primary,
-                      website.colors.secondary,
-                      website.colors.accent,
-                      website.colors.dark,
-                    ].map((c, i) => (
-                      <span
-                        key={i}
-                        className="w-3.5 h-3.5 rounded-full border border-white/20 shadow-sm"
-                        style={{ backgroundColor: c }}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Content Body */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-extrabold text-white group-hover:text-amber-400 transition-colors">
-                      {website.title}
-                    </h3>
-                    <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-amber-400 group-hover:translate-x-1 transition-all" />
-                  </div>
-
-                  <p className="text-xs font-mono text-slate-400 mb-3 capitalize">
-                    {website.style}
-                  </p>
-
-                  <p className="text-sm text-slate-300 leading-relaxed mb-6 flex-grow">
-                    {website.shortDescription}
-                  </p>
-
-                  <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
-                    <span className="text-emerald-400 font-mono font-bold flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> Ready & Live
-                    </span>
-                    <span className="text-slate-400 font-bold group-hover:text-white transition-colors">
-                      Launch Demo →
-                    </span>
-                  </div>
-                </div>
-              </Link>
+              <ConstructionCard key={website.id} website={website} />
             ))}
           </div>
 

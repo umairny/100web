@@ -1,6 +1,9 @@
-import { useEffect, lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { Navbar, Footer } from "./components";
+import { useEffect, useState, lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route, useLocation, useSearchParams } from "react-router-dom";
+import { Navbar, Footer, CommandPalette, ShowcaseToolbar, ShortlistDrawer } from "./components";
+import type { DeviceMode } from "./components/ShowcaseToolbar";
+import { allWebsites } from "./data/websites";
+import { importFavoriteIds } from "./utils/favorites";
 import { PageLoader } from "./components/PageLoader";
 
 // Lazy-loaded category index pages & standalone sites
@@ -247,19 +250,174 @@ function AppShell() {
     pathname.startsWith("/consentlayer") ||
     pathname.startsWith("/routestack");
 
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isShortlistOpen, setIsShortlistOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const rawDevice = searchParams.get('device');
+  const initialDevice: DeviceMode = (rawDevice === 'tablet' || rawDevice === 'mobile') ? rawDevice : 'desktop';
+  const [deviceMode, setDeviceMode] = useState<DeviceMode>(initialDevice);
+
+  const handleDeviceModeChange = (mode: DeviceMode) => {
+    setDeviceMode(mode);
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (mode === 'desktop') {
+          next.delete('device');
+        } else {
+          next.set('device', mode);
+        }
+        return next;
+      },
+      { replace: true }
+    );
+  };
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
+    document.body.style.overflow = '';
+    const currentDeviceParam = searchParams.get('device');
+    if (currentDeviceParam === 'tablet' || currentDeviceParam === 'mobile') {
+      setDeviceMode(currentDeviceParam);
+    } else {
+      setDeviceMode('desktop');
+    }
   }, [pathname]);
+
+  // Deep-link auto-import and open for shared shortlist (?shortlist=id1,id2)
+  useEffect(() => {
+    const shortlistParam = searchParams.get('shortlist');
+    if (shortlistParam) {
+      const ids = shortlistParam.split(',').map((id) => id.trim()).filter(Boolean);
+      if (ids.length > 0) {
+        importFavoriteIds(ids);
+        setIsShortlistOpen(true);
+      }
+    }
+  }, [searchParams]);
+
+  // Dynamic document title based on active template or category
+  useEffect(() => {
+    const cleanPath = pathname.toLowerCase();
+    const matched = allWebsites.find((site) => {
+      const catPath = site.category.toLowerCase().replace(/\s+/g, '-');
+      return (
+        cleanPath === `/${catPath}/${site.slug}` ||
+        cleanPath.startsWith(`/${catPath}/${site.slug}/`) ||
+        cleanPath === `/${site.slug}` ||
+        cleanPath.startsWith(`/${site.slug}/`)
+      );
+    }) || allWebsites.find((site) => cleanPath.includes(site.slug));
+
+    if (matched) {
+      document.title = `${matched.title} — ${matched.category} | 100Web`;
+      return;
+    }
+    const catMap: Record<string, string> = {
+      restaurant: "Restaurant & Dining",
+      beauty: "Beauty & Wellness",
+      "real-estate": "Real Estate & Architecture",
+      fitness: "Fitness & Athletics",
+      medical: "Healthcare & Medical",
+      construction: "Construction & Trades",
+      education: "Education & Learning",
+      "e-commerce": "E-Commerce & Retail",
+      portfolio: "Creative & Portfolios",
+      saas: "SaaS & Software",
+    };
+    const firstSegment = pathname.split("/").filter(Boolean)[0];
+    if (firstSegment && catMap[firstSegment]) {
+      document.title = `${catMap[firstSegment]} — 100Web Showcase`;
+    } else if (pathname === "/") {
+      document.title = "100Web — 100 Production Ready Modern Website Templates";
+    } else {
+      document.title = "100Web — Modern Web Experience Showcase";
+    }
+  }, [pathname]);
+
+  // Global spotlight keyboard shortcut: Ctrl+K / Cmd+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <div
       className={`flex min-h-screen flex-col ${isDemoPage ? "demo-mode" : ""}`}
     >
-      {isDemoPage ? <Navbar mode="floating" /> : <Navbar />}
-      <div className={`flex-grow ${isDemoPage ? "" : "pt-16"}`}>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
+      <CommandPalette
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+      />
+      <ShortlistDrawer
+        isOpen={isShortlistOpen}
+        onClose={() => setIsShortlistOpen(false)}
+      />
+      {isDemoPage && (
+        <ShowcaseToolbar
+          onOpenSearch={() => setIsSearchOpen(true)}
+          onOpenShortlist={() => setIsShortlistOpen(true)}
+          deviceMode={deviceMode}
+          onDeviceModeChange={handleDeviceModeChange}
+        />
+      )}
+      {isDemoPage ? (
+        <Navbar
+          mode="floating"
+          onOpenSearch={() => setIsSearchOpen(true)}
+          onOpenShortlist={() => setIsShortlistOpen(true)}
+        />
+      ) : (
+        <Navbar
+          onOpenSearch={() => setIsSearchOpen(true)}
+          onOpenShortlist={() => setIsShortlistOpen(true)}
+        />
+      )}
+      <div
+        className={`flex-grow ${isDemoPage ? "" : "pt-16"} ${
+          isDemoPage && deviceMode !== 'desktop'
+            ? "bg-slate-950/95 py-8 px-4 transition-colors duration-300 min-h-screen flex flex-col items-center justify-start"
+            : ""
+        }`}
+      >
+        <div
+          className={
+            isDemoPage && deviceMode !== 'desktop'
+              ? `w-full bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] border-[12px] border-slate-900 overflow-x-hidden overflow-y-auto transition-all duration-300 relative flex flex-col ${
+                  deviceMode === 'tablet'
+                    ? 'max-w-[768px] min-h-[960px] rounded-[36px]'
+                    : 'max-w-[390px] min-h-[844px] rounded-[48px]'
+                }`
+              : 'contents'
+          }
+        >
+          {isDemoPage && deviceMode !== 'desktop' && (
+            <div className="bg-slate-900 py-1.5 px-6 flex items-center justify-between shrink-0 select-none z-50 border-b border-slate-800">
+              <span className="text-[11px] font-semibold text-slate-200 tracking-wider font-mono">9:41</span>
+              {deviceMode === 'mobile' ? (
+                <div className="w-24 h-5 bg-black rounded-full flex items-center justify-end pr-2 ring-1 ring-slate-800">
+                  <div className="w-2 h-2 rounded-full bg-slate-900 border border-slate-700/80" />
+                </div>
+              ) : (
+                <div className="w-12 h-1 bg-slate-700 rounded-full" />
+              )}
+              <div className="flex items-center gap-1.5 text-[10px] text-slate-300 font-medium">
+                <span>5G</span>
+                <span>100%</span>
+              </div>
+            </div>
+          )}
+
+          <div className={isDemoPage && deviceMode !== 'desktop' ? "flex-grow flex flex-col overflow-x-hidden" : ""}>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
             <Route path="/beauty" element={<BeautyIndex />} />
             <Route path="/beauty/glowhaus-salon" element={<GlowHausSalon />} />
             <Route path="/beauty/luxe-nail-studio" element={<LuxeNailStudio />} />
@@ -1089,7 +1247,15 @@ function AppShell() {
           </Routes>
         </Suspense>
       </div>
-      {!isDemoPage && <Footer />}
+
+      {isDemoPage && deviceMode !== 'desktop' && (
+        <div className="bg-slate-900/90 backdrop-blur-sm py-2 shrink-0 flex justify-center z-50 pointer-events-none border-t border-slate-800">
+          <div className="w-32 h-1 bg-slate-600 rounded-full" />
+        </div>
+      )}
+    </div>
+  </div>
+  {!isDemoPage && <Footer />}
     </div>
   );
 }

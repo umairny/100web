@@ -1,6 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { Search, Heart } from 'lucide-react'
 import { categories } from '../data/websites'
+import { prefetchRoute } from '../utils/routePrefetch'
+import { useFavorites } from '../utils/favorites'
 
 const primaryLinks = [
   { label: 'Home', href: '/' },
@@ -17,6 +20,8 @@ const categoryLinks = categories.map((category) => ({
 
 interface NavbarProps {
   mode?: 'default' | 'floating'
+  onOpenSearch?: () => void
+  onOpenShortlist?: () => void
 }
 
 function getInitials(label: string) {
@@ -101,6 +106,8 @@ function CategoryMenu({
             key={link.label}
             to={link.href}
             onClick={onNavigate}
+            onMouseEnter={() => prefetchRoute(link.href)}
+            onTouchStart={() => prefetchRoute(link.href)}
             className={`group flex items-center rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 ${
               isActive
                 ? 'active border-gray-950 bg-gray-950 text-white shadow-lg shadow-gray-950/15'
@@ -137,7 +144,8 @@ function CategoryMenu({
   )
 }
 
-export function Navbar({ mode = 'default' }: NavbarProps) {
+export function Navbar({ mode = 'default', onOpenSearch, onOpenShortlist }: NavbarProps) {
+  const { count: shortlistCount } = useFavorites()
   const [isOpen, setIsOpen] = useState(false)
   const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -147,7 +155,19 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
   const isBrowseActive = isActiveHref(pathname, hash, '/#categories')
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 24)
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled((prev) => {
+            const next = window.scrollY > 24
+            return prev === next ? prev : next
+          })
+          ticking = false
+        })
+        ticking = true
+      }
+    }
 
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -196,6 +216,44 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
             onClick={() => setIsOpen(false)}
             className="pointer-events-auto fixed inset-0 hidden bg-transparent md:block"
           />
+        )}
+
+        {(onOpenSearch || onOpenShortlist) && (
+          <div className="pointer-events-auto fixed bottom-5 right-5 z-10 flex items-center gap-2">
+            {onOpenShortlist && (
+              <button
+                type="button"
+                onClick={onOpenShortlist}
+                aria-label={`View shortlist (${shortlistCount} saved)`}
+                title="View Shortlist & Compare"
+                className="flex h-14 sm:h-16 items-center gap-2 sm:gap-2.5 rounded-full border border-gray-200/90 bg-white/95 px-4 sm:px-5 text-gray-900 shadow-2xl shadow-gray-950/20 backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-rose-50/60 active:scale-95"
+              >
+                <Heart className={`h-4 w-4 sm:h-5 sm:w-5 transition-colors ${shortlistCount > 0 ? 'fill-rose-500 text-rose-500' : 'text-gray-700'}`} />
+                <span className="text-xs sm:text-sm font-black text-gray-900">Shortlist</span>
+                {shortlistCount > 0 && (
+                  <span className="rounded-full bg-rose-500 px-2 py-0.5 text-[10px] sm:text-xs font-black text-white shadow-xs">
+                    {shortlistCount}
+                  </span>
+                )}
+              </button>
+            )}
+
+            {onOpenSearch && (
+              <button
+                type="button"
+                onClick={onOpenSearch}
+                aria-label="Search all 100 websites"
+                title="Search 100 websites (Ctrl+K)"
+                className="flex h-14 sm:h-16 items-center gap-2.5 sm:gap-3 rounded-full border border-gray-200/90 bg-white/95 px-4 sm:px-5 text-gray-900 shadow-2xl shadow-gray-950/20 backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-gray-50 active:scale-95"
+              >
+                <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-700" />
+                <span className="text-xs sm:text-sm font-black text-gray-900">Search Sites</span>
+                <kbd className="hidden sm:inline-block rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] text-gray-500">
+                  Ctrl+K
+                </kbd>
+              </button>
+            )}
+          </div>
         )}
 
         <div className="pointer-events-auto fixed bottom-5 left-5 hidden md:block">
@@ -419,6 +477,38 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
           </div>
 
           <div className="hidden items-center gap-3 md:flex">
+            {onOpenShortlist && (
+              <button
+                type="button"
+                onClick={onOpenShortlist}
+                aria-label={`View Shortlist (${shortlistCount} saved)`}
+                title="View Shortlist & Compare"
+                className="flex items-center gap-2 rounded-full border border-gray-200/90 bg-gray-50/80 px-3.5 py-2 text-xs font-bold text-gray-700 shadow-2xs transition hover:border-rose-300 hover:bg-rose-50/50 hover:text-rose-900"
+              >
+                <Heart className={`h-3.5 w-3.5 transition-colors ${shortlistCount > 0 ? 'fill-rose-500 text-rose-500' : 'text-gray-400'}`} />
+                <span>Shortlist</span>
+                {shortlistCount > 0 && (
+                  <span className="rounded-full bg-rose-500 px-1.5 py-0.5 text-[10px] font-black text-white">
+                    {shortlistCount}
+                  </span>
+                )}
+              </button>
+            )}
+            {onOpenSearch && (
+              <button
+                type="button"
+                onClick={onOpenSearch}
+                aria-label="Search all 100 websites"
+                className="flex items-center gap-2 rounded-full border border-gray-200/90 bg-gray-50/80 px-3.5 py-2 text-xs font-bold text-gray-600 shadow-2xs transition hover:border-gray-300 hover:bg-white hover:text-gray-950"
+              >
+                <Search className="h-3.5 w-3.5 text-gray-400" />
+                <span className="hidden xl:inline">Search 100 sites</span>
+                <span className="xl:hidden">Search</span>
+                <kbd className="rounded border border-gray-200 bg-white px-1.5 py-0.5 font-mono text-[10px] text-gray-500">
+                  Ctrl+K
+                </kbd>
+              </button>
+            )}
             <Link
               to="/#categories"
               aria-current={isBrowseActive ? 'page' : undefined}
@@ -440,16 +530,43 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
             </a>
           </div>
 
-          <button
-            type="button"
-            aria-label="Toggle navigation menu"
-            aria-expanded={isOpen}
-            onClick={() => setIsOpen((current) => !current)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-950 shadow-sm transition hover:bg-gray-100 md:hidden"
-          >
-            <span className="sr-only">Menu</span>
-            <MenuIcon isOpen={isOpen} />
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            {onOpenShortlist && (
+              <button
+                type="button"
+                aria-label={`View Shortlist (${shortlistCount} saved)`}
+                onClick={onOpenShortlist}
+                className="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-950 shadow-sm transition hover:bg-rose-50"
+              >
+                <Heart className={`h-4 w-4 ${shortlistCount > 0 ? 'fill-rose-500 text-rose-500' : 'text-gray-700'}`} />
+                {shortlistCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 text-[9px] font-black text-white ring-2 ring-white">
+                    {shortlistCount}
+                  </span>
+                )}
+              </button>
+            )}
+            {onOpenSearch && (
+              <button
+                type="button"
+                aria-label="Search all 100 websites"
+                onClick={onOpenSearch}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-950 shadow-sm transition hover:bg-gray-100"
+              >
+                <Search className="h-4 w-4 text-gray-700" />
+              </button>
+            )}
+            <button
+              type="button"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
+              onClick={() => setIsOpen((current) => !current)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-950 shadow-sm transition hover:bg-gray-100"
+            >
+              <span className="sr-only">Menu</span>
+              <MenuIcon isOpen={isOpen} />
+            </button>
+          </div>
         </div>
 
         {isOpen && (
@@ -487,6 +604,27 @@ export function Navbar({ mode = 'default' }: NavbarProps) {
                 compact
               />
             </div>
+
+            {onOpenShortlist && (
+              <div className="mt-4 border-t border-gray-200 pt-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(false)
+                    onOpenShortlist()
+                  }}
+                  className="flex w-full items-center justify-between rounded-2xl bg-rose-50 px-4 py-3 text-sm font-black text-rose-700 transition hover:bg-rose-100"
+                >
+                  <span className="flex items-center gap-2">
+                    <Heart className={`h-4 w-4 ${shortlistCount > 0 ? 'fill-rose-600 text-rose-600' : 'text-rose-500'}`} />
+                    View Shortlist & Compare
+                  </span>
+                  <span className="rounded-full bg-rose-200 px-2.5 py-0.5 text-xs font-bold text-rose-800">
+                    {shortlistCount} saved
+                  </span>
+                </button>
+              </div>
+            )}
 
             <div className="mt-4 grid grid-cols-2 gap-2 border-t border-gray-200 pt-4">
               <Link
