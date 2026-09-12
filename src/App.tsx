@@ -387,9 +387,15 @@ function AppShell() {
         }`}
       >
         <div
+          style={{
+            boxShadow:
+              isDemoPage && deviceMode !== 'desktop'
+                ? '0 25px 60px -15px rgba(0,0,0,0.8), 0 0 35px -8px var(--theme-accent-primary, transparent)'
+                : undefined,
+          }}
           className={
             isDemoPage && deviceMode !== 'desktop'
-              ? `w-full bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] border-[12px] border-slate-900 overflow-x-hidden overflow-y-auto transition-all duration-300 relative flex flex-col ${
+              ? `w-full bg-white border-[12px] border-slate-900 overflow-x-hidden overflow-y-auto transition-all duration-300 relative flex flex-col ${
                   deviceMode === 'tablet'
                     ? 'max-w-[768px] min-h-[960px] rounded-[36px]'
                     : 'max-w-[390px] min-h-[844px] rounded-[48px]'

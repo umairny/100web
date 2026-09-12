@@ -21,10 +21,12 @@ import {
   Share2,
   Copy,
   Code2,
-  Sparkles,
   QrCode,
-  Eye
+  Eye,
+  Palette,
+  RotateCcw
 } from 'lucide-react'
+import { useThemeAccent } from '../utils/themeAccent'
 
 export type DeviceMode = 'desktop' | 'tablet' | 'mobile'
 
@@ -115,8 +117,35 @@ export function ShowcaseToolbar({
       const nextMode: DeviceMode =
         deviceMode === 'desktop' ? 'tablet' : deviceMode === 'tablet' ? 'mobile' : 'desktop'
       onDeviceModeChange(nextMode)
+    } else if (e.key.toLowerCase() === 't') {
+      e.preventDefault()
+      setIsThemeOpen((prev) => !prev)
+      setIsShareOpen(false)
     }
   })
+
+  const {
+    activePresetId,
+    currentPreset,
+    customPrimary,
+    isOriginal,
+    setPreset,
+    setCustomColor,
+    resetTheme,
+    presets,
+  } = useThemeAccent()
+
+  const [isThemeOpen, setIsThemeOpen] = useState(false)
+  const [copiedThemeTokens, setCopiedThemeTokens] = useState(false)
+
+  const handleCopyThemeTokens = () => {
+    const primary = customPrimary || currentPreset.primary || currentSite?.colors.primary || '#06b6d4'
+    const accent = currentPreset.accent || currentSite?.colors.accent || '#a855f7'
+    const css = `:root {\n  --color-primary: ${primary};\n  --color-accent: ${accent};\n}`
+    navigator.clipboard.writeText(css).catch(() => {})
+    setCopiedThemeTokens(true)
+    setTimeout(() => setCopiedThemeTokens(false), 2000)
+  }
 
   const [isShareOpen, setIsShareOpen] = useState(false)
   const [shareTab, setShareTab] = useState<'specs' | 'qr' | 'embed'>('specs')
@@ -358,10 +387,42 @@ export function ShowcaseToolbar({
           <span className="hidden sm:inline">Search</span>
         </button>
 
+        {/* Theme Accent Tuner Trigger */}
+        <button
+          type="button"
+          onClick={() => {
+            setIsThemeOpen((prev) => !prev)
+            if (isShareOpen) setIsShareOpen(false)
+          }}
+          className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 font-bold transition ${
+            isThemeOpen
+              ? 'bg-purple-600 text-white shadow-md'
+              : !isOriginal
+              ? 'bg-purple-50 text-purple-700 border border-purple-200 shadow-xs'
+              : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+          }`}
+          title="Theme Accent Tuner (T)"
+        >
+          <Palette className="h-3.5 w-3.5" />
+          <span className="hidden sm:inline">Theme</span>
+          {!isOriginal && (
+            <span
+              className="w-2 h-2 rounded-full ring-1 ring-white"
+              style={{ backgroundColor: customPrimary || currentPreset.primary }}
+            />
+          )}
+          <kbd className="hidden xl:inline rounded border border-gray-200 bg-gray-50 px-1 text-[9px] font-mono text-gray-400">
+            T
+          </kbd>
+        </button>
+
         {/* Share & Specs Trigger */}
         <button
           type="button"
-          onClick={() => setIsShareOpen((prev) => !prev)}
+          onClick={() => {
+            setIsShareOpen((prev) => !prev)
+            if (isThemeOpen) setIsThemeOpen(false)
+          }}
           className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 font-bold transition ${
             isShareOpen
               ? 'bg-blue-600 text-white shadow-md'
@@ -571,6 +632,12 @@ export function ShowcaseToolbar({
                   </div>
                   <div className="flex items-center gap-1.5">
                     <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                      T
+                    </kbd>
+                    <span>Theme</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
                       Ctrl+K
                     </kbd>
                     <span>Search</span>
@@ -642,6 +709,127 @@ export function ShowcaseToolbar({
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Theme Accent Tuner Modal Popover */}
+      {isThemeOpen && (
+        <div className="pointer-events-auto fixed bottom-20 left-1/2 -translate-x-1/2 z-[75] w-[92vw] max-w-md rounded-2xl border border-gray-200/90 bg-white/95 p-5 shadow-2xl backdrop-blur-2xl text-xs animate-in fade-in zoom-in-95 duration-150">
+          <div className="flex items-start justify-between pb-3 border-b border-gray-100">
+            <div>
+              <div className="flex items-center gap-2">
+                <Palette className="h-4 w-4 text-purple-600" />
+                <h3 className="font-extrabold text-sm text-gray-900">Theme Accent Tuner</h3>
+                {!isOriginal && (
+                  <span className="rounded-full bg-purple-100 text-purple-700 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide">
+                    Active
+                  </span>
+                )}
+              </div>
+              <p className="text-[11px] text-gray-500 mt-0.5">
+                Preview this template under different client aesthetic directions in real-time.
+              </p>
+            </div>
+            <div className="flex items-center gap-1">
+              {!isOriginal && (
+                <button
+                  type="button"
+                  onClick={resetTheme}
+                  title="Reset to original design palette"
+                  className="flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-bold text-gray-500 hover:bg-gray-100 hover:text-gray-800 transition"
+                >
+                  <RotateCcw className="h-3 w-3" />
+                  <span>Reset</span>
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setIsThemeOpen(false)}
+                className="rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Preset Swatches Grid */}
+          <div className="mt-3.5 space-y-3">
+            <div className="grid grid-cols-2 gap-2">
+              {presets.map((preset) => {
+                const isSelected = activePresetId === preset.id && !customPrimary
+                return (
+                  <button
+                    key={preset.id}
+                    type="button"
+                    onClick={() => setPreset(preset.id)}
+                    className={`flex items-center gap-2.5 p-2.5 rounded-xl border text-left transition ${
+                      isSelected
+                        ? 'border-purple-600 bg-purple-50/70 shadow-xs ring-1 ring-purple-600'
+                        : 'border-gray-200 bg-gray-50/60 hover:bg-gray-100/80 hover:border-gray-300'
+                    }`}
+                  >
+                    <div className="flex items-center -space-x-1 shrink-0">
+                      {preset.id === 'original' ? (
+                        <div className="w-5 h-5 rounded-full border border-gray-300 bg-gradient-to-tr from-amber-400 via-rose-500 to-indigo-600 shadow-xs" />
+                      ) : (
+                        <>
+                          <div
+                            className="w-4 h-4 rounded-full border border-white shadow-xs z-10"
+                            style={{ backgroundColor: preset.primary }}
+                          />
+                          <div
+                            className="w-4 h-4 rounded-full border border-white shadow-xs"
+                            style={{ backgroundColor: preset.accent }}
+                          />
+                        </>
+                      )}
+                    </div>
+                    <div className="flex-grow min-w-0">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-gray-900 text-[11px] truncate">
+                          {preset.name}
+                        </span>
+                        {isSelected && <Check className="h-3 w-3 text-purple-600 shrink-0 ml-1" />}
+                      </div>
+                      <span className="text-[10px] text-gray-500 truncate block">
+                        {preset.label}
+                      </span>
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Custom Accent Color Picker */}
+            <div className="pt-2.5 border-t border-gray-100 flex items-center justify-between">
+              <div>
+                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">
+                  Custom Primary Accent
+                </label>
+                <span className="text-[11px] text-gray-600 font-mono">
+                  {customPrimary || currentPreset.primary || 'Choose hex...'}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="color"
+                  value={customPrimary || currentPreset.primary || '#06b6d4'}
+                  onChange={(e) => setCustomColor(e.target.value)}
+                  className="w-8 h-8 rounded-lg cursor-pointer border border-gray-200 p-0.5 bg-white shadow-xs"
+                  title="Pick custom brand color"
+                />
+                <button
+                  type="button"
+                  onClick={handleCopyThemeTokens}
+                  className="flex items-center gap-1 rounded-lg border border-gray-200 bg-gray-50 px-2.5 py-1.5 text-[11px] font-bold text-gray-700 hover:bg-gray-100 transition"
+                  title="Copy CSS variables for active theme"
+                >
+                  {copiedThemeTokens ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3 text-gray-500" />}
+                  <span>{copiedThemeTokens ? 'Copied' : 'CSS Vars'}</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

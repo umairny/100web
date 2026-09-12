@@ -1628,3 +1628,26 @@ blockquote {
   }
 }
 
+/* Dynamic Theme Accent Tuner Overrides */
+:root {
+  --theme-accent-primary: #06b6d4;
+  --theme-accent-secondary: #a855f7;
+}
+
+[data-theme-preset]:not([data-theme-preset="original"]) {
+  --color-primary: var(--theme-accent-primary);
+  --color-accent: var(--theme-accent-secondary);
+}
+
+[data-theme-preset]:not([data-theme-preset="original"]) .theme-accent-text {
+  color: var(--theme-accent-primary) !important;
+}
+
+[data-theme-preset]:not([data-theme-preset="original"]) .theme-accent-bg {
+  background-color: var(--theme-accent-primary) !important;
+}
+
+[data-theme-preset]:not([data-theme-preset="original"]) .theme-accent-border {
+  border-color: var(--theme-accent-primary) !important;
+}
+
