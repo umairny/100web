@@ -13,6 +13,7 @@ import {
   FileText,
   MessageSquare,
   Star,
+  Printer,
 } from 'lucide-react'
 import { allWebsites, WebsiteDesign } from '../data/websites'
 import { useFavorites, getShareableShortlistUrl } from '../utils/favorites'
@@ -217,6 +218,16 @@ export function ShortlistDrawer({ isOpen, onClose }: ShortlistDrawerProps) {
                     <span>Export Brief</span>
                   </>
                 )}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="inline-flex items-center gap-1.5 rounded-lg bg-slate-800 px-3.5 py-1.5 font-bold text-slate-200 hover:bg-slate-700 hover:text-white transition active:scale-95"
+                title="Print or Save PDF pitch sheet for clients"
+              >
+                <Printer className="h-3.5 w-3.5 text-slate-400" />
+                <span>Print / PDF</span>
               </button>
             </div>
 

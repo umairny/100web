@@ -1589,3 +1589,42 @@ blockquote {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Clean Print & PDF Styling for Shortlist Pitch Sheets */
+@media print {
+  nav,
+  footer,
+  .no-print,
+  button,
+  [role="dialog"] > div:first-child {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  [role="dialog"] {
+    position: static !important;
+    display: block !important;
+    z-index: auto !important;
+  }
+
+  [role="dialog"] > div:last-child {
+    position: static !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  [role="dialog"] * {
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+    background-color: transparent !important;
+  }
+}
+
