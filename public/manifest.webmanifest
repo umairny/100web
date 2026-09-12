@@ -1,0 +1,19 @@
+{
+  "name": "100 Website Design Concepts",
+  "short_name": "100Web",
+  "description": "Curated directory of 100 bespoke website designs across 10 industries with interactive simulator and shortlist pitch briefs.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "icons": [
+    {
+      "src": "/globe.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

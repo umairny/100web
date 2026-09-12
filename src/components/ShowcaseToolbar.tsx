@@ -21,7 +21,9 @@ import {
   Share2,
   Copy,
   Code2,
-  Sparkles
+  Sparkles,
+  QrCode,
+  Eye
 } from 'lucide-react'
 
 export type DeviceMode = 'desktop' | 'tablet' | 'mobile'
@@ -117,7 +119,9 @@ export function ShowcaseToolbar({
   })
 
   const [isShareOpen, setIsShareOpen] = useState(false)
+  const [shareTab, setShareTab] = useState<'specs' | 'qr' | 'embed'>('specs')
   const [copiedLink, setCopiedLink] = useState(false)
+  const [copiedEmbed, setCopiedEmbed] = useState(false)
   const [copiedAllColors, setCopiedAllColors] = useState(false)
   const [copiedTailwind, setCopiedTailwind] = useState(false)
   const [copiedCss, setCopiedCss] = useState(false)
@@ -128,16 +132,28 @@ export function ShowcaseToolbar({
     setTimeout(() => setCopiedColor(null), 1800)
   }
 
-  const handleCopyShareLink = () => {
-    const url = new URL(window.location.href)
+  const getTemplateShareUrl = () => {
+    if (typeof window === 'undefined' || !currentSite) return ''
+    const url = new URL(window.location.origin + getSiteRoute(currentSite))
     if (deviceMode && deviceMode !== 'desktop') {
       url.searchParams.set('device', deviceMode)
-    } else {
-      url.searchParams.delete('device')
     }
-    navigator.clipboard.writeText(url.toString()).catch(() => {})
+    return url.toString()
+  }
+
+  const handleCopyShareLink = () => {
+    const shareUrl = getTemplateShareUrl()
+    navigator.clipboard.writeText(shareUrl).catch(() => {})
     setCopiedLink(true)
     setTimeout(() => setCopiedLink(false), 2000)
+  }
+
+  const handleCopyEmbedCode = () => {
+    const shareUrl = getTemplateShareUrl()
+    const embedCode = `<iframe src="${shareUrl}" width="100%" height="800" frameborder="0" allowfullscreen style="border:none;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,0.15)"></iframe>`
+    navigator.clipboard.writeText(embedCode).catch(() => {})
+    setCopiedEmbed(true)
+    setTimeout(() => setCopiedEmbed(false), 2000)
   }
 
   const handleCopyAllColors = () => {
@@ -399,134 +415,233 @@ export function ShowcaseToolbar({
             </button>
           </div>
 
-          {/* Share Link Row */}
-          <div className="mt-3.5 space-y-3">
-            <div>
-              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1">
-                Shareable Link {deviceMode !== 'desktop' && `(${deviceMode} view)`}
-              </label>
-              <div className="flex items-center gap-2">
-                <input
-                  readOnly
-                  value={
-                    typeof window !== 'undefined'
-                      ? `${window.location.origin}${getSiteRoute(currentSite)}${
-                          deviceMode !== 'desktop' ? `?device=${deviceMode}` : ''
-                        }`
-                      : ''
-                  }
-                  className="flex-grow rounded-lg border border-gray-200 bg-gray-50/80 px-3 py-1.5 text-xs text-gray-700 font-mono select-all focus:outline-none"
+          {/* Modal Tabs Header */}
+          <div className="flex items-center gap-1.5 mt-3 border-b border-gray-100 pb-2">
+            <button
+              type="button"
+              onClick={() => setShareTab('specs')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-[11px] transition ${
+                shareTab === 'specs'
+                  ? 'bg-blue-50 text-blue-600 border border-blue-200/80 shadow-xs'
+                  : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+              }`}
+            >
+              <SlidersHorizontal className="h-3 w-3" />
+              <span>Specs & Link</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setShareTab('qr')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-[11px] transition ${
+                shareTab === 'qr'
+                  ? 'bg-purple-50 text-purple-600 border border-purple-200/80 shadow-xs'
+                  : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+              }`}
+            >
+              <QrCode className="h-3 w-3" />
+              <span>Mobile QR Scan</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setShareTab('embed')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-[11px] transition ${
+                shareTab === 'embed'
+                  ? 'bg-emerald-50 text-emerald-600 border border-emerald-200/80 shadow-xs'
+                  : 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
+              }`}
+            >
+              <Code2 className="h-3 w-3" />
+              <span>Embed Iframe</span>
+            </button>
+          </div>
+
+          {/* TAB 1: Specs & Link */}
+          {shareTab === 'specs' && (
+            <div className="mt-3.5 space-y-3 animate-in fade-in duration-100">
+              <div>
+                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1">
+                  Shareable Link {deviceMode !== 'desktop' && `(${deviceMode} view)`}
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    readOnly
+                    value={getTemplateShareUrl()}
+                    className="flex-grow rounded-lg border border-gray-200 bg-gray-50/80 px-3 py-1.5 text-xs text-gray-700 font-mono select-all focus:outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleCopyShareLink}
+                    className="flex items-center gap-1.5 rounded-lg bg-gray-900 px-3 py-1.5 text-xs font-bold text-white hover:bg-black transition active:scale-95 shrink-0"
+                  >
+                    {copiedLink ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                    <span>{copiedLink ? 'Copied' : 'Copy'}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Color Palette List */}
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                    Brand Color Palette
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handleCopyAllColors}
+                      className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
+                    >
+                      {copiedAllColors ? 'Copied all!' : 'Hex list'}
+                    </button>
+                    <span className="text-gray-300">•</span>
+                    <button
+                      type="button"
+                      onClick={handleCopyCssVars}
+                      className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
+                    >
+                      {copiedCss ? 'Copied CSS!' : 'CSS vars'}
+                    </button>
+                    <span className="text-gray-300">•</span>
+                    <button
+                      type="button"
+                      onClick={handleCopyTailwind}
+                      className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
+                    >
+                      {copiedTailwind ? 'Copied JSON!' : 'Tailwind'}
+                    </button>
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 gap-2">
+                  {Object.entries(currentSite.colors).map(([key, hex]) => (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => handleCopyColor(hex)}
+                      className="flex flex-col items-center p-2 rounded-xl border border-gray-100 bg-gray-50/70 hover:bg-gray-100 transition group"
+                    >
+                      <div
+                        className="w-6 h-6 rounded-full border border-white shadow-xs mb-1 group-hover:scale-110 transition"
+                        style={{ backgroundColor: hex }}
+                      />
+                      <span className="text-[9px] font-bold text-gray-700 uppercase">{key}</span>
+                      <span className="text-[10px] text-gray-500 font-mono">{hex}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Template Specs */}
+              <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500">
+                <span>Style: <strong className="text-gray-800">{currentSite.style}</strong></span>
+                {currentSite.marketLabel && (
+                  <span>Market: <strong className="text-gray-800">{currentSite.marketLabel}</strong></span>
+                )}
+                <span>Status: <strong className="text-emerald-700 uppercase text-[10px]">Production Ready</strong></span>
+              </div>
+
+              {/* Keyboard Shortcuts Cheatsheet */}
+              <div className="pt-2 border-t border-gray-100">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">
+                  Keyboard Shortcuts
+                </label>
+                <div className="grid grid-cols-3 gap-1.5 text-[11px] text-gray-600">
+                  <div className="flex items-center gap-1.5">
+                    <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                      [ / ]
+                    </kbd>
+                    <span>Prev / Next</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                      D
+                    </kbd>
+                    <span>Device frame</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                      F
+                    </kbd>
+                    <span>Shortlist</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                      S
+                    </kbd>
+                    <span>Shortlist list</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                      Ctrl+K
+                    </kbd>
+                    <span>Search</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 2: Mobile QR Scan */}
+          {shareTab === 'qr' && (
+            <div className="mt-3.5 space-y-3 text-center animate-in fade-in duration-100">
+              <p className="text-[11px] text-gray-600">
+                Scan this QR code with your iPhone or Android camera to preview this design on real hardware.
+              </p>
+              <div className="inline-block p-3 rounded-2xl bg-white border border-gray-200 shadow-md">
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(
+                    getTemplateShareUrl()
+                  )}&color=09090b`}
+                  alt={`QR Code for ${currentSite.title}`}
+                  className="w-40 h-40 mx-auto rounded-lg"
+                  loading="lazy"
                 />
+              </div>
+              <div className="flex items-center justify-center gap-2 pt-1">
                 <button
                   type="button"
                   onClick={handleCopyShareLink}
-                  className="flex items-center gap-1.5 rounded-lg bg-gray-900 px-3 py-1.5 text-xs font-bold text-white hover:bg-black transition active:scale-95 shrink-0"
+                  className="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-bold text-gray-700 hover:bg-gray-100 transition"
                 >
-                  {copiedLink ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
-                  <span>{copiedLink ? 'Copied' : 'Copy'}</span>
+                  {copiedLink ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5 text-gray-500" />}
+                  <span>{copiedLink ? 'Copied link' : 'Copy mobile URL'}</span>
+                </button>
+                <a
+                  href={getTemplateShareUrl()}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1.5 rounded-lg bg-purple-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-purple-700 transition"
+                >
+                  <Eye className="h-3.5 w-3.5" />
+                  <span>Open tab</span>
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: Embed Iframe */}
+          {shareTab === 'embed' && (
+            <div className="mt-3.5 space-y-3 animate-in fade-in duration-100">
+              <p className="text-[11px] text-gray-600">
+                Embed this live interactive template directly into client proposals, Notion, Webflow, or documentation:
+              </p>
+              <div className="relative rounded-xl border border-gray-200 bg-gray-900 p-3 text-emerald-400 font-mono text-[11px] leading-relaxed break-all">
+                <code>
+                  {`<iframe src="${getTemplateShareUrl()}" width="100%" height="800" frameborder="0" allowfullscreen style="border:none;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,0.15)"></iframe>`}
+                </code>
+              </div>
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[10px] text-gray-400">Responsive iframe with rounded shadow frame</span>
+                <button
+                  type="button"
+                  onClick={handleCopyEmbedCode}
+                  className="flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-emerald-700 transition active:scale-95"
+                >
+                  {copiedEmbed ? <Check className="h-3.5 w-3.5 text-white" /> : <Copy className="h-3.5 w-3.5" />}
+                  <span>{copiedEmbed ? 'Embed Code Copied!' : 'Copy Embed Code'}</span>
                 </button>
               </div>
             </div>
-
-            {/* Color Palette List */}
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
-                  Brand Color Palette
-                </label>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={handleCopyAllColors}
-                    className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
-                  >
-                    {copiedAllColors ? 'Copied all!' : 'Hex list'}
-                  </button>
-                  <span className="text-gray-300">•</span>
-                  <button
-                    type="button"
-                    onClick={handleCopyCssVars}
-                    className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
-                  >
-                    {copiedCss ? 'Copied CSS!' : 'CSS vars'}
-                  </button>
-                  <span className="text-gray-300">•</span>
-                  <button
-                    type="button"
-                    onClick={handleCopyTailwind}
-                    className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
-                  >
-                    {copiedTailwind ? 'Copied JSON!' : 'Tailwind'}
-                  </button>
-                </div>
-              </div>
-              <div className="grid grid-cols-4 gap-2">
-                {Object.entries(currentSite.colors).map(([key, hex]) => (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => handleCopyColor(hex)}
-                    className="flex flex-col items-center p-2 rounded-xl border border-gray-100 bg-gray-50/70 hover:bg-gray-100 transition group"
-                  >
-                    <div
-                      className="w-6 h-6 rounded-full border border-white shadow-xs mb-1 group-hover:scale-110 transition"
-                      style={{ backgroundColor: hex }}
-                    />
-                    <span className="text-[9px] font-bold text-gray-700 uppercase">{key}</span>
-                    <span className="text-[10px] text-gray-500 font-mono">{hex}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Template Specs */}
-            <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500">
-              <span>Style: <strong className="text-gray-800">{currentSite.style}</strong></span>
-              {currentSite.marketLabel && (
-                <span>Market: <strong className="text-gray-800">{currentSite.marketLabel}</strong></span>
-              )}
-              <span>Status: <strong className="text-emerald-700 uppercase text-[10px]">Production Ready</strong></span>
-            </div>
-
-            {/* Keyboard Shortcuts Cheatsheet */}
-            <div className="pt-2 border-t border-gray-100">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">
-                Keyboard Shortcuts
-              </label>
-              <div className="grid grid-cols-3 gap-1.5 text-[11px] text-gray-600">
-                <div className="flex items-center gap-1.5">
-                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
-                    [ / ]
-                  </kbd>
-                  <span>Prev / Next</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
-                    D
-                  </kbd>
-                  <span>Device frame</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
-                    F
-                  </kbd>
-                  <span>Shortlist</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
-                    S
-                  </kbd>
-                  <span>Shortlist list</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
-                    Ctrl+K
-                  </kbd>
-                  <span>Search</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       )}
     </div>
