@@ -5,6 +5,8 @@ import type { DeviceMode } from "./components/ShowcaseToolbar";
 import { allWebsites } from "./data/websites";
 import { importFavoriteIds } from "./utils/favorites";
 import { PageLoader } from "./components/PageLoader";
+import { RotateCcw } from "lucide-react";
+import { useThemeAccent } from "./utils/themeAccent";
 
 // Lazy-loaded category index pages & standalone sites
 const Home = lazy(() => import("./pages/Home").then((m) => ({ default: m.Home })));
@@ -252,6 +254,7 @@ function AppShell() {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isShortlistOpen, setIsShortlistOpen] = useState(false);
+  const { currentPreset, isOriginal, resetTheme } = useThemeAccent();
   const [searchParams, setSearchParams] = useSearchParams();
   const rawDevice = searchParams.get('device');
   const initialDevice: DeviceMode = (rawDevice === 'tablet' || rawDevice === 'mobile') ? rawDevice : 'desktop';
@@ -379,6 +382,23 @@ function AppShell() {
           onOpenShortlist={() => setIsShortlistOpen(true)}
         />
       )}
+
+      {/* Floating Theme Active Indicator Badge */}
+      {isDemoPage && !isOriginal && (
+        <div className="fixed top-20 right-5 z-[60] flex items-center gap-2 rounded-full border border-purple-300/80 bg-white/95 px-3 py-1.5 text-xs font-bold text-purple-900 shadow-xl backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-200">
+          <span className="h-2 w-2 rounded-full bg-purple-600 animate-pulse" />
+          <span>Theme: {currentPreset.name}</span>
+          <button
+            type="button"
+            onClick={resetTheme}
+            className="ml-1 rounded-full p-0.5 text-purple-500 hover:bg-purple-100 hover:text-purple-800 transition"
+            title="Reset to original design palette"
+          >
+            <RotateCcw className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
+
       <div
         className={`flex-grow ${isDemoPage ? "" : "pt-16"} ${
           isDemoPage && deviceMode !== 'desktop'
@@ -420,7 +440,15 @@ function AppShell() {
             </div>
           )}
 
-          <div className={isDemoPage && deviceMode !== 'desktop' ? "flex-grow flex flex-col overflow-x-hidden" : ""}>
+          <div
+            className={`${
+              isDemoPage ? "demo-canvas transition-[filter] duration-300" : ""
+            } ${
+              isDemoPage && deviceMode !== 'desktop'
+                ? "flex-grow flex flex-col overflow-x-hidden"
+                : ""
+            }`}
+          >
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Home />} />

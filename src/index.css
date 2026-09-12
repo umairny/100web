@@ -1628,7 +1628,7 @@ blockquote {
   }
 }
 
-/* Dynamic Theme Accent Tuner Overrides */
+/* Dynamic Theme Accent Tuner Engine */
 :root {
   --theme-accent-primary: #06b6d4;
   --theme-accent-secondary: #a855f7;
@@ -1637,6 +1637,29 @@ blockquote {
 [data-theme-preset]:not([data-theme-preset="original"]) {
   --color-primary: var(--theme-accent-primary);
   --color-accent: var(--theme-accent-secondary);
+}
+
+/* Transform the active demo canvas with the chosen aesthetic palette */
+[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas {
+  filter: var(--theme-canvas-filter, none);
+  transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Protect natural photographs and videos from being color distorted */
+[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas img,
+[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas video,
+[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [data-preserve-color] {
+  filter: var(--theme-img-filter, none) !important;
+  transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ensure UI controls, modals, command palette, and toolbar are never filtered */
+.showcase-toolbar,
+.command-palette,
+.shortlist-drawer,
+nav,
+footer {
+  filter: none !important;
 }
 
 [data-theme-preset]:not([data-theme-preset="original"]) .theme-accent-text {

@@ -9,6 +9,35 @@ export interface ColorThemePreset {
   accent: string
   dark: string
   light: string
+  filterCss?: string
+  imgFilterCss?: string
+}
+
+export function hexToHue(hex: string): number {
+  let c = hex.replace('#', '').trim()
+  if (c.length === 3) {
+    c = c.split('').map((x) => x + x).join('')
+  }
+  if (c.length !== 6) return 210
+  const r = parseInt(c.substring(0, 2), 16) / 255
+  const g = parseInt(c.substring(2, 4), 16) / 255
+  const b = parseInt(c.substring(4, 6), 16) / 255
+
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  let h = 0
+
+  if (max === min) {
+    h = 0
+  } else if (max === r) {
+    h = ((g - b) / (max - min) + (g < b ? 6 : 0)) * 60
+  } else if (max === g) {
+    h = ((b - r) / (max - min) + 2) * 60
+  } else {
+    h = ((r - g) / (max - min) + 4) * 60
+  }
+
+  return Math.round(h)
 }
 
 export const THEME_PRESETS: ColorThemePreset[] = [
@@ -16,21 +45,25 @@ export const THEME_PRESETS: ColorThemePreset[] = [
     id: 'original',
     name: 'Original',
     label: 'Author Palette',
-    description: 'Default bespoke color design',
+    description: 'Template default bespoke color design',
     primary: '',
     accent: '',
     dark: '',
     light: '',
+    filterCss: 'none',
+    imgFilterCss: 'none',
   },
   {
     id: 'cyberpunk',
     name: 'Cyber Neon',
     label: 'Electric Cyan & Violet',
-    description: 'Futuristic high-contrast tech vibe',
+    description: 'Futuristic high-contrast tech aesthetic',
     primary: '#06b6d4',
     accent: '#a855f7',
     dark: '#09090b',
     light: '#ecfeff',
+    filterCss: 'hue-rotate(185deg) saturate(1.25)',
+    imgFilterCss: 'hue-rotate(-185deg) saturate(0.8)',
   },
   {
     id: 'emerald',
@@ -41,6 +74,8 @@ export const THEME_PRESETS: ColorThemePreset[] = [
     accent: '#d97706',
     dark: '#064e3b',
     light: '#ecfdf5',
+    filterCss: 'hue-rotate(95deg) saturate(1.15)',
+    imgFilterCss: 'hue-rotate(-95deg) saturate(0.87)',
   },
   {
     id: 'sunset',
@@ -51,6 +86,8 @@ export const THEME_PRESETS: ColorThemePreset[] = [
     accent: '#f59e0b',
     dark: '#1e1b4b',
     light: '#fff1f2',
+    filterCss: 'hue-rotate(330deg) saturate(1.3)',
+    imgFilterCss: 'hue-rotate(-330deg) saturate(0.77)',
   },
   {
     id: 'royal',
@@ -61,6 +98,8 @@ export const THEME_PRESETS: ColorThemePreset[] = [
     accent: '#ec4899',
     dark: '#0f172a',
     light: '#f5f3ff',
+    filterCss: 'hue-rotate(245deg) saturate(1.25)',
+    imgFilterCss: 'hue-rotate(-245deg) saturate(0.8)',
   },
   {
     id: 'obsidian',
@@ -71,6 +110,8 @@ export const THEME_PRESETS: ColorThemePreset[] = [
     accent: '#64748b',
     dark: '#020617',
     light: '#f8fafc',
+    filterCss: 'grayscale(0.95) contrast(1.12)',
+    imgFilterCss: 'grayscale(0) contrast(1)',
   },
 ]
 
@@ -104,6 +145,8 @@ export function applyThemeVariables(presetId: string, customPrimary?: string | n
     root.style.removeProperty('--theme-accent-secondary')
     root.style.removeProperty('--theme-accent-dark')
     root.style.removeProperty('--theme-accent-light')
+    root.style.removeProperty('--theme-canvas-filter')
+    root.style.removeProperty('--theme-img-filter')
     return
   }
 
@@ -113,11 +156,24 @@ export function applyThemeVariables(presetId: string, customPrimary?: string | n
   const dark = preset?.dark || '#09090b'
   const light = preset?.light || '#ffffff'
 
+  let filter = preset?.filterCss || 'none'
+  let imgFilter = preset?.imgFilterCss || 'none'
+
+  if (customPrimary) {
+    const hue = hexToHue(customPrimary)
+    // Calculate rotation relative to default blue (210deg)
+    const deg = Math.round(hue - 210)
+    filter = `hue-rotate(${deg}deg) saturate(1.2)`
+    imgFilter = `hue-rotate(${-deg}deg) saturate(0.833)`
+  }
+
   root.setAttribute('data-theme-preset', presetId)
   root.style.setProperty('--theme-accent-primary', primary)
   root.style.setProperty('--theme-accent-secondary', accent)
   root.style.setProperty('--theme-accent-dark', dark)
   root.style.setProperty('--theme-accent-light', light)
+  root.style.setProperty('--theme-canvas-filter', filter)
+  root.style.setProperty('--theme-img-filter', imgFilter)
 }
 
 export function useThemeAccent() {
