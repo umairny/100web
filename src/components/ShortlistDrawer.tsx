@@ -12,6 +12,7 @@ import {
   ArrowRight,
   FileText,
   MessageSquare,
+  Star,
 } from 'lucide-react'
 import { allWebsites, WebsiteDesign } from '../data/websites'
 import { useFavorites, getShareableShortlistUrl } from '../utils/favorites'
@@ -29,7 +30,7 @@ function getSiteRoute(site: WebsiteDesign) {
 }
 
 export function ShortlistDrawer({ isOpen, onClose }: ShortlistDrawerProps) {
-  const { favoriteIds, notes, setNote, toggle, clear } = useFavorites()
+  const { favoriteIds, notes, ratings, setNote, setRating, toggle, clear } = useFavorites()
   const [copiedLink, setCopiedLink] = useState(false)
   const [copiedBrief, setCopiedBrief] = useState(false)
   const [compareMode, setCompareMode] = useState(false)
@@ -75,8 +76,10 @@ export function ShortlistDrawer({ isOpen, onClose }: ShortlistDrawerProps) {
       '',
       ...favoritedWebsites.flatMap((site, i) => {
         const note = notes[site.id]
+        const score = ratings[site.id] || 0
         return [
           `### ${i + 1}. ${site.title} (${site.category})`,
+          score > 0 ? `- **Rating**: ${'★'.repeat(score)}${'☆'.repeat(5 - score)} (${score}/5)` : '',
           note ? `- **Client Note**: ${note}` : '',
           `- **Live Demo**: ${window.location.origin}${getSiteRoute(site)}`,
           `- **Brand Colors**: Primary: \`${site.colors.primary}\`, Secondary: \`${site.colors.secondary}\`, Accent: \`${site.colors.accent}\``,
@@ -339,6 +342,24 @@ export function ShortlistDrawer({ isOpen, onClose }: ShortlistDrawerProps) {
                       ))}
                     </tr>
                     <tr>
+                      <td className="p-3 font-mono text-[10px] text-slate-400 uppercase">Rating</td>
+                      {comparedWebsites.map((site) => {
+                        const score = ratings[site.id] || 0
+                        return (
+                          <td key={site.id} className="p-3 text-xs text-amber-400 font-bold">
+                            {score > 0 ? (
+                              <span className="flex items-center gap-1">
+                                {'★'.repeat(score)}{'☆'.repeat(5 - score)}
+                                <span className="text-[10px] text-slate-400 font-mono font-normal">({score}/5)</span>
+                              </span>
+                            ) : (
+                              <span className="text-slate-600 font-normal">Unrated</span>
+                            )}
+                          </td>
+                        )
+                      })}
+                    </tr>
+                    <tr>
                       <td className="p-3 font-mono text-[10px] text-slate-400 uppercase">Review Note</td>
                       {comparedWebsites.map((site) => (
                         <td key={site.id} className="p-3 text-xs text-amber-200/90 italic">
@@ -429,18 +450,39 @@ export function ShortlistDrawer({ isOpen, onClose }: ShortlistDrawerProps) {
                         {site.shortDescription}
                       </p>
 
-                      {/* Color dots */}
-                      <div className="mt-2.5 flex items-center gap-1.5">
-                        {[site.colors.primary, site.colors.secondary, site.colors.accent, site.colors.dark].map(
-                          (color, idx) => (
-                            <span
-                              key={idx}
-                              className="h-3.5 w-3.5 rounded-full border border-white/20"
-                              style={{ backgroundColor: color }}
-                              title={color}
-                            />
-                          )
-                        )}
+                      {/* Color dots & Interactive 5-Star Rating */}
+                      <div className="mt-2.5 flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-1.5">
+                          {[site.colors.primary, site.colors.secondary, site.colors.accent, site.colors.dark].map(
+                            (color, idx) => (
+                              <span
+                                key={idx}
+                                className="h-3.5 w-3.5 rounded-full border border-white/20"
+                                style={{ backgroundColor: color }}
+                                title={color}
+                              />
+                            )
+                          )}
+                        </div>
+
+                        {/* Interactive Rating Stars */}
+                        <div className="flex items-center gap-0.5" title="Rate template priority (1-5 stars)">
+                          {[1, 2, 3, 4, 5].map((star) => {
+                            const score = ratings[site.id] || 0
+                            const isFilled = star <= score
+                            return (
+                              <button
+                                key={star}
+                                type="button"
+                                onClick={() => setRating(site.id, score === star ? 0 : star)}
+                                className="p-0.5 text-slate-600 hover:text-amber-400 transition"
+                                aria-label={`Rate ${star} star${star > 1 ? 's' : ''}`}
+                              >
+                                <Star className={`h-3.5 w-3.5 ${isFilled ? 'fill-amber-400 text-amber-400' : 'text-slate-600'}`} />
+                              </button>
+                            )
+                          })}
+                        </div>
                       </div>
 
                       {/* Personal / Client Note Section */}

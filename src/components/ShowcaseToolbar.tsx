@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { allWebsites, WebsiteDesign } from '../data/websites'
 import { prefetchRoute } from '../utils/routePrefetch'
 import { useFavorites } from '../utils/favorites'
+import { useEventListener } from '../hooks/useEventListener'
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -84,9 +85,42 @@ export function ShowcaseToolbar({
     return `/${categoryPath}/${site.slug}`
   }
 
+  // Keyboard navigation shortcuts: [ prev, ] next, F favorite, D device mode, S shortlist
+  useEventListener('keydown', (e: KeyboardEvent) => {
+    const tag = (e.target as HTMLElement)?.tagName?.toLowerCase()
+    if (tag === 'input' || tag === 'textarea' || (e.target as HTMLElement)?.isContentEditable) {
+      return
+    }
+
+    if (e.metaKey || e.ctrlKey || e.altKey) {
+      return
+    }
+
+    if (e.key === '[' && prevSite) {
+      e.preventDefault()
+      navigate(getSiteRoute(prevSite))
+    } else if (e.key === ']' && nextSite) {
+      e.preventDefault()
+      navigate(getSiteRoute(nextSite))
+    } else if (e.key.toLowerCase() === 'f') {
+      e.preventDefault()
+      toggle()
+    } else if (e.key.toLowerCase() === 's' && onOpenShortlist) {
+      e.preventDefault()
+      onOpenShortlist()
+    } else if (e.key.toLowerCase() === 'd' && onDeviceModeChange) {
+      e.preventDefault()
+      const nextMode: DeviceMode =
+        deviceMode === 'desktop' ? 'tablet' : deviceMode === 'tablet' ? 'mobile' : 'desktop'
+      onDeviceModeChange(nextMode)
+    }
+  })
+
   const [isShareOpen, setIsShareOpen] = useState(false)
   const [copiedLink, setCopiedLink] = useState(false)
   const [copiedAllColors, setCopiedAllColors] = useState(false)
+  const [copiedTailwind, setCopiedTailwind] = useState(false)
+  const [copiedCss, setCopiedCss] = useState(false)
 
   const handleCopyColor = (color: string) => {
     navigator.clipboard.writeText(color).catch(() => {})
@@ -114,6 +148,24 @@ export function ShowcaseToolbar({
     navigator.clipboard.writeText(palette).catch(() => {})
     setCopiedAllColors(true)
     setTimeout(() => setCopiedAllColors(false), 2000)
+  }
+
+  const handleCopyTailwind = () => {
+    if (!currentSite) return
+    const obj = JSON.stringify({ colors: currentSite.colors }, null, 2)
+    navigator.clipboard.writeText(obj).catch(() => {})
+    setCopiedTailwind(true)
+    setTimeout(() => setCopiedTailwind(false), 2000)
+  }
+
+  const handleCopyCssVars = () => {
+    if (!currentSite) return
+    const css = Object.entries(currentSite.colors)
+      .map(([name, hex]) => `--color-${name}: ${hex};`)
+      .join('\n')
+    navigator.clipboard.writeText(css).catch(() => {})
+    setCopiedCss(true)
+    setTimeout(() => setCopiedCss(false), 2000)
   }
 
   if (isCollapsed) {
@@ -171,7 +223,7 @@ export function ShowcaseToolbar({
           <button
             type="button"
             onClick={() => toggle()}
-            title={isFavorited ? 'Remove from shortlist' : 'Save to shortlist'}
+            title={isFavorited ? 'Remove from shortlist (F)' : 'Save to shortlist (F)'}
             className={`flex items-center gap-1.5 px-3 py-1.5 font-bold transition ${
               onOpenShortlist && shortlistCount > 0 ? 'rounded-l-full' : 'rounded-full'
             } ${
@@ -182,6 +234,9 @@ export function ShowcaseToolbar({
           >
             <Heart className={`h-3.5 w-3.5 ${isFavorited ? 'fill-rose-600 text-rose-600' : 'text-gray-400'}`} />
             <span className="hidden lg:inline">{isFavorited ? 'Shortlisted' : 'Shortlist'}</span>
+            <kbd className="hidden xl:inline rounded border border-gray-200 bg-gray-50 px-1 text-[9px] font-mono text-gray-400">
+              F
+            </kbd>
           </button>
           {onOpenShortlist && shortlistCount > 0 && (
             <button
@@ -248,11 +303,14 @@ export function ShowcaseToolbar({
               type="button"
               onClick={() => navigate(getSiteRoute(prevSite))}
               onMouseEnter={() => prefetchRoute(getSiteRoute(prevSite))}
-              title={`Previous: ${prevSite.title}`}
+              title={`Previous: ${prevSite.title} ([)`}
               className="flex items-center gap-1 rounded-full p-1.5 sm:px-2.5 sm:py-1 text-gray-700 hover:bg-gray-100 transition font-semibold"
             >
               <ChevronLeft className="h-4 w-4" />
               <span className="hidden xl:inline">Prev</span>
+              <kbd className="hidden xl:inline rounded border border-gray-200 bg-gray-50 px-1 text-[9px] font-mono text-gray-400">
+                [
+              </kbd>
             </button>
           )}
 
@@ -261,10 +319,13 @@ export function ShowcaseToolbar({
               type="button"
               onClick={() => navigate(getSiteRoute(nextSite))}
               onMouseEnter={() => prefetchRoute(getSiteRoute(nextSite))}
-              title={`Next: ${nextSite.title}`}
+              title={`Next: ${nextSite.title} (])`}
               className="flex items-center gap-1 rounded-full p-1.5 sm:px-2.5 sm:py-1 text-gray-700 hover:bg-gray-100 transition font-semibold"
             >
               <span className="hidden xl:inline">Next</span>
+              <kbd className="hidden xl:inline rounded border border-gray-200 bg-gray-50 px-1 text-[9px] font-mono text-gray-400">
+                ]
+              </kbd>
               <ChevronRight className="h-4 w-4" />
             </button>
           )}
@@ -373,13 +434,31 @@ export function ShowcaseToolbar({
                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                   Brand Color Palette
                 </label>
-                <button
-                  type="button"
-                  onClick={handleCopyAllColors}
-                  className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
-                >
-                  {copiedAllColors ? 'Copied all!' : 'Copy all hex'}
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleCopyAllColors}
+                    className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
+                  >
+                    {copiedAllColors ? 'Copied all!' : 'Hex list'}
+                  </button>
+                  <span className="text-gray-300">•</span>
+                  <button
+                    type="button"
+                    onClick={handleCopyCssVars}
+                    className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
+                  >
+                    {copiedCss ? 'Copied CSS!' : 'CSS vars'}
+                  </button>
+                  <span className="text-gray-300">•</span>
+                  <button
+                    type="button"
+                    onClick={handleCopyTailwind}
+                    className="text-[10px] font-semibold text-blue-600 hover:text-blue-700"
+                  >
+                    {copiedTailwind ? 'Copied JSON!' : 'Tailwind'}
+                  </button>
+                </div>
               </div>
               <div className="grid grid-cols-4 gap-2">
                 {Object.entries(currentSite.colors).map(([key, hex]) => (
@@ -407,6 +486,45 @@ export function ShowcaseToolbar({
                 <span>Market: <strong className="text-gray-800">{currentSite.marketLabel}</strong></span>
               )}
               <span>Status: <strong className="text-emerald-700 uppercase text-[10px]">Production Ready</strong></span>
+            </div>
+
+            {/* Keyboard Shortcuts Cheatsheet */}
+            <div className="pt-2 border-t border-gray-100">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5">
+                Keyboard Shortcuts
+              </label>
+              <div className="grid grid-cols-3 gap-1.5 text-[11px] text-gray-600">
+                <div className="flex items-center gap-1.5">
+                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                    [ / ]
+                  </kbd>
+                  <span>Prev / Next</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                    D
+                  </kbd>
+                  <span>Device frame</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                    F
+                  </kbd>
+                  <span>Shortlist</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                    S
+                  </kbd>
+                  <span>Shortlist list</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <kbd className="rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-gray-700">
+                    Ctrl+K
+                  </kbd>
+                  <span>Search</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

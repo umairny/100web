@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 const STORAGE_KEY = '100websites_favorites'
 const STORAGE_NOTES_KEY = '100websites_favorites_notes'
+const STORAGE_RATINGS_KEY = '100websites_favorites_ratings'
 
 /**
  * Get all favorited website IDs from localStorage
@@ -49,6 +50,38 @@ export function saveFavoriteNote(id: string, note: string): void {
 }
 
 /**
+ * Get all personal ratings for shortlisted websites from localStorage
+ */
+export function getFavoriteRatings(): Record<string, number> {
+  if (typeof window === 'undefined') return {}
+  try {
+    const data = localStorage.getItem(STORAGE_RATINGS_KEY)
+    return data ? JSON.parse(data) : {}
+  } catch {
+    return {}
+  }
+}
+
+/**
+ * Save a 1-5 star rating for a shortlisted website
+ */
+export function saveFavoriteRating(id: string, rating: number): void {
+  if (typeof window === 'undefined') return
+  try {
+    const ratings = getFavoriteRatings()
+    if (rating > 0 && rating <= 5) {
+      ratings[id] = rating
+    } else {
+      delete ratings[id]
+    }
+    localStorage.setItem(STORAGE_RATINGS_KEY, JSON.stringify(ratings))
+    window.dispatchEvent(new Event('favorites-updated'))
+  } catch {
+    // ignore
+  }
+}
+
+/**
  * Toggle a website ID in favorites
  */
 export function toggleFavoriteId(id: string): boolean {
@@ -80,11 +113,13 @@ export function toggleFavoriteId(id: string): boolean {
 export function useFavorites(websiteId?: string) {
   const [favoriteIds, setFavoriteIds] = useState<string[]>(getFavoriteIds)
   const [notes, setNotes] = useState<Record<string, string>>(getFavoriteNotes)
+  const [ratings, setRatings] = useState<Record<string, number>>(getFavoriteRatings)
 
   useEffect(() => {
     const handleUpdate = () => {
       setFavoriteIds(getFavoriteIds())
       setNotes(getFavoriteNotes())
+      setRatings(getFavoriteRatings())
     }
 
     window.addEventListener('favorites-updated', handleUpdate)
@@ -109,6 +144,10 @@ export function useFavorites(websiteId?: string) {
     saveFavoriteNote(id, note)
   }
 
+  const setRating = (id: string, rating: number) => {
+    saveFavoriteRating(id, rating)
+  }
+
   const clear = () => {
     clearFavorites()
   }
@@ -116,22 +155,25 @@ export function useFavorites(websiteId?: string) {
   return {
     favoriteIds,
     notes,
+    ratings,
     isFavorited,
     toggle,
     setNote,
+    setRating,
     clear,
     count: favoriteIds.length,
   }
 }
 
 /**
- * Clear all favorites and notes from localStorage
+ * Clear all favorites, notes, and ratings from localStorage
  */
 export function clearFavorites(): void {
   if (typeof window === 'undefined') return
   try {
     localStorage.removeItem(STORAGE_KEY)
     localStorage.removeItem(STORAGE_NOTES_KEY)
+    localStorage.removeItem(STORAGE_RATINGS_KEY)
     window.dispatchEvent(new Event('favorites-updated'))
   } catch {
     // ignore
