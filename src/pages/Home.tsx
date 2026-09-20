@@ -1,7 +1,27 @@
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Heart, Search, X, Sparkles } from "lucide-react";
-import { useEffect, useState, useMemo, type ReactNode } from "react";
-import { AnimatedSection, Container, CTAButton } from "../components";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Heart,
+  Search,
+  X,
+  Sparkles,
+  ArrowRight,
+  Zap,
+  LayoutGrid,
+  ExternalLink,
+  TrendingUp,
+  CheckCircle2,
+  Clock,
+  ShieldCheck,
+  Rocket,
+  Code2,
+  Users,
+  XCircle,
+  MessageSquare,
+} from "lucide-react";
+import { useState, useMemo, type ReactNode } from "react";
+import { AnimatedSection, Container } from "../components";
 import { imageUrl } from "../assets/optimized";
 import { useFavorites } from "../utils/favorites";
 import { useSafeInterval } from "../hooks/useSafeInterval";
@@ -121,36 +141,45 @@ function HomeImage({
   );
 }
 
+function SectionPill({ children, icon }: { children: ReactNode; icon?: ReactNode }) {
+  return (
+    <div className="inline-flex items-center gap-2 rounded-full border border-[#1e8b79]/20 bg-[#1e8b79]/8 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-[#1e8b79]">
+      {icon ?? <span className="h-1.5 w-1.5 rounded-full bg-[#1e8b79]" />}
+      {children}
+    </div>
+  );
+}
+
 export function Home() {
   const liveRestaurants = restaurantWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
   const liveBeauty = beautyWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
   const liveRealEstate = realEstateWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
   const liveFitness = fitnessWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
   const liveMedical = medicalWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
   const liveConstruction = constructionWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
   const liveEducation = educationWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
   const liveEcommerce = ecommerceWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
   const livePortfolio = portfolioWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
   const liveSaaS = saasWebsites.filter(
-    (website) => website.status === "completed" || website.status === "live",
+    (w) => w.status === "completed" || w.status === "live",
   );
 
   const completedDesignCount =
@@ -175,7 +204,9 @@ export function Home() {
       href: "/restaurant",
       image: homeImages.restaurantCollection,
       count: liveRestaurants.length,
-      tone: "text-[#9a5b25]",
+      icon: "🍽️",
+      accentColor: "#c2400a",
+      bgGradient: "from-orange-600 to-red-500",
       button: "Open restaurants",
     },
     {
@@ -184,7 +215,9 @@ export function Home() {
       href: "/beauty",
       image: homeImages.beautyCollection,
       count: liveBeauty.length,
-      tone: "text-[#b76e79]",
+      icon: "💄",
+      accentColor: "#be185d",
+      bgGradient: "from-pink-600 to-rose-500",
       button: "Open beauty",
     },
     {
@@ -193,7 +226,9 @@ export function Home() {
       href: "/real-estate",
       image: homeImages.realEstatePreview,
       count: liveRealEstate.length,
-      tone: "text-[#153e75]",
+      icon: "🏠",
+      accentColor: "#1d4ed8",
+      bgGradient: "from-blue-600 to-cyan-500",
       button: "Open real estate",
     },
     {
@@ -202,7 +237,9 @@ export function Home() {
       href: "/fitness",
       image: homeImages.fitnessPreview,
       count: liveFitness.length,
-      tone: "text-[#14532d]",
+      icon: "💪",
+      accentColor: "#15803d",
+      bgGradient: "from-green-600 to-emerald-500",
       button: "Open fitness",
     },
     {
@@ -211,7 +248,9 @@ export function Home() {
       href: "/medical",
       image: homeImages.medicalPreview,
       count: liveMedical.length,
-      tone: "text-[#0f766e]",
+      icon: "⚕️",
+      accentColor: "#0e7490",
+      bgGradient: "from-cyan-600 to-teal-500",
       button: "Open medical",
     },
     {
@@ -220,7 +259,9 @@ export function Home() {
       href: "/construction",
       image: homeImages.constructionPreview,
       count: liveConstruction.length,
-      tone: "text-[#92400e]",
+      icon: "🏗️",
+      accentColor: "#b45309",
+      bgGradient: "from-amber-600 to-yellow-500",
       button: "Open construction",
     },
     {
@@ -229,7 +270,9 @@ export function Home() {
       href: "/education",
       image: homeImages.educationPreview,
       count: liveEducation.length,
-      tone: "text-[#3730a3]",
+      icon: "📚",
+      accentColor: "#4338ca",
+      bgGradient: "from-indigo-600 to-purple-500",
       button: "Open education",
     },
     {
@@ -238,7 +281,9 @@ export function Home() {
       href: "/e-commerce",
       image: homeImages.ecommercePreview,
       count: liveEcommerce.length,
-      tone: "text-[#7c3aed]",
+      icon: "🛍️",
+      accentColor: "#7c3aed",
+      bgGradient: "from-violet-600 to-fuchsia-500",
       button: "Open e-commerce",
     },
     {
@@ -247,7 +292,9 @@ export function Home() {
       href: "/portfolio",
       image: homeImages.portfolioPreview,
       count: livePortfolio.length,
-      tone: "text-[#0369a1]",
+      icon: "✨",
+      accentColor: "#0369a1",
+      bgGradient: "from-sky-600 to-blue-500",
       button: "Open portfolio",
     },
     {
@@ -256,7 +303,9 @@ export function Home() {
       href: "/saas",
       image: homeImages.saasPreview,
       count: liveSaaS.length,
-      tone: "text-[#075985]",
+      icon: "💻",
+      accentColor: "#0d7d6e",
+      bgGradient: "from-teal-600 to-emerald-500",
       button: "Open SaaS",
     },
   ];
@@ -303,44 +352,49 @@ export function Home() {
       accent: "#f2a7bb",
     },
   ];
+
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
   const [isHeroPaused, setIsHeroPaused] = useState(false);
   const activeHeroSlide = heroSlides[activeHeroIndex];
 
   const { favoriteIds, toggle } = useFavorites();
-  const [featuredTab, setFeaturedTab] = useState<'featured' | 'all' | 'shortlist'>('featured');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [featuredTab, setFeaturedTab] = useState<"featured" | "all" | "shortlist">("featured");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const shortlistedWebsites = useMemo(() => {
-    return allWebsites.filter((site) => favoriteIds.includes(site.id));
-  }, [favoriteIds]);
+  const shortlistedWebsites = useMemo(
+    () => allWebsites.filter((site) => favoriteIds.includes(site.id)),
+    [favoriteIds],
+  );
 
-  const categoryFilters = useMemo(() => [
-    { id: 'all', label: 'All Categories' },
-    { id: 'restaurant', label: 'Restaurant' },
-    { id: 'beauty', label: 'Beauty' },
-    { id: 'real estate', label: 'Real Estate' },
-    { id: 'fitness', label: 'Fitness' },
-    { id: 'medical', label: 'Medical' },
-    { id: 'construction', label: 'Construction' },
-    { id: 'education', label: 'Education' },
-    { id: 'e-commerce', label: 'E-Commerce' },
-    { id: 'portfolio', label: 'Portfolio' },
-    { id: 'saas', label: 'SaaS' },
-  ], []);
+  const categoryFilters = useMemo(
+    () => [
+      { id: "all", label: "All", icon: "✦" },
+      { id: "restaurant", label: "Restaurant", icon: "🍽️" },
+      { id: "beauty", label: "Beauty", icon: "💄" },
+      { id: "real estate", label: "Real Estate", icon: "🏠" },
+      { id: "fitness", label: "Fitness", icon: "💪" },
+      { id: "medical", label: "Medical", icon: "⚕️" },
+      { id: "construction", label: "Construction", icon: "🏗️" },
+      { id: "education", label: "Education", icon: "📚" },
+      { id: "e-commerce", label: "E-Commerce", icon: "🛍️" },
+      { id: "portfolio", label: "Portfolio", icon: "✨" },
+      { id: "saas", label: "SaaS", icon: "💻" },
+    ],
+    [],
+  );
 
   const displayedWebsites = useMemo(() => {
     let list =
-      featuredTab === 'shortlist'
+      featuredTab === "shortlist"
         ? shortlistedWebsites
-        : featuredTab === 'featured'
-        ? featuredWebsites
-        : allWebsites;
+        : featuredTab === "featured"
+          ? featuredWebsites
+          : allWebsites.filter((s) => s.status === "completed" || s.status === "live");
 
-    if (selectedCategory !== 'all') {
+    if (selectedCategory !== "all") {
       list = list.filter((site) =>
-        site.category.toLowerCase().includes(selectedCategory.toLowerCase())
+        site.category.toLowerCase().includes(selectedCategory.toLowerCase()),
       );
     }
 
@@ -350,332 +404,478 @@ export function Home() {
         (site) =>
           site.title.toLowerCase().includes(q) ||
           site.shortDescription.toLowerCase().includes(q) ||
-          site.category.toLowerCase().includes(q)
+          site.category.toLowerCase().includes(q),
       );
     }
 
     return list;
   }, [featuredTab, selectedCategory, searchQuery, featuredWebsites, shortlistedWebsites]);
 
-  // Safe timer for hero carousel to avoid unmount memory leaks
   useSafeInterval(() => {
     if (isHeroPaused || heroSlides.length < 2) return;
-    setActiveHeroIndex((current) => (current + 1) % heroSlides.length);
+    setActiveHeroIndex((c) => (c + 1) % heroSlides.length);
   }, 5500);
 
   const moveHeroSlide = (direction: -1 | 1) => {
-    setActiveHeroIndex(
-      (current) => (current + direction + heroSlides.length) % heroSlides.length,
-    );
+    setActiveHeroIndex((c) => (c + direction + heroSlides.length) % heroSlides.length);
   };
 
   return (
-    <main className="bg-[#f6f1e8] text-[#17211d]">
-      <section className="relative -mt-16 overflow-hidden bg-[#0d1f1a] pb-12 pt-24 text-white md:pb-16 md:pt-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_14%,rgba(30,139,121,0.42),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(238,118,92,0.28),transparent_24%),linear-gradient(135deg,#0d1f1a_0%,#142822_50%,#07110f_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-white/15" />
+    <main className="bg-white text-[#17211d]">
+      {/* ── HERO ─────────────────────────────────────────────────── */}
+      <section className="relative -mt-[4.25rem] overflow-hidden bg-[#060f0b] pb-20 pt-36 text-white md:pb-28 md:pt-44">
+        {/* Multi-layer background */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_-15%_5%,rgba(30,139,121,0.55),transparent)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_55%_at_110%_-8%,rgba(238,118,92,0.18),transparent)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_75%_at_50%_115%,rgba(15,60,45,0.6),transparent)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_30%_30%_at_80%_60%,rgba(240,199,106,0.07),transparent)]" />
+        </div>
+        {/* Dot grid */}
+        <div className="absolute inset-0 opacity-[0.045] [background-image:radial-gradient(circle,rgba(255,255,255,0.5)_1px,transparent_1px)] [background-size:28px_28px]" />
+        {/* Bottom fade */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white to-transparent" />
+
+        {/* Floating orbs */}
+        <div className="absolute left-[8%] top-[22%] h-72 w-72 rounded-full bg-[#1e8b79]/12 blur-3xl" />
+        <div className="absolute right-[5%] top-[15%] h-56 w-56 rounded-full bg-[#f0c76a]/8 blur-3xl" />
+
         <Container>
-          <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="relative grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
+            {/* Left: text */}
             <AnimatedSection animation="slide-left">
-              <div className="inline-flex border border-white/15 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#f0c76a]">
-                Umair 100 Website Designs
+              {/* Eyebrow */}
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-[#f0c76a]/22 bg-[#f0c76a]/9 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#f0c76a]">
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#f0c76a] opacity-60" />
+                  <span className="relative h-2 w-2 rounded-full bg-[#f0c76a]" />
+                </span>
+                Umair · 100 Website Designs
               </div>
-              <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[0.96] md:text-7xl">
-                A cleaner way to browse complete business homepage demos.
+
+              <h1 className="mt-7 text-[2.75rem] font-black leading-[1.02] tracking-tight md:text-[3.25rem] lg:text-[2.9rem] xl:text-[3.6rem]">
+                100 production‑ready{" "}
+                <span className="relative inline-block">
+                  <span className="text-white/28">web design</span>
+                </span>
+                <br />
+                <span className="relative">
+                  templates.
+                  <span className="absolute -bottom-1.5 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-[#1e8b79] via-[#1e8b79]/60 to-transparent" />
+                </span>
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72 md:text-xl">
-                Pick a category, scan the live count, and open polished React
-                homepages built with distinct brand direction instead of the
-                same template wearing different colors.
+
+              <p className="mt-6 max-w-lg text-base leading-8 text-white/52 md:text-lg md:leading-8">
+                Every homepage built with a distinct brand direction — real business categories,
+                real visual systems, no repeated color swaps.
               </p>
 
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton
-                  href="#collections"
-                  size="lg"
-                  className="bg-[#f0c76a] text-[#10201c] hover:bg-white"
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  to="#collections"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-[#f0c76a] px-7 py-3.5 text-sm font-black text-[#0a1a15] shadow-xl shadow-[#f0c76a]/25 transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-white/30 active:scale-95"
                 >
-                  Browse Collections
-                </CTAButton>
-                <CTAButton
-                  href="#featured"
-                  variant="outline"
-                  size="lg"
-                  className="border-white/40 text-white hover:bg-white/10"
+                  Browse All Categories
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="#featured"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/6 px-7 py-3.5 text-sm font-black text-white/80 backdrop-blur transition duration-200 hover:border-white/28 hover:bg-white/11 hover:text-white"
                 >
-                  View Featured Demos
-                </CTAButton>
+                  <Sparkles className="h-4 w-4 text-[#f0c76a]" />
+                  View Templates
+                </Link>
               </div>
 
-              <div className="mt-10 max-w-2xl border border-white/12 bg-white/8 p-5 backdrop-blur">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-white/52">
-                      Portfolio progress
+              {/* Stats row */}
+              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-white/8 pt-8">
+                {[
+                  { value: completedDesignCount, label: "Live now", color: "#6ee7b7" },
+                  { value: categories.length, label: "Categories", color: "#93c5fd" },
+                  { value: plannedCount, label: "Planned", color: "#f0c76a" },
+                ].map(({ value, label, color }) => (
+                  <div key={label} className="flex items-baseline gap-2">
+                    <p className="text-3xl font-black" style={{ color }}>
+                      {value}
                     </p>
-                    <p className="mt-2 text-4xl font-black text-[#f0c76a]">
-                      {completedDesignCount}/{plannedCount}
+                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/38">
+                      {label}
                     </p>
                   </div>
-                  <p className="max-w-xs text-sm leading-6 text-white/62">
-                    {remainingCount} concepts remaining across {categories.length} planned categories.
-                  </p>
+                ))}
+              </div>
+
+              {/* Progress */}
+              <div className="mt-6 max-w-xs">
+                <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.16em]">
+                  <span className="text-white/30">Progress</span>
+                  <span style={{ color: "#f0c76a" + "aa" }}>
+                    {completionPercent}% · {remainingCount} remaining
+                  </span>
                 </div>
-                <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/12">
+                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/7">
                   <div
-                    className="h-full rounded-full bg-[#f0c76a]"
+                    className="h-full rounded-full bg-gradient-to-r from-[#1e8b79] via-[#a3e6d8] to-[#f0c76a] shadow-[0_0_10px_rgba(240,199,106,0.35)]"
                     style={{ width: `${completionPercent}%` }}
                   />
                 </div>
               </div>
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                {liveCollections.slice(0, 6).map((collection) => (
+              {/* Category quick-links */}
+              <div className="mt-6 flex flex-wrap gap-1.5">
+                {liveCollections.slice(0, 6).map((c) => (
                   <Link
-                    key={collection.title}
-                    to={collection.href}
-                    className="rounded-full border border-white/12 bg-white/8 px-4 py-2 text-sm font-bold text-white/72 transition hover:border-[#f0c76a]/60 hover:bg-white/14 hover:text-white"
+                    key={c.title}
+                    to={c.href}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/8 px-3 py-1 text-[11px] font-bold text-white/42 transition hover:border-white/22 hover:text-white/72"
                   >
-                    {collection.title} - {collection.count}
+                    <span className="text-xs">{c.icon}</span>
+                    {c.title}
                   </Link>
                 ))}
               </div>
             </AnimatedSection>
 
+            {/* Right: carousel */}
             <AnimatedSection animation="scale-in" delay="delay-200">
               <div
-                className="relative overflow-hidden border border-white/12 bg-white/8 p-3 shadow-2xl shadow-black/30"
+                className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5 shadow-[0_40px_80px_rgba(0,0,0,0.55)] backdrop-blur-sm"
                 onMouseEnter={() => setIsHeroPaused(true)}
                 onMouseLeave={() => setIsHeroPaused(false)}
                 onFocusCapture={() => setIsHeroPaused(true)}
                 onBlurCapture={() => setIsHeroPaused(false)}
               >
+                {/* Carousel header */}
+                <div className="flex items-center justify-between border-b border-white/8 px-4 py-3">
+                  <div className="flex gap-1.5">
+                    {["bg-[#ff5f56]", "bg-[#ffbe2d]", "bg-[#27c840]"].map((c) => (
+                      <span key={c} className={`h-2.5 w-2.5 rounded-full ${c} opacity-70`} />
+                    ))}
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-[0.18em] text-white/32">
+                    {activeHeroSlide.label}
+                  </span>
+                  <div className="flex gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => moveHeroSlide(-1)}
+                      className="grid h-7 w-7 place-items-center rounded-full bg-white/8 text-white/60 transition hover:bg-white/18 hover:text-white focus:outline-none"
+                      aria-label="Previous slide"
+                    >
+                      <ChevronLeft className="h-3.5 w-3.5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => moveHeroSlide(1)}
+                      className="grid h-7 w-7 place-items-center rounded-full bg-white/8 text-white/60 transition hover:bg-white/18 hover:text-white focus:outline-none"
+                      aria-label="Next slide"
+                    >
+                      <ChevronRight className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                </div>
+
                 <HomeImage
                   key={activeHeroSlide.label}
                   src={activeHeroSlide.image.src}
                   alt={activeHeroSlide.image.alt}
                   fallbackStyle={activeHeroSlide.image.fallbackStyle}
-                  className="min-h-[520px]"
+                  className="min-h-[440px]"
                 >
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.02)_12%,rgba(0,0,0,0.78))]" />
-                  <div className="absolute left-5 right-5 top-5 flex items-start justify-between gap-4">
-                    <div className="bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#161616] shadow-lg">
-                      {activeHeroSlide.label}
-                    </div>
-                    <div className="flex gap-2">
-                      <button
-                        type="button"
-                        onClick={() => moveHeroSlide(-1)}
-                        className="grid h-11 w-11 place-items-center rounded-full bg-white/92 text-[#10201c] shadow-lg transition hover:bg-[#f0c76a] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/45"
-                        aria-label="Show previous hero slide"
-                      >
-                        <ChevronLeft className="h-5 w-5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => moveHeroSlide(1)}
-                        className="grid h-11 w-11 place-items-center rounded-full bg-white/92 text-[#10201c] shadow-lg transition hover:bg-[#f0c76a] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/45"
-                        aria-label="Show next hero slide"
-                      >
-                        <ChevronRight className="h-5 w-5" />
-                      </button>
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
 
-                  <div className="absolute bottom-5 left-5 right-5 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
-                    <div className="bg-white/94 p-5 text-[#17211d] shadow-xl backdrop-blur">
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="rounded-2xl border border-white/10 bg-black/52 p-4 backdrop-blur-md">
                       <p
-                        className="text-sm font-black uppercase tracking-[0.16em]"
+                        className="text-[10px] font-black uppercase tracking-[0.2em]"
                         style={{ color: activeHeroSlide.accent }}
                       >
                         {activeHeroSlide.kicker}
                       </p>
-                      <h2 className="mt-2 max-w-xl text-2xl font-black md:text-3xl">
+                      <p className="mt-1.5 text-sm font-black leading-snug text-white">
                         {activeHeroSlide.title}
-                      </h2>
-                      <Link
-                        to={activeHeroSlide.href}
-                        className="mt-5 inline-flex items-center justify-center rounded-lg bg-[#10201c] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#1e8b79]"
-                      >
-                        {activeHeroSlide.cta}
-                      </Link>
-                    </div>
-                    <div className="flex items-center justify-between gap-3 bg-white/94 p-4 shadow-xl backdrop-blur lg:flex-col lg:items-stretch">
-                      <div className="flex gap-2" aria-label="Hero slides">
-                        {heroSlides.map((slide, index) => (
-                          <button
-                            key={slide.label}
-                            type="button"
-                            onClick={() => setActiveHeroIndex(index)}
-                            className={`h-3 rounded-full transition ${
-                              index === activeHeroIndex
-                                ? "w-10 bg-[#10201c]"
-                                : "w-3 bg-[#10201c]/25 hover:bg-[#10201c]/55"
-                            }`}
-                            aria-label={`Show ${slide.label}`}
-                            aria-current={
-                              index === activeHeroIndex ? "true" : undefined
-                            }
-                          />
-                        ))}
-                      </div>
-                      <p className="text-xs font-black uppercase tracking-[0.14em] text-[#5f6963]">
-                        {activeHeroIndex + 1}/{heroSlides.length}
                       </p>
+                      <div className="mt-3 flex items-center justify-between">
+                        <Link
+                          to={activeHeroSlide.href}
+                          className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-black transition hover:-translate-y-px"
+                          style={{
+                            background: activeHeroSlide.accent + "22",
+                            border: `1px solid ${activeHeroSlide.accent}40`,
+                          }}
+                        >
+                          <span style={{ color: activeHeroSlide.accent }}>
+                            {activeHeroSlide.cta}
+                          </span>
+                          <ArrowRight
+                            className="h-3 w-3"
+                            style={{ color: activeHeroSlide.accent }}
+                          />
+                        </Link>
+                        <div className="flex gap-1.5">
+                          {heroSlides.map((_, i) => (
+                            <button
+                              key={i}
+                              type="button"
+                              onClick={() => setActiveHeroIndex(i)}
+                              className={`rounded-full transition-all duration-300 ${
+                                i === activeHeroIndex
+                                  ? "h-1.5 w-6 bg-white"
+                                  : "h-1.5 w-1.5 bg-white/28 hover:bg-white/52"
+                              }`}
+                              aria-label={`Slide ${i + 1}`}
+                            />
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="absolute inset-x-3 bottom-3 h-1 bg-white/20">
-                    <span
-                      key={`${activeHeroIndex}-${isHeroPaused}`}
-                      className="home-hero-carousel-progress block h-full w-full"
-                      style={{
-                        backgroundColor: activeHeroSlide.accent,
-                        animationPlayState: isHeroPaused ? "paused" : "running",
-                      }}
-                    />
                   </div>
                 </HomeImage>
+
+                {/* Progress bar */}
+                <div className="h-0.5 bg-white/6">
+                  <span
+                    key={`${activeHeroIndex}-${isHeroPaused}`}
+                    className="home-hero-carousel-progress block h-full"
+                    style={{
+                      backgroundColor: activeHeroSlide.accent,
+                      animationPlayState: isHeroPaused ? "paused" : "running",
+                    }}
+                  />
+                </div>
               </div>
             </AnimatedSection>
           </div>
         </Container>
       </section>
-      <section id="collections" className="py-16 md:py-24">
+
+      {/* ── MARQUEE ──────────────────────────────────────────────────── */}
+      <div className="home-marquee-wrap overflow-hidden border-y border-[#0d1f1a]/10 bg-[#0a1a14] py-3.5 cursor-default select-none">
+        <div className="home-marquee-track">
+          {[...liveCollections, ...liveCollections].map((c, i) => (
+            <span key={`${c.title}-${i}`} className="flex shrink-0 items-center">
+              <span className="px-6 text-[10px] font-black uppercase tracking-[0.28em] text-white/38 transition-colors hover:text-[#f0c76a]">
+                <span className="mr-2 text-sm">{c.icon}</span>
+                {c.title}
+              </span>
+              <span className="text-[#f0c76a]/25 text-sm">·</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ── COLLECTIONS GRID ─────────────────────────────────────────── */}
+      <section id="collections" className="bg-[#f7f8fa] py-20 md:py-28">
         <Container>
-          <AnimatedSection className="mb-10 grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+          <AnimatedSection className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#1e8b79]">
-                Collection hubs
-              </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Ten direct paths into finished homepage concepts.
+              <SectionPill icon={<LayoutGrid className="h-3 w-3" />}>
+                {categories.length} Categories
+              </SectionPill>
+              <h2 className="mt-5 text-4xl font-black leading-[1.06] tracking-tight md:text-5xl">
+                Every business type,
+                <br />
+                <span className="text-[#5f6963]">one focused hub.</span>
               </h2>
             </div>
-            <p className="max-w-2xl text-lg leading-8 text-[#5f6963]">
-              The homepage now works like an index: choose the business type,
-              open the category, then review the individual demos inside.
-            </p>
+            <div className="max-w-xs">
+              <p className="text-sm leading-7 text-[#5f6963]">
+                Pick a category to open its full collection of live homepage demos — each one
+                completely distinct.
+              </p>
+              <Link
+                to="#featured"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs font-black text-[#1e8b79] transition hover:text-[#0d1f1a]"
+              >
+                Browse all templates <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </AnimatedSection>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-            {liveCollections.map((collection) => (
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
+            {liveCollections.map((collection, i) => (
               <Link
                 key={collection.title}
                 to={collection.href}
-                className="group overflow-hidden bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                className="group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-transparent hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)]"
+                style={{ animationDelay: `${i * 35}ms` }}
               >
+                {/* Thumbnail */}
                 <HomeImage
                   src={collection.image.src}
                   alt={collection.image.alt}
                   fallbackStyle={collection.image.fallbackStyle}
-                  className="min-h-[220px]"
+                  className="h-40"
                 >
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(0,0,0,0.72))]" />
-                  <div className="absolute left-4 top-4 bg-white/94 px-3 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#161616]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
+                  {/* Hover color wash */}
+                  <div
+                    className="absolute inset-0 opacity-0 transition-opacity duration-400 group-hover:opacity-20"
+                    style={{ background: collection.accentColor }}
+                  />
+                  {/* Live badge */}
+                  <div className="absolute left-2.5 top-2.5 flex items-center gap-1 rounded-full bg-black/55 px-2 py-0.5 text-[9px] font-black text-white backdrop-blur-sm">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                     {collection.count} live
                   </div>
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <p className="text-2xl font-black">{collection.title}</p>
-                    <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-white/70">
-                      {collection.button}
+                  {/* Icon */}
+                  <div className="absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-lg bg-black/45 text-sm backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                    {collection.icon}
+                  </div>
+                  {/* Title overlay */}
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5">
+                    <p className="text-base font-black leading-tight text-white">
+                      {collection.title}
+                    </p>
+                    <p
+                      className="mt-0.5 text-[9px] font-black uppercase tracking-[0.16em] opacity-0 transition-all duration-300 group-hover:opacity-100"
+                      style={{ color: collection.accentColor }}
+                    >
+                      {collection.button} →
                     </p>
                   </div>
                 </HomeImage>
-                <div className="p-5">
+
+                {/* Card body */}
+                <div className="p-3.5">
                   <p
-                    className={`text-xs font-black uppercase tracking-[0.18em] ${collection.tone}`}
+                    className="text-[10px] font-black uppercase tracking-[0.18em]"
+                    style={{ color: collection.accentColor }}
                   >
-                    Category hub
+                    {collection.count} demos
                   </p>
-                  <p className="mt-3 text-sm leading-6 text-[#5f6963]">
+                  <p className="mt-1.5 text-[11px] leading-5 text-[#5f6963] line-clamp-2">
                     {collection.text}
                   </p>
                 </div>
+
+                {/* Bottom accent */}
+                <div
+                  className="absolute inset-x-0 bottom-0 h-0.5 scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
+                  style={{ background: `linear-gradient(90deg, ${collection.accentColor}, transparent)` }}
+                />
               </Link>
             ))}
           </div>
         </Container>
       </section>
 
-      <section id="featured" className="border-y border-[#ddd2c0] bg-[#fffaf1] py-16 md:py-24">
+      {/* ── FEATURE HIGHLIGHTS STRIP ─────────────────────────────────── */}
+      <section className="border-y border-gray-100 bg-white py-14">
         <Container>
-          <AnimatedSection className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            {[
+              {
+                icon: <Zap className="h-5 w-5" />,
+                title: "React + TypeScript",
+                text: "Every template is a real, runnable component with clean code.",
+                color: "#f0c76a",
+                bg: "bg-amber-50",
+              },
+              {
+                icon: <Sparkles className="h-5 w-5" />,
+                title: "Distinct brand systems",
+                text: "Each design has its own visual language, palette, and feel.",
+                color: "#1e8b79",
+                bg: "bg-emerald-50",
+              },
+              {
+                icon: <TrendingUp className="h-5 w-5" />,
+                title: "Conversion-focused",
+                text: "Layouts built around real business goals and user intent.",
+                color: "#4338ca",
+                bg: "bg-indigo-50",
+              },
+              {
+                icon: <Heart className="h-5 w-5" />,
+                title: "Shortlist & compare",
+                text: "Save favorites, share with a link, and compare side-by-side.",
+                color: "#be185d",
+                bg: "bg-rose-50",
+              },
+            ].map(({ icon, title, text, color, bg }) => (
+              <div key={title} className="flex flex-col gap-3">
+                <div
+                  className={`flex h-11 w-11 items-center justify-center rounded-2xl ${bg}`}
+                  style={{ color }}
+                >
+                  {icon}
+                </div>
+                <p className="text-sm font-black text-[#17211d]">{title}</p>
+                <p className="text-xs leading-5 text-[#5f6963]">{text}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── FEATURED / BROWSE SECTION ────────────────────────────────── */}
+      <section id="featured" className="bg-[#f7f8fa] py-20 md:py-28">
+        <Container>
+          <AnimatedSection className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#1e8b79]">
-                Featured work
-              </p>
-              <h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight md:text-5xl">
-                A quick sample from every live category.
+              <SectionPill icon={<Sparkles className="h-3 w-3" />}>Template browser</SectionPill>
+              <h2 className="mt-5 text-4xl font-black leading-[1.06] tracking-tight md:text-5xl">
+                Browse the full library.
+                <span className="ml-3 inline-block align-middle rounded-xl bg-[#0d1f1a] px-3 py-1.5 text-xl text-[#f0c76a]">
+                  {allWebsites.filter((s) => s.status === "completed" || s.status === "live").length}
+                </span>
               </h2>
             </div>
-            <p className="max-w-md text-base leading-7 text-[#5f6963]">
-              Use this section for fast review, then jump into the full category
-              hub when a direction feels right.
+            <p className="max-w-xs text-sm leading-7 text-[#5f6963]">
+              Filter by category, search by name, or open your shortlist to compare designs.
             </p>
           </AnimatedSection>
 
-          {/* Tab, Search & Filter Controls */}
-          <div className="mb-8 space-y-4 border-b border-[#ddd2c0] pb-6">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              {/* Primary Mode Tabs */}
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFeaturedTab('featured');
-                    setSelectedCategory('all');
-                  }}
-                  className={`rounded-full px-5 py-2.5 text-xs font-black uppercase tracking-wider transition ${
-                    featuredTab === 'featured'
-                      ? 'bg-[#10201c] text-white shadow-sm'
-                      : 'bg-white text-[#5f6963] border border-[#ddd2c0] hover:bg-[#fff7ec]'
-                  }`}
-                >
-                  Featured Samples ({featuredWebsites.length})
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFeaturedTab('all')}
-                  className={`flex items-center gap-1.5 rounded-full px-5 py-2.5 text-xs font-black uppercase tracking-wider transition ${
-                    featuredTab === 'all'
-                      ? 'bg-[#10201c] text-white shadow-sm'
-                      : 'bg-white text-[#5f6963] border border-[#ddd2c0] hover:bg-[#fff7ec]'
-                  }`}
-                >
-                  <Sparkles className="h-3.5 w-3.5 text-[#f0c76a]" />
-                  <span>All 100 Templates</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFeaturedTab('shortlist')}
-                  className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-black uppercase tracking-wider transition ${
-                    featuredTab === 'shortlist'
-                      ? 'bg-rose-600 text-white shadow-md shadow-rose-600/25'
-                      : 'bg-white text-[#5f6963] border border-[#ddd2c0] hover:bg-[#fff7ec]'
-                  }`}
-                >
-                  <Heart className={`h-3.5 w-3.5 ${featuredTab === 'shortlist' ? 'fill-white' : 'text-rose-500'}`} />
-                  <span>Your Shortlist ({shortlistedWebsites.length})</span>
-                </button>
+          {/* Controls bar */}
+          <div className="mb-6 overflow-hidden rounded-2xl border border-gray-200/60 bg-white shadow-sm">
+            <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
+              {/* Mode tabs */}
+              <div className="flex gap-1.5">
+                {[
+                  { id: "featured", label: `Featured (${featuredWebsites.length})`, icon: "✦" },
+                  { id: "all", label: "All Live", icon: "🔥" },
+                  { id: "shortlist", label: `Saved (${shortlistedWebsites.length})`, icon: "♥" },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => {
+                      setFeaturedTab(tab.id as typeof featuredTab);
+                      if (tab.id === "featured") setSelectedCategory("all");
+                    }}
+                    className={`flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-black transition-all duration-200 ${
+                      featuredTab === tab.id
+                        ? tab.id === "shortlist"
+                          ? "bg-rose-500 text-white shadow-sm shadow-rose-500/20"
+                          : "bg-[#0d1f1a] text-white shadow-sm"
+                        : tab.id === "shortlist"
+                          ? "text-gray-500 hover:bg-rose-50 hover:text-rose-600"
+                          : "text-gray-500 hover:bg-gray-100 hover:text-[#17211d]"
+                    }`}
+                  >
+                    <span>{tab.icon}</span>
+                    {tab.label}
+                  </button>
+                ))}
               </div>
 
-              {/* Quick Search Input */}
-              <div className="relative w-full sm:w-72">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#5f6963]" />
+              {/* Search input */}
+              <div className="relative w-full sm:w-60">
+                <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Filter by name or style..."
-                  className="w-full rounded-full border border-[#ddd2c0] bg-white pl-10 pr-9 py-2 text-xs font-semibold text-[#17211d] placeholder-[#9ca3af] focus:border-[#10201c] focus:outline-none shadow-2xs"
+                  placeholder="Search templates..."
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50 py-2 pl-9 pr-8 text-xs font-semibold text-[#17211d] placeholder-gray-400 focus:border-[#1e8b79] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#1e8b79]/12"
                 />
                 {searchQuery && (
                   <button
                     type="button"
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
-                    aria-label="Clear search"
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-full p-0.5 text-gray-400 hover:bg-gray-200 hover:text-gray-700"
+                    aria-label="Clear"
                   >
                     <X className="h-3.5 w-3.5" />
                   </button>
@@ -683,20 +883,21 @@ export function Home() {
               </div>
             </div>
 
-            {/* Category Filter Pills (visible in 'all' or 'featured' modes) */}
-            {featuredTab !== 'shortlist' && (
-              <div className="flex flex-wrap items-center gap-1.5 pt-2">
+            {/* Category filter pills */}
+            {featuredTab !== "shortlist" && (
+              <div className="flex flex-wrap gap-1.5 border-t border-gray-100 px-4 py-3">
                 {categoryFilters.map((cat) => (
                   <button
                     key={cat.id}
                     type="button"
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`rounded-full px-3.5 py-1.5 text-[11px] font-bold transition ${
+                    className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[11px] font-bold transition-all duration-150 ${
                       selectedCategory === cat.id
-                        ? 'bg-[#1e8b79] text-white shadow-xs'
-                        : 'bg-white/80 text-[#5f6963] border border-[#e5dcd0] hover:bg-white hover:text-[#17211d]'
+                        ? "bg-[#0d1f1a] text-white shadow-sm"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-[#17211d]"
                     }`}
                   >
+                    <span className="text-xs">{cat.icon}</span>
                     {cat.label}
                   </button>
                 ))}
@@ -704,37 +905,39 @@ export function Home() {
             )}
           </div>
 
-          {featuredTab === 'shortlist' && shortlistedWebsites.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-[#ddd2c0] bg-white/70 p-12 text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-rose-50 text-rose-500 shadow-xs">
-                <Heart className="h-6 w-6" />
+          {/* Cards grid */}
+          {featuredTab === "shortlist" && shortlistedWebsites.length === 0 ? (
+            <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-gray-200 bg-white py-24 text-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-rose-50 text-rose-400">
+                <Heart className="h-7 w-7" />
               </div>
-              <h3 className="text-xl font-black text-[#17211d]">Your Shortlist is Empty</h3>
-              <p className="mx-auto mt-2 max-w-md text-sm text-[#5f6963] leading-relaxed">
-                Click the <span className="font-bold text-rose-600">❤️ Heart button</span> on any website card or the floating toolbar to shortlist your favorite templates for quick review.
+              <h3 className="mt-5 text-lg font-black text-[#17211d]">Your shortlist is empty</h3>
+              <p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-[#5f6963]">
+                Click the <span className="font-bold text-rose-600">♥ heart</span> on any card to
+                save it here.
               </p>
             </div>
           ) : displayedWebsites.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-[#ddd2c0] bg-white/70 p-12 text-center">
-              <h3 className="text-lg font-black text-[#17211d]">No templates match your criteria</h3>
-              <p className="mx-auto mt-2 max-w-md text-xs text-[#5f6963]">
-                Try adjusting your search query or selecting "All Categories".
+            <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-gray-200 bg-white py-16 text-center">
+              <h3 className="text-base font-black text-[#17211d]">No templates match</h3>
+              <p className="mx-auto mt-2 max-w-xs text-xs text-[#5f6963]">
+                Try a different search or category.
               </p>
               <button
                 type="button"
                 onClick={() => {
-                  setSearchQuery('');
-                  setSelectedCategory('all');
+                  setSearchQuery("");
+                  setSelectedCategory("all");
                 }}
-                className="mt-4 rounded-full bg-[#10201c] px-4 py-2 text-xs font-bold text-white hover:bg-[#1e8b79] transition"
+                className="mt-5 rounded-full bg-[#0d1f1a] px-5 py-2 text-xs font-black text-white transition hover:bg-[#1e8b79]"
               >
-                Reset Filters
+                Reset filters
               </button>
             </div>
           ) : (
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-              {displayedWebsites.map((website, index) => {
-                const categoryPath = website.category.toLowerCase().replace(/\s+/g, '-');
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              {displayedWebsites.map((website) => {
+                const categoryPath = website.category.toLowerCase().replace(/\s+/g, "-");
                 const routePath = `/${categoryPath}/${website.slug}`;
                 const favorited = favoriteIds.includes(website.id);
 
@@ -744,36 +947,33 @@ export function Home() {
                     to={routePath}
                     onMouseEnter={() => prefetchRoute(routePath)}
                     onTouchStart={() => prefetchRoute(routePath)}
-                    className={`group reveal-card overflow-hidden bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
-                      index % 5 === 1
-                        ? "delay-100"
-                        : index % 5 === 2
-                          ? "delay-200"
-                          : index % 5 === 3
-                            ? "delay-300"
-                            : ""
-                    }`}
+                    className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-gray-200 hover:shadow-xl"
                   >
+                    {/* Thumbnail */}
                     <div
-                      className="relative h-40 overflow-hidden"
+                      className="relative h-44 overflow-hidden"
                       style={{
-                        backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 55%, ${website.colors.accent} 100%)`,
+                        backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 60%, ${website.colors.accent} 100%)`,
                       }}
                     >
                       {website.image && (
                         <img
                           src={website.image}
-                          alt={`${website.title} website preview`}
+                          alt={`${website.title} preview`}
                           className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
                           loading="lazy"
                           decoding="async"
                         />
                       )}
                       <div
-                        className={`absolute inset-0 ${website.image ? "bg-gradient-to-t from-black/50 via-black/5 to-transparent" : "bg-[radial-gradient(circle_at_24%_24%,rgba(255,255,255,0.58),transparent_25%),radial-gradient(circle_at_78%_76%,rgba(255,255,255,0.26),transparent_28%)]"}`}
+                        className={`absolute inset-0 ${
+                          website.image
+                            ? "bg-gradient-to-t from-black/55 via-black/5 to-transparent"
+                            : "bg-[radial-gradient(circle_at_24%_24%,rgba(255,255,255,0.5),transparent_25%)]"
+                        }`}
                       />
 
-                      {/* Interactive Heart Toggle on Homepage Card */}
+                      {/* Heart button */}
                       <button
                         type="button"
                         onClick={(e) => {
@@ -782,41 +982,52 @@ export function Home() {
                           toggle(website.id);
                         }}
                         aria-label={favorited ? "Remove from shortlist" : "Save to shortlist"}
-                        className={`absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full shadow-md backdrop-blur-md transition hover:scale-110 active:scale-95 ${
+                        className={`absolute right-2.5 top-2.5 z-10 flex h-7 w-7 items-center justify-center rounded-full backdrop-blur-sm transition hover:scale-110 active:scale-95 ${
                           favorited
-                            ? 'bg-rose-500 text-white shadow-rose-500/30'
-                            : 'bg-black/40 text-white/90 hover:bg-black/60'
+                            ? "bg-rose-500 text-white shadow-md"
+                            : "bg-black/35 text-white/80 hover:bg-black/55"
                         }`}
                       >
-                        <Heart className={`h-4 w-4 ${favorited ? 'fill-white' : ''}`} />
+                        <Heart className={`h-3.5 w-3.5 ${favorited ? "fill-white" : ""}`} />
                       </button>
 
-                      <div className="absolute bottom-4 left-4 flex gap-2">
-                        {[
-                          website.colors.primary,
-                          website.colors.secondary,
-                          website.colors.accent,
-                        ].map((color) => (
-                          <span
-                            key={color}
-                            className="h-5 w-5 rounded-full border border-white/75"
-                            style={{ backgroundColor: color }}
-                          />
-                        ))}
+                      {/* External link indicator on hover */}
+                      <div className="absolute left-2.5 bottom-2.5 flex gap-1.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                        <span className="flex items-center gap-1 rounded-full bg-black/55 px-2 py-0.5 text-[9px] font-black text-white backdrop-blur-sm">
+                          <ExternalLink className="h-2.5 w-2.5" />
+                          Open
+                        </span>
+                      </div>
+
+                      {/* Color palette */}
+                      <div className="absolute bottom-2.5 right-2.5 flex gap-1">
+                        {[website.colors.primary, website.colors.secondary, website.colors.accent].map(
+                          (color) => (
+                            <span
+                              key={color}
+                              className="h-3.5 w-3.5 rounded-full border border-white/60 shadow-sm"
+                              style={{ backgroundColor: color }}
+                            />
+                          ),
+                        )}
                       </div>
                     </div>
-                    <div className="p-5">
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#1e8b79]">
+
+                    {/* Card body */}
+                    <div className="p-3.5">
+                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#1e8b79]">
                         {website.category}
                       </p>
-                      <h3 className="mt-3 text-xl font-black transition group-hover:text-[#1e8b79]">
+                      <h3 className="mt-1.5 text-sm font-black leading-snug transition duration-200 group-hover:text-[#1e8b79]">
                         {website.title}
                       </h3>
-                      <p className="mt-3 text-sm leading-6 text-[#5f6963] line-clamp-2">
+                      <p className="mt-1.5 text-xs leading-5 text-[#5f6963] line-clamp-2">
                         {website.shortDescription}
                       </p>
-                      <div className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-[#10201c] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#1e8b79]">
-                        Open design
+                      <div className="mt-3 flex items-center justify-between">
+                        <span className="text-[10px] font-black uppercase tracking-[0.14em] text-[#0d1f1a]/35 transition group-hover:text-[#1e8b79]">
+                          View design →
+                        </span>
                       </div>
                     </div>
                   </Link>
@@ -827,48 +1038,330 @@ export function Home() {
         </Container>
       </section>
 
-      <section className="py-16 md:py-24">
+      {/* ── ABOUT / STORY / CLIENT VALUE SECTION ────────────────────────────── */}
+      <section id="about-project" className="relative overflow-hidden bg-[#060f0b] py-24 text-white md:py-32">
+        {/* Ambient atmospheric glows */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[32rem] w-full max-w-7xl bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(30,139,121,0.22),transparent)]" />
+          <div className="absolute right-0 top-1/3 h-96 w-96 rounded-full bg-[#f0c76a]/6 blur-3xl" />
+          <div className="absolute left-0 bottom-1/4 h-80 w-80 rounded-full bg-[#1e8b79]/10 blur-3xl" />
+        </div>
+
         <Container>
-          <AnimatedSection
-            animation="scale-in"
-            className="overflow-hidden bg-[#10201c] text-white shadow-2xl"
-          >
-            <div className="grid gap-8 p-8 md:grid-cols-[1fr_0.82fr] md:p-12 lg:p-16">
-              <div>
-                <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f0c76a]">
-                  Portfolio status
-                </p>
-                <h2 className="mt-4 max-w-3xl text-4xl font-black leading-tight md:text-5xl">
-                  {completedDesignCount} live concepts across {categories.length} categories.
-                </h2>
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-white/70">
-                  The page is intentionally shorter now: fewer explanations,
-                  more direct routes into the work.
-                </p>
+          <AnimatedSection>
+            {/* Header */}
+            <div className="relative mx-auto max-w-3xl text-center">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#f0c76a]/25 bg-[#f0c76a]/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-[#f0c76a]">
+                <Sparkles className="h-3.5 w-3.5" />
+                The Origin Story & Client Advantage
               </div>
-              <div className="bg-white p-6 text-[#161616]">
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-[#6a6258]">
-                  Start here
+
+              <h2 className="mt-6 text-3xl font-black leading-[1.1] tracking-tight md:text-5xl lg:text-5xl">
+                Most website templates are dead prototypes.
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1e8b79] via-[#6ee7b7] to-[#f0c76a]">
+                  100Web is built for clients who refuse to look average.
+                </span>
+              </h2>
+
+              <p className="mt-5 text-base leading-8 text-white/60 md:text-lg">
+                Traditional agencies charge $8,000–$20,000 to deliver static Figma mockups that lose their
+                soul during development. 100Web gives founders and businesses live, testable digital realities
+                before writing a single line of project scope.
+              </p>
+            </div>
+
+            {/* Story & Client Pillars Bento Grid */}
+            <div className="mt-16 grid gap-6 md:grid-cols-3">
+              {/* Chapter 1 */}
+              <div className="group relative rounded-3xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#1e8b79]/50 hover:bg-white/[0.06]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 ring-1 ring-rose-500/30">
+                  <XCircle className="h-6 w-6" />
+                </div>
+                <div className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-rose-400">
+                  <span>Chapter 01</span>
+                  <span className="h-1 w-1 rounded-full bg-rose-400" />
+                  <span>The Problem</span>
+                </div>
+                <h3 className="mt-2 text-xl font-black text-white">The "Recycled Theme" Trap</h3>
+                <p className="mt-3 text-sm leading-6 text-white/55">
+                  Clients are repeatedly promised "bespoke web craft," only to receive bloated WordPress themes
+                  with 35 plugins that load in 6 seconds, break on mobile, and look virtually identical to their
+                  competitors.
                 </p>
-                <div className="mt-6 grid gap-3">
-                  <a
-                    href="#collections"
-                    className="bg-[#f8f4ec] p-4 font-black transition hover:bg-[#f0c76a]"
+                <div className="mt-6 flex items-center gap-2 text-xs font-bold text-rose-300/80">
+                  <span className="rounded-full bg-rose-500/10 px-2.5 py-1">Endless Wireframe Fatigue</span>
+                  <span className="rounded-full bg-rose-500/10 px-2.5 py-1">Slow 3s+ Load</span>
+                </div>
+              </div>
+
+              {/* Chapter 2 */}
+              <div className="group relative rounded-3xl border border-[#1e8b79]/40 bg-gradient-to-b from-[#1e8b79]/15 to-transparent p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#1e8b79]/70 hover:shadow-2xl hover:shadow-[#1e8b79]/15">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#1e8b79]/20 text-[#6ee7b7] ring-1 ring-[#1e8b79]/40">
+                  <Code2 className="h-6 w-6" />
+                </div>
+                <div className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#6ee7b7]">
+                  <span>Chapter 02</span>
+                  <span className="h-1 w-1 rounded-full bg-[#6ee7b7]" />
+                  <span>The Craft</span>
+                </div>
+                <h3 className="mt-2 text-xl font-black text-white">The 100-System Odyssey</h3>
+                <p className="mt-3 text-sm leading-6 text-white/65">
+                  Umair set out to prove what true digital craftsmanship looks like: engineering 100 autonomous brand
+                  systems across 10 commercial industries. Every layout is hand-coded from scratch with distinct color
+                  theories and niche conversion psychology.
+                </p>
+                <div className="mt-6 flex items-center gap-2 text-xs font-bold text-[#6ee7b7]">
+                  <span className="rounded-full bg-[#1e8b79]/20 px-2.5 py-1">Pure React 19 + TS</span>
+                  <span className="rounded-full bg-[#1e8b79]/20 px-2.5 py-1">Tailwind CSS</span>
+                </div>
+              </div>
+
+              {/* Chapter 3 */}
+              <div className="group relative rounded-3xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#f0c76a]/50 hover:bg-white/[0.06]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#f0c76a]/15 text-[#f0c76a] ring-1 ring-[#f0c76a]/30">
+                  <Rocket className="h-6 w-6" />
+                </div>
+                <div className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#f0c76a]">
+                  <span>Chapter 03</span>
+                  <span className="h-1 w-1 rounded-full bg-[#f0c76a]" />
+                  <span>The Client ROI</span>
+                </div>
+                <h3 className="mt-2 text-xl font-black text-white">Zero Guesswork, 10x Speed</h3>
+                <p className="mt-3 text-sm leading-6 text-white/55">
+                  Instead of staring at abstract Figma rectangles for 2 months, clients test-drive live conversion
+                  flows on their phone, pick their dream foundation, and launch a world-class production experience in
+                  days.
+                </p>
+                <div className="mt-6 flex items-center gap-2 text-xs font-bold text-[#f0c76a]/90">
+                  <span className="rounded-full bg-[#f0c76a]/10 px-2.5 py-1">Launch in 5–7 Days</span>
+                  <span className="rounded-full bg-[#f0c76a]/10 px-2.5 py-1">100% Code Ownership</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Why Clients Choose 100Web Comparison Matrix */}
+            <div className="mt-14 overflow-hidden rounded-3xl border border-white/12 bg-white/[0.02] shadow-2xl backdrop-blur-xl">
+              <div className="border-b border-white/10 px-6 py-5 sm:px-8">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#1e8b79]">
+                      Direct Head-to-Head Proof
+                    </span>
+                    <h3 className="text-xl font-black text-white">How 100Web Compares to the Status Quo</h3>
+                  </div>
+                  <div className="flex items-center gap-4 text-xs font-bold">
+                    <span className="flex items-center gap-1.5 text-white/50">
+                      <span className="h-2 w-2 rounded-full bg-rose-400" /> Traditional Agency
+                    </span>
+                    <span className="flex items-center gap-1.5 text-[#6ee7b7]">
+                      <span className="h-2 w-2 rounded-full bg-[#1e8b79]" /> 100Web Approach
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="divide-y divide-white/8">
+                {[
+                  {
+                    feature: "Initial Experience",
+                    traditional: "Static PDF or Figma mockups with placeholder text",
+                    modern: "Fully interactive, runnable web applications in browser",
+                    badge: "Live Interactive",
+                  },
+                  {
+                    feature: "Turnaround Time",
+                    traditional: "8 to 14 weeks of back-and-forth wireframing meetings",
+                    modern: "Ready for content adaptation & launch in 3 to 7 business days",
+                    badge: "92% Faster",
+                  },
+                  {
+                    feature: "Performance & SEO",
+                    traditional: "Bloated themes, 35+ plugins, 3–6s load times",
+                    modern: "Handwritten React, zero bloat, sub-second 99+ Lighthouse",
+                    badge: "< 0.8s Load",
+                  },
+                  {
+                    feature: "Design Psychology",
+                    traditional: "Generic one-size-fits-all layout with swapped colors",
+                    modern: "Purpose-built conversion flows tailored to each industry niche",
+                    badge: "Bespoke UX",
+                  },
+                  {
+                    feature: "Code Ownership",
+                    traditional: "Proprietary builder lock-in & monthly subscription fees",
+                    modern: "100% clean TypeScript/React codebase owned by your business",
+                    badge: "Zero Lock-in",
+                  },
+                ].map((row, idx) => (
+                  <div
+                    key={row.feature}
+                    className={`grid gap-4 px-6 py-4.5 sm:grid-cols-[1.2fr_1.8fr_2fr] sm:items-center sm:px-8 transition-colors ${
+                      idx % 2 === 0 ? "bg-white/[0.01]" : "bg-transparent"
+                    }`}
                   >
-                    Browse all collections
-                  </a>
-                  <a
-                    href="#featured"
-                    className="bg-[#eef7f3] p-4 font-black transition hover:bg-[#b9e5d9]"
-                  >
-                    Review featured concepts
-                  </a>
-                  <Link
-                    to="/fitness"
-                    className="bg-gray-100 p-4 font-black transition hover:bg-gray-200"
-                  >
-                    Latest category: Fitness
-                  </Link>
+                    <div>
+                      <span className="text-xs font-black uppercase tracking-wider text-white/90">
+                        {row.feature}
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-2.5 text-xs text-white/45">
+                      <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-rose-400/70" />
+                      <span>{row.traditional}</span>
+                    </div>
+                    <div className="flex items-start justify-between gap-3 text-xs font-bold text-white">
+                      <div className="flex items-start gap-2.5">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                        <span className="text-white/95">{row.modern}</span>
+                      </div>
+                      <span className="shrink-0 rounded-full border border-[#1e8b79]/40 bg-[#1e8b79]/15 px-2.5 py-0.5 text-[10px] font-black text-[#6ee7b7]">
+                        {row.badge}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Founder Note & Direct Client Collaboration Card */}
+            <div className="mt-14 relative overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br from-[#0a1a14] via-[#0d221b] to-[#07130e] p-8 sm:p-12 shadow-2xl">
+              <div className="absolute right-0 top-0 h-64 w-64 bg-[radial-gradient(circle_at_80%_20%,rgba(240,199,106,0.12),transparent_70%)] pointer-events-none" />
+
+              <div className="relative grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#1e8b79] text-base font-black text-white shadow-lg shadow-[#1e8b79]/30">
+                      U
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-black text-white">Umair Ahmad</h4>
+                      <p className="text-xs font-bold uppercase tracking-wider text-[#f0c76a]">
+                        Creator · Lead UI/UX Engineer & Frontend Architect
+                      </p>
+                    </div>
+                  </div>
+
+                  <blockquote className="mt-6 border-l-2 border-[#1e8b79] pl-4 text-base italic leading-7 text-white/80">
+                    "I built 100Web because I believe digital credibility starts the moment a customer lands on your
+                    page. When you work with one of these systems, you aren't buying a template — you're adopting a
+                    production-tested foundation that I personally engineered to help businesses convert visitors into
+                    loyal clients."
+                  </blockquote>
+
+                  <div className="mt-6 flex flex-wrap items-center gap-6 text-xs text-white/50">
+                    <span className="flex items-center gap-1.5 text-white/70">
+                      <ShieldCheck className="h-4 w-4 text-emerald-400" />
+                      Production Tested
+                    </span>
+                    <span className="flex items-center gap-1.5 text-white/70">
+                      <Clock className="h-4 w-4 text-[#f0c76a]" />
+                      5–7 Day Custom Launch
+                    </span>
+                    <span className="flex items-center gap-1.5 text-white/70">
+                      <Users className="h-4 w-4 text-sky-400" />
+                      Direct Creator Collaboration
+                    </span>
+                  </div>
+                </div>
+
+                {/* Direct Action Hub */}
+                <div className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#f0c76a]">
+                    Have a vision for your brand?
+                  </p>
+                  <p className="text-sm font-bold text-white">
+                    Need one of these templates adapted for your business, or a custom build from scratch?
+                  </p>
+                  <p className="text-xs leading-5 text-white/50">
+                    Collaborate directly with Umair to adapt layouts, connect custom backends (Stripe, Supabase, CMS),
+                    and deploy your new digital flag.
+                  </p>
+
+                  <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
+                    <a
+                      href="https://github.com/umairny"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#f0c76a] px-4 py-2.5 text-xs font-black text-[#07130e] shadow-md shadow-[#f0c76a]/20 transition hover:bg-white active:scale-95"
+                    >
+                      <MessageSquare className="h-4 w-4" />
+                      Contact & Connect
+                    </a>
+                    <Link
+                      to="#collections"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.08] px-4 py-2.5 text-xs font-black text-white transition hover:border-white/30 hover:bg-white/15 active:scale-95"
+                    >
+                      Browse Collections
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </Container>
+      </section>
+
+      {/* ── CTA BANNER ──────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28">
+        <Container>
+          <AnimatedSection animation="scale-in">
+            <div className="relative overflow-hidden rounded-3xl bg-[#0a1a14] text-white shadow-2xl">
+              {/* Decorative */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_65%_at_-8%_-8%,rgba(30,139,121,0.45),transparent),radial-gradient(ellipse_55%_75%_at_108%_108%,rgba(240,199,106,0.12),transparent)]" />
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#1e8b79]/45 to-transparent" />
+              <div className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_80%_40%,rgba(240,199,106,0.05),transparent_60%)]" />
+
+              <div className="relative grid gap-10 px-8 py-14 md:grid-cols-[1.25fr_0.75fr] md:items-center md:px-14 md:py-18">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-[#f0c76a]/20 bg-[#f0c76a]/8 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#f0c76a]">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#f0c76a] opacity-55" />
+                      <span className="relative h-1.5 w-1.5 rounded-full bg-[#f0c76a]" />
+                    </span>
+                    {completedDesignCount} live · growing weekly
+                  </div>
+                  <h2 className="mt-6 max-w-xl text-3xl font-black leading-tight tracking-tight md:text-4xl">
+                    {completedDesignCount} production-ready templates across {categories.length}{" "}
+                    categories.
+                  </h2>
+                  <p className="mt-4 max-w-md text-base leading-7 text-white/52">
+                    Not the same layout with swapped colors. Each one is a real brand system, built
+                    to show what the web can look like.
+                  </p>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <Link
+                      to="#collections"
+                      className="inline-flex items-center gap-2.5 rounded-full bg-[#f0c76a] px-7 py-3.5 text-sm font-black text-[#0d1f1a] shadow-lg shadow-[#f0c76a]/15 transition hover:-translate-y-0.5 hover:bg-white"
+                    >
+                      Browse collections
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    <Link
+                      to="#featured"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/6 px-7 py-3.5 text-sm font-black text-white transition hover:bg-white/11 hover:border-white/24"
+                    >
+                      View templates
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Stats panel */}
+                <div className="grid grid-cols-3 overflow-hidden rounded-2xl border border-white/8 bg-white/4 md:grid-cols-1 md:divide-y md:divide-white/8">
+                  {[
+                    { val: completedDesignCount, label: "Live now", color: "#f0c76a" },
+                    { val: categories.length, label: "Categories", color: "#6ee7b7" },
+                    { val: plannedCount, label: "Total planned", color: "#93c5fd" },
+                  ].map(({ val, label, color }) => (
+                    <div key={label} className="p-5 text-center md:text-left">
+                      <p className="text-3xl font-black md:text-4xl" style={{ color }}>
+                        {val}
+                      </p>
+                      <p className="mt-1 text-[10px] font-black uppercase tracking-[0.16em] text-white/32">
+                        {label}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

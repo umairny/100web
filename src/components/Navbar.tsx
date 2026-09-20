@@ -1,237 +1,550 @@
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { Search, Heart } from 'lucide-react'
+import { Search, Heart, ChevronDown, X, LayoutGrid, ArrowLeft } from 'lucide-react'
 import { categories } from '../data/websites'
 import { prefetchRoute } from '../utils/routePrefetch'
 import { useFavorites } from '../utils/favorites'
 
-const primaryLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/#about-project' },
-  { label: 'Roadmap', href: '/#categories' },
-]
-
-const categoryLinks = categories.map((category) => ({
-  label: category.name,
-  href: category.href ?? '/#categories',
-  description: category.href ? 'Live collection' : 'Planned category',
-  isLive: Boolean(category.href),
-}))
-
-interface NavbarProps {
+export interface NavbarProps {
   mode?: 'default' | 'floating'
   onOpenSearch?: () => void
   onOpenShortlist?: () => void
 }
 
-function getInitials(label: string) {
-  return label
-    .split(/[\s-]+/)
-    .map((word) => word[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase()
+const primaryLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Collections', href: '/#collections' },
+  { label: 'Featured', href: '/#featured' },
+  { label: 'About', href: '/#about-project' },
+]
+
+const categoryLinks = categories.map((c) => ({
+  label: c.name,
+  href: c.href ?? '/#collections',
+  description: c.description,
+  icon: c.icon,
+  isLive: Boolean(c.href),
+}))
+
+function isActiveLink(pathname: string, hash: string, href: string) {
+  const [linkPath, linkHash] = href.split('#')
+  const path = linkPath || '/'
+
+  if (path === '/') {
+    if (pathname !== '/') return false
+    return linkHash ? hash === `#${linkHash}` : !hash
+  }
+
+  const matchesPath = pathname === path || pathname.startsWith(`${path}/`)
+  if (!matchesPath) return false
+  return linkHash ? hash === `#${linkHash}` : true
 }
 
-function isActiveHref(pathname: string, currentHash: string, href: string) {
-  const [rawPath, rawHash] = href.split('#')
-  const linkPath = rawPath || '/'
-  const linkHash = rawHash ? `#${rawHash}` : ''
+export function Navbar({ onOpenSearch, onOpenShortlist }: NavbarProps) {
+  const { count: shortlistCount } = useFavorites()
+  const { pathname, hash } = useLocation()
+  const isHomePage = pathname === '/'
 
-  if (linkPath === '/') {
-    if (pathname !== '/') {
-      return false
+  // Top navbar state (used on Home page)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState<string>('/')
+
+  // Floating bottom-left hub state (used on Other pages)
+  const [isBottomMenuOpen, setIsBottomMenuOpen] = useState(false)
+
+  const liveCategoryCount = categoryLinks.filter((c) => c.isLive).length
+  const isCategoryActive = categoryLinks.some((c) => isActiveLink(pathname, hash, c.href))
+
+  // Close menus on route/hash changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+    setIsCategoryOpen(false)
+    setIsBottomMenuOpen(false)
+  }, [pathname, hash])
+
+  // Close floating bottom menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsBottomMenuOpen(false)
+        setIsMobileMenuOpen(false)
+        setIsCategoryOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
+  // Scroll spy to dynamically track active section as user scrolls on Home page
+  useEffect(() => {
+    if (!isHomePage) {
+      setActiveSection('')
+      return
     }
 
-    return linkHash ? currentHash === linkHash : currentHash === ''
-  }
+    const sections = [
+      { id: 'about-project', href: '/#about-project' },
+      { id: 'featured', href: '/#featured' },
+      { id: 'collections', href: '/#collections' },
+    ]
 
-  const isPathMatch = pathname === linkPath || pathname.startsWith(`${linkPath}/`)
-
-  if (!isPathMatch) {
-    return false
-  }
-
-  return linkHash ? currentHash === linkHash : true
-}
-
-function MenuIcon({ isOpen }: { isOpen: boolean }) {
-  return (
-    <span className="flex flex-col gap-1.5" aria-hidden="true">
-      <span className={`block h-0.5 w-5 rounded-full bg-current transition ${isOpen ? 'translate-y-2 rotate-45' : ''}`} />
-      <span className={`block h-0.5 w-5 rounded-full bg-current transition ${isOpen ? 'opacity-0' : ''}`} />
-      <span className={`block h-0.5 w-5 rounded-full bg-current transition ${isOpen ? '-translate-y-2 -rotate-45' : ''}`} />
-    </span>
-  )
-}
-
-function Brand({ onClick, compact = false }: { onClick?: () => void; compact?: boolean }) {
-  return (
-    <Link to="/" className="group flex min-w-0 items-center gap-3" onClick={onClick}>
-      <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gray-950 text-sm font-black text-white shadow-lg shadow-gray-950/15 transition-all duration-300 ease-out group-hover:-translate-y-0.5 group-hover:bg-coffee-700 group-hover:shadow-coffee-700/25">
-        100
-      </div>
-      <div className="min-w-0">
-        <span className="block truncate font-black leading-none text-gray-950">100 Websites</span>
-        {!compact && (
-          <span className="mt-1 hidden text-xs font-bold uppercase tracking-[0.18em] text-gray-500 sm:block">
-            by Umair
-          </span>
-        )}
-      </div>
-    </Link>
-  )
-}
-
-function CategoryMenu({
-  pathname,
-  currentHash,
-  onNavigate,
-  className = 'grid gap-2',
-  compact = false,
-}: {
-  pathname: string
-  currentHash: string
-  onNavigate?: () => void
-  className?: string
-  compact?: boolean
-}) {
-  return (
-    <div className={className}>
-      {categoryLinks.map((link) => {
-        const isActive = isActiveHref(pathname, currentHash, link.href)
-
-        return (
-          <Link
-            key={link.label}
-            to={link.href}
-            onClick={onNavigate}
-            onMouseEnter={() => prefetchRoute(link.href)}
-            onTouchStart={() => prefetchRoute(link.href)}
-            className={`group flex items-center rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 ${
-              isActive
-                ? 'active border-gray-950 bg-gray-950 text-white shadow-lg shadow-gray-950/15'
-                : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-950 hover:shadow-md'
-            } ${compact ? 'gap-2 p-2' : 'gap-3 p-3'}`}
-          >
-            <span
-              className={`grid shrink-0 place-items-center rounded-xl text-xs font-black ${
-                isActive ? 'bg-white/15 text-white' : 'bg-gray-100 text-gray-950 group-hover:bg-coffee-100'
-              } ${compact ? 'h-8 w-8' : 'h-10 w-10'}`}
-            >
-              {getInitials(link.label)}
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className={`block truncate font-black ${compact ? 'text-xs sm:text-sm' : 'text-sm'}`}>
-                {link.label}
-              </span>
-              {!compact && (
-                <span className={`mt-0.5 block text-xs font-semibold ${isActive ? 'text-white/65' : 'text-gray-500'}`}>
-                  {link.description}
-                </span>
-              )}
-            </span>
-            <span
-              className={`h-2 w-2 rounded-full ${
-                link.isLive ? (isActive ? 'bg-coffee-300' : 'bg-emerald-500') : isActive ? 'bg-white/45' : 'bg-gray-300'
-              }`}
-              aria-label={link.isLive ? 'Live' : 'Planned'}
-            />
-          </Link>
-        )
-      })}
-    </div>
-  )
-}
-
-export function Navbar({ mode = 'default', onOpenSearch, onOpenShortlist }: NavbarProps) {
-  const { count: shortlistCount } = useFavorites()
-  const [isOpen, setIsOpen] = useState(false)
-  const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const { pathname, hash } = useLocation()
-  const liveCategoryCount = categoryLinks.filter((category) => category.isLive).length
-  const isCategoriesActive = categoryLinks.some((link) => isActiveHref(pathname, hash, link.href))
-  const isBrowseActive = isActiveHref(pathname, hash, '/#categories')
-
-  useEffect(() => {
-    let ticking = false
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setIsScrolled((prev) => {
-            const next = window.scrollY > 24
-            return prev === next ? prev : next
-          })
-          ticking = false
-        })
-        ticking = true
+      const scrollPos = window.scrollY + 180
+
+      // If reached bottom of page, highlight About
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120) {
+        setActiveSection('/#about-project')
+        return
+      }
+
+      // When near the top of the home page, highlight Home
+      if (window.scrollY < 380) {
+        setActiveSection('/')
+        return
+      }
+
+      for (const sec of sections) {
+        const el = document.getElementById(sec.id)
+        if (el) {
+          const top = el.offsetTop
+          const height = el.offsetHeight
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(sec.href)
+            return
+          }
+        }
       }
     }
 
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
-
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isHomePage])
 
-  useEffect(() => {
-    setIsOpen(false)
-    setIsCategoryMenuOpen(false)
-  }, [pathname, hash])
+  const isLinkActive = (href: string) => {
+    if (isHomePage) {
+      if (activeSection) {
+        return activeSection === href
+      }
+      return href === '/'
+    }
+    return isActiveLink(pathname, hash, href)
+  }
 
+  // Smooth scroll handler for anchor links
   useEffect(() => {
     if (!hash) {
       if (pathname === '/') {
         window.scrollTo({ top: 0, behavior: 'smooth' })
       }
-
       return
     }
 
     const targetId = decodeURIComponent(hash.slice(1))
-    const timeoutId = window.setTimeout(() => {
+    const timer = window.setTimeout(() => {
       const target = document.getElementById(targetId)
-
-      if (!target) {
-        return
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.scrollY - 72
+        window.scrollTo({ top, behavior: 'smooth' })
       }
+    }, 60)
 
-      const navbarOffset = mode === 'default' ? 84 : 0
-      const targetTop = target.getBoundingClientRect().top + window.scrollY - navbarOffset
+    return () => window.clearTimeout(timer)
+  }, [pathname, hash])
 
-      window.scrollTo({ top: targetTop, behavior: 'smooth' })
-    }, 80)
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
 
-    return () => window.clearTimeout(timeoutId)
-  }, [pathname, hash, mode])
-
-  if (mode === 'floating') {
+  // ── ON OTHER PAGES: RENDER SMALL FLOATING BUTTON ON BOTTOM-LEFT ─────────────
+  if (!isHomePage) {
     return (
-      <nav className="pointer-events-none fixed inset-0 z-[60]">
-        {isOpen && (
-          <button
-            type="button"
-            aria-label="Close portfolio navigation"
-            onClick={() => setIsOpen(false)}
-            className="pointer-events-auto fixed inset-0 hidden bg-transparent md:block"
-          />
-        )}
+      <div className="fixed bottom-5 left-5 z-[80] pointer-events-auto">
+        {/* Toggle Button */}
+        <button
+          type="button"
+          onClick={() => setIsBottomMenuOpen((prev) => !prev)}
+          aria-expanded={isBottomMenuOpen}
+          aria-label={isBottomMenuOpen ? 'Close 100Web Menu' : 'Open 100Web Menu'}
+          className={`flex items-center gap-2.5 rounded-full border px-3.5 py-2 text-xs font-bold shadow-2xl backdrop-blur-xl transition-all duration-300 hover:scale-105 active:scale-95 ${
+            isBottomMenuOpen
+              ? 'border-[#1e8b79] bg-[#07130e] text-white ring-2 ring-[#1e8b79]/40'
+              : 'border-white/20 bg-[#07130e]/95 text-white shadow-black/50 hover:border-white/35'
+          }`}
+        >
+          <div className="grid h-6 w-6 place-items-center rounded-lg bg-[#1e8b79] text-[11px] font-black text-white shadow-xs">
+            100
+          </div>
+          <span className="font-extrabold tracking-tight">100Web</span>
 
-        {(onOpenSearch || onOpenShortlist) && (
-          <div className="pointer-events-auto fixed bottom-5 right-5 z-10 flex items-center gap-2">
+          {shortlistCount > 0 && (
+            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 text-[9px] font-black text-white">
+              {shortlistCount}
+            </span>
+          )}
+
+          <span className="ml-0.5 text-white/60">
+            {isBottomMenuOpen ? (
+              <X className="h-3.5 w-3.5" />
+            ) : (
+              <LayoutGrid className="h-3.5 w-3.5 text-[#f0c76a]" />
+            )}
+          </span>
+        </button>
+
+        {/* Floating Popup Card */}
+        {isBottomMenuOpen && (
+          <>
+            {/* Click-away Backdrop */}
+            <div
+              className="fixed inset-0 z-[75] bg-black/50 backdrop-blur-xs"
+              onClick={() => setIsBottomMenuOpen(false)}
+            />
+
+            {/* Menu Panel */}
+            <div className="fixed bottom-20 left-5 z-[80] max-h-[calc(100vh-6.5rem)] w-[min(26rem,calc(100vw-2.5rem))] overflow-y-auto rounded-3xl border border-white/15 bg-[#07130e]/98 p-5 shadow-2xl shadow-black/80 backdrop-blur-2xl text-white animate-in fade-in slide-in-from-bottom-3 duration-200">
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <Link
+                  to="/"
+                  onClick={() => setIsBottomMenuOpen(false)}
+                  className="flex items-center gap-2.5 group"
+                >
+                  <div className="grid h-8 w-8 place-items-center rounded-lg bg-[#1e8b79] text-xs font-black text-white transition group-hover:scale-105">
+                    100
+                  </div>
+                  <div>
+                    <span className="block text-sm font-black text-white leading-none">100Web</span>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#f0c76a]">by Umair</span>
+                  </div>
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={() => setIsBottomMenuOpen(false)}
+                  className="rounded-full p-1.5 text-white/50 hover:bg-white/10 hover:text-white transition"
+                  aria-label="Close menu"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+
+              {/* Primary Links */}
+              <div className="mt-3.5 grid grid-cols-2 gap-1.5">
+                {primaryLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    onClick={() => setIsBottomMenuOpen(false)}
+                    className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.04] px-3 py-2 text-xs font-bold text-white/80 transition hover:border-white/15 hover:bg-white/[0.08] hover:text-white"
+                  >
+                    <span>{link.label}</span>
+                    <span className="text-[10px] text-white/40">→</span>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Categories Section */}
+              <div className="mt-4 border-t border-white/10 pt-3.5">
+                <div className="mb-2 flex items-center justify-between px-1">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f0c76a]">
+                    All Categories
+                  </span>
+                  <span className="text-[10px] font-bold text-white/40">
+                    {liveCategoryCount} Live
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-1.5 max-h-48 overflow-y-auto pr-1">
+                  {categoryLinks.map((cat) => (
+                    <Link
+                      key={cat.label}
+                      to={cat.href}
+                      onClick={() => setIsBottomMenuOpen(false)}
+                      className="flex items-center gap-2 rounded-xl border border-white/5 bg-white/[0.02] p-2 text-xs font-semibold text-white/75 transition hover:border-[#1e8b79]/40 hover:bg-[#1e8b79]/15 hover:text-white"
+                    >
+                      <span className="text-sm">{cat.icon}</span>
+                      <span className="truncate">{cat.label}</span>
+                      {cat.isLive && (
+                        <span className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
+                      )}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* Actions Footer */}
+              <div className="mt-4 border-t border-white/10 pt-3.5 flex flex-col gap-2">
+                <div className="grid grid-cols-2 gap-2">
+                  {onOpenSearch && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsBottomMenuOpen(false)
+                        onOpenSearch()
+                      }}
+                      className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] py-2 text-xs font-bold text-white/80 transition hover:bg-white/10 hover:text-white"
+                    >
+                      <Search className="h-3.5 w-3.5 text-white/60" />
+                      <span>Search</span>
+                    </button>
+                  )}
+
+                  {onOpenShortlist && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsBottomMenuOpen(false)
+                        onOpenShortlist()
+                      }}
+                      className="flex items-center justify-center gap-2 rounded-xl border border-rose-400/20 bg-rose-500/10 py-2 text-xs font-bold text-rose-300 transition hover:bg-rose-500/20"
+                    >
+                      <Heart className="h-3.5 w-3.5 fill-rose-500 text-rose-500" />
+                      <span>Saved ({shortlistCount})</span>
+                    </button>
+                  )}
+                </div>
+
+                <Link
+                  to="/"
+                  onClick={() => setIsBottomMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 rounded-xl bg-[#f0c76a] py-2.5 text-xs font-black text-[#07130e] shadow-md transition hover:bg-white active:scale-95"
+                >
+                  <ArrowLeft className="h-3.5 w-3.5" />
+                  <span>Return to 100Web Home</span>
+                </Link>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    )
+  }
+
+  // ── ON HOME PAGE: RENDER FULL STICKY TOP NAVBAR WITH SCROLL SPY ────────────
+  return (
+    <>
+      <nav
+        aria-label="Main Navigation"
+        className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#07130e]/95 backdrop-blur-xl shadow-lg shadow-black/20"
+      >
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          {/* Brand Logo */}
+          <Link
+            to="/"
+            onClick={() => {
+              setIsMobileMenuOpen(false)
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+            className="group flex items-center gap-3 shrink-0"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#1e8b79] text-sm font-black text-white shadow-md shadow-[#1e8b79]/20 transition-transform duration-300 ease-out group-hover:scale-105 group-hover:bg-[#23a28d]">
+              <span className="leading-none">100</span>
+            </div>
+            <div>
+              <span className="block text-base font-black leading-none tracking-tight text-white transition-colors duration-200 group-hover:text-[#f0c76a]">
+                100Web
+              </span>
+              <span className="mt-0.5 block text-[10px] font-bold uppercase tracking-[0.18em] text-[#f0c76a]/80">
+                by Umair
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.05] p-1 backdrop-blur-md">
+            {primaryLinks.map((link) => {
+              const active = isLinkActive(link.href)
+              return (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={`relative rounded-full px-4 py-1.5 text-sm font-bold transition-all duration-300 ${
+                    active
+                      ? 'bg-white/15 text-white shadow-xs'
+                      : 'text-white/70 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                  {active && (
+                    <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-[#f0c76a] animate-in fade-in duration-200" />
+                  )}
+                </Link>
+              )
+            })}
+
+            {/* Categories Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsCategoryOpen(true)}
+              onMouseLeave={() => setIsCategoryOpen(false)}
+            >
+              <button
+                type="button"
+                onClick={() => setIsCategoryOpen((prev) => !prev)}
+                aria-expanded={isCategoryOpen}
+                aria-haspopup="true"
+                className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold transition-all duration-200 focus:outline-none ${
+                  isCategoryActive || isCategoryOpen
+                    ? 'bg-white/15 text-white shadow-xs'
+                    : 'text-white/70 hover:bg-white/10 hover:text-white'
+                }`}
+              >
+                Categories
+                <span className="rounded-full bg-[#1e8b79]/30 px-1.5 py-0.5 text-[9px] font-black text-[#6ee7b7]">
+                  {liveCategoryCount}
+                </span>
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                    isCategoryOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+
+              {/* Mega-menu panel */}
+              {isCategoryOpen && (
+                <div className="absolute right-0 top-full pt-2 w-[38rem] origin-top-right">
+                  <div className="rounded-2xl border border-white/12 bg-[#0a1712]/98 p-4 shadow-2xl shadow-black/40 backdrop-blur-2xl">
+                    <div className="mb-3 flex items-center justify-between border-b border-white/8 pb-2.5">
+                      <div>
+                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f0c76a]">
+                          Website Collections
+                        </p>
+                        <p className="text-xs text-white/50">
+                          {liveCategoryCount} live categories · {categoryLinks.length - liveCategoryCount} in progress
+                        </p>
+                      </div>
+                      <Link
+                        to="/#collections"
+                        onClick={() => setIsCategoryOpen(false)}
+                        className="rounded-full bg-[#1e8b79] px-3.5 py-1 text-xs font-bold text-white transition hover:bg-[#23a28d]"
+                      >
+                        View all →
+                      </Link>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {categoryLinks.map((link) => {
+                        const active = isActiveLink(pathname, hash, link.href)
+                        return (
+                          <Link
+                            key={link.label}
+                            to={link.href}
+                            onClick={() => setIsCategoryOpen(false)}
+                            onMouseEnter={() => prefetchRoute(link.href)}
+                            className={`group flex items-center gap-2.5 rounded-xl border p-2.5 transition-all duration-200 ${
+                              active
+                                ? 'border-[#1e8b79]/60 bg-[#1e8b79]/20 text-white'
+                                : 'border-white/5 bg-white/[0.03] text-white/80 hover:border-white/15 hover:bg-white/[0.08] hover:text-white'
+                            }`}
+                          >
+                            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-base transition-transform group-hover:scale-110">
+                              {link.icon}
+                            </span>
+                            <div className="min-w-0 flex-1">
+                              <span className="block truncate text-xs font-black">
+                                {link.label}
+                              </span>
+                              <span className="block truncate text-[10px] text-white/45">
+                                {link.description}
+                              </span>
+                            </div>
+                            {link.isLive && (
+                              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+                            )}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Desktop Right Action Buttons */}
+          <div className="hidden md:flex items-center gap-2">
+            {/* Shortlist trigger */}
             {onOpenShortlist && (
               <button
                 type="button"
                 onClick={onOpenShortlist}
-                aria-label={`View shortlist (${shortlistCount} saved)`}
                 title="View Shortlist & Compare"
-                className="flex h-14 sm:h-16 items-center gap-2 sm:gap-2.5 rounded-full border border-gray-200/90 bg-white/95 px-4 sm:px-5 text-gray-900 shadow-2xl shadow-gray-950/20 backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-rose-50/60 active:scale-95"
+                className="flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-3.5 py-1.5 text-xs font-bold text-white/85 transition hover:border-rose-400/40 hover:bg-rose-500/10 hover:text-white"
               >
-                <Heart className={`h-4 w-4 sm:h-5 sm:w-5 transition-colors ${shortlistCount > 0 ? 'fill-rose-500 text-rose-500' : 'text-gray-700'}`} />
-                <span className="text-xs sm:text-sm font-black text-gray-900">Shortlist</span>
+                <Heart
+                  className={`h-3.5 w-3.5 ${
+                    shortlistCount > 0 ? 'fill-rose-500 text-rose-500' : 'text-white/60'
+                  }`}
+                />
+                <span>Saved</span>
                 {shortlistCount > 0 && (
-                  <span className="rounded-full bg-rose-500 px-2 py-0.5 text-[10px] sm:text-xs font-black text-white shadow-xs">
+                  <span className="rounded-full bg-rose-500 px-1.5 py-0.2 text-[10px] font-black text-white">
+                    {shortlistCount}
+                  </span>
+                )}
+              </button>
+            )}
+
+            {/* Search trigger */}
+            {onOpenSearch && (
+              <button
+                type="button"
+                onClick={onOpenSearch}
+                title="Search 100 websites (Ctrl+K)"
+                className="flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-3.5 py-1.5 text-xs font-bold text-white/85 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
+              >
+                <Search className="h-3.5 w-3.5 text-white/60" />
+                <span>Search</span>
+                <kbd className="rounded border border-white/15 bg-white/10 px-1.5 py-0.2 font-mono text-[9px] text-white/60">
+                  ⌘K
+                </kbd>
+              </button>
+            )}
+
+            {/* Browse All CTA */}
+            <Link
+              to="/#collections"
+              className="rounded-full bg-[#f0c76a] px-4 py-1.5 text-xs font-black text-[#07130e] shadow-md shadow-[#f0c76a]/20 transition-all duration-200 hover:bg-white hover:shadow-white/20 active:scale-95"
+            >
+              Browse All
+            </Link>
+
+            {/* GitHub */}
+            <a
+              href="https://github.com/umairny"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View on GitHub"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/12 text-white/70 transition hover:border-white/25 hover:bg-white/10 hover:text-white"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+            </a>
+          </div>
+
+          {/* Mobile Right Icons */}
+          <div className="flex items-center gap-1.5 lg:hidden">
+            {onOpenShortlist && (
+              <button
+                type="button"
+                onClick={onOpenShortlist}
+                aria-label={`Shortlist (${shortlistCount})`}
+                className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/[0.06] text-white"
+              >
+                <Heart
+                  className={`h-4 w-4 ${
+                    shortlistCount > 0 ? 'fill-rose-500 text-rose-500' : 'text-white/70'
+                  }`}
+                />
+                {shortlistCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 text-[9px] font-black text-white">
                     {shortlistCount}
                   </span>
                 )}
@@ -242,127 +555,57 @@ export function Navbar({ mode = 'default', onOpenSearch, onOpenShortlist }: Navb
               <button
                 type="button"
                 onClick={onOpenSearch}
-                aria-label="Search all 100 websites"
-                title="Search 100 websites (Ctrl+K)"
-                className="flex h-14 sm:h-16 items-center gap-2.5 sm:gap-3 rounded-full border border-gray-200/90 bg-white/95 px-4 sm:px-5 text-gray-900 shadow-2xl shadow-gray-950/20 backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-gray-50 active:scale-95"
+                aria-label="Search"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/12 bg-white/[0.06] text-white/70"
               >
-                <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-700" />
-                <span className="text-xs sm:text-sm font-black text-gray-900">Search Sites</span>
-                <kbd className="hidden sm:inline-block rounded border border-gray-200 bg-gray-100 px-1.5 py-0.5 font-mono text-[10px] text-gray-500">
-                  Ctrl+K
-                </kbd>
+                <Search className="h-4 w-4" />
               </button>
             )}
-          </div>
-        )}
 
-        <div className="pointer-events-auto fixed bottom-5 left-5 hidden md:block">
-          <button
-            type="button"
-            aria-label="Toggle portfolio navigation"
-            aria-expanded={isOpen}
-            onClick={() => setIsOpen((current) => !current)}
-            className={`relative z-10 flex h-16 items-center gap-3 rounded-full border px-3 pr-5 shadow-2xl backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-coffee-300/35 ${
-              isOpen
-                ? 'border-gray-950 bg-gray-950 text-white shadow-gray-950/25'
-                : 'border-gray-200 bg-white/95 text-gray-950 shadow-gray-950/15 hover:border-gray-300 hover:bg-gray-50'
-            }`}
-          >
-            <span
-              className={`grid h-11 w-11 place-items-center rounded-full text-xs font-black transition ${
-                isOpen ? 'bg-white text-gray-950' : 'bg-gray-950 text-white'
-              }`}
-            >
-              100
-            </span>
-            <span className="text-left leading-none">
-              <span className="block text-sm font-black">Explore sites</span>
-              <span className={`mt-1 block text-[0.65rem] font-black uppercase tracking-[0.16em] ${isOpen ? 'text-white/55' : 'text-gray-500'}`}>
-                {liveCategoryCount}/{categoryLinks.length} live
-              </span>
-            </span>
-            <span className="ml-1">
-              <MenuIcon isOpen={isOpen} />
-            </span>
-          </button>
-
-          {isOpen && (
-            <div className="absolute bottom-full left-0 pb-3">
-              <div className="scale-in">
-                <div className="w-[42rem] rounded-3xl border border-gray-200 bg-white/96 p-4 shadow-2xl shadow-gray-950/20 backdrop-blur-xl">
-                  <Brand compact onClick={() => setIsOpen(false)} />
-
-                  <div className="mt-4 grid gap-1 border-t border-gray-200 pt-4">
-                    {primaryLinks.map((link) => {
-                      const isActive = isActiveHref(pathname, hash, link.href)
-
-                      return (
-                        <Link
-                          key={link.label}
-                          to={link.href}
-                          onClick={() => setIsOpen(false)}
-                          className={`rounded-2xl px-4 py-3 text-sm font-bold transition ${
-                            isActive ? 'active bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-950'
-                          }`}
-                        >
-                          {link.label}
-                        </Link>
-                      )
-                    })}
-                  </div>
-
-                  <div className="mt-4 border-t border-gray-200 pt-4">
-                    <div className="mb-3 flex items-center justify-between px-1">
-                      <p className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">Categories</p>
-                      <p className="text-xs font-bold text-gray-400">{liveCategoryCount}/{categoryLinks.length} live</p>
-                    </div>
-                    <CategoryMenu
-                      pathname={pathname}
-                      currentHash={hash}
-                      onNavigate={() => setIsOpen(false)}
-                      className="grid grid-cols-2 gap-2"
-                      compact
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <button
-          type="button"
-          aria-label="Toggle portfolio navigation"
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen((current) => !current)}
-          className="pointer-events-auto fixed bottom-5 left-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-gray-200 bg-white/95 text-gray-950 shadow-xl shadow-gray-950/15 backdrop-blur transition hover:-translate-y-0.5 hover:bg-gray-100 md:hidden"
-        >
-          <span className="sr-only">Menu</span>
-          <MenuIcon isOpen={isOpen} />
-        </button>
-
-        {isOpen && (
-          <>
+            {/* Hamburger Toggle */}
             <button
               type="button"
-              aria-label="Close portfolio navigation"
-              onClick={() => setIsOpen(false)}
-              className="pointer-events-auto fixed inset-0 bg-gray-950/25 backdrop-blur-[2px] md:hidden"
-            />
-            <div className="pointer-events-auto fixed bottom-20 left-5 max-h-[calc(100vh-7rem)] w-[min(23rem,calc(100vw-2.5rem))] overflow-y-auto rounded-3xl border border-gray-200 bg-white/95 p-4 shadow-2xl shadow-gray-950/20 backdrop-blur-xl md:hidden">
-              <Brand onClick={() => setIsOpen(false)} />
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              aria-label="Toggle Navigation Menu"
+              aria-expanded={isMobileMenuOpen}
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1 rounded-xl border border-white/12 bg-white/[0.06] text-white"
+            >
+              <span
+                className={`h-0.5 w-5 bg-white transition-all duration-300 ${
+                  isMobileMenuOpen ? 'translate-y-1.5 rotate-45' : ''
+                }`}
+              />
+              <span
+                className={`h-0.5 w-5 bg-white transition-all duration-300 ${
+                  isMobileMenuOpen ? 'opacity-0' : ''
+                }`}
+              />
+              <span
+                className={`h-0.5 w-5 bg-white transition-all duration-300 ${
+                  isMobileMenuOpen ? '-translate-y-1.5 -rotate-45' : ''
+                }`}
+              />
+            </button>
+          </div>
+        </div>
 
-              <div className="mt-4 grid gap-1 border-t border-gray-200 pt-4">
+        {/* Mobile Slide-down Drawer */}
+        {isMobileMenuOpen && (
+          <div className="border-t border-white/10 bg-[#07130e]/98 backdrop-blur-2xl lg:hidden">
+            <div className="max-h-[calc(100vh-4rem)] overflow-y-auto px-4 py-5 space-y-4">
+              {/* Primary links */}
+              <div className="grid gap-1">
                 {primaryLinks.map((link) => {
-                  const isActive = isActiveHref(pathname, hash, link.href)
-
+                  const active = isLinkActive(link.href)
                   return (
                     <Link
                       key={link.label}
                       to={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`rounded-2xl px-4 py-3 text-sm font-bold transition ${
-                        isActive ? 'active bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-950'
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`flex items-center rounded-xl px-4 py-2.5 text-sm font-bold transition ${
+                        active
+                          ? 'bg-[#1e8b79] text-white'
+                          : 'text-white/80 hover:bg-white/10 hover:text-white'
                       }`}
                     >
                       {link.label}
@@ -371,285 +614,73 @@ export function Navbar({ mode = 'default', onOpenSearch, onOpenShortlist }: Navb
                 })}
               </div>
 
-              <div className="mt-4 border-t border-gray-200 pt-4">
-                <div className="mb-3 flex items-center justify-between px-1">
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">All categories</p>
-                  <p className="text-xs font-bold text-gray-400">{liveCategoryCount}/{categoryLinks.length} live</p>
+              {/* Categories Grid */}
+              <div className="border-t border-white/10 pt-4">
+                <div className="mb-2.5 flex items-center justify-between px-1">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f0c76a]">
+                    Categories
+                  </span>
+                  <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-bold text-white/60">
+                    {liveCategoryCount} live
+                  </span>
                 </div>
-                <CategoryMenu
-                  pathname={pathname}
-                  currentHash={hash}
-                  onNavigate={() => setIsOpen(false)}
-                  className="grid grid-cols-2 gap-2"
-                  compact
-                />
+                <div className="grid grid-cols-2 gap-1.5">
+                  {categoryLinks.map((link) => {
+                    const active = isActiveLink(pathname, hash, link.href)
+                    return (
+                      <Link
+                        key={link.label}
+                        to={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`flex items-center gap-2 rounded-xl border p-2 text-xs font-bold transition ${
+                          active
+                            ? 'border-[#1e8b79] bg-[#1e8b79]/20 text-white'
+                            : 'border-white/5 bg-white/[0.03] text-white/70 hover:bg-white/[0.08] hover:text-white'
+                        }`}
+                      >
+                        <span className="text-sm">{link.icon}</span>
+                        <span className="truncate">{link.label}</span>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* Mobile CTAs */}
+              <div className="border-t border-white/10 pt-4 grid gap-2">
+                <Link
+                  to="/#collections"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="rounded-xl bg-[#f0c76a] py-3 text-center text-sm font-black text-[#07130e] transition active:scale-95"
+                >
+                  Browse All 100 Websites
+                </Link>
+                {onOpenShortlist && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false)
+                      onOpenShortlist()
+                    }}
+                    className="flex items-center justify-center gap-2 rounded-xl border border-rose-400/30 bg-rose-500/10 py-2.5 text-xs font-bold text-rose-300"
+                  >
+                    <Heart className="h-4 w-4 fill-rose-500 text-rose-500" />
+                    <span>View Shortlist ({shortlistCount} saved)</span>
+                  </button>
+                )}
               </div>
             </div>
-          </>
+          </div>
         )}
       </nav>
-    )
-  }
 
-  return (
-    <nav
-      className={`sticky top-0 z-50 border-b bg-white/88 backdrop-blur-xl fade-in-down transition-all duration-300 ${
-        isScrolled ? 'border-gray-200 shadow-lg shadow-gray-950/10' : 'border-white/60 shadow-sm'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className={`flex items-center justify-between gap-4 transition-all duration-300 ${isScrolled ? 'h-[3.75rem] py-2' : 'h-[4.5rem] py-3'}`}>
-          <Brand onClick={() => setIsOpen(false)} />
-
-          <div className="hidden items-center rounded-full border border-gray-200 bg-gray-50/80 p-1 shadow-inner lg:flex">
-            {primaryLinks.map((link) => {
-              const isActive = isActiveHref(pathname, hash, link.href)
-
-              return (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  aria-current={isActive ? 'page' : undefined}
-                  className={`relative rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 ease-out hover:-translate-y-0.5 ${
-                    isActive ? 'active bg-white text-gray-950 shadow-sm' : 'text-gray-600 hover:bg-white/75 hover:text-gray-950'
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute inset-x-5 -bottom-0.5 h-0.5 rounded-full bg-coffee-700 transition-opacity ${
-                      isActive ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  />
-                </Link>
-              )
-            })}
-
-            <div
-              className="relative"
-              onMouseEnter={() => setIsCategoryMenuOpen(true)}
-              onMouseLeave={() => setIsCategoryMenuOpen(false)}
-              onFocus={() => setIsCategoryMenuOpen(true)}
-            >
-              <button
-                type="button"
-                aria-expanded={isCategoryMenuOpen}
-                className={`relative rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/75 hover:text-gray-950 focus:outline-none focus-visible:ring-4 focus-visible:ring-coffee-300/35 ${
-                  isCategoriesActive ? 'active bg-white text-gray-950 shadow-sm' : 'text-gray-600'
-                }`}
-              >
-                Categories
-                <span
-                  className={`absolute inset-x-5 -bottom-0.5 h-0.5 rounded-full bg-coffee-700 transition-opacity ${
-                    isCategoriesActive ? 'opacity-100' : 'opacity-0'
-                  }`}
-                />
-              </button>
-              <div
-                className={`absolute right-0 top-full w-[44rem] origin-top pt-3 transition-all duration-200 ease-out ${
-                  isCategoryMenuOpen
-                    ? 'pointer-events-auto translate-y-0 opacity-100'
-                    : 'pointer-events-none -translate-y-1 opacity-0'
-                }`}
-              >
-                <div className="rounded-3xl border border-gray-200 bg-white/96 p-4 shadow-2xl shadow-gray-950/15 backdrop-blur-xl">
-                  <div className="mb-4 flex items-end justify-between gap-4">
-                    <div>
-                      <p className="text-xs font-black uppercase tracking-[0.2em] text-coffee-700">Website categories</p>
-                      <p className="mt-1 text-sm font-semibold text-gray-500">Live collections and planned batches.</p>
-                    </div>
-                    <Link
-                      to="/#categories"
-                      onClick={() => setIsCategoryMenuOpen(false)}
-                      className="rounded-full bg-gray-950 px-4 py-2 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-coffee-700"
-                    >
-                      View roadmap
-                    </Link>
-                  </div>
-                  <CategoryMenu
-                    pathname={pathname}
-                    currentHash={hash}
-                    onNavigate={() => setIsCategoryMenuOpen(false)}
-                    className="grid grid-cols-2 gap-2"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="hidden items-center gap-3 md:flex">
-            {onOpenShortlist && (
-              <button
-                type="button"
-                onClick={onOpenShortlist}
-                aria-label={`View Shortlist (${shortlistCount} saved)`}
-                title="View Shortlist & Compare"
-                className="flex items-center gap-2 rounded-full border border-gray-200/90 bg-gray-50/80 px-3.5 py-2 text-xs font-bold text-gray-700 shadow-2xs transition hover:border-rose-300 hover:bg-rose-50/50 hover:text-rose-900"
-              >
-                <Heart className={`h-3.5 w-3.5 transition-colors ${shortlistCount > 0 ? 'fill-rose-500 text-rose-500' : 'text-gray-400'}`} />
-                <span>Shortlist</span>
-                {shortlistCount > 0 && (
-                  <span className="rounded-full bg-rose-500 px-1.5 py-0.5 text-[10px] font-black text-white">
-                    {shortlistCount}
-                  </span>
-                )}
-              </button>
-            )}
-            {onOpenSearch && (
-              <button
-                type="button"
-                onClick={onOpenSearch}
-                aria-label="Search all 100 websites"
-                className="flex items-center gap-2 rounded-full border border-gray-200/90 bg-gray-50/80 px-3.5 py-2 text-xs font-bold text-gray-600 shadow-2xs transition hover:border-gray-300 hover:bg-white hover:text-gray-950"
-              >
-                <Search className="h-3.5 w-3.5 text-gray-400" />
-                <span className="hidden xl:inline">Search 100 sites</span>
-                <span className="xl:hidden">Search</span>
-                <kbd className="rounded border border-gray-200 bg-white px-1.5 py-0.5 font-mono text-[10px] text-gray-500">
-                  Ctrl+K
-                </kbd>
-              </button>
-            )}
-            <Link
-              to="/#categories"
-              aria-current={isBrowseActive ? 'page' : undefined}
-              className={`rounded-full px-5 py-2.5 text-sm font-black shadow-lg transition-all duration-300 ease-out hover:-translate-y-0.5 ${
-                isBrowseActive
-                  ? 'active bg-coffee-700 text-white shadow-coffee-700/20'
-                  : 'bg-gray-950 text-white shadow-gray-950/20 hover:bg-coffee-700 hover:shadow-coffee-700/20'
-              }`}
-            >
-              Browse Websites
-            </Link>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-gray-200 px-4 py-2.5 text-sm font-bold text-gray-700 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-gray-950 hover:shadow-md hover:text-gray-950"
-            >
-              GitHub
-            </a>
-          </div>
-
-          <div className="flex items-center gap-2 md:hidden">
-            {onOpenShortlist && (
-              <button
-                type="button"
-                aria-label={`View Shortlist (${shortlistCount} saved)`}
-                onClick={onOpenShortlist}
-                className="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-950 shadow-sm transition hover:bg-rose-50"
-              >
-                <Heart className={`h-4 w-4 ${shortlistCount > 0 ? 'fill-rose-500 text-rose-500' : 'text-gray-700'}`} />
-                {shortlistCount > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 text-[9px] font-black text-white ring-2 ring-white">
-                    {shortlistCount}
-                  </span>
-                )}
-              </button>
-            )}
-            {onOpenSearch && (
-              <button
-                type="button"
-                aria-label="Search all 100 websites"
-                onClick={onOpenSearch}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-950 shadow-sm transition hover:bg-gray-100"
-              >
-                <Search className="h-4 w-4 text-gray-700" />
-              </button>
-            )}
-            <button
-              type="button"
-              aria-label="Toggle navigation menu"
-              aria-expanded={isOpen}
-              onClick={() => setIsOpen((current) => !current)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-950 shadow-sm transition hover:bg-gray-100"
-            >
-              <span className="sr-only">Menu</span>
-              <MenuIcon isOpen={isOpen} />
-            </button>
-          </div>
-        </div>
-
-        {isOpen && (
-          <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-gray-200 py-4 md:hidden">
-            <div className="grid gap-2">
-              {primaryLinks.map((link) => {
-                const isActive = isActiveHref(pathname, hash, link.href)
-
-                return (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    onClick={() => setIsOpen(false)}
-                    aria-current={isActive ? 'page' : undefined}
-                    className={`rounded-2xl px-4 py-3 text-sm font-bold transition ${
-                      isActive ? 'active bg-gray-950 text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-950'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              })}
-            </div>
-
-            <div className="mt-4 border-t border-gray-200 pt-4">
-              <div className="mb-3 flex items-center justify-between px-1">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-gray-500">All categories</p>
-                <p className="text-xs font-bold text-gray-400">{liveCategoryCount}/{categoryLinks.length} live</p>
-              </div>
-              <CategoryMenu
-                pathname={pathname}
-                currentHash={hash}
-                onNavigate={() => setIsOpen(false)}
-                className="grid grid-cols-2 gap-2"
-                compact
-              />
-            </div>
-
-            {onOpenShortlist && (
-              <div className="mt-4 border-t border-gray-200 pt-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpen(false)
-                    onOpenShortlist()
-                  }}
-                  className="flex w-full items-center justify-between rounded-2xl bg-rose-50 px-4 py-3 text-sm font-black text-rose-700 transition hover:bg-rose-100"
-                >
-                  <span className="flex items-center gap-2">
-                    <Heart className={`h-4 w-4 ${shortlistCount > 0 ? 'fill-rose-600 text-rose-600' : 'text-rose-500'}`} />
-                    View Shortlist & Compare
-                  </span>
-                  <span className="rounded-full bg-rose-200 px-2.5 py-0.5 text-xs font-bold text-rose-800">
-                    {shortlistCount} saved
-                  </span>
-                </button>
-              </div>
-            )}
-
-            <div className="mt-4 grid grid-cols-2 gap-2 border-t border-gray-200 pt-4">
-              <Link
-                to="/#categories"
-                onClick={() => setIsOpen(false)}
-                aria-current={isBrowseActive ? 'page' : undefined}
-                className={`rounded-2xl px-4 py-3 text-center text-sm font-black transition ${
-                  isBrowseActive ? 'active bg-coffee-700 text-white' : 'bg-gray-950 text-white hover:bg-coffee-700'
-                }`}
-              >
-                Browse
-              </Link>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsOpen(false)}
-                className="rounded-2xl border border-gray-200 px-4 py-3 text-center text-sm font-bold text-gray-700 transition hover:border-gray-950 hover:text-gray-950"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
+      {/* Mobile backdrop */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-xs lg:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+    </>
   )
 }

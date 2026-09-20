@@ -9,6 +9,23 @@ body {
   overscroll-behavior-y: none;
 }
 
+/* Home page marquee ticker */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.home-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.home-marquee-wrap:hover .home-marquee-track {
+  animation-play-state: paused;
+}
+
 .glowhaus-serif {
   font-family: "Iowan Old Style", Baskerville, "Times New Roman", serif;
   font-weight: 400;
@@ -1632,15 +1649,33 @@ blockquote {
 :root {
   --theme-accent-primary: #06b6d4;
   --theme-accent-secondary: #a855f7;
+  --theme-accent-tertiary: #ec4899;
+  --theme-accent-quaternary: #10b981;
+  --theme-accent-gradient: linear-gradient(135deg, #06b6d4, #a855f7);
+  --theme-accent-gradient-radial: radial-gradient(circle, #06b6d4, #a855f7);
 }
 
 [data-theme-preset]:not([data-theme-preset="original"]) {
   --color-primary: var(--theme-accent-primary);
   --color-accent: var(--theme-accent-secondary);
+  --color-tertiary: var(--theme-accent-tertiary, var(--theme-accent-secondary));
+  --color-quaternary: var(--theme-accent-quaternary, var(--theme-accent-secondary));
+  --color-gradient: var(--theme-accent-gradient);
 }
 
-/* Transform the active demo canvas with the chosen aesthetic palette */
-[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas {
+/* Transform the active demo canvas content with the chosen aesthetic palette.
+   CRITICAL: Do NOT apply CSS filter to the .demo-canvas wrapper itself.
+   In the CSS specification, applying a CSS filter to any ancestor element creates a
+   new containing block, which breaks position: fixed and position: sticky on all
+   descendant navbars (causing them to shift and scroll away with the page).
+   Instead, we filter the page content sections directly while keeping navbars fixed to the viewport. */
+.demo-canvas {
+  filter: none !important;
+}
+
+[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas section,
+[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas main > *:not(nav):not(header):not([class*="fixed"]):not([class*="sticky"]):not([class*="subnav"]),
+[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas > * > *:not(nav):not(header):not([class*="fixed"]):not([class*="sticky"]):not([class*="subnav"]):not(main) {
   filter: var(--theme-canvas-filter, none);
   transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1653,10 +1688,14 @@ blockquote {
   transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Ensure UI controls, modals, command palette, and toolbar are never filtered */
+/* Ensure UI controls, modals, command palette, toolbars, and sticky/fixed navbars are never filtered or trapped */
 .showcase-toolbar,
 .command-palette,
 .shortlist-drawer,
+.demo-canvas nav,
+.demo-canvas header,
+.demo-canvas [class*="fixed"],
+.demo-canvas [class*="sticky"],
 nav,
 footer {
   filter: none !important;
@@ -1672,5 +1711,15 @@ footer {
 
 [data-theme-preset]:not([data-theme-preset="original"]) .theme-accent-border {
   border-color: var(--theme-accent-primary) !important;
+}
+
+[data-theme-preset]:not([data-theme-preset="original"]) .theme-accent-gradient-bg {
+  background: var(--theme-accent-gradient) !important;
+}
+
+[data-theme-preset]:not([data-theme-preset="original"]) .theme-accent-gradient-text {
+  background: var(--theme-accent-gradient) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }
 

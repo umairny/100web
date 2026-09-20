@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Heart } from 'lucide-react'
-import { AnimatedSection, Container, CTAButton } from '../../components'
+import { Heart, Search, ArrowRight, Utensils, Sparkles, Flame, CheckCircle2, ArrowLeft, Star } from 'lucide-react'
+import { Container } from '../../components'
 import { restaurantWebsites, WebsiteDesign } from '../../data/websites'
 import { prefetchRoute } from '../../utils/routePrefetch'
 import { useFavorites } from '../../utils/favorites'
@@ -13,33 +13,36 @@ function RestaurantCard({ website, index }: { website: WebsiteDesign; index: num
   const routePath = `/restaurant/${website.slug}`
 
   return (
-    <Link
-      to={routePath}
-      onMouseEnter={() => prefetchRoute(routePath)}
-      onTouchStart={() => prefetchRoute(routePath)}
-      className={`group reveal-card relative overflow-hidden border border-[#eadfc8] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl ${
-        index % 3 === 1 ? 'delay-100' : index % 3 === 2 ? 'delay-200' : ''
-      }`}
-    >
-      <div
-        className="relative h-44 overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(135deg, ${website.colors.secondary} 0%, ${website.colors.primary} 52%, ${website.colors.accent} 100%)`,
-        }}
+    <div className="group relative flex flex-col overflow-hidden rounded-3xl border border-[#e8dec8] bg-white shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-[#c2410c]/40 hover:shadow-2xl hover:shadow-[#c2410c]/10">
+      {/* Visual Header / Preview */}
+      <Link
+        to={routePath}
+        onMouseEnter={() => prefetchRoute(routePath)}
+        onTouchStart={() => prefetchRoute(routePath)}
+        className="relative block aspect-[16/10] overflow-hidden bg-[#1c1917]"
       >
-        {website.image && (
+        {website.image ? (
           <img
             src={website.image}
             alt={`${website.title} website preview`}
-            className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             loading="lazy"
             decoding="async"
           />
+        ) : (
+          <div
+            className="h-full w-full"
+            style={{
+              background: `linear-gradient(135deg, ${website.colors.secondary}, ${website.colors.primary})`,
+            }}
+          />
         )}
-        <div className={`absolute inset-0 ${website.image ? 'bg-gradient-to-t from-[#171512]/70 via-[#171512]/10 to-transparent' : 'bg-[radial-gradient(circle_at_22%_24%,rgba(255,255,255,0.55),transparent_22%),radial-gradient(circle_at_76%_70%,rgba(255,255,255,0.25),transparent_26%)]'}`} />
-        
-        <div className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#171512] shadow-sm">
-          {website.status === 'completed' ? 'Live' : 'Queued'}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+        {/* Live Badge */}
+        <div className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-white backdrop-blur-md">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Live Concept</span>
         </div>
 
         {/* Shortlist Heart Button */}
@@ -51,246 +54,478 @@ function RestaurantCard({ website, index }: { website: WebsiteDesign; index: num
             toggle()
           }}
           title={isFavorited ? 'Remove from shortlist' : 'Save to shortlist'}
-          className={`absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md shadow-sm transition hover:scale-110 active:scale-95 ${
+          className={`absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full shadow-lg backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-95 ${
             isFavorited
-              ? 'bg-rose-500 text-white shadow-rose-500/30'
-              : 'bg-white/80 text-gray-700 hover:bg-white hover:text-rose-500'
+              ? 'bg-rose-500 text-white shadow-rose-500/40'
+              : 'bg-black/50 text-white/80 hover:bg-white hover:text-rose-500'
           }`}
         >
           <Heart className={`h-4 w-4 ${isFavorited ? 'fill-white' : ''}`} />
         </button>
-      </div>
-      <div className="p-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#9a5b25]">{website.category}</p>
-        <div className="mt-3 flex items-start justify-between gap-4">
-          <h3 className="restaurant-cinematic-title text-3xl font-semibold text-[#171512] transition group-hover:text-[#9a5b25]">
+
+        {/* Bottom Card Image Overlay Info */}
+        <div className="absolute bottom-3.5 left-4 right-4 flex items-end justify-between text-white">
+          <span className="text-[11px] font-black uppercase tracking-widest text-[#f0c76a]">
+            {website.style.split(',')[0]}
+          </span>
+          <span className="rounded-md bg-white/15 px-2 py-0.5 text-[10px] font-bold backdrop-blur-xs">
+            0{index + 1}
+          </span>
+        </div>
+      </Link>
+
+      {/* Card Body */}
+      <div className="flex flex-1 flex-col justify-between p-6">
+        <div>
+          {/* Palette Swatches */}
+          <div className="flex items-center gap-1.5 mb-3">
+            {[website.colors.primary, website.colors.accent, website.colors.secondary, website.colors.dark].map(
+              (color, idx) => (
+                <span
+                  key={idx}
+                  className="h-2.5 w-2.5 rounded-full border border-black/10 shadow-2xs"
+                  style={{ backgroundColor: color }}
+                  title={`Palette color: ${color}`}
+                />
+              ),
+            )}
+            <span className="ml-1 text-[10px] font-bold uppercase tracking-wider text-[#8c7e6d]">
+              Brand Palette
+            </span>
+          </div>
+
+          <Link
+            to={routePath}
+            className="block text-2xl font-black tracking-tight text-[#171512] transition group-hover:text-[#c2410c]"
+          >
             {website.title}
-          </h3>
-          <span className="text-sm font-semibold tracking-[0.12em] text-[#9a5b25]">0{index + 1}</span>
+          </Link>
+
+          <p className="mt-2.5 text-xs leading-5 text-[#6d6254] line-clamp-2">
+            {website.shortDescription}
+          </p>
         </div>
-        <p className="mt-3 text-xs font-semibold uppercase tracking-[0.1em] text-[#6d6254]">{website.style}</p>
-        <p className="mt-4 min-h-12 text-sm leading-6 text-[#6d6254]">{website.shortDescription}</p>
-        <div className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[#171512] px-4 py-3 text-sm font-bold text-white transition group-hover:bg-[#9a5b25]">
-          View Design
+
+        {/* Footer Action */}
+        <div className="mt-6 pt-4 border-t border-[#f0e8d9] flex items-center justify-between">
+          <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#a0907d]">
+            Responsive UX
+          </span>
+          <Link
+            to={routePath}
+            className="inline-flex items-center gap-1.5 rounded-xl bg-[#171512] px-4 py-2 text-xs font-black text-white transition hover:bg-[#c2410c] active:scale-95"
+          >
+            <span>Open Website</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
 
 export function RestaurantIndex() {
-  const completedCount = restaurantWebsites.filter((website) => website.status === 'completed').length
-  const carouselRestaurants = restaurantWebsites.filter((website) => website.status === 'completed' && website.image)
+  const completedCount = restaurantWebsites.filter((w) => w.status === 'completed').length
+  const carouselRestaurants = restaurantWebsites.filter((w) => w.status === 'completed' && w.image)
   const [activeSlide, setActiveSlide] = useState(0)
   const [isCarouselPaused, setIsCarouselPaused] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
   const [activeFilter, setActiveFilter] = useState<'all' | 'cozy' | 'modern' | 'flavor' | 'shortlist'>('all')
   const { favoriteIds } = useFavorites()
   const activeRestaurant = carouselRestaurants[activeSlide] ?? restaurantWebsites[0]
 
+  // Auto slide timer
   useSafeInterval(() => {
     if (isCarouselPaused || carouselRestaurants.length < 2) return
-    setActiveSlide((current) => (current + 1) % carouselRestaurants.length)
+    setActiveSlide((c) => (c + 1) % carouselRestaurants.length)
   }, 6000)
 
-  useEventListener('keydown', (event: KeyboardEvent) => {
-    if (event.key === 'ArrowRight') setActiveSlide((current) => (current + 1) % carouselRestaurants.length)
-    if (event.key === 'ArrowLeft') setActiveSlide((current) => (current - 1 + carouselRestaurants.length) % carouselRestaurants.length)
+  // Arrow key navigation
+  useEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'ArrowRight') setActiveSlide((c) => (c + 1) % carouselRestaurants.length)
+    if (e.key === 'ArrowLeft') setActiveSlide((c) => (c - 1 + carouselRestaurants.length) % carouselRestaurants.length)
   })
 
+  // Filter and search logic
   const filteredRestaurants = useMemo(() => {
+    let list = restaurantWebsites
+
     if (activeFilter === 'shortlist') {
-      return restaurantWebsites.filter((w) => favoriteIds.includes(w.id))
+      list = list.filter((w) => favoriteIds.includes(w.id))
+    } else if (activeFilter === 'cozy') {
+      list = list.filter(
+        (w) =>
+          w.style.includes('warm') ||
+          w.style.includes('cozy') ||
+          w.style.includes('handcrafted') ||
+          w.slug.includes('coffee') ||
+          w.slug.includes('bakery') ||
+          w.slug.includes('tea'),
+      )
+    } else if (activeFilter === 'modern') {
+      list = list.filter(
+        (w) =>
+          w.style.includes('modern') ||
+          w.style.includes('urban') ||
+          w.style.includes('bold') ||
+          w.slug.includes('urban') ||
+          w.slug.includes('burger'),
+      )
+    } else if (activeFilter === 'flavor') {
+      list = list.filter(
+        (w) =>
+          w.style.includes('flavor') ||
+          w.style.includes('cultural') ||
+          w.style.includes('rich') ||
+          w.slug.includes('spice') ||
+          w.slug.includes('steak') ||
+          w.slug.includes('ocean'),
+      )
     }
-    if (activeFilter === 'cozy') {
-      return restaurantWebsites.filter((w) => w.style.includes('warm') || w.style.includes('cozy') || w.style.includes('handcrafted'))
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim()
+      list = list.filter(
+        (w) =>
+          w.title.toLowerCase().includes(q) ||
+          w.shortDescription.toLowerCase().includes(q) ||
+          w.style.toLowerCase().includes(q),
+      )
     }
-    if (activeFilter === 'modern') {
-      return restaurantWebsites.filter((w) => w.style.includes('modern') || w.style.includes('urban') || w.style.includes('bold'))
-    }
-    if (activeFilter === 'flavor') {
-      return restaurantWebsites.filter((w) => w.style.includes('flavor') || w.style.includes('cultural') || w.style.includes('rich'))
-    }
-    return restaurantWebsites
-  }, [activeFilter, favoriteIds])
+
+    return list
+  }, [activeFilter, favoriteIds, searchQuery])
 
   const moveSlide = (direction: number) => {
-    setActiveSlide((current) => (current + direction + carouselRestaurants.length) % carouselRestaurants.length)
+    setActiveSlide((c) => (c + direction + carouselRestaurants.length) % carouselRestaurants.length)
   }
-  const diningStyles = ['Coffee', 'Bakery', 'Pizza', 'Bowls', 'Steak', 'Tea', 'Burgers', 'Seafood']
-  const experienceNotes = [
-    {
-      title: 'Distinct First Screens',
-      text: 'Each restaurant opens with a different layout language: centered ritual, right-aligned editorial, dark reservation room, tide table, orbiting pizza, and more.',
-    },
-    {
-      title: 'Brand-Led Palettes',
-      text: 'The cards and pages use each concept palette consistently, making the collection easier to scan and more memorable.',
-    },
-    {
-      title: 'Conversion Ready',
-      text: 'Every design keeps restaurant actions close: reserve, order, visit, browse menu, or build a custom meal.',
-    },
+
+  const diningTags = [
+    { label: 'Artisan Coffee', emoji: '☕', slug: 'brewnest-coffee' },
+    { label: 'Prime Steakhouse', emoji: '🥩', slug: 'ember-steakhouse' },
+    { label: 'Wood-Fired Pizza', emoji: '🍕', slug: 'luna-pizza-house' },
+    { label: 'Fusion Grill', emoji: '🔥', slug: 'spiceroute-grill' },
+    { label: 'Coastal Seafood', emoji: '🦞', slug: 'oceanplate-seafood' },
+    { label: 'Fresh Bakery', emoji: '🥐', slug: 'golden-crust-bakery' },
+    { label: 'Craft Burgers', emoji: '🍔', slug: 'burger-craft' },
+    { label: 'Organic Bowls', emoji: '🥗', slug: 'freshbowl-cafe' },
   ]
-  const layoutStyles = [
-    ['Center', 'Tea, seafood'],
-    ['Right align', 'Fresh bowls'],
-    ['Editorial', 'Coffee, bakery'],
-    ['High contrast', 'Steakhouse, burgers'],
+
+  const clientAdvantages = [
+    {
+      icon: <Utensils className="h-5 w-5 text-[#c2410c]" />,
+      title: 'Visual Appetite Pacing',
+      desc: 'Hero food photography, atmospheric lighting, and high-impact menu cards engineered to create craving in under 3 seconds.',
+    },
+    {
+      icon: <CheckCircle2 className="h-5 w-5 text-emerald-600" />,
+      title: 'Zero-Friction Reservations',
+      desc: 'Seamless booking pathways tailored for OpenTable, Resy, Toast, or direct private dining requests right from the hero.',
+    },
+    {
+      icon: <Star className="h-5 w-5 text-[#f59e0b]" />,
+      title: 'Distinct Brand Atmospheres',
+      desc: 'No shared theme templates. A cozy bakery feels organic and warm, while a late-night steakhouse feels moody, masculine, and flame-lit.',
+    },
+    {
+      icon: <Sparkles className="h-5 w-5 text-indigo-600" />,
+      title: 'Mobile-First Ordering Flow',
+      desc: 'Over 85% of restaurant customers browse on mobile. Every layout features fluid touch navigation and thumb-friendly menu taps.',
+    },
   ]
 
   return (
-    <main className="restaurant-cinematic bg-[#fffaf1] text-[#171512]">
+    <main className="bg-[#fcfaf6] text-[#171512] selection:bg-[#c2410c] selection:text-white">
+      {/* ── CINEMATIC RESTAURANT HERO CAROUSEL ─────────────────────────────── */}
       <section
         aria-roledescription="carousel"
         aria-label="Featured restaurant concepts"
         onMouseEnter={() => setIsCarouselPaused(true)}
         onMouseLeave={() => setIsCarouselPaused(false)}
-        onFocusCapture={() => setIsCarouselPaused(true)}
-        onBlurCapture={() => setIsCarouselPaused(false)}
-        className="relative -mt-16 min-h-[920px] overflow-hidden bg-[#0b0a09] pt-16 text-white sm:min-h-screen"
+        className="relative overflow-hidden bg-[#090807] text-white pt-10 pb-16 lg:pt-14 lg:pb-20"
       >
+        {/* Background slide cross-fade */}
         {carouselRestaurants.map((website, index) => (
-          <div key={website.id} aria-hidden={index !== activeSlide} className={`absolute inset-0 transition-opacity duration-1000 ${index === activeSlide ? 'opacity-100' : 'opacity-0'}`}>
-            <img src={website.image} alt="" className={`h-full w-full object-cover blur-[1px] ${index === activeSlide ? 'restaurant-cinematic-image' : 'scale-105'}`} />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,7,6,0.98)_0%,rgba(7,7,6,0.9)_34%,rgba(7,7,6,0.42)_66%,rgba(7,7,6,0.7)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_44%,transparent_0%,rgba(0,0,0,0.18)_45%,rgba(0,0,0,0.72)_100%),linear-gradient(0deg,#0b0a09_0%,transparent_38%,rgba(0,0,0,0.28)_100%)]" />
+          <div
+            key={website.id}
+            aria-hidden={index !== activeSlide}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === activeSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            <img
+              src={website.image}
+              alt=""
+              className="h-full w-full object-cover blur-[2px] opacity-40 scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#090807] via-[#090807]/90 to-[#090807]/50" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#090807] via-transparent to-black/60" />
           </div>
         ))}
-        <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:48px_48px]" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-3 bg-black/55" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-3 bg-black/55" />
-        <div className="absolute left-0 top-0 h-full w-1 bg-white/10" style={{ backgroundColor: activeRestaurant.colors.accent }} />
 
-        <div className="relative mx-auto flex min-h-[856px] max-w-[1500px] flex-col px-5 pb-7 pt-10 sm:min-h-[calc(100vh-4rem)] sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between gap-4">
-            <Link to="/" className="inline-flex items-center gap-2 text-[0.65rem] font-black uppercase tracking-[0.18em] text-white/60 transition hover:text-white"><span>←</span> Portfolio home</Link>
-            <div className="rounded-full border border-white/15 bg-black/25 px-4 py-2 text-[0.58rem] font-black uppercase tracking-[0.16em] text-white/65 backdrop-blur">{completedCount} concepts live</div>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Top Breadcrumb & Status */}
+          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white/70 transition hover:text-[#f0c76a]"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              <span>100Web Portfolio</span>
+            </Link>
+
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-xs font-bold text-white/80 backdrop-blur-md">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>{completedCount} Restaurant Concepts Live</span>
+            </div>
           </div>
 
-          <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 xl:gap-24">
-            <div key={`copy-${activeRestaurant.id}`} aria-live="polite" className="restaurant-slide-copy relative z-10 max-w-2xl">
-              <div className="flex items-center gap-3 text-[0.6rem] font-semibold uppercase tracking-[0.28em]" style={{ color: activeRestaurant.colors.accent }}><span className="h-px w-10" style={{ backgroundColor: activeRestaurant.colors.accent }} />Restaurant collection · 0{activeSlide + 1}</div>
-              <p className="mt-7 text-xs font-medium uppercase tracking-[0.24em] text-white/42">{activeRestaurant.style}</p>
-              <h1 className="restaurant-cinematic-title mt-3 text-[clamp(4.2rem,8vw,8.6rem)] leading-[0.78] tracking-[-0.055em]">{activeRestaurant.title}</h1>
-              <p className="mt-6 max-w-xl text-base leading-8 text-white/62 sm:text-lg">{activeRestaurant.shortDescription}</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link to={`/restaurant/${activeRestaurant.slug}`} className="inline-flex items-center justify-center gap-3 rounded-full px-7 py-4 text-xs font-black uppercase tracking-[0.13em] text-[#11100f] shadow-2xl transition hover:-translate-y-1" style={{ backgroundColor: activeRestaurant.colors.accent }}>Explore this concept <span>→</span></Link>
-                <a href="#concepts" className="inline-flex items-center justify-center rounded-full border border-white/25 bg-black/15 px-7 py-4 text-xs font-black uppercase tracking-[0.13em] backdrop-blur transition hover:-translate-y-1 hover:bg-white/10">View all restaurants</a>
+          {/* Carousel Main Stage */}
+          <div className="grid items-center gap-10 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:py-16">
+            {/* Left: Text & Pitch */}
+            <div key={`copy-${activeRestaurant.id}`} className="max-w-2xl animate-in fade-in slide-in-from-left-4 duration-300">
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-[#f0c76a]/25 bg-[#f0c76a]/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#f0c76a]">
+                <Flame className="h-3.5 w-3.5" />
+                Featured Concept · 0{activeSlide + 1} of {carouselRestaurants.length}
               </div>
-              <div className="mt-9 flex items-center gap-3 text-[0.55rem] font-semibold uppercase tracking-[0.2em] text-white/35"><span className="h-px w-12 bg-white/25" />Curated dining stories</div>
+
+              <h1 className="mt-5 text-4xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+                {activeRestaurant.title}
+              </h1>
+
+              <p className="mt-3 text-xs font-black uppercase tracking-[0.22em] text-white/50">
+                {activeRestaurant.style}
+              </p>
+
+              <p className="mt-5 text-base leading-8 text-white/75 sm:text-lg">
+                {activeRestaurant.shortDescription}. Handcrafted with menu flow, reservation urgency, and signature hospitality branding.
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-3.5">
+                <Link
+                  to={`/restaurant/${activeRestaurant.slug}`}
+                  className="inline-flex items-center gap-2.5 rounded-full bg-[#f0c76a] px-7 py-3.5 text-xs font-black uppercase tracking-wider text-[#090807] shadow-xl shadow-[#f0c76a]/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white active:scale-95"
+                >
+                  <span>Explore This Concept</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+
+                <a
+                  href="#concepts"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/[0.06] px-6 py-3.5 text-xs font-bold text-white backdrop-blur-md transition hover:bg-white/15"
+                >
+                  Browse All 10 Concepts
+                </a>
+              </div>
             </div>
 
-            <div key={`card-${activeRestaurant.id}`} className="restaurant-slide-card relative mx-auto w-full max-w-3xl lg:ml-auto">
-              <div className="absolute -inset-5 rotate-2 rounded-[2rem] border border-white/10 bg-white/[0.035] backdrop-blur-sm" />
-              <Link to={`/restaurant/${activeRestaurant.slug}`} className="group relative block overflow-hidden rounded-[1.5rem] border border-white/20 bg-[#1b1917] p-2 shadow-[0_40px_110px_rgba(0,0,0,0.5)] sm:p-3">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[1rem]"><img src={activeRestaurant.image} alt={`${activeRestaurant.title} website preview`} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" /><div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" /></div>
-                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 text-white sm:bottom-8 sm:left-8 sm:right-8"><div><p className="text-[0.55rem] font-black uppercase tracking-[0.18em] text-white/55">Live restaurant concept</p><p className="mt-1 hidden text-lg font-black sm:block">Open the full experience</p></div><span className="grid h-11 w-11 place-items-center rounded-full text-xl text-[#11100f] transition group-hover:rotate-[-15deg] group-hover:scale-110" style={{ backgroundColor: activeRestaurant.colors.accent }}>↗</span></div>
-              </Link>
-              <div className="absolute -bottom-4 -left-3 rounded-full border border-white/15 bg-[#161412]/90 px-4 py-2 text-[0.55rem] font-black uppercase tracking-[0.15em] text-white/55 shadow-xl backdrop-blur sm:-left-6">Responsive · Editorial · Conversion ready</div>
+            {/* Right: Interactive Showcase Window */}
+            <div key={`card-${activeRestaurant.id}`} className="relative animate-in fade-in zoom-in-95 duration-300">
+              <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-3 shadow-2xl backdrop-blur-xl">
+                <Link
+                  to={`/restaurant/${activeRestaurant.slug}`}
+                  className="group relative block aspect-[16/10] overflow-hidden rounded-2xl bg-black/40"
+                >
+                  <img
+                    src={activeRestaurant.image}
+                    alt={`${activeRestaurant.title} preview`}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f0c76a]">
+                        Interactive Live Preview
+                      </p>
+                      <p className="text-xl font-black">{activeRestaurant.title}</p>
+                    </div>
+                    <span className="grid h-10 w-10 place-items-center rounded-full bg-[#f0c76a] text-sm font-black text-[#090807] shadow-lg transition group-hover:scale-110">
+                      ↗
+                    </span>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Slide Navigation Buttons */}
+              <div className="mt-4 flex items-center justify-between">
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => moveSlide(-1)}
+                    aria-label="Previous concept"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 text-sm font-bold transition hover:bg-white hover:text-black"
+                  >
+                    ←
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => moveSlide(1)}
+                    aria-label="Next concept"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 text-sm font-bold transition hover:bg-white hover:text-black"
+                  >
+                    →
+                  </button>
+                </div>
+
+                <div className="flex gap-1.5">
+                  {carouselRestaurants.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setActiveSlide(idx)}
+                      aria-label={`Go to slide ${idx + 1}`}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        idx === activeSlide ? 'w-8 bg-[#f0c76a]' : 'w-2 bg-white/30 hover:bg-white/60'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="grid items-end gap-5 lg:grid-cols-[auto_1fr_auto]">
-            <div className="flex gap-2">
-              <button type="button" onClick={() => moveSlide(-1)} aria-label="Previous restaurant" className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-black/20 text-lg backdrop-blur transition hover:bg-white hover:text-[#11100f]">←</button>
-              <button type="button" onClick={() => moveSlide(1)} aria-label="Next restaurant" className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-black/20 text-lg backdrop-blur transition hover:bg-white hover:text-[#11100f]">→</button>
-            </div>
-            <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
-              {carouselRestaurants.map((website, index) => (
-                <button key={website.id} type="button" onClick={() => setActiveSlide(index)} aria-label={`Show ${website.title}`} aria-current={index === activeSlide ? 'true' : undefined} className={`group relative h-[4.6rem] min-w-[7.5rem] overflow-hidden rounded-xl border text-left transition sm:h-20 sm:min-w-[9rem] ${index === activeSlide ? 'active border-white/60 opacity-100' : 'border-white/10 opacity-50 hover:opacity-90'}`}>
-                  <img src={website.image} alt="" className="absolute inset-0 h-full w-full object-cover transition group-hover:scale-105" /><span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" /><span className="absolute bottom-2 left-2 right-2 truncate text-[0.54rem] font-black uppercase tracking-[0.08em] text-white">{website.title}</span>{index === activeSlide && <span className="absolute inset-x-0 bottom-0 h-[3px]" style={{ backgroundColor: website.colors.accent }} />}
-                </button>
-              ))}
-            </div>
-            <div className="hidden min-w-24 text-right lg:block"><p className="text-2xl font-black">{String(activeSlide + 1).padStart(2, '0')}</p><p className="text-[0.55rem] font-black uppercase tracking-[0.16em] text-white/35">of {String(carouselRestaurants.length).padStart(2, '0')}</p></div>
+          {/* Carousel Thumbnail Strip */}
+          <div className="mt-6 flex gap-2.5 overflow-x-auto pb-2 [scrollbar-width:none]">
+            {carouselRestaurants.map((website, index) => (
+              <button
+                key={website.id}
+                type="button"
+                onClick={() => setActiveSlide(index)}
+                className={`group relative h-16 min-w-[110px] overflow-hidden rounded-xl border text-left transition-all ${
+                  index === activeSlide
+                    ? 'border-[#f0c76a] ring-2 ring-[#f0c76a]/30 opacity-100'
+                    : 'border-white/10 opacity-50 hover:opacity-90'
+                }`}
+              >
+                <img src={website.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                <span className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                <span className="absolute bottom-2 left-2 right-2 truncate text-[10px] font-black uppercase text-white">
+                  {website.title}
+                </span>
+              </button>
+            ))}
           </div>
         </div>
-        <div className="absolute inset-x-0 bottom-3 z-20 h-[2px] bg-white/10"><span key={`progress-${activeSlide}-${isCarouselPaused}`} className="restaurant-carousel-progress block h-full w-full" style={{ backgroundColor: activeRestaurant.colors.accent, animationPlayState: isCarouselPaused ? 'paused' : 'running' }} /></div>
       </section>
 
-      <section className="border-b border-[#eadfc8] bg-[#fffaf1] py-10">
+      {/* ── QUICK CUISINE TAGS STRIP ──────────────────────────────────────── */}
+      <section className="border-b border-[#e8dec8] bg-white py-6">
         <Container>
-          <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-xs font-black uppercase tracking-wider text-[#8c7e6d]">
+              Explore by dining style:
+            </span>
             <div className="flex flex-wrap gap-2">
-              {diningStyles.map((style) => (
-                <span key={style} className="rounded-full border border-[#e0d1b4] bg-white px-4 py-2 text-sm font-bold text-[#5f5242]">
-                  {style}
-                </span>
-              ))}
-            </div>
-            <div className="grid grid-cols-3 overflow-hidden border border-[#e0d1b4] bg-white text-center">
-              {[
-                { value: restaurantWebsites.length, label: 'Concepts' },
-                { value: completedCount, label: 'Live' },
-                { value: restaurantWebsites.length - completedCount, label: 'Queued' },
-              ].map((stat) => (
-                <div key={stat.label} className="border-r border-[#e0d1b4] px-5 py-3 last:border-r-0">
-                  <p className="text-2xl font-black">{stat.value}</p>
-                  <p className="text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#7b6d5b]">{stat.label}</p>
-                </div>
+              {diningTags.map((tag) => (
+                <Link
+                  key={tag.label}
+                  to={`/restaurant/${tag.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#e8dec8] bg-[#fcfaf6] px-3.5 py-1.5 text-xs font-bold text-[#5c5040] transition hover:border-[#c2410c] hover:bg-[#c2410c]/5 hover:text-[#c2410c]"
+                >
+                  <span>{tag.emoji}</span>
+                  <span>{tag.label}</span>
+                </Link>
               ))}
             </div>
           </div>
         </Container>
       </section>
 
+      {/* ── ALL CONCEPTS GALLERY & DIRECTORY ─────────────────────────────── */}
       <section id="concepts" className="py-20 md:py-28">
         <Container>
-          <AnimatedSection className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          {/* Header */}
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between mb-12">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#9a5b25]">All concepts</p>
-              <h2 className="mt-3 max-w-3xl text-3xl font-black leading-tight md:text-5xl">
-                Pick a restaurant mood and open the full homepage.
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#c2410c]/20 bg-[#c2410c]/10 px-4 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#c2410c]">
+                <Utensils className="h-3.5 w-3.5" />
+                100Web Dining Collection
+              </div>
+              <h2 className="mt-4 text-3xl font-black tracking-tight text-[#171512] sm:text-5xl">
+                Every restaurant mood, ready to launch.
               </h2>
             </div>
-            <p className="max-w-sm text-sm leading-6 text-[#6d6254]">
-              Each card uses real concept artwork so the collection reads like a visual menu of distinct restaurant experiences.
+            <p className="max-w-md text-sm leading-6 text-[#6d6254]">
+              Each concept features complete menus, atmosphere pacing, online booking flows, and distinct
+              color palettes built for culinary conversion.
             </p>
-          </AnimatedSection>
-          {/* Mood & Shortlist Filter Tabs */}
-          <div className="mb-8 flex flex-wrap items-center gap-2">
-            {[
-              { id: 'all', label: `All Concepts (${restaurantWebsites.length})` },
-              { id: 'cozy', label: 'Warm & Handcrafted' },
-              { id: 'modern', label: 'Modern & Urban' },
-              { id: 'flavor', label: 'Cultural & Flavor' },
-              { id: 'shortlist', label: `Shortlisted (${restaurantWebsites.filter((w) => favoriteIds.includes(w.id)).length})` },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveFilter(tab.id as any)}
-                className={`rounded-full px-4 py-2 text-xs font-bold transition ${
-                  activeFilter === tab.id
-                    ? 'bg-[#171512] text-white shadow-sm'
-                    : 'bg-[#eadfc8]/50 text-[#6d6254] hover:bg-[#eadfc8] hover:text-[#171512]'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
           </div>
 
-          {filteredRestaurants.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-[#eadfc8] bg-white/70 p-12 text-center">
-              <p className="font-extrabold text-lg text-[#171512]">No concepts in this view</p>
-              <p className="text-sm text-[#6d6254] mt-1">
-                {activeFilter === 'shortlist'
-                  ? 'Click the heart icon on any restaurant card to save your favorite concepts to this list.'
-                  : 'Try selecting a different filter.'}
-              </p>
-              {activeFilter === 'shortlist' && (
+          {/* Search Bar & Filter Switchers */}
+          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            {/* Search Input */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8c7e6d]" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by restaurant name, cuisine, or vibe..."
+                className="w-full rounded-full border border-[#e8dec8] bg-white py-2.5 pl-11 pr-4 text-xs font-bold text-[#171512] placeholder-[#a0907d] shadow-2xs focus:border-[#c2410c] focus:outline-none"
+              />
+              {searchQuery && (
                 <button
                   type="button"
-                  onClick={() => setActiveFilter('all')}
-                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#171512] px-5 py-2 text-xs font-bold text-white transition hover:bg-[#9a5b25]"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 rounded-full bg-gray-200 px-1.5 py-0.5 text-[10px] font-bold text-gray-700"
                 >
-                  Browse all restaurants
+                  Clear
                 </button>
               )}
             </div>
+
+            {/* Filter Tabs */}
+            <div className="flex flex-wrap items-center gap-1.5">
+              {[
+                { id: 'all', label: `All (${restaurantWebsites.length})` },
+                { id: 'cozy', label: 'Cozy & Bakery' },
+                { id: 'modern', label: 'Urban & Fast Casual' },
+                { id: 'flavor', label: 'Steak & Seafood' },
+                {
+                  id: 'shortlist',
+                  label: `Saved (${restaurantWebsites.filter((w) => favoriteIds.includes(w.id)).length})`,
+                },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveFilter(tab.id as any)}
+                  className={`rounded-full px-4 py-2 text-xs font-bold transition-all ${
+                    activeFilter === tab.id
+                      ? 'bg-[#171512] text-white shadow-md'
+                      : 'border border-[#e8dec8] bg-white text-[#6d6254] hover:border-[#c2410c]/30 hover:text-[#171512]'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Cards Grid */}
+          {filteredRestaurants.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-[#e8dec8] bg-white p-16 text-center shadow-xs">
+              <Utensils className="mx-auto h-10 w-10 text-[#a0907d]" />
+              <p className="mt-4 text-lg font-black text-[#171512]">No restaurant concepts found</p>
+              <p className="mt-1 text-sm text-[#6d6254]">
+                {activeFilter === 'shortlist'
+                  ? 'You have not saved any restaurant concepts yet. Click the heart icon on any card to save favorites!'
+                  : 'Try searching for a different term or reset your filters.'}
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveFilter('all')
+                  setSearchQuery('')
+                }}
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#171512] px-6 py-2.5 text-xs font-black text-white transition hover:bg-[#c2410c]"
+              >
+                Reset All Filters
+              </button>
+            </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {filteredRestaurants.map((website, index) => (
                 <RestaurantCard key={website.id} website={website} index={index} />
               ))}
@@ -299,74 +534,106 @@ export function RestaurantIndex() {
         </Container>
       </section>
 
-      <section className="border-y border-[#eadfc8] bg-white py-20 md:py-28">
+      {/* ── CLIENT VALUE: WHY RESTAURANT WEBSITES SUCCEED ─────────────────── */}
+      <section className="border-t border-[#e8dec8] bg-white py-20 md:py-28">
         <Container>
-          <AnimatedSection className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#9a5b25]">Collection UX</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                Built to compare concepts quickly without making them feel the same.
-              </h2>
-              <p className="mt-5 text-lg leading-8 text-[#6d6254]">
-                The page works as a tasting flight: fast visual scanning, clear brand contrast, and direct paths into
-                the full restaurant homepages.
-              </p>
+          <div className="mx-auto max-w-3xl text-center mb-16">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#f59e0b]/25 bg-[#f59e0b]/10 px-4 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#d97706]">
+              <Sparkles className="h-3.5 w-3.5" />
+              Conversion UX Strategy
             </div>
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-[#171512] sm:text-5xl">
+              Why hospitality brands thrive on these architectures
+            </h2>
+            <p className="mt-4 text-base leading-7 text-[#6d6254]">
+              Restaurant websites shouldn't look like tech startups. We engineer distinct visual appetites
+              paired with booking and menu pathways that turn hungry visitors into booked tables.
+            </p>
+          </div>
 
-            <div className="grid gap-5 md:grid-cols-3">
-              {experienceNotes.map((note) => (
-                <article key={note.title} className="border border-[#eadfc8] bg-[#fffaf1] p-6 shadow-sm">
-                  <div className="mb-6 h-2 w-16 bg-[#9a5b25]" />
-                  <h3 className="text-2xl font-black">{note.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[#6d6254]">{note.text}</p>
-                </article>
-              ))}
-            </div>
-          </AnimatedSection>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {clientAdvantages.map((adv) => (
+              <div
+                key={adv.title}
+                className="flex flex-col justify-between rounded-3xl border border-[#e8dec8] bg-[#fcfaf6] p-7 transition hover:-translate-y-1 hover:border-[#c2410c]/30 hover:shadow-xl"
+              >
+                <div>
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white shadow-xs border border-[#e8dec8]">
+                    {adv.icon}
+                  </div>
+                  <h3 className="mt-5 text-lg font-black text-[#171512]">{adv.title}</h3>
+                  <p className="mt-2.5 text-xs leading-6 text-[#6d6254]">{adv.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 
-      <section className="bg-[#fffaf1] py-20 md:py-28">
+      {/* ── CALL TO ACTION BANNER FOR RESTAURANT OWNERS ───────────────────── */}
+      <section className="bg-[#090807] py-20 text-white md:py-28">
         <Container>
-          <AnimatedSection className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-            <div className="border border-[#eadfc8] bg-white p-8 shadow-sm md:p-10">
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#9a5b25]">Layout map</p>
-              <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
-                A restaurant collection with more than one visual recipe.
-              </h2>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {layoutStyles.map(([layout, examples]) => (
-                  <div key={layout} className="border border-[#eadfc8] bg-[#fffaf1] p-5">
-                    <p className="text-2xl font-black">{layout}</p>
-                    <p className="mt-2 text-sm font-bold text-[#6d6254]">{examples}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-[#1c1917] via-[#0f0e0d] to-[#090807] p-8 sm:p-14 shadow-2xl">
+            <div className="absolute right-0 top-0 h-96 w-96 bg-[radial-gradient(circle_at_80%_20%,rgba(240,199,106,0.12),transparent_70%)] pointer-events-none" />
 
-            <div className="relative overflow-hidden bg-[#171512] p-8 text-white shadow-2xl md:p-10">
-              <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#e36a2c]/30" />
-              <div className="absolute -bottom-24 left-8 h-64 w-64 rounded-full bg-[#2f8f46]/25" />
-              <div className="relative">
-                <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f4c76d]">Next step</p>
-                <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
-                  Open a concept, compare the hero, then scan the full page flow.
+            <div className="relative grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f0c76a]">
+                  Hospitality Partnerships
+                </span>
+                <h2 className="mt-3 text-3xl font-black leading-tight sm:text-5xl">
+                  Need a bespoke website for your restaurant, café, or dining group?
                 </h2>
-                <p className="mt-5 text-lg leading-8 text-white/70">
-                  The strongest restaurant pages now use different structures, so this hub helps you judge the whole set
-                  as a portfolio instead of a repeated template.
+                <p className="mt-4 max-w-xl text-sm leading-7 text-white/65 sm:text-base">
+                  Pick any of these 10 live foundations to launch in under a week, or collaborate with Umair Ahmad
+                  to design a completely bespoke digital flagship tailored to your chef, menu, and interior.
                 </p>
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                  <CTAButton href="#concepts" size="lg" className="bg-[#f4c76d] text-[#171512] hover:bg-white">
-                    Return to Concepts
-                  </CTAButton>
-                  <CTAButton href="/restaurant/brewnest-coffee" variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10">
-                    Start with BrewNest
-                  </CTAButton>
+
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <a
+                    href="https://github.com/umairny"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2.5 rounded-full bg-[#f0c76a] px-7 py-3.5 text-xs font-black uppercase tracking-wider text-[#090807] shadow-xl shadow-[#f0c76a]/20 transition hover:bg-white active:scale-95"
+                  >
+                    <span>Inquire for Custom Restaurant Build</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+
+                  <Link
+                    to="/"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-xs font-bold text-white transition hover:bg-white/10"
+                  >
+                    Return to 100Web Home
+                  </Link>
+                </div>
+              </div>
+
+              {/* Quick Specs Highlight */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-md">
+                <div className="p-3">
+                  <p className="text-3xl font-black text-[#f0c76a]">10</p>
+                  <p className="text-xs font-bold text-white">Distinct Concepts</p>
+                  <p className="text-[10px] text-white/40 mt-0.5">Zero cloned layouts</p>
+                </div>
+                <div className="p-3">
+                  <p className="text-3xl font-black text-emerald-400">&lt; 1s</p>
+                  <p className="text-xs font-bold text-white">Load Time</p>
+                  <p className="text-[10px] text-white/40 mt-0.5">Pure React 19</p>
+                </div>
+                <div className="p-3">
+                  <p className="text-3xl font-black text-sky-400">100%</p>
+                  <p className="text-xs font-bold text-white">Mobile Ready</p>
+                  <p className="text-[10px] text-white/40 mt-0.5">Touch menu flows</p>
+                </div>
+                <div className="p-3">
+                  <p className="text-3xl font-black text-rose-400">Days</p>
+                  <p className="text-xs font-bold text-white">Launch Speed</p>
+                  <p className="text-[10px] text-white/40 mt-0.5">Vs 3 months agency</p>
                 </div>
               </div>
             </div>
-          </AnimatedSection>
+          </div>
         </Container>
       </section>
     </main>

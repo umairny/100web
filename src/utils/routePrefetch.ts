@@ -99,7 +99,6 @@ const routeLoaders: Record<string, () => Promise<unknown>> = {
   '/portfolio/inkhouse-copy': () => import('../pages/Portfolio/InkhouseCopy'),
   '/portfolio/framelab-photo': () => import('../pages/Portfolio/FrameLabPhoto'),
   '/portfolio/cedar-ux-consultant': () => import('../pages/Portfolio/CedarUXConsultant'),
-  '/portfolio/atelier-north-architecture': () => import('../pages/Portfolio/AtelierNorthArchitecture'),
   '/portfolio/artisan-objects': () => import('../pages/Portfolio/ArtisanObjects'),
 
   // Real Estate

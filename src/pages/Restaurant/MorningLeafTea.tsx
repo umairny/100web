@@ -1,786 +1,941 @@
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Container } from "../../components";
+import {
+  Clock,
+  MapPin,
+  Phone,
+  ShoppingBag,
+  Plus,
+  Minus,
+  ArrowRight,
+  Play,
+  Pause,
+  RotateCcw,
+  Check,
+  Droplet,
+  Flame,
+  Volume2,
+  CheckCircle2,
+  Sparkles,
+  Compass,
+} from "lucide-react";
+import { Container, SubWebsiteNav } from "../../components";
 import { imageUrl } from "../../assets/optimized";
 
-type TeaTone = "herbal" | "cup" | "citrus" | "chamomile" | "matcha" | "pot";
+const imageAssets = {
+  hero: {
+    src: imageUrl("restaurent/morningleaf-tea/hero-tea.webp"),
+    alt: "MorningLeaf tea house table with cast iron teapot, cups, and warm morning sunlight",
+  },
+  tatami: {
+    src: imageUrl("restaurent/morningleaf-tea/tatami-room.jpg"),
+    alt: "Minimalist Japanese tatami tea house room with shoji screens, low wooden table, and bamboo garden view",
+  },
+  ourStory: {
+    src: imageUrl("restaurent/morningleaf-tea/our-story.webp"),
+    alt: "Sunlit tea table with brewing ceramics, stone coasters, and fresh herbs",
+  },
+  matcha: {
+    src: imageUrl("restaurent/morningleaf-tea/Matcha-Ritual.webp"),
+    alt: "Ceremonial matcha bowl with bamboo chasen whisk and vivid emerald green foam",
+  },
+  citrusGreen: {
+    src: imageUrl("restaurent/morningleaf-tea/Citrus-Green-Tea.webp"),
+    alt: "Clear glass teapot with steeped green tea leaves and dehydrated citrus slices",
+  },
+  chamomile: {
+    src: imageUrl("restaurent/morningleaf-tea/Chamomile-Reset.webp"),
+    alt: "Golden chamomile herbal infusion in handcrafted ceramic teacup with dried flowers",
+  },
+  herbalBlends: {
+    src: imageUrl("restaurent/morningleaf-tea/herbal-blends.webp"),
+    alt: "Loose leaf botanical herbal blend with lavender, mint, and rosehips on raw linen",
+  },
+  lowCaffeine: {
+    src: imageUrl("restaurent/morningleaf-tea/Low-Caffeine-Cups.webp"),
+    alt: "Warm roasted hojicha and genmaicha tea in rustic ceramic stoneware cups",
+  },
+  steepedWellness: {
+    src: imageUrl("restaurent/morningleaf-tea/Steeped-Wellness.webp"),
+    alt: "Cast iron tetsubin teapot with twin matching cups on dark wood tea board",
+  },
+};
 
-interface Tea {
+type TeaCategory = "all" | "matcha-green" | "roasted-oolong" | "botanical-herbal";
+
+interface TeaProfile {
+  id: string;
   name: string;
+  kanji: string;
+  category: "matcha-green" | "roasted-oolong" | "botanical-herbal";
+  origin: string;
+  tastingNotes: string[];
+  caffeine: "None" | "Gentle" | "Moderate" | "Ceremonial Alert";
+  steepTemp: string;
+  steepTime: string;
+  priceDineIn: number;
+  priceCanister: number; // 50g tin
   description: string;
-  price: string;
-  tone: TeaTone;
   image: string;
+  badge?: string;
+  harvestYear: string;
 }
 
-interface ResetItem {
-  title: string;
-  description: string;
-  icon: "drop" | "sun" | "steam" | "leaf";
-}
-
-const navItems = [
-  "Home",
-  "Menu",
-  "Rituals",
-  "Reservations",
-  "About",
-  "Journal",
-  "Contact",
+const teaCatalog: TeaProfile[] = [
+  {
+    id: "ceremonial-matcha",
+    name: "First-Harvest Uji Matcha",
+    kanji: "濃茶 · 宇治",
+    category: "matcha-green",
+    origin: "Uji, Kyoto, Japan · Single Estate",
+    tastingNotes: ["Fresh Sweet Cream", "Nutty Edamame", "Deep Velvety Umami"],
+    caffeine: "Ceremonial Alert",
+    steepTemp: "80°C · 175°F",
+    steepTime: "Whisk 35s",
+    priceDineIn: 8.5,
+    priceCanister: 34.0,
+    description: "Stone-milled shade-grown tencha hand-whisked before your eyes with a 100-prong bamboo chasen into a thick, luminous emerald froth.",
+    image: imageAssets.matcha.src,
+    badge: "Master Reserve",
+    harvestYear: "Spring 2026",
+  },
+  {
+    id: "citrus-sencha",
+    name: "Yuzu Mountain Sencha",
+    kanji: "柚子 · 静岡",
+    category: "matcha-green",
+    origin: "Shizuoka Terraces, Japan",
+    tastingNotes: ["Meyer Lemon Blossom", "Sweet Grass", "Crisp Pine"],
+    caffeine: "Moderate",
+    steepTemp: "75°C · 167°F",
+    steepTime: "Steep 90s",
+    priceDineIn: 7.25,
+    priceCanister: 26.0,
+    description: "First-flush steamed green tea infused with sun-dried organic yuzu peel. Opens the breath and gently resets mental clarity.",
+    image: imageAssets.citrusGreen.src,
+    badge: "Morning Favorite",
+    harvestYear: "First Flush",
+  },
+  {
+    id: "roasted-hojicha",
+    name: "Charcoal Roasted Hojicha",
+    kanji: "炭火 · 焙じ茶",
+    category: "roasted-oolong",
+    origin: "Wazuka River Valley, Kyoto",
+    tastingNotes: ["Toasted Barley", "Warm Hazelnut", "Caramelized Rice"],
+    caffeine: "Gentle",
+    steepTemp: "90°C · 195°F",
+    steepTime: "Steep 2m",
+    priceDineIn: 7.0,
+    priceCanister: 24.0,
+    description: "Slow-roasted over porcelain hot coals. Almost zero astringency and deeply comforting for calm, unhurried afternoons.",
+    image: imageAssets.lowCaffeine.src,
+    harvestYear: "Autumn Roast",
+  },
+  {
+    id: "chamomile-botanical",
+    name: "Wild Nile Chamomile & Lavender",
+    kanji: "安眠 · 花茶",
+    category: "botanical-herbal",
+    origin: "Faiyum Oasis, Egypt & Provence, France",
+    tastingNotes: ["Honeyed Apple", "French Lavender", "Sweet Vanilla Pod"],
+    caffeine: "None",
+    steepTemp: "100°C · 212°F",
+    steepTime: "Steep 5m",
+    priceDineIn: 6.75,
+    priceCanister: 22.0,
+    description: "Whole chamomile flower blossoms hand-blended with soothing French lavender buds and lemon verbena for restful sleep.",
+    image: imageAssets.chamomile.src,
+    badge: "Evening Rest",
+    harvestYear: "Wild Harvest",
+  },
+  {
+    id: "tetsubin-wellness",
+    name: "Mountain Ginseng & Safflower",
+    kanji: "滋養 · 鉄瓶",
+    category: "botanical-herbal",
+    origin: "Changbai High Alpine & Alishan",
+    tastingNotes: ["Sweet Earth", "Ginger Root", "Orchid Nectar"],
+    caffeine: "None",
+    steepTemp: "95°C · 203°F",
+    steepTime: "Steep 4m",
+    priceDineIn: 8.0,
+    priceCanister: 28.0,
+    description: "Simmered in cast iron tetsubin teaware with red jujube dates, astragalus, and wild mountain ginseng root.",
+    image: imageAssets.steepedWellness.src,
+    harvestYear: "Alpine Reserve",
+  },
+  {
+    id: "botanical-harmony",
+    name: "Alpine Peppermint & Crimson Rose",
+    kanji: "薄荷 · 薔薇",
+    category: "botanical-herbal",
+    origin: "Cascade Mountain Foothills, Oregon",
+    tastingNotes: ["Crisp Spearmint", "Crimson Rose Petal", "Clean Eucalyptus"],
+    caffeine: "None",
+    steepTemp: "95°C · 203°F",
+    steepTime: "Steep 3m",
+    priceDineIn: 6.5,
+    priceCanister: 20.0,
+    description: "Crisp aromatic mint leaves blended with whole organic rose petals for soothing digestion and mindful grounding.",
+    image: imageAssets.herbalBlends.src,
+    harvestYear: "Summer Blend",
+  },
 ];
-const morningLeafHeroImage = imageUrl(
-  "restaurent/morningleaf-tea/hero-tea.webp",
-);
-const morningLeafMobileHeroImage = imageUrl(
-  "restaurent/morningleaf-tea/hero-mobile-tea.webp",
-);
-const morningLeafStoryImage = imageUrl(
-  "restaurent/morningleaf-tea/our-story.webp",
-);
 
-const teas: Tea[] = [
+const steepRituals = [
   {
-    name: "Herbal Blends",
-    description: "Caffeine-free botanicals for balance and calm.",
-    price: "$6.50",
-    tone: "herbal",
-    image: imageUrl("restaurent/morningleaf-tea/herbal-blends.webp"),
+    id: "gyokuro",
+    name: "Gyokuro Shade-Grown Green",
+    temp: "60°C · 140°F",
+    seconds: 90,
+    vibe: "Meditative Umami",
+    tip: "Cool water preserves rich L-theanine and sweet amino acids without extracting tannic bite.",
   },
   {
-    name: "Low-Caffeine Cups",
-    description: "Gentle energy with mindful, natural notes.",
-    price: "$6.00",
-    tone: "cup",
-    image: imageUrl("restaurent/morningleaf-tea/Low-Caffeine-Cups.webp"),
+    id: "matcha",
+    name: "Ceremonial Koicha Matcha",
+    temp: "80°C · 175°F",
+    seconds: 35,
+    vibe: "Focused Clarity",
+    tip: "Whisk briskly in rapid 'W' strokes from the wrist to suspend microscopic emerald tea particles.",
   },
   {
-    name: "Citrus Green Tea",
-    description: "Bright citrus. Smooth green. Light and fresh.",
-    price: "$6.75",
-    tone: "citrus",
-    image: imageUrl("restaurent/morningleaf-tea/Citrus-Green-Tea.webp"),
+    id: "hojicha",
+    name: "Kyoto Roasted Hojicha",
+    temp: "90°C · 195°F",
+    seconds: 120,
+    vibe: "Warm Evening Calm",
+    tip: "High thermal water coaxes deep roasted hazelnut notes while keeping caffeine virtually non-existent.",
   },
   {
-    name: "Chamomile Reset",
-    description: "Floral and soothing. Perfect for unwinding.",
-    price: "$6.50",
-    tone: "chamomile",
-    image: imageUrl("restaurent/morningleaf-tea/Chamomile-Reset.webp"),
-  },
-  {
-    name: "Matcha Ritual",
-    description: "Crafted matcha for focus and clarity.",
-    price: "$7.25",
-    tone: "matcha",
-    image: imageUrl("restaurent/morningleaf-tea/Matcha-Ritual.webp"),
-  },
-  {
-    name: "Steeped Wellness",
-    description: "Thoughtful blends for everyday well-being.",
-    price: "$6.75",
-    tone: "pot",
-    image: imageUrl("restaurent/morningleaf-tea/Steeped-Wellness.webp"),
+    id: "chamomile",
+    name: "Egyptian Blossom Herbal",
+    temp: "100°C · 212°F",
+    seconds: 300,
+    vibe: "Deep Sleep Release",
+    tip: "Keep teapot tightly lidded throughout the steep to capture delicate essential flower vapors.",
   },
 ];
 
-const resetItems: ResetItem[] = [
-  {
-    title: "Relax",
-    description: "Soft botanicals ease the mind and body.",
-    icon: "drop",
-  },
-  { title: "Focus", description: "Clean energy to stay present.", icon: "sun" },
-  {
-    title: "Unwind",
-    description: "Slow down with intentional sips.",
-    icon: "steam",
-  },
-  {
-    title: "Restore",
-    description: "Nourish from within, daily.",
-    icon: "leaf",
-  },
-];
+export function MorningLeafTea() {
+  const [activeCategory, setActiveCategory] = useState<TeaCategory>("all");
+  const [cart, setCart] = useState<Record<string, number>>({});
 
-function LeafLogo({ className = "" }: { className?: string }) {
-  return (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
-      <svg
-        viewBox="0 0 32 32"
-        className="h-6 w-6"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M16 26V10"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        />
-        <path
-          d="M16 19C9 18 6 13 7 6c7 1 11 5 9 13Z"
-          stroke="currentColor"
-          strokeWidth="1.6"
-        />
-        <path
-          d="M17 20c7-.8 10-5.2 9-12-6.5.9-10 4.5-9 12Z"
-          stroke="currentColor"
-          strokeWidth="1.6"
-        />
-        <path
-          d="M11 13c2.2 1 3.8 2.5 5 4.6M21.5 14c-2 .9-3.5 2.2-4.5 4"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-      </svg>
-      <span className="font-serif text-2xl">MorningLeaf</span>
-    </span>
-  );
-}
+  // Interactive Steep Timer State
+  const [activeRitual, setActiveRitual] = useState(steepRituals[0]);
+  const [timerSeconds, setTimerSeconds] = useState(steepRituals[0].seconds);
+  const [timerRunning, setTimerRunning] = useState(false);
 
-function Icon({
-  type,
-}: {
-  type: ResetItem["icon"] | "bag" | "menu" | "calendar" | "home" | "more";
-}) {
-  const common = "h-5 w-5";
+  // Table reservation form state
+  const [bookingState, setBookingState] = useState({
+    tableType: "Tatami Garden Room",
+    guests: "2 Guests",
+    time: "2:30 PM",
+    isConfirmed: false,
+  });
 
-  if (type === "menu") {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        className={common}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      >
-        <path d="M4 7h16M4 12h16M4 17h16" />
-      </svg>
-    );
-  }
+  // Handle Steep Timer Countdown
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (timerRunning && timerSeconds > 0) {
+      interval = setInterval(() => {
+        setTimerSeconds((prev) => prev - 1);
+      }, 1000);
+    } else if (timerSeconds === 0) {
+      setTimerRunning(false);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [timerRunning, timerSeconds]);
 
-  if (type === "bag") {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        className={common}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M7 9h10l1 11H6L7 9Z" />
-        <path d="M9 9a3 3 0 0 1 6 0" />
-      </svg>
-    );
-  }
-
-  if (type === "calendar") {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        className={common}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M7 3v4M17 3v4M4 9h16M5 5h14v15H5z" />
-      </svg>
-    );
-  }
-
-  if (type === "home") {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        className={common}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="m4 11 8-7 8 7" />
-        <path d="M7 10v10h10V10" />
-        <path d="M10 20v-5h4v5" />
-      </svg>
-    );
-  }
-
-  if (type === "more") {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        className={common}
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <circle cx="5" cy="12" r="1.5" />
-        <circle cx="12" cy="12" r="1.5" />
-        <circle cx="19" cy="12" r="1.5" />
-      </svg>
-    );
-  }
-
-  if (type === "drop") {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        className={common}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 3s6 6.3 6 11a6 6 0 0 1-12 0c0-4.7 6-11 6-11Z" />
-        <path d="M10 15a3 3 0 0 0 4 0" />
-      </svg>
-    );
-  }
-
-  if (type === "sun") {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        className={common}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      >
-        <circle cx="12" cy="12" r="3.5" />
-        <path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1" />
-      </svg>
-    );
-  }
-
-  if (type === "steam") {
-    return (
-      <svg
-        viewBox="0 0 24 24"
-        className={common}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M7 11h10v4a5 5 0 0 1-10 0v-4Z" />
-        <path d="M17 12h1.5a2 2 0 0 1 0 4H17" />
-        <path d="M8 6c1-1 .5-2 0-3M12 6c1-1 .5-2 0-3M16 6c1-1 .5-2 0-3" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={common}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 20V9" />
-      <path d="M12 16C7 15 5 12 6 7c5 .7 7.5 3.7 6 9Z" />
-      <path d="M13 17c4.8-.6 7-3.5 6-8-4.7.6-7 3.2-6 8Z" />
-    </svg>
-  );
-}
-
-function TeaImage({
-  tone,
-  src,
-  alt,
-  className = "",
-}: {
-  tone: TeaTone;
-  src?: string;
-  alt?: string;
-  className?: string;
-}) {
-  const toneStyles = {
-    herbal:
-      "bg-[radial-gradient(circle_at_34%_38%,#c29b55_0_10%,transparent_11%),radial-gradient(circle_at_57%_42%,#6f7c4d_0_9%,transparent_10%),radial-gradient(circle_at_44%_62%,#d7c790_0_11%,transparent_12%),linear-gradient(135deg,#3c331f,#a7854d_52%,#ede2c9)]",
-    cup: "bg-[radial-gradient(ellipse_at_50%_58%,#8a5a28_0_22%,transparent_23%),radial-gradient(ellipse_at_52%_65%,#eee3d0_0_35%,transparent_36%),linear-gradient(135deg,#312918,#d8c6a8)]",
-    citrus:
-      "bg-[radial-gradient(circle_at_40%_38%,#e5d36a_0_13%,transparent_14%),radial-gradient(circle_at_60%_54%,#a5aa53_0_16%,transparent_17%),linear-gradient(135deg,#4d562b,#eadfa9_58%,#f9f5e8)]",
-    chamomile:
-      "bg-[radial-gradient(circle_at_46%_48%,#c47d25_0_20%,transparent_21%),radial-gradient(circle_at_60%_35%,#f1d38a_0_8%,transparent_9%),linear-gradient(135deg,#513a1f,#d9b66d_50%,#f6efe0)]",
-    matcha:
-      "bg-[radial-gradient(circle_at_50%_55%,#8fa37a_0_28%,transparent_29%),radial-gradient(circle_at_48%_50%,#526a38_0_12%,transparent_13%),linear-gradient(135deg,#2c311f,#d3c79d)]",
-    pot: "bg-[radial-gradient(ellipse_at_55%_56%,#b28d42_0_20%,transparent_21%),radial-gradient(circle_at_46%_43%,#e7d9a2_0_9%,transparent_10%),linear-gradient(135deg,#2b2a1c,#6a6c45_50%,#eee7d7)]",
+  const selectRitual = (ritual: (typeof steepRituals)[0]) => {
+    setActiveRitual(ritual);
+    setTimerSeconds(ritual.seconds);
+    setTimerRunning(false);
   };
 
-  return (
-    <div
-      className={`relative overflow-hidden ${toneStyles[tone]} ${className}`}
-    >
-      {src && (
-        <img
-          src={src}
-          alt={alt || ""}
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="lazy"
-        />
-      )}
-      <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.22),transparent_34%,rgba(31,25,13,0.3))]" />
-      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-black/12" />
-    </div>
-  );
-}
+  const resetTimer = () => {
+    setTimerSeconds(activeRitual.seconds);
+    setTimerRunning(false);
+  };
 
-function HeroImage() {
+  // Cart operations
+  const addToCart = (id: string) => {
+    setCart((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+  };
+
+  const removeFromCart = (id: string) => {
+    setCart((prev) => {
+      const next = { ...prev };
+      if (next[id] > 1) {
+        next[id] -= 1;
+      } else {
+        delete next[id];
+      }
+      return next;
+    });
+  };
+
+  const totalCartCount = Object.values(cart).reduce((a, b) => a + b, 0);
+  const totalCartPrice = Object.entries(cart).reduce((sum, [id, count]) => {
+    const tea = teaCatalog.find((t) => t.id === id);
+    return sum + (tea ? tea.priceDineIn : 0) * count;
+  }, 0);
+
+  const filteredTeas = useMemo(() => {
+    if (activeCategory === "all") return teaCatalog;
+    return teaCatalog.filter((t) => t.category === activeCategory);
+  }, [activeCategory]);
+
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[#292818]">
-      <img
-        src={morningLeafHeroImage}
-        alt="MorningLeaf tea house table with teapot, cups, herbs, and warm natural light"
-        className="absolute left-0 top-0 hidden h-full w-[138%] max-w-none object-cover object-left-top md:block"
+    <main className="brand-motion motion-morningleaf min-h-screen bg-[#f8f6f0] text-[#181f19] selection:bg-[#2d4a32] selection:text-white">
+      {/* ── REFINED SUB-WEBSITE NAVIGATION (FROSTED GLASS ON TOP OF HERO) ──── */}
+      <SubWebsiteNav
+        brand="MorningLeaf Tea Sanctuary"
+        links={[
+          { label: "Tea Scrolls", href: "#scrolls" },
+          { label: "Steep Timer", href: "#timer" },
+          { label: "Tatami Pavilion", href: "#space" },
+          { label: "Ceremony Booking", href: "#reserve" },
+        ]}
+        ctaLabel="Reserve a Tea Table"
+        ctaHref="#reserve"
+        className="sticky top-0 z-40 border-b border-[#e5dfd2]/80 bg-[#f8f6f0]/95 backdrop-blur-md shadow-2xs"
+        brandClassName="text-[#2d4a32] font-serif text-xl tracking-wide font-black"
+        linkClassName="rounded-full px-3.5 py-1.5 text-xs font-bold text-[#556456] transition hover:bg-[#2d4a32]/10 hover:text-[#2d4a32]"
+        ctaClassName="rounded-full bg-[#2d4a32] px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-sm hover:bg-[#1f3423] transition"
+        menuButtonClassName="border-[#e5dfd2] text-[#2d4a32] hover:bg-[#2d4a32]/10"
+        mobilePanelClassName="border border-[#e5dfd2] bg-[#f8f6f0]"
       />
-      <img
-        src={morningLeafMobileHeroImage}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover object-[78%_7%] md:hidden"
-      />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(220,224,148,0.18),transparent_27%),linear-gradient(90deg,rgba(21,18,10,0.72),rgba(21,18,10,0.24)_46%,rgba(21,18,10,0.5))]" />
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#19150e]/65 via-[#19150e]/12 to-transparent md:h-1/3" />
-    </div>
-  );
-}
 
-function DesktopHeader() {
-  return (
-    <header className="absolute left-0 right-0 top-0 z-20 hidden h-16 items-center border-b border-white/10 bg-[#171309]/50 px-10 text-white backdrop-blur-md lg:flex">
-      <Link to="/restaurant" className="mr-16 text-white">
-        <LeafLogo />
-      </Link>
-      <nav className="flex flex-1 items-center justify-center gap-10 text-sm font-bold">
-        {navItems.map((item) => (
-          <a
-            key={item}
-            href={item === "Home" ? "#home" : `#${item.toLowerCase()}`}
-            className={`py-6 text-white/88 transition hover:text-white ${item === "Home" ? "border-b-2 border-white" : ""}`}
-          >
-            {item}
-          </a>
-        ))}
-      </nav>
-      <a
-        href="#reservations"
-        className="rounded-full bg-[#717942] px-7 py-3 text-sm font-black text-white shadow-lg shadow-black/20 transition hover:bg-[#5f6838]"
-      >
-        Reserve a Table
-      </a>
-    </header>
-  );
-}
+      {/* ── FULL BACKGROUND CINEMATIC HERO SECTION ───────────────────────── */}
+      <section className="relative min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#181f19] text-white">
+        {/* Full-bleed background photograph */}
+        <div className="absolute inset-0">
+          <img
+            src={imageAssets.hero.src}
+            alt={imageAssets.hero.alt}
+            className="h-full w-full object-cover object-center scale-105 transition-transform duration-1000 ease-out"
+          />
+          {/* Deep atmospheric Sumi-ink Japanese gradient vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#181f19] via-[#181f19]/65 to-[#181f19]/45" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(24,31,25,0.7)_80%)]" />
+        </div>
 
-function MobileHeader() {
-  return (
-    <div className="absolute left-0 right-0 top-0 z-20 px-5 pt-4 text-white lg:hidden">
-      <div className="flex items-center justify-between text-xs font-bold">
-        <span>9:41</span>
-        <span
-          className="h-7 w-20 rounded-full bg-black/85"
-          aria-hidden="true"
-        />
-        <span className="flex items-center gap-1.5">
-          <span className="h-3 w-4 rounded-sm border border-current" />
-          <span className="h-2 w-5 rounded-sm bg-current" />
-        </span>
-      </div>
-      <div className="mt-7 flex items-center justify-between">
-        <button
-          type="button"
-          className="grid h-10 w-10 place-items-center rounded-full bg-black/10"
-          aria-label="Open menu"
-        >
-          <Icon type="menu" />
-        </button>
-        <LeafLogo className="text-white" />
-        <button
-          type="button"
-          className="grid h-10 w-10 place-items-center rounded-full bg-black/10"
-          aria-label="Open bag"
-        >
-          <Icon type="bag" />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function HeroSection() {
-  return (
-    <section
-      id="home"
-      className="relative overflow-hidden rounded-b-[2rem] bg-[#2c2918] text-white shadow-xl lg:rounded-b-none"
-    >
-      <DesktopHeader />
-      <MobileHeader />
-      <div className="relative min-h-[355px] md:min-h-[520px] lg:min-h-[570px]">
-        <HeroImage />
-        <Container className="relative z-10 flex min-h-[355px] items-end pb-7 pt-32 md:min-h-[520px] md:pb-10 md:pt-36 lg:min-h-[570px] lg:items-center lg:pt-16">
-          <div className="max-w-3xl md:max-w-3xl">
-            <h1 className="font-serif text-3xl leading-none md:text-6xl lg:text-7xl">
-              MorningLeaf
-            </h1>
-            <p className="mt-2 max-w-xs font-serif text-xl leading-tight md:mt-3 md:max-w-2xl md:text-4xl">
-              Quiet Tea Rituals for Modern Calm
-            </p>
-            <div className="mt-4 hidden h-px w-20 bg-white md:block" />
-            <p className="mt-3 hidden max-w-lg text-base font-medium leading-7 text-white/86 md:mt-5 md:block md:text-lg">
-              Herbal blends. Low-caffeine cups. Quiet tables. Steep times that
-              turn a drink into a small reset.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-4 md:mt-7">
-              <a
-                href="#reservations"
-                className="rounded-full bg-[#737c45] px-6 py-3 text-xs font-black text-white shadow-xl shadow-black/25 transition hover:bg-[#60683a] md:px-7 md:py-4 md:text-sm"
+        {/* Hero Top Content Header */}
+        <div className="relative z-10 pt-16 md:pt-24">
+          <Container>
+            <div className="flex items-center justify-between border-b border-white/15 pb-6">
+              <Link
+                to="/restaurant"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/75 hover:text-[#d4a359] transition"
               >
-                Reserve a Table
-              </a>
-              <a
-                href="#menu"
-                className="hidden rounded-full border border-white px-7 py-4 text-sm font-black text-white transition hover:bg-white/10 sm:inline-flex"
+                <ArrowRight className="h-3.5 w-3.5 rotate-180" />
+                <span>Restaurant Collection</span>
+              </Link>
+
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 text-xs font-serif text-[#d4a359] backdrop-blur-md">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>朝葉 · 静寂の茶 · Kyoto Uji & Alishan Harvests</span>
+              </div>
+            </div>
+          </Container>
+        </div>
+
+        {/* Hero Center Master Copy */}
+        <div className="relative z-10 py-16 md:py-24">
+          <Container>
+            <div className="max-w-3xl">
+              <span className="inline-block font-serif text-sm md:text-base tracking-[0.25em] uppercase text-[#d4a359] mb-4">
+                Single-Origin Tea Sanctuary
+              </span>
+
+              <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal leading-[1.08] tracking-tight text-white drop-shadow-md">
+                Slow down. The kettle is <span className="italic font-normal text-[#d4a359]">whispering.</span>
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-base sm:text-xl font-light leading-relaxed text-white/85 drop-shadow-sm">
+                In the space between thoughts, there is tea. Sip shade-grown Gyokuro, stoneground ceremonial Uji matcha, and restorative Egyptian chamomile steeped in unhurried silence.
+              </p>
+
+              {/* Action Buttons over background image */}
+              <div className="mt-10 flex flex-wrap items-center gap-4">
+                <a
+                  href="#scrolls"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-[#d4a359] px-8 py-4 text-xs font-black uppercase tracking-wider text-[#181f19] shadow-2xl hover:bg-white hover:scale-105 active:scale-95 transition"
+                >
+                  <ShoppingBag className="h-4 w-4" />
+                  <span>Explore Tea Scrolls</span>
+                </a>
+
+                <a
+                  href="#timer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/35 px-7 py-4 text-xs font-bold text-white backdrop-blur-md hover:bg-white/20 transition"
+                >
+                  <Clock className="h-4 w-4 text-[#d4a359]" />
+                  <span>Interactive Steep Master</span>
+                </a>
+              </div>
+            </div>
+          </Container>
+        </div>
+
+        {/* Hero Bottom Glassmorphism Ledger Bar */}
+        <div className="relative z-10 border-t border-white/15 bg-black/45 backdrop-blur-xl py-6">
+          <Container>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-white">
+              <div className="border-l border-white/20 pl-4">
+                <p className="font-serif text-lg font-bold text-[#d4a359]">80°C Precision</p>
+                <p className="text-xs text-white/70 mt-0.5">Custom thermal curve per harvest</p>
+              </div>
+              <div className="border-l border-white/20 pl-4">
+                <p className="font-serif text-lg font-bold text-[#d4a359]">100% Whole Leaf</p>
+                <p className="text-xs text-white/70 mt-0.5">Uji, Shizuoka & Alishan single estates</p>
+              </div>
+              <div className="border-l border-white/20 pl-4">
+                <p className="font-serif text-lg font-bold text-[#d4a359]">Woven Tatami</p>
+                <p className="text-xs text-white/70 mt-0.5">Barefoot screen-free sanctuary</p>
+              </div>
+              <div className="border-l border-white/20 pl-4">
+                <p className="font-serif text-lg font-bold text-[#d4a359]">Quiet Hours</p>
+                <p className="text-xs text-white/70 mt-0.5">Daily 8:00 AM – 7:30 PM</p>
+              </div>
+            </div>
+          </Container>
+        </div>
+      </section>
+
+      {/* ── THE TEA SCROLLS (HORIZONTAL LEDGER CARDS - DISTINCT DESIGN) ──── */}
+      <section id="scrolls" className="py-20 md:py-28 bg-[#f8f6f0]">
+        <Container>
+          {/* Header */}
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end mb-14">
+            <div>
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-[#2d4a32]">
+                The Botanical Ledger
+              </span>
+              <h2 className="mt-2 font-serif text-3xl tracking-tight text-[#181f19] sm:text-5xl">
+                Curated Single-Estate Tea Scrolls
+              </h2>
+            </div>
+            <p className="max-w-md text-xs leading-relaxed text-[#556456] sm:text-sm">
+              Each harvest is selected for mineral terroir, aroma complexity, and meditative feeling. Served by the ceramic pot for your table or packaged into airtight washi canisters.
+            </p>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="mb-10 flex flex-wrap items-center gap-2.5">
+            {[
+              { id: "all" as const, label: `All Harvests (${teaCatalog.length})` },
+              { id: "matcha-green" as const, label: "Ceremonial Matcha & Green" },
+              { id: "roasted-oolong" as const, label: "Roasted Hojicha & Oolong" },
+              { id: "botanical-herbal" as const, label: "Botanical Herbs & Blossoms" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveCategory(tab.id)}
+                className={`rounded-full px-5 py-2 text-xs font-bold transition-all ${
+                  activeCategory === tab.id
+                    ? "bg-[#2d4a32] text-white shadow-md"
+                    : "border border-[#e5dfd2] bg-white text-[#556456] hover:border-[#2d4a32] hover:text-[#2d4a32]"
+                }`}
               >
-                Explore the Menu
-              </a>
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Horizontal Ledger Cards (Distinct from standard grid) */}
+          <div className="space-y-6">
+            {filteredTeas.map((tea) => {
+              const qty = cart[tea.id] || 0;
+              return (
+                <article
+                  key={tea.id}
+                  className="group rounded-3xl border border-[#e5dfd2] bg-white p-6 shadow-xs transition-all duration-300 hover:border-[#2d4a32]/50 hover:shadow-xl grid gap-6 md:grid-cols-[160px_1fr_auto] md:items-center"
+                >
+                  {/* Photo with Kanji Seal */}
+                  <div className="relative aspect-square w-full max-w-[160px] overflow-hidden rounded-2xl bg-[#f0ebe1] mx-auto md:mx-0">
+                    <img
+                      src={tea.image}
+                      alt={tea.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                    <span className="absolute bottom-2 left-2 rounded-md bg-[#181f19]/85 px-2 py-0.5 text-[9px] font-mono font-bold text-white">
+                      {tea.kanji}
+                    </span>
+                  </div>
+
+                  {/* Tea Description & Flavor Ledger */}
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="font-serif text-2xl font-bold text-[#181f19]">
+                        {tea.name}
+                      </h3>
+                      {tea.badge && (
+                        <span className="rounded-full bg-[#2d4a32]/10 px-2.5 py-0.5 text-[10px] font-black uppercase text-[#2d4a32]">
+                          {tea.badge}
+                        </span>
+                      )}
+                      <span className="text-xs text-[#556456]">· {tea.harvestYear}</span>
+                    </div>
+
+                    <p className="mt-1 text-xs font-semibold text-[#c9933b]">
+                      ✦ Origin: {tea.origin}
+                    </p>
+
+                    <p className="mt-2 text-xs leading-relaxed text-[#556456] max-w-2xl">
+                      {tea.description}
+                    </p>
+
+                    {/* Tasting Profile Tags */}
+                    <div className="mt-3.5 flex flex-wrap items-center gap-2">
+                      <span className="text-[10px] uppercase font-bold text-[#556456]/70">Notes:</span>
+                      {tea.tastingNotes.map((note) => (
+                        <span
+                          key={note}
+                          className="rounded-full border border-[#e5dfd2] bg-[#f8f6f0] px-2.5 py-0.5 text-[10px] font-medium text-[#556456]"
+                        >
+                          {note}
+                        </span>
+                      ))}
+                      <span className="rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 text-[10px] font-semibold">
+                        Caffeine: {tea.caffeine}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Pricing & Table Action */}
+                  <div className="flex flex-row md:flex-col items-center md:items-end justify-between gap-4 border-t md:border-t-0 md:border-l border-[#e5dfd2] pt-4 md:pt-0 md:pl-6">
+                    <div className="text-left md:text-right">
+                      <span className="font-serif text-2xl font-bold text-[#2d4a32]">
+                        ${tea.priceDineIn.toFixed(2)}
+                      </span>
+                      <p className="text-[10px] text-[#556456]">Fresh Table Pot</p>
+                      <p className="text-[10px] text-[#c9933b] font-bold mt-0.5">50g Washi Tin: ${tea.priceCanister}</p>
+                    </div>
+
+                    {qty > 0 ? (
+                      <div className="flex items-center gap-3 rounded-full border border-[#2d4a32] bg-[#2d4a32]/10 px-3.5 py-1.5">
+                        <button
+                          type="button"
+                          onClick={() => removeFromCart(tea.id)}
+                          className="text-[#2d4a32] hover:scale-125 transition"
+                          aria-label="Remove pot"
+                        >
+                          <Minus className="h-3.5 w-3.5" />
+                        </button>
+                        <span className="text-xs font-black text-[#181f19]">{qty}</span>
+                        <button
+                          type="button"
+                          onClick={() => addToCart(tea.id)}
+                          className="text-[#2d4a32] hover:scale-125 transition"
+                          aria-label="Add pot"
+                        >
+                          <Plus className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => addToCart(tea.id)}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-[#2d4a32] px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-sm hover:bg-[#1f3423] transition active:scale-95"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                        <span>Order Pot</span>
+                      </button>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── INTERACTIVE STEEP TIMER & RITUAL MASTER ───────────────────────── */}
+      <section id="timer" className="py-20 md:py-28 bg-white border-y border-[#e5dfd2]">
+        <Container>
+          <div className="mx-auto max-w-2xl text-center mb-16">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#2d4a32]/20 bg-[#2d4a32]/10 px-4 py-1 text-xs font-black uppercase tracking-widest text-[#2d4a32]">
+              <Clock className="h-3.5 w-3.5 text-[#c9933b]" />
+              The Steep Master
+            </span>
+            <h2 className="mt-3 font-serif text-3xl tracking-tight text-[#181f19] sm:text-5xl">
+              Water Temperature & Unhurried Seconds
+            </h2>
+            <p className="mt-3 text-sm text-[#556456]">
+              Calibrate water heat, leaf weight, and start the live countdown for the optimal steep.
+            </p>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            {/* Ritual Selector Options */}
+            <div className="space-y-4">
+              {steepRituals.map((ritual) => {
+                const isSelected = activeRitual.id === ritual.id;
+                return (
+                  <button
+                    key={ritual.id}
+                    type="button"
+                    onClick={() => selectRitual(ritual)}
+                    className={`w-full text-left rounded-3xl border p-5 sm:p-6 transition-all ${
+                      isSelected
+                        ? "border-[#2d4a32] bg-[#f8f6f0] ring-2 ring-[#2d4a32]/20 shadow-md"
+                        : "border-[#e5dfd2] bg-white hover:border-[#2d4a32]/40 hover:bg-[#f8f6f0]/50"
+                    }`}
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                      <div>
+                        <span className="text-[10px] font-black uppercase tracking-wider text-[#c9933b]">
+                          {ritual.vibe}
+                        </span>
+                        <h3 className="font-serif text-xl font-bold text-[#181f19] mt-0.5">
+                          {ritual.name}
+                        </h3>
+                      </div>
+                      <div className="flex items-center gap-3 text-xs font-bold">
+                        <span className="rounded-full bg-white px-3 py-1 text-[#2d4a32] border border-[#e5dfd2]">
+                          {ritual.temp}
+                        </span>
+                        <span className="rounded-full bg-[#2d4a32] px-3 py-1 text-white">
+                          {ritual.seconds}s Steep
+                        </span>
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs leading-relaxed text-[#556456]">
+                      {ritual.tip}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Live Interactive Timer Widget */}
+            <div className="rounded-3xl border border-[#2d4a32]/20 bg-[#181f19] p-8 sm:p-10 text-white shadow-2xl text-center">
+              <span className="text-[10px] font-black uppercase tracking-widest text-[#d4a359]">
+                Steeping Chamber
+              </span>
+              <h3 className="font-serif text-2xl font-bold text-white mt-1">
+                {activeRitual.name}
+              </h3>
+
+              {/* Big Animated Timer Circle */}
+              <div className="my-8 mx-auto relative flex h-48 w-48 items-center justify-center rounded-full border-4 border-white/10 bg-white/5 shadow-inner">
+                <div className="text-center">
+                  <p className="font-serif text-5xl font-black text-[#d4a359] tracking-tight">
+                    {Math.floor(timerSeconds / 60)}:
+                    {(timerSeconds % 60).toString().padStart(2, "0")}
+                  </p>
+                  <p className="text-[10px] uppercase font-bold text-white/50 mt-1">
+                    {timerRunning ? "Slow Steeping..." : timerSeconds === 0 ? "Tea is Ready! 🍵" : "Resting"}
+                  </p>
+                </div>
+              </div>
+
+              {/* Timer Controls */}
+              <div className="flex items-center justify-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => setTimerRunning((prev) => !prev)}
+                  className="inline-flex items-center gap-2 rounded-full bg-[#d4a359] px-7 py-3 text-xs font-black uppercase tracking-wider text-[#181f19] shadow-lg hover:bg-white transition active:scale-95"
+                >
+                  {timerRunning ? (
+                    <>
+                      <Pause className="h-4 w-4" />
+                      <span>Pause Steep</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="h-4 w-4" />
+                      <span>Start Steep Timer</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={resetTimer}
+                  className="rounded-full border border-white/20 p-3 text-white/80 hover:bg-white/10 transition"
+                  title="Reset timer"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </div>
         </Container>
-      </div>
-    </section>
-  );
-}
-
-function SectionTitle({ title, action }: { title: string; action?: string }) {
-  return (
-    <div className="mb-6 flex items-center justify-between gap-4">
-      <div className="flex items-center gap-3">
-        <span className="text-[#9aa276]">
-          <Icon type="leaf" />
-        </span>
-        <h2 className="font-serif text-2xl text-[#2f281c] md:text-3xl">
-          {title}
-        </h2>
-        <span className="hidden h-px w-7 bg-[#9aa276] sm:block" />
-      </div>
-      {action && (
-        <a
-          href="#menu"
-          className="text-xs font-black text-[#596035] transition hover:text-[#2f281c]"
-        >
-          {action}
-        </a>
-      )}
-    </div>
-  );
-}
-
-function TeaCard({ tea, compact = false }: { tea: Tea; compact?: boolean }) {
-  if (compact) {
-    return (
-      <article className="grid grid-cols-[5.6rem_1fr_auto] gap-3 border-b border-[#ded7c9] pb-4 last:border-b-0">
-        <TeaImage
-          tone={tea.tone}
-          src={tea.image}
-          alt={`${tea.name} tea`}
-          className="h-20 rounded-xl"
-        />
-        <div>
-          <h3 className="font-serif text-lg leading-tight text-[#2f281c]">
-            {tea.name}
-          </h3>
-          <p className="mt-1 text-xs leading-5 text-[#5b5347]">
-            {tea.description}
-          </p>
-        </div>
-        <p className="pt-6 font-serif text-lg text-[#2f281c]">{tea.price}</p>
-      </article>
-    );
-  }
-
-  return (
-    <article className="overflow-hidden rounded-lg border border-[#ded7c9] bg-[#fbf8ef] shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-      <TeaImage
-        tone={tea.tone}
-        src={tea.image}
-        alt={`${tea.name} tea`}
-        className="h-28"
-      />
-      <div className="p-4">
-        <h3 className="font-serif text-xl text-[#2f281c]">{tea.name}</h3>
-        <p className="mt-2 min-h-12 text-sm leading-6 text-[#5b5347]">
-          {tea.description}
-        </p>
-        <p className="mt-4 font-serif text-lg text-[#2f281c]">{tea.price}</p>
-      </div>
-    </article>
-  );
-}
-
-function ResetPanel() {
-  return (
-    <section id="rituals" className="rounded-2xl bg-[#f1ecdf] p-6 shadow-sm">
-      <SectionTitle title="Find Your Reset" />
-      <div className="grid grid-cols-2 gap-6">
-        {resetItems.map((item) => (
-          <article
-            key={item.title}
-            className="grid grid-cols-[2.75rem_1fr] gap-3"
-          >
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-[#d9ddbf] text-[#596035]">
-              <Icon type={item.icon} />
-            </span>
-            <span>
-              <h3 className="font-serif text-lg text-[#2f281c]">
-                {item.title}
-              </h3>
-              <p className="mt-1 text-xs leading-5 text-[#5b5347]">
-                {item.description}
-              </p>
-            </span>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ReservationPanel({ mobile = false }: { mobile?: boolean }) {
-  return (
-    <section
-      id="reservations"
-      className={`rounded-2xl bg-[#f1ecdf] p-6 shadow-sm ${mobile ? "shadow-lg shadow-black/5" : ""}`}
-    >
-      <SectionTitle title="Reserve Your Table" />
-      <form className="grid gap-4" onSubmit={(event) => event.preventDefault()}>
-        <label className="grid gap-1 text-xs font-bold text-[#5b5347]">
-          Date
-          <span className="flex items-center justify-between rounded-lg border border-[#d9d1c0] bg-[#fbf8ef] px-3 py-3 text-sm font-medium text-[#2f281c]">
-            May 24, 2025
-            <Icon type="calendar" />
-          </span>
-        </label>
-        <div className="grid grid-cols-2 gap-3">
-          <label className="grid gap-1 text-xs font-bold text-[#5b5347]">
-            Time
-            <select className="rounded-lg border border-[#d9d1c0] bg-[#fbf8ef] px-3 py-3 text-sm font-medium text-[#2f281c]">
-              <option>10:00 AM</option>
-              <option>11:30 AM</option>
-              <option>2:00 PM</option>
-            </select>
-          </label>
-          <label className="grid gap-1 text-xs font-bold text-[#5b5347]">
-            Guests
-            <select className="rounded-lg border border-[#d9d1c0] bg-[#fbf8ef] px-3 py-3 text-sm font-medium text-[#2f281c]">
-              <option>2 Guests</option>
-              <option>3 Guests</option>
-              <option>4 Guests</option>
-            </select>
-          </label>
-        </div>
-        <button
-          type="submit"
-          className="mt-1 rounded-lg bg-[#68713d] px-5 py-4 text-sm font-black text-white transition hover:bg-[#596035]"
-        >
-          Find a Table
-        </button>
-      </form>
-    </section>
-  );
-}
-
-function StoryPanel() {
-  return (
-    <section
-      id="about"
-      className="grid gap-6 rounded-2xl bg-[#f1ecdf] p-6 shadow-sm md:grid-cols-[1fr_14rem]"
-    >
-      <div>
-        <h2 className="font-serif text-2xl text-[#2f281c]">Our Story</h2>
-        <p className="mt-4 text-sm leading-6 text-[#5b5347]">
-          MorningLeaf is a quiet tea house for modern life.
-        </p>
-        <p className="mt-4 text-sm leading-6 text-[#5b5347]">
-          We believe in mindful moments, thoughtfully sourced ingredients, and
-          the simple beauty of a pause.
-        </p>
-        <p className="mt-4 text-sm leading-6 text-[#5b5347]">
-          Join us for rituals that restore balance and bring you home to
-          yourself.
-        </p>
-        <a
-          href="#about"
-          className="mt-5 inline-flex items-center gap-3 text-sm font-black text-[#596035]"
-        >
-          Learn More About Us
-          <span aria-hidden="true">-&gt;</span>
-        </a>
-      </div>
-      <div className="relative min-h-48 overflow-hidden rounded-lg bg-[#2f281c]">
-        <img
-          src={morningLeafStoryImage}
-          alt="Sunlit MorningLeaf tea table with teapot and cups"
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-      </div>
-    </section>
-  );
-}
-
-function MobileBottomNav() {
-  const items = [
-    ["Home", "home"],
-    ["Menu", "steam"],
-    ["Reserve", "calendar"],
-    ["Rituals", "leaf"],
-    ["More", "more"],
-  ] as const;
-
-  return (
-    <nav className="fixed bottom-4 left-1/2 z-50 grid w-[calc(100%-2rem)] max-w-md -translate-x-1/2 grid-cols-5 rounded-[1.75rem] border border-[#e3dccd] bg-[#fbf8ef]/95 px-3 py-3 text-center text-[0.68rem] font-bold text-[#5b5347] shadow-2xl shadow-black/15 backdrop-blur lg:hidden">
-      {items.map(([label, icon]) => (
-        <a
-          key={label}
-          href={label === "Home" ? "#home" : `#${label.toLowerCase()}`}
-          className={`grid justify-items-center gap-1 ${label === "Home" ? "text-[#596035]" : ""}`}
-        >
-          <Icon type={icon} />
-          <span>{label}</span>
-        </a>
-      ))}
-    </nav>
-  );
-}
-
-function Footer() {
-  return (
-    <footer
-      id="contact"
-      className="bg-[#596035] px-6 py-8 text-[#f9f4e7] lg:px-10"
-    >
-      <div className="grid gap-8 md:grid-cols-[1.1fr_1fr_1fr_1fr_1.5fr]">
-        <div>
-          <LeafLogo />
-          <p className="mt-3 max-w-44 text-sm leading-6 text-white/72">
-            Quiet tea rituals for modern calm.
-          </p>
-        </div>
-        <div>
-          <h3 className="text-sm font-black">Visit Us</h3>
-          <p className="mt-3 text-sm leading-6 text-white/72">
-            123 Leafy Lane
-            <br />
-            Portland, OR 97201
-          </p>
-          <a href="#contact" className="mt-3 inline-block text-sm font-black">
-            View on Map
-          </a>
-        </div>
-        <div>
-          <h3 className="text-sm font-black">Hours</h3>
-          <p className="mt-3 text-sm leading-6 text-white/72">
-            Mon - Fri&nbsp;&nbsp; 8:00 AM - 8:00 PM
-            <br />
-            Sat - Sun&nbsp;&nbsp; 9:00 AM - 7:00 PM
-          </p>
-        </div>
-        <div>
-          <h3 className="text-sm font-black">Connect</h3>
-          <div className="mt-4 flex gap-3">
-            {["ig", "f", "p", "x"].map((item) => (
-              <a
-                key={item}
-                href="#contact"
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/30 text-xs font-black uppercase text-white/80"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-        </div>
-        <form className="max-w-sm" onSubmit={(event) => event.preventDefault()}>
-          <h3 className="text-sm font-black">Stay in the Loop</h3>
-          <p className="mt-3 text-sm leading-6 text-white/72">
-            Thoughtful tea. Seasonal news. Special invites.
-          </p>
-          <label className="mt-4 flex rounded-lg border border-white/25 bg-white/5 p-1">
-            <span className="sr-only">Email address</span>
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm text-white placeholder:text-white/45 outline-none"
-            />
-            <button
-              type="submit"
-              className="grid h-10 w-10 place-items-center rounded-md bg-[#fbf8ef] text-[#596035]"
-              aria-label="Subscribe"
-            >
-              -&gt;
-            </button>
-          </label>
-        </form>
-      </div>
-      <div className="mt-8 flex flex-col justify-between gap-4 border-t border-white/10 pt-5 text-xs text-white/60 md:flex-row">
-        <p>(c) 2025 MorningLeaf Tea House. All rights reserved.</p>
-        <div className="flex gap-6">
-          <a href="#contact">Privacy Policy</a>
-          <a href="#contact">Terms of Service</a>
-          <a href="#contact">Accessibility</a>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-export function MorningLeafTea() {
-  return (
-    <main className="brand-motion motion-morningleaf bg-[#e9e1d0] pb-24 text-[#2f281c] lg:pb-0">
-      <div className="mx-auto min-h-screen max-w-[92rem] bg-[#fbf8ef] shadow-2xl shadow-black/15 lg:my-8 lg:overflow-hidden lg:rounded-[1.75rem]">
-        <HeroSection />
-
-        <section id="menu" className="px-5 py-6 md:px-10 lg:px-16">
-          <SectionTitle title="Featured Teas" action="View All Menu ->" />
-          <div className="hidden grid-cols-2 gap-4 md:grid lg:grid-cols-6">
-            {teas.map((tea) => (
-              <TeaCard key={tea.name} tea={tea} />
-            ))}
-          </div>
-          <div className="grid gap-4 md:hidden">
-            {teas.slice(0, 4).map((tea) => (
-              <TeaCard key={tea.name} tea={tea} compact />
-            ))}
-          </div>
-        </section>
-
-        <section className="grid gap-5 px-5 pb-6 md:px-10 lg:grid-cols-[1fr_0.82fr_1.36fr] lg:px-16">
-          <ResetPanel />
-          <ReservationPanel />
-          <StoryPanel />
-        </section>
-
-        <Footer />
-      </div>
-
-      <section className="border-t border-[#d9ccb1] bg-[#fbf8ef] px-5 py-7 text-center lg:hidden">
-        <Link to="/restaurant" className="font-bold text-[#596035]">
-          Back to Restaurant Collection
-        </Link>
       </section>
 
-      <MobileBottomNav />
+      {/* ── THE TATAMI PAVILION & ZEN ARCHITECTURE ────────────────────────── */}
+      <section id="space" className="py-20 md:py-28 bg-[#f0ebe1] border-y border-[#e5dfd2]">
+        <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="relative">
+            <div className="overflow-hidden rounded-3xl border border-[#e5dfd2] shadow-2xl aspect-[16/10]">
+              <img
+                src={imageAssets.tatami.src}
+                alt={imageAssets.tatami.alt}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 hidden sm:block rounded-2xl border border-[#e5dfd2] bg-white p-5 shadow-xl">
+              <p className="text-xs font-black uppercase tracking-wider text-[#2d4a32]">Architecture</p>
+              <p className="font-serif text-sm font-bold text-[#181f19] mt-0.5">Woven Igusa Tatami & Cedar Wood Lattice</p>
+            </div>
+          </div>
+
+          <div>
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-[#2d4a32]">
+              The Tea House Setting
+            </span>
+            <h2 className="mt-3 font-serif text-3xl tracking-tight text-[#181f19] sm:text-5xl">
+              A serene refuge where time moves at a gentler cadence.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-[#556456]">
+              Step out of your shoes and onto woven tatami mats. Filtered morning light through washi paper screens, steaming iron tetsubin kettles, and quiet garden vistas of moss and bamboo create an immediate somatic calm.
+            </p>
+
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="rounded-2xl border border-[#e5dfd2] bg-white p-4">
+                <Clock className="h-5 w-5 text-[#2d4a32]" />
+                <p className="font-serif text-sm font-bold text-[#181f19] mt-2">Opening Hours</p>
+                <p className="text-xs text-[#556456] mt-0.5">8:00 AM – 7:30 PM Daily</p>
+              </div>
+
+              <div className="rounded-2xl border border-[#e5dfd2] bg-white p-4">
+                <MapPin className="h-5 w-5 text-[#c9933b]" />
+                <p className="font-serif text-sm font-bold text-[#181f19] mt-2">Garden Location</p>
+                <p className="text-xs text-[#556456] mt-0.5">123 Leafy Lane, Bamboo Courtyard</p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── TABLE & CEREMONY RESERVATIONS ──────────────────────────────────── */}
+      <section id="reserve" className="py-20 md:py-28 bg-[#181f19] text-white">
+        <Container>
+          <div className="grid gap-12 rounded-3xl border border-white/15 bg-gradient-to-br from-[#242e26] via-[#181f19] to-[#121613] p-8 sm:p-14 shadow-2xl lg:grid-cols-2 lg:items-center">
+            <div>
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#d4a359]">
+                Tea Table Bookings
+              </span>
+              <h2 className="mt-3 font-serif text-3xl leading-tight sm:text-5xl">
+                Reserve your quiet table in the tea house.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-white/70">
+                Whether you seek a solitary morning reflection with a book, an intimate conversation with friends, or a formal 90-minute ceremonial matcha tasting, we hold tables ready for your arrival.
+              </p>
+
+              <div className="mt-8 space-y-3">
+                <div className="flex items-center gap-3 text-xs text-white/80">
+                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
+                  <span>Complimentary first steeping guided by our tea sommelier</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-white/80">
+                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
+                  <span>Shoes checked into private cedar lockers at entry</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-white/80">
+                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
+                  <span>Handmade seasonal wagashi sweets paired with every pot</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Interactive Booking Module */}
+            <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-6 sm:p-8 backdrop-blur-xl">
+              {bookingState.isConfirmed ? (
+                <div className="text-center py-6">
+                  <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-emerald-500/20 text-emerald-400 mb-3">
+                    <Check className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-serif text-2xl font-bold text-white">Table Reserved</h3>
+                  <p className="text-xs text-white/70 mt-1">
+                    {bookingState.tableType} for {bookingState.guests} at {bookingState.time}.
+                  </p>
+                  <p className="text-xs text-[#d4a359] font-bold mt-2">
+                    A confirmation email has been dispatched with directions.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setBookingState((prev) => ({ ...prev, isConfirmed: false }))
+                    }
+                    className="mt-6 rounded-full border border-white/20 px-5 py-2 text-xs font-bold text-white hover:bg-white/10"
+                  >
+                    Modify Reservation
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <h3 className="font-serif text-xl font-bold text-white">Reserve a Tea Table</h3>
+                  <p className="text-xs text-white/60 mt-0.5">Instant booking without deposit</p>
+
+                  <div className="mt-5 space-y-4">
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-white/70 mb-1.5">
+                        Experience & Seating
+                      </label>
+                      <select
+                        value={bookingState.tableType}
+                        onChange={(e) =>
+                          setBookingState((prev) => ({ ...prev, tableType: e.target.value }))
+                        }
+                        className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs font-bold text-white focus:border-[#d4a359] focus:outline-none"
+                      >
+                        <option value="Tatami Garden Room" className="bg-[#181f19]">Tatami Garden Room (Barefoot / Low Tables)</option>
+                        <option value="Sunlit Reading Hearth" className="bg-[#181f19]">Sunlit Reading Hearth (Armchairs)</option>
+                        <option value="Tea Master Bar" className="bg-[#181f19]">Tea Master Bar (Direct Whisking View)</option>
+                      </select>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-bold uppercase tracking-wider text-white/70 mb-1.5">
+                          Party Size
+                        </label>
+                        <select
+                          value={bookingState.guests}
+                          onChange={(e) =>
+                            setBookingState((prev) => ({ ...prev, guests: e.target.value }))
+                          }
+                          className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs font-bold text-white focus:border-[#d4a359] focus:outline-none"
+                        >
+                          <option value="1 Guest" className="bg-[#181f19]">1 Guest (Solo Reset)</option>
+                          <option value="2 Guests" className="bg-[#181f19]">2 Guests (Intimate)</option>
+                          <option value="3 Guests" className="bg-[#181f19]">3 Guests</option>
+                          <option value="4+ Guests" className="bg-[#181f19]">4+ Guests</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-bold uppercase tracking-wider text-white/70 mb-1.5">
+                          Time Slot
+                        </label>
+                        <select
+                          value={bookingState.time}
+                          onChange={(e) =>
+                            setBookingState((prev) => ({ ...prev, time: e.target.value }))
+                          }
+                          className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs font-bold text-white focus:border-[#d4a359] focus:outline-none"
+                        >
+                          <option value="10:30 AM" className="bg-[#181f19]">10:30 AM (Morning Calm)</option>
+                          <option value="1:00 PM" className="bg-[#181f19]">1:00 PM</option>
+                          <option value="2:30 PM" className="bg-[#181f19]">2:30 PM (Afternoon Tea)</option>
+                          <option value="4:00 PM" className="bg-[#181f19]">4:00 PM</option>
+                          <option value="5:30 PM" className="bg-[#181f19]">5:30 PM (Evening Twilight)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setBookingState((prev) => ({ ...prev, isConfirmed: true }))
+                      }
+                      className="w-full rounded-full bg-[#d4a359] py-3.5 text-xs font-black uppercase tracking-wider text-[#181f19] shadow-xl hover:bg-white transition active:scale-95"
+                    >
+                      Confirm Tea Table Reservation
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── STICKY TEA ORDER BADGE ─────────────────────────────────────────── */}
+      {totalCartCount > 0 && (
+        <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#181f19]/95 px-5 py-3 text-white shadow-2xl backdrop-blur-xl">
+            <div className="flex items-center gap-2">
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-[#2d4a32] text-xs font-black">
+                {totalCartCount}
+              </span>
+              <span className="text-xs font-bold">
+                Table Pots: <span className="text-[#d4a359] font-black">${totalCartPrice.toFixed(2)}</span>
+              </span>
+            </div>
+            <a
+              href="#reserve"
+              className="rounded-full bg-[#d4a359] px-4 py-1.5 text-xs font-black uppercase text-[#181f19] hover:bg-white transition"
+            >
+              Finish Order
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* ── CALM JAPANESE MINIMALIST FOOTER ────────────────────────────────── */}
+      <footer className="border-t border-[#e5dfd2] bg-[#121613] py-14 text-white">
+        <Container>
+          <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+            <div>
+              <div className="flex items-center gap-2.5">
+                <div className="grid h-8 w-8 place-items-center rounded-lg bg-[#2d4a32] text-sm font-black text-white">
+                  🍵
+                </div>
+                <p className="font-serif text-xl font-bold text-white">MorningLeaf</p>
+              </div>
+              <p className="mt-3 max-w-sm text-xs leading-relaxed text-white/60">
+                Single-estate ceremonial green teas, stoneground matcha, and slow botanical infusions steeped in unhurried silence.
+              </p>
+              <div className="mt-5">
+                <Link
+                  to="/restaurant"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d4a359] hover:underline"
+                >
+                  <ArrowRight className="h-3.5 w-3.5 rotate-180" />
+                  <span>Return to 100Web Restaurant Collection</span>
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-[#d4a359]">Hours</p>
+              <div className="mt-3 space-y-1 text-xs text-white/70">
+                <p className="font-semibold text-white">Monday – Friday</p>
+                <p>8:00 AM – 7:30 PM</p>
+                <p className="mt-2 font-semibold text-white">Saturday – Sunday</p>
+                <p>9:00 AM – 8:00 PM</p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-[#d4a359]">Location</p>
+              <div className="mt-3 space-y-1 text-xs text-white/70">
+                <p>123 Leafy Lane</p>
+                <p>Bamboo Courtyard District</p>
+                <p className="mt-2 text-white font-semibold">(555) 019-4400</p>
+                <p>tea@morningleafhouse.com</p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-[#d4a359]">Tea Quick Links</p>
+              <ul className="mt-3 space-y-1.5 text-xs text-white/70 font-semibold">
+                <li><a href="#scrolls" className="hover:text-white transition">First-Harvest Matcha</a></li>
+                <li><a href="#scrolls" className="hover:text-white transition">Yuzu Citrus Sencha</a></li>
+                <li><a href="#scrolls" className="hover:text-white transition">Roasted Hojicha</a></li>
+                <li><a href="#timer" className="hover:text-white transition">Interactive Steep Timer</a></li>
+                <li><a href="#space" className="hover:text-white transition">Tatami Garden Room</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-white/40">
+            <p>© {new Date().getFullYear()} MorningLeaf Tea Sanctuary · 100Web Portfolio</p>
+            <p>Designed with React 19, Tailwind CSS & Vite</p>
+          </div>
+        </Container>
+      </footer>
     </main>
   );
 }

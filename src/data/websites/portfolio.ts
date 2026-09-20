@@ -155,23 +155,6 @@ export const portfolioWebsites: WebsiteDesign[] = [
     status: "completed",
   },
   {
-    id: "atelier-north-architecture",
-    title: "Atelier North Architecture",
-    category: "Portfolio",
-    style: "scandinavian architectural studio, light form and place, residential & commercial, timber sustainability",
-    shortDescription:
-      "Light, form, and place: sustainable built environments, timber retreats, contextual integrity, and the 4-step architectural execution process",
-    slug: "atelier-north-architecture",
-    image: "/images/atelier/hero-fjord-cabin.webp",
-    colors: {
-      primary: "#1b1e21",
-      secondary: "#ffffff",
-      accent: "#415a4b",
-      dark: "#111214",
-    },
-    status: "completed",
-  },
-  {
     id: "artisan-objects",
     title: "Artisan Objects",
     category: "Portfolio",
