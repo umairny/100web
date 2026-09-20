@@ -152,7 +152,7 @@ function IronHeading({
         {label}
       </p>
       <h2
-        className={`mt-5 text-[clamp(3.2rem,6vw,6.5rem)] font-black uppercase leading-[0.82] tracking-[-0.075em] ${light ? "text-white" : "text-[#111318]"}`}
+        className={`mt-5 text-[clamp(2.15rem,5.5vw,6.5rem)] font-black uppercase leading-[0.86] tracking-[-0.075em] ${light ? "text-white" : "text-[#111318]"}`}
       >
         {title}
       </h2>
@@ -194,25 +194,86 @@ export function IronDistrictGym() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const sections = navLinks
-      .map(([, href]) => document.getElementById(href.slice(1)))
-      .filter((section): section is HTMLElement => section !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-25% 0px -58% 0px", threshold: [0.05, 0.2, 0.5] },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
+  // Robust frame-debounced scroll spy with boundary guards
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollable > 0 && scrollY >= scrollable - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      if (scrollY < 80) {
+        setActiveSection("");
+        return;
+      }
+
+      const marker = Math.min(220, Math.max(100, window.innerHeight * 0.28));
+      const sectionIds = [
+        "training",
+        "facility",
+        "coaching",
+        "membership",
+        "contact",
+      ];
+      let current = "";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = id;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
 
   return (
-    <main className="irondistrict-site -mt-16 overflow-hidden bg-[#C9CDD1] text-[#111318] selection:bg-[#F6C945] selection:text-[#0A0B0D]">
+    <main className="irondistrict-site w-full max-w-full overflow-x-hidden bg-[#C9CDD1] text-[#111318] selection:bg-[#F6C945] selection:text-[#0A0B0D]">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0A0B0D]/95 text-white backdrop-blur-xl">
         <div className="mx-auto flex h-[4.75rem] max-w-[96rem] items-center justify-between px-5 lg:px-10">
           <IronLogo />
@@ -234,15 +295,18 @@ export function IronDistrictGym() {
               );
             })}
           </nav>
-          <IronButton href="#contact" className="hidden lg:inline-flex">
-            Join The District
-          </IronButton>
+          {/* Desktop-Only District CTA (Isolated from mobile viewports) */}
+          <div className="hidden lg:block">
+            <IronButton href="#contact">
+              Join The District
+            </IronButton>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-10 w-10 place-items-center border border-white/15 lg:hidden"
+            className="grid h-11 w-11 place-items-center border border-white/15 text-white transition active:scale-95 hover:border-[#F6C945] lg:hidden"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -251,26 +315,38 @@ export function IronDistrictGym() {
             )}
           </button>
         </div>
+        {/* Mobile Slide-Down Overlay */}
         {menuOpen && (
-          <nav className="border-t border-white/10 bg-[#0A0B0D] p-5 lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  aria-current={active ? "location" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block px-4 py-3 text-sm font-black uppercase tracking-[0.1em] ${active ? "irondistrict-nav-active bg-[#F6C945] text-[#0A0B0D]" : "text-white/58"}`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <IronButton href="#contact" className="mt-4 w-full">
-              Join The District
-            </IronButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/75 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav className="fixed inset-x-0 top-[4.75rem] z-50 border-b border-white/10 bg-[#0A0B0D]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+              <div className="space-y-1">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={active ? "location" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between px-4 py-3 text-sm font-black uppercase tracking-[0.1em] transition ${
+                        active
+                          ? "irondistrict-nav-active bg-[#F6C945] text-[#0A0B0D] font-black"
+                          : "text-white/65 hover:bg-white/[0.06] hover:text-[#F6C945]"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs text-[#F6C945]">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -308,7 +384,7 @@ export function IronDistrictGym() {
                 <p className="mb-7 flex items-center gap-3 text-[0.62rem] font-black uppercase tracking-[0.24em] text-[#F6C945]">
                   <span className="h-px w-12 bg-[#F6C945]" /> IronDistrict Gym
                 </p>
-                <h1 className="max-w-6xl text-[clamp(4.6rem,12vw,12.5rem)] font-black uppercase leading-[0.72] tracking-[-0.11em]">
+                <h1 className="max-w-6xl text-[clamp(2.4rem,10.5vw,12.5rem)] font-black uppercase leading-[0.8] tracking-[-0.09em]">
                   Train where the bar sets the tone.
                 </h1>
                 <div className="mt-9 grid max-w-4xl gap-6 border-l-4 border-[#F6C945] pl-6 md:grid-cols-[1fr_auto] md:items-end">
@@ -720,7 +796,7 @@ export function IronDistrictGym() {
             <p className="text-[0.62rem] font-black uppercase tracking-[0.24em] text-[#F6C945]">
               The bar is loaded
             </p>
-            <h2 className="mt-6 text-[clamp(4rem,8vw,8.8rem)] font-black uppercase leading-[0.74] tracking-[-0.085em]">
+            <h2 className="mt-6 text-[clamp(2.4rem,7.5vw,8.8rem)] font-black uppercase leading-[0.82] tracking-[-0.08em]">
               Step into the district.
             </h2>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-white/58">

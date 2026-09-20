@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   Building2,
@@ -181,8 +181,30 @@ function SuncrestLogo({ light = false }: { light?: boolean }) {
 export function SuncrestVacationVillas() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
   return (
-    <main className="suncrest-site overflow-hidden bg-[#F7F1E3] text-[#243C40] selection:bg-[#E8B94A] selection:text-[#103F4A]">
+    <main className="suncrest-site w-full max-w-full overflow-x-hidden bg-[#F7F1E3] text-[#243C40] selection:bg-[#E8B94A] selection:text-[#103F4A]">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[#EADFCB] bg-[#FFFDF8]/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[4.75rem] max-w-[92rem] items-center justify-between px-5 lg:px-10">
           <SuncrestLogo />
@@ -200,15 +222,20 @@ export function SuncrestVacationVillas() {
               </a>
             ))}
           </nav>
-          <SuncrestButton href="#villas" className="hidden lg:inline-flex">
-            Explore Villas
-          </SuncrestButton>
+
+          {/* Desktop-Only Explore Villas Button (Isolated from mobile viewports) */}
+          <div className="hidden lg:block">
+            <SuncrestButton href="#villas">
+              Explore Villas
+            </SuncrestButton>
+          </div>
+
           <button
             type="button"
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(!menuOpen)}
-            className="grid h-11 w-11 place-items-center rounded-full border border-[#D7E1DF] text-[#103F4A] lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[#D7E1DF] text-[#103F4A] lg:hidden transition active:scale-95 hover:border-[#1595A3]"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -217,22 +244,31 @@ export function SuncrestVacationVillas() {
             )}
           </button>
         </div>
+
+        {/* Mobile Slide-Down Overlay */}
         {menuOpen && (
-          <nav className="border-t border-[#EADFCB] bg-[#FFFDF8] px-5 py-5 lg:hidden">
-            {navLinks.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className="block rounded-xl px-3 py-3 font-bold text-[#486367] hover:bg-[#F7F1E3]"
-              >
-                {label}
-              </a>
-            ))}
-            <SuncrestButton href="#villas" className="mt-3 w-full">
-              Explore Villas
-            </SuncrestButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/45 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav className="fixed inset-x-0 top-[4.75rem] z-50 border-b border-[#EADFCB] bg-[#FFFDF8]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+              <div className="space-y-1">
+                {navLinks.map(([label, href]) => (
+                  <a
+                    key={label}
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center justify-between rounded-xl px-4 py-3 font-bold text-[#486367] transition hover:bg-[#F7F1E3] hover:text-[#1595A3]"
+                  >
+                    <span>{label}</span>
+                    <span className="text-xs text-[#1595A3]">→</span>
+                  </a>
+                ))}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -248,11 +284,11 @@ export function SuncrestVacationVillas() {
             <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.22em] backdrop-blur">
               <Sun className="h-4 w-4 text-[#E8B94A]" /> Vacation property
             </p>
-            <h1 className="mt-7 text-[clamp(4rem,8.5vw,8.7rem)] font-semibold leading-[0.82] tracking-[-0.075em]">
+            <h1 className="mt-7 text-[clamp(2.4rem,7.8vw,8.5rem)] font-semibold leading-[0.84] tracking-[-0.075em]">
               Own the Stay.{" "}
               <span className="text-[#F4C65B]">Enjoy the Destination.</span>
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-white/78">
+            <p className="mt-8 max-w-2xl text-base sm:text-lg leading-relaxed text-white/78">
               Suncrest Vacation Villas connects buyers and investors with
               holiday villas and resort properties designed around memorable
               stays, relaxed living, and long-term lifestyle value.

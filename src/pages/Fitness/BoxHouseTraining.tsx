@@ -210,7 +210,7 @@ function BoxHeading({
         {label}
       </p>
       <h2
-        className={`mt-5 text-[clamp(3.2rem,6.6vw,7.2rem)] font-semibold uppercase leading-[0.82] tracking-[-0.075em] ${light ? "text-[#F8EFE2]" : "text-[#171717]"}`}
+        className={`mt-5 text-[clamp(2.15rem,5.5vw,6.8rem)] font-semibold uppercase leading-[0.88] tracking-[-0.075em] ${light ? "text-[#F8EFE2]" : "text-[#171717]"}`}
       >
         {title}
       </h2>
@@ -252,25 +252,66 @@ export function BoxHouseTraining() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
+  // Lock body scroll and handle Escape key when mobile menu is open
   useEffect(() => {
-    const sections = navLinks
-      .map(([, href]) => document.getElementById(href.slice(1)))
-      .filter((section): section is HTMLElement => section !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0.05, 0.2, 0.45] },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setMenuOpen(false);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+    document.body.style.overflow = "";
+  }, [menuOpen]);
+
+  // Frame-debounced scroll spy
+  useEffect(() => {
+    const sectionIds = ["classes", "coaching", "facility", "membership", "contact"];
+    let rafId: number;
+
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const scrollPosition = window.scrollY + 140;
+        const windowHeight = window.innerHeight;
+        const fullHeight = document.documentElement.scrollHeight;
+
+        if (window.scrollY + windowHeight >= fullHeight - 80) {
+          setActiveSection("contact");
+          return;
+        }
+
+        for (let i = sectionIds.length - 1; i >= 0; i--) {
+          const id = sectionIds[i];
+          const el = document.getElementById(id);
+          if (el) {
+            const top = el.offsetTop;
+            if (scrollPosition >= top) {
+              setActiveSection(id);
+              return;
+            }
+          }
+        }
+        if (window.scrollY < 200) {
+          setActiveSection("");
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
-    <main className="boxhouse-site -mt-16 overflow-hidden bg-[#101112] text-[#F8EFE2] selection:bg-[#E24835] selection:text-white">
+    <main className="boxhouse-site w-full max-w-full overflow-x-hidden bg-[#101112] text-[#F8EFE2] selection:bg-[#E24835] selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0A0B0C]/95 text-white backdrop-blur-xl">
         <div className="mx-auto flex h-[4.75rem] max-w-[98rem] items-center justify-between px-5 lg:px-10">
           <BoxLogo />
@@ -292,14 +333,17 @@ export function BoxHouseTraining() {
               );
             })}
           </nav>
-          <BoxButton href="#contact" className="hidden lg:inline-flex">
-            Start Training
-          </BoxButton>
+          <div className="hidden lg:block">
+            <BoxButton href="#contact">
+              Start Training
+            </BoxButton>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
             className="grid h-10 w-10 place-items-center border border-white/16 lg:hidden"
           >
             {menuOpen ? (
@@ -309,26 +353,42 @@ export function BoxHouseTraining() {
             )}
           </button>
         </div>
+        {/* Mobile Navigation Drawer */}
         {menuOpen && (
-          <nav className="border-t border-white/10 bg-[#0A0B0C] p-5 lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  aria-current={active ? "location" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block px-4 py-3 text-sm font-black uppercase tracking-[0.1em] ${active ? "boxhouse-nav-active bg-[#E24835] text-white" : "text-white/58"}`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <BoxButton href="#contact" className="mt-4 w-full">
-              Start Training
-            </BoxButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/75 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav
+              id="mobile-navigation"
+              className="fixed inset-x-0 top-[4.75rem] z-50 max-h-[calc(100vh-4.75rem)] overflow-y-auto border-b border-white/10 bg-[#0A0B0C]/98 p-6 shadow-2xl backdrop-blur-2xl lg:hidden"
+              aria-label="Mobile navigation"
+            >
+              <div className="flex flex-col gap-2">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={active ? "location" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between rounded-none px-4 py-3.5 text-sm font-black uppercase tracking-[0.14em] transition ${
+                        active
+                          ? "boxhouse-nav-active bg-[#E24835] text-white"
+                          : "text-white/65 hover:bg-white/[0.06] hover:text-white"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs opacity-50">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -355,7 +415,7 @@ export function BoxHouseTraining() {
                 Boxing and conditioning
               </span>
             </div>
-            <h1 className="mt-8 max-w-6xl text-[clamp(5rem,12vw,12.5rem)] font-semibold uppercase leading-[0.68] tracking-[-0.095em]">
+            <h1 className="mt-8 max-w-6xl text-[clamp(2.4rem,10.5vw,12.5rem)] font-semibold uppercase leading-[0.78] tracking-[-0.09em]">
               Hit Hard. Move Fast. Train With Purpose.
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-white/66 md:text-xl">
@@ -529,7 +589,7 @@ export function BoxHouseTraining() {
               <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#F7B04A]">
                 Facility floor
               </p>
-              <p className="mt-2 text-5xl font-black uppercase leading-[0.85] tracking-[-0.075em]">
+              <p className="mt-2 text-3xl font-black uppercase leading-[0.88] tracking-[-0.075em] sm:text-4xl lg:text-5xl">
                 Heavy bags. Strength tools. No wasted space.
               </p>
             </div>
@@ -752,7 +812,7 @@ export function BoxHouseTraining() {
             <p className="text-[0.62rem] font-black uppercase tracking-[0.24em] text-[#F7B04A]">
               The bell is live
             </p>
-            <h2 className="mt-6 text-[clamp(4.2rem,9vw,9.6rem)] font-black uppercase leading-[0.74] tracking-[-0.095em]">
+            <h2 className="mt-6 text-[clamp(2.4rem,7.5vw,9.6rem)] font-black uppercase leading-[0.82] tracking-[-0.08em]">
               Step Into The House.
             </h2>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-white/62">

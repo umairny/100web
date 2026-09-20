@@ -1,5 +1,17 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Container, CTAButton, SubWebsiteNav } from "../../components";
+import {
+  Coffee,
+  Sparkles,
+  Utensils,
+  MapPin,
+  Clock,
+  Phone,
+  ArrowRight,
+  ChevronRight,
+  Heart,
+} from "lucide-react";
+import { Container, CTAButton } from "../../components";
 import { imageUrl } from "../../assets/optimized";
 
 const signatureDrinks = [
@@ -105,27 +117,367 @@ const testimonials = [
   },
 ];
 
+interface NavItem {
+  label: string;
+  href: string;
+  desc: string;
+  icon: typeof Coffee;
+}
+
+const navItems: NavItem[] = [
+  { label: "About", href: "#about", desc: "Our heritage & roasting craft", icon: Sparkles },
+  { label: "Coffee", href: "#coffee", desc: "Signature roasts & cold steep", icon: Coffee },
+  { label: "The Craft", href: "#why", desc: "Why our pours taste different", icon: Heart },
+  { label: "Menu", href: "#menu", desc: "Espresso, lattes & baked goods", icon: Utensils },
+  { label: "Visit & Hours", href: "#visit", desc: "Old Town Market & slow bar", icon: MapPin },
+];
+
+function BrewNestNav() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeHash, setActiveHash] = useState("#about");
+
+  // Scroll detection for elevated glass effect and scroll spy
+  useEffect(() => {
+    const sectionList = [
+      { id: "about", hash: "#about" },
+      { id: "coffee", hash: "#coffee" },
+      { id: "why", hash: "#why" },
+      { id: "menu", hash: "#menu" },
+      { id: "testimonials", hash: "#why" },
+      { id: "visit", hash: "#visit" },
+    ];
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+
+      // 1. If reached the bottom of page, activate visit
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 70
+      ) {
+        setActiveHash("#visit");
+        return;
+      }
+
+      // 2. If above the about section (in hero), no section active
+      const firstSection = document.getElementById("about");
+      const marker = Math.min(240, Math.max(120, window.innerHeight * 0.28));
+
+      if (firstSection) {
+        const firstRect = firstSection.getBoundingClientRect();
+        if (firstRect.top > marker) {
+          setActiveHash("");
+          return;
+        }
+      }
+
+      // 3. Find active section: the last section whose top has reached or passed the marker
+      let current = "";
+      for (const section of sectionList) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = section.hash;
+          }
+        }
+      }
+
+      if (current) {
+        setActiveHash(current);
+      }
+    };
+
+    const handleHashChange = () => {
+      if (window.location.hash) {
+        setActiveHash(window.location.hash);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+    window.addEventListener("hashchange", handleHashChange);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-[#fbf6ef]/96 backdrop-blur-xl border-b border-[#d7c7b3] shadow-[0_8px_30px_rgba(45,33,26,0.08)] py-2.5 sm:py-3"
+          : "bg-[#fbf6ef]/92 backdrop-blur-md border-b border-[#d7c7b3]/60 py-3 sm:py-4"
+      }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Brand Logo */}
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setIsMobileMenuOpen(false);
+          }}
+          className="group flex items-center gap-2.5 sm:gap-3 select-none"
+        >
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#caa56f] via-[#b88755] to-[#6c4a34] text-white shadow-md shadow-[#2d211a]/20 ring-1 ring-white/40 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">
+            <Coffee className="h-5 w-5" />
+            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d9b274] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#caa56f]"></span>
+            </span>
+          </div>
+          <div className="flex flex-col">
+            <div className="flex items-center gap-2">
+              <span className="font-serif text-lg sm:text-xl font-black tracking-tight text-[#2d211a] leading-none">
+                BrewNest<span className="text-[#caa56f]">.</span>
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/30 bg-emerald-500/10 px-2 py-0.5 text-[9.5px] font-bold text-emerald-800">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-600"></span>
+                <span>Open</span>
+              </span>
+            </div>
+            <span className="mt-0.5 text-[8.5px] sm:text-[9px] font-black uppercase tracking-[0.2em] text-[#8d6748]">
+              Artisan Roasters &amp; Slow Bar
+            </span>
+          </div>
+        </a>
+
+        {/* Center Desktop Navigation Pills */}
+        <nav
+          aria-label="BrewNest Main Navigation"
+          className="hidden md:flex items-center gap-1 rounded-full border border-[#d7c7b3]/70 bg-white/60 p-1 backdrop-blur-md shadow-2xs"
+        >
+          {navItems.map((item) => {
+            const isActive = activeHash === item.href;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                onClick={() => setActiveHash(item.href)}
+                className={`relative rounded-full px-3.5 py-1.5 text-xs font-bold transition-all duration-200 ${
+                  isActive
+                    ? "bg-[#2d211a] text-white shadow-xs font-black"
+                    : "text-[#5a4638] hover:bg-[#6c4a34]/10 hover:text-[#6c4a34]"
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Right Desktop CTA & Mobile Toggle */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Quick Hours Pill (Large screens) */}
+          <div className="hidden lg:flex items-center gap-2 text-xs font-semibold text-[#6c4a34] bg-white/70 border border-[#d7c7b3]/80 rounded-full px-3 py-1.5">
+            <Clock className="h-3.5 w-3.5 text-[#b88755]" />
+            <span>6:30 AM – 7 PM</span>
+          </div>
+
+          {/* Primary CTA (Desktop & Tablet) */}
+          <a
+            href="#visit"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[#2d211a] px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-[#2d211a]/15 transition-all duration-300 hover:bg-[#6c4a34] hover:-translate-y-0.5 active:translate-y-0"
+          >
+            <span>Visit Cafe</span>
+            <ArrowRight className="h-3.5 w-3.5 text-[#d9b274]" />
+          </a>
+
+          {/* Mobile Visit Icon Button */}
+          <a
+            href="#visit"
+            aria-label="Visit Cafe Location"
+            className="sm:hidden flex h-10 w-10 items-center justify-center rounded-xl border border-[#d7c7b3] bg-white/80 text-[#6c4a34] shadow-xs active:scale-95 transition"
+          >
+            <MapPin className="h-4 w-4" />
+          </a>
+
+          {/* Mobile Menu Hamburger Button */}
+          <button
+            type="button"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#d7c7b3] bg-white/80 text-[#2d211a] transition hover:bg-white hover:border-[#6c4a34] md:hidden shadow-xs active:scale-95"
+          >
+            <span className="sr-only">Toggle navigation menu</span>
+            <div className="relative h-4 w-5">
+              <span
+                className={`absolute left-0 top-0 block h-0.5 w-5 rounded-full bg-[#2d211a] transition-all duration-300 ${
+                  isMobileMenuOpen ? "top-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-1.5 block h-0.5 w-5 rounded-full bg-[#2d211a] transition-all duration-200 ${
+                  isMobileMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-3 block h-0.5 w-5 rounded-full bg-[#2d211a] transition-all duration-300 ${
+                  isMobileMenuOpen ? "top-2 -rotate-45" : ""
+                }`}
+              />
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer / Overlay */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Backdrop Dimmer */}
+          <div
+            className="fixed inset-0 top-[58px] sm:top-[66px] z-40 bg-black/40 backdrop-blur-xs md:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Slide-down Sheet */}
+          <div
+            className="relative z-50 border-b border-[#d7c7b3] bg-[#fbf6ef]/98 px-4 pt-3 pb-6 shadow-2xl backdrop-blur-2xl md:hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto"
+          >
+            {/* Quick Status Bar */}
+            <div className="mb-3 flex items-center justify-between rounded-xl bg-white/80 border border-[#e5d9ca] px-3.5 py-2 text-xs">
+              <span className="flex items-center gap-2 font-bold text-[#6c4a34]">
+                <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+                Slow Bar Serving Now
+              </span>
+              <span className="text-[11px] font-medium text-[#8d6748]">
+                Old Town Market
+              </span>
+            </div>
+
+            {/* Navigation Cards */}
+            <nav className="space-y-1.5" aria-label="Mobile Navigation">
+              {navItems.map((item) => {
+                const IconComponent = item.icon;
+                const isActive = activeHash === item.href;
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => {
+                      setActiveHash(item.href);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={`flex items-center justify-between rounded-xl p-2.5 transition-all ${
+                      isActive
+                        ? "bg-[#2d211a] text-white shadow-sm"
+                        : "bg-white/70 text-[#2d211a] hover:bg-white active:bg-[#f0e3d2]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+                          isActive
+                            ? "bg-white/15 text-[#d9b274]"
+                            : "bg-[#f0e3d2] text-[#6c4a34]"
+                        }`}
+                      >
+                        <IconComponent className="h-4.5 w-4.5" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-black leading-tight">
+                          {item.label}
+                        </div>
+                        <div
+                          className={`text-[11px] ${
+                            isActive ? "text-white/70" : "text-[#7a6657]"
+                          }`}
+                        >
+                          {item.desc}
+                        </div>
+                      </div>
+                    </div>
+                    <ChevronRight
+                      className={`h-4 w-4 shrink-0 ${
+                        isActive ? "text-[#d9b274]" : "text-[#b88755]"
+                      }`}
+                    />
+                  </a>
+                );
+              })}
+            </nav>
+
+            {/* Cafe Details Card */}
+            <div className="mt-4 rounded-2xl border border-[#d7c7b3] bg-white/90 p-4 shadow-sm">
+              <div className="grid grid-cols-2 gap-3 text-xs text-[#5f4a3d] border-b border-[#ebdcd0] pb-3 mb-3">
+                <div className="flex items-start gap-2">
+                  <Clock className="h-3.5 w-3.5 text-[#b88755] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-[#2d211a] block">Hours</span>
+                    <span>Daily 6:30am–7pm</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="h-3.5 w-3.5 text-[#b88755] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-[#2d211a] block">Location</span>
+                    <span>Old Town Market</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <a
+                  href="#visit"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#2d211a] py-3 text-center text-xs font-black uppercase tracking-wider text-white shadow-md hover:bg-[#6c4a34] transition active:scale-[0.99]"
+                >
+                  <Coffee className="h-4 w-4 text-[#d9b274]" />
+                  <span>Plan Your Visit</span>
+                </a>
+                <a
+                  href="tel:555-123-4567"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-[#d7c7b3] bg-white py-2.5 text-xs font-bold text-[#6c4a34] hover:bg-[#f6efe5] transition"
+                >
+                  <Phone className="h-3.5 w-3.5 text-[#b88755]" />
+                  <span>Call: (555) 123-4567</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </header>
+  );
+}
+
 export function BrewNestCoffee() {
   return (
     <main className="brand-motion motion-brewnest bg-[#f6efe5] text-[#251c16]">
-      <SubWebsiteNav
-        brand="BrewNest Coffee"
-        links={[
-          { label: "About", href: "#about" },
-          { label: "Coffee", href: "#coffee" },
-          { label: "Why BrewNest", href: "#why" },
-          { label: "Menu", href: "#menu" },
-          { label: "Visit", href: "#visit" },
-        ]}
-        ctaLabel="Visit Our Cafe"
-        ctaHref="#visit"
-        className="border-b border-[#d7c7b3] bg-[#fbf6ef]/95"
-        brandClassName="text-[#6c4a34]"
-        linkClassName="text-[#5a4638] transition hover:bg-white/70 hover:text-[#8d6748]"
-        ctaClassName="bg-[#2d211a] text-white hover:bg-[#6c4a34]"
-        menuButtonClassName="border-[#d7c7b3] text-[#6c4a34] hover:bg-white/70"
-        mobilePanelClassName="border border-[#d7c7b3] bg-[#fbf6ef]"
-      />
+      <BrewNestNav />
 
       <section className="relative isolate overflow-hidden border-b border-[#4c382b] bg-[#241a14] pt-20 text-[#f8f1e8] md:pt-24">
         <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_18%_24%,rgba(192,145,94,0.18),transparent_28%),linear-gradient(115deg,#241a14_0%,#2d211a_52%,#17100c_100%)]" />

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowDownRight,
   ArrowRight,
@@ -200,6 +200,28 @@ function FoundryMark({ light = false }: { light?: boolean }) {
 export function FoundryPropertyGroup() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
   return (
     <main className="foundry-site overflow-hidden bg-[#F2F0EA] text-[#242A32] selection:bg-[#E86F2A] selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/15 bg-[#10141A]/92 text-white backdrop-blur-xl">
@@ -219,9 +241,11 @@ export function FoundryPropertyGroup() {
               </a>
             ))}
           </nav>
-          <FoundryButton href="#projects" className="hidden lg:inline-flex">
-            View Portfolio
-          </FoundryButton>
+          <div className="hidden lg:block">
+            <FoundryButton href="#projects">
+              View Portfolio
+            </FoundryButton>
+          </div>
           <button
             type="button"
             aria-label="Toggle navigation"
@@ -237,21 +261,25 @@ export function FoundryPropertyGroup() {
           </button>
         </div>
         {menuOpen && (
-          <nav className="border-t border-white/10 bg-[#10141A] px-5 py-5 lg:hidden">
-            {navLinks.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className="block border-b border-white/10 px-2 py-4 text-sm font-black uppercase tracking-[0.12em] text-white/75"
-              >
-                {label}
-              </a>
-            ))}
-            <FoundryButton href="#projects" className="mt-5 w-full">
-              View Portfolio
-            </FoundryButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[4.5rem] z-40 bg-black/60 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav className="fixed inset-x-0 top-[4.5rem] z-50 border-b border-white/10 bg-[#10141A]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+              {navLinks.map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block border-b border-white/10 px-2 py-4 text-sm font-black uppercase tracking-[0.12em] text-white/75 transition hover:text-[#E86F2A]"
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
+          </>
         )}
       </header>
 

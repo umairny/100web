@@ -188,29 +188,86 @@ export function OaklinePropertyManagement() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const sectionIds = navLinks.map(([, href]) => href.slice(1));
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => section !== null);
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSection = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
 
-        if (visibleSection) setActiveSection(visibleSection.target.id);
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0.05, 0.2, 0.5] },
-    );
+  // Robust frame-debounced scroll spy with boundary guards
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      if (scrollable > 0 && scrollY >= scrollable - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      if (scrollY < 80) {
+        setActiveSection("");
+        return;
+      }
+
+      const marker = Math.min(220, Math.max(100, window.innerHeight * 0.28));
+      const sectionIds = [
+        "landlords",
+        "tenants",
+        "services",
+        "maintenance",
+        "contact",
+      ];
+      let current = "";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = id;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
 
   return (
-    <main className="oakline-site overflow-hidden bg-[#F2F7F5] text-[#334047] selection:bg-[#8FA377] selection:text-white">
+    <main className="oakline-site w-full max-w-full overflow-x-hidden bg-[#F2F7F5] text-[#334047] selection:bg-[#8FA377] selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[#D9E2E0] bg-white/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[4.5rem] max-w-[90rem] items-center justify-between px-5 lg:px-10">
           <OakLogo />
@@ -225,22 +282,31 @@ export function OaklinePropertyManagement() {
                   key={label}
                   href={href}
                   aria-current={isActive ? "location" : undefined}
-                  className={`rounded-full px-4 py-2 text-sm font-bold transition ${isActive ? "oakline-nav-active bg-[#E8F0EC] text-[#3D7657]" : "text-[#5D6C72] hover:bg-[#F2F7F5] hover:text-[#3D7657]"}`}
+                  className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                    isActive
+                      ? "oakline-nav-active bg-[#E8F0EC] text-[#3D7657]"
+                      : "text-[#5D6C72] hover:bg-[#F2F7F5] hover:text-[#3D7657]"
+                  }`}
                 >
                   {label}
                 </a>
               );
             })}
           </nav>
-          <OakButton href="#contact" className="hidden lg:inline-flex">
-            Request Management
-          </OakButton>
+
+          {/* Desktop-Only Request Management CTA (Isolated from mobile viewports) */}
+          <div className="hidden lg:block">
+            <OakButton href="#contact">
+              Request Management
+            </OakButton>
+          </div>
+
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-[#D9E2E0] text-[#16324A] lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-[#D9E2E0] text-[#16324A] lg:hidden transition active:scale-95 hover:border-[#3D7657]"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -249,26 +315,39 @@ export function OaklinePropertyManagement() {
             )}
           </button>
         </div>
+
+        {/* Mobile Slide-Down Overlay */}
         {menuOpen && (
-          <nav className="border-t border-[#D9E2E0] bg-white px-5 py-5 lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const isActive = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  aria-current={isActive ? "location" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block rounded-xl px-3 py-3 font-bold transition ${isActive ? "oakline-nav-active bg-[#E8F0EC] text-[#3D7657]" : "text-[#536369] hover:bg-[#F2F7F5]"}`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <OakButton href="#contact" className="mt-3 w-full">
-              Request Management
-            </OakButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[4.5rem] z-40 bg-black/45 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav className="fixed inset-x-0 top-[4.5rem] z-50 border-b border-[#D9E2E0] bg-white/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+              <div className="space-y-1">
+                {navLinks.map(([label, href]) => {
+                  const isActive = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={isActive ? "location" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between rounded-xl px-4 py-3 font-bold transition ${
+                        isActive
+                          ? "oakline-nav-active bg-[#E8F0EC] text-[#3D7657] font-extrabold"
+                          : "text-[#536369] hover:bg-[#F2F7F5] hover:text-[#3D7657]"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs text-[#3D7657]">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -280,13 +359,13 @@ export function OaklinePropertyManagement() {
               <p className="inline-flex items-center gap-2 rounded-full border border-[#CAD9D4] bg-white px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-[#3D7657]">
                 <ShieldCheck className="h-4 w-4" /> Property management
               </p>
-              <h1 className="mt-7 max-w-3xl text-[clamp(3.4rem,6.2vw,6.5rem)] font-black leading-[0.9] tracking-[-0.07em] text-[#16324A]">
+              <h1 className="mt-7 max-w-3xl text-[clamp(2.35rem,6.2vw,6.5rem)] font-black leading-[0.9] tracking-[-0.07em] text-[#16324A]">
                 Calm, Clear Property Management{" "}
                 <span className="text-[#3D7657]">
                   for Landlords and Tenants
                 </span>
               </h1>
-              <p className="mt-7 max-w-xl text-lg leading-8 text-[#607078]">
+              <p className="mt-7 max-w-xl text-base sm:text-lg leading-relaxed text-[#607078]">
                 Oakline Property Management helps landlords protect their
                 properties and tenants feel supported through responsive
                 service, organized operations, and transparent communication.
@@ -325,7 +404,9 @@ export function OaklinePropertyManagement() {
             </div>
           </div>
         </div>
-        <div className="mx-auto grid max-w-[90rem] -translate-y-1/2 grid-cols-1 overflow-hidden rounded-2xl border border-[#D9E2E0] bg-white shadow-xl sm:grid-cols-3">
+
+        {/* Responsive Features Ribbon with Mobile Overlap Protection */}
+        <div className="relative z-10 mx-auto -mt-6 sm:-mt-0 sm:-translate-y-1/2 grid max-w-[90rem] grid-cols-1 overflow-hidden rounded-2xl border border-[#D9E2E0] bg-white shadow-xl sm:grid-cols-3">
           {[
             [Wrench, "Responsive Maintenance"],
             [ClipboardCheck, "Transparent Operations"],

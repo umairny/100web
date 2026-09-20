@@ -142,7 +142,7 @@ function ForgeHeading({
         {eyebrow}
       </p>
       <h2
-        className={`mt-5 text-[clamp(2.8rem,5.5vw,5.8rem)] font-black uppercase leading-[0.88] tracking-[-0.065em] ${light ? "text-white" : "text-[#111318]"}`}
+        className={`mt-5 text-[clamp(2.1rem,5vw,5.8rem)] font-black uppercase leading-[0.88] tracking-[-0.065em] ${light ? "text-white" : "text-[#111318]"}`}
       >
         {title}
       </h2>
@@ -184,26 +184,87 @@ export function PulseForgeFitness() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const sections = navLinks
-      .map(([, href]) => document.getElementById(href.slice(1)))
-      .filter((section): section is HTMLElement => section !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-25% 0px -58% 0px", threshold: [0.05, 0.2, 0.5] },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
+  // Robust frame-debounced scroll spy with boundary guards
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollable > 0 && scrollY >= scrollable - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      if (scrollY < 80) {
+        setActiveSection("");
+        return;
+      }
+
+      const marker = Math.min(220, Math.max(100, window.innerHeight * 0.28));
+      const sectionIds = [
+        "programs",
+        "coaching",
+        "results",
+        "membership",
+        "contact",
+      ];
+      let current = "";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = id;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
 
   return (
-    <main className="pulseforge-premium -mt-16 overflow-hidden bg-[#ECEEF1] text-[#111318] selection:bg-[#F05A28] selection:text-white">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0B0D10]/94 text-white backdrop-blur-xl">
+    <main className="pulseforge-premium w-full max-w-full overflow-x-hidden bg-[#ECEEF1] text-[#111318] selection:bg-[#F05A28] selection:text-white">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0B0D10]/95 text-white backdrop-blur-xl">
         <div className="mx-auto flex h-[4.5rem] max-w-[94rem] items-center justify-between px-5 lg:px-10">
           <ForgeLogo />
           <nav
@@ -224,15 +285,18 @@ export function PulseForgeFitness() {
               );
             })}
           </nav>
-          <ForgeButton href="#contact" className="hidden lg:inline-flex">
-            Start Training
-          </ForgeButton>
+          {/* Desktop-Only Training CTA (Isolated from mobile viewports) */}
+          <div className="hidden lg:block">
+            <ForgeButton href="#contact">
+              Start Training
+            </ForgeButton>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
             aria-label="Toggle navigation"
-            className="grid h-10 w-10 place-items-center rounded-lg border border-white/15 lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-lg border border-white/15 text-white transition active:scale-95 hover:border-[#F05A28] lg:hidden"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -241,26 +305,38 @@ export function PulseForgeFitness() {
             )}
           </button>
         </div>
+        {/* Mobile Slide-Down Overlay */}
         {menuOpen && (
-          <nav className="border-t border-white/10 bg-[#0B0D10] p-5 lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  aria-current={active ? "location" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block rounded-lg px-4 py-3 text-sm font-bold ${active ? "pulseforge-nav-active bg-white/10 text-[#FF7444]" : "text-white/65"}`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <ForgeButton href="#contact" className="mt-4 w-full">
-              Start Training
-            </ForgeButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[4.5rem] z-40 bg-black/70 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav className="fixed inset-x-0 top-[4.5rem] z-50 border-b border-white/10 bg-[#0B0D10]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+              <div className="space-y-1">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={active ? "location" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-black uppercase tracking-[0.14em] transition ${
+                        active
+                          ? "pulseforge-nav-active bg-white/10 text-[#FF7444] font-black"
+                          : "text-white/65 hover:bg-white/[0.06] hover:text-white"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs text-[#F05A28]">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -286,7 +362,7 @@ export function PulseForgeFitness() {
               <span className="h-2 w-2 animate-pulse rounded-full bg-[#F05A28]" />{" "}
               Coaching that keeps you moving
             </div>
-            <h1 className="mt-8 max-w-6xl text-[clamp(4rem,8.6vw,9rem)] font-black uppercase leading-[0.79] tracking-[-0.08em]">
+            <h1 className="mt-8 max-w-6xl text-[clamp(2.35rem,8.2vw,9rem)] font-black uppercase leading-[0.82] tracking-[-0.075em]">
               Build Power. <span className="text-[#F05A28]">Move Better.</span>{" "}
               Stay Accountable.
             </h1>
@@ -669,7 +745,7 @@ export function PulseForgeFitness() {
             <p className="text-[0.65rem] font-black uppercase tracking-[0.24em] text-[#FF7444]">
               Your next session starts here
             </p>
-            <h2 className="mt-6 text-[clamp(3.5rem,7.5vw,8rem)] font-black uppercase leading-[0.82] tracking-[-0.075em]">
+            <h2 className="mt-6 text-[clamp(2.35rem,7.2vw,8rem)] font-black uppercase leading-[0.85] tracking-[-0.075em]">
               Ready to forge your next level?
             </h2>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/65">

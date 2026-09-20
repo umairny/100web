@@ -616,6 +616,7 @@ blockquote {
   backface-visibility: hidden;
 }
 
+.restaurant-subnav,
 .demo-mode .restaurant-subnav {
   top: 0;
 }

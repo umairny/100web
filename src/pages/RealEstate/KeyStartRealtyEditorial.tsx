@@ -230,25 +230,86 @@ export function KeyStartRealty() {
   const [openFaq, setOpenFaq] = useState(0);
   const [activeSection, setActiveSection] = useState("");
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const sections = navLinks
-      .map(([, href]) => document.getElementById(href.slice(1)))
-      .filter((section): section is HTMLElement => section !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0.05, 0.2, 0.5] },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
+  // Robust frame-debounced scroll spy with boundary guards
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollable > 0 && scrollY >= scrollable - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      if (scrollY < 80) {
+        setActiveSection("");
+        return;
+      }
+
+      const marker = Math.min(220, Math.max(100, window.innerHeight * 0.28));
+      const sectionIds = [
+        "buyer-guide",
+        "homes",
+        "how-it-works",
+        "resources",
+        "contact",
+      ];
+      let current = "";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = id;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
 
   return (
-    <main className="keystart-site keystart-editorial overflow-hidden bg-[#F7F1E5] text-[#354147] selection:bg-[#9BAD83] selection:text-white">
+    <main className="keystart-site keystart-editorial w-full max-w-full overflow-x-hidden bg-[#F7F1E5] text-[#354147] selection:bg-[#9BAD83] selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3">
         <div className="mx-auto flex h-[4.25rem] max-w-[88rem] items-center justify-between rounded-2xl border border-[#D7E1DA] bg-white/95 px-4 shadow-[0_12px_40px_rgba(21,52,75,.08)] backdrop-blur-xl lg:px-6">
           <KeyLogo />
@@ -270,15 +331,18 @@ export function KeyStartRealty() {
               );
             })}
           </nav>
-          <KeyButton href="#buyer-guide" className="hidden lg:inline-flex">
-            Start Your Search
-          </KeyButton>
+          {/* Desktop-Only Search CTA (Isolated from mobile viewports) */}
+          <div className="hidden lg:block">
+            <KeyButton href="#buyer-guide">
+              Start Your Search
+            </KeyButton>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-[#D7E1DA] text-[#15344B] lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-[#D7E1DA] text-[#15344B] lg:hidden transition active:scale-95 hover:border-[#3F7355]"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -287,26 +351,38 @@ export function KeyStartRealty() {
             )}
           </button>
         </div>
+        {/* Mobile Slide-Down Overlay */}
         {menuOpen && (
-          <nav className="mx-auto mt-2 max-w-[88rem] rounded-2xl border border-[#D7E1DA] bg-white p-4 shadow-xl lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  aria-current={active ? "location" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block rounded-xl px-3 py-3 font-bold ${active ? "keystart-nav-active bg-[#E8F0EA] text-[#3F7355]" : "text-[#56666C] hover:bg-[#F3F7F4]"}`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <KeyButton href="#buyer-guide" className="mt-3 w-full">
-              Start Your Search
-            </KeyButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[5.25rem] z-40 bg-black/40 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav className="relative z-50 mx-auto mt-2 max-w-[88rem] rounded-2xl border border-[#D7E1DA] bg-white/98 p-4 shadow-2xl backdrop-blur-2xl lg:hidden">
+              <div className="space-y-1">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={active ? "location" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between rounded-xl px-4 py-3 font-bold transition ${
+                        active
+                          ? "keystart-nav-active bg-[#E8F0EA] text-[#3F7355] font-extrabold"
+                          : "text-[#56666C] hover:bg-[#F3F7F4] hover:text-[#3F7355]"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs text-[#3F7355]">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 

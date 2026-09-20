@@ -148,7 +148,7 @@ function AppShell() {
   // If in embedded mode (inside phone/tablet preview iframe), render template directly without outer chrome
   if (isEmbed) {
     return (
-      <div id="device-frame-embed" className="demo-canvas min-h-screen w-full bg-white transition-[filter] duration-300 overflow-x-hidden">
+      <div id="device-frame-embed" className="demo-canvas demo-mode min-h-screen w-full bg-white transition-[filter] duration-300 overflow-x-hidden">
         <AppRoutes />
       </div>
     );

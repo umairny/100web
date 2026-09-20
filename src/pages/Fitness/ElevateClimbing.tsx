@@ -17,8 +17,8 @@ const navLinks = [
   ["Climb", "#climb", "#21A6A1"],
   ["Classes", "#classes", "#F36F5D"],
   ["Community", "#community", "#DCA83A"],
-  ["Membership", "#membership", "#95C84A"],
   ["Events", "#events", "#315DC8"],
+  ["Membership", "#membership", "#95C84A"],
   ["Contact", "#contact", "#C97957"],
 ];
 
@@ -234,7 +234,7 @@ function SectionHeading({
         {label}
       </p>
       <h2
-        className={`mt-5 text-[clamp(3rem,6.5vw,7rem)] font-black uppercase leading-[0.82] tracking-[-0.075em] ${light ? "text-white" : "text-[#25303A]"}`}
+        className={`mt-5 text-[clamp(2.15rem,5.5vw,7rem)] font-black uppercase leading-[0.88] tracking-[-0.07em] ${light ? "text-white" : "text-[#25303A]"}`}
       >
         {title}
       </h2>
@@ -295,34 +295,80 @@ export function ElevateClimbing() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+  // Lock body scroll and handle Escape key when mobile menu is open
   useEffect(() => {
-    const updateActiveSection = () => {
-      const sections = observedSectionIds
-        .map((id) => document.getElementById(id))
-        .filter(Boolean) as HTMLElement[];
-      const currentPosition = window.scrollY + 132;
-      const current = sections
-        .map((section) => ({
-          id: section.id,
-          top: section.getBoundingClientRect().top + window.scrollY,
-        }))
-        .filter((section) => section.top <= currentPosition)
-        .sort((a, b) => b.top - a.top)[0];
-      setActiveSection(current?.id ?? "home");
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setMenuOpen(false);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+    document.body.style.overflow = "";
+  }, [menuOpen]);
+
+  // Frame-debounced scroll spy
+  useEffect(() => {
+    let rafId: number;
+
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const scrollPosition = window.scrollY + 140;
+        const windowHeight = window.innerHeight;
+        const fullHeight = document.documentElement.scrollHeight;
+
+        if (window.scrollY + windowHeight >= fullHeight - 80) {
+          setActiveSection("contact");
+          return;
+        }
+
+        if (window.scrollY < 200) {
+          setActiveSection("home");
+          return;
+        }
+
+        const targets = navLinks
+          .map(([, href]) => {
+            const id = href.slice(1);
+            const el = document.getElementById(id);
+            if (!el) return null;
+            return {
+              id,
+              top: el.getBoundingClientRect().top + window.scrollY,
+            };
+          })
+          .filter((item): item is { id: string; top: number } => item !== null)
+          .sort((a, b) => a.top - b.top);
+
+        let current = "home";
+        for (let i = targets.length - 1; i >= 0; i--) {
+          if (scrollPosition >= targets[i].top - 30) {
+            current = targets[i].id;
+            break;
+          }
+        }
+
+        setActiveSection(current);
+      });
     };
 
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
-
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+    handleScroll();
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
   return (
-    <main className="elevate-climbing-site -mt-16 overflow-hidden bg-[#F7F1E6] text-[#25303A]">
+    <main className="elevate-climbing-site w-full max-w-full overflow-x-hidden bg-[#F7F1E6] text-[#25303A]">
       <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.18] [background-image:radial-gradient(#25303A_1px,transparent_1px)] [background-size:22px_22px]" />
 
       <header className="fixed inset-x-0 top-4 z-50 px-4">
@@ -376,18 +422,21 @@ export function ElevateClimbing() {
             })}
           </nav>
 
-          <a
-            href="#contact"
-            className="hidden rounded-full bg-[#F36F5D] px-5 py-3 text-xs font-black uppercase tracking-[0.13em] text-white shadow-[0_9px_0_rgba(37,48,58,.16),0_18px_32px_rgba(243,111,93,.22)] transition hover:-translate-y-0.5 hover:shadow-[0_11px_0_rgba(37,48,58,.16),0_22px_36px_rgba(243,111,93,.25)] lg:inline-flex"
-          >
-            Start Climbing
-          </a>
+          <div className="hidden lg:block">
+            <a
+              href="#contact"
+              className="rounded-full bg-[#F36F5D] px-5 py-3 text-xs font-black uppercase tracking-[0.13em] text-white shadow-[0_9px_0_rgba(37,48,58,.16),0_18px_32px_rgba(243,111,93,.22)] transition hover:-translate-y-0.5 hover:shadow-[0_11px_0_rgba(37,48,58,.16),0_22px_36px_rgba(243,111,93,.25)]"
+            >
+              Start Climbing
+            </a>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             className="grid h-11 w-11 place-items-center rounded-full border border-[#25303A]/15 bg-white/75 text-[#25303A] shadow-sm lg:hidden"
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -396,51 +445,58 @@ export function ElevateClimbing() {
             )}
           </button>
         </div>
+        {/* Mobile Navigation Backdrop & Sheet */}
         {menuOpen && (
-          <nav className="mx-auto mt-3 max-w-7xl overflow-hidden rounded-[2rem] border-2 border-white/70 bg-[#F7F1E6]/96 p-3 shadow-2xl ring-1 ring-[#25303A]/10 backdrop-blur-xl lg:hidden">
-            <div className="mb-2 flex items-center justify-between rounded-[1.4rem] bg-white/60 px-4 py-3">
-              <span className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-[#6C6A61]">
-                Climbing map
-              </span>
-              <Route className="h-4 w-4 text-[#21A6A1]" />
-            </div>
-            {navLinks.map(([label, href, color]) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  onClick={() => setMenuOpen(false)}
-                  aria-current={active ? "location" : undefined}
-                  className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-black uppercase tracking-[0.1em] transition ${
-                    active
-                      ? "active bg-[#25303A] text-white shadow-sm"
-                      : "text-[#606A70] hover:bg-white hover:text-[#25303A]"
-                  }`}
-                >
-                  <span className="flex items-center gap-3">
-                    <span
-                      className={`h-3 w-3 rounded-full ${active ? "border border-white/80" : ""}`}
-                      style={{ backgroundColor: color }}
-                    />
-                    {label}
-                  </span>
-                  <span
-                    className={`text-[0.58rem] ${active ? "text-white/65" : "text-[#6C6A61]"}`}
-                  >
-                    V{label.length}
-                  </span>
-                </a>
-              );
-            })}
-            <a
-              href="#contact"
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/45 backdrop-blur-xs lg:hidden"
               onClick={() => setMenuOpen(false)}
-              className="mt-2 block rounded-2xl bg-[#F36F5D] px-4 py-3 text-center text-sm font-black uppercase tracking-[0.12em] text-white shadow-[0_7px_0_rgba(37,48,58,.16)]"
+              aria-hidden="true"
+            />
+            <nav
+              id="mobile-navigation"
+              className="fixed inset-x-4 top-[4.75rem] z-50 max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[2rem] border-2 border-white/70 bg-[#F7F1E6]/98 p-4 shadow-2xl ring-1 ring-[#25303A]/10 backdrop-blur-2xl lg:hidden"
+              aria-label="Mobile navigation"
             >
-              Start Climbing
-            </a>
-          </nav>
+              <div className="mb-3 flex items-center justify-between rounded-[1.4rem] bg-white/60 px-4 py-3">
+                <span className="text-[0.6rem] font-black uppercase tracking-[0.2em] text-[#6C6A61]">
+                  Climbing map
+                </span>
+                <Route className="h-4 w-4 text-[#21A6A1]" />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                {navLinks.map(([label, href, color]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      onClick={() => setMenuOpen(false)}
+                      aria-current={active ? "location" : undefined}
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-black uppercase tracking-[0.1em] transition ${
+                        active
+                          ? "active bg-[#25303A] text-white shadow-sm"
+                          : "text-[#606A70] hover:bg-white hover:text-[#25303A]"
+                      }`}
+                    >
+                      <span className="flex items-center gap-3">
+                        <span
+                          className={`h-3 w-3 rounded-full ${active ? "border border-white/80" : ""}`}
+                          style={{ backgroundColor: color }}
+                        />
+                        {label}
+                      </span>
+                      <span
+                        className={`text-xs ${active ? "text-white/75" : "text-[#6C6A61]"}`}
+                      >
+                        →
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -455,7 +511,7 @@ export function ElevateClimbing() {
               <Route className="h-4 w-4 text-[#21A6A1]" />
               Bouldering • Training • Community
             </p>
-            <h1 className="mt-7 max-w-5xl text-[clamp(4.1rem,8.9vw,10rem)] font-black uppercase leading-[0.73] tracking-[-0.09em]">
+            <h1 className="mt-7 max-w-5xl text-[clamp(2.4rem,8.8vw,10rem)] font-black uppercase leading-[0.82] tracking-[-0.08em]">
               Find Your Route. Build Your Grip. Climb Together.
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-[#606A70]">
@@ -918,7 +974,7 @@ export function ElevateClimbing() {
               <Compass className="h-4 w-4" />
               Start your route
             </p>
-            <h2 className="mt-7 text-[clamp(4rem,8vw,8.8rem)] font-black uppercase leading-[0.72] tracking-[-0.09em]">
+            <h2 className="mt-7 text-[clamp(2.35rem,7.5vw,8.8rem)] font-black uppercase leading-[0.84] tracking-[-0.08em]">
               Your Next Route Starts Here.
             </h2>
             <p className="mt-7 max-w-xl text-lg leading-8 text-white/68">

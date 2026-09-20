@@ -183,7 +183,7 @@ function PeakHeading({
         {label}
       </p>
       <h2
-        className={`mt-5 text-[clamp(3rem,6vw,6.7rem)] font-semibold uppercase leading-[0.88] tracking-[-0.055em] ${light ? "text-white" : "text-[#102033]"}`}
+        className={`mt-5 text-[clamp(2.15rem,5.5vw,6.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.055em] ${light ? "text-white" : "text-[#102033]"}`}
       >
         {title}
       </h2>
@@ -224,26 +224,87 @@ export function PeakRunCoaching() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const sections = navLinks
-      .map(([, href]) => document.getElementById(href.slice(1)))
-      .filter((section): section is HTMLElement => section !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0.05, 0.2, 0.45] },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
+  // Robust frame-debounced scroll spy with boundary guards
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollable > 0 && scrollY >= scrollable - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      if (scrollY < 80) {
+        setActiveSection("");
+        return;
+      }
+
+      const marker = Math.min(220, Math.max(100, window.innerHeight * 0.28));
+      const sectionIds = [
+        "plans",
+        "coaching",
+        "races",
+        "results",
+        "contact",
+      ];
+      let current = "";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = id;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
 
   return (
-    <main className="peakrun-site -mt-16 overflow-hidden bg-[#F5F8FB] text-[#102033] selection:bg-[#FFB06B] selection:text-[#102033]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#0B2A4A]/10 bg-white/88 backdrop-blur-xl">
+    <main className="peakrun-site w-full max-w-full overflow-x-hidden bg-[#F5F8FB] text-[#102033] selection:bg-[#FFB06B] selection:text-[#102033]">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#0B2A4A]/10 bg-white/92 backdrop-blur-xl">
         <div className="mx-auto flex h-[4.75rem] max-w-[96rem] items-center justify-between px-5 lg:px-10">
           <PeakLogo />
           <nav
@@ -264,15 +325,18 @@ export function PeakRunCoaching() {
               );
             })}
           </nav>
-          <PeakButton href="#contact" className="hidden lg:inline-flex">
-            Start Training
-          </PeakButton>
+          {/* Desktop-Only Training CTA (Isolated from mobile viewports) */}
+          <div className="hidden lg:block">
+            <PeakButton href="#contact">
+              Start Training
+            </PeakButton>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#0B2A4A]/15 lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[#0B2A4A]/15 text-[#102033] transition active:scale-95 hover:border-[#117DB0] lg:hidden"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -281,26 +345,38 @@ export function PeakRunCoaching() {
             )}
           </button>
         </div>
+        {/* Mobile Slide-Down Overlay */}
         {menuOpen && (
-          <nav className="border-t border-[#0B2A4A]/10 bg-white p-5 lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  aria-current={active ? "location" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block rounded-2xl px-4 py-3 text-sm font-black uppercase tracking-[0.1em] ${active ? "peakrun-nav-active bg-[#E7F6FD] text-[#117DB0]" : "text-[#5D6C7E]"}`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <PeakButton href="#contact" className="mt-4 w-full">
-              Start Training
-            </PeakButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/45 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav className="fixed inset-x-0 top-[4.75rem] z-50 border-b border-[#0B2A4A]/10 bg-white/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+              <div className="space-y-1">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={active ? "location" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-black uppercase tracking-[0.1em] transition ${
+                        active
+                          ? "peakrun-nav-active bg-[#E7F6FD] text-[#117DB0] font-black"
+                          : "text-[#5D6C7E] hover:bg-[#F0F6FA] hover:text-[#0B2A4A]"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs text-[#117DB0]">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -315,7 +391,7 @@ export function PeakRunCoaching() {
         />
         <div className="absolute inset-x-0 top-0 h-[30rem] bg-[linear-gradient(135deg,#E7F6FD_0%,#FFF4EA_52%,#F5F8FB_100%)]" />
         <div className="absolute right-[8%] top-36 h-72 w-72 rounded-full bg-[#17A7E8]/20 blur-3xl" />
-        <div className="relative mx-auto grid min-h-[calc(100vh-4.75rem)] max-w-[100rem] gap-0 px-5 py-12 lg:grid-cols-[0.82fr_1.18fr] lg:px-10 lg:py-16 xl:px-14">
+        <div className="relative mx-auto grid min-h-[calc(100vh-4.75rem)] max-w-[100rem] gap-6 px-5 py-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-0 lg:px-10 lg:py-16 xl:px-14">
           <div className="relative z-10 flex flex-col justify-between rounded-[2rem] border border-[#D7E6F0] bg-white/88 p-6 shadow-2xl shadow-[#0B2A4A]/8 backdrop-blur md:p-9 lg:rounded-r-none lg:border-r-0">
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-[0.9rem] bg-[#0B2A4A] px-4 py-2 text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#8EDBFF]">
@@ -330,7 +406,7 @@ export function PeakRunCoaching() {
                 <Zap className="h-4 w-4 text-[#FF7A3D]" /> Morning miles,
                 measured progress
               </p>
-              <h1 className="mt-7 max-w-4xl text-[clamp(3.8rem,8.2vw,8.8rem)] font-semibold uppercase leading-[0.84] tracking-[-0.07em]">
+              <h1 className="mt-7 max-w-4xl text-[clamp(2.35rem,7.5vw,8.8rem)] font-bold uppercase leading-[0.88] tracking-[-0.07em]">
                 Train Smarter. Run Stronger. Race Ready.
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-8 text-[#56677A] md:text-xl">
@@ -717,7 +793,7 @@ export function PeakRunCoaching() {
             <p className="text-[0.62rem] font-black uppercase tracking-[0.24em] text-[#8EDBFF]">
               Next block starts here
             </p>
-            <h2 className="mt-6 text-[clamp(3.8rem,8vw,8.6rem)] font-black uppercase leading-[0.8] tracking-[-0.08em]">
+            <h2 className="mt-6 text-[clamp(2.35rem,7.2vw,8.6rem)] font-black uppercase leading-[0.86] tracking-[-0.08em]">
               Ready To Start Your Next Training Block?
             </h2>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68">

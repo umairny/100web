@@ -36,8 +36,8 @@ const navItems = [
   "Home",
   "Services",
   "About",
-  "Stylists",
   "Gallery",
+  "Stylists",
   "Products",
   "Contact",
 ];
@@ -185,10 +185,10 @@ function Button({
   href?: string;
   outline?: boolean;
   className?: string;
-  onClick?: () => void;
+  onClick?: (event?: MouseEvent<HTMLAnchorElement>) => void;
 }) {
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    onClick?.();
+    onClick?.(event);
 
     if (href.startsWith("#")) {
       event.preventDefault();
@@ -218,32 +218,52 @@ export function GlowHausSalon() {
 
     const updateNavigation = () => {
       const scrollTop = window.scrollY;
-      const viewportMarker = scrollTop + 96;
       const scrollableHeight =
         document.documentElement.scrollHeight - window.innerHeight;
-      let currentSection = "home";
-      let currentSectionTop = -1;
 
-      for (const item of navItems) {
-        const sectionId = item.toLowerCase();
-        const section = document.getElementById(sectionId);
+      // 1. If at or near bottom of page -> contact
+      if (scrollableHeight > 0 && scrollTop >= scrollableHeight - 60) {
+        setActiveSection("contact");
+        setIsScrolled(true);
+        setScrollProgress(100);
+        return;
+      }
 
-        if (
-          section &&
-          section.offsetTop <= viewportMarker &&
-          section.offsetTop > currentSectionTop
-        ) {
-          currentSection = sectionId;
-          currentSectionTop = section.offsetTop;
+      // 2. If at or near top of page -> home
+      if (scrollTop < 120) {
+        setActiveSection("home");
+        setIsScrolled(false);
+        setScrollProgress(0);
+        return;
+      }
+
+      // Sections in physical DOM order
+      const sections = [
+        { id: "home", navId: "home" },
+        { id: "services", navId: "services" },
+        { id: "about", navId: "about" },
+        { id: "gallery", navId: "gallery" },
+        { id: "stylists", navId: "stylists" },
+        { id: "book", navId: "stylists" },
+        { id: "products", navId: "products" },
+        { id: "contact", navId: "contact" },
+      ];
+
+      const marker = Math.min(240, Math.max(120, window.innerHeight * 0.28));
+
+      let current = "home";
+      for (const section of sections) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = section.navId;
+          }
         }
       }
 
-      if (scrollableHeight > 0 && scrollTop >= scrollableHeight - 2) {
-        currentSection = "contact";
-      }
-
-      setActiveSection(currentSection);
-      setIsScrolled(scrollTop > 12);
+      setActiveSection(current);
+      setIsScrolled(scrollTop > 15);
       setScrollProgress(
         scrollableHeight > 0
           ? Math.min(100, (scrollTop / scrollableHeight) * 100)
@@ -256,18 +276,41 @@ export function GlowHausSalon() {
       animationFrame = window.requestAnimationFrame(updateNavigation);
     };
 
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "").toLowerCase();
+      if (hash === "book") {
+        setActiveSection("stylists");
+      } else if (hash && ["home", "services", "about", "gallery", "stylists", "products", "contact"].includes(hash)) {
+        setActiveSection(hash);
+      }
+    };
+
     updateNavigation();
     window.addEventListener("scroll", requestNavigationUpdate, {
       passive: true,
     });
     window.addEventListener("resize", requestNavigationUpdate);
+    window.addEventListener("hashchange", handleHashChange);
 
     return () => {
       window.cancelAnimationFrame(animationFrame);
       window.removeEventListener("scroll", requestNavigationUpdate);
       window.removeEventListener("resize", requestNavigationUpdate);
+      window.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -281,38 +324,44 @@ export function GlowHausSalon() {
   }, [menuOpen]);
 
   const scrollToSection = (
-    event: MouseEvent<HTMLAnchorElement>,
+    event: MouseEvent<HTMLAnchorElement> | undefined,
     sectionId: string,
   ) => {
     const section = document.getElementById(sectionId);
     if (!section) return;
 
-    event.preventDefault();
+    event?.preventDefault();
     setMenuOpen(false);
     setActiveSection(sectionId);
     smoothScrollToId(sectionId);
   };
 
   return (
-    <main className="glowhaus-site bg-[#fffaf6] text-[#272020] [font-family:Arial,sans-serif]">
+    <main className="glowhaus-site bg-[#fffaf6] text-[#272020] [font-family:Arial,sans-serif] pt-[74px] w-full max-w-full overflow-x-hidden">
       <header
-        className={`sticky top-0 z-50 border-b bg-[#fffaf6]/95 backdrop-blur-xl transition-shadow duration-300 ${isScrolled ? "border-[#dec9c0] shadow-[0_10px_35px_rgba(73,45,36,0.10)]" : "border-[#eadfd8]"}`}
+        className={`fixed inset-x-0 top-0 z-50 w-full max-w-full border-b bg-[#fffaf6]/95 backdrop-blur-xl transition-all duration-300 ${
+          isScrolled
+            ? "border-[#dec9c0] shadow-[0_10px_35px_rgba(73,45,36,0.10)]"
+            : "border-[#eadfd8]"
+        }`}
       >
-        <div className="mx-auto flex h-[74px] max-w-[1320px] items-center justify-between px-5 lg:px-8">
+        <div className="mx-auto flex h-[74px] max-w-[1320px] items-center justify-between px-4 sm:px-6 lg:px-8">
           <a
             href="#home"
             onClick={(event) => scrollToSection(event, "home")}
-            className="leading-none transition-opacity hover:opacity-70"
+            className="leading-none transition-opacity hover:opacity-75 select-none"
             aria-label="GlowHaus Salon home"
           >
-            <span className="glowhaus-serif block text-[32px] tracking-[-0.05em]">
-              GlowHaus
+            <span className="glowhaus-serif block text-[28px] sm:text-[32px] tracking-[-0.05em] text-[#272020]">
+              GlowHaus<span className="text-[#ad5e68]">.</span>
             </span>
-            <span className="block text-center text-[9px] uppercase tracking-[0.45em]">
+            <span className="block text-center text-[8.5px] uppercase tracking-[0.45em] text-[#857570]">
               Salon
             </span>
           </a>
-          <nav className="hidden items-center gap-8 lg:flex">
+
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-7 xl:gap-8 lg:flex">
             {navItems.map((item) => {
               const sectionId = item.toLowerCase();
               const isActive = activeSection === sectionId;
@@ -323,66 +372,166 @@ export function GlowHausSalon() {
                   href={`#${sectionId}`}
                   onClick={(event) => scrollToSection(event, sectionId)}
                   aria-current={isActive ? "location" : undefined}
-                  className={`relative border-b py-2 text-[10px] font-semibold uppercase tracking-[0.08em] transition duration-300 after:absolute after:inset-x-0 after:-bottom-px after:h-px after:origin-center after:bg-[#ae5e68] after:transition-transform after:duration-300 hover:text-[#ae5e68] ${isActive ? "active border-[#ae5e68] text-[#ae5e68] after:scale-x-100" : "border-transparent after:scale-x-0 hover:after:scale-x-100"}`}
+                  className={`relative border-b py-2 text-[10.5px] font-semibold uppercase tracking-[0.08em] transition duration-300 hover:text-[#ae5e68] ${
+                    isActive
+                      ? "active border-[#ae5e68] text-[#ae5e68] font-bold"
+                      : "border-transparent text-[#5c504c]"
+                  }`}
                 >
                   {item}
+                  <span
+                    className={`absolute inset-x-0 -bottom-px h-[2px] bg-[#ae5e68] transition-transform duration-300 ${
+                      isActive ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
                 </a>
               );
             })}
           </nav>
-          <Button className="hidden min-w-32 lg:inline-flex">Book Now</Button>
-          <button
-            type="button"
-            onClick={() => setMenuOpen((value) => !value)}
-            className={`grid h-11 w-11 place-items-center rounded-full border transition duration-300 lg:hidden ${menuOpen ? "border-[#ad5e68] bg-[#ad5e68] text-white" : "border-[#e0c8bf] hover:border-[#ad5e68] hover:text-[#ad5e68]"}`}
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-            aria-controls="glowhaus-mobile-menu"
-          >
-            <span className="flex flex-col gap-1.5">
-              <i
-                className={`h-px w-5 bg-current transition ${menuOpen ? "translate-y-[7px] rotate-45" : ""}`}
-              />
-              <i
-                className={`h-px w-5 bg-current transition ${menuOpen ? "opacity-0" : ""}`}
-              />
-              <i
-                className={`h-px w-5 bg-current transition ${menuOpen ? "-translate-y-[7px] -rotate-45" : ""}`}
-              />
-            </span>
-          </button>
-        </div>
-        {menuOpen && (
-          <nav
-            id="glowhaus-mobile-menu"
-            className="grid max-h-[calc(100vh-74px)] overflow-y-auto border-t border-[#eadfd8] bg-[#fffaf6] px-5 py-4 shadow-xl lg:hidden"
-          >
-            {navItems.map((item) => {
-              const sectionId = item.toLowerCase();
-              const isActive = activeSection === sectionId;
-              return (
-                <a
-                  key={item}
-                  href={`#${sectionId}`}
-                  onClick={(event) => scrollToSection(event, sectionId)}
-                  aria-current={isActive ? "location" : undefined}
-                  className={`border-b border-[#eadfd8] px-3 py-3 text-xs font-semibold uppercase tracking-wider transition ${isActive ? "active bg-[#f7e9e5] text-[#a8525e]" : "hover:bg-[#fbf1ed] hover:text-[#a8525e]"}`}
-                >
-                  {item}
-                </a>
-              );
-            })}
-            <Button onClick={() => setMenuOpen(false)} className="mt-4">
+
+          {/* Right Header Actions */}
+          <div className="flex items-center gap-2.5 sm:gap-4">
+            {/* Quick Hours Pill on large screens */}
+            <div className="hidden xl:flex items-center gap-1.5 rounded-full border border-[#eadfd8] bg-[#fbf5f0] px-3 py-1 text-[10px] font-semibold text-[#6e5d57]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#ad5e68] animate-pulse" />
+              <span>Tue–Sat 9 AM–7 PM</span>
+            </div>
+
+            {/* Book Now Button (Desktop Only) */}
+            <Button
+              href="#book"
+              onClick={(e) => scrollToSection(e, "book")}
+              className="hidden lg:inline-flex min-w-28 lg:min-w-32"
+            >
               Book Now
             </Button>
-          </nav>
-        )}
+
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              onClick={() => setMenuOpen((value) => !value)}
+              className={`grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-full border transition duration-300 lg:hidden shadow-xs active:scale-95 ${
+                menuOpen
+                  ? "border-[#ad5e68] bg-[#ad5e68] text-white"
+                  : "border-[#e0c8bf] bg-white/80 text-[#3a302c] hover:border-[#ad5e68] hover:text-[#ad5e68]"
+              }`}
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+              aria-controls="glowhaus-mobile-menu"
+            >
+              <span className="flex flex-col gap-1.5">
+                <i
+                  className={`h-px w-5 bg-current transition ${
+                    menuOpen ? "translate-y-[7px] rotate-45" : ""
+                  }`}
+                />
+                <i
+                  className={`h-px w-5 bg-current transition ${
+                    menuOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <i
+                  className={`h-px w-5 bg-current transition ${
+                    menuOpen ? "-translate-y-[7px] -rotate-45" : ""
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Scroll Progress Bar */}
         <span
           aria-hidden="true"
           className="absolute inset-x-0 bottom-0 h-[2px] bg-[#ad5e68] transition-[width] duration-150 ease-out"
           style={{ width: `${scrollProgress}%` }}
         />
       </header>
+
+      {/* Mobile Drawer Navigation & Backdrop */}
+      {menuOpen && (
+        <>
+          {/* Dimmer Backdrop */}
+          <div
+            className="fixed inset-0 top-[74px] z-40 bg-black/40 backdrop-blur-xs lg:hidden"
+            onClick={() => setMenuOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Slide-down Sheet */}
+          <nav
+            id="glowhaus-mobile-menu"
+            className="fixed inset-x-0 top-[74px] z-50 w-full max-w-full max-h-[calc(100dvh-74px)] overflow-y-auto overflow-x-hidden border-b border-[#eadfd8] bg-[#fffaf6]/98 px-5 py-4 shadow-2xl backdrop-blur-2xl lg:hidden"
+          >
+            {/* Salon Status Pill in Drawer */}
+            <div className="mb-3 flex items-center justify-between rounded-xl border border-[#eaded7] bg-[#fbf5f0] px-3.5 py-2 text-xs">
+              <span className="flex items-center gap-2 font-bold text-[#ad5e68]">
+                <span className="h-2 w-2 rounded-full bg-[#ad5e68] animate-pulse" />
+                Salon Open This Week
+              </span>
+              <span className="text-[11px] font-medium text-[#7d6c66]">
+                SoHo, New York
+              </span>
+            </div>
+
+            <div className="space-y-1">
+              {navItems.map((item) => {
+                const sectionId = item.toLowerCase();
+                const isActive = activeSection === sectionId;
+                return (
+                  <a
+                    key={item}
+                    href={`#${sectionId}`}
+                    onClick={(event) => scrollToSection(event, sectionId)}
+                    aria-current={isActive ? "location" : undefined}
+                    className={`flex items-center justify-between rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-wider transition ${
+                      isActive
+                        ? "active bg-[#f7e9e5] text-[#a8525e] shadow-xs"
+                        : "text-[#3a302c] hover:bg-[#fbf1ed] hover:text-[#a8525e]"
+                    }`}
+                  >
+                    <span>{item}</span>
+                    <span className="text-xs text-[#ad5e68]">→</span>
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Quick Contact Card */}
+            <div className="mt-4 rounded-2xl border border-[#eadfd8] bg-white/90 p-4 shadow-sm">
+              <div className="grid grid-cols-2 gap-2 text-xs text-[#6e5d57] border-b border-[#f0e4dc] pb-3 mb-3">
+                <div>
+                  <span className="font-bold uppercase tracking-wider text-[#ad5e68] block">Hours</span>
+                  <span>Tue–Sat 9am–7pm</span>
+                </div>
+                <div>
+                  <span className="font-bold uppercase tracking-wider text-[#ad5e68] block">Location</span>
+                  <span>SoHo · New York</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Button
+                  href="#book"
+                  onClick={(e) => {
+                    setMenuOpen(false);
+                    scrollToSection(e, "book");
+                  }}
+                  className="w-full text-center"
+                >
+                  Book Your Appointment
+                </Button>
+                <a
+                  href="tel:555-392-4569"
+                  className="flex items-center justify-center rounded-full border border-[#dec9c0] py-2.5 text-xs font-bold text-[#ad5e68] hover:bg-[#fff7f4] transition"
+                >
+                  Call: (555) 392-4569
+                </a>
+              </div>
+            </div>
+          </nav>
+        </>
+      )}
 
       <section id="home" className="overflow-hidden bg-[#f7eee8]">
         <div className="mx-auto grid min-h-[500px] max-w-[1440px] lg:grid-cols-[1.03fr_1fr]">

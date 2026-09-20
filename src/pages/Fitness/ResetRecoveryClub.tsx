@@ -189,7 +189,7 @@ function SectionHeading({
         {label}
       </p>
       <h2
-        className={`mt-5 text-[clamp(3rem,6.2vw,6.8rem)] font-semibold leading-[0.9] tracking-[-0.075em] ${light ? "text-white" : "text-[#23313B]"}`}
+        className={`mt-5 text-[clamp(2.15rem,5.5vw,6.8rem)] font-semibold leading-[0.96] tracking-[-0.065em] ${light ? "text-white" : "text-[#23313B]"}`}
       >
         {title}
       </h2>
@@ -223,35 +223,66 @@ export function ResetRecoveryClub() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+  // Lock body scroll and handle Escape key when mobile menu is open
   useEffect(() => {
-    const updateActiveSection = () => {
-      const currentPosition = window.scrollY + 132;
-      const current = observedSectionIds
-        .map((id) => {
-          const section = document.getElementById(id);
-          return section
-            ? { id, top: section.getBoundingClientRect().top + window.scrollY }
-            : null;
-        })
-        .filter(Boolean)
-        .filter((section) => section!.top <= currentPosition)
-        .sort((a, b) => b!.top - a!.top)[0];
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setMenuOpen(false);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+    document.body.style.overflow = "";
+  }, [menuOpen]);
 
-      setActiveSection(current?.id ?? "home");
+  // Frame-debounced scroll spy
+  useEffect(() => {
+    const sectionIds = ["home", "services", "club", "method", "membership", "journal", "contact"];
+    let rafId: number;
+
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const scrollPosition = window.scrollY + 160;
+        const windowHeight = window.innerHeight;
+        const fullHeight = document.documentElement.scrollHeight;
+
+        if (window.scrollY + windowHeight >= fullHeight - 80) {
+          setActiveSection("contact");
+          return;
+        }
+
+        for (let i = sectionIds.length - 1; i >= 0; i--) {
+          const id = sectionIds[i];
+          const el = document.getElementById(id);
+          if (el) {
+            const top = el.offsetTop;
+            if (scrollPosition >= top) {
+              setActiveSection(id);
+              return;
+            }
+          }
+        }
+        if (window.scrollY < 200) {
+          setActiveSection("home");
+        }
+      });
     };
 
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
-
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <main className="reset-recovery-site -mt-16 overflow-hidden bg-[#F6F8F7] text-[#23313B]">
+    <main className="reset-recovery-site w-full max-w-full overflow-x-hidden bg-[#F6F8F7] text-[#23313B]">
       <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_18%_14%,rgba(117,183,166,.22),transparent_30%),radial-gradient(circle_at_85%_18%,rgba(125,195,210,.2),transparent_30%),linear-gradient(180deg,#F6F8F7,#EAF1F2)]" />
 
       <header className="fixed inset-x-0 top-4 z-50 px-4">
@@ -293,18 +324,21 @@ export function ResetRecoveryClub() {
             })}
           </nav>
 
-          <a
-            href="#contact"
-            className="hidden rounded-full bg-[#75B7A6] px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white shadow-[0_14px_32px_rgba(117,183,166,.28)] transition hover:-translate-y-0.5 hover:bg-[#64A897] lg:inline-flex"
-          >
-            Book A Reset
-          </a>
+          <div className="hidden lg:block">
+            <a
+              href="#contact"
+              className="rounded-full bg-[#75B7A6] px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white shadow-[0_14px_32px_rgba(117,183,166,.28)] transition hover:-translate-y-0.5 hover:bg-[#64A897]"
+            >
+              Book A Reset
+            </a>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             className="grid h-11 w-11 place-items-center rounded-full border border-[#C9D3D6] bg-white/70 lg:hidden"
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -314,30 +348,42 @@ export function ResetRecoveryClub() {
           </button>
         </div>
 
+        {/* Mobile Navigation Backdrop & Sheet */}
         {menuOpen && (
-          <nav className="mx-auto mt-3 max-w-7xl rounded-[2rem] border border-white/70 bg-white/88 p-3 shadow-2xl ring-1 ring-[#C9D3D6]/60 backdrop-blur-2xl lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  onClick={() => setMenuOpen(false)}
-                  aria-current={active ? "location" : undefined}
-                  className={`block rounded-2xl px-4 py-3 text-sm font-bold uppercase tracking-[0.11em] transition ${active ? "active bg-[#23313B] text-white" : "text-[#6A7A7E] hover:bg-[#EDF4F3] hover:text-[#23313B]"}`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <a
-              href="#contact"
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/40 backdrop-blur-xs lg:hidden"
               onClick={() => setMenuOpen(false)}
-              className="mt-2 block rounded-2xl bg-[#75B7A6] px-4 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-white"
+              aria-hidden="true"
+            />
+            <nav
+              id="mobile-navigation"
+              className="fixed inset-x-4 top-[4.75rem] z-50 max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[2rem] border border-white/70 bg-white/98 p-4 shadow-2xl ring-1 ring-[#C9D3D6]/60 backdrop-blur-2xl lg:hidden"
+              aria-label="Mobile navigation"
             >
-              Book A Reset
-            </a>
-          </nav>
+              <div className="flex flex-col gap-1.5">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      onClick={() => setMenuOpen(false)}
+                      aria-current={active ? "location" : undefined}
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-bold uppercase tracking-[0.11em] transition ${
+                        active
+                          ? "active bg-[#23313B] text-white shadow-sm"
+                          : "text-[#6A7A7E] hover:bg-[#EDF4F3] hover:text-[#23313B]"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs opacity-50">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -357,7 +403,7 @@ export function ResetRecoveryClub() {
               </span>
             </div>
 
-            <h1 className="mt-8 max-w-5xl text-[clamp(3.8rem,7.5vw,8.2rem)] font-semibold leading-[0.9] text-[#23313B]">
+            <h1 className="mt-8 max-w-5xl text-[clamp(2.4rem,7.5vw,8.2rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-[#23313B]">
               Recovery that feels quiet, guided, and easy to repeat.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-[#607075]">
@@ -644,37 +690,87 @@ export function ResetRecoveryClub() {
         </div>
       </section>
 
-      <section className="relative z-10 bg-[#EAF1F2] px-5 py-24 lg:px-10 lg:py-32">
-        <div className="mx-auto grid max-w-[94rem] gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+      <section className="relative z-10 bg-[#EAF1F2] px-5 py-16 sm:py-20 lg:px-10 lg:py-32">
+        <div className="mx-auto grid max-w-[94rem] gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-12">
           <div>
             <SectionHeading
               label="Mobility Studio"
               title="Move Better Without Forcing It"
               text="Mobility sessions focus on controlled range, joint comfort, posture awareness, and movement quality. The goal is not intensity. The goal is better access, better control, and smoother movement."
             />
-            <div className="mt-9 grid gap-4 sm:grid-cols-3">
-              {["Joint Range", "Movement Control", "Everyday Ease"].map(
-                (benefit) => (
-                  <div
-                    key={benefit}
-                    className="rounded-[1.6rem] border border-white/70 bg-white/62 p-5"
-                  >
-                    <Circle className="h-5 w-5 fill-[#75B7A6] text-[#75B7A6]" />
-                    <p className="mt-8 text-lg font-semibold tracking-[-0.03em]">
-                      {benefit}
-                    </p>
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {[
+                {
+                  title: "Joint Range",
+                  desc: "Active, gentle mobility routines to open hips, shoulders, and spine without forced strain.",
+                },
+                {
+                  title: "Movement Control",
+                  desc: "Neuromuscular cues that build smooth joint stability, coordination, and alignment.",
+                },
+                {
+                  title: "Everyday Ease",
+                  desc: "Downshift chronic tightness so daily work, lifting, and training feel effortless.",
+                },
+              ].map(({ title, desc }, index) => (
+                <div
+                  key={title}
+                  className="rounded-[1.6rem] border border-white/80 bg-white/70 p-5 shadow-xs transition duration-300 hover:-translate-y-0.5 hover:bg-white sm:p-6"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-10 w-10 place-items-center rounded-full bg-[#DDEBE8] text-[#2F6E62]">
+                      <Circle className="h-4 w-4 fill-[#75B7A6] text-[#75B7A6]" />
+                    </span>
+                    <span className="text-[0.58rem] font-bold uppercase tracking-[0.16em] text-[#809095]">
+                      0{index + 1}
+                    </span>
                   </div>
-                ),
-              )}
+                  <p className="mt-4 text-lg font-semibold tracking-[-0.03em] text-[#23313B]">
+                    {title}
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-[#607075]">
+                    {desc}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="relative min-h-[40rem] overflow-hidden rounded-[2.7rem]">
+          <div className="relative min-h-[22rem] overflow-hidden rounded-[2.4rem] border border-white bg-white/45 p-2.5 shadow-xl sm:min-h-[28rem] sm:rounded-[2.8rem] sm:p-3 lg:min-h-[40rem]">
             <img
               src={images.mobility}
               alt="Mobility studio session"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-2.5 h-[calc(100%-1.25rem)] w-[calc(100%-1.25rem)] rounded-[2rem] object-cover sm:inset-3 sm:h-[calc(100%-1.5rem)] sm:w-[calc(100%-1.5rem)] sm:rounded-[2.4rem]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#23313B]/60 via-transparent to-transparent" />
+            <div className="absolute inset-2.5 rounded-[2rem] bg-gradient-to-t from-[#23313B]/75 via-[#23313B]/20 to-transparent sm:inset-3 sm:rounded-[2.4rem]" />
+
+            <div className="absolute left-5 right-5 top-5 flex flex-wrap gap-2 sm:left-6 sm:right-6 sm:top-6">
+              <span className="rounded-full border border-white/60 bg-white/80 px-3.5 py-1.5 text-[0.58rem] font-bold uppercase tracking-[0.14em] text-[#23313B] shadow-sm backdrop-blur">
+                Low impact
+              </span>
+              <span className="rounded-full border border-white/60 bg-white/80 px-3.5 py-1.5 text-[0.58rem] font-bold uppercase tracking-[0.14em] text-[#23313B] shadow-sm backdrop-blur">
+                Breath-synchronized
+              </span>
+            </div>
+
+            <div className="absolute bottom-5 left-5 right-5 rounded-[1.6rem] border border-white/40 bg-white/85 p-4 shadow-xl backdrop-blur-xl sm:bottom-8 sm:left-8 sm:right-8 sm:p-5">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-[0.6rem] font-bold uppercase tracking-[0.18em] text-[#6EAFA0]">
+                    Movement focus
+                  </p>
+                  <p className="mt-1 text-lg font-semibold tracking-[-0.03em] text-[#23313B] sm:text-2xl">
+                    Controlled Range & Joint Flow
+                  </p>
+                </div>
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#DDEBE8] text-[#2F6E62]">
+                  <Leaf className="h-5 w-5" />
+                </span>
+              </div>
+              <div className="mt-3 flex items-center gap-2 border-t border-[#C9D3D6]/60 pt-3 text-xs text-[#607075] sm:mt-4">
+                <span className="h-2 w-2 rounded-full bg-[#75B7A6]" />
+                <span>Zero forced stretches • Guided tempo</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -906,7 +1002,7 @@ export function ResetRecoveryClub() {
               <TimerReset className="h-4 w-4" />
               Begin again
             </p>
-            <h2 className="mt-7 text-[clamp(3.8rem,7vw,7.8rem)] font-semibold leading-[0.88] tracking-[-0.075em]">
+            <h2 className="mt-7 text-[clamp(2.35rem,6.8vw,7.8rem)] font-semibold leading-[0.95] tracking-[-0.06em]">
               Give Your Body A Place To Reset.
             </h2>
             <p className="mt-7 max-w-xl text-lg leading-8 text-[#607075]">

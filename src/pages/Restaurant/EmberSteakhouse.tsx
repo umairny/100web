@@ -43,12 +43,12 @@ const steaks = [
 ];
 
 const navigation = [
-  { label: "Home", href: "#home", icon: "flame" },
-  { label: "Menu", href: "#menu", icon: "menu" },
-  { label: "Specials", href: "#specials", icon: "spark" },
-  { label: "Wine", href: "#wine", icon: "wine" },
-  { label: "Reviews", href: "#reviews", icon: "star" },
-  { label: "Reserve", href: "#reserve", icon: "profile" },
+  { label: "Home", href: "#home", id: "home", icon: "flame", desc: "Live-fire dining & lounge" },
+  { label: "Menu", href: "#menu", id: "menu", icon: "menu", desc: "Prime USDA steaks & chops" },
+  { label: "Specials", href: "#specials", id: "specials", icon: "spark", desc: "Dry-aged reserve cuts" },
+  { label: "Wine", href: "#wine", id: "wine", icon: "wine", desc: "Curated cellar vintages" },
+  { label: "Reviews", href: "#reviews", id: "reviews", icon: "star", desc: "Critiques & guest words" },
+  { label: "Reserve", href: "#reserve", id: "reserve", icon: "profile", desc: "Private dining & tables" },
 ];
 
 function Icon({
@@ -145,6 +145,95 @@ function Eyebrow({ children }: { children: ReactNode }) {
 
 export function EmberSteakhouse() {
   const [reserved, setReserved] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Dynamic scroll spy for section highlighting
+  useEffect(() => {
+    const handleScroll = () => {
+      // 1. Bottom of page -> activate reserve
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 90
+      ) {
+        setActiveSection("reserve");
+        return;
+      }
+
+      // 2. Top of page (hero section)
+      if (window.scrollY < 200) {
+        setActiveSection("home");
+        return;
+      }
+
+      // Sections in physical DOM order from top to bottom
+      const sections = [
+        { id: "home", navId: "home" },
+        { id: "reserve", navId: "reserve" },
+        { id: "menu", navId: "menu" },
+        { id: "specials", navId: "specials" },
+        { id: "wine", navId: "wine" },
+        { id: "reviews", navId: "reviews" },
+      ];
+
+      const marker = Math.min(260, Math.max(120, window.innerHeight * 0.32));
+
+      // Find the last section whose top has reached or passed the marker
+      let current = "home";
+      for (const section of sections) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = section.navId;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash && ["home", "menu", "specials", "wine", "reviews", "reserve"].includes(hash)) {
+        setActiveSection(hash);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+    window.addEventListener("hashchange", handleHashChange);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>(
@@ -177,32 +266,44 @@ export function EmberSteakhouse() {
 
   return (
     <main className="motion-ember min-h-screen overflow-x-hidden bg-[#070606] text-[#f8f3eb] lg:pl-[5.5rem]">
+      {/* Desktop Vertical Rail Navigation */}
       <aside className="fixed inset-y-0 left-0 z-50 hidden w-[5.5rem] flex-col border-r border-[#c67c2f]/25 bg-[#0b0a09] lg:flex">
         <a
           href="#home"
           aria-label="Ember Steakhouse home"
-          className="grid h-[5.5rem] place-items-center border-b border-[#c67c2f]/20 text-[#f0b35a]"
+          className="grid h-[5.5rem] place-items-center border-b border-[#c67c2f]/20 text-[#f0b35a] transition hover:text-white"
         >
-          <Icon name="flame" className="h-7 w-7" />
+          <div className="grid h-11 w-11 place-items-center rounded-xl border border-[#c67c2f]/40 bg-gradient-to-br from-[#7e451f]/40 to-[#b87333]/10 text-[#f0b35a] shadow-[0_0_15px_rgba(216,137,50,0.25)]">
+            <Icon name="flame" className="h-6 w-6" />
+          </div>
         </a>
         <nav
           aria-label="Steakhouse navigation"
           className="flex flex-1 flex-col justify-center"
         >
-          {navigation.map((item, index) => (
-            <a
-              key={item.href}
-              href={item.href}
-              aria-label={item.label}
-              title={item.label}
-              className={`group relative grid h-[4.4rem] place-items-center border-y border-transparent text-[#80776e] transition duration-300 hover:border-[#c67c2f]/20 hover:bg-[#17130f] hover:text-[#f0b35a] ${index === 0 ? "bg-gradient-to-r from-[#7e451f]/65 to-[#b87333]/25 text-[#f0b35a]" : ""}`}
-            >
-              {index === 0 && (
-                <span className="absolute right-0 h-full w-[2px] bg-[#d88932] shadow-[0_0_14px_#d88932]" />
-              )}
-              <Icon name={item.icon} />
-            </a>
-          ))}
+          {navigation.map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                aria-label={item.label}
+                title={item.label}
+                onClick={() => setActiveSection(item.id)}
+                className={`group relative grid h-[4.4rem] place-items-center border-y border-transparent transition duration-300 ${
+                  isActive
+                    ? "border-[#c67c2f]/25 bg-gradient-to-r from-[#7e451f]/65 to-[#b87333]/25 text-[#f0b35a]"
+                    : "text-[#80776e] hover:border-[#c67c2f]/20 hover:bg-[#17130f] hover:text-[#f0b35a]"
+                }`}
+              >
+                {isActive && (
+                  <span className="absolute right-0 h-full w-[2px] bg-[#d88932] shadow-[0_0_14px_#d88932]" />
+                )}
+                <Icon name={item.icon} className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
+                <span className="sr-only">{item.label}</span>
+              </a>
+            );
+          })}
         </nav>
         <Link
           to="/restaurant"
@@ -213,32 +314,200 @@ export function EmberSteakhouse() {
         </Link>
       </aside>
 
-      <header className="fixed inset-x-0 top-0 z-40 flex h-16 items-center justify-between border-b border-[#c67c2f]/20 bg-[#070606]/92 px-5 backdrop-blur-xl lg:left-[5.5rem] lg:h-[5.5rem] lg:px-10">
-        <a href="#home" className="flex items-center gap-3">
-          <span className="grid h-9 w-9 place-items-center rounded-full border border-[#c67c2f]/40 text-[#f0b35a]">
+      {/* Top Header Bar */}
+      <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[#c67c2f]/25 bg-[#070606]/95 px-4 backdrop-blur-xl transition-all duration-300 sm:px-6 lg:left-[5.5rem] lg:h-[5.5rem] lg:px-10">
+        <a
+          href="#home"
+          onClick={() => setActiveSection("home")}
+          className="group flex items-center gap-2.5 sm:gap-3 select-none"
+        >
+          <span className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-xl border border-[#c67c2f]/50 bg-gradient-to-br from-[#7e451f]/50 to-[#b87333]/15 text-[#f0b35a] shadow-[0_0_18px_rgba(216,137,50,0.3)] transition-transform duration-300 group-hover:scale-105">
             <Icon name="flame" className="h-5 w-5" />
           </span>
           <span>
-            <span className="block text-sm font-black uppercase tracking-[0.24em]">
+            <span className="block text-sm sm:text-base font-black uppercase tracking-[0.24em] text-[#f8f3eb]">
               Ember
             </span>
-            <span className="hidden text-[0.5rem] font-bold uppercase tracking-[0.3em] text-[#8f8479] sm:block">
-              Prime steakhouse
+            <span className="block text-[0.5rem] sm:text-[0.52rem] font-bold uppercase tracking-[0.28em] text-[#d88932]">
+              Prime Steakhouse
             </span>
           </span>
         </a>
-        <div className="flex items-center gap-5">
-          <p className="hidden text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#8f8479] md:block">
-            Dinner nightly · 5 PM–12 AM
-          </p>
+
+        {/* Center Nav Links for tablet / medium screens */}
+        <nav
+          aria-label="Tablet steakhouse navigation"
+          className="hidden md:flex lg:hidden items-center gap-1 rounded-full border border-[#c67c2f]/30 bg-[#12100e]/90 p-1 backdrop-blur-md"
+        >
+          {navigation.map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setActiveSection(item.id)}
+                className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider transition ${
+                  isActive
+                    ? "bg-[#d88932] text-[#070606] font-black shadow-sm"
+                    : "text-[#8f8479] hover:bg-[#c67c2f]/15 hover:text-[#f0b35a]"
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+        </nav>
+
+        <div className="flex items-center gap-2 sm:gap-4">
+          {/* Dinner Hours Tag (Desktop) */}
+          <div className="hidden items-center gap-2 rounded-full border border-[#c67c2f]/30 bg-[#14100c]/80 px-3.5 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#c9b29b] xl:flex">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#d88932] shadow-[0_0_8px_#d88932] animate-pulse" />
+            <span>Dinner nightly · 5 PM–12 AM</span>
+          </div>
+
+          {/* Reserve Table CTA button - accessible on all screens */}
           <a
             href="#reserve"
-            className="hidden items-center gap-2 rounded-sm bg-gradient-to-r from-[#a85f29] to-[#d88932] px-5 py-3 text-[0.62rem] font-black uppercase tracking-[0.16em] shadow-[0_10px_35px_rgba(184,115,51,0.18)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(216,137,50,0.28)] sm:inline-flex"
+            onClick={() => setActiveSection("reserve")}
+            className="inline-flex items-center gap-1.5 sm:gap-2 rounded-sm bg-gradient-to-r from-[#a85f29] via-[#c4772b] to-[#d88932] px-3.5 py-2 sm:px-5 sm:py-2.5 text-[0.6rem] sm:text-[0.65rem] font-black uppercase tracking-[0.16em] text-[#f8f3eb] shadow-[0_8px_30px_rgba(184,115,51,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(216,137,50,0.38)] active:translate-y-0"
           >
-            Reserve <Icon name="arrow" className="h-4 w-4" />
+            <span>Reserve</span>
+            <Icon name="arrow" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </a>
+
+          {/* Mobile Menu Hamburger Button (visible on screens < lg) */}
+          <button
+            type="button"
+            aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            className="grid h-10 w-10 place-items-center rounded-lg border border-[#c67c2f]/40 bg-[#12100e] text-[#f0b35a] transition hover:border-[#d88932] hover:bg-[#1a1511] lg:hidden active:scale-95 shadow-sm"
+          >
+            <span className="sr-only">Toggle navigation</span>
+            <div className="relative h-4 w-5">
+              <span
+                className={`absolute left-0 top-0 block h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+                  mobileMenuOpen ? "top-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-1.5 block h-0.5 w-5 rounded-full bg-current transition-all duration-200 ${
+                  mobileMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-3 block h-0.5 w-5 rounded-full bg-current transition-all duration-300 ${
+                  mobileMenuOpen ? "top-2 -rotate-45" : ""
+                }`}
+              />
+            </div>
+          </button>
         </div>
       </header>
+
+      {/* Mobile Drawer Navigation (screens < lg) */}
+      {mobileMenuOpen && (
+        <>
+          {/* Backdrop Dimmer */}
+          <div
+            className="fixed inset-0 top-16 z-40 bg-black/60 backdrop-blur-xs lg:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Slide-down Sheet */}
+          <div
+            className="fixed inset-x-0 top-16 z-50 border-b border-[#c67c2f]/30 bg-[#0a0807]/98 px-4 pt-3 pb-6 shadow-2xl backdrop-blur-2xl lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto"
+          >
+            {/* Live Hearth Status */}
+            <div className="mb-3 flex items-center justify-between rounded-xl border border-[#c67c2f]/25 bg-[#14100c] px-3.5 py-2 text-xs">
+              <span className="flex items-center gap-2 font-bold text-[#f0b35a]">
+                <span className="h-2 w-2 rounded-full bg-[#d88932] animate-pulse shadow-[0_0_8px_#d88932]" />
+                Live Fire Hearth Open
+              </span>
+              <span className="text-[11px] font-medium text-[#8f8479]">
+                5 PM – 12 AM
+              </span>
+            </div>
+
+            {/* Navigation Rows */}
+            <nav className="space-y-1.5" aria-label="Mobile Navigation Drawer">
+              {navigation.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => {
+                      setActiveSection(item.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`flex items-center justify-between rounded-xl p-3 transition-all ${
+                      isActive
+                        ? "border border-[#d88932]/50 bg-gradient-to-r from-[#7e451f]/70 to-[#b87333]/30 text-[#f8f3eb] shadow-md"
+                        : "border border-transparent bg-[#14100c]/70 text-[#c9b29b] hover:border-[#c67c2f]/20 hover:bg-[#1a1511] active:bg-[#201914]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3.5">
+                      <div
+                        className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg border ${
+                          isActive
+                            ? "border-[#d88932]/60 bg-[#7e451f]/50 text-[#f0b35a]"
+                            : "border-[#c67c2f]/30 bg-[#0d0c0b] text-[#80776e]"
+                        }`}
+                      >
+                        <Icon name={item.icon} className="h-4.5 w-4.5" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-black uppercase tracking-wider text-[#f8f3eb]">
+                          {item.label}
+                        </div>
+                        <div className="text-[11px] text-[#8f8479]">
+                          {item.desc}
+                        </div>
+                      </div>
+                    </div>
+                    <span className="text-xs font-bold text-[#d88932]">→</span>
+                  </a>
+                );
+              })}
+            </nav>
+
+            {/* Steakhouse Info Card */}
+            <div className="mt-4 rounded-2xl border border-[#c67c2f]/25 bg-[#120e0b] p-4 shadow-sm">
+              <div className="grid grid-cols-2 gap-3 text-xs text-[#8f8479] border-b border-[#c67c2f]/20 pb-3 mb-3">
+                <div>
+                  <span className="font-bold uppercase tracking-wider text-[#d88932] block">Hours</span>
+                  <span>Sun–Thu 5–11 PM</span>
+                  <span className="block">Fri–Sat 5 PM–12 AM</span>
+                </div>
+                <div>
+                  <span className="font-bold uppercase tracking-wider text-[#d88932] block">Location</span>
+                  <span>19 Ashford Lane</span>
+                  <span className="block">New York, NY</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <a
+                  href="#reserve"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#a85f29] to-[#d88932] py-3 text-center text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-[#b87333]/20 hover:brightness-110 transition active:scale-[0.99]"
+                >
+                  <Icon name="profile" className="h-4 w-4" />
+                  <span>Reserve a Table</span>
+                </a>
+                <a
+                  href="tel:555-017-7700"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-[#c67c2f]/30 bg-[#17120e] py-2.5 text-xs font-bold text-[#d88932] hover:bg-[#201812] transition"
+                >
+                  <span>Call: (555) 017-7700</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       <section
         id="home"
@@ -683,23 +952,6 @@ export function EmberSteakhouse() {
         </div>
       </footer>
 
-      <nav
-        aria-label="Mobile steakhouse navigation"
-        className="fixed bottom-4 left-20 right-4 z-50 grid grid-cols-4 overflow-hidden border border-[#c67c2f]/30 bg-[#0d0c0b]/95 shadow-[0_18px_55px_rgba(0,0,0,0.7)] backdrop-blur-xl lg:hidden"
-      >
-        {[navigation[0], navigation[1], navigation[3], navigation[5]].map(
-          (item, index) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={`flex min-h-16 flex-col items-center justify-center gap-1 text-[0.5rem] font-bold uppercase tracking-[0.12em] transition ${index === 0 ? "bg-gradient-to-b from-[#9a5426] to-[#6e3518] text-[#f8f3eb]" : "text-[#80776e] hover:bg-[#171512] hover:text-[#f0b35a]"}`}
-            >
-              <Icon name={item.icon} className="h-5 w-5" />
-              {item.label}
-            </a>
-          ),
-        )}
-      </nav>
     </main>
   );
 }

@@ -185,10 +185,10 @@ function Icon({
   );
 }
 
-function scrollToId(event: MouseEvent<HTMLAnchorElement>, id: string) {
+function scrollToId(event?: MouseEvent<HTMLAnchorElement>, id: string = "home") {
   const target = document.getElementById(id);
   if (!target) return;
-  event.preventDefault();
+  event?.preventDefault();
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const top = target.getBoundingClientRect().top + window.scrollY - 68;
   window.scrollTo({
@@ -203,18 +203,22 @@ function Button({
   href = "#reserve",
   outline = false,
   className = "",
+  onClick,
 }: {
   children: ReactNode;
   href?: string;
   outline?: boolean;
   className?: string;
+  onClick?: (event?: MouseEvent<HTMLAnchorElement>) => void;
 }) {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    onClick?.(event);
+    if (href.startsWith("#")) scrollToId(event, href.slice(1));
+  };
   return (
     <a
       href={href}
-      onClick={(event) =>
-        href.startsWith("#") && scrollToId(event, href.slice(1))
-      }
+      onClick={handleClick}
       className={`inline-flex min-h-11 items-center justify-center rounded-full px-7 py-3 text-xs font-semibold uppercase tracking-[0.08em] transition duration-300 hover:-translate-y-0.5 ${outline ? "border border-white/75 bg-black/10 text-white hover:bg-white hover:text-[#35402c]" : "bg-[#778269] text-white shadow-lg shadow-black/15 hover:bg-[#626d56] hover:shadow-xl"} ${className}`}
     >
       {children}
@@ -288,6 +292,18 @@ export function SerenitySpa() {
     return () => window.removeEventListener("keydown", close);
   }, [menuOpen]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   const navigate = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
     setMenuOpen(false);
     setActiveSection(id);
@@ -295,15 +311,15 @@ export function SerenitySpa() {
   };
 
   return (
-    <main className="serenity-site brand-motion motion-serenity bg-[#f7f4ec] text-[#4d4b42] [font-family:Arial,sans-serif]">
+    <main className="serenity-site brand-motion motion-serenity bg-[#f7f4ec] text-[#4d4b42] [font-family:Arial,sans-serif] w-full max-w-full overflow-x-hidden">
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b transition duration-300 ${scrolled || menuOpen ? "border-white/10 bg-[#3f4937]/95 shadow-xl backdrop-blur-xl" : "border-transparent bg-gradient-to-b from-black/45 to-transparent"}`}
+        className={`fixed inset-x-0 top-0 z-50 w-full max-w-full border-b transition duration-300 ${scrolled || menuOpen ? "border-white/10 bg-[#3f4937]/95 shadow-xl backdrop-blur-xl" : "border-transparent bg-gradient-to-b from-black/45 to-transparent"}`}
       >
         <div className="mx-auto flex h-[70px] max-w-[1510px] items-center justify-between px-5 lg:px-10">
           <a
             href="#home"
             onClick={(event) => navigate(event, "home")}
-            className="flex items-center gap-3 text-white"
+            className="flex items-center gap-3 text-white select-none"
           >
             <span className="grid h-11 w-9 place-items-center rounded-full border border-white/75">
               <Icon name="branch" className="h-7 w-7" />
@@ -325,16 +341,18 @@ export function SerenitySpa() {
               </a>
             ))}
           </nav>
-          <Button className="hidden bg-[#7d876c] px-8 lg:inline-flex">
-            Book a Retreat
-          </Button>
+          <div className="hidden xl:block">
+            <Button className="bg-[#7d876c] px-8">
+              Book a Retreat
+            </Button>
+          </div>
           <button
             type="button"
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
             aria-controls="serenity-mobile-menu"
             onClick={() => setMenuOpen((open) => !open)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-white/50 text-white xl:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full border border-white/50 text-white xl:hidden active:scale-95 transition"
           >
             <span className="flex flex-col gap-1.5">
               <i
@@ -350,22 +368,31 @@ export function SerenitySpa() {
           </button>
         </div>
         {menuOpen && (
-          <nav
-            id="serenity-mobile-menu"
-            className="grid max-h-[calc(100vh-70px)] overflow-auto border-t border-white/10 bg-[#3f4937] p-4 xl:hidden"
-          >
-            {navItems.map(([label, id]) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                onClick={(event) => navigate(event, id)}
-                className={`rounded-lg px-4 py-3 text-sm font-semibold uppercase tracking-wider text-white ${activeSection === id ? "active bg-white/12" : "hover:bg-white/8"}`}
-              >
-                {label}
-              </a>
-            ))}
-            <Button className="mt-3 bg-[#818b70]">Book a Retreat</Button>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[70px] z-40 bg-black/45 backdrop-blur-xs xl:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav
+              id="serenity-mobile-menu"
+              className="fixed inset-x-0 top-[70px] z-50 w-full max-w-full max-h-[calc(100dvh-70px)] overflow-y-auto overflow-x-hidden border-b border-white/15 bg-[#3f4937]/98 p-5 shadow-2xl backdrop-blur-2xl xl:hidden"
+            >
+              <div className="space-y-1">
+                {navItems.map(([label, id]) => (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={(event) => navigate(event, id)}
+                    className={`flex items-center justify-between rounded-lg px-4 py-3 text-xs font-semibold uppercase tracking-wider text-white transition ${activeSection === id ? "active bg-white/20 font-bold" : "hover:bg-white/10 text-white/85"}`}
+                  >
+                    <span>{label}</span>
+                    <span className="text-xs text-white/60">→</span>
+                  </a>
+                ))}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 

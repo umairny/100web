@@ -183,7 +183,7 @@ function FlowHeading({
         {label}
       </p>
       <h2
-        className={`flowstate-serif mt-5 text-[clamp(3.2rem,6vw,6.8rem)] font-normal leading-[0.94] tracking-[-0.055em] ${light ? "text-white" : "text-[#332F2A]"}`}
+        className={`flowstate-serif mt-5 text-[clamp(2.15rem,5.5vw,6.5rem)] font-normal leading-[0.96] tracking-[-0.055em] ${light ? "text-white" : "text-[#332F2A]"}`}
       >
         {title}
       </h2>
@@ -224,26 +224,87 @@ export function FlowStateYoga() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const sections = navLinks
-      .map(([, href]) => document.getElementById(href.slice(1)))
-      .filter((section): section is HTMLElement => section !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0.05, 0.2, 0.45] },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
+  // Robust frame-debounced scroll spy with boundary guards
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollable > 0 && scrollY >= scrollable - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      if (scrollY < 80) {
+        setActiveSection("");
+        return;
+      }
+
+      const marker = Math.min(220, Math.max(100, window.innerHeight * 0.28));
+      const sectionIds = [
+        "classes",
+        "studio",
+        "teachers",
+        "membership",
+        "contact",
+      ];
+      let current = "";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = id;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
 
   return (
-    <main className="flowstate-site -mt-16 overflow-hidden bg-[#F8F2EA] text-[#332F2A] selection:bg-[#D7B5A4] selection:text-[#332F2A]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#5F6F58]/10 bg-[#FFFDF9]/88 backdrop-blur-xl">
+    <main className="flowstate-site w-full max-w-full overflow-x-hidden bg-[#F8F2EA] text-[#332F2A] selection:bg-[#D7B5A4] selection:text-[#332F2A]">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#5F6F58]/10 bg-[#FFFDF9]/92 backdrop-blur-xl">
         <div className="mx-auto flex h-[4.75rem] max-w-[96rem] items-center justify-between px-5 lg:px-10">
           <FlowLogo />
           <nav
@@ -264,15 +325,18 @@ export function FlowStateYoga() {
               );
             })}
           </nav>
-          <FlowButton href="#contact" className="hidden lg:inline-flex">
-            Book a Class
-          </FlowButton>
+          {/* Desktop-Only Booking CTA (Isolated from mobile viewports) */}
+          <div className="hidden lg:block">
+            <FlowButton href="#contact">
+              Book a Class
+            </FlowButton>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#5F6F58]/20 lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[#5F6F58]/20 text-[#332F2A] transition active:scale-95 hover:border-[#5F6F58] lg:hidden"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -281,26 +345,38 @@ export function FlowStateYoga() {
             )}
           </button>
         </div>
+        {/* Mobile Slide-Down Overlay */}
         {menuOpen && (
-          <nav className="border-t border-[#5F6F58]/10 bg-[#FFFDF9] p-5 lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  aria-current={active ? "location" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block rounded-2xl px-4 py-3 text-sm font-bold uppercase tracking-[0.1em] ${active ? "flowstate-nav-active bg-[#EFE7DA] text-[#5F6F58]" : "text-[#81786F]"}`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <FlowButton href="#contact" className="mt-4 w-full">
-              Book a Class
-            </FlowButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/45 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav className="fixed inset-x-0 top-[4.75rem] z-50 border-b border-[#5F6F58]/10 bg-[#FFFDF9]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+              <div className="space-y-1">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={active ? "location" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-bold uppercase tracking-[0.1em] transition ${
+                        active
+                          ? "flowstate-nav-active bg-[#EFE7DA] text-[#5F6F58] font-black"
+                          : "text-[#81786F] hover:bg-[#F3ECE2] hover:text-[#332F2A]"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs text-[#5F6F58]">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -328,7 +404,7 @@ export function FlowStateYoga() {
                 </span>
               </div>
               <div className="py-12 lg:py-16">
-                <h1 className="flowstate-serif max-w-5xl text-[clamp(4rem,9vw,9.8rem)] font-normal uppercase leading-[0.82] tracking-[-0.075em]">
+                <h1 className="flowstate-serif max-w-5xl text-[clamp(2.35rem,8vw,9.5rem)] font-normal uppercase leading-[0.88] tracking-[-0.075em]">
                   Move With Breath. Find Your Flow.
                 </h1>
                 <p className="mt-8 max-w-2xl text-lg leading-8 text-white/68 md:text-xl">
@@ -699,7 +775,7 @@ export function FlowStateYoga() {
             <p className="text-[0.62rem] font-bold uppercase tracking-[0.24em] text-[#D7B5A4]">
               Begin gently
             </p>
-            <h2 className="flowstate-serif mt-6 text-[clamp(4rem,8vw,8.5rem)] font-normal leading-[0.9] tracking-[-0.065em]">
+            <h2 className="flowstate-serif mt-6 text-[clamp(2.35rem,7.2vw,8.5rem)] font-normal leading-[0.92] tracking-[-0.065em]">
               Begin Your Flow Today
             </h2>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/70">

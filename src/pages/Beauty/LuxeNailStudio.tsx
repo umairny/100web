@@ -173,12 +173,12 @@ function Icon({
 }
 
 function scrollToSection(
-  event: MouseEvent<HTMLAnchorElement>,
-  sectionId: string,
+  event?: MouseEvent<HTMLAnchorElement>,
+  sectionId: string = "booking",
 ) {
   const section = document.getElementById(sectionId);
   if (!section) return;
-  event.preventDefault();
+  event?.preventDefault();
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const top = section.getBoundingClientRect().top + window.scrollY - 72;
   window.scrollTo({
@@ -199,10 +199,10 @@ function Button({
   href?: string;
   outline?: boolean;
   className?: string;
-  onClick?: () => void;
+  onClick?: (event?: MouseEvent<HTMLAnchorElement>) => void;
 }) {
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    onClick?.();
+    onClick?.(event);
     if (href.startsWith("#")) scrollToSection(event, href.slice(1));
   };
   return (
@@ -280,6 +280,18 @@ export function LuxeNailStudio() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [menuOpen]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   useEffect(() => {
     const interval = window.setInterval(() => {
       setHeroSlide((current) => (current + 1) % heroSlides.length);
@@ -294,9 +306,9 @@ export function LuxeNailStudio() {
   };
 
   return (
-    <main className="luxe-site brand-motion motion-luxenail bg-[#fffdf9] text-[#34251f] [font-family:Arial,sans-serif]">
+    <main className="luxe-site brand-motion motion-luxenail bg-[#fffdf9] text-[#34251f] [font-family:Arial,sans-serif] pt-[72px] w-full max-w-full overflow-x-hidden">
       <header
-        className={`sticky top-0 z-50 border-b bg-[#fffdfa]/95 backdrop-blur-xl transition duration-300 ${scrolled ? "border-[#e5d7c6] shadow-[0_8px_30px_rgba(74,47,29,0.10)]" : "border-transparent"}`}
+        className={`fixed inset-x-0 top-0 z-50 w-full max-w-full border-b bg-[#fffdfa]/95 backdrop-blur-xl transition duration-300 ${scrolled ? "border-[#e5d7c6] shadow-[0_8px_30px_rgba(74,47,29,0.10)]" : "border-transparent"}`}
       >
         <div className="mx-auto flex h-[72px] max-w-[1510px] items-center justify-between px-5 lg:px-10">
           <a
@@ -324,9 +336,11 @@ export function LuxeNailStudio() {
               </a>
             ))}
           </nav>
-          <Button className="hidden rounded-full px-7 lg:inline-flex">
-            Book Now <Icon name="calendar" className="h-4 w-4" />
-          </Button>
+          <div className="hidden xl:block">
+            <Button className="rounded-full px-7">
+              Book Now <Icon name="calendar" className="h-4 w-4" />
+            </Button>
+          </div>
           <button
             type="button"
             aria-label="Toggle navigation"
@@ -349,24 +363,31 @@ export function LuxeNailStudio() {
           </button>
         </div>
         {menuOpen && (
-          <nav
-            id="luxe-mobile-menu"
-            className="grid max-h-[calc(100vh-72px)] overflow-auto border-t border-[#eadfce] bg-[#fffdf9] p-4 shadow-xl xl:hidden"
-          >
-            {navItems.map(([label, id]) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                onClick={(event) => navigate(event, id)}
-                className={`rounded-md px-4 py-3 text-xs font-semibold ${activeSection === id ? "active bg-[#f5eadb] text-[#a96c1d]" : "hover:bg-[#faf3e9]"}`}
-              >
-                {label}
-              </a>
-            ))}
-            <Button onClick={() => setMenuOpen(false)} className="mt-3">
-              Book Now
-            </Button>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[72px] z-40 bg-black/35 backdrop-blur-xs xl:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav
+              id="luxe-mobile-menu"
+              className="fixed inset-x-0 top-[72px] z-50 w-full max-w-full max-h-[calc(100dvh-72px)] overflow-y-auto overflow-x-hidden border-b border-[#eadfce] bg-[#fffdf9]/98 p-5 shadow-2xl backdrop-blur-xl xl:hidden"
+            >
+              <div className="space-y-1">
+                {navItems.map(([label, id]) => (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    onClick={(event) => navigate(event, id)}
+                    className={`flex items-center justify-between rounded-lg px-4 py-3 text-xs font-semibold tracking-wide transition ${activeSection === id ? "active bg-[#f5eadb] text-[#a96c1d] font-bold" : "hover:bg-[#faf3e9] text-[#4d3a31]"}`}
+                  >
+                    <span>{label}</span>
+                    <span className="text-xs text-[#b87820]">→</span>
+                  </a>
+                ))}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 

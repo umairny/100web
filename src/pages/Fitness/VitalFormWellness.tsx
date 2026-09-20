@@ -243,7 +243,7 @@ function WellnessHeading({
   return (
     <div className="max-w-3xl">
       <SectionLabel>{label}</SectionLabel>
-      <h2 className="mt-5 text-[clamp(2.8rem,6vw,5.9rem)] font-semibold leading-[0.95] tracking-[-0.065em] text-[#174136]">
+      <h2 className="mt-5 text-[clamp(2.15rem,5.5vw,5.9rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-[#174136]">
         {title}
       </h2>
       {text && (
@@ -281,25 +281,66 @@ export function VitalFormWellness() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("method");
 
+  // Lock body scroll and handle Escape key when mobile menu is open
   useEffect(() => {
-    const sections = navLinks
-      .map(([, href]) => document.getElementById(href.slice(1)))
-      .filter(Boolean) as HTMLElement[];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        });
-      },
-      { rootMargin: "-35% 0px -55% 0px", threshold: 0.1 },
-    );
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setMenuOpen(false);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+    document.body.style.overflow = "";
+  }, [menuOpen]);
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+  // Frame-debounced scroll spy
+  useEffect(() => {
+    const sectionIds = ["method", "fitness", "nutrition", "recovery", "plans", "contact"];
+    let rafId: number;
+
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const scrollPosition = window.scrollY + 160;
+        const windowHeight = window.innerHeight;
+        const fullHeight = document.documentElement.scrollHeight;
+
+        if (window.scrollY + windowHeight >= fullHeight - 80) {
+          setActiveSection("contact");
+          return;
+        }
+
+        for (let i = sectionIds.length - 1; i >= 0; i--) {
+          const id = sectionIds[i];
+          const el = document.getElementById(id);
+          if (el) {
+            const top = el.offsetTop;
+            if (scrollPosition >= top) {
+              setActiveSection(id);
+              return;
+            }
+          }
+        }
+        if (window.scrollY < 200) {
+          setActiveSection("method");
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
-    <main className="vitalform-site -mt-16 overflow-hidden bg-[#FBFAF5] text-[#174136]">
+    <main className="vitalform-site w-full max-w-full overflow-x-hidden bg-[#FBFAF5] text-[#174136]">
       <header className="fixed inset-x-0 top-4 z-50 px-4">
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-[#174136]/10 bg-[#FBFAF5]/88 px-4 py-3 shadow-[0_20px_60px_rgba(23,65,54,.12)] backdrop-blur-xl lg:px-5">
           <a
@@ -338,18 +379,21 @@ export function VitalFormWellness() {
             })}
           </nav>
 
-          <a
-            href="#plans"
-            className="hidden rounded-full bg-[#F47F72] px-5 py-3 text-xs font-bold text-white shadow-[0_14px_35px_rgba(244,127,114,.28)] transition hover:-translate-y-0.5 hover:bg-[#E86E61] lg:inline-flex"
-          >
-            Start Your Plan
-          </a>
+          <div className="hidden lg:block">
+            <a
+              href="#plans"
+              className="rounded-full bg-[#F47F72] px-5 py-3 text-xs font-bold text-white shadow-[0_14px_35px_rgba(244,127,114,.28)] transition hover:-translate-y-0.5 hover:bg-[#E86E61]"
+            >
+              Start Your Plan
+            </a>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             className="grid h-10 w-10 place-items-center rounded-full border border-[#174136]/10 bg-white lg:hidden"
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -358,26 +402,42 @@ export function VitalFormWellness() {
             )}
           </button>
         </div>
+        {/* Mobile Navigation Backdrop & Sheet */}
         {menuOpen && (
-          <nav className="mx-auto mt-3 max-w-7xl rounded-[2rem] border border-[#174136]/10 bg-[#FBFAF5] p-3 shadow-xl lg:hidden">
-            {navLinks.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className="block rounded-2xl px-4 py-3 text-sm font-semibold text-[#53635F] hover:bg-[#EAF7F3] hover:text-[#174136]"
-              >
-                {label}
-              </a>
-            ))}
-            <a
-              href="#plans"
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/40 backdrop-blur-xs lg:hidden"
               onClick={() => setMenuOpen(false)}
-              className="mt-2 block rounded-2xl bg-[#174136] px-4 py-3 text-center text-sm font-semibold text-white"
+              aria-hidden="true"
+            />
+            <nav
+              id="mobile-navigation"
+              className="fixed inset-x-4 top-[4.75rem] z-50 max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[2rem] border border-[#174136]/10 bg-[#FBFAF5]/98 p-4 shadow-2xl backdrop-blur-2xl lg:hidden"
+              aria-label="Mobile navigation"
             >
-              Start Your Plan
-            </a>
-          </nav>
+              <div className="flex flex-col gap-1.5">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={active ? "location" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold transition ${
+                        active
+                          ? "bg-[#174136] text-white shadow-sm"
+                          : "text-[#53635F] hover:bg-[#EAF7F3] hover:text-[#174136]"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs opacity-50">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -389,7 +449,7 @@ export function VitalFormWellness() {
         <div className="mx-auto grid max-w-[92rem] gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
           <div>
             <SectionLabel>Integrated Wellness Coaching</SectionLabel>
-            <h1 className="mt-7 max-w-4xl text-[clamp(3.8rem,7.8vw,8.4rem)] font-semibold leading-[0.9] tracking-[-0.075em] text-[#174136]">
+            <h1 className="mt-7 max-w-4xl text-[clamp(2.4rem,8.2vw,8.4rem)] font-semibold leading-[0.95] tracking-[-0.065em] text-[#174136]">
               Build A Body That Feels Strong, Fueled, And Restored.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-[#53635F]">
@@ -873,7 +933,7 @@ export function VitalFormWellness() {
         <div className="mx-auto grid max-w-[92rem] overflow-hidden rounded-[3rem] bg-[#D8F6E7] lg:grid-cols-[1fr_.85fr]">
           <div className="p-8 sm:p-12 lg:p-16">
             <SectionLabel>Start here</SectionLabel>
-            <h2 className="mt-6 max-w-3xl text-[clamp(3rem,6vw,6.5rem)] font-semibold leading-[0.92] tracking-[-0.07em] text-[#174136]">
+            <h2 className="mt-6 max-w-3xl text-[clamp(2.35rem,6vw,6.5rem)] font-semibold leading-[0.96] tracking-[-0.065em] text-[#174136]">
               Create A Wellness Rhythm That Lasts.
             </h2>
             <p className="mt-7 max-w-xl text-lg leading-8 text-[#53635F]">

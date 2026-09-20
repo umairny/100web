@@ -217,7 +217,7 @@ function SectionHeading({
         <Sparkles className="h-3.5 w-3.5 text-[#FF2FCB]" />
         {label}
       </p>
-      <h2 className="mt-5 text-[clamp(3.4rem,7vw,7.6rem)] font-black uppercase leading-[0.78] tracking-[-0.085em] text-white">
+      <h2 className="mt-5 text-[clamp(2.15rem,5.8vw,7.6rem)] font-black uppercase leading-[0.88] tracking-[-0.075em] text-white">
         {title}
       </h2>
       {text && (
@@ -263,32 +263,66 @@ export function RideHausCycling() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+  // Lock body scroll and handle Escape key when mobile menu is open
   useEffect(() => {
-    const updateActiveSection = () => {
-      const sections = observedSectionIds
-        .map((id) => document.getElementById(id))
-        .filter(Boolean) as HTMLElement[];
-      const sectionOffset = 140;
-      const currentPosition = window.scrollY + sectionOffset;
-      const lastSection = sections
-        .filter((section) => section.offsetTop <= currentPosition)
-        .sort((a, b) => b.offsetTop - a.offsetTop)[0];
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setMenuOpen(false);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+    document.body.style.overflow = "";
+  }, [menuOpen]);
 
-      setActiveSection(lastSection?.id ?? "home");
+  // Frame-debounced scroll spy
+  useEffect(() => {
+    const sectionIds = ["home", "rides", "studio", "coaches", "schedule", "membership", "contact"];
+    let rafId: number;
+
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const scrollPosition = window.scrollY + 160;
+        const windowHeight = window.innerHeight;
+        const fullHeight = document.documentElement.scrollHeight;
+
+        if (window.scrollY + windowHeight >= fullHeight - 80) {
+          setActiveSection("contact");
+          return;
+        }
+
+        for (let i = sectionIds.length - 1; i >= 0; i--) {
+          const id = sectionIds[i];
+          const el = document.getElementById(id);
+          if (el) {
+            const top = el.offsetTop;
+            if (scrollPosition >= top) {
+              setActiveSection(id);
+              return;
+            }
+          }
+        }
+        if (window.scrollY < 200) {
+          setActiveSection("home");
+        }
+      });
     };
 
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
-
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <main className="ridehaus-site -mt-16 overflow-hidden bg-[#070817] text-white">
+    <main className="ridehaus-site w-full max-w-full overflow-x-hidden bg-[#070817] text-white">
       <div className="pointer-events-none fixed inset-0 z-0 opacity-70 [background-image:radial-gradient(circle_at_20%_10%,rgba(255,47,203,.22),transparent_30%),radial-gradient(circle_at_80%_15%,rgba(32,231,255,.2),transparent_28%),linear-gradient(180deg,#070817,#05050D)]" />
 
       <header className="fixed inset-x-0 top-4 z-50 px-4">
@@ -329,18 +363,21 @@ export function RideHausCycling() {
             })}
           </nav>
 
-          <a
-            href="#schedule"
-            className="hidden rounded-full bg-[#20E7FF] px-5 py-3 text-xs font-black uppercase tracking-[0.13em] text-[#07101A] shadow-[0_0_26px_rgba(32,231,255,.34)] transition hover:-translate-y-0.5 lg:inline-flex"
-          >
-            Book a Bike
-          </a>
+          <div className="hidden lg:block">
+            <a
+              href="#schedule"
+              className="rounded-full bg-[#20E7FF] px-5 py-3 text-xs font-black uppercase tracking-[0.13em] text-[#07101A] shadow-[0_0_26px_rgba(32,231,255,.34)] transition hover:-translate-y-0.5"
+            >
+              Book a Bike
+            </a>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/[0.06] lg:hidden"
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -349,35 +386,43 @@ export function RideHausCycling() {
             )}
           </button>
         </div>
+        {/* Mobile Navigation Backdrop & Sheet */}
         {menuOpen && (
-          <nav className="mx-auto mt-3 max-w-7xl rounded-[2rem] border border-white/10 bg-[#080A18] p-3 shadow-xl lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const active = activeSection === href.slice(1);
-
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  onClick={() => setMenuOpen(false)}
-                  aria-current={active ? "location" : undefined}
-                  className={`block rounded-2xl px-4 py-3 text-sm font-bold uppercase tracking-[0.1em] transition ${
-                    active
-                      ? "active bg-white text-[#080A18]"
-                      : "text-white/64 hover:bg-white/10 hover:text-white"
-                  }`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <a
-              href="#schedule"
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/75 backdrop-blur-xs lg:hidden"
               onClick={() => setMenuOpen(false)}
-              className="mt-2 block rounded-2xl bg-[#20E7FF] px-4 py-3 text-center text-sm font-black uppercase tracking-[0.12em] text-[#07101A]"
+              aria-hidden="true"
+            />
+            <nav
+              id="mobile-navigation"
+              className="fixed inset-x-4 top-[4.75rem] z-50 max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[2rem] border border-white/10 bg-[#080A18]/98 p-4 shadow-2xl backdrop-blur-2xl lg:hidden"
+              aria-label="Mobile navigation"
             >
-              Book a Bike
-            </a>
-          </nav>
+              <div className="flex flex-col gap-1.5">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      onClick={() => setMenuOpen(false)}
+                      aria-current={active ? "location" : undefined}
+                      className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-bold uppercase tracking-[0.1em] transition ${
+                        active
+                          ? "active bg-white text-[#080A18]"
+                          : "text-white/64 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs opacity-50">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -391,7 +436,7 @@ export function RideHausCycling() {
               <Radio className="h-4 w-4 text-[#FF2FCB]" />
               Rhythm-Based Indoor Cycling
             </p>
-            <h1 className="mt-7 max-w-5xl text-[clamp(4.5rem,9.5vw,10.8rem)] font-black uppercase leading-[0.68] tracking-[-0.1em]">
+            <h1 className="mt-7 max-w-5xl text-[clamp(2.4rem,9vw,10.8rem)] font-black uppercase leading-[0.8] tracking-[-0.08em]">
               Ride The Beat. Push The Room. Own The Energy.
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-white/62">
@@ -837,7 +882,7 @@ export function RideHausCycling() {
               <CalendarDays className="h-4 w-4" />
               Final call
             </p>
-            <h2 className="mt-7 text-[clamp(4rem,8vw,9rem)] font-black uppercase leading-[0.72] tracking-[-0.095em]">
+            <h2 className="mt-7 text-[clamp(2.35rem,7.5vw,9rem)] font-black uppercase leading-[0.84] tracking-[-0.08em]">
               Your Bike Is Waiting.
             </h2>
             <p className="mt-7 max-w-xl text-lg leading-8 text-white/62">

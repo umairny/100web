@@ -192,7 +192,7 @@ export function SubWebsiteNav({
 
   return (
     <nav
-      className={`restaurant-subnav fixed left-0 right-0 top-16 z-40 backdrop-blur fade-in-down ${className}`}
+      className={`restaurant-subnav fixed left-0 right-0 top-0 z-50 backdrop-blur fade-in-down ${className}`}
     >
       <Container>
         <div className="flex h-14 items-center justify-between gap-4">

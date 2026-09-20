@@ -162,7 +162,7 @@ function CoreHeading({
         {label}
       </p>
       <h2
-        className={`mt-4 text-[clamp(2.8rem,5.5vw,5.7rem)] leading-[0.94] tracking-[-0.045em] ${light ? "text-[#F7F0E7]" : "text-[#373330]"}`}
+        className={`mt-4 text-[clamp(2.15rem,5.2vw,5.7rem)] leading-[0.96] tracking-[-0.045em] ${light ? "text-[#F7F0E7]" : "text-[#373330]"}`}
       >
         {title}
       </h2>
@@ -205,25 +205,86 @@ export function CoreLabPilates() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const sections = navLinks
-      .map(([, href]) => document.getElementById(href.slice(1)))
-      .filter((section): section is HTMLElement => section !== null);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-25% 0px -58% 0px", threshold: [0.05, 0.2, 0.5] },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
+  // Robust frame-debounced scroll spy with boundary guards
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollable > 0 && scrollY >= scrollable - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      if (scrollY < 80) {
+        setActiveSection("");
+        return;
+      }
+
+      const marker = Math.min(220, Math.max(100, window.innerHeight * 0.28));
+      const sectionIds = [
+        "classes",
+        "studio",
+        "instructors",
+        "pricing",
+        "contact",
+      ];
+      let current = "";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= marker) {
+            current = id;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
 
   return (
-    <main className="corelab-site -mt-16 overflow-hidden bg-[#F7F0E7] text-[#514B47] selection:bg-[#B56F59] selection:text-white">
+    <main className="corelab-site w-full max-w-full overflow-x-hidden bg-[#F7F0E7] text-[#514B47] selection:bg-[#B56F59] selection:text-white">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-[#DED3C8] bg-[#FCF9F4]/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[4.75rem] max-w-[92rem] items-center justify-between px-5 lg:px-10">
           <CoreLogo />
@@ -245,15 +306,18 @@ export function CoreLabPilates() {
               );
             })}
           </nav>
-          <CoreButton href="#contact" className="hidden lg:inline-flex">
-            Book a Class
-          </CoreButton>
+          {/* Desktop-Only Booking CTA (Isolated from mobile viewports) */}
+          <div className="hidden lg:block">
+            <CoreButton href="#contact">
+              Book a Class
+            </CoreButton>
+          </div>
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-11 w-11 place-items-center rounded-full border border-[#D8CCC1] text-[#514B47] lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[#D8CCC1] text-[#514B47] transition active:scale-95 hover:border-[#B56F59] lg:hidden"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -262,26 +326,38 @@ export function CoreLabPilates() {
             )}
           </button>
         </div>
+        {/* Mobile Slide-Down Overlay */}
         {menuOpen && (
-          <nav className="border-t border-[#DED3C8] bg-[#FCF9F4] p-5 lg:hidden">
-            {navLinks.map(([label, href]) => {
-              const active = activeSection === href.slice(1);
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  aria-current={active ? "location" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block rounded-xl px-4 py-3 font-semibold ${active ? "corelab-nav-active bg-[#EEE3DA] text-[#9A5D4A]" : "text-[#6E6762]"}`}
-                >
-                  {label}
-                </a>
-              );
-            })}
-            <CoreButton href="#contact" className="mt-4 w-full">
-              Book a Class
-            </CoreButton>
-          </nav>
+          <>
+            <div
+              className="fixed inset-0 top-[4.75rem] z-40 bg-black/45 backdrop-blur-xs lg:hidden"
+              onClick={() => setMenuOpen(false)}
+              aria-hidden="true"
+            />
+            <nav className="fixed inset-x-0 top-[4.75rem] z-50 border-b border-[#DED3C8] bg-[#FCF9F4]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+              <div className="space-y-1">
+                {navLinks.map(([label, href]) => {
+                  const active = activeSection === href.slice(1);
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-current={active ? "location" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex items-center justify-between rounded-xl px-4 py-3 font-semibold transition ${
+                        active
+                          ? "corelab-nav-active bg-[#EEE3DA] text-[#9A5D4A] font-bold"
+                          : "text-[#6E6762] hover:bg-white hover:text-[#B56F59]"
+                      }`}
+                    >
+                      <span>{label}</span>
+                      <span className="text-xs text-[#B56F59]">→</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </nav>
+          </>
         )}
       </header>
 
@@ -297,7 +373,7 @@ export function CoreLabPilates() {
             <p className="inline-flex items-center gap-2 rounded-full border border-[#D9CCC0] bg-white/70 px-4 py-2 text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#9A5D4A]">
               <Leaf className="h-4 w-4" /> Calm studio classes
             </p>
-            <h1 className="mt-7 max-w-3xl text-[clamp(3.8rem,7vw,7.4rem)] leading-[0.88] tracking-[-0.055em] text-[#373330]">
+            <h1 className="mt-7 max-w-3xl text-[clamp(2.35rem,6.8vw,7.4rem)] leading-[0.92] tracking-[-0.055em] text-[#373330]">
               Move With Control.{" "}
               <span className="text-[#B56F59]">Breathe With Intention.</span>
             </h1>
@@ -336,7 +412,7 @@ export function CoreLabPilates() {
                 className="h-[40rem] w-full rounded-[11rem_11rem_1.4rem_1.4rem] object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 -left-4 max-w-xs rounded-2xl bg-[#6F7D61] p-5 text-white shadow-xl md:-left-8">
+            <div className="absolute -bottom-6 left-4 right-4 max-w-xs rounded-2xl bg-[#6F7D61] p-5 text-white shadow-xl sm:left-auto sm:right-auto sm:-left-4 md:-left-8">
               <Waves className="h-5 w-5" />
               <p className="mt-3 text-sm font-semibold leading-6">
                 A quieter space to build steady, lasting strength.
@@ -632,7 +708,7 @@ export function CoreLabPilates() {
             <p className="text-[0.64rem] font-black uppercase tracking-[0.24em] text-[#E7B9A8]">
               Your practice can begin gently
             </p>
-            <h2 className="mt-6 text-[clamp(3.3rem,7vw,7rem)] leading-[0.88] tracking-[-0.055em] text-[#F7F0E7]">
+            <h2 className="mt-6 text-[clamp(2.35rem,6.8vw,7rem)] leading-[0.9] tracking-[-0.055em] text-[#F7F0E7]">
               Begin your calm strength practice
             </h2>
             <p className="mt-7 max-w-xl text-lg leading-8 text-white/68">
