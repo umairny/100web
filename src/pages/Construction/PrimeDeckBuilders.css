@@ -170,7 +170,7 @@
 .pd-nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
 }
 
 .pd-nav-links a {
@@ -257,6 +257,160 @@
 .pd-btn-lg {
   padding: 16px 34px;
   font-size: 1.0625rem;
+}
+
+/* Nav actions container */
+.pd-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.pd-nav-cta {
+  /* visible on desktop, hidden on mobile via media query */
+}
+
+/* Hamburger button */
+.pd-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(7, 30, 25, 0.07);
+  border: 1px solid rgba(194, 112, 52, 0.3);
+  color: var(--pd-forest);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.pd-hamburger:hover {
+  background: rgba(194, 112, 52, 0.12);
+  border-color: var(--pd-teak);
+}
+
+/* Mobile overlay backdrop */
+.pd-mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 98;
+  animation: pdFadeIn 0.22s ease;
+}
+
+@keyframes pdFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile slide-in drawer */
+.pd-mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(380px, 90vw);
+  background: var(--pd-sandalwood);
+  border-left: 1px solid var(--pd-sandalwood-border);
+  box-shadow: none;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pd-mobile-drawer.is-open {
+  transform: translateX(0);
+  box-shadow: -24px 0 70px rgba(7, 30, 25, 0.25);
+}
+
+.pd-mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--pd-sandalwood-border);
+  flex-shrink: 0;
+  background: #ffffff;
+}
+
+.pd-drawer-close {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(7, 30, 25, 0.06);
+  border: 1px solid var(--pd-sandalwood-border);
+  color: var(--pd-forest);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.pd-drawer-close:hover {
+  background: rgba(194, 112, 52, 0.1);
+  border-color: var(--pd-teak);
+}
+
+/* Mobile nav links list */
+.pd-mobile-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--pd-sandalwood);
+}
+
+.pd-mobile-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--pd-text-muted);
+  border-bottom: 1px solid var(--pd-sandalwood-border);
+  transition: all 0.18s ease;
+}
+
+.pd-mobile-nav-link svg {
+  opacity: 0.3;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.pd-mobile-nav-link:hover {
+  color: var(--pd-forest);
+  background: rgba(194, 112, 52, 0.05);
+}
+
+.pd-mobile-nav-link.active {
+  color: var(--pd-teak);
+  border-left: 3px solid var(--pd-teak);
+  padding-left: 21px;
+  background: rgba(194, 112, 52, 0.06);
+}
+
+.pd-mobile-nav-link:hover svg,
+.pd-mobile-nav-link.active svg {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* Mobile drawer footer */
+.pd-mobile-drawer-footer {
+  padding: 24px;
+  border-top: 1px solid var(--pd-sandalwood-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+  background: #ffffff;
 }
 
 /* 3. Hero Section - Warm Architectural Sanctuary */
@@ -867,6 +1021,22 @@
 }
 
 /* Responsive */
+@media (max-width: 1280px) {
+  .pd-nav-links {
+    gap: 18px;
+  }
+
+  .pd-nav-links a {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .pd-nav-links {
+    gap: 14px;
+  }
+}
+
 @media (max-width: 1024px) {
   .pd-stats-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -884,10 +1054,26 @@
   }
 }
 
-@media (max-width: 768px) {
+/* At 920px the 7-item nav starts crowding — switch to hamburger */
+@media (max-width: 920px) {
   .pd-nav-links {
     display: none;
   }
+
+  .pd-hamburger {
+    display: flex;
+  }
+
+  .pd-nav-cta {
+    display: none;
+  }
+
+  .pd-nav {
+    height: 68px;
+  }
+}
+
+@media (max-width: 768px) {
   .pd-stats-grid,
   .pd-studio-grid,
   .pd-config-grid,
@@ -903,5 +1089,28 @@
   .pd-configurator-box,
   .pd-form-card {
     padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pd-section {
+    padding: 64px 0;
+  }
+
+  .pd-hero-content {
+    padding: 60px 0;
+  }
+
+  .pd-hero-h1 {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  .pd-hero-actions {
+    flex-direction: column;
+  }
+
+  .pd-hero-actions .pd-btn {
+    width: 100%;
+    justify-content: center;
   }
 }

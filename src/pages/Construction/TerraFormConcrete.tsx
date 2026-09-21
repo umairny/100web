@@ -365,23 +365,49 @@ export function TerraFormConcrete() {
 
   return (
     <div className="tf-site" id="tf-top">
-      {/* Simple Classic Header */}
-      <header className={`tf-header ${scrolled ? "scrolled" : ""}`}>
+      {/* Top Announcement Strip */}
+      <div className="tf-topstrip">
+        <div className="tf-wrap tf-topstrip-inner">
+          <div className="tf-topstrip-left">
+            <span className="tf-topstrip-badge">
+              <span className="tf-topstrip-dot" />
+              Accepting Commercial Pours
+            </span>
+            <span>ACI Certified Master Guild &bull; PTI Level 2 Post-Tensioning</span>
+          </div>
+          <div className="tf-topstrip-right">
+            <a href="tel:8005553676" className="tf-topstrip-link">
+              <Phone className="w-3 h-3" />
+              (800) 555-FORM
+            </a>
+            <a href="mailto:dispatch@terraformconcrete.com" className="tf-topstrip-link">
+              <Mail className="w-3 h-3" />
+              dispatch@terraformconcrete.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navigation Bar */}
+      <header className={`tf-header${scrolled ? " scrolled" : ""}`}>
         <div className="tf-wrap tf-header-inner">
           <a href="#tf-top" className="tf-brand-link" onClick={(e) => scrollTo(e, "tf-top")}>
             <div className="tf-brand-box">
-              <Box className="w-5 h-5 text-[#e06820]" />
+              <Box className="w-5 h-5" style={{ color: "var(--tf-terracotta-bright)" }} />
             </div>
-            <h2 className="tf-brand-title">TERRAFORM</h2>
+            <div className="tf-brand-wordmark">
+              <h2 className="tf-brand-title">TERRAFORM</h2>
+              <span className="tf-brand-sub">Architectural Concrete</span>
+            </div>
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="tf-nav-links">
+          <nav className="tf-nav-links" aria-label="Main navigation">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`tf-nav-item ${activeNav === item.id ? "active" : ""}`}
+                className={`tf-nav-item${activeNav === item.id ? " active" : ""}`}
                 onClick={(e) => scrollTo(e, item.id)}
               >
                 {item.label}
@@ -390,19 +416,25 @@ export function TerraFormConcrete() {
           </nav>
 
           <div className="tf-header-actions">
+            <a href="tel:8005553676" className="tf-phone-pill">
+              <Phone className="w-3.5 h-3.5" />
+              (800) 555-FORM
+            </a>
             <a
               href="#tf-dispatch"
               className="tf-cta-btn"
               onClick={(e) => scrollTo(e, "tf-dispatch")}
             >
               Schedule Pour
+              <ArrowRight className="w-4 h-4" />
             </a>
 
             <button
               type="button"
               className="tf-menu-toggle"
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
             >
               {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -495,7 +527,7 @@ export function TerraFormConcrete() {
             <p className="tf-hero-p">
               From mass foundation mat pours and post-tensioned high-rise slabs to glass-smooth polished terrazzo and board-formed architectural feature walls, TerraForm shapes concrete into architectural permanence.
             </p>
-            <div className="flex gap-4 flex-wrap">
+            <div className="tf-hero-ctas">
               <a
                 href="#tf-lab"
                 className="tf-btn tf-btn-terracotta tf-btn-lg"
@@ -694,37 +726,36 @@ export function TerraFormConcrete() {
           </div>
 
           {/* Active Finish Highlight Card */}
-          <div className="p-8 rounded-xl bg-slate-900 border border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-5 h-64 rounded-lg overflow-hidden relative">
+          <div className="tf-finish-highlight">
+            <div className="tf-finish-highlight-img">
               <img
                 src={activeFinish.image}
                 alt={activeFinish.title}
-                className="w-full h-full object-cover"
               />
-              <div className="absolute top-3 left-3 bg-black/80 px-2.5 py-1 rounded text-xs font-mono text-[#e06820] font-bold">
+              <div className="tf-finish-sheen-tag">
                 {activeFinish.sheen}
               </div>
             </div>
 
-            <div className="lg:col-span-7">
-              <div className="text-xs font-mono text-[#e06820] font-bold uppercase mb-1">
+            <div>
+              <div className="text-xs font-mono text-[#e06820] font-bold uppercase mb-1" style={{fontFamily:"'JetBrains Mono',monospace",fontSize:"0.75rem",fontWeight:700,color:"var(--tf-terracotta-bright)",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:"6px"}}>
                 Selected Finish Specification
               </div>
-              <h3 className="tf-font-display text-3xl font-black text-white mb-3">
+              <h3 className="tf-font-display" style={{fontSize:"clamp(1.6rem,3vw,2.2rem)",fontWeight:900,color:"#ffffff",marginBottom:"12px"}}>
                 {activeFinish.title}
               </h3>
-              <p className="text-slate-300 text-sm mb-6 leading-relaxed">
+              <p style={{color:"#94a3b8",fontSize:"0.9375rem",marginBottom:"24px",lineHeight:1.7}}>
                 {activeFinish.desc}
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-                <div className="p-3 rounded bg-black/40 border border-white/10">
-                  <span className="text-slate-400 block mb-0.5">Slip Coefficient (SCOF):</span>
-                  <strong className="text-emerald-400">{activeFinish.scof}</strong>
+              <div className="tf-finish-spec-cols">
+                <div className="tf-finish-spec-cell">
+                  <span style={{color:"#64748b",display:"block",marginBottom:"4px",fontSize:"0.6875rem"}}>Slip Coefficient (SCOF):</span>
+                  <strong style={{color:"#34d399"}}>{activeFinish.scof}</strong>
                 </div>
-                <div className="p-3 rounded bg-black/40 border border-white/10">
-                  <span className="text-slate-400 block mb-0.5">Ideal Applications:</span>
-                  <strong className="text-white">{activeFinish.application}</strong>
+                <div className="tf-finish-spec-cell">
+                  <span style={{color:"#64748b",display:"block",marginBottom:"4px",fontSize:"0.6875rem"}}>Ideal Applications:</span>
+                  <strong style={{color:"#ffffff"}}>{activeFinish.application}</strong>
                 </div>
               </div>
             </div>
@@ -805,50 +836,51 @@ export function TerraFormConcrete() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3.5 rounded bg-slate-50 border border-slate-200">
+                <div className="tf-pump-toggle">
                   <input
                     type="checkbox"
                     id="includePump"
                     checked={calcIncludePump}
                     onChange={(e) => setCalcIncludePump(e.target.checked)}
-                    className="w-4 h-4 accent-[#c85a17] cursor-pointer"
+                    style={{width:"16px",height:"16px",accentColor:"var(--tf-terracotta)",cursor:"pointer",flexShrink:0}}
                   />
-                  <label htmlFor="includePump" className="text-xs font-semibold text-slate-800 cursor-pointer">
+                  <label htmlFor="includePump" className="tf-pump-toggle">
                     Include Boom Pump Truck Dispatch &amp; Line Prime
                   </label>
                 </div>
               </div>
 
               {/* Calculation Summary Box */}
-              <div className="p-8 rounded-xl bg-[#161a22] text-white text-center border border-white/10 relative">
-                <div className="text-xs font-mono font-bold uppercase tracking-widest text-[#e06820] mb-2">
+              <div className="tf-calc-result">
+                <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:"0.6875rem",fontWeight:700,textTransform:"uppercase",letterSpacing:"0.1em",color:"var(--tf-terracotta-bright)",marginBottom:"8px"}}>
                   Total Order Volume (10% Waste Incl.)
                 </div>
-                <div className="tf-font-display text-4xl font-black text-white mb-1">
+                <div className="tf-font-display" style={{fontSize:"clamp(2.5rem,5vw,3.5rem)",fontWeight:900,color:"#ffffff",marginBottom:"4px"}}>
                   {yardageData.finalYards} CY
                 </div>
-                <p className="text-xs text-slate-400 mb-6 font-mono">
+                <p style={{fontSize:"0.75rem",color:"#64748b",marginBottom:"24px",fontFamily:"'JetBrains Mono',monospace"}}>
                   {yardageData.sqFt} SQ FT Surface Area
                 </p>
 
-                <div className="space-y-2 text-xs font-mono text-left bg-black/40 p-4 rounded-lg border border-white/10 mb-6">
-                  <div className="flex justify-between text-slate-300">
+                <div className="tf-calc-result-details">
+                  <div className="tf-calc-result-row">
                     <span>Ready-Mix Trucks (10 CY ea):</span>
-                    <strong className="text-white">{yardageData.trucks} Trucks</strong>
+                    <strong style={{color:"#ffffff"}}>{yardageData.trucks} Trucks</strong>
                   </div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="tf-calc-result-row">
                     <span>Estimated Rebar Cage Weight:</span>
-                    <strong className="text-[#e06820]">{yardageData.rebarWeight} Lbs</strong>
+                    <strong style={{color:"var(--tf-terracotta-bright)"}}>{yardageData.rebarWeight} Lbs</strong>
                   </div>
-                  <div className="flex justify-between text-slate-300">
+                  <div className="tf-calc-result-row">
                     <span>Recommended Pump Equipment:</span>
-                    <strong className="text-emerald-400">{yardageData.pumpBoom}</strong>
+                    <strong style={{color:"#34d399"}}>{yardageData.pumpBoom}</strong>
                   </div>
                 </div>
 
                 <a
                   href="#tf-dispatch"
-                  className="tf-btn tf-btn-terracotta w-full !text-xs"
+                  className="tf-btn tf-btn-terracotta"
+                  style={{width:"100%",fontSize:"0.75rem"}}
                   onClick={(e) => {
                     scrollTo(e, "tf-dispatch");
                     setPourNotes(
@@ -930,39 +962,29 @@ export function TerraFormConcrete() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="tf-portfolio-grid">
             {concretePortfolio.map((proj, idx) => (
-              <div key={idx} className="rounded-xl overflow-hidden bg-slate-900/80 border border-white/10 hover:border-[#e06820] transition-all group">
-                <div className="h-64 relative overflow-hidden">
+              <div key={idx} className="tf-portfolio-card">
+                <div className="tf-portfolio-card-img">
                   <img
                     src={proj.image}
                     alt={proj.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-4 left-4 bg-[#c85a17] text-white font-bold text-xs px-3 py-1 font-mono uppercase rounded">
-                    {proj.category}
-                  </div>
-                  <div className="absolute bottom-4 right-4 bg-black/80 text-white text-xs font-mono px-3 py-1 rounded">
-                    {proj.location}
-                  </div>
+                  <div className="tf-portfolio-badge">{proj.category}</div>
+                  <div className="tf-portfolio-location">{proj.location}</div>
                 </div>
 
-                <div className="p-6">
-                  <div className="text-xs text-[#e06820] font-mono font-bold mb-1">
-                    {proj.metric}
-                  </div>
-                  <h3 className="tf-font-display text-2xl font-black text-white mb-2">
-                    {proj.name}
-                  </h3>
-                  <p className="text-xs text-slate-300 mb-4 font-mono bg-black/40 p-3 rounded border border-white/10">
-                    {proj.specs}
-                  </p>
+                <div className="tf-portfolio-card-body">
+                  <div className="tf-portfolio-metric">{proj.metric}</div>
+                  <h3 className="tf-portfolio-name">{proj.name}</h3>
+                  <p className="tf-portfolio-specs">{proj.specs}</p>
                   <a
                     href="#tf-dispatch"
-                    className="text-xs font-mono font-bold text-[#e06820] hover:underline"
+                    className="tf-btn tf-btn-sm tf-btn-outline"
                     onClick={(e) => scrollTo(e, "tf-dispatch")}
                   >
-                    View Engineering Specs →
+                    View Engineering Specs
+                    <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
               </div>
@@ -982,7 +1004,7 @@ export function TerraFormConcrete() {
             <h2 className="tf-section-title">ACI Standards &amp; QA Protocols</h2>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="tf-standards-grid">
             {[
               { title: "ACI 301 / 318", subtitle: "Structural Spec Standard" },
               { title: "PTI Level 2", subtitle: "Post-Tensioning Institute" },
@@ -991,10 +1013,10 @@ export function TerraFormConcrete() {
               { title: "ICRI Certified", subtitle: "Surface Prep & Repair" },
               { title: "OSHA 30", subtitle: "Zero Incident Safety" },
             ].map((std, idx) => (
-              <div key={idx} className="p-5 rounded-lg bg-white border border-slate-200 text-center font-mono hover:border-[#c85a17] transition-colors shadow-sm">
-                <Shield className="w-7 h-7 text-[#c85a17] mx-auto mb-2" />
-                <div className="font-bold text-slate-900 text-sm mb-1">{std.title}</div>
-                <div className="text-[11px] text-slate-500">{std.subtitle}</div>
+              <div key={idx} className="tf-standard-card">
+                <Shield className="w-7 h-7 mx-auto" style={{color:"var(--tf-terracotta)"}} />
+                <div className="tf-standard-title">{std.title}</div>
+                <div className="tf-standard-sub">{std.subtitle}</div>
               </div>
             ))}
           </div>
@@ -1004,67 +1026,67 @@ export function TerraFormConcrete() {
       {/* 11. Ready-Mix Schedule & Dispatch Portal */}
       <section id="tf-dispatch" className="tf-section card-bg">
         <div className="tf-wrap">
-          <div className="p-8 sm:p-12 rounded-xl bg-white border border-slate-200 shadow-xl">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              <div className="lg:col-span-5">
+          <div className="tf-dispatch-card">
+            <div className="tf-dispatch-grid">
+              <div>
                 <div className="tf-section-eyebrow">
                   <Truck className="w-4 h-4" />
                   Dispatch Operations
                 </div>
-                <h2 className="tf-font-display text-3xl sm:text-4xl font-black text-slate-900 mb-4 leading-tight">
-                  Schedule Concrete Pour <br />
-                  <span className="text-[#c85a17]">&amp; Pump Dispatch</span>
+                <h2 className="tf-font-display" style={{fontSize:"clamp(1.8rem,3.5vw,2.8rem)",fontWeight:900,color:"var(--tf-titanium)",marginBottom:"16px",lineHeight:1.1}}>
+                  Schedule Concrete Pour<br />
+                  <span style={{color:"var(--tf-terracotta)"}}>&amp; Pump Dispatch</span>
                 </h2>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                <p style={{color:"var(--tf-text-muted)",fontSize:"0.9375rem",lineHeight:1.7,marginBottom:"24px"}}>
                   Book ready-mix truck batches, structural boom pump placement, and ACI laser screed finishing crews with 24-hour dispatch confirmation.
                 </p>
 
-                <div className="space-y-3 font-mono text-xs text-slate-700 mb-8 font-medium">
-                  <div className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#c85a17] shrink-0" />
+                <div style={{display:"flex",flexDirection:"column",gap:"10px",fontFamily:"'JetBrains Mono',monospace",fontSize:"0.75rem",color:"var(--tf-text-muted)",marginBottom:"28px"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
+                    <CheckCircle2 className="w-4 h-4" style={{color:"var(--tf-terracotta)",flexShrink:0}} />
                     <span>Continuous batch plant supply coordination</span>
                   </div>
-                  <div className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#c85a17] shrink-0" />
+                  <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
+                    <CheckCircle2 className="w-4 h-4" style={{color:"var(--tf-terracotta)",flexShrink:0}} />
                     <span>Dedicated 32m – 56m boom pump truck reservation</span>
                   </div>
-                  <div className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#c85a17] shrink-0" />
+                  <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
+                    <CheckCircle2 className="w-4 h-4" style={{color:"var(--tf-terracotta)",flexShrink:0}} />
                     <span>Third-party ASTM cylinder break testing available</span>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-lg bg-slate-50 border border-slate-200 font-mono text-xs">
-                  <div className="text-slate-500">Concrete Dispatch Direct:</div>
-                  <div className="text-base font-bold text-slate-900 mt-0.5">(800) 555-FORM</div>
-                  <div className="text-[11px] text-slate-500 mt-1">dispatch@terraformconcrete.com</div>
+                <div style={{padding:"16px",borderRadius:"8px",background:"var(--tf-concrete-surface)",border:"1px solid var(--tf-concrete-border)",fontFamily:"'JetBrains Mono',monospace",fontSize:"0.75rem"}}>
+                  <div style={{color:"var(--tf-text-muted)"}}>Concrete Dispatch Direct:</div>
+                  <div style={{fontSize:"1.1rem",fontWeight:700,color:"var(--tf-titanium)",marginTop:"4px"}}>(800) 555-FORM</div>
+                  <div style={{fontSize:"0.6875rem",color:"var(--tf-text-muted)",marginTop:"4px"}}>dispatch@terraformconcrete.com</div>
                 </div>
               </div>
 
               {/* Dispatch Form */}
-              <div className="lg:col-span-7">
+              <div>
                 {pourSubmitted ? (
-                  <div className="p-8 rounded-xl bg-emerald-50 border border-emerald-300 text-center font-mono">
-                    <div className="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <div style={{padding:"32px",borderRadius:"12px",background:"#ecfdf5",border:"1px solid #6ee7b7",textAlign:"center",fontFamily:"'JetBrains Mono',monospace"}}>
+                    <div style={{width:"56px",height:"56px",background:"#d1fae5",color:"#065f46",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 12px"}}>
                       <CheckCircle2 className="w-7 h-7" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">Pour Request Confirmed!</h3>
-                    <p className="text-slate-600 text-xs mb-6">
+                    <h3 style={{fontSize:"1.25rem",fontWeight:700,color:"var(--tf-titanium)",marginBottom:"8px"}}>Pour Request Confirmed!</h3>
+                    <p style={{color:"var(--tf-text-muted)",fontSize:"0.8125rem",marginBottom:"20px"}}>
                       Thank you, <strong>{pourContact || "Contractor"}</strong> ({pourProject || "Project"}). Our concrete batch coordinator is reviewing your placement date for <strong>{pourDate || "Upcoming Pour"}</strong> and will confirm pump truck staging within <strong>2 hours</strong>.
                     </p>
                     <button
                       type="button"
-                      className="tf-btn tf-btn-terracotta !text-xs"
+                      className="tf-btn tf-btn-terracotta tf-btn-sm"
                       onClick={() => setPourSubmitted(false)}
                     >
                       Schedule Another Placement
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handlePourSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <form onSubmit={handlePourSubmit} style={{display:"flex",flexDirection:"column",gap:"16px"}}>
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"16px"}}>
                       <div>
-                        <label className="text-xs font-bold uppercase text-slate-600 block mb-1 font-mono">
+                        <label style={{fontSize:"0.6875rem",fontWeight:700,textTransform:"uppercase",color:"var(--tf-text-muted)",display:"block",marginBottom:"6px",fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.06em"}}>
                           Project Name / General Contractor *
                         </label>
                         <input
@@ -1077,7 +1099,7 @@ export function TerraFormConcrete() {
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-bold uppercase text-slate-600 block mb-1 font-mono">
+                        <label style={{fontSize:"0.6875rem",fontWeight:700,textTransform:"uppercase",color:"var(--tf-text-muted)",display:"block",marginBottom:"6px",fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.06em"}}>
                           Target Pour Date *
                         </label>
                         <input
@@ -1090,9 +1112,9 @@ export function TerraFormConcrete() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"16px"}}>
                       <div>
-                        <label className="text-xs font-bold uppercase text-slate-600 block mb-1 font-mono">
+                        <label style={{fontSize:"0.6875rem",fontWeight:700,textTransform:"uppercase",color:"var(--tf-text-muted)",display:"block",marginBottom:"6px",fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.06em"}}>
                           Contact Name *
                         </label>
                         <input
@@ -1105,7 +1127,7 @@ export function TerraFormConcrete() {
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-bold uppercase text-slate-600 block mb-1 font-mono">
+                        <label style={{fontSize:"0.6875rem",fontWeight:700,textTransform:"uppercase",color:"var(--tf-text-muted)",display:"block",marginBottom:"6px",fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.06em"}}>
                           Email Address *
                         </label>
                         <input
@@ -1120,7 +1142,7 @@ export function TerraFormConcrete() {
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600 block mb-1 font-mono">
+                      <label style={{fontSize:"0.6875rem",fontWeight:700,textTransform:"uppercase",color:"var(--tf-text-muted)",display:"block",marginBottom:"6px",fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.06em"}}>
                         Mix Design &amp; Placement Specifications
                       </label>
                       <textarea
@@ -1133,20 +1155,20 @@ export function TerraFormConcrete() {
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600 block mb-1 font-mono">
+                      <label style={{fontSize:"0.6875rem",fontWeight:700,textTransform:"uppercase",color:"var(--tf-text-muted)",display:"block",marginBottom:"6px",fontFamily:"'JetBrains Mono',monospace",letterSpacing:"0.06em"}}>
                         Upload Structural Drawings / Formwork Plans (Optional)
                       </label>
-                      <div className="border border-dashed border-slate-300 rounded p-6 text-center bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer">
-                        <UploadCloud className="w-8 h-8 text-[#c85a17] mx-auto mb-2" />
-                        <p className="text-xs text-slate-700 font-mono font-bold">
+                      <div style={{border:"1.5px dashed var(--tf-concrete-border)",borderRadius:"8px",padding:"24px",textAlign:"center",background:"var(--tf-concrete-surface)",cursor:"pointer"}}>
+                        <UploadCloud className="w-8 h-8 mx-auto mb-2" style={{color:"var(--tf-terracotta)"}} />
+                        <p style={{fontSize:"0.75rem",color:"var(--tf-text-dark)",fontFamily:"'JetBrains Mono',monospace",fontWeight:700,margin:"0 0 4px"}}>
                           Drag &amp; drop foundation plans, rebar schedules, or structural drawings
                         </p>
-                        <p className="text-[10px] text-slate-400 mt-1 font-mono">Accepts PDF, DWG, ZIP up to 100MB</p>
-                        <input type="file" className="hidden" />
+                        <p style={{fontSize:"0.6875rem",color:"var(--tf-text-muted)",fontFamily:"'JetBrains Mono',monospace",margin:0}}>Accepts PDF, DWG, ZIP up to 100MB</p>
+                        <input type="file" style={{display:"none"}} />
                       </div>
                     </div>
 
-                    <button type="submit" className="tf-btn tf-btn-terracotta tf-btn-lg w-full mt-2">
+                    <button type="submit" className="tf-btn tf-btn-terracotta tf-btn-lg" style={{width:"100%",marginTop:"8px"}}>
                       Transmit Pour Reservation to Dispatch
                       <ArrowRight className="w-4 h-4" />
                     </button>

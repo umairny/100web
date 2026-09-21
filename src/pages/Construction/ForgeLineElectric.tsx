@@ -294,6 +294,23 @@ export function ForgeLineElectric() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Lock body scroll while mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileMenuOpen]);
+
+  // Close menu on ESC key
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMobileMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   // Estimator State
   const [selectedServiceId, setSelectedServiceId] = useState("panel");
   const [selectedProperty, setSelectedProperty] = useState("residential_small");
@@ -440,7 +457,7 @@ export function ForgeLineElectric() {
       </div>
 
       {/* 2. Main Navigation Bar */}
-      <header className={`fl-header ${isScrolled ? "scrolled" : ""}`}>
+      <header className={`fl-header${isScrolled ? " scrolled" : ""}`}>
         <div className="fl-container fl-nav-wrapper">
           <a href="#fl-hero" className="fl-logo" onClick={(e) => scrollToSection(e, "fl-hero")}>
             <div className="fl-logo-icon">
@@ -452,7 +469,7 @@ export function ForgeLineElectric() {
           </a>
 
           {/* Desktop Nav */}
-          <nav className="fl-nav-links">
+          <nav className="fl-nav-links" aria-label="Main navigation">
             {navLinks.map((link) => (
               <a
                 key={link.target}
@@ -468,7 +485,7 @@ export function ForgeLineElectric() {
           <div className="fl-nav-actions">
             <a
               href="#fl-quote"
-              className="fl-btn fl-btn-primary fl-btn-sm hidden sm:inline-flex"
+              className="fl-btn fl-btn-primary fl-btn-sm fl-nav-cta"
               onClick={(e) => scrollToSection(e, "fl-quote")}
             >
               Get Free Estimate
@@ -476,46 +493,81 @@ export function ForgeLineElectric() {
             </a>
             <button
               type="button"
-              className="md:hidden text-white p-2"
+              className="fl-hamburger"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Navigation Menu"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-[#0d1524] border-b border-slate-800 p-6 flex flex-col gap-4 animate-in slide-in-from-top-4 duration-200">
-            {navLinks.map((link) => (
-              <a
-                key={link.target}
-                href={`#${link.target}`}
-                className={`text-base font-semibold py-2 ${
-                  activeNav === link.target ? "text-amber-400" : "text-slate-300"
-                }`}
-                onClick={(e) => scrollToSection(e, link.target)}
-              >
-                {link.label}
-              </a>
-            ))}
-            <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
-              <a
-                href="#fl-quote"
-                className="fl-btn fl-btn-primary w-full"
-                onClick={(e) => scrollToSection(e, "fl-quote")}
-              >
-                Request a Fast Quote
-              </a>
-              <a href="tel:18005558658" className="fl-btn fl-btn-emergency w-full">
-                <Phone className="w-4 h-4" />
-                Emergency Hotline
-              </a>
+      {/* Mobile Nav Overlay Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="fl-mobile-backdrop"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Slide-In Drawer */}
+      <div className={`fl-mobile-drawer${mobileMenuOpen ? " is-open" : ""}`} aria-hidden={!mobileMenuOpen}>
+        <div className="fl-mobile-drawer-header">
+          <div className="fl-logo">
+            <div className="fl-logo-icon">
+              <Zap className="w-6 h-6 fill-current" />
+            </div>
+            <div className="fl-logo-text">
+              ForgeLine<span>Electrical</span>
             </div>
           </div>
-        )}
-      </header>
+          <button
+            type="button"
+            className="fl-drawer-close"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        <nav className="fl-mobile-nav">
+          {navLinks.map((link) => (
+            <a
+              key={link.target}
+              href={`#${link.target}`}
+              className={`fl-mobile-nav-link${activeNav === link.target ? " active" : ""}`}
+              onClick={(e) => scrollToSection(e, link.target)}
+            >
+              {link.label}
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          ))}
+        </nav>
+
+        <div className="fl-mobile-drawer-footer">
+          <a
+            href="#fl-quote"
+            className="fl-btn fl-btn-primary"
+            style={{ width: "100%" }}
+            onClick={(e) => scrollToSection(e, "fl-quote")}
+          >
+            Request a Fast Quote
+            <ArrowRight className="w-4 h-4" />
+          </a>
+          <a
+            href="tel:18005558658"
+            className="fl-btn fl-btn-emergency"
+            style={{ width: "100%" }}
+          >
+            <Phone className="w-4 h-4" />
+            Emergency Hotline — 24/7
+          </a>
+        </div>
+      </div>
 
       {/* 3. Hero Section */}
       <section id="fl-hero" className="fl-hero-section">

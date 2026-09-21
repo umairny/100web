@@ -203,6 +203,23 @@ export function PrimeDeckBuilders() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("pd-studio");
 
+  // Lock body scroll while mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  // Close menu on ESC key
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   // HOA Checker
   const [hoaInput, setHoaInput] = useState("");
   const [hoaResult, setHoaResult] = useState<string | null>(null);
@@ -307,7 +324,7 @@ export function PrimeDeckBuilders() {
       </div>
 
       {/* 2. Main Navigation Header */}
-      <header className={`pd-header ${scrolled ? "scrolled" : ""}`}>
+      <header className={`pd-header${scrolled ? " scrolled" : ""}`}>
         <div className="pd-wrap pd-nav">
           <a href="#pd-top" className="pd-brand" onClick={(e) => scrollTo(e, "pd-top")}>
             <div className="pd-brand-icon">
@@ -320,7 +337,7 @@ export function PrimeDeckBuilders() {
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="pd-nav-links">
+          <nav className="pd-nav-links" aria-label="Main navigation">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -333,10 +350,10 @@ export function PrimeDeckBuilders() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="pd-nav-actions">
             <a
               href="#pd-quote-form"
-              className="pd-btn pd-btn-teak pd-btn-sm hidden sm:inline-flex"
+              className="pd-btn pd-btn-teak pd-btn-sm pd-nav-cta"
               onClick={(e) => scrollTo(e, "pd-quote-form")}
             >
               Book 3D Design Walk
@@ -345,42 +362,82 @@ export function PrimeDeckBuilders() {
 
             <button
               type="button"
-              className="md:hidden text-stone-900 p-2"
+              className="pd-hamburger"
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle navigation"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
             >
               {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Navigation Drawer */}
-        {menuOpen && (
-          <div className="md:hidden bg-[#071e19] text-white border-b border-emerald-900 p-6 flex flex-col gap-3 animate-in slide-in-from-top-4 duration-200">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={`py-2 text-base font-semibold ${
-                  activeNav === item.id ? "text-amber-400" : "text-slate-300"
-                }`}
-                onClick={(e) => scrollTo(e, item.id)}
-              >
-                {item.label}
-              </a>
-            ))}
-            <div className="pt-4 border-t border-emerald-800 flex flex-col gap-2">
-              <a
-                href="#pd-quote-form"
-                className="pd-btn pd-btn-teak w-full"
-                onClick={(e) => scrollTo(e, "pd-quote-form")}
-              >
-                Book 3D Design Walk
-              </a>
+      {/* Mobile Nav Overlay Backdrop */}
+      {menuOpen && (
+        <div
+          className="pd-mobile-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Slide-In Drawer */}
+      <div className={`pd-mobile-drawer${menuOpen ? " is-open" : ""}`} aria-hidden={!menuOpen}>
+        <div className="pd-mobile-drawer-header">
+          <div className="pd-brand">
+            <div className="pd-brand-icon">
+              <Compass className="w-6 h-6" />
+            </div>
+            <div className="pd-brand-text">
+              <h2>PRIMEDECK</h2>
+              <span>Builders • Outdoor Living</span>
             </div>
           </div>
-        )}
-      </header>
+          <button
+            type="button"
+            className="pd-drawer-close"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        <nav className="pd-mobile-nav">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`pd-mobile-nav-link${activeNav === item.id ? " active" : ""}`}
+              onClick={(e) => scrollTo(e, item.id)}
+            >
+              {item.label}
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          ))}
+        </nav>
+
+        <div className="pd-mobile-drawer-footer">
+          <a
+            href="#pd-quote-form"
+            className="pd-btn pd-btn-teak"
+            style={{ width: "100%" }}
+            onClick={(e) => scrollTo(e, "pd-quote-form")}
+          >
+            Book 3D Design Walk
+            <ArrowRight className="w-4 h-4" />
+          </a>
+          <a
+            href="tel:6155553325"
+            className="pd-btn pd-btn-forest"
+            style={{ width: "100%" }}
+          >
+            <Phone className="w-4 h-4" />
+            (615) 555-DECK — Call Now
+          </a>
+        </div>
+      </div>
 
       {/* 3. Hero Section (Warm Teak & Forest Sanctuary) */}
       <section className="pd-hero-wrap">

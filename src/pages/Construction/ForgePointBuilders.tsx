@@ -277,6 +277,23 @@ export function ForgePointBuilders() {
   const [activeSection, setActiveSection] = useState("fp-services");
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Lock body scroll while mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  // Close menu on ESC key
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   // Estimator state
   const [selectedProjectType, setSelectedProjectType] = useState("custom_home");
   const [selectedSqFt, setSelectedSqFt] = useState("4000");
@@ -391,7 +408,7 @@ export function ForgePointBuilders() {
       </div>
 
       {/* 2. Main Navigation Header */}
-      <header className={`fp-header ${isScrolled ? "is-scrolled" : ""}`}>
+      <header className={`fp-header${isScrolled ? " is-scrolled" : ""}`}>
         <div className="fp-wrap fp-nav">
           <a href="#fp-home" className="fp-logo" onClick={(e) => scrollTo(e, "fp-home")}>
             <div className="fp-logo-mark">F</div>
@@ -402,7 +419,7 @@ export function ForgePointBuilders() {
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="fp-nav-links">
+          <nav className="fp-nav-links" aria-label="Main navigation">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -415,10 +432,10 @@ export function ForgePointBuilders() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="fp-nav-actions">
             <a
               href="#fp-contact"
-              className="fp-btn fp-btn-primary fp-btn-sm hidden sm:inline-flex"
+              className="fp-btn fp-btn-primary fp-btn-sm fp-nav-cta"
               onClick={(e) => scrollTo(e, "fp-contact")}
             >
               Request Consultation
@@ -427,42 +444,74 @@ export function ForgePointBuilders() {
 
             <button
               type="button"
-              className="md:hidden text-white p-2"
+              className="fp-hamburger"
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
             >
               {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Nav Drawer */}
-        {menuOpen && (
-          <div className="md:hidden bg-[#071320] border-b border-slate-800 p-6 flex flex-col gap-3 animate-in slide-in-from-top-4 duration-200">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={`py-2 text-base font-semibold ${
-                  activeSection === item.id ? "text-amber-500" : "text-slate-300"
-                }`}
-                onClick={(e) => scrollTo(e, item.id)}
-              >
-                {item.label}
-              </a>
-            ))}
-            <div className="pt-4 border-t border-slate-800 flex flex-col gap-2">
-              <a
-                href="#fp-contact"
-                className="fp-btn fp-btn-primary w-full"
-                onClick={(e) => scrollTo(e, "fp-contact")}
-              >
-                Request Consultation
-              </a>
+      {/* Mobile Nav Overlay */}
+      {menuOpen && (
+        <div
+          className="fp-mobile-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+      <div className={`fp-mobile-drawer${menuOpen ? " is-open" : ""}`} aria-hidden={!menuOpen}>
+        <div className="fp-mobile-drawer-header">
+          <div className="fp-logo">
+            <div className="fp-logo-mark">F</div>
+            <div className="fp-logo-text">
+              ForgePoint<br />
+              <span>Builders</span>
             </div>
           </div>
-        )}
-      </header>
+          <button
+            type="button"
+            className="fp-drawer-close"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+        <nav className="fp-mobile-nav">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`fp-mobile-nav-link${activeSection === item.id ? " active" : ""}`}
+              onClick={(e) => scrollTo(e, item.id)}
+            >
+              {item.label}
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          ))}
+        </nav>
+        <div className="fp-mobile-drawer-footer">
+          <a
+            href="#fp-contact"
+            className="fp-btn fp-btn-primary"
+            style={{ width: "100%" }}
+            onClick={(e) => scrollTo(e, "fp-contact")}
+          >
+            Request Consultation
+            <ArrowRight className="w-4 h-4" />
+          </a>
+          <div className="fp-mobile-contact-info">
+            <a href="tel:5125550198" className="fp-mobile-phone">
+              <Phone className="w-4 h-4" />
+              (512) 555-0198
+            </a>
+          </div>
+        </div>
+      </div>
 
       {/* 3. Hero Section */}
       <section className="fp-hero">

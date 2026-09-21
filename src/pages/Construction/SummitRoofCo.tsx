@@ -241,6 +241,23 @@ export function SummitRoofCo() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("sr-anatomy");
 
+  // Lock body scroll while mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  // Close menu on ESC key
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   // Form State
   const [formName, setFormName] = useState("");
   const [formPhone, setFormPhone] = useState("");
@@ -338,7 +355,7 @@ export function SummitRoofCo() {
       </div>
 
       {/* 2. Main Sticky Header */}
-      <header className={`sr-header-nav ${scrolled ? "scrolled" : ""}`}>
+      <header className={`sr-header-nav${scrolled ? " scrolled" : ""}`}>
         <div className="sr-wrap sr-nav-container">
           <a href="#sr-top" className="sr-brand-logo" onClick={(e) => scrollTo(e, "sr-top")}>
             <div className="sr-logo-icon">
@@ -351,7 +368,7 @@ export function SummitRoofCo() {
           </a>
 
           {/* Desktop Nav */}
-          <nav className="sr-nav-links">
+          <nav className="sr-nav-links" aria-label="Main navigation">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -364,10 +381,10 @@ export function SummitRoofCo() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="sr-nav-actions">
             <a
               href="#sr-inspection-form"
-              className="sr-btn sr-btn-copper sr-btn-sm hidden sm:inline-flex"
+              className="sr-btn sr-btn-copper sr-btn-sm sr-nav-cta"
               onClick={(e) => scrollTo(e, "sr-inspection-form")}
             >
               Free 4K Drone Inspection
@@ -376,45 +393,82 @@ export function SummitRoofCo() {
 
             <button
               type="button"
-              className="md:hidden text-white p-2"
+              className="sr-hamburger"
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle Navigation"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
             >
               {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Navigation Drawer */}
-        {menuOpen && (
-          <div className="md:hidden bg-[#060a12] border-b border-slate-800 p-6 flex flex-col gap-3 animate-in slide-in-from-top-4 duration-200">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={`py-2 text-base font-semibold ${
-                  activeNav === item.id ? "text-orange-500" : "text-slate-300"
-                }`}
-                onClick={(e) => scrollTo(e, item.id)}
-              >
-                {item.label}
-              </a>
-            ))}
-            <div className="pt-4 border-t border-slate-800 flex flex-col gap-2">
-              <a
-                href="#sr-inspection-form"
-                className="sr-btn sr-btn-copper w-full"
-                onClick={(e) => scrollTo(e, "sr-inspection-form")}
-              >
-                Request Free Drone Inspection
-              </a>
-              <a href="tel:8333657663" className="sr-btn sr-btn-ghost w-full">
-                <Phone className="w-4 h-4" /> Call 24/7 Hotline
-              </a>
+      {/* Mobile Nav Overlay Backdrop */}
+      {menuOpen && (
+        <div
+          className="sr-mobile-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Slide-In Drawer */}
+      <div className={`sr-mobile-drawer${menuOpen ? " is-open" : ""}`} aria-hidden={!menuOpen}>
+        <div className="sr-mobile-drawer-header">
+          <div className="sr-brand-logo">
+            <div className="sr-logo-icon">
+              <Shield className="w-6 h-6" />
+            </div>
+            <div className="sr-brand-text">
+              <h2>SUMMIT ROOF CO.</h2>
+              <span>Alpine Armor Systems</span>
             </div>
           </div>
-        )}
-      </header>
+          <button
+            type="button"
+            className="sr-drawer-close"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        <nav className="sr-mobile-nav">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`sr-mobile-nav-link${activeNav === item.id ? " active" : ""}`}
+              onClick={(e) => scrollTo(e, item.id)}
+            >
+              {item.label}
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          ))}
+        </nav>
+
+        <div className="sr-mobile-drawer-footer">
+          <a
+            href="#sr-inspection-form"
+            className="sr-btn sr-btn-copper"
+            style={{ width: "100%" }}
+            onClick={(e) => scrollTo(e, "sr-inspection-form")}
+          >
+            Free 4K Drone Inspection
+            <ArrowRight className="w-4 h-4" />
+          </a>
+          <a
+            href="tel:8333657663"
+            className="sr-btn sr-btn-ghost"
+            style={{ width: "100%" }}
+          >
+            <Phone className="w-4 h-4" />
+            (833) 365-ROOF — 24/7 Hotline
+          </a>
+        </div>
+      </div>
 
       {/* 3. Hero Section (Obsidian & Alpine Copper) */}
       <section className="sr-hero-split">
