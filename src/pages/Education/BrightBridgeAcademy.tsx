@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import {
   GraduationCap,
   BookOpen,
@@ -19,6 +18,7 @@ import {
   Quote,
   Clock,
   ShieldCheck,
+  HelpCircle,
 } from "lucide-react";
 import "./BrightBridgeAcademy.css";
 
@@ -31,12 +31,12 @@ import facultyImage from "../../assets/optimized/education/brightbridge/brightbr
 import artsImage from "../../assets/optimized/education/brightbridge/arts.webp";
 
 const navItems = [
-  { id: "bb-about", label: "Academy Overview" },
-  { id: "bb-divisions", label: "Divisions & Curriculum" },
-  { id: "bb-admissions", label: "Admissions Timeline" },
-  { id: "bb-calculator", label: "Tuition Estimator" },
-  { id: "bb-faculty", label: "Faculty Directory" },
-  { id: "bb-faq", label: "FAQ" },
+  { id: "bb-about", label: "Academy Overview", shortLabel: "Overview", icon: Building2 },
+  { id: "bb-divisions", label: "Divisions & Curriculum", shortLabel: "Curriculum", icon: BookOpen },
+  { id: "bb-calculator", label: "Tuition Estimator", shortLabel: "Tuition", icon: Calculator },
+  { id: "bb-admissions", label: "Admissions Timeline", shortLabel: "Admissions", icon: Calendar },
+  { id: "bb-faculty", label: "Faculty Directory", shortLabel: "Faculty", icon: Users },
+  { id: "bb-faq", label: "FAQ & Inquiries", shortLabel: "FAQ", icon: HelpCircle },
 ];
 
 const divisionTabs = [
@@ -141,7 +141,6 @@ const faqs = [
 
 export function BrightBridgeAcademy() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("bb-about");
   const [activeTab, setActiveTab] = useState("lower");
   const [incomeRange, setIncomeRange] = useState<number>(120000);
@@ -152,7 +151,7 @@ export function BrightBridgeAcademy() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
 
-      const offset = window.scrollY + 140;
+      const offset = window.scrollY + 180;
       for (let i = navItems.length - 1; i >= 0; i--) {
         const el = document.getElementById(navItems[i].id);
         if (el && el.offsetTop <= offset) {
@@ -163,16 +162,18 @@ export function BrightBridgeAcademy() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollTo = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     setActiveNav(id);
-    setMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      const topOffset = element.getBoundingClientRect().top + window.scrollY - 80;
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+      const headerOffset = isMobile ? 64 : 24;
+      const topOffset = element.getBoundingClientRect().top + window.scrollY - headerOffset;
       window.scrollTo({ top: topOffset, behavior: "smooth" });
     }
   };
@@ -190,93 +191,105 @@ export function BrightBridgeAcademy() {
 
   return (
     <div className="brightbridge-site" id="bb-top">
-      {/* 1. Classic Editorial Header */}
-      <header className={`bb-editorial-header ${scrolled ? "scrolled" : ""}`}>
-        <div className="bb-editorial-wrap bb-header-row">
-          <a href="#bb-top" className="bb-crest-brand" onClick={(e) => scrollTo(e, "bb-top")}>
+      {/* 1. Desktop Left Vertical Sidebar Navbar (Visible >= 1024px) */}
+      <aside className="bb-left-sidebar" aria-label="Desktop Navigation">
+        <div className="bb-sidebar-top">
+          <a href="#bb-top" className="bb-sidebar-brand" onClick={(e) => scrollTo(e, "bb-top")}>
             <div className="bb-monogram-shield">BB</div>
-            <h1 className="bb-brand-name">
+            <div className="bb-brand-text">
+              <span className="bb-brand-name-text">BRIGHTBRIDGE</span>
+              <span className="bb-brand-sub-text">ACADEMY EST. 1988</span>
+            </div>
+          </a>
+          <div className="bb-sidebar-badge">Classical College Prep</div>
+        </div>
+
+        <nav className="bb-sidebar-nav" aria-label="Section Navigation">
+          <div className="bb-sidebar-nav-title">SECTIONS &amp; DIRECTORY</div>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeNav === item.id;
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`bb-sidebar-link ${isActive ? "active" : ""}`}
+                onClick={(e) => scrollTo(e, item.id)}
+              >
+                <div className="bb-sidebar-icon-wrap">
+                  <Icon className="w-4 h-4" />
+                </div>
+                <span className="bb-sidebar-label">{item.label}</span>
+                {isActive && <span className="bb-sidebar-active-indicator" />}
+              </a>
+            );
+          })}
+        </nav>
+
+        <div className="bb-sidebar-footer">
+          <a
+            href="#bb-admissions"
+            className="bb-sidebar-cta"
+            onClick={(e) => scrollTo(e, "bb-admissions")}
+          >
+            <span>Book Campus Tour</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+          <div className="bb-sidebar-contact">
+            <span className="bb-contact-label">Admissions Hotline</span>
+            <span className="bb-contact-val">(800) 555-BRIGHT</span>
+          </div>
+          <div className="bb-sidebar-motto">
+            <em>Curiosity &amp; Character</em>
+          </div>
+        </div>
+      </aside>
+
+      {/* 2. Mobile Top Header (< 1024px) */}
+      <header className={`bb-mobile-header ${scrolled ? "scrolled" : ""}`}>
+        <div className="bb-mobile-header-inner">
+          <a href="#bb-top" className="bb-crest-brand" onClick={(e) => scrollTo(e, "bb-top")}>
+            <div className="bb-monogram-shield !w-7 !h-8 text-xs">BB</div>
+            <h1 className="bb-brand-name !text-base">
               BRIGHTBRIDGE
               <span>ACADEMY EST. 1988</span>
             </h1>
           </a>
 
-          {/* Desktop Links */}
-          <nav className="bb-nav-menu">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={`bb-nav-link ${activeNav === item.id ? "active" : ""}`}
-                onClick={(e) => scrollTo(e, item.id)}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="#bb-admissions"
-              className="bb-tour-cta"
-              onClick={(e) => scrollTo(e, "bb-admissions")}
-            >
-              Book Campus Tour
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-
-            <button
-              type="button"
-              className="bb-drawer-toggle"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle navigation menu"
-            >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
+          <a
+            href="#bb-admissions"
+            className="bb-mobile-top-cta"
+            onClick={(e) => scrollTo(e, "bb-admissions")}
+          >
+            <span>Tour</span>
+            <ArrowRight className="w-3 h-3" />
+          </a>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu Portal */}
-      {menuOpen && typeof document !== "undefined" && createPortal(
-        <div className="bb-portal-drawer-root">
-          <div
-            className="bb-portal-backdrop"
-            onClick={() => setMenuOpen(false)}
-            aria-hidden="true"
-          />
-          <div className="bb-portal-drawer" role="dialog" aria-modal="true" aria-label="BrightBridge Navigation Menu">
-            <div className="bb-drawer-head">
-              <div className="flex items-center gap-2">
-                <div className="bb-monogram-shield !w-7 !h-8 text-xs">BB</div>
-                <span className="font-serif font-bold text-white text-base">BRIGHTBRIDGE</span>
+      {/* 3. Mobile Fixed Bottom Navigation Bar (< 1024px) */}
+      <nav className="bb-bottom-nav" aria-label="Mobile Bottom Navigation">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          const isActive = activeNav === item.id;
+          return (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`bb-bottom-nav-item ${isActive ? "active" : ""}`}
+              onClick={(e) => scrollTo(e, item.id)}
+            >
+              <div className="bb-bottom-icon-container">
+                <Icon className="bb-bottom-icon" />
               </div>
-              <button
-                type="button"
-                className="p-2 text-slate-400 hover:text-white"
-                onClick={() => setMenuOpen(false)}
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
+              <span className="bb-bottom-label">{item.shortLabel}</span>
+            </a>
+          );
+        })}
+      </nav>
 
-            <div className="bb-drawer-nav">
-              {navItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className={`bb-drawer-item ${activeNav === item.id ? "active" : ""}`}
-                  onClick={(e) => scrollTo(e, item.id)}
-                >
-                  {item.label}
-                  <ArrowRight className="w-4 h-4 text-slate-400" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
+      {/* 4. Main Page Content Container */}
+      <main className="bb-main-content">
 
       {/* 2. Hero Magazine Cover Section */}
       <section className="bb-hero-editorial" id="bb-about">
@@ -733,6 +746,7 @@ export function BrightBridgeAcademy() {
           </div>
         </div>
       </footer>
-    </div>
+    </main>
+  </div>
   );
 }

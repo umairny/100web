@@ -8,6 +8,7 @@ import {
   Check,
   CheckCircle2,
   ChevronDown,
+  ChevronLeft,
   ChevronRight,
   Clock,
   Clock3,
@@ -54,6 +55,8 @@ import instructorMichaelImg from "../../assets/optimized/education/fluentpath/in
 import instructorLeilaImg from "../../assets/optimized/education/fluentpath/instructor-leila.jpg";
 import instructorJeanImg from "../../assets/optimized/education/fluentpath/instructor-jean.jpg";
 import classroomImgUrl from "../../assets/optimized/education/fluentpath/classroom.jpg";
+import carouselFrenchImg from "../../assets/optimized/education/fluentpath/carousel-french.jpg";
+import carouselItalianImg from "../../assets/optimized/education/fluentpath/carousel-italian.jpg";
 
 // Language programs dataset
 const programsData = [
@@ -320,6 +323,130 @@ const faqs = [
   },
 ];
 
+// Rich Hero Carousel Tracks Dataset
+const heroSlides = [
+  {
+    id: "spanish",
+    language: "Spanish",
+    flag: "🇪🇸",
+    badge: "Live Speaking Cohorts • Max 6 Adults",
+    title: "Speak Spanish with",
+    titleHighlight: "Native Fluency & Ease",
+    desc: "Structured CEFR pathways, native Colombian & Castilian educators, and micro-cohorts designed for adults who want effortless conversations for travel, career, and culture.",
+    img: heroImgUrl,
+    accent: "terracotta",
+    accentGlow: "rgba(214, 104, 79, 0.45)",
+    primaryCta: "Book Spanish Placement Call",
+    secondaryCta: "Take 3-Min Placement Quiz",
+    secondaryTarget: "#quiz",
+    hudTitle: "Real-Time Cohort Progress",
+    cohortName: "Spanish Spoken Cohort B2",
+    cohortWeek: "Week 7 of 12 (Fluency Accelerator)",
+    currentLevel: "CEFR B2",
+    gain: "+1.6 Levels",
+    streak: "24 Days Active",
+    focusTopic: "Spontaneous Idioms & Cultural Stories",
+    fluencyScore: "88%",
+    nextSession: "Today, 7:00 PM with Daniela Ruiz",
+    tagline: "Live speaking cohorts & natural pronunciation",
+    stats: [
+      { label: "CEFR Velocity", val: "2.4x Faster" },
+      { label: "Speaking Ratio", val: "70% Student Talk" },
+      { label: "Cohort Size", val: "Max 6 Learners" },
+    ],
+  },
+  {
+    id: "english",
+    language: "Executive English",
+    flag: "🇬🇧",
+    badge: "Executive Fluency • C1 Professional Credential",
+    title: "Command Boardrooms & Meetings in",
+    titleHighlight: "Polished Global English",
+    desc: "Conquer high-stakes international presentations, cross-border negotiations, nuanced executive vocabulary, and clear accent modulation for senior corporate leadership.",
+    img: classroomImgUrl,
+    accent: "navy",
+    accentGlow: "rgba(37, 99, 235, 0.45)",
+    primaryCta: "Schedule Executive Diagnostic",
+    secondaryCta: "Take 3-Min Placement Quiz",
+    secondaryTarget: "#quiz",
+    hudTitle: "Executive Speech Telemetry",
+    cohortName: "Global Leadership Seminar C1",
+    cohortWeek: "Week 5 of 12 (Boardroom Track)",
+    currentLevel: "CEFR C1",
+    gain: "+1.8 Levels",
+    streak: "31 Days Active",
+    focusTopic: "Cross-Border Negotiations & Pitching",
+    fluencyScore: "94%",
+    nextSession: "Tomorrow, 8:30 AM with Michael Vance",
+    tagline: "Oxford & Ivy League certified corporate mentors",
+    stats: [
+      { label: "Career Velocity", val: "+42% Promoted" },
+      { label: "Accent Clarity", val: "99% Metric" },
+      { label: "Format", val: "1:1 + Masterclass" },
+    ],
+  },
+  {
+    id: "french",
+    language: "French",
+    flag: "🇫🇷",
+    badge: "Parisian Conversation Salons • DELF/DALF",
+    title: "Master Parisian French for",
+    titleHighlight: "Travel, Art & Living Abroad",
+    desc: "Cultivate authentic Parisian rhythm, effortless pronunciation, and cultural depth in conversational salon cohorts led by Sorbonne-educated native French language scholars.",
+    img: carouselFrenchImg,
+    accent: "blue",
+    accentGlow: "rgba(59, 130, 246, 0.45)",
+    primaryCta: "Join French Speaking Salon",
+    secondaryCta: "Take 3-Min Placement Quiz",
+    secondaryTarget: "#quiz",
+    hudTitle: "Acoustic Phonetics Lab",
+    cohortName: "Rive Gauche Speaking Salon B1+",
+    cohortWeek: "Week 8 of 12 (Conversational Ease)",
+    currentLevel: "CEFR B2.1",
+    gain: "+1.5 Levels",
+    streak: "19 Days Active",
+    focusTopic: "Subjunctive Nuance & Cafe Scenarios",
+    fluencyScore: "86%",
+    nextSession: "Wednesday, 6:30 PM with Jean-Luc Dubois",
+    tagline: "Authentic Parisian rhythm & cultural depth",
+    stats: [
+      { label: "DELF Pass Rate", val: "98.4%" },
+      { label: "Cultural Salons", val: "Weekly Included" },
+      { label: "Cohort Cap", val: "6 Adults Max" },
+    ],
+  },
+  {
+    id: "italian",
+    language: "Italian",
+    flag: "🇮🇹",
+    badge: "Convivial Speaking Tables • A1 ➔ B2 Mastery",
+    title: "Immerse in the Rhythm of",
+    titleHighlight: "Authentic Conversational Italian",
+    desc: "From ordering espresso with native cadence to unscripted cultural debates in convivial small circles, speak authentic Italian with warmth, gesture, and spontaneous confidence.",
+    img: carouselItalianImg,
+    accent: "gold",
+    accentGlow: "rgba(212, 163, 89, 0.45)",
+    primaryCta: "Begin Italian Journey",
+    secondaryCta: "Take 3-Min Placement Quiz",
+    secondaryTarget: "#quiz",
+    hudTitle: "Spontaneous Speech Lab",
+    cohortName: "Toscana Immersion Cohort",
+    cohortWeek: "Week 6 of 12 (Real-World Speech)",
+    currentLevel: "CEFR B1",
+    gain: "+1.4 Levels",
+    streak: "22 Days Active",
+    focusTopic: "Gastronomy, Travel & Regional Nuances",
+    fluencyScore: "91%",
+    nextSession: "Thursday, 6:00 PM with Daniela & Matteo",
+    tagline: "Warm Mediterranean immersion & expressive fluency",
+    stats: [
+      { label: "Fluency Velocity", val: "3.1 Months" },
+      { label: "Speaking Time", val: "75% In Italian" },
+      { label: "Community", val: "1,200+ Alumni" },
+    ],
+  },
+];
+
 export function FluentPathLanguages() {
   // Navigation & Scroll State
   const [isScrolled, setIsScrolled] = useState(false);
@@ -344,6 +471,19 @@ export function FluentPathLanguages() {
 
   // Pricing Toggle (Monthly vs Full Cohort)
   const [billingCycle, setBillingCycle] = useState<"monthly" | "cohort">("monthly");
+
+  // Hero Carousel State
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  // Auto-advance hero carousel every 6.5s
+  useEffect(() => {
+    if (!isPlaying) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 6500);
+    return () => clearInterval(timer);
+  }, [isPlaying]);
 
   // Instructor Modal State
   const [selectedInstructor, setSelectedInstructor] = useState<any | null>(null);
@@ -639,121 +779,244 @@ export function FluentPathLanguages() {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="fl-hero-section">
-        <div className="fl-wrap fl-hero-grid">
-          <div className="fl-hero-copy">
-            <div className="fl-pill-badge">
-              <Sparkles className="icon-terracotta" size={14} />
-              <span>Real Conversational Fluency for Adults</span>
+      {/* Hero Interactive Carousel Section */}
+      <section
+        id="top"
+        className="fl-hero-carousel-wrap"
+        aria-label="Language Immersion Programs Carousel"
+        onMouseEnter={() => setIsPlaying(false)}
+        onMouseLeave={() => setIsPlaying(true)}
+      >
+        <div className="fl-wrap">
+          {/* Integrated Language Track Switcher Bar */}
+          <div className="fl-track-switcher-bar">
+            <div className="fl-track-tabs">
+              {heroSlides.map((slide, sIdx) => {
+                const isCurrent = sIdx === currentSlide;
+                return (
+                  <button
+                    key={slide.id}
+                    type="button"
+                    onClick={() => setCurrentSlide(sIdx)}
+                    className={`fl-track-tab ${isCurrent ? "active" : ""}`}
+                    aria-label={`Select ${slide.language} immersion track`}
+                  >
+                    <span className="fl-tab-flag">{slide.flag}</span>
+                    <span className="fl-tab-name">{slide.language}</span>
+                    {isCurrent && <div className="fl-tab-progress-indicator" />}
+                  </button>
+                );
+              })}
             </div>
-            <h1 className="fl-hero-title">
-              Language Learning
-              <br />
-              for Adults Who Want
-              <br />
-              <span className="fl-hero-gradient-text">Real Progress.</span>
-            </h1>
-            <p className="fl-hero-desc">
-              Structured CEFR pathways, native-speaking educators, and live speaking cohorts designed for real life—so you can converse with natural ease at work, while traveling, and in everyday moments.
-            </p>
 
-            <div className="fl-hero-actions">
+            <div className="fl-track-nav-controls">
               <button
-                onClick={() => setIsBookingOpen(true)}
-                className="fl-btn-terracotta fl-hero-btn"
+                type="button"
+                onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
+                className="fl-track-arrow-btn"
+                aria-label="Previous language slide"
+                title="Previous track"
               >
-                <span>Explore Live Programs</span>
-                <ArrowRight size={17} />
+                <ChevronLeft size={16} />
               </button>
-              <a
-                href="#quiz"
-                onClick={(e) => handleNavClick(e, "#quiz")}
-                className="fl-btn-secondary"
-              >
-                <span>Take 3-Min Placement Quiz</span>
-              </a>
-            </div>
 
-            <div className="fl-hero-trust-bar">
-              <div className="fl-trust-item">
-                <CheckCircle2 size={16} className="icon-sage" />
-                <span>Small Cohorts (Max 6)</span>
+              <div className="fl-track-counter">
+                <span>0{currentSlide + 1}</span>
+                <span className="fl-counter-divider">/</span>
+                <span>0{heroSlides.length}</span>
               </div>
-              <div className="fl-trust-item">
-                <CheckCircle2 size={16} className="icon-sage" />
-                <span>Native-Level Educators</span>
-              </div>
-              <div className="fl-trust-item">
-                <Star size={16} className="icon-gold" />
-                <span>4.9/5 Rating (15,000+ Learners)</span>
-              </div>
+
+              <button
+                type="button"
+                onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
+                className="fl-track-arrow-btn"
+                aria-label="Next language slide"
+                title="Next track"
+              >
+                <ChevronRight size={16} />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="fl-track-play-btn"
+                title={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+                aria-label={isPlaying ? "Pause autoplay" : "Resume autoplay"}
+              >
+                {isPlaying ? (
+                  <span className="fl-pause-bars">
+                    <span />
+                    <span />
+                  </span>
+                ) : (
+                  <Play size={12} />
+                )}
+              </button>
             </div>
           </div>
 
-          {/* Hero Visual Card Area with High-Res Generated Photo & Dynamic Floating Widget */}
-          <div className="fl-hero-visual-wrapper">
-            <div className="fl-hero-image-card">
-              <img
-                src={heroImgUrl}
-                alt="FluentPath Adult Language Learners Practicing in Modern Studio"
-                className="fl-hero-img"
-              />
-              <div className="fl-hero-overlay" />
-            </div>
+          {/* Carousel Slide Stage */}
+          <div className="fl-carousel-stage">
+            {heroSlides.map((slide, idx) => {
+              const isActive = idx === currentSlide;
+              return (
+                <div
+                  key={slide.id}
+                  className={`fl-carousel-slide ${isActive ? "active" : ""}`}
+                  aria-hidden={!isActive}
+                >
+                  <div className="fl-slide-grid">
+                    {/* Left Column: Copy & Actions */}
+                    <div className="fl-slide-copy">
+                      <div className={`fl-pill-badge fl-badge-${slide.accent}`}>
+                        <Sparkles className="icon-terracotta" size={14} />
+                        <span>{slide.badge}</span>
+                      </div>
 
-            {/* Floating Live Fluency Progress Card */}
-            <div className="fl-floating-fluency-card">
-              <div className="fl-floating-header">
-                <div className="fl-floating-avatar">
-                  <Languages size={17} />
-                </div>
-                <div>
-                  <strong>Spanish Cohort B2</strong>
-                  <small>Week 6 of 12 (Spoken Fluency Track)</small>
-                </div>
-              </div>
+                      <h1 className="fl-hero-title">
+                        {slide.title}
+                        <br />
+                        <span className={`fl-hero-gradient-text fl-grad-${slide.accent}`}>
+                          {slide.titleHighlight}
+                        </span>
+                      </h1>
 
-              <div className="fl-fluency-mini-grid">
-                <div className="fl-fluency-badge">
-                  <span>Current Level</span>
-                  <strong>CEFR B2</strong>
-                  <small className="fluency-gain">+1.4 Levels</small>
-                </div>
-                <div className="fl-fluency-badge">
-                  <span>Speaking Streak</span>
-                  <strong>18 Days</strong>
-                  <small className="fluency-gain">🔥 Active</small>
-                </div>
-              </div>
+                      <p className="fl-hero-desc">{slide.desc}</p>
 
-              <div className="fl-progress-wrap">
-                <div className="fl-progress-label">
-                  <span>Spontaneous Dialogues & Idioms</span>
-                  <b>84% Fluency Score</b>
-                </div>
-                <div className="fl-progress-bar">
-                  <div className="fl-progress-fill" style={{ width: "84%" }} />
-                </div>
-              </div>
-            </div>
+                      {/* Interactive Slide Feature Chips */}
+                      <div className="fl-slide-stats-row">
+                        {slide.stats.map((stat, sIdx) => (
+                          <div key={sIdx} className="fl-slide-stat-chip">
+                            <span className="fl-stat-chip-val">{stat.val}</span>
+                            <span className="fl-stat-chip-lbl">{stat.label}</span>
+                          </div>
+                        ))}
+                      </div>
 
-            {/* Floating Upcoming Conversation Club Badge */}
-            <div className="fl-floating-session-card">
-              <div className="fl-session-icon">
-                <MessageCircle size={16} />
-              </div>
-              <div className="fl-session-info">
-                <span>Next Live Speaking Lab</span>
-                <strong>Today, 7:00 PM with Daniela Ruiz</strong>
-              </div>
-              <button
-                onClick={() => setIsBookingOpen(true)}
-                className="fl-session-join-btn"
-              >
-                Join
-              </button>
-            </div>
+                      {/* Slide Action Buttons */}
+                      <div className="fl-hero-actions">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setBookingForm((prev) => ({
+                              ...prev,
+                              language: slide.language.includes("English") ? "English" : slide.language,
+                            }));
+                            setIsBookingOpen(true);
+                          }}
+                          className={`fl-btn-terracotta fl-hero-btn fl-btn-accent-${slide.accent}`}
+                        >
+                          <CalendarDays size={18} />
+                          <span>{slide.primaryCta}</span>
+                        </button>
+
+                        <a
+                          href="#quiz"
+                          onClick={(e) => handleNavClick(e, "#quiz")}
+                          className="fl-btn-secondary"
+                        >
+                          <span>{slide.secondaryCta}</span>
+                          <ArrowRight size={16} />
+                        </a>
+                      </div>
+
+                      {/* Trust Bar */}
+                      <div className="fl-hero-trust-bar">
+                        <div className="fl-trust-item">
+                          <CheckCircle2 size={16} className="icon-sage" />
+                          <span>Small Cohorts (Max 6)</span>
+                        </div>
+                        <div className="fl-trust-item">
+                          <CheckCircle2 size={16} className="icon-sage" />
+                          <span>Native-Level Educators</span>
+                        </div>
+                        <div className="fl-trust-item">
+                          <Star size={16} className="icon-gold" />
+                          <span>4.9/5 Rating (15,000+ Learners)</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Column: Visual Photo Card with Floating Fluency Widgets */}
+                    <div className="fl-hero-visual-wrapper">
+                      <div className="fl-hero-image-card">
+                        <img
+                          src={slide.img}
+                          alt={`${slide.language} Immersion Program`}
+                          className="fl-hero-img"
+                        />
+                        <div className="fl-hero-overlay" />
+                      </div>
+
+                      {/* Floating Live Fluency Progress Card */}
+                      <div className="fl-floating-fluency-card">
+                        <div className="fl-floating-header">
+                          <div className="fl-floating-avatar">
+                            <span className="fl-flag-mini">{slide.flag}</span>
+                          </div>
+                          <div>
+                            <strong>{slide.cohortName}</strong>
+                            <small>{slide.cohortWeek}</small>
+                          </div>
+                        </div>
+
+                        <div className="fl-fluency-mini-grid">
+                          <div className="fl-fluency-badge">
+                            <span>Current Level</span>
+                            <strong>{slide.currentLevel}</strong>
+                            <small className="fluency-gain">{slide.gain}</small>
+                          </div>
+                          <div className="fl-fluency-badge">
+                            <span>Speaking Streak</span>
+                            <strong>{slide.streak.split(" ")[0]} Days</strong>
+                            <small className="fluency-gain">
+                              <Flame size={12} style={{ display: "inline", verticalAlign: "middle", marginRight: "2px" }} /> Active
+                            </small>
+                          </div>
+                        </div>
+
+                        <div className="fl-progress-wrap">
+                          <div className="fl-progress-label">
+                            <span>{slide.focusTopic}</span>
+                            <b>{slide.fluencyScore} Fluency Score</b>
+                          </div>
+                          <div className="fl-progress-bar">
+                            <div
+                              className={`fl-progress-fill fl-fill-${slide.accent}`}
+                              style={{ width: slide.fluencyScore }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Floating Upcoming Conversation Club Badge */}
+                      <div className="fl-floating-session-card">
+                        <div className="fl-session-icon">
+                          <MessageCircle size={16} />
+                        </div>
+                        <div className="fl-session-info">
+                          <span>Next Live Speaking Lab</span>
+                          <strong>{slide.nextSession}</strong>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setBookingForm((prev) => ({
+                              ...prev,
+                              language: slide.language.includes("English") ? "English" : slide.language,
+                            }));
+                            setIsBookingOpen(true);
+                          }}
+                          className="fl-session-join-btn"
+                        >
+                          Join
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

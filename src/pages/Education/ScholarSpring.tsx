@@ -338,6 +338,7 @@ export function ScholarSpring() {
   const [calcTier, setCalcTier] = useState<"preschool" | "toddler" | "prek">("preschool");
   const [calcDays, setCalcDays] = useState<2 | 3 | 5>(5);
   const [calcHours, setCalcHours] = useState<"core" | "extended">("core");
+  const [siblingDiscount, setSiblingDiscount] = useState(false);
 
   // Form State
   const [tourForm, setTourForm] = useState({
@@ -347,14 +348,15 @@ export function ScholarSpring() {
     childName: "",
     childAge: "Preschool (3 – 4 Years)",
     tourDate: "Tomorrow Morning (9:30 AM)",
+    startTerm: "Fall 2026 (September Start)",
     notes: "",
   });
 
   // FAQ Accordion State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  // Calculate Tuition
-  const calculateTuition = () => {
+  // Calculate Tuition with Sibling Discount & Savings breakdown
+  const getTuitionData = () => {
     const baseRates: Record<string, Record<number, { core: number; extended: number }>> = {
       toddler: {
         2: { core: 780, extended: 980 },
@@ -373,8 +375,13 @@ export function ScholarSpring() {
       },
     };
 
-    return baseRates[calcTier][calcDays][calcHours];
+    const base = baseRates[calcTier][calcDays][calcHours];
+    const final = siblingDiscount ? Math.round(base * 0.9) : base;
+    const savings = base - final;
+    return { base, final, savings };
   };
+
+  const tuitionData = getTuitionData();
 
   // Scrollspy & sticky listener
   useEffect(() => {
@@ -1113,6 +1120,25 @@ export function ScholarSpring() {
                   </button>
                 </div>
               </div>
+
+              {/* Step 4: Family Sibling Savings Toggle */}
+              <div className="ss-calc-group">
+                <label className="ss-calc-label">4. Family Discount:</label>
+                <button
+                  type="button"
+                  className={`ss-sibling-toggle-btn ${siblingDiscount ? "active" : ""}`}
+                  onClick={() => setSiblingDiscount(!siblingDiscount)}
+                  aria-pressed={siblingDiscount}
+                >
+                  <span className={`ss-sibling-check ${siblingDiscount ? "checked" : ""}`}>
+                    {siblingDiscount && <Check size={14} />}
+                  </span>
+                  <div className="ss-sibling-copy">
+                    <strong>Enrolling a sibling?</strong>
+                    <span>Apply 10% Family Discount across monthly tuition</span>
+                  </div>
+                </button>
+              </div>
             </div>
 
             {/* Tuition Price Result Box */}
@@ -1120,9 +1146,19 @@ export function ScholarSpring() {
               <span className="ss-result-tag">Estimated All-Inclusive Monthly Tuition</span>
               <div className="ss-price-display">
                 <span className="ss-curr">$</span>
-                <span className="ss-amt">{calculateTuition().toLocaleString()}</span>
+                <span className="ss-amt">{tuitionData.final.toLocaleString()}</span>
                 <span className="ss-mo">/ month</span>
+                {siblingDiscount && (
+                  <span className="ss-orig-price" title="Original Rate">${tuitionData.base}</span>
+                )}
               </div>
+
+              {siblingDiscount && (
+                <div className="ss-discount-ribbon">
+                  <Sparkles size={14} />
+                  <span>Saving <strong>${tuitionData.savings}/mo</strong> with 10% Sibling Discount!</span>
+                </div>
+              )}
 
               <div className="ss-tuition-included-list">
                 <div className="ss-inc-item">
@@ -1139,17 +1175,44 @@ export function ScholarSpring() {
                 </div>
                 <div className="ss-inc-item">
                   <CheckCircle2 size={16} className="text-mint" />
-                  <span>10% Sibling Discount available for 2nd enrolled child</span>
+                  <span>10% Sibling Discount for second enrolled child</span>
                 </div>
               </div>
 
-              <button
-                onClick={() => setIsTourOpen(true)}
-                className="ss-btn-coral full-w ss-calc-cta"
-              >
-                <CalendarDays size={18} />
-                <span>Schedule a Tour & Reserve Spot</span>
-              </button>
+              <div className="ss-calc-btn-actions">
+                <button
+                  onClick={() => {
+                    const mappedAge =
+                      calcTier === "toddler"
+                        ? "Toddlers (18 – 36 Months)"
+                        : calcTier === "prek"
+                        ? "Pre-K (4 – 5 Years)"
+                        : "Preschool (3 – 4 Years)";
+                    setTourForm((prev) => ({ ...prev, childAge: mappedAge }));
+                    setIsTourOpen(true);
+                  }}
+                  className="ss-btn-coral ss-calc-cta"
+                >
+                  <CalendarDays size={17} />
+                  <span>Book Tour</span>
+                </button>
+                <button
+                  onClick={() => {
+                    const mappedAge =
+                      calcTier === "toddler"
+                        ? "Toddlers (18 – 36 Months)"
+                        : calcTier === "prek"
+                        ? "Pre-K (4 – 5 Years)"
+                        : "Preschool (3 – 4 Years)";
+                    setTourForm((prev) => ({ ...prev, childAge: mappedAge }));
+                    setIsEnrollOpen(true);
+                  }}
+                  className="ss-btn-mint ss-calc-cta"
+                >
+                  <FileText size={17} />
+                  <span>Start Enrollment</span>
+                </button>
+              </div>
               <small className="ss-calc-note">* Need-based scholarships & state childcare subsidy vouchers accepted.</small>
             </div>
           </div>
@@ -1471,11 +1534,20 @@ export function ScholarSpring() {
               <div
                 key={faq.q}
                 className={`ss-faq-card ${openFaq === idx ? "open" : ""}`}
+                role="button"
+                tabIndex={0}
+                aria-expanded={openFaq === idx}
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setOpenFaq(openFaq === idx ? null : idx);
+                  }
+                }}
               >
                 <div className="ss-faq-q">
                   <span>{faq.q}</span>
-                  <span className="ss-faq-arrow">{openFaq === idx ? "−" : "+"}</span>
+                  <span className="ss-faq-arrow" aria-hidden="true">{openFaq === idx ? "−" : "+"}</span>
                 </div>
                 {openFaq === idx && (
                   <div className="ss-faq-a">
@@ -1587,10 +1659,10 @@ export function ScholarSpring() {
       </footer>
 
       {/* Mobile Sticky Quick Action Bar */}
-      <div className="ss-mobile-bottom-bar">
+      <div className={`ss-mobile-bottom-bar ${(isTourOpen || isEnrollOpen || selectedProgram || mobileMenuOpen) ? "hidden-modal" : ""}`}>
         <a href="tel:5551234567" className="ss-mob-action-btn phone">
           <Phone size={16} />
-          <span>Call Us</span>
+          <span>Call School</span>
         </a>
         <button onClick={() => setIsTourOpen(true)} className="ss-mob-action-btn tour">
           <CalendarDays size={16} />
@@ -1639,12 +1711,41 @@ export function ScholarSpring() {
             <div className="ss-modal-btn-row">
               <button
                 onClick={() => {
+                  const targetAge =
+                    selectedProgram.id === "toddlers"
+                      ? "Toddlers (18 – 36 Months)"
+                      : selectedProgram.id === "preschool"
+                      ? "Preschool (3 – 4 Years)"
+                      : selectedProgram.id === "pre-k"
+                      ? "Pre-K (4 – 5 Years)"
+                      : "Enrichment (Ages 2 – 5)";
+                  setTourForm((prev) => ({ ...prev, childAge: targetAge }));
                   setSelectedProgram(null);
                   setIsTourOpen(true);
                 }}
-                className="ss-btn-coral full-w"
+                className="ss-btn-coral"
               >
-                Schedule a Tour for {selectedProgram.title}
+                <CalendarDays size={16} />
+                <span>Book Campus Tour</span>
+              </button>
+              <button
+                onClick={() => {
+                  const targetAge =
+                    selectedProgram.id === "toddlers"
+                      ? "Toddlers (18 – 36 Months)"
+                      : selectedProgram.id === "preschool"
+                      ? "Preschool (3 – 4 Years)"
+                      : selectedProgram.id === "pre-k"
+                      ? "Pre-K (4 – 5 Years)"
+                      : "Enrichment (Ages 2 – 5)";
+                  setTourForm((prev) => ({ ...prev, childAge: targetAge }));
+                  setSelectedProgram(null);
+                  setIsEnrollOpen(true);
+                }}
+                className="ss-btn-mint"
+              >
+                <FileText size={16} />
+                <span>Start Enrollment</span>
               </button>
             </div>
           </div>
@@ -1684,7 +1785,7 @@ export function ScholarSpring() {
                   <p>
                     {isTourOpen
                       ? "Come meet our loving educators, tour our bright classrooms, and see joyful learning in action."
-                      : "Begin your child's ScholarSpring application in just 2 minutes."}
+                      : "Begin your child's ScholarSpring application in just 2 minutes. Our team is here to support you."}
                   </p>
                 </div>
 
@@ -1748,18 +1849,34 @@ export function ScholarSpring() {
                         <option value="Enrichment (Ages 2 – 5)">Enrichment Track (Ages 2 – 5)</option>
                       </select>
                     </div>
-                    <div className="ss-form-group">
-                      <label>Preferred Tour Time</label>
-                      <select
-                        value={tourForm.tourDate}
-                        onChange={(e) => setTourForm({ ...tourForm, tourDate: e.target.value })}
-                      >
-                        <option value="Tomorrow Morning (9:30 AM)">Tomorrow Morning (9:30 AM)</option>
-                        <option value="Tomorrow Afternoon (2:30 PM)">Tomorrow Afternoon (2:30 PM)</option>
-                        <option value="This Thursday (10:00 AM)">This Thursday (10:00 AM)</option>
-                        <option value="This Saturday (11:00 AM)">This Saturday (11:00 AM)</option>
-                      </select>
-                    </div>
+
+                    {isTourOpen ? (
+                      <div className="ss-form-group">
+                        <label>Preferred Tour Time</label>
+                        <select
+                          value={tourForm.tourDate}
+                          onChange={(e) => setTourForm({ ...tourForm, tourDate: e.target.value })}
+                        >
+                          <option value="Tomorrow Morning (9:30 AM)">Tomorrow Morning (9:30 AM)</option>
+                          <option value="Tomorrow Afternoon (2:30 PM)">Tomorrow Afternoon (2:30 PM)</option>
+                          <option value="This Thursday (10:00 AM)">This Thursday (10:00 AM)</option>
+                          <option value="This Saturday (11:00 AM)">This Saturday (11:00 AM)</option>
+                        </select>
+                      </div>
+                    ) : (
+                      <div className="ss-form-group">
+                        <label>Desired Start Term</label>
+                        <select
+                          value={tourForm.startTerm}
+                          onChange={(e) => setTourForm({ ...tourForm, startTerm: e.target.value })}
+                        >
+                          <option value="Fall 2026 (September Start)">Fall 2026 (September Start)</option>
+                          <option value="Immediate Rolling Admission (Current Term)">Immediate Rolling Admission (Current Term)</option>
+                          <option value="Summer Camp 2026 (June Start)">Summer Camp 2026 (June Start)</option>
+                          <option value="Spring 2027 (January Start)">Spring 2027 (January Start)</option>
+                        </select>
+                      </div>
+                    )}
                   </div>
 
                   <button type="submit" className="ss-btn-coral full-w">
@@ -1776,9 +1893,11 @@ export function ScholarSpring() {
             ) : (
               <div className="ss-modal-success">
                 <Smile size={56} className="text-coral" />
-                <h3>We Can't Wait to Meet You!</h3>
+                <h3>{isTourOpen ? "We Can't Wait to Meet You! 🌸" : "Application Received! 🎉"}</h3>
                 <p>
-                  Your visit has been scheduled. We have sent your family welcome pack and parking directions to <strong>{tourForm.email}</strong>.
+                  {isTourOpen
+                    ? <>Your campus tour has been scheduled. We have sent your family welcome pack and parking directions to <strong>{tourForm.email}</strong>.</>
+                    : <>Thank you for applying to ScholarSpring! We have sent your enrollment confirmation and next steps packet to <strong>{tourForm.email}</strong>. Our admissions director will reach out within 24 hours.</>}
                 </p>
                 <button
                   onClick={() => {

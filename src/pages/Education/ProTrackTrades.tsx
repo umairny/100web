@@ -85,17 +85,17 @@ function ProTrackLogo({ size = 32 }: { size?: number }) {
     <svg width={size} height={size} viewBox="0 0 36 36" fill="none">
       <path
         d="M18 2L32 10.08V25.92L18 34L4 25.92V10.08L18 2Z"
-        fill="#f59e0b"
-        stroke="#fbbf24"
+        fill="#ff334b"
+        stroke="#ff6b7d"
         strokeWidth="1.5"
       />
       <path
         d="M18 8L27 13.2V22.8L18 28L9 22.8V13.2L18 8Z"
-        fill="#0a0f1d"
+        fill="#090a0d"
       />
       <path
         d="M14 18H22M18 14V22"
-        stroke="#f59e0b"
+        stroke="#ff334b"
         strokeWidth="2.5"
         strokeLinecap="round"
       />

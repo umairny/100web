@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   ArrowRight,
   Award,
@@ -49,6 +50,27 @@ import coachDanielImg from "../../assets/optimized/education/examedge/coach-dani
 import coachLauraImg from "../../assets/optimized/education/examedge/coach-laura.jpg";
 import coachArjunImg from "../../assets/optimized/education/examedge/coach-arjun.jpg";
 import sessionImgUrl from "../../assets/optimized/education/examedge/session.jpg";
+
+// Navigation items with dedicated Lucide icons
+const navItems = [
+  { name: "Overview", href: "#top", icon: Compass },
+  { name: "Score Calculator", href: "#calculator", icon: BarChart3 },
+  { name: "Diagnostic Quiz", href: "#diagnostic-quiz", icon: Brain },
+  { name: "Programs", href: "#programs", icon: BookOpen },
+  { name: "Schedule", href: "#schedule", icon: Calendar },
+  { name: "Coaches", href: "#coaches", icon: Users },
+  { name: "Results", href: "#results", icon: Trophy },
+  { name: "Pricing", href: "#pricing", icon: Zap },
+  { name: "FAQ", href: "#faq", icon: HelpCircle },
+];
+
+const mobileBottomNavItems = [
+  { name: "Home", href: "#top", icon: Compass },
+  { name: "Calc", href: "#calculator", icon: BarChart3 },
+  { name: "Quiz", href: "#diagnostic-quiz", icon: Brain },
+  { name: "Tracks", href: "#programs", icon: BookOpen },
+  { name: "Pricing", href: "#pricing", icon: Zap },
+];
 
 // Programs dataset
 const programsData = [
@@ -317,7 +339,63 @@ const faqs = [
   },
 ];
 
+const heroTrackData = {
+  SAT: {
+    badge: "Official 2026 Digital SAT Adaptive Diagnostic Engine",
+    scoreBaseline: "1280",
+    scoreTarget: "1540",
+    scoreDelta: "+260 Pts",
+    percentile: "99th Percentile (Top 1%)",
+    guarantee: "+160 Points Score Guarantee",
+    highlight: "Desmos Math Shortcuts & Reading Matrix",
+    studentName: "Lucas Vance",
+    acceptance: "Accepted to MIT '28 (+190 Pts)",
+    avatar: coachMayaImg,
+    coachName: "Maya Patel (Harvard '23)",
+    coachRole: "1600 Perfect Scorer & Lead SAT Master",
+    timingPill: "Fall 2026 Testing Window Active",
+  },
+  ACT: {
+    badge: "Speed-Calibrated 36 Composite Curriculum",
+    scoreBaseline: "27",
+    scoreTarget: "34",
+    scoreDelta: "+7 Comp",
+    percentile: "98th Percentile Elite",
+    guarantee: "+4.5 Composite Score Guarantee",
+    highlight: "Science Graph Pacing & 45-Sec Speed Drills",
+    studentName: "Sofia Chen",
+    acceptance: "Accepted to Stanford '28 (+6 Comp)",
+    avatar: coachDanielImg,
+    coachName: "Daniel Kim (Stanford '22)",
+    coachRole: "36 ACT Scorer & Pacing Specialist",
+    timingPill: "Official ACT Testing Format Ready",
+  },
+  Elite: {
+    badge: "Ivy League & Tier-1 Bespoke 1:1 Mentorship",
+    scoreBaseline: "1390",
+    scoreTarget: "1580",
+    scoreDelta: "+190 Pts",
+    percentile: "99.9th Percentile Top 0.1%",
+    guarantee: "1:1 Guaranteed Score or Free Coaching",
+    highlight: "Unlimited 1:1 Mentorship & Application Strategy",
+    studentName: "Elena R.",
+    acceptance: "Accepted to Harvard '29",
+    avatar: coachLauraImg,
+    coachName: "Dr. Laura Vance (Princeton)",
+    coachRole: "Former Admissions Reader & Lead Mentor",
+    timingPill: "Limited to 15 Students per Cohort",
+  },
+};
+
 export function ExamEdgePrep() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Hero Track Switcher State
+  const [heroTrack, setHeroTrack] = useState<"SAT" | "ACT" | "Elite">("SAT");
+
   // Navigation & Scroll State
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -369,20 +447,21 @@ export function ExamEdgePrep() {
   // Sticky navbar listener & scrollspy
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      setIsScrolled(window.scrollY > 30);
+
+      if (window.scrollY < 200) {
+        setActiveNav("#top");
+        return;
       }
 
       const sections = ["top", "calculator", "diagnostic-quiz", "programs", "schedule", "coaches", "results", "pricing", "faq"];
-      const scrollPosition = window.scrollY + 140;
+      const scrollPosition = window.scrollY + 160;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const sectionId = sections[i];
         const el = document.getElementById(sectionId);
         if (el) {
-          const top = el.offsetTop;
+          const top = el.getBoundingClientRect().top + window.scrollY;
           if (scrollPosition >= top) {
             setActiveNav(`#${sectionId}`);
             break;
@@ -436,9 +515,13 @@ export function ExamEdgePrep() {
     setMobileMenuOpen(false);
 
     const targetId = href.substring(1);
+    if (targetId === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     const targetEl = document.getElementById(targetId);
     if (targetEl) {
-      const headerOffset = 90;
+      const headerOffset = 80;
       const elementPosition = targetEl.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -483,31 +566,36 @@ export function ExamEdgePrep() {
 
   return (
     <main className="ee-site" id="top" tabIndex={-1}>
-      {/* Top Announcement Bar & Sticky Header */}
+      {/* 1. Desktop Sticky Header & Top Announcement Bar (Visible on Desktop >= 1024px) */}
       <header className={`ee-header-wrapper ${isScrolled ? "scrolled" : ""}`}>
-        {/* Top Notice Bar */}
+        {/* Top Notification / Announcement Bar */}
         <div className="ee-top-bar">
           <div className="ee-wrap ee-top-bar-content">
             <div className="ee-top-bar-text">
-              <Sparkles className="icon-amber icon-sparkle" size={14} />
+              <Sparkles className="icon-cyan icon-sparkle" size={14} />
               <span>
-                <strong>Fall 2026 Digital SAT & ACT Cohorts Open</strong>
-                <span className="ee-top-bar-sub"> — Limited to 15 students per master coach</span>
+                <strong>Fall 2026 Ivy League &amp; Top 20 Diagnostic Cohorts Open</strong>
+                <span className="ee-top-bar-sub"> — Adaptive 1:1 prep with +160 score guarantee</span>
               </span>
             </div>
-            <button
-              onClick={() => setIsBookingOpen(true)}
-              className="ee-top-bar-btn"
-              aria-label="Book Free Diagnostic Consultation"
-            >
-              <span>Book Free Diagnostic</span>
-              <ArrowRight size={13} className="ee-btn-arrow" />
-            </button>
+            <div className="ee-top-bar-right">
+              <span className="ee-top-hotline">
+                Admissions: <strong>(800) 555-EDGE</strong>
+              </span>
+              <button
+                onClick={() => setIsBookingOpen(true)}
+                className="ee-top-bar-btn"
+                aria-label="Book Free Diagnostic Consultation"
+              >
+                <span>Book Free Diagnostic</span>
+                <ArrowRight size={13} className="ee-btn-arrow" />
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Main Sticky Navbar */}
-        <nav className="ee-nav" aria-label="Main navigation">
+        <nav className="ee-nav" aria-label="Main Navigation">
           <div className="ee-wrap ee-nav-inner">
             <a
               href="#top"
@@ -520,251 +608,438 @@ export function ExamEdgePrep() {
               </div>
               <div className="ee-brand-text">
                 <span className="ee-brand-title">EXAM<span className="ee-highlight">EDGE</span></span>
-                <span className="ee-brand-sub">PREP & ADMISSIONS</span>
+                <span className="ee-brand-sub">PREP &amp; ADMISSIONS</span>
               </div>
             </a>
 
-            {/* Desktop Nav Links */}
+            {/* Desktop Navigation Links */}
             <div className="ee-nav-links">
-              {[
-                { name: "Overview", href: "#top" },
-                { name: "Score Calculator", href: "#calculator" },
-                { name: "Diagnostic Quiz", href: "#diagnostic-quiz" },
-                { name: "Programs", href: "#programs" },
-                { name: "Schedule", href: "#schedule" },
-                { name: "Coaches", href: "#coaches" },
-                { name: "Results", href: "#results" },
-                { name: "Pricing", href: "#pricing" },
-                { name: "FAQ", href: "#faq" },
-              ].map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={`ee-nav-link ${activeNav === item.href ? "active" : ""}`}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                >
-                  {item.name}
-                </a>
-              ))}
+              {navItems.map((item) => {
+                const isActive = activeNav === item.href;
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className={`ee-nav-link ${isActive ? "active" : ""}`}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                  >
+                    <span>{item.name}</span>
+                    {isActive && <span className="ee-nav-indicator" />}
+                  </a>
+                );
+              })}
             </div>
 
-            {/* Right Action & Mobile Button */}
-            <div className="ee-nav-cta-wrap">
+            {/* Nav Actions / CTA */}
+            <div className="ee-nav-actions">
+              <a href="tel:8005553343" className="ee-nav-phone" aria-label="Call Admissions Hotline">
+                <Phone size={14} />
+                <span>(800) 555-EDGE</span>
+              </a>
               <button
                 onClick={() => setIsBookingOpen(true)}
-                className="ee-btn-primary ee-nav-cta-btn"
+                className="ee-nav-cta-btn"
+                aria-label="Book Free Diagnostic Consultation"
               >
-                <CalendarDays size={16} />
+                <CalendarDays size={15} />
                 <span>Free Diagnostic</span>
-              </button>
-
-              <button
-                className={`ee-mobile-toggle ${mobileMenuOpen ? "open" : ""}`}
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-                aria-expanded={mobileMenuOpen}
-              >
-                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                <ArrowRight size={13} className="ee-btn-arrow" />
               </button>
             </div>
           </div>
         </nav>
       </header>
 
-      {/* Mobile Drawer Overlay Backdrop */}
-      <div
-        className={`ee-mobile-backdrop ${mobileMenuOpen ? "is-visible" : ""}`}
-        onClick={() => setMobileMenuOpen(false)}
-        aria-hidden={!mobileMenuOpen}
-      />
-
-      {/* Off-Canvas Mobile Drawer */}
-      <div
-        className={`ee-mobile-drawer ${mobileMenuOpen ? "is-open" : ""}`}
-        aria-hidden={!mobileMenuOpen}
-      >
-        <div className="ee-mobile-drawer-header">
-          <div className="ee-brand-mini">
+      {/* 2. Mobile Top Mini-Header (< 1024px) */}
+      <header className="ee-mobile-top-header">
+        <div className="ee-mobile-top-inner">
+          <a
+            href="#top"
+            className="ee-mobile-top-brand"
+            onClick={(e) => handleNavClick(e, "#top")}
+            aria-label="ExamEdge Prep Home"
+          >
             <div className="ee-brand-badge-mini">
               <ShieldCheck size={18} />
             </div>
             <div className="ee-brand-text">
               <span className="ee-brand-title-mini">EXAM<span className="ee-highlight">EDGE</span></span>
-              <span className="ee-brand-sub-mini">TEST PREP</span>
+              <span className="ee-brand-sub-mini">PREP &amp; ADMISSIONS</span>
             </div>
-          </div>
-          <button
-            className="ee-mobile-close-btn"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-label="Close navigation drawer"
-          >
-            <X size={20} />
-          </button>
-        </div>
+          </a>
 
-        <div className="ee-mobile-drawer-body">
-          <div className="ee-mobile-menu-label">Navigation Menu</div>
-          <div className="ee-mobile-menu-links">
-            {[
-              { name: "Overview", href: "#top" },
-              { name: "Score Calculator", href: "#calculator" },
-              { name: "Diagnostic Quiz", href: "#diagnostic-quiz" },
-              { name: "Programs & Courses", href: "#programs" },
-              { name: "Study Schedule", href: "#schedule" },
-              { name: "Expert Coaches", href: "#coaches" },
-              { name: "Verified Results", href: "#results" },
-              { name: "Pricing Plans", href: "#pricing" },
-              { name: "FAQ", href: "#faq" },
-            ].map((item) => (
+          <div className="ee-mobile-top-actions">
+            <button
+              onClick={() => setIsBookingOpen(true)}
+              className="ee-mobile-top-cta"
+            >
+              <CalendarDays size={13} />
+              <span>Free Diagnostic</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* 3. Mobile Fixed Bottom Navbar (< 1024px) rendered via Portal to body */}
+      {mounted && typeof document !== "undefined" && createPortal(
+        <nav className="ee-bottom-nav" aria-label="Mobile Bottom Navigation">
+          {mobileBottomNavItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeNav === item.href;
+            return (
               <a
                 key={item.name}
                 href={item.href}
-                className={`ee-mobile-link ${activeNav === item.href ? "active" : ""}`}
+                className={`ee-bottom-nav-item ${isActive ? "active" : ""}`}
                 onClick={(e) => handleNavClick(e, item.href)}
               >
-                <span>{item.name}</span>
-                <ChevronRight size={16} className="ee-mobile-link-arrow" />
+                <div className="ee-bottom-icon-container">
+                  <Icon size={19} className="ee-bottom-icon" />
+                </div>
+                <span className="ee-bottom-label">{item.name}</span>
               </a>
-            ))}
-          </div>
-        </div>
-
-        <div className="ee-mobile-drawer-footer">
+            );
+          })}
           <button
-            onClick={() => {
-              setMobileMenuOpen(false);
-              setIsBookingOpen(true);
-            }}
-            className="ee-btn-primary ee-mobile-cta-btn"
+            type="button"
+            className={`ee-bottom-nav-item ${mobileMenuOpen ? "active" : ""}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="More navigation links"
           >
-            <CalendarDays size={16} />
-            <span>Book Free Diagnostic Test</span>
+            <div className="ee-bottom-icon-container">
+              <Menu size={19} className="ee-bottom-icon" />
+            </div>
+            <span className="ee-bottom-label">More</span>
           </button>
-          <div className="ee-mobile-callout">
-            <Sparkles size={13} className="icon-amber" />
-            <span>Average +184 SAT & +4.8 ACT Score Gain</span>
-          </div>
-        </div>
-      </div>
+        </nav>,
+        document.body
+      )}
 
-      {/* Hero Section */}
-      <section className="ee-hero-section">
-        <div className="ee-wrap ee-hero-grid">
-          <div className="ee-hero-copy">
-            <div className="ee-pill-badge">
-              <Sparkles className="icon-amber" size={14} />
-              <span>Proven Test Score Acceleration</span>
-            </div>
-            <h1 className="ee-hero-title">
-              Higher Scores.
-              <br />
-              Stronger Futures.
-              <br />
-              <span className="ee-hero-gradient-text">We Raise SAT & ACT Scores.</span>
-            </h1>
-            <p className="ee-hero-desc">
-              Start with an adaptive precision diagnostic. Receive an AI-tailored study plan, official-style test drills, and weekly 1:1 sessions with 99th-percentile master coaches.
-            </p>
+      {/* 4. Off-Canvas Full Drawer for Mobile (< 1024px) rendered via Portal to body */}
+      {mounted && typeof document !== "undefined" && createPortal(
+        <>
+          <div
+            className={`ee-mobile-backdrop ${mobileMenuOpen ? "is-visible" : ""}`}
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden={!mobileMenuOpen}
+          />
 
-            <div className="ee-hero-actions">
-              <button
-                onClick={() => setIsBookingOpen(true)}
-                className="ee-btn-primary ee-hero-btn"
-              >
-                <span>Start Free Diagnostic</span>
-                <ArrowRight size={17} />
-              </button>
-              <a
-                href="#calculator"
-                onClick={(e) => handleNavClick(e, "#calculator")}
-                className="ee-btn-secondary"
-              >
-                <span>Calculate Your Score Gain</span>
-              </a>
-            </div>
-
-            <div className="ee-hero-trust-bar">
-              <div className="ee-trust-item">
-                <CheckCircle2 size={16} className="icon-cyan" />
-                <span>100% Free Diagnostic</span>
-              </div>
-              <div className="ee-trust-item">
-                <CheckCircle2 size={16} className="icon-cyan" />
-                <span>AI Personalized Plan</span>
-              </div>
-              <div className="ee-trust-item">
-                <Star size={16} className="icon-amber" />
-                <span>4.9/5 Rating (10,000+ Families)</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Hero Visual Area with Real Photo & Dynamic Interactive Dashboard */}
-          <div className="ee-hero-visual-wrapper">
-            <div className="ee-hero-image-card">
-              <img
-                src={heroImgUrl}
-                alt="ExamEdge Prep High School Student Diagnostic Study Session"
-                className="ee-hero-img"
-              />
-              <div className="ee-hero-overlay" />
-            </div>
-
-            {/* Floating Live Score Summary Card */}
-            <div className="ee-floating-score-card">
-              <div className="ee-floating-header">
-                <div className="ee-floating-avatar">
-                  <GraduationCap size={16} />
+          <div
+            className={`ee-mobile-drawer ${mobileMenuOpen ? "is-open" : ""}`}
+            aria-hidden={!mobileMenuOpen}
+          >
+            <div className="ee-mobile-drawer-header">
+              <div className="ee-brand-mini">
+                <div className="ee-brand-badge-mini">
+                  <ShieldCheck size={18} />
                 </div>
-                <div>
-                  <strong>Diagnostic Progress</strong>
-                  <small>Week 3 of 12 (75% Milestone)</small>
+                <div className="ee-brand-text">
+                  <span className="ee-brand-title-mini">EXAM<span className="ee-highlight">EDGE</span></span>
+                  <span className="ee-brand-sub-mini">TEST PREP</span>
                 </div>
-              </div>
-
-              <div className="ee-score-mini-grid">
-                <div className="ee-score-badge">
-                  <span>SAT Score</span>
-                  <strong>1490</strong>
-                  <small className="score-increase">+180 Pts</small>
-                </div>
-                <div className="ee-score-badge">
-                  <span>ACT Target</span>
-                  <strong>34</strong>
-                  <small className="score-increase">+5 Comp</small>
-                </div>
-              </div>
-
-              <div className="ee-progress-wrap">
-                <div className="ee-progress-label">
-                  <span>Algebra & Inference Drills</span>
-                  <b>88% Accuracy</b>
-                </div>
-                <div className="ee-progress-bar">
-                  <div className="ee-progress-fill" style={{ width: "88%" }} />
-                </div>
-              </div>
-            </div>
-
-            {/* Floating Upcoming Strategy Session Badge */}
-            <div className="ee-floating-session-card">
-              <div className="ee-session-icon">
-                <Clock size={16} />
-              </div>
-              <div className="ee-session-info">
-                <span>Next 1:1 Coaching Call</span>
-                <strong>Today, 6:00 PM with Maya Patel</strong>
               </div>
               <button
-                onClick={() => setIsBookingOpen(true)}
-                className="ee-session-join-btn"
+                className="ee-mobile-close-btn"
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close navigation drawer"
               >
-                Join
+                <X size={20} />
               </button>
             </div>
+
+            <div className="ee-mobile-drawer-body">
+              <div className="ee-mobile-menu-label">Navigation Directory</div>
+              <div className="ee-mobile-menu-links">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={`ee-mobile-link ${activeNav === item.href ? "active" : ""}`}
+                      onClick={(e) => handleNavClick(e, item.href)}
+                    >
+                      <div className="ee-mobile-link-left">
+                        <div className="ee-mobile-icon-box">
+                          <Icon size={16} />
+                        </div>
+                        <span>{item.name}</span>
+                      </div>
+                      <ChevronRight size={16} className="ee-mobile-link-arrow" />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="ee-mobile-drawer-footer">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setIsBookingOpen(true);
+                }}
+                className="ee-btn-primary ee-mobile-cta-btn"
+              >
+                <CalendarDays size={16} />
+                <span>Book Free Diagnostic Test</span>
+              </button>
+              <div className="ee-mobile-callout">
+                <Sparkles size={13} className="icon-amber" />
+                <span>Average +184 SAT &amp; +4.8 ACT Score Gain</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </>,
+        document.body
+      )}
+
+      {/* Main Content Area */}
+      <div className="ee-site-main-content">
+        {/* New Ultra-Premium Hero Section */}
+        <section className="ee-hero-section">
+          {/* Ambient Lighting Background Accents */}
+          <div className="ee-hero-ambient-glow glow-1" />
+          <div className="ee-hero-ambient-glow glow-2" />
+          <div className="ee-hero-grid-pattern" />
+
+          <div className="ee-wrap ee-hero-wrap">
+            {/* Top Interactive Track Switcher Pill Row */}
+            <div className="ee-hero-track-bar">
+              <span className="ee-track-bar-label">SELECT YOUR TARGET EXAM:</span>
+              <div className="ee-track-tabs">
+                <button
+                  type="button"
+                  className={`ee-track-tab ${heroTrack === "SAT" ? "active" : ""}`}
+                  onClick={() => setHeroTrack("SAT")}
+                >
+                  <span className="ee-tab-dot sat-dot" />
+                  <span>Digital SAT</span>
+                  <span className="ee-tab-badge">+160 Pts</span>
+                </button>
+                <button
+                  type="button"
+                  className={`ee-track-tab ${heroTrack === "ACT" ? "active" : ""}`}
+                  onClick={() => setHeroTrack("ACT")}
+                >
+                  <span className="ee-tab-dot act-dot" />
+                  <span>ACT Mastery</span>
+                  <span className="ee-tab-badge">+4.5 Comp</span>
+                </button>
+                <button
+                  type="button"
+                  className={`ee-track-tab ${heroTrack === "Elite" ? "active" : ""}`}
+                  onClick={() => setHeroTrack("Elite")}
+                >
+                  <span className="ee-tab-dot elite-dot" />
+                  <span>1:1 Ivy Elite</span>
+                  <span className="ee-tab-badge gold">Top 1%</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="ee-hero-grid">
+              {/* Left Column: Compelling Copy & Interactive Stats */}
+              <div className="ee-hero-copy">
+                <div className="ee-pill-badge">
+                  <Sparkles className="icon-cyan" size={14} />
+                  <span>{heroTrackData[heroTrack].badge}</span>
+                </div>
+
+                <h1 className="ee-hero-title">
+                  Higher Test Scores.{" "}
+                  <br className="ee-hide-mobile" />
+                  <span className="ee-hero-gradient-text">Top 1% Admissions.</span>{" "}
+                  <br className="ee-hide-mobile" />
+                  <span className="ee-hero-sub-headline">Guaranteed.</span>
+                </h1>
+
+                <p className="ee-hero-desc">
+                  Accelerate your scores with adaptive precision diagnostics, official 2026 digital test engines, and weekly 1-on-1 coaching by Harvard, MIT, and Stanford 99th-percentile master coaches.
+                </p>
+
+                {/* Hero Feature Micro-Pills */}
+                <div className="ee-hero-feature-tags">
+                  <div className="ee-feature-tag">
+                    <ShieldCheck size={14} className="icon-cyan" />
+                    <span>{heroTrackData[heroTrack].guarantee}</span>
+                  </div>
+                  <div className="ee-feature-tag">
+                    <Zap size={14} className="icon-amber" />
+                    <span>{heroTrackData[heroTrack].highlight}</span>
+                  </div>
+                </div>
+
+                {/* Action CTAs */}
+                <div className="ee-hero-actions">
+                  <button
+                    onClick={() => setIsBookingOpen(true)}
+                    className="ee-btn-primary ee-hero-cta-btn"
+                  >
+                    <CalendarDays size={18} />
+                    <div className="ee-btn-text-group">
+                      <span className="ee-btn-main-text">Start Free Diagnostic</span>
+                      <span className="ee-btn-sub-text">14-Page Roadmap • 100% Free</span>
+                    </div>
+                    <ArrowRight size={16} className="ee-cta-arrow" />
+                  </button>
+
+                  <a
+                    href="#calculator"
+                    onClick={(e) => handleNavClick(e, "#calculator")}
+                    className="ee-btn-secondary ee-hero-calc-btn"
+                  >
+                    <BarChart3 size={17} className="icon-cyan" />
+                    <span>Simulate Score Boost</span>
+                  </a>
+                </div>
+
+                {/* Trust Proof Row */}
+                <div className="ee-hero-trust-bar">
+                  <div className="ee-trust-avatars">
+                    <img src={coachMayaImg} alt="Mentor Maya" className="ee-avatar-img" />
+                    <img src={coachDanielImg} alt="Mentor Daniel" className="ee-avatar-img" />
+                    <img src={coachLauraImg} alt="Mentor Laura" className="ee-avatar-img" />
+                    <img src={coachArjunImg} alt="Mentor Arjun" className="ee-avatar-img" />
+                  </div>
+                  <div className="ee-trust-ratings">
+                    <div className="ee-stars-row">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={14} className="ee-star-filled" fill="#f59e0b" />
+                      ))}
+                      <span className="ee-rating-val">4.98 / 5.0</span>
+                    </div>
+                    <span className="ee-trust-sub">10,400+ Students Coached • 96% Top 50 Admissions</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: High-Tech Glassmorphic HUD Diagnostic Card */}
+              <div className="ee-hero-visual-wrapper">
+                <div className="ee-hud-card">
+                  {/* HUD Header Bar */}
+                  <div className="ee-hud-top-bar">
+                    <div className="ee-hud-dots">
+                      <span className="dot red" />
+                      <span className="dot yellow" />
+                      <span className="dot green" />
+                    </div>
+                    <div className="ee-hud-status-badge">
+                      <span className="ee-hud-status-pulse" />
+                      <span>{heroTrackData[heroTrack].timingPill}</span>
+                    </div>
+                    <span className="ee-hud-engine-tag">Adaptive Portal v4.2</span>
+                  </div>
+
+                  {/* Main Visual Image with Layered Overlays */}
+                  <div className="ee-hud-image-container">
+                    <img
+                      src={heroImgUrl}
+                      alt="Student in diagnostic strategy session"
+                      className="ee-hud-image"
+                    />
+                    <div className="ee-hud-gradient-veil" />
+
+                    {/* Floating Verification Tag */}
+                    <div className="ee-hud-verify-tag">
+                      <ShieldCheck size={14} className="icon-cyan" />
+                      <span>College Board &amp; ACT Multi-Stage Compliant</span>
+                    </div>
+                  </div>
+
+                  {/* HUD Live Score Metrics Gauge Area */}
+                  <div className="ee-hud-metrics-dashboard">
+                    <div className="ee-hud-metric-row">
+                      <div className="ee-hud-stat-box">
+                        <span className="ee-hud-label">Diagnostic Baseline</span>
+                        <div className="ee-hud-value-row">
+                          <span className="ee-hud-val baseline">{heroTrackData[heroTrack].scoreBaseline}</span>
+                          <span className="ee-hud-exam-tag">{heroTrack === "ACT" ? "ACT Comp" : "SAT Score"}</span>
+                        </div>
+                      </div>
+
+                      <div className="ee-hud-arrow-box">
+                        <ArrowRight size={18} className="ee-arrow-icon" />
+                        <span className="ee-delta-badge">{heroTrackData[heroTrack].scoreDelta}</span>
+                      </div>
+
+                      <div className="ee-hud-stat-box target">
+                        <span className="ee-hud-label">Target Milestone</span>
+                        <div className="ee-hud-value-row">
+                          <span className="ee-hud-val target">{heroTrackData[heroTrack].scoreTarget}</span>
+                          <span className="ee-hud-percentile">{heroTrackData[heroTrack].percentile}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Animated Progress Meter */}
+                    <div className="ee-hud-progress-meter">
+                      <div className="ee-meter-info">
+                        <span>Speed &amp; Precision Index</span>
+                        <span className="ee-meter-pct">94.8% Accuracy</span>
+                      </div>
+                      <div className="ee-meter-track">
+                        <div className="ee-meter-fill" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Active Coach Mentor Bar */}
+                  <div className="ee-hud-coach-bar">
+                    <img
+                      src={heroTrackData[heroTrack].avatar}
+                      alt={heroTrackData[heroTrack].coachName}
+                      className="ee-coach-avatar"
+                    />
+                    <div className="ee-coach-details">
+                      <div className="ee-coach-name-row">
+                        <strong>{heroTrackData[heroTrack].coachName}</strong>
+                        <span className="ee-coach-status-dot" />
+                        <small>Online for Matching</small>
+                      </div>
+                      <span className="ee-coach-cred">{heroTrackData[heroTrack].coachRole}</span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        const cName = heroTrackData[heroTrack].coachName;
+                        setBookingForm({ ...bookingForm, coachPreference: cName });
+                        setIsBookingOpen(true);
+                      }}
+                      className="ee-coach-quick-btn"
+                    >
+                      Match
+                    </button>
+                  </div>
+
+                  {/* Floating Acceptance Pill at bottom */}
+                  <div className="ee-hud-acceptance-pill">
+                    <Trophy size={14} className="icon-amber" />
+                    <span><strong>{heroTrackData[heroTrack].studentName}</strong>: {heroTrackData[heroTrack].acceptance}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* University Crests / Proof Strip */}
+            <div className="ee-hero-uni-strip">
+              <span className="ee-uni-label">OUR STUDENTS EARN ACCEPTANCES TO:</span>
+              <div className="ee-uni-badges">
+                <span className="ee-uni-chip">HARVARD</span>
+                <span className="ee-uni-dot">•</span>
+                <span className="ee-uni-chip">MIT</span>
+                <span className="ee-uni-dot">•</span>
+                <span className="ee-uni-chip">STANFORD</span>
+                <span className="ee-uni-dot">•</span>
+                <span className="ee-uni-chip">YALE</span>
+                <span className="ee-uni-dot">•</span>
+                <span className="ee-uni-chip">PRINCETON</span>
+                <span className="ee-uni-dot">•</span>
+                <span className="ee-uni-chip">COLUMBIA</span>
+                <span className="ee-uni-dot">•</span>
+                <span className="ee-uni-chip">UPENN</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
       {/* Proof Stats Ribbon */}
       <section className="ee-stats-section">
@@ -1761,6 +2036,7 @@ export function ExamEdgePrep() {
           </div>
         </div>
       </footer>
+      </div> {/* Close ee-site-main-content */}
 
       {/* Free Diagnostic Booking Modal */}
       {isBookingOpen && (

@@ -37,6 +37,7 @@ import { imageUrl } from "../../assets/images";
 const fallbackAtlas = imageUrl("education/atlascollege.webp") || "/images/education/atlascollege.webp";
 
 const heroImage = imageUrl("education/atlascollege/atlas-hero-new.jpg") || imageUrl("education/atlascollege/atlas-hero.webp") || fallbackAtlas;
+const heroImageFallback = imageUrl("education/atlascollege/atlas-hero.webp") || "/images/education/atlascollege/atlas-hero.webp";
 const counselorLaura = imageUrl("education/atlascollege/counselor-laura.jpg") || imageUrl("education/atlascollege/atlas-counselors.webp") || fallbackAtlas;
 const counselorDavid = imageUrl("education/atlascollege/counselor-david.jpg") || imageUrl("education/atlascollege/atlas-counselors.webp") || fallbackAtlas;
 const counselorMaria = imageUrl("education/atlascollege/counselor-maria.jpg") || imageUrl("education/atlascollege/atlas-counselors.webp") || fallbackAtlas;
@@ -626,8 +627,29 @@ export function AtlasCollegeCounseling() {
           {/* Hero Visual Area */}
           <div className="hero-visual-wrapper">
             <div className="hero-image-card">
-              <img src={heroImage} alt="Atlas College Counseling Student & Advisor Session" className="hero-img" />
+              <img
+                src={heroImage}
+                alt="Atlas College Counseling Student & Advisor Session"
+                className="hero-img"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.dataset.triedWebp) {
+                    target.dataset.triedWebp = "true";
+                    target.src = heroImageFallback;
+                  } else if (!target.dataset.triedFallback) {
+                    target.dataset.triedFallback = "true";
+                    target.src = fallbackAtlas;
+                  }
+                }}
+              />
               <div className="hero-img-overlay" />
+              <div className="hero-image-badge">
+                <Sparkles size={14} className="icon-gold" />
+                <span>1:1 Ivy &amp; Elite Admissions Advisory</span>
+              </div>
             </div>
 
             {/* Floating Interactive Widget 1: College List Tracker */}
