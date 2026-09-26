@@ -146,7 +146,11 @@ function MetroButton({
   return (
     <a
       href={href}
-      className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-extrabold transition duration-300 hover:-translate-y-0.5 ${secondary ? "border border-[#C9D2DE] bg-white text-[#202446] hover:border-[#5A52C8]" : "bg-[#5A52C8] text-white shadow-[0_12px_30px_rgba(90,82,200,0.28)] hover:bg-[#4942b3]"} ${className}`}
+      className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-extrabold transition duration-300 hover:-translate-y-0.5 ${
+        secondary
+          ? "border border-[var(--theme-border,#C9D2DE)] [html.dark_&]:border-white/20 bg-white [html.dark_&]:bg-white/10 text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white hover:border-[var(--theme-accent-primary,#5A52C8)]"
+          : "bg-[var(--theme-accent-primary,#5A52C8)] text-[var(--theme-accent-contrast,#ffffff)] shadow-[0_12px_30px_rgba(90,82,200,0.28)] hover:opacity-90"
+      } ${className}`}
     >
       {children}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -167,15 +171,15 @@ function SectionHeading({
 }) {
   return (
     <div className={center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-      <p className="text-[0.68rem] font-black uppercase tracking-[0.25em] text-[#5A52C8]">
+      <p className="text-[0.68rem] font-black uppercase tracking-[0.25em] text-[var(--theme-accent-primary,#5A52C8)]">
         {label}
       </p>
-      <h2 className="mt-3 text-[clamp(2.15rem,4.7vw,4.4rem)] font-black leading-[0.95] tracking-[-0.055em] text-[#202446]">
+      <h2 className="mt-3 text-[clamp(2.15rem,4.7vw,4.4rem)] font-black leading-[0.95] tracking-[-0.055em] text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
         {title}
       </h2>
       {text && (
         <p
-          className={`mt-5 text-base leading-7 text-[#60677A] md:text-lg md:leading-8 ${center ? "mx-auto max-w-2xl" : ""}`}
+          className={`mt-5 text-base leading-7 text-[var(--theme-text-secondary,#60677A)] [html.dark_&]:text-[var(--theme-text-secondary,#9aa2b5)] md:text-lg md:leading-8 ${center ? "mx-auto max-w-2xl" : ""}`}
         >
           {text}
         </p>
@@ -195,19 +199,19 @@ export function MetroLoftRentals() {
   };
 
   return (
-    <main className="metroloft-site overflow-hidden bg-[#F8F9FD] text-[#40475A] selection:bg-[#F07C72] selection:text-[#202446]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#DDE3EC] bg-white/95 backdrop-blur-xl">
+    <main className="metroloft-site overflow-hidden bg-[var(--theme-bg-base,#F8F9FD)] [html.dark_&]:bg-[var(--theme-bg-base,#0c0e1a)] text-[var(--theme-text-primary,#40475A)] [html.dark_&]:text-[var(--theme-text-primary,#e2e8f0)] selection:bg-[var(--theme-accent-secondary,#F07C72)] selection:text-white transition-colors duration-300">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--theme-border,#DDE3EC)] [html.dark_&]:border-white/10 bg-white/95 [html.dark_&]:bg-[var(--theme-bg-surface,#12162a)]/95 backdrop-blur-xl transition-colors duration-300">
         <div className="mx-auto flex h-[4.5rem] max-w-[90rem] items-center justify-between px-5 lg:px-10">
           <a
             href="#home"
             className="flex items-center gap-3"
             aria-label="MetroLoft Rentals home"
           >
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#5A52C8] text-white">
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--theme-accent-primary,#5A52C8)] text-[var(--theme-accent-contrast,#ffffff)]">
               <Building2 className="h-5 w-5" />
             </span>
-            <span className="text-lg font-black tracking-[-0.04em] text-[#202446]">
-              MetroLoft <span className="text-[#5A52C8]">Rentals</span>
+            <span className="text-lg font-black tracking-[-0.04em] text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
+              MetroLoft <span className="text-[var(--theme-accent-primary,#5A52C8)]">Rentals</span>
             </span>
           </a>
           <nav
@@ -218,7 +222,7 @@ export function MetroLoftRentals() {
               <a
                 key={label}
                 href={href}
-                className="text-sm font-bold text-[#5F6678] transition hover:text-[#5A52C8]"
+                className="text-sm font-bold text-[var(--theme-text-secondary,#5F6678)] [html.dark_&]:text-white/70 transition hover:text-[var(--theme-accent-primary,#5A52C8)] [html.dark_&]:hover:text-white"
               >
                 {label}
               </a>
@@ -230,7 +234,7 @@ export function MetroLoftRentals() {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-[#DDE3EC] text-[#202446] lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--theme-border,#DDE3EC)] [html.dark_&]:border-white/15 text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white lg:hidden transition active:scale-95 hover:border-[var(--theme-accent-primary,#5A52C8)]"
             aria-expanded={menuOpen}
             aria-label="Toggle navigation"
           >
@@ -242,14 +246,14 @@ export function MetroLoftRentals() {
           </button>
         </div>
         {menuOpen && (
-          <nav className="border-t border-[#DDE3EC] bg-white px-5 py-5 lg:hidden">
+          <nav className="border-t border-[var(--theme-border,#DDE3EC)] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-surface,#12162a)] px-5 py-5 lg:hidden">
             <div className="mx-auto grid max-w-[90rem] gap-1">
               {navLinks.map(([label, href]) => (
                 <a
                   key={label}
                   href={href}
                   onClick={() => setMenuOpen(false)}
-                  className="rounded-xl px-4 py-3 font-bold text-[#40475A] hover:bg-[#F4F5FB]"
+                  className="rounded-xl px-4 py-3 font-bold text-[var(--theme-text-secondary,#40475A)] [html.dark_&]:text-white/80 hover:bg-[var(--theme-bg-surface,#F4F5FB)] [html.dark_&]:hover:bg-white/10 hover:text-[var(--theme-accent-primary,#5A52C8)] [html.dark_&]:hover:text-white"
                 >
                   {label}
                 </a>
@@ -264,21 +268,21 @@ export function MetroLoftRentals() {
 
       <section
         id="home"
-        className="relative bg-[#F4F5FB] pb-16 pt-28 lg:pb-28 lg:pt-36"
+        className="relative bg-[var(--theme-bg-base,#F4F5FB)] [html.dark_&]:bg-[var(--theme-bg-base,#0c0e1a)] pb-16 pt-28 lg:pb-28 lg:pt-36 transition-colors duration-300"
       >
-        <div className="absolute -left-24 top-28 h-72 w-72 rounded-full bg-[#F07C72]/15 blur-3xl" />
-        <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#5A52C8]/10 blur-3xl" />
+        <div className="absolute -left-24 top-28 h-72 w-72 rounded-full bg-[var(--theme-accent-secondary,#F07C72)]/15 blur-3xl" />
+        <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[var(--theme-accent-primary,#5A52C8)]/10 blur-3xl" />
         <div className="mx-auto grid max-w-[90rem] gap-12 px-5 lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:px-10">
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#D7D6F1] bg-white px-4 py-2 text-[0.68rem] font-black uppercase tracking-[0.2em] text-[#5A52C8]">
-              <span className="h-2 w-2 rounded-full bg-[#F07C72]" /> Urban
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-border,#D7D6F1)] [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-white/10 px-4 py-2 text-[0.68rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#5A52C8)] [html.dark_&]:text-white">
+              <span className="h-2 w-2 rounded-full bg-[var(--theme-accent-secondary,#F07C72)]" /> Urban
               rentals, simplified
             </div>
-            <h1 className="mt-7 max-w-2xl text-[clamp(3.4rem,6.8vw,7.2rem)] font-black leading-[0.86] tracking-[-0.075em] text-[#202446]">
+            <h1 className="mt-7 max-w-2xl text-[clamp(3.4rem,6.8vw,7.2rem)] font-black leading-[0.86] tracking-[-0.075em] text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
               Find Your Next City{" "}
-              <span className="text-[#5A52C8]">Apartment,</span> Faster
+              <span className="text-[var(--theme-accent-primary,#5A52C8)]">Apartment,</span> Faster
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-[#5E6577]">
+            <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--theme-text-secondary,#5E6577)] [html.dark_&]:text-[var(--theme-text-secondary,#9aa2b5)]">
               MetroLoft Rentals helps renters discover modern apartments built
               around city access, amenities, flexible leasing, and
               design-forward living.
@@ -289,11 +293,11 @@ export function MetroLoftRentals() {
                 View Neighborhoods
               </MetroButton>
             </div>
-            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm font-bold text-[#40475A]">
+            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm font-bold text-[var(--theme-text-secondary,#40475A)] [html.dark_&]:text-white/80">
               {["Flexible leases", "Amenity-rich", "Walkable locations"].map(
                 (item) => (
                   <span key={item} className="flex items-center gap-2">
-                    <Check className="h-4 w-4 rounded-full bg-[#DCD9FA] p-0.5 text-[#5A52C8]" />
+                    <Check className="h-4 w-4 rounded-full bg-[var(--theme-accent-primary-light,rgba(90,82,200,0.15))] p-0.5 text-[var(--theme-accent-primary,#5A52C8)]" />
                     {item}
                   </span>
                 ),
@@ -302,23 +306,23 @@ export function MetroLoftRentals() {
           </div>
 
           <div className="relative lg:pl-8">
-            <div className="relative overflow-hidden rounded-[2rem] bg-[#202446] shadow-[0_40px_100px_rgba(32,36,70,0.2)]">
+            <div className="relative overflow-hidden rounded-[2rem] bg-[var(--theme-bg-dark,#202446)] shadow-[0_40px_100px_rgba(32,36,70,0.2)]">
               <img
                 src={heroImage}
                 alt="Modern MetroLoft apartment overlooking the city"
                 className="h-[34rem] w-full object-cover md:h-[43rem]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#202446]/60 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 rounded-2xl bg-white/95 p-4 shadow-xl backdrop-blur md:bottom-8 md:left-8">
-                <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#F07C72]">
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-dark,#202446)]/60 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6 rounded-2xl bg-white/95 [html.dark_&]:bg-[var(--theme-bg-card,#171c34)]/95 p-4 shadow-xl backdrop-blur md:bottom-8 md:left-8">
+                <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#F07C72)]">
                   Now touring
                 </p>
-                <p className="mt-1 font-black text-[#202446]">
+                <p className="mt-1 font-black text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
                   Downtown loft collection
                 </p>
               </div>
             </div>
-            <div className="absolute -right-4 top-8 hidden rounded-2xl bg-[#F07C72] p-4 text-white shadow-xl sm:block lg:-right-2">
+            <div className="absolute -right-4 top-8 hidden rounded-2xl bg-[var(--theme-accent-secondary,#F07C72)] p-4 text-[var(--theme-accent-contrast,#ffffff)] shadow-xl sm:block lg:-right-2">
               <MapPin className="h-5 w-5" />
               <p className="mt-2 text-xs font-black uppercase tracking-[0.16em]">
                 12 neighborhoods
@@ -329,7 +333,7 @@ export function MetroLoftRentals() {
 
         <form
           onSubmit={handleSearch}
-          className="relative z-20 mx-auto mt-10 grid max-w-[82rem] gap-3 rounded-[1.5rem] border border-[#DDE3EC] bg-white p-4 shadow-[0_24px_70px_rgba(32,36,70,0.14)] sm:grid-cols-2 lg:-mb-44 lg:-mt-12 lg:grid-cols-[1.2fr_1fr_.8fr_1fr_auto] lg:items-end lg:p-5"
+          className="relative z-20 mx-auto mt-10 grid max-w-[82rem] gap-3 rounded-[1.5rem] border border-[var(--theme-border,#DDE3EC)] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#171c34)] p-4 shadow-[0_24px_70px_rgba(32,36,70,0.14)] sm:grid-cols-2 lg:-mb-44 lg:-mt-12 lg:grid-cols-[1.2fr_1fr_.8fr_1fr_auto] lg:items-end lg:p-5 transition-colors duration-300"
         >
           {[
             ["Neighborhood", "Downtown Arts District", "text"],
@@ -337,13 +341,13 @@ export function MetroLoftRentals() {
           ].map(([label, placeholder, type]) => (
             <label
               key={label}
-              className="block rounded-xl bg-[#F4F5FB] px-4 py-3 text-[0.64rem] font-black uppercase tracking-[0.15em] text-[#747B8D]"
+              className="block rounded-xl bg-[var(--theme-bg-surface,#F4F5FB)] [html.dark_&]:bg-white/5 px-4 py-3 text-[0.64rem] font-black uppercase tracking-[0.15em] text-[var(--theme-text-secondary,#747B8D)] [html.dark_&]:text-white/60"
             >
               {label}
               <input
                 type={type}
                 placeholder={placeholder}
-                className="mt-1.5 w-full bg-transparent text-sm font-bold normal-case tracking-normal text-[#202446] outline-none placeholder:text-[#202446]"
+                className="mt-1.5 w-full bg-transparent text-sm font-bold normal-case tracking-normal text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white outline-none placeholder:text-[var(--theme-text-secondary,#747B8D)] [html.dark_&]:placeholder:text-white/40"
               />
             </label>
           ))}
@@ -353,27 +357,27 @@ export function MetroLoftRentals() {
           ].map(([label, options]) => (
             <label
               key={label as string}
-              className="relative block rounded-xl bg-[#F4F5FB] px-4 py-3 text-[0.64rem] font-black uppercase tracking-[0.15em] text-[#747B8D]"
+              className="relative block rounded-xl bg-[var(--theme-bg-surface,#F4F5FB)] [html.dark_&]:bg-white/5 px-4 py-3 text-[0.64rem] font-black uppercase tracking-[0.15em] text-[var(--theme-text-secondary,#747B8D)] [html.dark_&]:text-white/60"
             >
               {label as string}
-              <select className="mt-1.5 w-full appearance-none bg-transparent pr-5 text-sm font-bold normal-case tracking-normal text-[#202446] outline-none">
+              <select className="mt-1.5 w-full appearance-none bg-transparent pr-5 text-sm font-bold normal-case tracking-normal text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white outline-none">
                 {(options as string[]).map((option) => (
-                  <option key={option}>{option}</option>
+                  <option key={option} className="bg-white text-[#202446] [html.dark_&]:bg-[#171c34] [html.dark_&]:text-white">{option}</option>
                 ))}
               </select>
-              <ChevronDown className="pointer-events-none absolute bottom-4 right-4 h-4 w-4" />
+              <ChevronDown className="pointer-events-none absolute bottom-4 right-4 h-4 w-4 text-[var(--theme-accent-primary,#5A52C8)]" />
             </label>
           ))}
           <button
             type="submit"
-            className="inline-flex min-h-[4.1rem] items-center justify-center gap-2 rounded-xl bg-[#5A52C8] px-6 text-sm font-black text-white transition hover:bg-[#4942b3]"
+            className="inline-flex min-h-[4.1rem] items-center justify-center gap-2 rounded-xl bg-[var(--theme-accent-primary,#5A52C8)] px-6 text-sm font-black text-[var(--theme-accent-contrast,#ffffff)] transition hover:opacity-90 shadow-md"
           >
             <Search className="h-4 w-4" />
             Search Rentals
           </button>
           {searched && (
             <p
-              className="col-span-full px-2 text-sm font-bold text-[#5A52C8]"
+              className="col-span-full px-2 text-sm font-bold text-[var(--theme-accent-primary,#5A52C8)]"
               role="status"
             >
               Showing featured rentals that match your starting criteria.
@@ -384,7 +388,7 @@ export function MetroLoftRentals() {
 
       <section
         id="apartments"
-        className="px-5 pb-20 pt-24 lg:px-10 lg:pb-28 lg:pt-44"
+        className="px-5 pb-20 pt-24 lg:px-10 lg:pb-28 lg:pt-44 bg-[var(--theme-bg-base,#F8F9FD)] [html.dark_&]:bg-[var(--theme-bg-base,#0c0e1a)] transition-colors duration-300"
       >
         <div className="mx-auto max-w-[90rem]">
           <SectionHeading
@@ -396,7 +400,7 @@ export function MetroLoftRentals() {
             {discoveryCards.map((card) => (
               <article
                 key={card.title}
-                className="metro-card group overflow-hidden rounded-[1.5rem] border border-[#DDE3EC] bg-white"
+                className="metro-card group overflow-hidden rounded-[1.5rem] border border-[var(--theme-border,#DDE3EC)] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#171c34)]"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
@@ -406,18 +410,18 @@ export function MetroLoftRentals() {
                   />
                 </div>
                 <div className="p-6 md:p-7">
-                  <p className="text-[0.64rem] font-black uppercase tracking-[0.2em] text-[#F07C72]">
+                  <p className="text-[0.64rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#F07C72)]">
                     {card.tag}
                   </p>
-                  <h3 className="mt-3 text-2xl font-black tracking-[-0.04em] text-[#202446]">
+                  <h3 className="mt-3 text-2xl font-black tracking-[-0.04em] text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
                     {card.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-[#6B7284]">
+                  <p className="mt-3 text-sm leading-6 text-[var(--theme-text-secondary,#6B7284)] [html.dark_&]:text-[var(--theme-text-secondary,#9aa2b5)]">
                     {card.text}
                   </p>
                   <a
                     href="#featured"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#5A52C8]"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[var(--theme-accent-primary,#5A52C8)] transition hover:opacity-80"
                   >
                     Explore <ArrowRight className="h-4 w-4" />
                   </a>
@@ -430,12 +434,12 @@ export function MetroLoftRentals() {
 
       <section
         id="featured"
-        className="bg-[#202446] px-5 py-20 text-white lg:px-10 lg:py-28"
+        className="bg-[var(--theme-bg-dark,#202446)] px-5 py-20 text-white lg:px-10 lg:py-28 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[90rem]">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="text-[0.68rem] font-black uppercase tracking-[0.25em] text-[#F07C72]">
+              <p className="text-[0.68rem] font-black uppercase tracking-[0.25em] text-[var(--theme-accent-secondary,#F07C72)]">
                 Featured apartments
               </p>
               <h2 className="mt-3 text-[clamp(2.4rem,5vw,4.8rem)] font-black leading-none tracking-[-0.055em]">
@@ -451,7 +455,7 @@ export function MetroLoftRentals() {
             {rentals.map((rental) => (
               <article
                 key={rental.title}
-                className="group overflow-hidden rounded-[1.5rem] bg-white text-[#40475A] shadow-2xl shadow-black/10"
+                className="group overflow-hidden rounded-[1.5rem] bg-white [html.dark_&]:bg-[var(--theme-bg-card,#171c34)] text-[var(--theme-text-primary,#40475A)] [html.dark_&]:text-white shadow-2xl shadow-black/10 border border-transparent [html.dark_&]:border-white/10"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <img
@@ -459,34 +463,34 @@ export function MetroLoftRentals() {
                     alt={`${rental.title} apartment interior`}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
-                  <span className="absolute left-4 top-4 rounded-full bg-[#F07C72] px-3 py-1.5 text-[0.62rem] font-black uppercase tracking-[0.16em] text-white">
+                  <span className="absolute left-4 top-4 rounded-full bg-[var(--theme-accent-secondary,#F07C72)] px-3 py-1.5 text-[0.62rem] font-black uppercase tracking-[0.16em] text-[var(--theme-accent-contrast,#ffffff)]">
                     Available
                   </span>
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="rounded-full bg-[#EFEEFC] px-3 py-1 text-xs font-black text-[#5A52C8]">
+                    <span className="rounded-full bg-[var(--theme-accent-primary-light,rgba(90,82,200,0.12))] px-3 py-1 text-xs font-black text-[var(--theme-accent-primary,#5A52C8)]">
                       {rental.type}
                     </span>
-                    <span className="text-sm font-black text-[#202446]">
+                    <span className="text-sm font-black text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
                       {rental.rent}
                     </span>
                   </div>
-                  <h3 className="mt-5 text-2xl font-black tracking-[-0.04em] text-[#202446]">
+                  <h3 className="mt-5 text-2xl font-black tracking-[-0.04em] text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
                     {rental.title}
                   </h3>
-                  <p className="mt-2 flex items-center gap-1.5 text-sm text-[#747B8D]">
-                    <MapPin className="h-4 w-4 text-[#F07C72]" />
+                  <p className="mt-2 flex items-center gap-1.5 text-sm text-[var(--theme-text-secondary,#747B8D)] [html.dark_&]:text-[var(--theme-text-secondary,#9aa2b5)]">
+                    <MapPin className="h-4 w-4 text-[var(--theme-accent-secondary,#F07C72)]" />
                     {rental.location}
                   </p>
-                  <div className="mt-5 flex gap-4 border-y border-[#E7EAF0] py-4 text-xs font-bold text-[#60677A]">
+                  <div className="mt-5 flex gap-4 border-y border-[var(--theme-border,#E7EAF0)] [html.dark_&]:border-white/10 py-4 text-xs font-bold text-[var(--theme-text-secondary,#60677A)] [html.dark_&]:text-white/60">
                     {rental.details.map((detail) => (
                       <span key={detail}>{detail}</span>
                     ))}
                   </div>
                   <a
                     href="#contact"
-                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#202446] px-5 py-3 text-sm font-black text-white transition hover:bg-[#5A52C8]"
+                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--theme-bg-dark,#202446)] [html.dark_&]:bg-[var(--theme-accent-primary,#5A52C8)] px-5 py-3 text-sm font-black text-white transition hover:bg-[var(--theme-accent-primary,#5A52C8)] [html.dark_&]:hover:opacity-90"
                   >
                     View Apartment <ArrowRight className="h-4 w-4" />
                   </a>
@@ -497,7 +501,7 @@ export function MetroLoftRentals() {
         </div>
       </section>
 
-      <section id="neighborhoods" className="px-5 py-20 lg:px-10 lg:py-28">
+      <section id="neighborhoods" className="px-5 py-20 lg:px-10 lg:py-28 bg-[var(--theme-bg-base,#F8F9FD)] [html.dark_&]:bg-[var(--theme-bg-base,#0c0e1a)] transition-colors duration-300">
         <div className="mx-auto grid max-w-[90rem] gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
           <div className="relative overflow-hidden rounded-[2rem]">
             <img
@@ -505,17 +509,17 @@ export function MetroLoftRentals() {
               alt="Walkable MetroLoft neighborhood with city access"
               className="min-h-[34rem] w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#202446]/70 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-white/95 p-5 backdrop-blur">
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-dark,#202446)]/70 via-transparent to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-white/95 [html.dark_&]:bg-[var(--theme-bg-card,#171c34)]/95 p-5 backdrop-blur">
               <div>
-                <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[#F07C72]">
+                <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#F07C72)]">
                   City access
                 </p>
-                <p className="mt-1 font-black text-[#202446]">
+                <p className="mt-1 font-black text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
                   Your routine, within reach.
                 </p>
               </div>
-              <TrainFront className="h-7 w-7 text-[#5A52C8]" />
+              <TrainFront className="h-7 w-7 text-[var(--theme-accent-primary,#5A52C8)]" />
             </div>
           </div>
           <div>
@@ -551,13 +555,13 @@ export function MetroLoftRentals() {
                 return (
                   <article
                     key={title as string}
-                    className="rounded-2xl border border-[#DDE3EC] bg-white p-5"
+                    className="rounded-2xl border border-[var(--theme-border,#DDE3EC)] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#171c34)] p-5"
                   >
-                    <CardIcon className="h-5 w-5 text-[#5A52C8]" />
-                    <h3 className="mt-4 font-black text-[#202446]">
+                    <CardIcon className="h-5 w-5 text-[var(--theme-accent-primary,#5A52C8)]" />
+                    <h3 className="mt-4 font-black text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
                       {title as string}
                     </h3>
-                    <p className="mt-2 text-sm leading-6 text-[#6B7284]">
+                    <p className="mt-2 text-sm leading-6 text-[var(--theme-text-secondary,#6B7284)] [html.dark_&]:text-[var(--theme-text-secondary,#9aa2b5)]">
                       {text as string}
                     </p>
                   </article>
@@ -570,7 +574,7 @@ export function MetroLoftRentals() {
 
       <section
         id="amenities"
-        className="border-y border-[#E2E6ED] bg-[#EEF1F7] px-5 py-20 lg:px-10 lg:py-28"
+        className="border-y border-[var(--theme-border,#E2E6ED)] [html.dark_&]:border-white/10 bg-[var(--theme-bg-surface,#EEF1F7)] [html.dark_&]:bg-[var(--theme-bg-surface,#12162a)] px-5 py-20 lg:px-10 lg:py-28 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[90rem]">
           <SectionHeading
@@ -582,23 +586,23 @@ export function MetroLoftRentals() {
             {amenities.map(({ icon: Icon, title, text }) => (
               <article
                 key={title}
-                className="metro-card rounded-2xl border border-white bg-white p-6"
+                className="metro-card rounded-2xl border border-white [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#171c34)] p-6"
               >
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#EFEEFC] text-[#5A52C8]">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[var(--theme-accent-primary-light,rgba(90,82,200,0.12))] text-[var(--theme-accent-primary,#5A52C8)]">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-5 font-black text-[#202446]">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#71788A]">{text}</p>
+                <h3 className="mt-5 font-black text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[var(--theme-text-secondary,#71788A)] [html.dark_&]:text-[var(--theme-text-secondary,#9aa2b5)]">{text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="leasing" className="px-5 py-20 lg:px-10 lg:py-28">
-        <div className="mx-auto grid max-w-[90rem] overflow-hidden rounded-[2rem] bg-[#5A52C8] lg:grid-cols-2">
+      <section id="leasing" className="px-5 py-20 lg:px-10 lg:py-28 bg-[var(--theme-bg-base,#F8F9FD)] [html.dark_&]:bg-[var(--theme-bg-base,#0c0e1a)] transition-colors duration-300">
+        <div className="mx-auto grid max-w-[90rem] overflow-hidden rounded-[2rem] bg-[var(--theme-accent-primary,#5A52C8)] [html.dark_&]:bg-[var(--theme-bg-card,#171c34)] [html.dark_&]:border [html.dark_&]:border-white/10 lg:grid-cols-2">
           <div className="p-8 text-white md:p-12 lg:p-16">
-            <p className="text-[0.68rem] font-black uppercase tracking-[0.25em] text-[#FFB4AD]">
+            <p className="text-[0.68rem] font-black uppercase tracking-[0.25em] text-[var(--theme-accent-secondary,#FFB4AD)]">
               Flexible living
             </p>
             <h2 className="mt-4 text-[clamp(2.5rem,5vw,4.8rem)] font-black leading-[0.95] tracking-[-0.055em]">
@@ -619,7 +623,7 @@ export function MetroLoftRentals() {
                   key={item}
                   className="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3 font-bold"
                 >
-                  <Check className="h-5 w-5 rounded-full bg-[#F07C72] p-1" />
+                  <Check className="h-5 w-5 rounded-full bg-[var(--theme-accent-secondary,#F07C72)] p-1 text-[var(--theme-accent-contrast,#ffffff)]" />
                   {item}
                 </div>
               ))}
@@ -633,7 +637,7 @@ export function MetroLoftRentals() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-20 lg:px-10 lg:py-28">
+      <section className="bg-white [html.dark_&]:bg-[var(--theme-bg-surface,#12162a)] px-5 py-20 lg:px-10 lg:py-28 transition-colors duration-300">
         <div className="mx-auto max-w-[90rem]">
           <SectionHeading
             label="How it works"
@@ -665,22 +669,22 @@ export function MetroLoftRentals() {
             ].map(([number, title, text]) => (
               <article
                 key={number}
-                className="relative rounded-[1.5rem] border border-[#DDE3EC] bg-[#F8F9FD] p-7"
+                className="relative rounded-[1.5rem] border border-[var(--theme-border,#DDE3EC)] [html.dark_&]:border-white/10 bg-[var(--theme-bg-surface,#F8F9FD)] [html.dark_&]:bg-[var(--theme-bg-card,#171c34)] p-7"
               >
-                <span className="text-5xl font-black tracking-[-0.08em] text-[#DAD8F5]">
+                <span className="text-5xl font-black tracking-[-0.08em] text-[var(--theme-accent-primary-light,#DAD8F5)] [html.dark_&]:text-white/20">
                   {number}
                 </span>
-                <h3 className="mt-7 text-xl font-black text-[#202446]">
+                <h3 className="mt-7 text-xl font-black text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-[#6B7284]">{text}</p>
+                <p className="mt-3 text-sm leading-6 text-[var(--theme-text-secondary,#6B7284)] [html.dark_&]:text-[var(--theme-text-secondary,#9aa2b5)]">{text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-5 py-20 lg:px-10 lg:py-28">
+      <section className="px-5 py-20 lg:px-10 lg:py-28 bg-[var(--theme-bg-base,#F8F9FD)] [html.dark_&]:bg-[var(--theme-bg-base,#0c0e1a)] transition-colors duration-300">
         <div className="mx-auto grid max-w-[90rem] gap-12 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHeading
@@ -693,7 +697,7 @@ export function MetroLoftRentals() {
                 (item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-[#D7D6F1] bg-white px-4 py-2 text-sm font-black text-[#5A52C8]"
+                    className="rounded-full border border-[var(--theme-border,#D7D6F1)] [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-white/10 px-4 py-2 text-sm font-black text-[var(--theme-accent-primary,#5A52C8)] [html.dark_&]:text-white"
                   >
                     {item}
                   </span>
@@ -707,7 +711,7 @@ export function MetroLoftRentals() {
               alt="Design-forward MetroLoft apartment interior"
               className="min-h-[32rem] w-full rounded-[2rem] object-cover"
             />
-            <div className="absolute -bottom-5 -left-4 rounded-2xl bg-[#F07C72] p-5 text-white shadow-xl md:-left-6">
+            <div className="absolute -bottom-5 -left-4 rounded-2xl bg-[var(--theme-accent-secondary,#F07C72)] p-5 text-[var(--theme-accent-contrast,#ffffff)] shadow-xl md:-left-6">
               <KeyRound className="h-6 w-6" />
               <p className="mt-3 text-sm font-black">
                 Made for modern city life.
@@ -717,7 +721,7 @@ export function MetroLoftRentals() {
         </div>
       </section>
 
-      <section className="border-y border-[#E2E6ED] bg-[#F1F3F9] px-5 py-20 lg:px-10 lg:py-28">
+      <section className="border-y border-[var(--theme-border,#E2E6ED)] [html.dark_&]:border-white/10 bg-[var(--theme-bg-surface,#F1F3F9)] [html.dark_&]:bg-[var(--theme-bg-surface,#12162a)] px-5 py-20 lg:px-10 lg:py-28 transition-colors duration-300">
         <div className="mx-auto max-w-[90rem]">
           <SectionHeading label="Resources" title="Renter Guides" />
           <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -740,18 +744,18 @@ export function MetroLoftRentals() {
             ].map(([tag, title, text]) => (
               <article
                 key={title}
-                className="metro-card rounded-[1.5rem] border border-[#DDE3EC] bg-white p-7"
+                className="metro-card rounded-[1.5rem] border border-[var(--theme-border,#DDE3EC)] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#171c34)] p-7"
               >
-                <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#F07C72]">
+                <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#F07C72)]">
                   {tag}
                 </p>
-                <h3 className="mt-4 text-2xl font-black tracking-[-0.04em] text-[#202446]">
+                <h3 className="mt-4 text-2xl font-black tracking-[-0.04em] text-[var(--theme-text-primary,#202446)] [html.dark_&]:text-white">
                   {title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-[#6B7284]">{text}</p>
+                <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#6B7284)] [html.dark_&]:text-[var(--theme-text-secondary,#9aa2b5)]">{text}</p>
                 <a
                   href="#contact"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[#5A52C8]"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[var(--theme-accent-primary,#5A52C8)] transition hover:opacity-80"
                 >
                   Read Guide <ArrowRight className="h-4 w-4" />
                 </a>
@@ -763,17 +767,17 @@ export function MetroLoftRentals() {
 
       <section
         id="contact"
-        className="relative overflow-hidden bg-[#202446] px-5 py-24 text-white lg:px-10 lg:py-32"
+        className="relative overflow-hidden bg-[var(--theme-bg-dark,#202446)] px-5 py-24 text-white lg:px-10 lg:py-32 transition-colors duration-300"
       >
         <img
           src={ctaImage}
           alt="City apartments at dusk"
           className="absolute inset-0 h-full w-full object-cover opacity-25"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#202446] via-[#202446]/90 to-[#202446]/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--theme-bg-dark,#202446)] via-[var(--theme-bg-dark,#202446)]/90 to-[var(--theme-bg-dark,#202446)]/55" />
         <div className="relative mx-auto max-w-[90rem]">
           <div className="max-w-3xl">
-            <p className="text-[0.68rem] font-black uppercase tracking-[0.25em] text-[#F07C72]">
+            <p className="text-[0.68rem] font-black uppercase tracking-[0.25em] text-[var(--theme-accent-secondary,#F07C72)]">
               Your city. Your place.
             </p>
             <h2 className="mt-4 text-[clamp(3rem,7vw,6.8rem)] font-black leading-[0.9] tracking-[-0.065em]">
@@ -785,7 +789,7 @@ export function MetroLoftRentals() {
             </p>
             <MetroButton
               href="#apartments"
-              className="mt-8 bg-[#F07C72] shadow-[0_12px_30px_rgba(240,124,114,0.25)] hover:bg-[#e86f65]"
+              className="mt-8 bg-[var(--theme-accent-secondary,#F07C72)] text-[var(--theme-accent-contrast,#ffffff)] shadow-[0_12px_30px_rgba(240,124,114,0.25)] hover:opacity-90"
             >
               Start Apartment Search
             </MetroButton>
@@ -793,12 +797,12 @@ export function MetroLoftRentals() {
         </div>
       </section>
 
-      <footer className="bg-[#171A35] px-5 pb-8 pt-16 text-white lg:px-10">
+      <footer className="bg-[var(--theme-bg-dark,#171A35)] [html.dark_&]:bg-[var(--theme-bg-dark,#090b14)] px-5 pb-8 pt-16 text-white lg:px-10 transition-colors duration-300">
         <div className="mx-auto max-w-[90rem]">
           <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-[1.4fr_.7fr_.7fr_1fr]">
             <div>
               <div className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#5A52C8]">
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--theme-accent-primary,#5A52C8)] text-white">
                   <Building2 className="h-5 w-5" />
                 </span>
                 <span className="text-lg font-black">MetroLoft Rentals</span>
@@ -812,7 +816,7 @@ export function MetroLoftRentals() {
               <p className="font-black">Quick links</p>
               <div className="mt-4 grid gap-3 text-sm text-white/55">
                 {navLinks.slice(0, 4).map(([label, href]) => (
-                  <a key={label} href={href} className="hover:text-white">
+                  <a key={label} href={href} className="hover:text-white transition-colors">
                     {label}
                   </a>
                 ))}
@@ -821,19 +825,19 @@ export function MetroLoftRentals() {
             <div>
               <p className="font-black">Rental categories</p>
               <div className="mt-4 grid gap-3 text-sm text-white/55">
-                <a href="#featured">Studios</a>
-                <a href="#featured">Lofts</a>
-                <a href="#featured">1 Bedrooms</a>
-                <a href="#featured">2 Bedrooms</a>
+                <a href="#featured" className="hover:text-white transition-colors">Studios</a>
+                <a href="#featured" className="hover:text-white transition-colors">Lofts</a>
+                <a href="#featured" className="hover:text-white transition-colors">1 Bedrooms</a>
+                <a href="#featured" className="hover:text-white transition-colors">2 Bedrooms</a>
               </div>
             </div>
             <div>
               <p className="font-black">Contact</p>
               <div className="mt-4 grid gap-3 text-sm text-white/55">
-                <a href="mailto:hello@metroloftrentals.com">
+                <a href="mailto:hello@metroloftrentals.com" className="hover:text-white transition-colors">
                   hello@metroloftrentals.com
                 </a>
-                <a href="tel:2125550164">(212) 555-0164</a>
+                <a href="tel:2125550164" className="hover:text-white transition-colors">(212) 555-0164</a>
                 <span>New York, NY</span>
               </div>
             </div>

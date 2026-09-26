@@ -532,11 +532,11 @@ export function ClearViewOptometry() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] font-sans text-slate-800 antialiased selection:bg-cyan-500 selection:text-white">
+    <main className="min-h-screen bg-[var(--theme-bg-base,#f8fafc)] font-sans text-[var(--theme-text-primary,#0e2238)] antialiased selection:bg-cyan-500 selection:text-white transition-colors duration-300">
       {/* ========================================================================= */}
       {/* 1. TOP EMERGENCY & CLINIC BENEFIT UTILITY BAR                             */}
       {/* ========================================================================= */}
-      <div className="relative z-50 border-b border-slate-800/30 bg-[#071524] px-3 sm:px-6 py-2 text-xs text-slate-200">
+      <div className="relative z-50 border-b border-slate-800/30 bg-[var(--theme-bg-dark,#071524)] px-3 sm:px-6 py-2 text-xs text-slate-200">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-2.5">
           {/* Left: Medical Back Link & Urgent Eye Care */}
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
@@ -548,7 +548,7 @@ export function ClearViewOptometry() {
               <span className="hidden sm:inline">← Medical Showcase</span>
               <span className="sm:hidden text-[11px]">← Showcase</span>
             </Link>
-            <span className="text-slate-700">|</span>
+            <span className="text-slate-500">|</span>
             <div className="inline-flex items-center gap-1.5 text-slate-300 text-[10px] sm:text-xs truncate">
               <span className="relative flex h-2 w-2 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
@@ -582,29 +582,29 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 2. STICKY FROSTED CAPSULE NAVBAR                                          */}
       {/* ========================================================================= */}
-      <div className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-xs transition-all">
+      <div className="sticky top-0 z-40 w-full border-b border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#ffffff)]/95 backdrop-blur-xl shadow-xs transition-colors duration-300">
         <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-2">
           {/* Brand Identity */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
             <Link
               to="/medical"
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#16324f] to-[#2f6f9f] text-cyan-300 shadow-md shadow-blue-950/20 ring-2 ring-cyan-400/40 transition-transform hover:scale-105 active:scale-95 shrink-0"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-2xl bg-gradient-to-tr from-[var(--theme-accent-secondary,#16324f)] to-[var(--theme-accent-primary,#2f6f9f)] text-cyan-300 shadow-md shadow-blue-950/20 ring-2 ring-cyan-400/40 transition-transform hover:scale-105 active:scale-95 shrink-0"
               title="Return to Medical Showcase Directory"
             >
               <Eye size={20} className="stroke-[2.2]" />
             </Link>
             <a href="#hero" className="flex flex-col min-w-0">
-              <span className="text-xs sm:text-base font-black tracking-tight text-[#0e2238] leading-tight truncate">
-                CLEARVIEW <span className="text-[#2f6f9f] font-light">OPTOMETRY</span>
+              <span className="text-xs sm:text-base font-black tracking-tight text-[var(--theme-text-primary,#0e2238)] leading-tight truncate">
+                CLEARVIEW <span className="text-[var(--theme-accent-primary,#2f6f9f)] font-light">OPTOMETRY</span>
               </span>
-              <span className="text-[9px] uppercase font-extrabold tracking-widest text-[#2f6f9f] hidden sm:inline leading-none mt-0.5">
+              <span className="text-[9px] uppercase font-extrabold tracking-widest text-[var(--theme-accent-primary,#2f6f9f)] hidden sm:inline leading-none mt-0.5">
                 Boutique Eyewear & Advanced Vision
               </span>
             </a>
           </div>
 
           {/* Desktop Navigation Links with Live ScrollSpy */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 rounded-full bg-slate-100/90 p-1 border border-slate-200/70 shadow-xs">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 rounded-full bg-[var(--theme-bg-card,#f1f5f9)]/90 p-1 border border-[var(--theme-border,#e2e8f0)] shadow-xs">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
@@ -613,8 +613,8 @@ export function ClearViewOptometry() {
                   href={link.href}
                   className={`relative rounded-full px-2.5 xl:px-3 py-1.5 text-xs font-bold tracking-tight transition-all duration-200 whitespace-nowrap ${
                     isActive
-                      ? "bg-gradient-to-r from-[#16324f] to-[#2f6f9f] text-white shadow-sm font-black"
-                      : "text-slate-600 hover:text-[#0e2238] hover:bg-white"
+                      ? "bg-gradient-to-r from-[var(--theme-accent-secondary,#16324f)] to-[var(--theme-accent-primary,#2f6f9f)] text-white shadow-sm font-black"
+                      : "text-[var(--theme-text-secondary,#475569)] hover:text-[var(--theme-text-primary,#0e2238)] hover:bg-[var(--theme-bg-surface,#ffffff)]"
                   }`}
                 >
                   {link.label}
@@ -627,17 +627,17 @@ export function ClearViewOptometry() {
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             <a
               href="tel:5550149921"
-              className="hidden md:flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700 hover:bg-slate-100 transition-colors"
+              className="hidden md:flex items-center gap-1.5 rounded-full border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)] px-3 py-1.5 text-xs font-bold text-[var(--theme-text-secondary,#334155)] hover:bg-[var(--theme-bg-card,#f1f5f9)] transition-colors"
               title="Same-Day Red Eye Emergency Appointment"
             >
-              <Phone size={13} className="text-[#2f6f9f]" />
+              <Phone size={13} className="text-[var(--theme-accent-primary,#2f6f9f)]" />
               <span>(555) 014-9921</span>
             </a>
 
             <button
               type="button"
               onClick={() => handleStartBooking()}
-              className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#16324f] via-[#1e4066] to-[#2f6f9f] px-3 sm:px-4.5 py-1.5 sm:py-2 text-xs sm:text-sm font-extrabold text-white shadow-md shadow-blue-950/20 transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap"
+              className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[var(--theme-accent-secondary,#16324f)] via-[var(--theme-accent-secondary,#1e4066)] to-[var(--theme-accent-primary,#2f6f9f)] px-3 sm:px-4.5 py-1.5 sm:py-2 text-xs sm:text-sm font-extrabold text-white shadow-md shadow-blue-950/20 transition-all duration-200 hover:scale-105 active:scale-95 whitespace-nowrap"
             >
               <Calendar size={13} strokeWidth={2.5} className="sm:w-[14px] sm:h-[14px]" />
               <span className="hidden sm:inline">Book Vision Exam</span>
@@ -650,9 +650,9 @@ export function ClearViewOptometry() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation menu"
               aria-expanded={isMobileMenuOpen}
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 lg:hidden transition-colors shadow-xs active:scale-95"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)] text-[var(--theme-text-secondary,#334155)] hover:bg-[var(--theme-bg-card,#f1f5f9)] lg:hidden transition-colors shadow-xs active:scale-95"
             >
-              {isMobileMenuOpen ? <X size={18} className="text-[#16324f]" /> : <Menu size={18} />}
+              {isMobileMenuOpen ? <X size={18} className="text-[var(--theme-accent-secondary,#16324f)]" /> : <Menu size={18} />}
             </button>
           </div>
         </div>
@@ -667,11 +667,11 @@ export function ClearViewOptometry() {
           onClick={() => setIsMobileMenuOpen(false)}
         >
           <div
-            className="w-full max-w-sm sm:max-w-md h-full bg-[#091724] border-l border-white/10 flex flex-col justify-between overflow-hidden text-white shadow-2xl animate-in slide-in-from-right duration-300"
+            className="w-full max-w-sm sm:max-w-md h-full bg-[var(--theme-bg-dark,#091724)] border-l border-white/10 flex flex-col justify-between overflow-hidden text-white shadow-2xl animate-in slide-in-from-right duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 3A. Fixed Top Header */}
-            <div className="shrink-0 p-4 sm:p-5 border-b border-white/10 bg-[#0b1a29]/95 backdrop-blur-md space-y-3">
+            <div className="shrink-0 p-4 sm:p-5 border-b border-white/10 bg-[var(--theme-bg-dark,#0b1a29)]/95 backdrop-blur-md space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-cyan-500/20 to-blue-500/20 text-cyan-300 border border-cyan-400/30">
@@ -718,7 +718,7 @@ export function ClearViewOptometry() {
                     setIsMobileMenuOpen(false);
                     handleStartBooking();
                   }}
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 py-3 text-xs font-black text-[#0b1a29] shadow-lg shadow-cyan-500/20 hover:brightness-110 active:scale-98 transition-all"
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 py-3 text-xs font-black text-[var(--theme-bg-dark,#0b1a29)] shadow-lg shadow-cyan-500/20 hover:brightness-110 active:scale-98 transition-all"
                 >
                   <Calendar size={15} strokeWidth={2.5} />
                   <span>Schedule Vision Exam Online</span>
@@ -763,7 +763,7 @@ export function ClearViewOptometry() {
                         <div
                           className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${
                             isActive
-                              ? "bg-cyan-400 text-[#0b1a29] font-black shadow-md shadow-cyan-400/30"
+                              ? "bg-cyan-400 text-[var(--theme-bg-dark,#0b1a29)] font-black shadow-md shadow-cyan-400/30"
                               : "bg-white/5 text-slate-400 group-hover:text-cyan-300 group-hover:bg-white/10"
                           }`}
                         >
@@ -809,19 +809,19 @@ export function ClearViewOptometry() {
               </div>
             </div>
 
-            {/* 3C. Fixed Bottom Footer */}
-            <div className="shrink-0 p-3 sm:p-4 border-t border-white/10 bg-[#06111c] text-center text-[10px] text-slate-400 space-y-0.5">
-              <p className="text-white font-medium">850 Grand Optical Way, Suite 210</p>
-              <p className="text-cyan-400 font-semibold">Mon–Sat 8:30 AM – 6:00 PM · Dedicated Free Parking</p>
+            {/* 3C. Fixed Bottom Micro-Footer */}
+            <div className="shrink-0 p-3 sm:p-4 border-t border-white/10 bg-[var(--theme-bg-dark,#06111c)] text-center text-[10px] text-slate-400 space-y-0.5">
+              <p className="font-bold text-slate-300">ClearView Optometry & Eyewear Studio</p>
+              <p>850 Grand Optical Way, Suite 210 · (555) 014-9921</p>
             </div>
           </div>
         </div>
       )}
 
       {/* ========================================================================= */}
-      {/* 3. EDITORIAL BOUTIQUE HERO SECTION WITH INTERACTIVE CAROUSEL              */}
+      {/* 4. HERO SECTION WITH IMAGE SHOWCASE & OPTICAL HIGHLIGHTS                 */}
       {/* ========================================================================= */}
-      <section id="hero" className="relative pt-6 sm:pt-10 pb-16 sm:pb-24 overflow-hidden bg-[#06121e] text-white">
+      <section id="hero" className="relative pt-6 sm:pt-10 pb-16 sm:pb-24 overflow-hidden bg-[var(--theme-bg-dark,#06121e)] text-white">
         {/* Soft Ambient Radiance Orbs */}
         <div className="pointer-events-none absolute -top-36 -right-36 h-[700px] w-[700px] rounded-full bg-cyan-500/15 blur-[160px]" />
         <div className="pointer-events-none absolute top-48 -left-36 h-[600px] w-[600px] rounded-full bg-blue-600/15 blur-[150px]" />
@@ -955,7 +955,7 @@ export function ClearViewOptometry() {
                     <button
                       type="button"
                       onClick={() => handleStartBooking(activeSlide.service, activeSlide.doctor)}
-                      className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 px-6 py-3.5 text-xs sm:text-sm font-black text-[#0b1a29] shadow-lg shadow-cyan-500/25 hover:scale-105 active:scale-95 transition-all"
+                      className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 px-6 py-3.5 text-xs sm:text-sm font-black text-[var(--theme-bg-dark,#0b1a29)] shadow-lg shadow-cyan-500/25 hover:scale-105 active:scale-95 transition-all"
                     >
                       <Calendar size={15} strokeWidth={2.5} />
                       <span>{activeSlide.primaryBtn}</span>
@@ -995,16 +995,16 @@ export function ClearViewOptometry() {
                       alt={activeSlide.titleHighlight}
                       className="h-full w-full object-cover transition-all duration-700 hover:scale-105 animate-in fade-in zoom-in-95 duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b1a29]/90 via-[#0b1a29]/25 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-dark,#0b1a29)]/90 via-[var(--theme-bg-dark,#0b1a29)]/25 to-transparent" />
 
                     {/* Top-Right Stat Capsule */}
-                    <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 flex items-center gap-2 rounded-2xl border border-white/20 bg-[#0b1a29]/80 px-3 py-1.5 text-xs text-white shadow-lg backdrop-blur-md">
+                    <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 flex items-center gap-2 rounded-2xl border border-white/20 bg-[var(--theme-bg-dark,#0b1a29)]/80 px-3 py-1.5 text-xs text-white shadow-lg backdrop-blur-md">
                       <span className="text-base sm:text-lg font-black text-cyan-300">{activeSlide.statValue}</span>
                       <span className="text-[10px] text-slate-300 font-semibold uppercase leading-tight">{activeSlide.statLabel}</span>
                     </div>
 
                     {/* Bottom Doctor Voucher Card */}
-                    <div className="absolute right-3 bottom-3 left-3 rounded-2xl border border-white/15 bg-[#0e2238]/90 p-3.5 text-white shadow-2xl backdrop-blur-xl">
+                    <div className="absolute right-3 bottom-3 left-3 rounded-2xl border border-white/15 bg-[var(--theme-bg-dark,#0e2238)]/90 p-3.5 text-white shadow-2xl backdrop-blur-xl">
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0">
                           <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-cyan-400">
@@ -1021,7 +1021,7 @@ export function ClearViewOptometry() {
                         <button
                           type="button"
                           onClick={() => handleStartBooking(activeSlide.service, activeSlide.doctor)}
-                          className="shrink-0 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-3 py-1.5 text-xs font-extrabold text-[#0b1a29] shadow-md hover:brightness-110 active:scale-95 transition-all"
+                          className="shrink-0 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-3 py-1.5 text-xs font-extrabold text-[var(--theme-bg-dark,#0b1a29)] shadow-md hover:brightness-110 active:scale-95 transition-all"
                         >
                           Select
                         </button>
@@ -1125,61 +1125,61 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 4. ASYMMETRICAL CLINICAL SERVICES BENTO GRID                              */}
       {/* ========================================================================= */}
-      <section id="services" className="py-20 sm:py-28 bg-white border-t border-b border-slate-200/80">
+      <section id="services" className="py-20 sm:py-28 bg-[var(--theme-bg-surface,#ffffff)] border-t border-b border-[var(--theme-border,#e2e8f0)] transition-colors duration-300">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-cyan-200 bg-cyan-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[#2f6f9f]">
+            <span className="rounded-full border border-cyan-200 bg-cyan-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#2f6f9f)]">
               Comprehensive Eye Care
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0e2238] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#0e2238)] tracking-tight">
               Clinical Optometry Meets Boutique Craftsmanship.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#475569)] text-sm sm:text-base">
               Every procedure is paired with clear explanations, advanced digital diagnostics, and personalized guidance.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             {/* Bento 1: Comprehensive Eye Exams + Optomap (7 cols) */}
-            <div className="md:col-span-7 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-8 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
+            <div className="md:col-span-7 rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] p-6 sm:p-8 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-black text-[#2f6f9f]">
+                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-black text-[var(--theme-accent-primary,#2f6f9f)]">
                     Clinical Flagship
                   </span>
                   <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
                     Covered by VSP & EyeMed
                   </span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#0e2238]">
+                <h3 className="text-2xl sm:text-3xl font-black text-[var(--theme-text-primary,#0e2238)]">
                   Comprehensive Eye Exams with Optomap Imaging
                 </h3>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#475569)] text-sm sm:text-base leading-relaxed">
                   Thorough examination of visual acuity, refractive error, eye pressure, and peripheral vision. We use ultra-widefield imaging to evaluate retina, optic nerve, and macula health without lingering dilation blur.
                 </p>
 
-                <div className="rounded-2xl bg-white border border-slate-200 p-4 space-y-2 text-xs text-slate-700">
+                <div className="rounded-2xl bg-[var(--theme-bg-surface,#f8fafc)] border border-[var(--theme-border,#e2e8f0)] p-4 space-y-2 text-xs text-[var(--theme-text-secondary,#334155)]">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-[#2f6f9f] shrink-0" />
+                    <CheckCircle2 size={15} className="text-[var(--theme-accent-primary,#2f6f9f)] shrink-0" />
                     <span>0.125-diopter digital wavefront refraction for pinpoint clarity</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-[#2f6f9f] shrink-0" />
+                    <CheckCircle2 size={15} className="text-[var(--theme-accent-primary,#2f6f9f)] shrink-0" />
                     <span>Glaucoma tonometry screening and diabetic retinal checks</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 size={15} className="text-[#2f6f9f] shrink-0" />
+                    <CheckCircle2 size={15} className="text-[var(--theme-accent-primary,#2f6f9f)] shrink-0" />
                     <span>Computer vision syndrome & blue-light fatigue analysis</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
-                <span className="text-xs font-bold text-slate-500">Duration: 40 mins · No Dilation Needed</span>
+              <div className="mt-8 pt-6 border-t border-[var(--theme-border,#e2e8f0)] flex flex-wrap items-center justify-between gap-4">
+                <span className="text-xs font-bold text-[var(--theme-text-muted,#64748b)]">Duration: 40 mins · No Dilation Needed</span>
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Comprehensive Eye Exam + Optomap")}
-                  className="rounded-xl bg-[#0e2238] px-5 py-2.5 text-xs font-black text-white hover:bg-[#2f6f9f] transition-colors shadow-md"
+                  className="rounded-xl bg-[var(--theme-bg-dark,#0e2238)] px-5 py-2.5 text-xs font-black text-white hover:bg-[var(--theme-accent-hover,#2f6f9f)] transition-colors shadow-md"
                 >
                   Book Comprehensive Exam
                 </button>
@@ -1187,22 +1187,22 @@ export function ClearViewOptometry() {
             </div>
 
             {/* Bento 2: Contact Lens Diagnostic Fitting (5 cols) */}
-            <div className="md:col-span-5 rounded-3xl border border-slate-200 bg-gradient-to-br from-cyan-50/50 to-white p-6 sm:p-8 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
+            <div className="md:col-span-5 rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] p-6 sm:p-8 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-cyan-100 px-3 py-1 text-xs font-black text-cyan-900">
                     Contact Specialty
                   </span>
-                  <span className="text-xs font-bold text-slate-500">Daily & Toric</span>
+                  <span className="text-xs font-bold text-[var(--theme-text-muted,#64748b)]">Daily & Toric</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-[#0e2238]">
+                <h3 className="text-xl sm:text-2xl font-black text-[var(--theme-text-primary,#0e2238)]">
                   Precision Contact Lens Fittings
                 </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#475569)] text-xs sm:text-sm leading-relaxed">
                   Specialized fittings for astigmatism, multifocals, and dry eye sensitivity. Includes trial lenses to ensure all-day comfort before you order.
                 </p>
 
-                <div className="rounded-2xl bg-white border border-slate-200 p-3 text-xs space-y-1.5 text-slate-700">
+                <div className="rounded-2xl bg-[var(--theme-bg-surface,#f8fafc)] border border-[var(--theme-border,#e2e8f0)] p-3 text-xs space-y-1.5 text-[var(--theme-text-secondary,#334155)]">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 size={14} className="text-cyan-700 shrink-0" />
                     <span>Corneal topography mapping for tailored curvature match</span>
@@ -1214,12 +1214,12 @@ export function ClearViewOptometry() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-                <span className="text-xs text-slate-500">Duration: 30 mins</span>
+              <div className="mt-6 pt-4 border-t border-[var(--theme-border,#e2e8f0)] flex items-center justify-between">
+                <span className="text-xs text-[var(--theme-text-muted,#64748b)]">Duration: 30 mins</span>
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Contact Lens Diagnostic Fitting")}
-                  className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-[#0e2238] hover:bg-slate-100"
+                  className="rounded-xl border border-[var(--theme-border,#cbd5e1)] bg-[var(--theme-bg-surface,#ffffff)] px-4 py-2 text-xs font-bold text-[var(--theme-text-primary,#0e2238)] hover:bg-[var(--theme-bg-card,#f1f5f9)]"
                 >
                   Book Contact Fitting
                 </button>
@@ -1227,16 +1227,16 @@ export function ClearViewOptometry() {
             </div>
 
             {/* Bento 3: Eyewear Styling & Custom Lenses (4 cols) */}
-            <div className="md:col-span-4 rounded-3xl border border-slate-200 bg-gradient-to-br from-amber-50/40 to-white p-6 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
+            <div className="md:col-span-4 rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] p-6 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-black text-amber-900">
                     Optical Styling
                   </span>
-                  <span className="text-xs text-slate-500">800+ Frames</span>
+                  <span className="text-xs text-[var(--theme-text-muted,#64748b)]">800+ Frames</span>
                 </div>
-                <h3 className="text-xl font-black text-[#0e2238]">Frame Curation & Custom Lenses</h3>
-                <p className="text-slate-600 text-xs leading-relaxed">
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#0e2238)]">Frame Curation & Custom Lenses</h3>
+                <p className="text-[var(--theme-text-secondary,#475569)] text-xs leading-relaxed">
                   Consult with our licensed opticians to choose frames matching your face shape, personal style, and prescription thickness.
                 </p>
                 <div className="text-xs text-amber-800 font-bold">
@@ -1244,12 +1244,12 @@ export function ClearViewOptometry() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-                <span className="text-xs text-slate-500">Free with exam</span>
+              <div className="mt-6 pt-4 border-t border-[var(--theme-border,#e2e8f0)] flex items-center justify-between">
+                <span className="text-xs text-[var(--theme-text-muted,#64748b)]">Free with exam</span>
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Eyewear Styling & Prescription Fitting")}
-                  className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100"
+                  className="rounded-xl border border-[var(--theme-border,#cbd5e1)] bg-[var(--theme-bg-surface,#ffffff)] px-4 py-2 text-xs font-bold text-[var(--theme-text-primary,#0e2238)] hover:bg-[var(--theme-bg-card,#f1f5f9)]"
                 >
                   Book Styling
                 </button>
@@ -1257,7 +1257,7 @@ export function ClearViewOptometry() {
             </div>
 
             {/* Bento 4: Dry Eye & Meibomian Spa (4 cols) */}
-            <div className="md:col-span-4 rounded-3xl border border-slate-200 bg-gradient-to-br from-sky-50/40 to-white p-6 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
+            <div className="md:col-span-4 rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] p-6 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-sky-100 px-3 py-1 text-xs font-black text-sky-900">
@@ -1265,8 +1265,8 @@ export function ClearViewOptometry() {
                   </span>
                   <span className="text-xs text-sky-700 font-bold">Advanced Relief</span>
                 </div>
-                <h3 className="text-xl font-black text-[#0e2238]">Dry Eye Spa & Tear Therapy</h3>
-                <p className="text-slate-600 text-xs leading-relaxed">
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#0e2238)]">Dry Eye Spa & Tear Therapy</h3>
+                <p className="text-[var(--theme-text-secondary,#475569)] text-xs leading-relaxed">
                   Infrared meibomian gland imaging, tear osmolarity testing, and thermal expression therapy to restore natural eye moisture.
                 </p>
                 <div className="text-xs text-sky-800 font-bold">
@@ -1274,12 +1274,12 @@ export function ClearViewOptometry() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-                <span className="text-xs text-slate-500">30–45 mins</span>
+              <div className="mt-6 pt-4 border-t border-[var(--theme-border,#e2e8f0)] flex items-center justify-between">
+                <span className="text-xs text-[var(--theme-text-muted,#64748b)]">30–45 mins</span>
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Dry Eye Spa Evaluation")}
-                  className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-800 hover:bg-slate-100"
+                  className="rounded-xl border border-[var(--theme-border,#cbd5e1)] bg-[var(--theme-bg-surface,#ffffff)] px-4 py-2 text-xs font-bold text-[var(--theme-text-primary,#0e2238)] hover:bg-[var(--theme-bg-card,#f1f5f9)]"
                 >
                   Dry Eye Consult
                 </button>
@@ -1287,7 +1287,7 @@ export function ClearViewOptometry() {
             </div>
 
             {/* Bento 5: Same-Day Urgent Red Eye Care (4 cols) */}
-            <div className="md:col-span-4 rounded-3xl border border-rose-200 bg-gradient-to-br from-rose-50/40 to-white p-6 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
+            <div className="md:col-span-4 rounded-3xl border border-rose-200 bg-[var(--theme-bg-card,#ffffff)] p-6 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-rose-100 px-3 py-1 text-xs font-black text-rose-800 flex items-center gap-1.5">
@@ -1296,8 +1296,8 @@ export function ClearViewOptometry() {
                   </span>
                   <span className="text-xs text-rose-600 font-bold">Today</span>
                 </div>
-                <h3 className="text-xl font-black text-[#0e2238]">Red Eye & Corneal Emergency</h3>
-                <p className="text-slate-600 text-xs leading-relaxed">
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#0e2238)]">Red Eye & Corneal Emergency</h3>
+                <p className="text-[var(--theme-text-secondary,#475569)] text-xs leading-relaxed">
                   Foreign particles, sudden flashes, floaters, scratches, or painful infections evaluated the exact day you call.
                 </p>
                 <div className="text-xs text-rose-700 font-bold">
@@ -1305,8 +1305,8 @@ export function ClearViewOptometry() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-                <span className="text-xs text-slate-500">Immediate triage</span>
+              <div className="mt-6 pt-4 border-t border-[var(--theme-border,#e2e8f0)] flex items-center justify-between">
+                <span className="text-xs text-[var(--theme-text-muted,#64748b)]">Immediate triage</span>
                 <a
                   href="tel:5550149921"
                   className="rounded-xl bg-rose-600 px-4 py-2 text-xs font-bold text-white hover:bg-rose-500"
@@ -1322,16 +1322,16 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 5. INTERACTIVE FACE SHAPE & EYEWEAR MATCHING STUDIO                       */}
       {/* ========================================================================= */}
-      <section id="face-finder" className="py-20 sm:py-28 bg-[#f8fafc]">
+      <section id="face-finder" className="py-20 sm:py-28 bg-[var(--theme-bg-base,#f8fafc)]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
             <span className="rounded-full border border-amber-300 bg-amber-100 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-amber-900">
               Interactive Optical Stylist
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0e2238] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#0e2238)] tracking-tight">
               Find the Perfect Frame for Your Face Shape.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#475569)] text-sm sm:text-base">
               Click your face shape below to discover tailored frame silhouettes, materials, and styling rules recommended by our licensed opticians.
             </p>
           </div>
@@ -1347,8 +1347,8 @@ export function ClearViewOptometry() {
                   onClick={() => setActiveFaceShapeId(shape.id)}
                   className={`flex items-center gap-2 rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-black transition-all ${
                     isActive
-                      ? "bg-[#0e2238] text-white shadow-lg ring-2 ring-cyan-400 scale-105"
-                      : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
+                      ? "bg-[var(--theme-bg-dark,#0e2238)] text-white shadow-lg ring-2 ring-cyan-400 scale-105"
+                      : "bg-[var(--theme-bg-surface,#ffffff)] text-[var(--theme-text-secondary,#334155)] hover:bg-[var(--theme-bg-card,#f1f5f9)] border border-[var(--theme-border,#e2e8f0)]"
                   }`}
                 >
                   <span className="text-base sm:text-lg">{shape.emoji}</span>
@@ -1359,15 +1359,15 @@ export function ClearViewOptometry() {
           </div>
 
           {/* Active Face Shape Card */}
-          <div className="mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          <div className="mx-auto max-w-4xl rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] p-6 sm:p-10 shadow-xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             {/* Visual Frame Photo */}
-            <div className="md:col-span-5 relative overflow-hidden rounded-2xl border border-slate-200 shadow-md">
+            <div className="md:col-span-5 relative overflow-hidden rounded-2xl border border-[var(--theme-border,#e2e8f0)] shadow-md">
               <img
                 src={imageUrl(currentFaceShape.image)}
                 alt={currentFaceShape.shape}
                 className="h-64 sm:h-72 w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0e2238]/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-dark,#0e2238)]/70 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 right-3 text-white text-xs font-black">
                 Featured Silhouette: {currentFaceShape.topPicks[0]}
               </div>
@@ -1376,33 +1376,33 @@ export function ClearViewOptometry() {
             {/* Stylist Recommendation Details */}
             <div className="md:col-span-7 space-y-4">
               <div>
-                <span className="text-xs font-black uppercase tracking-wider text-[#2f6f9f]">
+                <span className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2f6f9f)]">
                   Optician Styling Guidance
                 </span>
-                <h3 className="text-2xl font-black text-[#0e2238] mt-0.5">
+                <h3 className="text-2xl font-black text-[var(--theme-text-primary,#0e2238)] mt-0.5">
                   {currentFaceShape.shape}
                 </h3>
-                <p className="text-xs text-slate-500 font-medium mt-1">
+                <p className="text-xs text-[var(--theme-text-muted,#64748b)] font-medium mt-1">
                   {currentFaceShape.traits}
                 </p>
               </div>
 
-              <div className="rounded-2xl bg-slate-50 p-4 border border-slate-200/80 space-y-2">
-                <p className="text-xs font-bold text-[#0e2238]">Styling Rule of Thumb:</p>
-                <p className="text-xs text-slate-700 leading-relaxed">
+              <div className="rounded-2xl bg-[var(--theme-bg-surface,#f8fafc)] p-4 border border-[var(--theme-border,#e2e8f0)] space-y-2">
+                <p className="text-xs font-bold text-[var(--theme-text-primary,#0e2238)]">Styling Rule of Thumb:</p>
+                <p className="text-xs text-[var(--theme-text-secondary,#334155)] leading-relaxed">
                   {currentFaceShape.recommendation}
                 </p>
               </div>
 
               <div className="space-y-2">
-                <p className="text-xs font-black uppercase tracking-wider text-slate-400">
+                <p className="text-xs font-black uppercase tracking-wider text-[var(--theme-text-muted,#64748b)]">
                   Ideal Frame Silhouettes:
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {currentFaceShape.topPicks.map((pick) => (
                     <span
                       key={pick}
-                      className="rounded-xl bg-blue-50 border border-blue-200 px-3 py-1.5 text-xs font-bold text-[#16324f]"
+                      className="rounded-xl bg-cyan-500/10 border border-cyan-500/20 px-3 py-1.5 text-xs font-bold text-[var(--theme-accent-secondary,#16324f)]"
                     >
                       {pick}
                     </span>
@@ -1414,11 +1414,11 @@ export function ClearViewOptometry() {
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Eyewear Styling & Face Shape Fitting")}
-                  className="rounded-xl bg-[#0e2238] px-6 py-2.5 text-xs font-bold text-white hover:bg-[#2f6f9f] transition-all shadow-md"
+                  className="rounded-xl bg-[var(--theme-bg-dark,#0e2238)] px-6 py-2.5 text-xs font-bold text-white hover:bg-[var(--theme-accent-hover,#2f6f9f)] transition-all shadow-md"
                 >
                   Reserve In-Store Try-On
                 </button>
-                <a href="#eyewear-studio" className="text-xs font-bold text-[#2f6f9f] hover:underline">
+                <a href="#eyewear-studio" className="text-xs font-bold text-[var(--theme-accent-primary,#2f6f9f)] hover:underline">
                   Browse Full Eyewear Studio →
                 </a>
               </div>
@@ -1430,17 +1430,17 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 6. CURATED EYEWEAR & CONTACT LENS GALLERY                                 */}
       {/* ========================================================================= */}
-      <section id="eyewear-studio" className="py-20 sm:py-28 bg-white border-t border-b border-slate-200/80">
+      <section id="eyewear-studio" className="py-20 sm:py-28 bg-[var(--theme-bg-surface,#ffffff)] border-t border-b border-[var(--theme-border,#e2e8f0)] transition-colors duration-300">
         <Container>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[#2f6f9f]">
+              <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#2f6f9f)]">
                 Curated Optical Gallery
               </span>
-              <h2 className="text-3xl sm:text-5xl font-black text-[#0e2238] tracking-tight mt-2">
+              <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#0e2238)] tracking-tight mt-2">
                 Designer Optical Collection.
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base mt-1">
+              <p className="text-[var(--theme-text-secondary,#475569)] text-sm sm:text-base mt-1">
                 Hand-finished Italian acetate, aerospace Japanese titanium, and precision lenses.
               </p>
             </div>
@@ -1454,8 +1454,8 @@ export function ClearViewOptometry() {
                   onClick={() => setSelectedFrameCategory(cat)}
                   className={`rounded-xl px-3.5 py-1.5 text-xs font-bold transition-all ${
                     selectedFrameCategory === cat
-                      ? "bg-[#0e2238] text-white shadow-sm"
-                      : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                      ? "bg-[var(--theme-bg-dark,#0e2238)] text-white shadow-sm"
+                      : "bg-[var(--theme-bg-card,#f1f5f9)] text-[var(--theme-text-secondary,#334155)] hover:opacity-80"
                   }`}
                 >
                   {cat}
@@ -1469,10 +1469,10 @@ export function ClearViewOptometry() {
             {filteredFrames.map((frame) => (
               <div
                 key={frame.id}
-                className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+                className="rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
-                  <div className="relative h-56 w-full overflow-hidden bg-slate-50">
+                  <div className="relative h-56 w-full overflow-hidden bg-[var(--theme-bg-surface,#f8fafc)]">
                     <img
                       src={imageUrl(frame.image)}
                       alt={frame.name}
@@ -1482,7 +1482,7 @@ export function ClearViewOptometry() {
                       {frame.badges.map((b) => (
                         <span
                           key={b}
-                          className="rounded-full bg-white/95 border border-slate-200 px-2.5 py-0.5 text-[9px] font-black text-[#0e2238] shadow-xs"
+                          className="rounded-full bg-[var(--theme-bg-surface,#ffffff)]/95 border border-[var(--theme-border,#e2e8f0)] px-2.5 py-0.5 text-[9px] font-black text-[var(--theme-text-primary,#0e2238)] shadow-xs"
                         >
                           {b}
                         </span>
@@ -1492,22 +1492,22 @@ export function ClearViewOptometry() {
 
                   <div className="p-5 space-y-2">
                     <div className="flex justify-between items-baseline">
-                      <h3 className="text-base font-black text-[#0e2238]">{frame.name}</h3>
-                      <span className="text-sm font-black text-[#2f6f9f]">{frame.price}</span>
+                      <h3 className="text-base font-black text-[var(--theme-text-primary,#0e2238)]">{frame.name}</h3>
+                      <span className="text-sm font-black text-[var(--theme-accent-primary,#2f6f9f)]">{frame.price}</span>
                     </div>
-                    <p className="text-xs text-slate-500 font-medium">{frame.color}</p>
-                    <p className="text-xs text-slate-600 leading-relaxed">{frame.material}</p>
+                    <p className="text-xs text-[var(--theme-text-muted,#64748b)] font-medium">{frame.color}</p>
+                    <p className="text-xs text-[var(--theme-text-secondary,#475569)] leading-relaxed">{frame.material}</p>
                     <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-2 text-[11px] font-bold text-emerald-800">
                       Estimated Copay: {frame.insuranceAllowance}
                     </div>
                   </div>
                 </div>
 
-                <div className="p-5 pt-0 border-t border-slate-100 mt-2">
+                <div className="p-5 pt-0 border-t border-[var(--theme-border,#e2e8f0)]/50 mt-2">
                   <button
                     type="button"
                     onClick={() => handleStartBooking("Eyewear Styling Consultation", "Sophia Rivera")}
-                    className="w-full rounded-xl border border-slate-300 bg-slate-50 py-2 text-xs font-bold text-slate-800 hover:bg-[#0e2238] hover:text-white transition-colors"
+                    className="w-full rounded-xl border border-[var(--theme-border,#cbd5e1)] bg-[var(--theme-bg-surface,#f8fafc)] py-2 text-xs font-bold text-[var(--theme-text-primary,#0e2238)] hover:bg-[var(--theme-bg-dark,#0e2238)] hover:text-white transition-colors"
                   >
                     Reserve In Studio
                   </button>
@@ -1521,7 +1521,7 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 7. ADVANCED DIGITAL RETINAL DIAGNOSTICS & EXAM TECH                       */}
       {/* ========================================================================= */}
-      <section id="exam-tech" className="py-20 sm:py-28 bg-[#0b1a29] text-white">
+      <section id="exam-tech" className="py-20 sm:py-28 bg-[var(--theme-bg-dark,#0b1a29)] text-white">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
             <span className="rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-cyan-300">
@@ -1582,16 +1582,16 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 8. OPTOMETRISTS & OPTICAL STYLISTS                                       */}
       {/* ========================================================================= */}
-      <section id="optometrists" className="py-20 sm:py-28 bg-white border-t border-b border-slate-200/80">
+      <section id="optometrists" className="py-20 sm:py-28 bg-[var(--theme-bg-surface,#ffffff)] border-t border-b border-[var(--theme-border,#e2e8f0)] transition-colors duration-300">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[#2f6f9f]">
+            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#2f6f9f)]">
               Clinical Excellence
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0e2238] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#0e2238)] tracking-tight">
               Optometrists & Eyewear Stylists.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#475569)] text-sm sm:text-base">
               Trained at the nation's premier optometry schools, committed to patient education and zero rushed visits.
             </p>
           </div>
@@ -1600,10 +1600,10 @@ export function ClearViewOptometry() {
             {providers.map((doc) => (
               <div
                 key={doc.name}
-                className="rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white overflow-hidden shadow-md flex flex-col justify-between group hover:shadow-xl transition-all duration-300"
+                className="rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] overflow-hidden shadow-md flex flex-col justify-between group hover:shadow-xl transition-all duration-300"
               >
                 <div>
-                  <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-slate-100">
+                  <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-[var(--theme-bg-surface,#f8fafc)]">
                     <img
                       src={imageUrl(doc.photo)}
                       alt={doc.name}
@@ -1611,7 +1611,7 @@ export function ClearViewOptometry() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4">
-                      <span className="rounded-full bg-white/95 border border-white/40 px-3 py-1 text-[10px] font-black text-[#0e2238]">
+                      <span className="rounded-full bg-[var(--theme-bg-surface,#ffffff)]/95 border border-[var(--theme-border,#e2e8f0)] px-3 py-1 text-[10px] font-black text-[var(--theme-text-primary,#0e2238)]">
                         {doc.experience}
                       </span>
                     </div>
@@ -1619,18 +1619,18 @@ export function ClearViewOptometry() {
 
                   <div className="p-6 space-y-3">
                     <div>
-                      <h3 className="text-lg font-black text-[#0e2238]">{doc.name}</h3>
-                      <p className="text-xs font-bold text-[#2f6f9f]">{doc.role}</p>
-                      <p className="text-[11px] text-slate-500 mt-0.5">{doc.education}</p>
+                      <h3 className="text-lg font-black text-[var(--theme-text-primary,#0e2238)]">{doc.name}</h3>
+                      <p className="text-xs font-bold text-[var(--theme-accent-primary,#2f6f9f)]">{doc.role}</p>
+                      <p className="text-[11px] text-[var(--theme-text-muted,#64748b)] mt-0.5">{doc.education}</p>
                     </div>
-                    <p className="text-xs text-slate-600 leading-relaxed italic">
+                    <p className="text-xs text-[var(--theme-text-secondary,#475569)] leading-relaxed italic">
                       "{doc.quote}"
                     </p>
                     <div className="flex flex-wrap gap-1.5 pt-1">
                       {doc.specialties.map((s) => (
                         <span
                           key={s}
-                          className="rounded-lg bg-blue-50 border border-blue-100 px-2 py-0.5 text-[10px] font-bold text-[#16324f]"
+                          className="rounded-lg bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 text-[10px] font-bold text-[var(--theme-accent-secondary,#16324f)]"
                         >
                           {s}
                         </span>
@@ -1639,12 +1639,12 @@ export function ClearViewOptometry() {
                   </div>
                 </div>
 
-                <div className="p-6 pt-0 border-t border-slate-100 mt-4 flex items-center justify-between">
+                <div className="p-6 pt-0 border-t border-[var(--theme-border,#e2e8f0)]/50 mt-4 flex items-center justify-between">
                   <span className="text-xs font-bold text-emerald-700">Accepting Patients</span>
                   <button
                     type="button"
                     onClick={() => handleStartBooking("Comprehensive Eye Exam + Optomap", doc.name)}
-                    className="rounded-xl bg-[#0e2238] px-4 py-2 text-xs font-bold text-white hover:bg-[#2f6f9f] transition-colors shadow-sm"
+                    className="rounded-xl bg-[var(--theme-bg-dark,#0e2238)] px-4 py-2 text-xs font-bold text-white hover:bg-[var(--theme-accent-hover,#2f6f9f)] transition-colors shadow-sm"
                   >
                     Book with {doc.name.split(" ")[1]}
                   </button>
@@ -1658,51 +1658,51 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 9. VISION INSURANCE & BENEFIT MAXIMIZER                                   */}
       {/* ========================================================================= */}
-      <section id="visit-info" className="py-20 sm:py-28 bg-[#f8fafc]">
+      <section id="visit-info" className="py-20 sm:py-28 bg-[var(--theme-bg-base,#f8fafc)]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
             <span className="rounded-full border border-emerald-300 bg-emerald-100 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-emerald-900">
               Zero Surprise Billing
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0e2238] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#0e2238)] tracking-tight">
               Maximize Your Vision Insurance & FSA Benefits.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#475569)] text-sm sm:text-base">
               We verify your optical benefits in real time before your appointment so you know exactly what your plan covers.
             </p>
           </div>
 
-          <div className="mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xl space-y-6">
+          <div className="mx-auto max-w-4xl rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] p-6 sm:p-10 shadow-xl space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {visionPlans.map((plan) => (
                 <div
                   key={plan.name}
-                  className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 space-y-1.5"
+                  className="rounded-2xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)]/70 p-4 space-y-1.5"
                 >
                   <div className="flex justify-between items-baseline">
-                    <h4 className="text-xs font-black text-[#0e2238]">{plan.name}</h4>
+                    <h4 className="text-xs font-black text-[var(--theme-text-primary,#0e2238)]">{plan.name}</h4>
                     <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[9px] font-black text-emerald-800">
                       {plan.tier}
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                  <p className="text-[11px] text-[var(--theme-text-secondary,#475569)] font-medium leading-relaxed">
                     {plan.coverage}
                   </p>
                 </div>
               ))}
             </div>
 
-            <div className="rounded-2xl bg-blue-50 border border-blue-200 p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="rounded-2xl bg-cyan-500/10 border border-cyan-500/20 p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="space-y-1 text-center sm:text-left">
-                <h4 className="text-sm font-black text-[#0e2238]">Have Unused FSA / HSA Dollars?</h4>
-                <p className="text-xs text-slate-600">
+                <h4 className="text-sm font-black text-[var(--theme-text-primary,#0e2238)]">Have Unused FSA / HSA Dollars?</h4>
+                <p className="text-xs text-[var(--theme-text-secondary,#475569)]">
                   Most Flexible Spending Accounts expire on December 31st! Use your pre-tax funds on prescription sunglasses, backup glasses, or annual contact lenses.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => handleStartBooking("FSA / HSA Benefit Utilization Exam")}
-                className="shrink-0 rounded-xl bg-[#0e2238] px-5 py-2.5 text-xs font-black text-white hover:bg-[#2f6f9f] transition-all shadow-md"
+                className="shrink-0 rounded-xl bg-[var(--theme-bg-dark,#0e2238)] px-5 py-2.5 text-xs font-black text-white hover:bg-[var(--theme-accent-hover,#2f6f9f)] transition-all shadow-md"
               >
                 Use Vision Benefits
               </button>
@@ -1714,16 +1714,16 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 10. VERIFIED PATIENT REVIEWS & WALL                                       */}
       {/* ========================================================================= */}
-      <section id="reviews" className="py-20 sm:py-28 bg-white border-t border-slate-200">
+      <section id="reviews" className="py-20 sm:py-28 bg-[var(--theme-bg-surface,#ffffff)] border-t border-[var(--theme-border,#e2e8f0)] transition-colors duration-300">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
             <span className="rounded-full border border-amber-300 bg-amber-100 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-amber-900">
               Patient Testimonials
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0e2238] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#0e2238)] tracking-tight">
               Trusted by Over 850+ ClearView Patients.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#475569)] text-sm sm:text-base">
               Honest stories from patients who found clearer sight and their signature eyewear at ClearView.
             </p>
           </div>
@@ -1732,7 +1732,7 @@ export function ClearViewOptometry() {
             {reviews.map((rev) => (
               <div
                 key={rev.name}
-                className="rounded-3xl border border-slate-200 bg-slate-50/70 p-6 space-y-4 shadow-md flex flex-col justify-between"
+                className="rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)]/70 p-6 space-y-4 shadow-md flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
@@ -1741,16 +1741,16 @@ export function ClearViewOptometry() {
                         <Star key={i} size={14} className="fill-amber-400" />
                       ))}
                     </div>
-                    <span className="text-[10px] font-bold text-slate-400">{rev.location}</span>
+                    <span className="text-[10px] font-bold text-[var(--theme-text-muted,#64748b)]">{rev.location}</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-[var(--theme-text-secondary,#334155)] leading-relaxed italic">
                     "{rev.quote}"
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-200">
-                  <p className="text-xs font-black text-[#0e2238]">{rev.name}</p>
-                  <p className="text-[11px] text-[#2f6f9f] font-bold">{rev.type}</p>
+                <div className="pt-4 border-t border-[var(--theme-border,#e2e8f0)]">
+                  <p className="text-xs font-black text-[var(--theme-text-primary,#0e2238)]">{rev.name}</p>
+                  <p className="text-[11px] text-[var(--theme-accent-primary,#2f6f9f)] font-bold">{rev.type}</p>
                 </div>
               </div>
             ))}
@@ -1761,16 +1761,16 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 11. INTERACTIVE FREQUENTLY ASKED QUESTIONS                                */}
       {/* ========================================================================= */}
-      <section id="faq" className="py-20 sm:py-28 bg-[#f8fafc] border-t border-slate-200">
+      <section id="faq" className="py-20 sm:py-28 bg-[var(--theme-bg-base,#f8fafc)] border-t border-[var(--theme-border,#e2e8f0)]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[#2f6f9f]">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#2f6f9f)]/30 bg-[var(--theme-accent-primary,#2f6f9f)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#2f6f9f)]">
               Clear Answers
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#0e2238] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#0e2238)] tracking-tight">
               Frequently Asked Questions.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#475569)] text-sm sm:text-base">
               Everything you need to know about exams, lens timing, and vision insurance.
             </p>
           </div>
@@ -1781,17 +1781,17 @@ export function ClearViewOptometry() {
               return (
                 <div
                   key={faq.q}
-                  className="rounded-2xl border border-slate-200 bg-white overflow-hidden transition-colors"
+                  className="rounded-2xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] overflow-hidden transition-colors"
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between p-5 text-left text-sm sm:text-base font-bold text-[#0e2238] hover:text-[#2f6f9f] transition-colors"
+                    className="w-full flex items-center justify-between p-5 text-left text-sm sm:text-base font-bold text-[var(--theme-text-primary,#0e2238)] hover:text-[var(--theme-accent-primary,#2f6f9f)] transition-colors"
                   >
                     <span>{faq.q}</span>
                     <span
-                      className={`ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-transform ${
-                        isOpen ? "rotate-180 text-[#2f6f9f] bg-blue-50" : ""
+                      className={`ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--theme-bg-surface,#f1f5f9)] text-[var(--theme-text-secondary,#475569)] transition-transform ${
+                        isOpen ? "rotate-180 text-[var(--theme-accent-primary,#2f6f9f)] bg-[var(--theme-accent-primary,#2f6f9f)]/15" : ""
                       }`}
                     >
                       <ChevronDown size={14} />
@@ -1799,7 +1799,7 @@ export function ClearViewOptometry() {
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                    <div className="px-5 pb-5 text-xs sm:text-sm text-[var(--theme-text-secondary,#475569)] leading-relaxed border-t border-[var(--theme-border,#f1f5f9)] pt-3">
                       {faq.a}
                     </div>
                   )}
@@ -1813,7 +1813,7 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 12. BOUTIQUE OPTOMETRY FOOTER                                             */}
       {/* ========================================================================= */}
-      <footer className="bg-[#0b1a29] text-slate-300 py-16 pb-28 sm:pb-16 text-xs">
+      <footer className="bg-[var(--theme-bg-dark,#0b1a29)] text-slate-300 py-16 pb-28 sm:pb-16 text-xs">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div className="space-y-4">
@@ -1887,11 +1887,11 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {/* 13. FLOATING MOBILE CONCIERGE DOCK                                        */}
       {/* ========================================================================= */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 border-t border-slate-200 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden shadow-2xl">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--theme-bg-surface,#ffffff)]/95 border-t border-[var(--theme-border,#e2e8f0)] p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden shadow-2xl">
         <div className="flex items-center gap-2">
           <a
             href="tel:5550149921"
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-slate-50 py-2.5 text-xs font-bold text-[#0e2238] active:scale-95"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-[var(--theme-border,#cbd5e1)] bg-[var(--theme-bg-card,#f8fafc)] py-2.5 text-xs font-bold text-[var(--theme-text-primary,#0e2238)] active:scale-95"
           >
             <Phone size={14} />
             <span>Call Clinic</span>
@@ -1900,7 +1900,7 @@ export function ClearViewOptometry() {
           <button
             type="button"
             onClick={() => handleStartBooking()}
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#0e2238] via-[#16324f] to-[#2f6f9f] py-2.5 text-xs font-black text-white shadow-md active:scale-95"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[var(--theme-bg-dark,#0e2238)] via-[var(--theme-accent-secondary,#16324f)] to-[var(--theme-accent-primary,#2f6f9f)] py-2.5 text-xs font-black text-white shadow-md active:scale-95"
           >
             <Calendar size={14} strokeWidth={2.5} />
             <span>Book Exam</span>
@@ -1913,11 +1913,11 @@ export function ClearViewOptometry() {
       {/* ========================================================================= */}
       {isBookingOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
+          <div className="relative w-full max-w-lg rounded-3xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-card,#ffffff)] p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
             <button
               type="button"
               onClick={() => setIsBookingOpen(false)}
-              className="absolute top-5 right-5 text-slate-400 hover:text-slate-800"
+              className="absolute top-5 right-5 text-[var(--theme-text-muted,#94a3b8)] hover:text-[var(--theme-text-primary,#0e2238)]"
             >
               <X size={20} />
             </button>
@@ -1925,25 +1925,25 @@ export function ClearViewOptometry() {
             {!bookingConfirmed ? (
               <div>
                 <div className="mb-6">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#2f6f9f]">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[var(--theme-accent-primary,#2f6f9f)]">
                     ClearView Online Concierge
                   </span>
-                  <h3 className="text-xl font-black text-[#0e2238] mt-0.5">
+                  <h3 className="text-xl font-black text-[var(--theme-text-primary,#0e2238)] mt-0.5">
                     Schedule Your Vision Visit
                   </h3>
                 </div>
 
                 {/* Step Indicators */}
-                <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100 text-xs">
-                  <span className={`font-bold ${bookingStep >= 1 ? "text-[#2f6f9f]" : "text-slate-400"}`}>
+                <div className="flex items-center justify-between mb-6 pb-3 border-b border-[var(--theme-border,#f1f5f9)] text-xs">
+                  <span className={`font-bold ${bookingStep >= 1 ? "text-[var(--theme-accent-primary,#2f6f9f)]" : "text-[var(--theme-text-muted,#94a3b8)]"}`}>
                     1. Visit & Doctor
                   </span>
-                  <ChevronRight size={14} className="text-slate-300" />
-                  <span className={`font-bold ${bookingStep >= 2 ? "text-[#2f6f9f]" : "text-slate-400"}`}>
+                  <ChevronRight size={14} className="text-[var(--theme-text-muted,#cbd5e1)]" />
+                  <span className={`font-bold ${bookingStep >= 2 ? "text-[var(--theme-accent-primary,#2f6f9f)]" : "text-[var(--theme-text-muted,#94a3b8)]"}`}>
                     2. Date & Time
                   </span>
-                  <ChevronRight size={14} className="text-slate-300" />
-                  <span className={`font-bold ${bookingStep >= 3 ? "text-[#2f6f9f]" : "text-slate-400"}`}>
+                  <ChevronRight size={14} className="text-[var(--theme-text-muted,#cbd5e1)]" />
+                  <span className={`font-bold ${bookingStep >= 3 ? "text-[var(--theme-accent-primary,#2f6f9f)]" : "text-[var(--theme-text-muted,#94a3b8)]"}`}>
                     3. Patient Info
                   </span>
                 </div>
@@ -1952,11 +1952,11 @@ export function ClearViewOptometry() {
                 {bookingStep === 1 && (
                   <div className="space-y-4 text-xs">
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Reason for Visit</label>
+                      <label className="block text-[var(--theme-text-secondary,#334155)] font-bold mb-1.5">Reason for Visit</label>
                       <select
                         value={bookingExamType}
                         onChange={(e) => setBookingExamType(e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-slate-800 focus:border-[#2f6f9f] focus:outline-none"
+                        className="w-full rounded-xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)] px-3 py-2.5 text-[var(--theme-text-primary,#0e2238)] focus:border-[var(--theme-accent-primary,#2f6f9f)] focus:outline-none"
                       >
                         <option value="Comprehensive Eye Exam + Optomap">Comprehensive Eye Exam + Optomap 200°</option>
                         <option value="Contact Lens Diagnostic Fitting">Contact Lens Diagnostic Fitting</option>
@@ -1967,11 +1967,11 @@ export function ClearViewOptometry() {
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Preferred Optometrist / Stylist</label>
+                      <label className="block text-[var(--theme-text-secondary,#334155)] font-bold mb-1.5">Preferred Optometrist / Stylist</label>
                       <select
                         value={bookingDoctor}
                         onChange={(e) => setBookingDoctor(e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-slate-800 focus:border-[#2f6f9f] focus:outline-none"
+                        className="w-full rounded-xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)] px-3 py-2.5 text-[var(--theme-text-primary,#0e2238)] focus:border-[var(--theme-accent-primary,#2f6f9f)] focus:outline-none"
                       >
                         <option value="First Available Optometrist">First Available Clinician (Fastest)</option>
                         <option value="Dr. Olivia Bennett, OD">Dr. Olivia Bennett, OD (Retinal & Glaucoma)</option>
@@ -1984,7 +1984,7 @@ export function ClearViewOptometry() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(2)}
-                        className="rounded-xl bg-[#0e2238] px-6 py-2.5 font-bold text-white hover:bg-[#2f6f9f]"
+                        className="rounded-xl bg-[var(--theme-bg-dark,#0e2238)] px-6 py-2.5 font-bold text-white hover:bg-[var(--theme-accent-hover,#2f6f9f)]"
                       >
                         Select Date & Time →
                       </button>
@@ -1996,7 +1996,7 @@ export function ClearViewOptometry() {
                 {bookingStep === 2 && (
                   <div className="space-y-4 text-xs">
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Select Day</label>
+                      <label className="block text-[var(--theme-text-secondary,#334155)] font-bold mb-1.5">Select Day</label>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                         {["Today (Priority)", "Tomorrow (Tue)", "Wednesday", "Thursday"].map((day) => (
                           <button
@@ -2005,8 +2005,8 @@ export function ClearViewOptometry() {
                             onClick={() => setBookingDay(day)}
                             className={`p-2 rounded-xl text-center font-bold border transition-all ${
                               bookingDay === day
-                                ? "border-[#2f6f9f] bg-blue-50 text-[#0e2238]"
-                                : "border-slate-200 bg-slate-50 text-slate-700"
+                                ? "border-[var(--theme-accent-primary,#2f6f9f)] bg-[var(--theme-accent-primary,#2f6f9f)]/15 text-[var(--theme-text-primary,#0e2238)] shadow-sm font-black"
+                                : "border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)] text-[var(--theme-text-secondary,#334155)]"
                             }`}
                           >
                             {day}
@@ -2016,7 +2016,7 @@ export function ClearViewOptometry() {
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Available Time Slot</label>
+                      <label className="block text-[var(--theme-text-secondary,#334155)] font-bold mb-1.5">Available Time Slot</label>
                       <div className="grid grid-cols-3 gap-2">
                         {["9:15 AM", "10:15 AM", "11:30 AM", "1:45 PM", "3:15 PM", "4:30 PM"].map((time) => (
                           <button
@@ -2025,8 +2025,8 @@ export function ClearViewOptometry() {
                             onClick={() => setBookingSlot(time)}
                             className={`p-2 rounded-xl text-center font-bold border transition-all ${
                               bookingSlot === time
-                                ? "border-[#2f6f9f] bg-blue-50 text-[#0e2238]"
-                                : "border-slate-200 bg-slate-50 text-slate-700"
+                                ? "border-[var(--theme-accent-primary,#2f6f9f)] bg-[var(--theme-accent-primary,#2f6f9f)]/15 text-[var(--theme-text-primary,#0e2238)] shadow-sm font-black"
+                                : "border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)] text-[var(--theme-text-secondary,#334155)]"
                             }`}
                           >
                             {time}
@@ -2039,14 +2039,14 @@ export function ClearViewOptometry() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(1)}
-                        className="text-slate-500 hover:text-slate-800"
+                        className="text-[var(--theme-text-muted,#64748b)] hover:text-[var(--theme-text-primary,#0e2238)]"
                       >
                         ← Back
                       </button>
                       <button
                         type="button"
                         onClick={() => setBookingStep(3)}
-                        className="rounded-xl bg-[#0e2238] px-6 py-2.5 font-bold text-white hover:bg-[#2f6f9f]"
+                        className="rounded-xl bg-[var(--theme-bg-dark,#0e2238)] px-6 py-2.5 font-bold text-white hover:bg-[var(--theme-accent-hover,#2f6f9f)]"
                       >
                         Enter Patient Info →
                       </button>
@@ -2064,35 +2064,35 @@ export function ClearViewOptometry() {
                     className="space-y-4 text-xs"
                   >
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1">Full Name *</label>
+                      <label className="block text-[var(--theme-text-secondary,#334155)] font-bold mb-1">Full Name *</label>
                       <input
                         type="text"
                         required
                         value={patientName}
                         onChange={(e) => setPatientName(e.target.value)}
                         placeholder="e.g. Rachel Chen"
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 focus:border-[#2f6f9f] focus:outline-none"
+                        className="w-full rounded-xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)] px-3 py-2 text-[var(--theme-text-primary,#0e2238)] focus:border-[var(--theme-accent-primary,#2f6f9f)] focus:outline-none placeholder:text-[var(--theme-text-muted,#94a3b8)]"
                       />
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-slate-700 font-bold mb-1">Mobile Phone (SMS Confirmation) *</label>
+                        <label className="block text-[var(--theme-text-secondary,#334155)] font-bold mb-1">Mobile Phone (SMS Confirmation) *</label>
                         <input
                           type="tel"
                           required
                           value={patientPhone}
                           onChange={(e) => setPatientPhone(e.target.value)}
                           placeholder="(555) 000-0000"
-                          className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 focus:border-[#2f6f9f] focus:outline-none"
+                          className="w-full rounded-xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)] px-3 py-2 text-[var(--theme-text-primary,#0e2238)] focus:border-[var(--theme-accent-primary,#2f6f9f)] focus:outline-none placeholder:text-[var(--theme-text-muted,#94a3b8)]"
                         />
                       </div>
                       <div>
-                        <label className="block text-slate-700 font-bold mb-1">Vision Insurance Plan</label>
+                        <label className="block text-[var(--theme-text-secondary,#334155)] font-bold mb-1">Vision Insurance Plan</label>
                         <select
                           value={patientInsurance}
                           onChange={(e) => setPatientInsurance(e.target.value)}
-                          className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 focus:border-[#2f6f9f] focus:outline-none"
+                          className="w-full rounded-xl border border-[var(--theme-border,#e2e8f0)] bg-[var(--theme-bg-surface,#f8fafc)] px-3 py-2 text-[var(--theme-text-primary,#0e2238)] focus:border-[var(--theme-accent-primary,#2f6f9f)] focus:outline-none"
                         >
                           <option value="VSP (Vision Service Plan)">VSP (Vision Service Plan)</option>
                           <option value="EyeMed Vision Care">EyeMed Vision Care</option>
@@ -2103,18 +2103,18 @@ export function ClearViewOptometry() {
                       </div>
                     </div>
 
-                    <div className="rounded-xl bg-cyan-50 border border-cyan-200 p-3 space-y-1 text-slate-700">
+                    <div className="rounded-xl bg-[var(--theme-accent-primary,#2f6f9f)]/10 border border-[var(--theme-accent-primary,#2f6f9f)]/25 p-3 space-y-1 text-[var(--theme-text-secondary,#334155)]">
                       <div className="flex justify-between">
                         <span>Appointment:</span>
-                        <span className="font-bold text-[#0e2238]">{bookingExamType}</span>
+                        <span className="font-bold text-[var(--theme-text-primary,#0e2238)]">{bookingExamType}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Doctor:</span>
-                        <span className="font-bold text-[#0e2238]">{bookingDoctor}</span>
+                        <span className="font-bold text-[var(--theme-text-primary,#0e2238)]">{bookingDoctor}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Scheduled Slot:</span>
-                        <span className="font-bold text-[#2f6f9f]">{bookingDay} at {bookingSlot}</span>
+                        <span className="font-bold text-[var(--theme-accent-primary,#2f6f9f)]">{bookingDay} at {bookingSlot}</span>
                       </div>
                     </div>
 
@@ -2122,13 +2122,13 @@ export function ClearViewOptometry() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(2)}
-                        className="text-slate-500 hover:text-slate-800"
+                        className="text-[var(--theme-text-muted,#64748b)] hover:text-[var(--theme-text-primary,#0e2238)]"
                       >
                         ← Back
                       </button>
                       <button
                         type="submit"
-                        className="rounded-xl bg-gradient-to-r from-[#0e2238] to-[#2f6f9f] px-6 py-2.5 font-bold text-white shadow-md hover:scale-105 transition-all"
+                        className="rounded-xl bg-gradient-to-r from-[var(--theme-bg-dark,#0e2238)] to-[var(--theme-accent-primary,#2f6f9f)] px-6 py-2.5 font-bold text-white shadow-md hover:scale-105 transition-all"
                       >
                         Confirm Appointment
                       </button>
@@ -2142,40 +2142,40 @@ export function ClearViewOptometry() {
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                   <CheckCircle2 size={32} strokeWidth={2.5} />
                 </div>
-                <h3 className="text-2xl font-black text-[#0e2238]">
+                <h3 className="text-2xl font-black text-[var(--theme-text-primary,#0e2238)]">
                   Eye Exam Confirmed!
                 </h3>
-                <p className="text-xs text-slate-600 max-w-sm mx-auto">
+                <p className="text-xs text-[var(--theme-text-secondary,#475569)] max-w-sm mx-auto">
                   Thank you, {patientName || "valued patient"}! A digital confirmation pass and insurance intake form have been sent to {patientPhone || "your mobile phone"}.
                 </p>
 
-                <div className="rounded-2xl bg-slate-50 border border-slate-200 p-4 text-left text-xs space-y-2">
+                <div className="rounded-2xl bg-[var(--theme-bg-surface,#f8fafc)] border border-[var(--theme-border,#e2e8f0)] p-4 text-left text-xs space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Patient:</span>
-                    <span className="font-bold text-[#0e2238]">{patientName || "Patient"}</span>
+                    <span className="text-[var(--theme-text-muted,#64748b)]">Patient:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#0e2238)]">{patientName || "Patient"}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Service:</span>
-                    <span className="font-bold text-[#0e2238]">{bookingExamType}</span>
+                    <span className="text-[var(--theme-text-muted,#64748b)]">Service:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#0e2238)]">{bookingExamType}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Optometrist:</span>
-                    <span className="font-bold text-[#0e2238]">{bookingDoctor}</span>
+                    <span className="text-[var(--theme-text-muted,#64748b)]">Optometrist:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#0e2238)]">{bookingDoctor}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Time:</span>
-                    <span className="font-bold text-[#2f6f9f]">{bookingDay} · {bookingSlot}</span>
+                    <span className="text-[var(--theme-text-muted,#64748b)]">Time:</span>
+                    <span className="font-bold text-[var(--theme-accent-primary,#2f6f9f)]">{bookingDay} · {bookingSlot}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Location:</span>
-                    <span className="font-bold text-[#0e2238]">850 Grand Optical Way, Suite 210</span>
+                    <span className="text-[var(--theme-text-muted,#64748b)]">Location:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#0e2238)]">850 Grand Optical Way, Suite 210</span>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setIsBookingOpen(false)}
-                  className="w-full rounded-xl bg-[#0e2238] py-3 text-xs font-bold text-white hover:bg-slate-800"
+                  className="w-full rounded-xl bg-[var(--theme-bg-dark,#0e2238)] py-3 text-xs font-bold text-white hover:bg-slate-800"
                 >
                   Done & Return to Site
                 </button>

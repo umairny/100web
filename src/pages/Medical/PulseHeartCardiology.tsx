@@ -763,31 +763,31 @@ export function PulseHeartCardiology() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 antialiased selection:bg-rose-600 selection:text-white">
+    <main className="min-h-screen bg-[var(--theme-bg-base,#070f1a)] font-sans antialiased text-[var(--theme-text-primary,#f8fafc)] transition-colors duration-300 selection:bg-[var(--theme-accent-primary,#e11d48)] selection:text-white">
       {/* ========================================================================= */}
       {/* 1. CLEAN TOP UTILITY STRIP (EMERGENCY & MEDICAL HUB LINK)                 */}
       {/* ========================================================================= */}
-      <div className="relative z-50 border-b border-rose-950/40 bg-[#07101d] px-3 sm:px-6 py-1.5 text-xs text-slate-300">
+      <div className="relative z-50 border-b border-[var(--theme-border,rgba(255,255,255,0.08))] bg-[var(--theme-bg-surface,#0b1626)] px-3 sm:px-6 py-1.5 text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           <Link
             to="/medical"
-            className="group inline-flex items-center gap-1.5 font-semibold text-rose-400 hover:text-white transition-colors text-[11px] sm:text-xs shrink-0"
+            className="group inline-flex items-center gap-1.5 font-semibold text-[var(--theme-accent-primary,#e11d48)] hover:text-[var(--theme-text-primary,#f8fafc)] transition-colors text-[11px] sm:text-xs shrink-0"
             title="Return to Medical Showcase Directory"
           >
             <span>← Medical Showcase</span>
           </Link>
 
           <div className="flex items-center gap-3 sm:gap-6 text-[11px] sm:text-xs">
-            <span className="hidden md:inline-flex items-center gap-1.5 text-slate-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-rose-500 animate-pulse" />
-              Emergency Chest Pain? <strong className="text-rose-300 font-bold">Dial 911</strong>
+            <span className="hidden md:inline-flex items-center gap-1.5 text-[var(--theme-text-muted,#94a3b8)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--theme-accent-primary,#e11d48)] animate-pulse" />
+              Emergency Chest Pain? <strong className="text-[var(--theme-accent-primary,#e11d48)] font-bold">Dial 911</strong>
             </span>
-            <span className="text-slate-700 hidden sm:inline">|</span>
+            <span className="text-[var(--theme-border,rgba(255,255,255,0.2))] hidden sm:inline">|</span>
             <a
               href="tel:5550147318"
-              className="inline-flex items-center gap-1.5 font-bold text-slate-200 hover:text-rose-400 transition-colors"
+              className="inline-flex items-center gap-1.5 font-bold text-[var(--theme-text-primary,#f8fafc)] hover:text-[var(--theme-accent-primary,#e11d48)] transition-colors"
             >
-              <Phone size={12} className="text-rose-500" />
+              <Phone size={12} className="text-[var(--theme-accent-primary,#e11d48)]" />
               <span>(555) 014-7318</span>
             </a>
           </div>
@@ -797,18 +797,18 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 2. SIMPLIFIED STICKY CARDIOVASCULAR NAVBAR                                */}
       {/* ========================================================================= */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#0a1322]/95 backdrop-blur-xl text-white shadow-md">
+      <header className="sticky top-0 z-40 w-full border-b border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1626)]/95 backdrop-blur-xl text-[var(--theme-text-primary,#f8fafc)] shadow-md">
         <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-4">
           {/* Simple Clean Brand Logo */}
           <a href="#hero" className="flex items-center gap-3 group shrink-0">
-            <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 via-red-600 to-rose-700 text-white shadow-md shadow-rose-950/40 group-hover:scale-105 transition-transform">
+            <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] shadow-md shadow-black/40 group-hover:scale-105 transition-transform">
               <HeartPulse size={22} className="animate-pulse" />
             </div>
             <div className="flex flex-col">
-              <span className="text-sm sm:text-base font-black tracking-tight text-white leading-none">
-                PULSE<span className="text-rose-400">HEART</span>
+              <span className="text-sm sm:text-base font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)] leading-none">
+                PULSE<span className="text-[var(--theme-accent-primary,#e11d48)]">HEART</span>
               </span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 mt-1">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--theme-text-muted,#94a3b8)] mt-1">
                 Cardiology Clinic
               </span>
             </div>
@@ -828,8 +828,8 @@ export function PulseHeartCardiology() {
                   }}
                   className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
                     isActive
-                      ? "text-rose-300 bg-rose-500/10 font-bold border border-rose-500/20"
-                      : "text-slate-300 hover:text-white hover:bg-white/5"
+                      ? "bg-[var(--theme-accent-primary,#e11d48)]/15 text-[var(--theme-accent-primary,#e11d48)] border border-[var(--theme-accent-primary,#e11d48)]/30 font-bold"
+                      : "text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-text-primary,#f8fafc)] hover:bg-[var(--theme-accent-primary,#e11d48)]/10"
                   }`}
                 >
                   {link.label}
@@ -842,16 +842,16 @@ export function PulseHeartCardiology() {
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <a
               href="tel:5550147318"
-              className="hidden xl:inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-xs font-semibold text-slate-300 hover:text-white hover:border-white/20 transition-colors"
+              className="hidden xl:inline-flex items-center gap-1.5 rounded-lg border border-[var(--theme-border,rgba(255,255,255,0.15))] px-3 py-2 text-xs font-semibold text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-text-primary,#f8fafc)] hover:border-[var(--theme-accent-primary,#e11d48)]/40 transition-colors"
             >
-              <Phone size={13} className="text-rose-400" />
+              <Phone size={13} className="text-[var(--theme-accent-primary,#e11d48)]" />
               <span>(555) 014-7318</span>
             </a>
 
             <button
               type="button"
               onClick={() => handleStartBooking()}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs font-bold text-white shadow-md shadow-rose-950/30 transition-all hover:scale-102 active:scale-98"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs font-bold shadow-md shadow-black/30 transition-all hover:scale-102 active:scale-98"
             >
               <Calendar size={14} />
               <span>Book Consult</span>
@@ -863,9 +863,9 @@ export function PulseHeartCardiology() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation menu"
               aria-expanded={isMobileMenuOpen}
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-slate-200 hover:bg-white/15 lg:hidden transition-colors"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f1e33)] text-[var(--theme-text-primary,#f8fafc)] hover:bg-[var(--theme-accent-primary,#e11d48)]/10 lg:hidden transition-colors"
             >
-              {isMobileMenuOpen ? <X size={20} className="text-rose-400" /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={20} className="text-[var(--theme-accent-primary,#e11d48)]" /> : <Menu size={20} />}
             </button>
           </div>
         </div>
@@ -880,28 +880,28 @@ export function PulseHeartCardiology() {
           onClick={() => setIsMobileMenuOpen(false)}
         >
           <div
-            className="w-full max-w-xs sm:max-w-sm h-full bg-[#08121e] border-l border-white/10 flex flex-col justify-between text-white p-5 overflow-y-auto overscroll-contain animate-in slide-in-from-right duration-250"
+            className="w-full max-w-xs sm:max-w-sm h-full bg-[var(--theme-bg-card,#0f1e33)] border-l border-[var(--theme-border,rgba(255,255,255,0.1))] flex flex-col justify-between text-[var(--theme-text-primary,#f8fafc)] p-5 overflow-y-auto overscroll-contain animate-in slide-in-from-right duration-250 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Branding & Close */}
             <div className="space-y-6 pt-[max(0.5rem,env(safe-area-inset-top))]">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <div className="flex items-center justify-between pb-4 border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-600 text-white shadow-md">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] shadow-md">
                     <HeartPulse size={20} />
                   </div>
                   <div>
-                    <div className="text-sm font-black text-white">
-                      PULSE<span className="text-rose-400">HEART</span>
+                    <div className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)]">
+                      PULSE<span className="text-[var(--theme-accent-primary,#e11d48)]">HEART</span>
                     </div>
-                    <div className="text-[10px] text-slate-400 font-semibold uppercase">Cardiology Clinic</div>
+                    <div className="text-[10px] text-[var(--theme-text-muted,#94a3b8)] font-semibold uppercase">Cardiology Clinic</div>
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsMobileMenuOpen(false)}
                   aria-label="Close navigation"
-                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-slate-300 hover:text-white"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-text-primary,#f8fafc)]"
                 >
                   <X size={18} />
                 </button>
@@ -922,11 +922,11 @@ export function PulseHeartCardiology() {
                       }}
                       className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-colors ${
                         isActive
-                          ? "bg-rose-600 text-white font-bold"
-                          : "text-slate-300 hover:bg-white/5 hover:text-white"
+                          ? "bg-[var(--theme-accent-primary,#e11d48)] text-[var(--theme-accent-contrast,#ffffff)] font-bold shadow-md"
+                          : "text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-[var(--theme-accent-primary,#e11d48)]/10 hover:text-[var(--theme-text-primary,#f8fafc)]"
                       }`}
                     >
-                      <Icon size={16} className={isActive ? "text-white" : "text-rose-400"} />
+                      <Icon size={16} className={isActive ? "text-[var(--theme-accent-contrast,#ffffff)]" : "text-[var(--theme-accent-primary,#e11d48)]"} />
                       <span>{link.label}</span>
                     </a>
                   );
@@ -935,14 +935,14 @@ export function PulseHeartCardiology() {
             </div>
 
             {/* Bottom Actions & Hotline */}
-            <div className="space-y-3 pt-6 border-t border-white/10 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+            <div className="space-y-3 pt-6 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] pb-[max(0.5rem,env(safe-area-inset-bottom))]">
               <button
                 type="button"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   handleStartBooking();
                 }}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-rose-600 hover:bg-rose-500 py-3 text-xs font-bold text-white shadow-md"
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] py-3 text-xs font-bold text-[var(--theme-accent-contrast,#ffffff)] shadow-md"
               >
                 <Calendar size={15} />
                 <span>Schedule Consultation</span>
@@ -950,14 +950,14 @@ export function PulseHeartCardiology() {
 
               <a
                 href="tel:5550147318"
-                className="w-full flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 py-2.5 text-xs font-semibold text-slate-200"
+                className="w-full flex items-center justify-center gap-2 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1626)] py-2.5 text-xs font-semibold text-[var(--theme-text-primary,#f8fafc)] hover:bg-[var(--theme-accent-primary,#e11d48)]/10"
               >
-                <Phone size={14} className="text-rose-400" />
+                <Phone size={14} className="text-[var(--theme-accent-primary,#e11d48)]" />
                 <span>Call Clinic: (555) 014-7318</span>
               </a>
 
-              <p className="text-[10px] text-center text-slate-400 pt-1">
-                Chest pain emergency? <strong className="text-rose-400">Call 911</strong>
+              <p className="text-[10px] text-center text-[var(--theme-text-muted,#94a3b8)] pt-1">
+                Chest pain emergency? <strong className="text-[var(--theme-accent-primary,#e11d48)]">Call 911</strong>
               </p>
             </div>
           </div>
@@ -998,8 +998,8 @@ export function PulseHeartCardiology() {
         })}
 
         {/* Ambient Glows */}
-        <div className="pointer-events-none absolute -top-24 -right-24 h-[550px] w-[550px] rounded-full bg-rose-600/10 blur-[150px] z-10" />
-        <div className="pointer-events-none absolute bottom-12 -left-24 h-[450px] w-[450px] rounded-full bg-red-800/15 blur-[150px] z-10" />
+        <div className="pointer-events-none absolute -top-24 -right-24 h-[550px] w-[550px] rounded-full bg-[var(--theme-accent-primary,#e11d48)]/15 blur-[150px] z-10" />
+        <div className="pointer-events-none absolute bottom-12 -left-24 h-[450px] w-[450px] rounded-full bg-[var(--theme-accent-secondary,#0d9488)]/15 blur-[150px] z-10" />
 
         {/* Center Main Slide Content */}
         <div className="relative z-20 flex-1 flex items-center py-10 sm:py-16">
@@ -1008,10 +1008,10 @@ export function PulseHeartCardiology() {
               {/* Left Column: Slide Narrative & Actions (7 Cols) */}
               <div className="lg:col-span-7 space-y-5 sm:space-y-7 text-left">
                 {/* Slide Category Pill */}
-                <div className="inline-flex items-center gap-2 rounded-full border border-rose-500/30 bg-rose-500/15 px-3 sm:px-4 py-1.5 text-xs text-rose-200 backdrop-blur-md">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/15 px-3 sm:px-4 py-1.5 text-xs text-[var(--theme-accent-primary,#fb7185)] backdrop-blur-md">
                   {(() => {
                     const TagIcon = activeSlideData.tagIcon;
-                    return <TagIcon size={14} className="text-rose-400 animate-pulse" />;
+                    return <TagIcon size={14} className="text-[var(--theme-accent-primary,#fb7185)] animate-pulse" />;
                   })()}
                   <span className="font-bold text-[11px] sm:text-xs uppercase tracking-wider text-white">
                     {activeSlideData.tag}
@@ -1021,7 +1021,7 @@ export function PulseHeartCardiology() {
                 {/* Main Slide Title */}
                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
                   {activeSlideData.title} <br className="hidden sm:inline" />
-                  <span className="bg-gradient-to-r from-rose-400 via-red-400 to-pink-300 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[var(--theme-accent-primary,#fb7185)] via-[var(--theme-accent-primary,#f43f5e)] to-[var(--theme-accent-secondary,#2dd4bf)] bg-clip-text text-transparent">
                     {activeSlideData.highlight}
                   </span>{" "}
                   {activeSlideData.afterHighlight}
@@ -1037,7 +1037,7 @@ export function PulseHeartCardiology() {
                   <button
                     type="button"
                     onClick={() => handleStartBooking()}
-                    className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-rose-500 via-red-600 to-rose-600 px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-rose-950/40 hover:shadow-rose-600/30 hover:scale-105 active:scale-95 transition-all duration-200"
+                    className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black shadow-xl shadow-black/40 hover:scale-105 active:scale-95 transition-all duration-200"
                   >
                     <Calendar size={16} strokeWidth={2.5} />
                     <span>{activeSlideData.primaryCta}</span>
@@ -1063,7 +1063,7 @@ export function PulseHeartCardiology() {
                       key={sIdx}
                       className="rounded-2xl border border-white/10 bg-black/40 p-3 sm:p-3.5 backdrop-blur-md"
                     >
-                      <div className="text-base sm:text-xl font-black text-rose-400">{stat.value}</div>
+                      <div className="text-base sm:text-xl font-black text-[var(--theme-accent-primary,#fb7185)]">{stat.value}</div>
                       <div className="text-[11px] text-slate-300 mt-0.5">{stat.label}</div>
                     </div>
                   ))}
@@ -1076,11 +1076,11 @@ export function PulseHeartCardiology() {
                   {/* Live Rhythm Monitor HUD */}
                   <div className="flex items-center justify-between rounded-2xl border border-white/15 bg-[#0b1626]/90 p-3.5 backdrop-blur-md">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/20 text-rose-400">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--theme-accent-primary,#e11d48)]/20 text-[var(--theme-accent-primary,#fb7185)] border border-[var(--theme-accent-primary,#e11d48)]/30">
                         <Activity size={18} />
                       </div>
                       <div>
-                        <div className="text-[10px] font-black uppercase tracking-wider text-rose-300">
+                        <div className="text-[10px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#fb7185)]">
                           {activeSlideData.telemetry.title}
                         </div>
                         <div className="text-xs font-black text-white">
@@ -1098,12 +1098,12 @@ export function PulseHeartCardiology() {
                   <div className="rounded-2xl border border-white/15 bg-[#081424]/92 p-4 text-left backdrop-blur-md space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
-                        <div className="h-9 w-9 rounded-full bg-rose-600/30 border border-rose-500/40 flex items-center justify-center text-white font-black text-xs">
+                        <div className="h-9 w-9 rounded-full bg-[var(--theme-accent-primary,#e11d48)]/25 border border-[var(--theme-accent-primary,#e11d48)]/40 flex items-center justify-center text-white font-black text-xs">
                           FACC
                         </div>
                         <div>
                           <div className="text-xs font-black text-white">{activeSlideData.badgeLabel}</div>
-                          <div className="text-[10px] text-rose-300 font-semibold">{activeSlideData.badgeDesc}</div>
+                          <div className="text-[10px] text-[var(--theme-accent-primary,#fb7185)] font-semibold">{activeSlideData.badgeDesc}</div>
                         </div>
                       </div>
                       <ShieldCheck size={20} className="text-cyan-400 shrink-0" />
@@ -1135,12 +1135,12 @@ export function PulseHeartCardiology() {
                       onClick={() => setCurrentHeroSlide(idx)}
                       className={`group relative text-left p-2 sm:p-2.5 rounded-xl border transition-all ${
                         isActive
-                          ? "border-rose-500/50 bg-rose-950/40 text-white"
+                          ? "border-[var(--theme-accent-primary,#e11d48)]/60 bg-[var(--theme-accent-primary,#e11d48)]/20 text-white"
                           : "border-white/5 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10"
                       }`}
                     >
                       <div className="flex items-center gap-2 text-[10px] font-bold">
-                        <span className={isActive ? "text-rose-400" : "text-slate-500"}>
+                        <span className={isActive ? "text-[var(--theme-accent-primary,#fb7185)]" : "text-slate-500"}>
                           0{idx + 1}
                         </span>
                         <span className="truncate">{slide.tag.split(" ")[0]} Care</span>
@@ -1148,7 +1148,7 @@ export function PulseHeartCardiology() {
                       {/* Active Progress Bar */}
                       <div className="h-0.5 w-full bg-white/10 rounded-full mt-1.5 overflow-hidden">
                         <div
-                          className={`h-full bg-rose-500 transition-all duration-300 ${
+                          className={`h-full bg-[var(--theme-accent-primary,#e11d48)] transition-all duration-300 ${
                             isActive ? "w-full" : "w-0"
                           }`}
                         />
@@ -1201,16 +1201,16 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 5. ASYMMETRICAL CLINICAL SERVICES BENTO GRID                              */}
       {/* ========================================================================= */}
-      <section id="services" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-white border-t border-b border-slate-200/80">
+      <section id="services" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-surface,#0b1626)] border-t border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-rose-200 bg-rose-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-rose-900">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#e11d48)]">
               Evidence-Based Cardiovascular Care
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Specialized heart care with clearer answers.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               From unhurried clinical evaluations to advanced lipid subfractionation and arrhythmia surveillance, our programs intercept disease before it disrupts your life.
             </p>
           </div>
@@ -1220,14 +1220,14 @@ export function PulseHeartCardiology() {
             {clinicalServices.map((service) => (
               <div
                 key={service.id}
-                className={`rounded-3xl border border-slate-200 p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:border-rose-300 ${
+                className={`rounded-3xl border p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:border-[var(--theme-accent-primary,#e11d48)]/40 ${
                   service.featured
-                    ? "lg:col-span-2 bg-gradient-to-br from-[#0e1724] via-[#1a0f18] to-[#0a121d] text-white shadow-xl relative overflow-hidden"
-                    : "bg-white text-slate-900 shadow-sm"
+                    ? "lg:col-span-2 bg-gradient-to-br from-[var(--theme-bg-card,#0f1e33)] via-[var(--theme-bg-surface,#0b1626)] to-[var(--theme-bg-card,#0f1e33)] text-[var(--theme-text-primary,#f8fafc)] shadow-xl relative overflow-hidden border-[var(--theme-border,rgba(255,255,255,0.15))]"
+                    : "bg-[var(--theme-bg-card,#0f1e33)] text-[var(--theme-text-primary,#f8fafc)] border-[var(--theme-border,rgba(255,255,255,0.1))] shadow-sm"
                 }`}
               >
                 {service.featured && (
-                  <div className="pointer-events-none absolute -right-20 -bottom-20 h-72 w-72 rounded-full bg-rose-600/20 blur-3xl" />
+                  <div className="pointer-events-none absolute -right-20 -bottom-20 h-72 w-72 rounded-full bg-[var(--theme-accent-primary,#e11d48)]/20 blur-3xl" />
                 )}
 
                 <div className="space-y-4 relative z-10">
@@ -1236,16 +1236,16 @@ export function PulseHeartCardiology() {
                       <Flame size={12} />
                       <span>{service.tag}</span>
                     </span>
-                    <span className={`text-[10px] uppercase font-bold ${service.featured ? "text-slate-400" : "text-slate-400"}`}>
+                    <span className="text-[10px] uppercase font-bold text-[var(--theme-text-muted,#94a3b8)]">
                       {service.subtitle}
                     </span>
                   </div>
 
-                  <h3 className={`text-xl sm:text-2xl font-black leading-tight ${service.featured ? "text-white" : "text-slate-900"}`}>
+                  <h3 className="text-xl sm:text-2xl font-black leading-tight text-[var(--theme-text-primary,#f8fafc)]">
                     {service.title}
                   </h3>
 
-                  <p className={`text-xs sm:text-sm leading-relaxed ${service.featured ? "text-slate-300" : "text-slate-600"}`}>
+                  <p className="text-xs sm:text-sm leading-relaxed text-[var(--theme-text-secondary,#cbd5e1)]">
                     {service.desc}
                   </p>
 
@@ -1253,23 +1253,21 @@ export function PulseHeartCardiology() {
                   <div className="space-y-2 pt-2">
                     {service.details.map((point) => (
                       <div key={point} className="flex items-start gap-2 text-xs">
-                        <CheckCircle2 size={15} className={`shrink-0 mt-0.5 ${service.featured ? "text-rose-400" : "text-rose-600"}`} />
-                        <span className={service.featured ? "text-slate-200" : "text-slate-700"}>{point}</span>
+                        <CheckCircle2 size={15} className="shrink-0 mt-0.5 text-[var(--theme-accent-primary,#e11d48)]" />
+                        <span className="text-[var(--theme-text-secondary,#cbd5e1)]">{point}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className={`mt-6 pt-4 border-t flex items-center justify-between relative z-10 ${service.featured ? "border-white/10" : "border-slate-100"}`}>
-                  <span className={`text-xs font-bold ${service.featured ? "text-rose-300" : "text-slate-500"}`}>
+                <div className="mt-6 pt-4 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between relative z-10">
+                  <span className="text-xs font-bold text-[var(--theme-text-muted,#94a3b8)]">
                     Physician Led
                   </span>
                   <button
                     type="button"
                     onClick={() => handleStartBooking(service.title)}
-                    className={`inline-flex items-center gap-1 text-xs font-black transition-colors ${
-                      service.featured ? "text-white hover:text-rose-300" : "text-rose-700 hover:text-rose-900"
-                    }`}
+                    className="inline-flex items-center gap-1 text-xs font-black text-[var(--theme-accent-primary,#e11d48)] hover:opacity-80 transition-colors"
                   >
                     <span>Schedule Consult</span>
                     <ArrowRight size={13} />
@@ -1284,31 +1282,31 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 6. NON-INVASIVE DIAGNOSTIC TESTING SUITE                                   */}
       {/* ========================================================================= */}
-      <section id="diagnostics" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[#0c1624] text-white relative overflow-hidden">
+      <section id="diagnostics" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-base,#070f1a)] text-[var(--theme-text-primary,#f8fafc)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))] relative overflow-hidden">
         {/* Ambient Halo */}
-        <div className="pointer-events-none absolute -top-32 right-0 h-[600px] w-[600px] rounded-full bg-rose-600/10 blur-[170px]" />
-        <div className="pointer-events-none absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-cyan-600/10 blur-[150px]" />
+        <div className="pointer-events-none absolute -top-32 right-0 h-[600px] w-[600px] rounded-full bg-[var(--theme-accent-primary,#e11d48)]/15 blur-[170px]" />
+        <div className="pointer-events-none absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-[var(--theme-accent-secondary,#0d9488)]/15 blur-[150px]" />
 
         <Container>
           <div className="mb-14 grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7 space-y-4 text-left">
-              <span className="rounded-full border border-rose-500/30 bg-rose-500/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-rose-300">
+              <span className="rounded-full border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#e11d48)]">
                 Diagnostic Clarity Suite
               </span>
-              <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+              <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
                 Precision cardiac testing without the hospital hassle.
               </h2>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
                 We perform our comprehensive non-invasive diagnostics in an uncrowded, reassuring outpatient environment with certified sonographers and rapid physician interpretations.
               </p>
             </div>
 
-            <div className="lg:col-span-5 rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-md">
-              <div className="flex items-center justify-between text-xs font-bold text-slate-300">
+            <div className="lg:col-span-5 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1626)] p-4 backdrop-blur-md">
+              <div className="flex items-center justify-between text-xs font-bold text-[var(--theme-text-primary,#f8fafc)]">
                 <span>Accredited Cardiac Laboratory</span>
-                <span className="text-cyan-400 font-extrabold">IAC Certified</span>
+                <span className="text-[var(--theme-accent-primary,#e11d48)] font-extrabold">IAC Certified</span>
               </div>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] mt-1">
                 Zero hospital facility fees. All tests billed under transparent outpatient in-network specialist rates.
               </p>
             </div>
@@ -1321,11 +1319,11 @@ export function PulseHeartCardiology() {
               return (
                 <div
                   key={card.name}
-                  className="rounded-3xl border border-white/15 bg-white/[0.04] p-6 sm:p-7 backdrop-blur-md shadow-xl flex flex-col justify-between hover:border-rose-400/40 hover:bg-white/[0.07] transition-all duration-300 space-y-5"
+                  className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0f1e33)] p-6 sm:p-7 backdrop-blur-md shadow-xl flex flex-col justify-between hover:border-[var(--theme-accent-primary,#e11d48)]/40 transition-all duration-300 space-y-5"
                 >
                   <div className="space-y-3.5">
                     <div className="flex items-center justify-between">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--theme-accent-primary,#e11d48)]/15 text-[var(--theme-accent-primary,#e11d48)] border border-[var(--theme-accent-primary,#e11d48)]/30">
                         <Icon size={22} />
                       </div>
                       <span className="rounded-full bg-cyan-400/10 border border-cyan-400/30 px-2.5 py-0.5 text-[10px] font-black text-cyan-300 uppercase tracking-wider">
@@ -1333,22 +1331,22 @@ export function PulseHeartCardiology() {
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-black text-white leading-tight">
+                    <h3 className="text-lg font-black text-[var(--theme-text-primary,#f8fafc)] leading-tight">
                       {card.name}
                     </h3>
 
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                       {card.purpose}
                     </p>
 
-                    <div className="rounded-xl bg-black/30 p-3 space-y-1 text-left text-[11px] border border-white/5">
-                      <div className="flex justify-between text-slate-400">
+                    <div className="rounded-xl bg-[var(--theme-bg-surface,#0b1626)] p-3 space-y-1 text-left text-[11px] border border-[var(--theme-border,rgba(255,255,255,0.08))]">
+                      <div className="flex justify-between text-[var(--theme-text-muted,#94a3b8)]">
                         <span>Duration:</span>
-                        <span className="text-white font-bold">{card.time}</span>
+                        <span className="text-[var(--theme-text-primary,#f8fafc)] font-bold">{card.time}</span>
                       </div>
-                      <div className="flex justify-between text-slate-400">
+                      <div className="flex justify-between text-[var(--theme-text-muted,#94a3b8)]">
                         <span>Preparation:</span>
-                        <span className="text-rose-300 font-medium truncate max-w-[190px]">{card.prep}</span>
+                        <span className="text-[var(--theme-accent-primary,#e11d48)] font-medium truncate max-w-[190px]">{card.prep}</span>
                       </div>
                     </div>
                   </div>
@@ -1356,7 +1354,7 @@ export function PulseHeartCardiology() {
                   <button
                     type="button"
                     onClick={() => handleStartBooking(card.name)}
-                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-white/10 hover:bg-rose-600 hover:text-white py-2.5 text-xs font-bold text-slate-200 transition-colors"
+                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] py-2.5 text-xs font-bold text-[var(--theme-accent-contrast,#ffffff)] transition-all shadow-md hover:scale-102 active:scale-98"
                   >
                     <span>Request Diagnostic Test</span>
                     <ArrowRight size={13} />
@@ -1368,19 +1366,19 @@ export function PulseHeartCardiology() {
         </Container>
       </section>
 
-      {/* ========================================================================= */}
+      {/* =====================================================      {/* ========================================================================= */}
       {/* 7. INTERACTIVE CARDIAC SYMPTOM & CONDITION NAVIGATOR                      */}
       {/* ========================================================================= */}
-      <section id="symptom-navigator" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[#fdf2f4]">
+      <section id="symptom-navigator" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-surface,#0b1626)] border-t border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-12">
-            <span className="rounded-full border border-rose-300 bg-rose-100 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-rose-900">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#e11d48)]">
               Interactive Symptom & Risk Guide
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               What heart sensations are you experiencing?
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               Select your primary symptom below to view biological causes, gold-standard diagnostic pathways, and our assigned clinical lead.
             </p>
           </div>
@@ -1396,8 +1394,8 @@ export function PulseHeartCardiology() {
                   onClick={() => setSelectedSymptomId(symptom.id)}
                   className={`rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-extrabold transition-all duration-200 active:scale-95 whitespace-nowrap ${
                     isSelected
-                      ? "bg-rose-700 text-white shadow-lg shadow-rose-900/20 font-black scale-105"
-                      : "bg-white text-slate-700 hover:bg-rose-50 border border-slate-200"
+                      ? "bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] shadow-lg font-black scale-105"
+                      : "bg-[var(--theme-bg-card,#0f1e33)] text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-text-primary,#f8fafc)] hover:bg-[var(--theme-accent-primary,#e11d48)]/10 border border-[var(--theme-border,rgba(255,255,255,0.1))]"
                   }`}
                 >
                   {symptom.title}
@@ -1407,7 +1405,7 @@ export function PulseHeartCardiology() {
           </div>
 
           {/* Dynamic Symptom Card Display */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xl">
+          <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0f1e33)] p-6 sm:p-10 shadow-xl text-[var(--theme-text-primary,#f8fafc)]">
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               {/* Left Details (7 cols) */}
               <div className="lg:col-span-7 space-y-5 text-left">
@@ -1416,24 +1414,24 @@ export function PulseHeartCardiology() {
                     <AlertTriangle size={12} />
                     <span>{currentSymptom.urgency}</span>
                   </span>
-                  <h3 className="text-2xl sm:text-4xl font-black text-slate-900">
+                  <h3 className="text-2xl sm:text-4xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                     {currentSymptom.title}
                   </h3>
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                   {currentSymptom.overview}
                 </p>
 
                 {/* Common Causes */}
-                <div className="rounded-2xl bg-slate-50 p-4 border border-slate-200 space-y-2">
-                  <div className="text-[11px] font-black uppercase tracking-wider text-slate-800">
+                <div className="rounded-2xl bg-[var(--theme-bg-surface,#0b1626)] p-4 border border-[var(--theme-border,rgba(255,255,255,0.1))] space-y-2">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)]">
                     Primary Clinical Diagnoses to Investigate:
                   </div>
-                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-slate-700">
+                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
                     {currentSymptom.commonCauses.map((cause) => (
                       <div key={cause} className="flex items-start gap-2">
-                        <CheckCircle2 size={14} className="text-rose-600 shrink-0 mt-0.5" />
+                        <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#e11d48)] shrink-0 mt-0.5" />
                         <span>{cause}</span>
                       </div>
                     ))}
@@ -1441,14 +1439,14 @@ export function PulseHeartCardiology() {
                 </div>
 
                 {/* Recommended Tests */}
-                <div className="rounded-2xl bg-rose-50/70 p-4 border border-rose-200 space-y-2">
-                  <div className="text-[11px] font-black uppercase tracking-wider text-rose-900">
+                <div className="rounded-2xl bg-[var(--theme-accent-primary,#e11d48)]/10 p-4 border border-[var(--theme-accent-primary,#e11d48)]/20 space-y-2">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#e11d48)]">
                     Recommended First-Line Diagnostic Protocol:
                   </div>
-                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-slate-800">
+                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-[var(--theme-text-primary,#f8fafc)]">
                     {currentSymptom.recommendedTests.map((test) => (
                       <div key={test} className="flex items-start gap-2">
-                        <Activity size={14} className="text-rose-600 shrink-0 mt-0.5" />
+                        <Activity size={14} className="text-[var(--theme-accent-primary,#e11d48)] shrink-0 mt-0.5" />
                         <span>{test}</span>
                       </div>
                     ))}
@@ -1458,13 +1456,13 @@ export function PulseHeartCardiology() {
                 {/* Lead Specialist & Booking CTA */}
                 <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div>
-                    <div className="text-[10px] uppercase font-bold text-slate-400">Assigned Clinical Specialist</div>
-                    <div className="text-sm font-black text-slate-900">{currentSymptom.specialistLead}</div>
+                    <div className="text-[10px] uppercase font-bold text-[var(--theme-text-muted,#94a3b8)]">Assigned Clinical Specialist</div>
+                    <div className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)]">{currentSymptom.specialistLead}</div>
                   </div>
                   <button
                     type="button"
                     onClick={() => handleStartBooking(currentSymptom.title, currentSymptom.specialistLead)}
-                    className="rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-black text-white hover:bg-rose-700 transition active:scale-95 shadow-md"
+                    className="rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] px-5 py-2.5 text-xs font-black text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition active:scale-95 shadow-md"
                   >
                     Schedule Evaluation for {currentSymptom.title} →
                   </button>
@@ -1473,16 +1471,16 @@ export function PulseHeartCardiology() {
 
               {/* Right Visual Image & Metric (5 cols) */}
               <div className="lg:col-span-5">
-                <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-900 p-2.5 shadow-2xl">
+                <div className="relative overflow-hidden rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-surface,#0b1626)] p-2.5 shadow-2xl">
                   <img
                     src={imageUrl(currentSymptom.image)}
                     alt={currentSymptom.title}
                     className="h-[300px] sm:h-[380px] w-full rounded-xl object-cover transition-all duration-500 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0b1523]/95 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/20 bg-[#0b1523]/90 p-3.5 text-white backdrop-blur-md">
+                  <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1626)]/90 p-3.5 text-white backdrop-blur-md">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase tracking-wider text-rose-400">Clinical Benchmark</span>
+                      <span className="text-[10px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#e11d48)]">Clinical Benchmark</span>
                       <span className="text-sm font-black text-white">{currentSymptom.statMetric}</span>
                     </div>
                     <div className="text-[11px] text-slate-300 mt-1 leading-snug">{currentSymptom.statDesc}</div>
@@ -1497,16 +1495,16 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 8. 4-STAGE HEART CARE PATHWAY                                             */}
       {/* ========================================================================= */}
-      <section id="care-pathway" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[#f4f7fa]">
+      <section id="care-pathway" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-base,#070f1a)] border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-slate-300 bg-white px-4 py-1.5 text-xs font-black tracking-widest uppercase text-slate-800">
+            <span className="rounded-full border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f1e33)] px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-text-primary,#f8fafc)]">
               Clear & Transparent Care Model
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Your 4-stage journey to cardiovascular clarity.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               We eliminate uncertainty by mapping out your care step-by-step, ensuring you understand every test result, prescription decision, and lifestyle goal.
             </p>
           </div>
@@ -1522,19 +1520,19 @@ export function PulseHeartCardiology() {
                   onClick={() => setActiveStageIndex(idx)}
                   className={`p-4 rounded-2xl border text-left transition-all ${
                     isActive
-                      ? "bg-[#0b1523] text-white border-rose-500 shadow-xl scale-102 ring-2 ring-rose-500/30"
-                      : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
+                      ? "border-[var(--theme-accent-primary,#e11d48)] bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-primary,#f8fafc)] shadow-xl scale-102 ring-2 ring-[var(--theme-accent-primary,#e11d48)]/30"
+                      : "bg-[var(--theme-bg-card,#0f1e33)] text-[var(--theme-text-secondary,#cbd5e1)] border border-[var(--theme-border,rgba(255,255,255,0.1))] hover:bg-[var(--theme-accent-primary,#e11d48)]/10"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className={`text-[10px] font-black uppercase tracking-wider ${isActive ? "text-rose-400" : "text-slate-400"}`}>
+                    <span className={`text-[10px] font-black uppercase tracking-wider ${isActive ? "text-[var(--theme-accent-primary,#e11d48)]" : "text-[var(--theme-text-muted,#94a3b8)]"}`}>
                       {stage.step}
                     </span>
-                    <span className={`text-[10px] font-bold ${isActive ? "text-cyan-300" : "text-slate-500"}`}>
+                    <span className={`text-[10px] font-bold ${isActive ? "text-cyan-400" : "text-[var(--theme-text-muted,#94a3b8)]"}`}>
                       {stage.duration}
                     </span>
                   </div>
-                  <h4 className={`text-xs sm:text-sm font-black mt-1 line-clamp-2 ${isActive ? "text-white" : "text-slate-900"}`}>
+                  <h4 className="text-xs sm:text-sm font-black mt-1 line-clamp-2 text-[var(--theme-text-primary,#f8fafc)]">
                     {stage.name}
                   </h4>
                 </button>
@@ -1543,36 +1541,36 @@ export function PulseHeartCardiology() {
           </div>
 
           {/* Active Stage Deep Dive */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xl">
+          <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0f1e33)] p-6 sm:p-10 shadow-xl text-[var(--theme-text-primary,#f8fafc)]">
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-7 space-y-5 text-left">
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-rose-100 text-rose-900 px-3 py-1 text-xs font-black uppercase">
+                  <span className="rounded-full bg-[var(--theme-accent-primary,#e11d48)]/10 text-[var(--theme-accent-primary,#e11d48)] px-3 py-1 text-xs font-black uppercase">
                     {currentStage.step} · {currentStage.duration}
                   </span>
-                  <span className="text-xs font-bold text-slate-500 italic">
+                  <span className="text-xs font-bold text-[var(--theme-text-muted,#94a3b8)] italic">
                     "{currentStage.theme}"
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
+                <h3 className="text-2xl sm:text-3xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                   {currentStage.name}
                 </h3>
 
-                <p className="text-slate-600 text-sm leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm leading-relaxed">
                   {currentStage.desc}
                 </p>
 
                 {/* Deliverables Box */}
-                <div className="rounded-2xl bg-slate-50 border border-slate-200 p-4 space-y-2">
-                  <div className="text-[11px] font-black uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                    <CheckCircle size={15} className="text-rose-600" />
+                <div className="rounded-2xl bg-[var(--theme-bg-surface,#0b1626)] border border-[var(--theme-border,rgba(255,255,255,0.1))] p-4 space-y-2">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)] flex items-center gap-1.5">
+                    <CheckCircle size={15} className="text-[var(--theme-accent-primary,#e11d48)]" />
                     Key Milestones & Deliverables:
                   </div>
-                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-slate-700">
+                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
                     {currentStage.deliverables.map((item) => (
                       <div key={item} className="flex items-start gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-rose-600 shrink-0 mt-1.5" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--theme-accent-primary,#e11d48)] shrink-0 mt-1.5" />
                         <span>{item}</span>
                       </div>
                     ))}
@@ -1585,7 +1583,7 @@ export function PulseHeartCardiology() {
                 <img
                   src={imageUrl("medical/pulseheart/diagnostic-clarity.webp")}
                   alt={currentStage.name}
-                  className="rounded-2xl border border-slate-200 shadow-xl object-cover h-[280px] w-full"
+                  className="rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.12))] shadow-xl object-cover h-[280px] w-full"
                 />
               </div>
             </div>
@@ -1596,16 +1594,16 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 9. BOARD-CERTIFIED CARDIOLOGIST FACULTY                                   */}
       {/* ========================================================================= */}
-      <section id="specialists" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-white border-t border-b border-slate-200">
+      <section id="specialists" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-surface,#0b1626)] border-t border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-rose-200 bg-rose-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-rose-900">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#e11d48)]">
               Elite Heart Faculty
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Led by Fellows of the American College of Cardiology.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               Every consultation is performed directly by licensed, fellowship-trained cardiology clinicians with decades of diagnostic and interventional experience.
             </p>
           </div>
@@ -1614,7 +1612,7 @@ export function PulseHeartCardiology() {
             {facultySpecialists.map((doc) => (
               <div
                 key={doc.name}
-                className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-7 shadow-lg flex flex-col justify-between hover:border-rose-300 hover:shadow-xl transition-all duration-300"
+                className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0f1e33)] p-6 sm:p-7 shadow-lg flex flex-col justify-between hover:border-[var(--theme-accent-primary,#e11d48)]/40 hover:shadow-xl transition-all duration-300"
               >
                 <div className="space-y-4 text-left">
                   <div className="relative overflow-hidden rounded-2xl aspect-[4/3.5]">
@@ -1623,40 +1621,40 @@ export function PulseHeartCardiology() {
                       alt={doc.name}
                       className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                     />
-                    <div className="absolute bottom-2 left-2 rounded-lg bg-[#0b1523]/90 px-2.5 py-1 text-[10px] font-extrabold text-rose-300 backdrop-blur-md">
+                    <div className="absolute bottom-2 left-2 rounded-lg bg-[var(--theme-bg-surface,#0b1626)]/90 px-2.5 py-1 text-[10px] font-extrabold text-[var(--theme-accent-primary,#e11d48)] backdrop-blur-md border border-[var(--theme-border,rgba(255,255,255,0.1))]">
                       {doc.fellowship.split("(")[0]}
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="text-lg sm:text-xl font-black text-slate-900">{doc.name}</h3>
-                    <p className="text-xs font-bold text-rose-700 mt-0.5">{doc.role}</p>
-                    <p className="text-[11px] text-slate-500 mt-0.5">{doc.education}</p>
+                    <h3 className="text-lg sm:text-xl font-black text-[var(--theme-text-primary,#f8fafc)]">{doc.name}</h3>
+                    <p className="text-xs font-bold text-[var(--theme-accent-primary,#e11d48)] mt-0.5">{doc.role}</p>
+                    <p className="text-[11px] text-[var(--theme-text-secondary,#cbd5e1)] mt-0.5">{doc.education}</p>
                   </div>
 
-                  <p className="text-xs text-slate-600 leading-relaxed">{doc.bio}</p>
+                  <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">{doc.bio}</p>
 
-                  <div className="space-y-1.5 pt-2 border-t border-slate-100">
-                    <div className="text-[10px] uppercase font-black tracking-wider text-slate-400">Clinical Focus Areas:</div>
+                  <div className="space-y-1.5 pt-2 border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
+                    <div className="text-[10px] uppercase font-black tracking-wider text-[var(--theme-text-muted,#94a3b8)]">Clinical Focus Areas:</div>
                     <div className="flex flex-wrap gap-1.5">
                       {doc.specialties.map((spec) => (
-                        <span key={spec} className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-700">
+                        <span key={spec} className="rounded-md border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1626)] px-2 py-0.5 text-[10px] font-bold text-[var(--theme-text-secondary,#cbd5e1)]">
                           {spec}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <blockquote className="rounded-xl bg-rose-50/80 p-3 text-[11px] italic text-rose-900 leading-relaxed border-l-2 border-rose-500">
+                  <blockquote className="rounded-xl bg-[var(--theme-accent-primary,#e11d48)]/10 p-3 text-[11px] italic text-[var(--theme-text-primary,#f8fafc)] leading-relaxed border-l-2 border-[var(--theme-accent-primary,#e11d48)]">
                     "{doc.quote}"
                   </blockquote>
                 </div>
 
-                <div className="pt-5 mt-4 border-t border-slate-100">
+                <div className="pt-5 mt-4 border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
                   <button
                     type="button"
                     onClick={() => handleStartBooking(undefined, doc.name)}
-                    className="w-full rounded-xl bg-slate-900 py-2.5 text-xs font-black text-white hover:bg-rose-700 transition"
+                    className="w-full rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] py-2.5 text-xs font-black text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition active:scale-95 shadow-md"
                   >
                     Request Consult with {doc.name.split(",")[0]}
                   </button>
@@ -1670,24 +1668,24 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 10. CLINIC ENVIRONMENT & ADVANCED DIAGNOSTIC FACILITY                     */}
       {/* ========================================================================= */}
-      <section id="clinic-tech" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[#f8fafc]">
+      <section id="clinic-tech" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-base,#070f1a)] border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             {/* Left Image Showcase (6 Cols) */}
             <div className="lg:col-span-6 relative">
-              <div className="overflow-hidden rounded-3xl border border-slate-200 shadow-2xl">
+              <div className="overflow-hidden rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.12))] shadow-2xl">
                 <img
                   src={imageUrl("medical/pulseheart/room.webp")}
                   alt="Modern Cardiology Diagnostic Examination Suite"
                   className="h-[360px] sm:h-[440px] w-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 hidden sm:block rounded-2xl border border-slate-200 bg-white p-4 shadow-xl max-w-xs text-left">
-                <div className="flex items-center gap-2 text-rose-700 text-xs font-black">
+              <div className="absolute -bottom-6 -right-6 hidden sm:block rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f1e33)] p-4 shadow-xl max-w-xs text-left">
+                <div className="flex items-center gap-2 text-[var(--theme-accent-primary,#e11d48)] text-xs font-black">
                   <ShieldCheck size={16} />
                   <span>Outpatient Comfort Model</span>
                 </div>
-                <p className="text-[11px] text-slate-600 mt-1">
+                <p className="text-[11px] text-[var(--theme-text-secondary,#cbd5e1)] mt-1">
                   Private diagnostic rooms with soundproof walls, acoustic testing gel warmers, and digital visual result monitors.
                 </p>
               </div>
@@ -1695,13 +1693,13 @@ export function PulseHeartCardiology() {
 
             {/* Right Details (6 Cols) */}
             <div className="lg:col-span-6 space-y-6 text-left">
-              <span className="rounded-full border border-rose-200 bg-rose-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-rose-900">
+              <span className="rounded-full border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#e11d48)]">
                 Clinic Environment
               </span>
-              <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+              <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
                 Modern diagnostics in a calm, reassuring space.
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
                 Hospital cardiology departments can be chaotic, stressful, and intimidating. We designed PulseHeart to feel like a boutique diagnostic sanctuary where you are treated with dignity, privacy, and clinical thoroughness.
               </p>
 
@@ -1714,8 +1712,8 @@ export function PulseHeartCardiology() {
                   "Dedicated patient parking right outside",
                   "Direct electronic pharmacy prescribing",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-2 rounded-xl bg-white p-3 border border-slate-200 shadow-xs text-xs font-bold text-slate-800">
-                    <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
+                  <div key={item} className="flex items-center gap-2 rounded-xl bg-[var(--theme-bg-card,#0f1e33)] p-3 border border-[var(--theme-border,rgba(255,255,255,0.1))] shadow-xs text-xs font-bold text-[var(--theme-text-primary,#f8fafc)]">
+                    <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -1728,34 +1726,34 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 11. IN-NETWORK INSURANCE TRANSPARENCY                                     */}
       {/* ========================================================================= */}
-      <section id="insurance" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-white border-t border-b border-slate-200">
+      <section id="insurance" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-surface,#0b1626)] border-t border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             {/* Left: Insurance Details (6 Cols) */}
             <div className="lg:col-span-6 space-y-6 text-left">
-              <span className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-emerald-800">
+              <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-emerald-400">
                 Insurance Transparency
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)] leading-tight">
                 In-network with Medicare and leading health plans.
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
                 Specialist cardiology care should never come with surprise billing. We participate directly with Medicare and major commercial insurers, checking your exact copay and diagnostic pre-authorizations before you arrive.
               </p>
 
               <div className="space-y-3">
-                <div className="flex items-start gap-3 rounded-2xl bg-slate-50 p-4 border border-slate-200">
-                  <ShieldCheck size={18} className="text-emerald-600 shrink-0 mt-0.5" />
-                  <div className="text-xs text-slate-700">
-                    <strong className="block text-slate-900 font-black">No Surprise Facility Surcharges:</strong>
+                <div className="flex items-start gap-3 rounded-2xl bg-[var(--theme-bg-card,#0f1e33)] p-4 border border-[var(--theme-border,rgba(255,255,255,0.1))]">
+                  <ShieldCheck size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <div className="text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
+                    <strong className="block text-[var(--theme-text-primary,#f8fafc)] font-black">No Surprise Facility Surcharges:</strong>
                     Unlike hospital outpatient departments that tack on unexpected $500–$1,500 'facility fees,' our visits are billed under standard clinic specialist codes.
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 rounded-2xl bg-slate-50 p-4 border border-slate-200">
-                  <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
-                  <div className="text-xs text-slate-700">
-                    <strong className="block text-slate-900 font-black">Direct Physician Coordination:</strong>
+                <div className="flex items-start gap-3 rounded-2xl bg-[var(--theme-bg-card,#0f1e33)] p-4 border border-[var(--theme-border,rgba(255,255,255,0.1))]">
+                  <CheckCircle2 size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <div className="text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
+                    <strong className="block text-[var(--theme-text-primary,#f8fafc)] font-black">Direct Physician Coordination:</strong>
                     We send complete consultation notes and imaging links directly to your primary care doctor within 24 hours of your visit.
                   </div>
                 </div>
@@ -1763,12 +1761,12 @@ export function PulseHeartCardiology() {
             </div>
 
             {/* Right: Accepted Insurance List (6 Cols) */}
-            <div className="lg:col-span-6 rounded-3xl border border-slate-200 bg-slate-50/80 p-6 sm:p-8 shadow-xl space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-                <h3 className="text-base font-black text-slate-900">
+            <div className="lg:col-span-6 rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0f1e33)] p-6 sm:p-8 shadow-xl space-y-4">
+              <div className="flex items-center justify-between border-b border-[var(--theme-border,rgba(255,255,255,0.1))] pb-3">
+                <h3 className="text-base font-black text-[var(--theme-text-primary,#f8fafc)]">
                   Accepted In-Network Insurance Plans
                 </h3>
-                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/30">
                   Pre-Verification Service
                 </span>
               </div>
@@ -1777,20 +1775,20 @@ export function PulseHeartCardiology() {
                 {acceptedInsurances.map((plan) => (
                   <div
                     key={plan.name}
-                    className="flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-white hover:border-rose-300 transition-colors"
+                    className="flex items-center justify-between p-3 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.08))] bg-[var(--theme-bg-surface,#0b1626)] hover:border-[var(--theme-accent-primary,#e11d48)]/40 transition-colors"
                   >
                     <div>
-                      <div className="text-xs font-bold text-slate-900">{plan.name}</div>
-                      <div className="text-[11px] text-slate-500">{plan.note}</div>
+                      <div className="text-xs font-bold text-[var(--theme-text-primary,#f8fafc)]">{plan.name}</div>
+                      <div className="text-[11px] text-[var(--theme-text-secondary,#cbd5e1)]">{plan.note}</div>
                     </div>
-                    <span className="shrink-0 rounded-lg bg-slate-100 border border-slate-200 px-2.5 py-1 text-[10px] font-black text-slate-800">
+                    <span className="shrink-0 rounded-lg bg-[var(--theme-accent-primary,#e11d48)]/15 border border-[var(--theme-accent-primary,#e11d48)]/30 px-2.5 py-1 text-[10px] font-black text-[var(--theme-accent-primary,#e11d48)]">
                       {plan.tier}
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="pt-3 border-t border-slate-200 text-center text-xs text-slate-500">
+              <div className="pt-3 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] text-center text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
                 Have a different plan or high deductible? Contact our billing team for clear, up-front self-pay diagnostic bundles.
               </div>
             </div>
@@ -1801,16 +1799,16 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 12. VERIFIED PATIENT CARDIAC STORIES                                      */}
       {/* ========================================================================= */}
-      <section id="reviews" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[#0b1523] text-white">
+      <section id="reviews" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-base,#070f1a)] text-[var(--theme-text-primary,#f8fafc)] border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-rose-500/30 bg-rose-500/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-rose-300">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#e11d48)]">
               Verified Patient Transformations
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Real patients. Real recoveries. Fearless living.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               Read how our rapid diagnostics and dedicated cardiologists restored peace of mind and active lifestyles.
             </p>
           </div>
@@ -1819,33 +1817,33 @@ export function PulseHeartCardiology() {
             {patientReviews.map((review) => (
               <div
                 key={review.name}
-                className="rounded-3xl border border-white/15 bg-white/[0.04] p-7 backdrop-blur-md shadow-xl flex flex-col justify-between space-y-6 text-left"
+                className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0f1e33)] p-7 backdrop-blur-md shadow-xl flex flex-col justify-between space-y-6 text-left"
               >
                 <div className="space-y-4">
-                  <div className="flex items-center gap-1 text-rose-400">
+                  <div className="flex items-center gap-1 text-[var(--theme-accent-primary,#e11d48)]">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} size={15} className="fill-rose-400 text-rose-400" />
+                      <Star key={i} size={15} className="fill-[var(--theme-accent-primary,#e11d48)] text-[var(--theme-accent-primary,#e11d48)]" />
                     ))}
                   </div>
                   <div className="space-y-1">
-                    <span className="text-[10px] uppercase font-bold text-rose-400 tracking-wider">
+                    <span className="text-[10px] uppercase font-bold text-[var(--theme-accent-primary,#e11d48)] tracking-wider">
                       {review.condition}
                     </span>
-                    <h4 className="text-sm font-black text-white">
+                    <h4 className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)]">
                       {review.result}
                     </h4>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed italic">
                     "{review.quote}"
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+                <div className="pt-4 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between text-xs">
                   <div>
-                    <div className="font-black text-white">{review.name}</div>
+                    <div className="font-black text-[var(--theme-text-primary,#f8fafc)]">{review.name}</div>
                     <div className="text-[10px] text-cyan-400 font-semibold">{review.doctor}</div>
                   </div>
-                  <ShieldCheck size={16} className="text-slate-400" />
+                  <ShieldCheck size={16} className="text-[var(--theme-text-muted,#94a3b8)]" />
                 </div>
               </div>
             ))}
@@ -1856,24 +1854,24 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 13. INTERACTIVE 30-SECOND HEART RISK & SYMPTOM SCREENER                   */}
       {/* ========================================================================= */}
-      <section id="risk-screener" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-white border-t border-slate-200">
+      <section id="risk-screener" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-surface,#0b1626)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-14">
-            <span className="rounded-full border border-rose-200 bg-rose-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-rose-900">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#e11d48)]">
               Cardiovascular Risk Screener
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Check your cardiac risk profile in 30 seconds.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               Answer 4 brief questions to see which cardiovascular tests our cardiologists recommend for your age and symptoms.
             </p>
           </div>
 
-          <div className="mx-auto max-w-2xl rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-10 shadow-lg space-y-6 text-left">
+          <div className="mx-auto max-w-2xl rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0f1e33)] p-6 sm:p-10 shadow-lg space-y-6 text-left">
             {/* Question 1: Age */}
             <div>
-              <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-2">
+              <label className="block text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)] mb-2">
                 1. What is your age group?
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -1884,8 +1882,8 @@ export function PulseHeartCardiology() {
                     onClick={() => setScreenerAge(opt)}
                     className={`p-2.5 rounded-xl text-xs font-bold border transition-all ${
                       screenerAge === opt
-                        ? "bg-rose-700 text-white border-rose-700 shadow-sm"
-                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                        ? "bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] border-transparent shadow-sm"
+                        : "bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-secondary,#cbd5e1)] border border-[var(--theme-border,rgba(255,255,255,0.1))] hover:border-[var(--theme-accent-primary,#e11d48)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                     }`}
                   >
                     {opt}
@@ -1896,7 +1894,7 @@ export function PulseHeartCardiology() {
 
             {/* Question 2: Blood Pressure */}
             <div>
-              <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-2">
+              <label className="block text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)] mb-2">
                 2. Average resting blood pressure range:
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -1907,8 +1905,8 @@ export function PulseHeartCardiology() {
                     onClick={() => setScreenerBp(opt)}
                     className={`p-2.5 rounded-xl text-xs font-bold border transition-all ${
                       screenerBp === opt
-                        ? "bg-rose-700 text-white border-rose-700 shadow-sm"
-                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                        ? "bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] border-transparent shadow-sm"
+                        : "bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-secondary,#cbd5e1)] border border-[var(--theme-border,rgba(255,255,255,0.1))] hover:border-[var(--theme-accent-primary,#e11d48)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                     }`}
                   >
                     {opt}
@@ -1919,7 +1917,7 @@ export function PulseHeartCardiology() {
 
             {/* Question 3: Family History */}
             <div>
-              <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-2">
+              <label className="block text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)] mb-2">
                 3. Family history of early heart attack or stroke (under age 60)?
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -1930,8 +1928,8 @@ export function PulseHeartCardiology() {
                     onClick={() => setScreenerFamily(opt)}
                     className={`p-2.5 rounded-xl text-xs font-bold border transition-all ${
                       screenerFamily === opt
-                        ? "bg-rose-700 text-white border-rose-700 shadow-sm"
-                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                        ? "bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] border-transparent shadow-sm"
+                        : "bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-secondary,#cbd5e1)] border border-[var(--theme-border,rgba(255,255,255,0.1))] hover:border-[var(--theme-accent-primary,#e11d48)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                     }`}
                   >
                     {opt}
@@ -1942,7 +1940,7 @@ export function PulseHeartCardiology() {
 
             {/* Question 4: Symptoms */}
             <div>
-              <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-2">
+              <label className="block text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)] mb-2">
                 4. Primary reason for cardiac inquiry:
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -1958,8 +1956,8 @@ export function PulseHeartCardiology() {
                     onClick={() => setScreenerSymptoms(opt)}
                     className={`p-2.5 rounded-xl text-xs font-bold border transition-all text-left ${
                       screenerSymptoms === opt
-                        ? "bg-rose-700 text-white border-rose-700 shadow-sm"
-                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                        ? "bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] border-transparent shadow-sm"
+                        : "bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-secondary,#cbd5e1)] border border-[var(--theme-border,rgba(255,255,255,0.1))] hover:border-[var(--theme-accent-primary,#e11d48)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                     }`}
                   >
                     {opt}
@@ -1973,7 +1971,7 @@ export function PulseHeartCardiology() {
               <button
                 type="button"
                 onClick={() => setScreenerResultShown(true)}
-                className="w-full rounded-2xl bg-rose-700 py-3.5 text-xs sm:text-sm font-black text-white hover:bg-rose-800 transition active:scale-95 shadow-md flex items-center justify-center gap-2"
+                className="w-full rounded-2xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] py-3.5 text-xs sm:text-sm font-black text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition active:scale-95 shadow-md flex items-center justify-center gap-2"
               >
                 <HeartPulse size={16} />
                 <span>Calculate My Recommended Heart Pathway</span>
@@ -1982,25 +1980,25 @@ export function PulseHeartCardiology() {
 
             {/* Revealed Result Card */}
             {screenerResultShown && (
-              <div className="rounded-2xl border border-rose-300 bg-rose-50/80 p-5 space-y-3 animate-in fade-in duration-300">
+              <div className="rounded-2xl border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/10 p-5 space-y-3 animate-in fade-in duration-300">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-black uppercase tracking-wider text-rose-900">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#e11d48)]">
                     Personalized Clinical Recommendation
                   </span>
-                  <span className="rounded-md bg-rose-200 px-2 py-0.5 text-[10px] font-black text-rose-900">
+                  <span className="rounded-md bg-[var(--theme-accent-primary,#e11d48)]/20 px-2 py-0.5 text-[10px] font-black text-[var(--theme-accent-primary,#e11d48)]">
                     Priority Outpatient Care
                   </span>
                 </div>
-                <h4 className="text-base font-black text-slate-900">
+                <h4 className="text-base font-black text-[var(--theme-text-primary,#f8fafc)]">
                   Comprehensive Consultation + {screenerSymptoms.includes("Palpitations") ? "14-Day Holter Patch & Echo" : "CT Calcium Scoring & Lipid Panel"}
                 </h4>
-                <p className="text-xs text-slate-700 leading-relaxed">
+                <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                   Based on your age ({screenerAge}), blood pressure profile, and {screenerFamily}, we recommend establishing a baseline cardiovascular workup to evaluate heart rhythm, wall thickness, and arterial plaque burden.
                 </p>
                 <button
                   type="button"
                   onClick={() => handleStartBooking(`Screener Result: ${screenerSymptoms}`)}
-                  className="w-full rounded-xl bg-slate-900 py-3 text-xs font-black text-white hover:bg-rose-700 transition"
+                  className="w-full rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] py-3 text-xs font-black text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition shadow-md"
                 >
                   Book Recommended Consultation Online →
                 </button>
@@ -2013,66 +2011,66 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 14. HIGH-PERFORMANCE MEDICAL FOOTER                                       */}
       {/* ========================================================================= */}
-      <footer id="contact" className="scroll-mt-20 sm:scroll-mt-24 bg-[#08121f] text-white pt-16 pb-24 sm:pb-16 border-t border-white/10">
+      <footer id="contact" className="scroll-mt-20 sm:scroll-mt-24 bg-[var(--theme-bg-base,#070f1a)] text-[var(--theme-text-primary,#f8fafc)] pt-16 pb-24 sm:pb-16 border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-12 pb-12 border-b border-white/10">
+          <div className="grid gap-10 lg:grid-cols-12 pb-12 border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
             {/* Col 1: Brand & Bio (4 Cols) */}
             <div className="lg:col-span-4 space-y-4 text-left">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-rose-500 to-red-700 text-white font-black shadow-md">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] text-[var(--theme-accent-contrast,#ffffff)] font-black shadow-md">
                   <HeartPulse size={18} />
                 </div>
-                <div className="text-base font-black tracking-tight text-white">
-                  PULSEHEART <span className="text-rose-400 font-light">CARDIOLOGY</span>
+                <div className="text-base font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
+                  PULSEHEART <span className="text-[var(--theme-accent-primary,#e11d48)] font-light">CARDIOLOGY</span>
                 </div>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+              <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed max-w-sm">
                 Board-certified cardiovascular specialists dedicated to clear diagnostic answers, unhurried 45-minute consultations, and proactive heart attack prevention.
               </p>
-              <div className="rounded-xl border border-rose-500/30 bg-rose-950/20 p-3 text-[11px] text-rose-200">
-                <strong className="block text-rose-300 font-bold mb-0.5">Emergency Notice:</strong>
+              <div className="rounded-xl border border-[var(--theme-accent-primary,#e11d48)]/30 bg-[var(--theme-accent-primary,#e11d48)]/15 p-3 text-[11px] text-[var(--theme-text-secondary,#cbd5e1)]">
+                <strong className="block text-[var(--theme-accent-primary,#e11d48)] font-bold mb-0.5">Emergency Notice:</strong>
                 If you are experiencing severe chest pain, shortness of breath, or sudden weakness, call 911 immediately.
               </div>
             </div>
 
             {/* Col 2: Clinic Location & Hours (4 Cols) */}
-            <div className="lg:col-span-4 space-y-3 text-left text-xs text-slate-300">
-              <div className="font-black text-white uppercase tracking-wider text-xs">Diagnostic Center Location</div>
+            <div className="lg:col-span-4 space-y-3 text-left text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
+              <div className="font-black text-[var(--theme-text-primary,#f8fafc)] uppercase tracking-wider text-xs">Diagnostic Center Location</div>
               <p className="flex items-start gap-2">
-                <MapPin size={16} className="text-rose-400 shrink-0 mt-0.5" />
+                <MapPin size={16} className="text-[var(--theme-accent-primary,#e11d48)] shrink-0 mt-0.5" />
                 <span>530 Pulse Avenue, Suite 240 · Bethesda Medical Pavilion · Free Dedicated Patient Parking</span>
               </p>
               <p className="flex items-start gap-2">
-                <Clock size={16} className="text-rose-400 shrink-0 mt-0.5" />
+                <Clock size={16} className="text-[var(--theme-accent-primary,#e11d48)] shrink-0 mt-0.5" />
                 <span>Monday–Friday: 8:00 AM – 5:00 PM · Saturday: 9:00 AM – 12:00 PM</span>
               </p>
               <p className="flex items-start gap-2">
-                <Phone size={16} className="text-rose-400 shrink-0 mt-0.5" />
-                <a href="tel:5550147318" className="hover:text-rose-300 font-bold">
+                <Phone size={16} className="text-[var(--theme-accent-primary,#e11d48)] shrink-0 mt-0.5" />
+                <a href="tel:5550147318" className="hover:text-[var(--theme-accent-primary,#e11d48)] font-bold text-[var(--theme-text-primary,#f8fafc)]">
                   (555) 014-7318
                 </a>
               </p>
             </div>
 
             {/* Col 3: Section Directory in Strict DOM Order (4 Cols) */}
-            <div className="lg:col-span-4 space-y-3 text-left text-xs text-slate-400">
-              <div className="font-black text-white uppercase tracking-wider text-xs">Clinical Navigation Directory</div>
+            <div className="lg:col-span-4 space-y-3 text-left text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
+              <div className="font-black text-[var(--theme-text-primary,#f8fafc)] uppercase tracking-wider text-xs">Clinical Navigation Directory</div>
               <div className="grid grid-cols-2 gap-2 text-[11px]">
-                <a href="#services" className="hover:text-rose-300">Clinical Services</a>
-                <a href="#diagnostics" className="hover:text-rose-300">Diagnostic Suite</a>
-                <a href="#symptom-navigator" className="hover:text-rose-300">Symptom Guide</a>
-                <a href="#care-pathway" className="hover:text-rose-300">4-Stage Pathway</a>
-                <a href="#specialists" className="hover:text-rose-300">Cardiologists</a>
-                <a href="#clinic-tech" className="hover:text-rose-300">Facility & Lab</a>
-                <a href="#insurance" className="hover:text-rose-300">Insurance Plans</a>
-                <a href="#reviews" className="hover:text-rose-300">Patient Stories</a>
-                <a href="#risk-screener" className="hover:text-rose-300">Risk Screener</a>
-                <Link to="/medical" className="text-rose-400 hover:underline">← Medical Index</Link>
+                <a href="#services" className="hover:text-[var(--theme-accent-primary,#e11d48)]">Clinical Services</a>
+                <a href="#diagnostics" className="hover:text-[var(--theme-accent-primary,#e11d48)]">Diagnostic Suite</a>
+                <a href="#symptom-navigator" className="hover:text-[var(--theme-accent-primary,#e11d48)]">Symptom Guide</a>
+                <a href="#care-pathway" className="hover:text-[var(--theme-accent-primary,#e11d48)]">4-Stage Pathway</a>
+                <a href="#specialists" className="hover:text-[var(--theme-accent-primary,#e11d48)]">Cardiologists</a>
+                <a href="#clinic-tech" className="hover:text-[var(--theme-accent-primary,#e11d48)]">Facility & Lab</a>
+                <a href="#insurance" className="hover:text-[var(--theme-accent-primary,#e11d48)]">Insurance Plans</a>
+                <a href="#reviews" className="hover:text-[var(--theme-accent-primary,#e11d48)]">Patient Stories</a>
+                <a href="#risk-screener" className="hover:text-[var(--theme-accent-primary,#e11d48)]">Risk Screener</a>
+                <Link to="/medical" className="text-[var(--theme-accent-primary,#e11d48)] hover:underline">← Medical Index</Link>
               </div>
             </div>
           </div>
 
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500 text-center sm:text-left">
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[var(--theme-text-muted,#94a3b8)] text-center sm:text-left">
             <p>© {new Date().getFullYear()} PulseHeart Cardiology, PLLC. All Rights Reserved. HIPAA Compliant Outpatient Facility.</p>
             <div className="flex gap-4">
               <span>American College of Cardiology (ACC)</span>
@@ -2086,20 +2084,20 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {/* 15. FLOATING MOBILE CONCIERGE DOCK                                        */}
       {/* ========================================================================= */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#08121f]/95 border-t border-rose-900/50 p-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden shadow-2xl">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--theme-bg-surface,#0b1626)]/95 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] p-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden shadow-2xl">
         <div className="flex items-center gap-2">
           <a
             href="tel:5550147318"
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/5 py-2.5 text-xs font-bold text-white active:scale-95"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f1e33)] py-2.5 text-xs font-bold text-[var(--theme-text-primary,#f8fafc)] active:scale-95"
           >
-            <Phone size={13} className="text-rose-400" />
+            <Phone size={13} className="text-[var(--theme-accent-primary,#e11d48)]" />
             <span>Call Clinic</span>
           </a>
 
           <button
             type="button"
             onClick={() => handleStartBooking()}
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-rose-500 via-red-600 to-rose-600 py-2.5 text-xs font-black text-white shadow-md active:scale-95"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] py-2.5 text-xs font-black text-[var(--theme-accent-contrast,#ffffff)] shadow-md active:scale-95"
           >
             <Calendar size={13} strokeWidth={2.5} />
             <span>Book Consult</span>
@@ -2112,12 +2110,12 @@ export function PulseHeartCardiology() {
       {/* ========================================================================= */}
       {isBookingOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] text-slate-900 text-left">
+          <div className="relative w-full max-w-lg rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f1e33)] p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] text-[var(--theme-text-primary,#f8fafc)] text-left">
             <button
               type="button"
               onClick={() => setIsBookingOpen(false)}
               aria-label="Close booking modal"
-              className="absolute top-5 right-5 text-slate-400 hover:text-slate-800"
+              className="absolute top-5 right-5 text-[var(--theme-text-muted,#94a3b8)] hover:text-[var(--theme-text-primary,#f8fafc)]"
             >
               <X size={20} />
             </button>
@@ -2125,29 +2123,29 @@ export function PulseHeartCardiology() {
             {!bookingConfirmed ? (
               <div>
                 <div className="mb-6">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-rose-700">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[var(--theme-accent-primary,#e11d48)]">
                     PulseHeart Online Patient Concierge
                   </span>
-                  <h3 className="text-xl font-black text-slate-900 mt-0.5">
+                  <h3 className="text-xl font-black text-[var(--theme-text-primary,#f8fafc)] mt-0.5">
                     Schedule Your Cardiology Consultation
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] mt-1">
                     Unhurried 45-minute specialist visits with transparent in-network billing.
                   </p>
                 </div>
 
                 {/* Step Progress Bar */}
                 <div className="flex items-center gap-2 mb-6 text-xs">
-                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 1 ? "bg-rose-600" : "bg-slate-200"}`} />
-                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 2 ? "bg-rose-600" : "bg-slate-200"}`} />
-                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 3 ? "bg-rose-600" : "bg-slate-200"}`} />
+                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 1 ? "bg-[var(--theme-accent-primary,#e11d48)]" : "bg-[var(--theme-border,rgba(255,255,255,0.15))]"}`} />
+                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 2 ? "bg-[var(--theme-accent-primary,#e11d48)]" : "bg-[var(--theme-border,rgba(255,255,255,0.15))]"}`} />
+                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 3 ? "bg-[var(--theme-accent-primary,#e11d48)]" : "bg-[var(--theme-border,rgba(255,255,255,0.15))]"}`} />
                 </div>
 
                 {/* Step 1: Select Visit Type & Doctor */}
                 {bookingStep === 1 && (
                   <div className="space-y-4 text-xs">
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Select Clinical Focus</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1.5">Select Clinical Focus</label>
                       <div className="space-y-2">
                         {[
                           "New Patient Comprehensive Heart Consultation (45 Min)",
@@ -2162,8 +2160,8 @@ export function PulseHeartCardiology() {
                             onClick={() => setBookingVisitType(srv)}
                             className={`w-full text-left p-3 rounded-xl border transition-all ${
                               bookingVisitType === srv
-                                ? "border-rose-600 bg-rose-50 text-slate-900 font-bold"
-                                : "border-slate-200 bg-slate-50/60 text-slate-700 hover:bg-slate-100"
+                                ? "border-[var(--theme-accent-primary,#e11d48)] bg-[var(--theme-accent-primary,#e11d48)]/15 text-[var(--theme-accent-primary,#e11d48)] font-bold shadow-xs"
+                                : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-secondary,#cbd5e1)] hover:border-[var(--theme-accent-primary,#e11d48)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                             }`}
                           >
                             {srv}
@@ -2173,16 +2171,16 @@ export function PulseHeartCardiology() {
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Preferred Cardiologist</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1.5">Preferred Cardiologist</label>
                       <select
                         value={bookingSpecialist}
                         onChange={(e) => setBookingSpecialist(e.target.value)}
-                        className="w-full p-2.5 rounded-xl border border-slate-200 bg-white font-medium text-slate-900 focus:border-rose-600 focus:outline-hidden"
+                        className="w-full p-2.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1626)] font-medium text-[var(--theme-text-primary,#f8fafc)] focus:border-[var(--theme-accent-primary,#e11d48)] focus:outline-hidden"
                       >
-                        <option>First Available Cardiologist</option>
-                        <option>Dr. Adrian Cole, MD, FACC (General & CAD)</option>
-                        <option>Dr. Nina Patel, MD, FACC (Imaging & Plaque)</option>
-                        <option>Grace Morgan, MSN, CRNP (Telemetry & Follow-Up)</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-primary,#f8fafc)]">First Available Cardiologist</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-primary,#f8fafc)]">Dr. Adrian Cole, MD, FACC (General & CAD)</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-primary,#f8fafc)]">Dr. Nina Patel, MD, FACC (Imaging & Plaque)</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-primary,#f8fafc)]">Grace Morgan, MSN, CRNP (Telemetry & Follow-Up)</option>
                       </select>
                     </div>
 
@@ -2190,7 +2188,7 @@ export function PulseHeartCardiology() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(2)}
-                        className="rounded-xl bg-slate-900 px-6 py-2.5 font-bold text-white hover:bg-rose-700 transition-all"
+                        className="rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] px-6 py-2.5 font-bold text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition-all shadow-md"
                       >
                         Select Date & Slot →
                       </button>
@@ -2202,7 +2200,7 @@ export function PulseHeartCardiology() {
                 {bookingStep === 2 && (
                   <div className="space-y-4 text-xs">
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Select Preferred Day</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1.5">Select Preferred Day</label>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                         {["Tomorrow (Priority)", "Wednesday", "Thursday", "Friday"].map((day) => (
                           <button
@@ -2211,8 +2209,8 @@ export function PulseHeartCardiology() {
                             onClick={() => setBookingDay(day)}
                             className={`p-2 rounded-xl text-center font-bold border transition-all ${
                               bookingDay === day
-                                ? "border-rose-600 bg-rose-50 text-slate-900"
-                                : "border-slate-200 bg-slate-50 text-slate-700"
+                                ? "border-[var(--theme-accent-primary,#e11d48)] bg-[var(--theme-accent-primary,#e11d48)]/15 text-[var(--theme-accent-primary,#e11d48)]"
+                                : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-secondary,#cbd5e1)] hover:border-[var(--theme-accent-primary,#e11d48)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                             }`}
                           >
                             {day}
@@ -2222,7 +2220,7 @@ export function PulseHeartCardiology() {
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Available Consultation Slot</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1.5">Available Consultation Slot</label>
                       <div className="grid grid-cols-3 gap-2">
                         {["8:30 AM", "9:30 AM", "11:00 AM", "1:30 PM", "3:15 PM", "4:30 PM"].map((slot) => (
                           <button
@@ -2231,8 +2229,8 @@ export function PulseHeartCardiology() {
                             onClick={() => setBookingSlot(slot)}
                             className={`p-2 rounded-xl text-center font-bold border transition-all ${
                               bookingSlot === slot
-                                ? "border-rose-600 bg-rose-50 text-slate-900"
-                                : "border-slate-200 bg-slate-50 text-slate-700"
+                                ? "border-[var(--theme-accent-primary,#e11d48)] bg-[var(--theme-accent-primary,#e11d48)]/15 text-[var(--theme-accent-primary,#e11d48)]"
+                                : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-secondary,#cbd5e1)] hover:border-[var(--theme-accent-primary,#e11d48)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                             }`}
                           >
                             {slot}
@@ -2245,14 +2243,14 @@ export function PulseHeartCardiology() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(1)}
-                        className="text-slate-500 hover:text-slate-800 font-bold"
+                        className="text-[var(--theme-text-muted,#94a3b8)] hover:text-[var(--theme-text-primary,#f8fafc)] font-bold"
                       >
                         ← Back
                       </button>
                       <button
                         type="button"
                         onClick={() => setBookingStep(3)}
-                        className="rounded-xl bg-slate-900 px-6 py-2.5 font-bold text-white hover:bg-rose-700 transition-all"
+                        className="rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] px-6 py-2.5 font-bold text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition-all shadow-md"
                       >
                         Patient Contact & Insurance →
                       </button>
@@ -2264,46 +2262,46 @@ export function PulseHeartCardiology() {
                 {bookingStep === 3 && (
                   <div className="space-y-4 text-xs">
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1">Full Legal Name</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1">Full Legal Name</label>
                       <input
                         type="text"
                         placeholder="Jane Doe"
                         value={patientName}
                         onChange={(e) => setPatientName(e.target.value)}
-                        className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-rose-600 focus:outline-hidden"
+                        className="w-full p-2.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-primary,#f8fafc)] font-medium focus:border-[var(--theme-accent-primary,#e11d48)] focus:outline-hidden placeholder:text-[var(--theme-text-muted,#94a3b8)]/50"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1">Mobile Phone for SMS Confirmation</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1">Mobile Phone for SMS Confirmation</label>
                       <input
                         type="tel"
                         placeholder="(555) 000-0000"
                         value={patientPhone}
                         onChange={(e) => setPatientPhone(e.target.value)}
-                        className="w-full p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:bg-white focus:border-rose-600 focus:outline-hidden"
+                        className="w-full p-2.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-primary,#f8fafc)] font-medium focus:border-[var(--theme-accent-primary,#e11d48)] focus:outline-hidden placeholder:text-[var(--theme-text-muted,#94a3b8)]/50"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1">Health Insurance Plan</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1">Health Insurance Plan</label>
                       <select
                         value={patientInsurance}
                         onChange={(e) => setPatientInsurance(e.target.value)}
-                        className="w-full p-2.5 rounded-xl border border-slate-200 bg-white font-medium text-slate-900 focus:border-rose-600 focus:outline-hidden"
+                        className="w-full p-2.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1626)] font-medium text-[var(--theme-text-primary,#f8fafc)] focus:border-[var(--theme-accent-primary,#e11d48)] focus:outline-hidden"
                       >
                         {acceptedInsurances.map((ins) => (
-                          <option key={ins.name}>{ins.name}</option>
+                          <option key={ins.name} className="bg-[var(--theme-bg-surface,#0b1626)] text-[var(--theme-text-primary,#f8fafc)]">{ins.name}</option>
                         ))}
                       </select>
                     </div>
 
-                    <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-[11px] text-rose-900 space-y-1">
-                      <div className="font-bold flex items-center gap-1">
-                        <ShieldCheck size={13} className="text-rose-600" />
+                    <div className="rounded-xl bg-[var(--theme-accent-primary,#e11d48)]/10 border border-[var(--theme-accent-primary,#e11d48)]/30 p-3 text-[11px] text-[var(--theme-text-primary,#f8fafc)] space-y-1">
+                      <div className="font-bold flex items-center gap-1 text-[var(--theme-accent-primary,#e11d48)]">
+                        <ShieldCheck size={13} />
                         Cardiology Pre-Verification Guarantee
                       </div>
-                      <p>
+                      <p className="text-[var(--theme-text-secondary,#cbd5e1)]">
                         Your appointment request is held immediately. Our team will verify your benefits and text your digital intake confirmation pass within 2 hours.
                       </p>
                     </div>
@@ -2312,14 +2310,14 @@ export function PulseHeartCardiology() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(2)}
-                        className="text-slate-500 hover:text-slate-800 font-bold"
+                        className="text-[var(--theme-text-muted,#94a3b8)] hover:text-[var(--theme-text-primary,#f8fafc)] font-bold"
                       >
                         ← Back
                       </button>
                       <button
                         type="button"
                         onClick={() => setBookingConfirmed(true)}
-                        className="rounded-xl bg-rose-700 px-6 py-2.5 font-bold text-white hover:bg-rose-800 transition-all shadow-md"
+                        className="rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] px-6 py-2.5 font-bold text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition-all shadow-md"
                       >
                         Confirm Consultation Reservation
                       </button>
@@ -2330,43 +2328,43 @@ export function PulseHeartCardiology() {
             ) : (
               /* Confirmation Screen */
               <div className="text-center py-4 space-y-4">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-rose-100 text-rose-600">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--theme-accent-primary,#e11d48)]/15 text-[var(--theme-accent-primary,#e11d48)]">
                   <CheckCircle2 size={32} strokeWidth={2.5} />
                 </div>
-                <h3 className="text-2xl font-black text-slate-900">
+                <h3 className="text-2xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                   Cardiology Consultation Confirmed!
                 </h3>
-                <p className="text-xs text-slate-600 max-w-sm mx-auto">
+                <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] max-w-sm mx-auto">
                   Thank you, {patientName || "valued patient"}! A digital confirmation pass and cardiology medical history intake have been sent to {patientPhone || "your mobile phone"}.
                 </p>
 
-                <div className="rounded-2xl bg-slate-50 border border-slate-200 p-4 text-left text-xs space-y-2">
+                <div className="rounded-2xl bg-[var(--theme-bg-surface,#0b1626)] border border-[var(--theme-border,rgba(255,255,255,0.1))] p-4 text-left text-xs space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Patient:</span>
-                    <span className="font-bold text-slate-900">{patientName || "Patient"}</span>
+                    <span className="text-[var(--theme-text-secondary,#cbd5e1)]">Patient:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#f8fafc)]">{patientName || "Patient"}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Clinical Focus:</span>
-                    <span className="font-bold text-slate-900">{bookingVisitType}</span>
+                    <span className="text-[var(--theme-text-secondary,#cbd5e1)]">Clinical Focus:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#f8fafc)]">{bookingVisitType}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Cardiologist:</span>
-                    <span className="font-bold text-slate-900">{bookingSpecialist}</span>
+                    <span className="text-[var(--theme-text-secondary,#cbd5e1)]">Cardiologist:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#f8fafc)]">{bookingSpecialist}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Scheduled Time:</span>
-                    <span className="font-bold text-rose-700">{bookingDay} · {bookingSlot}</span>
+                    <span className="text-[var(--theme-text-secondary,#cbd5e1)]">Scheduled Time:</span>
+                    <span className="font-bold text-[var(--theme-accent-primary,#e11d48)]">{bookingDay} · {bookingSlot}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Facility Location:</span>
-                    <span className="font-bold text-slate-900">530 Pulse Avenue, Suite 240</span>
+                    <span className="text-[var(--theme-text-secondary,#cbd5e1)]">Facility Location:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#f8fafc)]">530 Pulse Avenue, Suite 240</span>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setIsBookingOpen(false)}
-                  className="w-full rounded-xl bg-slate-900 py-3 text-xs font-bold text-white hover:bg-slate-800"
+                  className="w-full rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#e11d48)] to-[var(--theme-accent-secondary,#be123c)] py-3 text-xs font-bold text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 shadow-md"
                 >
                   Done & Return to Heart Center
                 </button>

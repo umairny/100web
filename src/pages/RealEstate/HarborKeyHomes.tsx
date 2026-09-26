@@ -102,13 +102,13 @@ function BrandMark({ light = false }: { light?: boolean }) {
   return (
     <a
       href="#home"
-      className={`group flex items-center gap-3 ${light ? "text-white" : "text-[#12344a]"}`}
+      className={`group flex items-center gap-3 ${light ? "text-white" : "text-[var(--theme-text-primary,#12344a)] [html.dark_&]:text-white"}`}
     >
       <span
-        className={`grid h-10 w-10 place-items-center rounded-full border ${light ? "border-white/35" : "border-[#c8a466]/50"} transition-transform group-hover:-rotate-6`}
+        className={`grid h-10 w-10 place-items-center rounded-full border ${light ? "border-white/35" : "border-[var(--theme-accent-secondary,#c8a466)]/50 [html.dark_&]:border-white/20"} transition-transform group-hover:-rotate-6`}
       >
         <Waves
-          className={`h-5 w-5 ${light ? "text-[#e9d5aa]" : "text-[#2b7898]"}`}
+          className={`h-5 w-5 ${light ? "text-[var(--theme-accent-secondary,#e9d5aa)]" : "text-[var(--theme-accent-primary,#2b7898)]"}`}
           strokeWidth={1.6}
         />
       </span>
@@ -117,7 +117,7 @@ function BrandMark({ light = false }: { light?: boolean }) {
           HarborKey
         </span>
         <span
-          className={`mt-1 block text-[0.58rem] font-semibold uppercase tracking-[0.31em] ${light ? "text-white/60" : "text-[#60757e]"}`}
+          className={`mt-1 block text-[0.58rem] font-semibold uppercase tracking-[0.31em] ${light ? "text-white/60" : "text-[var(--theme-text-secondary,#60757e)] [html.dark_&]:text-white/60"}`}
         >
           Homes
         </span>
@@ -145,20 +145,20 @@ function SectionHeading({
       data-hk-reveal
     >
       <p
-        className={`mb-4 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] ${centered ? "justify-center" : ""} ${light ? "text-[#e3c98f]" : "text-[#2d7593]"}`}
+        className={`mb-4 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] ${centered ? "justify-center" : ""} ${light ? "text-[var(--theme-accent-secondary,#e3c98f)]" : "text-[var(--theme-accent-primary,#2d7593)]"}`}
       >
-        <span className="h-px w-8 bg-[#c7a466]" />
+        <span className="h-px w-8 bg-[var(--theme-accent-secondary,#c7a466)]" />
         {eyebrow}
-        {centered && <span className="h-px w-8 bg-[#c7a466]" />}
+        {centered && <span className="h-px w-8 bg-[var(--theme-accent-secondary,#c7a466)]" />}
       </p>
       <h2
-        className={`harborkey-serif text-[clamp(2.4rem,5vw,4.5rem)] leading-[0.98] tracking-[-0.035em] ${light ? "text-white" : "text-[#11354b]"}`}
+        className={`harborkey-serif text-[clamp(2.4rem,5vw,4.5rem)] leading-[0.98] tracking-[-0.035em] ${light ? "text-white" : "text-[var(--theme-text-primary,#11354b)] [html.dark_&]:text-white"}`}
       >
         {title}
       </h2>
       {body && (
         <p
-          className={`mt-6 text-base leading-8 md:text-lg ${light ? "text-white/65" : "text-[#566971]"}`}
+          className={`mt-6 text-base leading-8 md:text-lg ${light ? "text-white/65" : "text-[var(--theme-text-secondary,#566971)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]"}`}
         >
           {body}
         </p>
@@ -177,10 +177,11 @@ function HarborButton({
   variant?: "navy" | "light" | "outline";
 }) {
   const styles = {
-    navy: "bg-[#123b53] text-white hover:bg-[#1f6583]",
-    light: "bg-[#f8f4ec] text-[#123b53] hover:bg-white",
+    navy: "bg-[var(--theme-accent-primary,#123b53)] text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90",
+    light:
+      "bg-[var(--theme-bg-surface,#f8f4ec)] text-[var(--theme-accent-primary,#123b53)] [html.dark_&]:bg-[var(--theme-bg-card,#173245)] [html.dark_&]:text-white hover:bg-white [html.dark_&]:hover:bg-[var(--theme-bg-card-hover,#1f425b)]",
     outline:
-      "border border-[#173e54]/25 text-[#173e54] hover:border-[#173e54] hover:bg-[#173e54] hover:text-white",
+      "border border-[var(--theme-border,#173e54)]/25 text-[var(--theme-text-primary,#173e54)] [html.dark_&]:text-white [html.dark_&]:border-white/25 hover:border-[var(--theme-accent-primary,#173e54)] hover:bg-[var(--theme-accent-primary,#173e54)] hover:text-[var(--theme-accent-contrast,#ffffff)]",
   };
   return (
     <a
@@ -219,9 +220,9 @@ export function HarborKeyHomes() {
   }, []);
 
   return (
-    <main className="harborkey-site overflow-hidden bg-[#f8f5ee] text-[#314650]">
+    <main className="harborkey-site overflow-hidden bg-[var(--theme-bg-base,#f8f5ee)] [html.dark_&]:bg-[var(--theme-bg-base,#0c1a24)] text-[var(--theme-text-primary,#314650)] [html.dark_&]:text-[var(--theme-text-primary,#e2e8f0)] transition-colors duration-300">
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled || menuOpen ? "border-b border-[#173e54]/10 bg-[#fbf8f2]/95 shadow-[0_12px_40px_rgba(18,59,83,0.08)] backdrop-blur-xl" : "bg-[#fbf8f2]/90 backdrop-blur-md"}`}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled || menuOpen ? "border-b border-[var(--theme-border,#173e54)]/10 [html.dark_&]:border-white/10 bg-[var(--theme-bg-surface,#fbf8f2)]/95 [html.dark_&]:bg-[var(--theme-bg-surface,#0f212e)]/95 shadow-[0_12px_40px_rgba(18,59,83,0.08)] [html.dark_&]:shadow-[0_12px_40px_rgba(0,0,0,0.3)] backdrop-blur-xl" : "bg-[var(--theme-bg-surface,#fbf8f2)]/90 [html.dark_&]:bg-[var(--theme-bg-surface,#0f212e)]/90 backdrop-blur-md"}`}
       >
         <div className="mx-auto flex h-[5.25rem] max-w-[90rem] items-center justify-between px-5 sm:px-8 lg:px-12">
           <BrandMark />
@@ -233,7 +234,7 @@ export function HarborKeyHomes() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-[0.8rem] font-semibold text-[#284859] transition-colors hover:text-[#2d7a99]"
+                className="text-[0.8rem] font-semibold text-[var(--theme-text-secondary,#284859)] [html.dark_&]:text-white/70 transition-colors hover:text-[var(--theme-accent-primary,#2d7a99)] [html.dark_&]:hover:text-white"
               >
                 {link.label}
               </a>
@@ -241,14 +242,14 @@ export function HarborKeyHomes() {
           </nav>
           <a
             href="#contact"
-            className="hidden rounded-full bg-[#163d53] px-5 py-3 text-xs font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#2d7593] sm:inline-flex"
+            className="hidden rounded-full bg-[var(--theme-accent-primary,#163d53)] px-5 py-3 text-xs font-bold text-[var(--theme-accent-contrast,#ffffff)] transition hover:-translate-y-0.5 hover:opacity-90 sm:inline-flex"
           >
             Book a Consultation
           </a>
           <button
             type="button"
             onClick={() => setMenuOpen((current) => !current)}
-            className="grid h-11 w-11 place-items-center rounded-full border border-[#173e54]/15 text-[#173e54] lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[var(--theme-border,#173e54)]/15 [html.dark_&]:border-white/15 text-[var(--theme-text-primary,#173e54)] [html.dark_&]:text-white lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
@@ -261,7 +262,7 @@ export function HarborKeyHomes() {
         </div>
         {menuOpen && (
           <nav
-            className="border-t border-[#173e54]/10 bg-[#fbf8f2] px-5 py-5 lg:hidden"
+            className="border-t border-[var(--theme-border,#173e54)]/10 [html.dark_&]:border-white/10 bg-[var(--theme-bg-surface,#fbf8f2)] [html.dark_&]:bg-[var(--theme-bg-surface,#0f212e)] px-5 py-5 lg:hidden"
             aria-label="Mobile navigation"
           >
             <div className="mx-auto grid max-w-[90rem] gap-1">
@@ -270,7 +271,7 @@ export function HarborKeyHomes() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="rounded-xl px-4 py-3 font-semibold text-[#173e54] hover:bg-[#eaf0ec]"
+                  className="rounded-xl px-4 py-3 font-semibold text-[var(--theme-text-primary,#173e54)] [html.dark_&]:text-white hover:bg-[var(--theme-bg-surface,#eaf0ec)] [html.dark_&]:hover:bg-white/10"
                 >
                   {link.label}
                 </a>
@@ -278,7 +279,7 @@ export function HarborKeyHomes() {
               <a
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-3 rounded-full bg-[#173e54] px-5 py-3 text-center text-sm font-bold text-white sm:hidden"
+                className="mt-3 rounded-full bg-[var(--theme-accent-primary,#173e54)] px-5 py-3 text-center text-sm font-bold text-[var(--theme-accent-contrast,#ffffff)] sm:hidden"
               >
                 Book a Consultation
               </a>
@@ -302,13 +303,13 @@ export function HarborKeyHomes() {
         </div>
         <div className="relative mx-auto flex min-h-[675px] max-w-[90rem] items-center px-5 py-20 sm:px-8 lg:min-h-[815px] lg:px-12">
           <div className="max-w-3xl text-white">
-            <p className="mb-7 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.28em] text-[#e7d4a9]">
-              <span className="h-px w-10 bg-[#e7d4a9]" />
+            <p className="mb-7 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.28em] text-[var(--theme-accent-secondary,#e7d4a9)]">
+              <span className="h-px w-10 bg-[var(--theme-accent-secondary,#e7d4a9)]" />
               Coastal living, thoughtfully found
             </p>
             <h1 className="harborkey-serif max-w-3xl text-[clamp(4.1rem,8vw,7.9rem)] leading-[0.86] tracking-[-0.045em]">
               Find Your Place{" "}
-              <em className="font-normal text-[#dbe7e4]">by the Water</em>
+              <em className="font-normal text-[var(--theme-accent-secondary,#dbe7e4)]">by the Water</em>
             </h1>
             <p className="mt-8 max-w-xl text-base leading-8 text-white/80 sm:text-lg">
               Coastal and waterfront homes guided by local knowledge, family
@@ -335,7 +336,7 @@ export function HarborKeyHomes() {
         </div>
       </section>
 
-      <section className="px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section className="px-5 py-24 sm:px-8 md:py-32 lg:px-12 bg-[var(--theme-bg-base,#f8f5ee)] [html.dark_&]:bg-[var(--theme-bg-base,#0c1a24)] transition-colors duration-300">
         <div className="mx-auto max-w-[82rem]">
           <div className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:gap-24">
             <SectionHeading
@@ -343,7 +344,7 @@ export function HarborKeyHomes() {
               title="Coastal Real Estate, Guided With Care"
             />
             <p
-              className="self-end text-lg leading-9 text-[#536870] md:text-xl"
+              className="self-end text-lg leading-9 text-[var(--theme-text-secondary,#536870)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] md:text-xl"
               data-hk-reveal
             >
               HarborKey Homes helps buyers and sellers navigate coastal living
@@ -353,19 +354,19 @@ export function HarborKeyHomes() {
             </p>
           </div>
           <div
-            className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-[#173e54]/10 bg-[#173e54]/10 md:grid-cols-3"
+            className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-[var(--theme-border,#173e54)]/10 [html.dark_&]:border-white/10 bg-[var(--theme-border,#173e54)]/10 [html.dark_&]:bg-white/10 md:grid-cols-3"
             data-hk-reveal
           >
             {trustPoints.map(({ icon: Icon, title, text }) => (
               <article
                 key={title}
-                className="group bg-[#f8f5ee] p-8 transition hover:bg-[#eef2eb] lg:p-10"
+                className="group bg-[var(--theme-bg-card,#f8f5ee)] [html.dark_&]:bg-[var(--theme-bg-card,#122533)] p-8 transition hover:bg-[var(--theme-bg-surface,#eef2eb)] [html.dark_&]:hover:bg-[var(--theme-bg-card-hover,#183042)] lg:p-10"
               >
-                <Icon className="h-7 w-7 text-[#2d7898]" strokeWidth={1.4} />
-                <h3 className="harborkey-serif mt-8 text-2xl text-[#15394e]">
+                <Icon className="h-7 w-7 text-[var(--theme-accent-primary,#2d7898)]" strokeWidth={1.4} />
+                <h3 className="harborkey-serif mt-8 text-2xl text-[var(--theme-text-primary,#15394e)] [html.dark_&]:text-white">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[#62747b]">{text}</p>
+                <p className="mt-3 text-sm leading-7 text-[var(--theme-text-secondary,#62747b)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">{text}</p>
               </article>
             ))}
           </div>
@@ -374,7 +375,7 @@ export function HarborKeyHomes() {
 
       <section
         id="listings"
-        className="bg-[#eaf0ec] px-5 py-24 sm:px-8 md:py-32 lg:px-12"
+        className="bg-[var(--theme-bg-surface,#eaf0ec)] [html.dark_&]:bg-[var(--theme-bg-surface,#10222f)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[90rem]">
           <div className="flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
@@ -385,7 +386,7 @@ export function HarborKeyHomes() {
             />
             <a
               href="#contact"
-              className="group inline-flex w-fit items-center gap-2 border-b border-[#173e54]/40 pb-1 text-sm font-bold text-[#173e54]"
+              className="group inline-flex w-fit items-center gap-2 border-b border-[var(--theme-accent-primary,#173e54)]/40 text-sm font-bold text-[var(--theme-accent-primary,#173e54)] [html.dark_&]:text-white [html.dark_&]:border-white/40 pb-1 hover:opacity-80"
             >
               Explore all listings{" "}
               <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -395,7 +396,7 @@ export function HarborKeyHomes() {
             {listings.map((listing, index) => (
               <article
                 key={listing.title}
-                className="group overflow-hidden rounded-[1.5rem] bg-[#fbf9f4] shadow-[0_18px_50px_rgba(18,59,83,0.08)]"
+                className="group overflow-hidden rounded-[1.5rem] bg-[var(--theme-bg-card,#fbf9f4)] [html.dark_&]:bg-[var(--theme-bg-card,#142938)] shadow-[0_18px_50px_rgba(18,59,83,0.08)] [html.dark_&]:shadow-none [html.dark_&]:border [html.dark_&]:border-white/10"
                 data-hk-reveal
                 style={{ transitionDelay: `${index * 90}ms` }}
               >
@@ -405,26 +406,26 @@ export function HarborKeyHomes() {
                     alt={listing.title}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-5 top-5 rounded-full bg-[#f8f5ee]/92 px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#173e54] backdrop-blur">
+                  <span className="absolute left-5 top-5 rounded-full bg-[var(--theme-bg-card,#f8f5ee)]/92 [html.dark_&]:bg-[var(--theme-bg-dark,#0c1a24)]/92 px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#173e54)] [html.dark_&]:text-white backdrop-blur">
                     Featured
                   </span>
                 </div>
                 <div className="p-6 lg:p-7">
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[#588193]">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[var(--theme-accent-primary,#588193)]">
                     <MapPin className="h-3.5 w-3.5" />
                     {listing.location}
                   </div>
-                  <h3 className="harborkey-serif mt-4 text-[1.85rem] leading-tight text-[#12364b]">
+                  <h3 className="harborkey-serif mt-4 text-[1.85rem] leading-tight text-[var(--theme-text-primary,#12364b)] [html.dark_&]:text-white">
                     {listing.title}
                   </h3>
-                  <p className="mt-3 text-lg font-bold text-[#173e54]">
+                  <p className="mt-3 text-lg font-bold text-[var(--theme-accent-primary,#173e54)] [html.dark_&]:text-[var(--theme-accent-primary,#7fc8d8)]">
                     {listing.price}
                   </p>
-                  <div className="mt-5 flex flex-wrap gap-x-3 gap-y-2 border-y border-[#173e54]/10 py-4 text-xs font-medium text-[#60727a]">
+                  <div className="mt-5 flex flex-wrap gap-x-3 gap-y-2 border-y border-[var(--theme-border,#173e54)]/10 [html.dark_&]:border-white/10 py-4 text-xs font-medium text-[var(--theme-text-secondary,#60727a)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                     {listing.details.map((detail) => (
                       <span
                         key={detail}
-                        className="after:ml-3 after:text-[#c49d5f] after:content-['·'] last:after:hidden"
+                        className="after:ml-3 after:text-[var(--theme-accent-secondary,#c49d5f)] after:content-['·'] last:after:hidden"
                       >
                         {detail}
                       </span>
@@ -432,7 +433,7 @@ export function HarborKeyHomes() {
                   </div>
                   <a
                     href="#contact"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#173e54]"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[var(--theme-accent-primary,#173e54)] [html.dark_&]:text-white hover:text-[var(--theme-accent-primary,#2d7a99)]"
                   >
                     View Property{" "}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -446,7 +447,7 @@ export function HarborKeyHomes() {
 
       <section
         id="neighborhoods"
-        className="px-5 py-24 sm:px-8 md:py-32 lg:px-12"
+        className="px-5 py-24 sm:px-8 md:py-32 lg:px-12 bg-[var(--theme-bg-base,#f8f5ee)] [html.dark_&]:bg-[var(--theme-bg-base,#0c1a24)] transition-colors duration-300"
       >
         <div className="mx-auto max-w-[86rem]">
           <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-24">
@@ -464,12 +465,12 @@ export function HarborKeyHomes() {
                 ].map((item, index) => (
                   <div
                     key={item}
-                    className="flex items-center gap-5 border-b border-[#173e54]/12 py-4"
+                    className="flex items-center gap-5 border-b border-[var(--theme-border,#173e54)]/12 [html.dark_&]:border-white/10 py-4"
                   >
-                    <span className="harborkey-serif text-lg text-[#c19d60]">
+                    <span className="harborkey-serif text-lg text-[var(--theme-accent-secondary,#c19d60)]">
                       0{index + 1}
                     </span>
-                    <h3 className="text-sm font-bold text-[#173e54]">{item}</h3>
+                    <h3 className="text-sm font-bold text-[var(--theme-text-primary,#173e54)] [html.dark_&]:text-white">{item}</h3>
                   </div>
                 ))}
               </div>
@@ -489,8 +490,8 @@ export function HarborKeyHomes() {
                   className="h-full min-h-[340px] w-full object-cover"
                 />
               </div>
-              <div className="col-span-8 col-start-5 -mt-16 rounded-[1.5rem] bg-[#153e53] p-7 text-white shadow-xl sm:p-9">
-                <Waves className="h-7 w-7 text-[#e5ce9d]" strokeWidth={1.4} />
+              <div className="col-span-8 col-start-5 -mt-16 rounded-[1.5rem] bg-[var(--theme-accent-primary,#153e53)] [html.dark_&]:bg-[var(--theme-bg-card,#142938)] p-7 text-white shadow-xl sm:p-9">
+                <Waves className="h-7 w-7 text-[var(--theme-accent-secondary,#e5ce9d)]" strokeWidth={1.4} />
                 <p className="harborkey-serif mt-5 text-2xl leading-snug">
                   A home is also the walk to school, the favorite café, and the
                   view at day’s end.
@@ -501,7 +502,7 @@ export function HarborKeyHomes() {
         </div>
       </section>
 
-      <section className="bg-[#12384d] px-5 py-24 text-white sm:px-8 md:py-32 lg:px-12">
+      <section className="bg-[var(--theme-bg-dark,#12384d)] [html.dark_&]:bg-[var(--theme-bg-surface,#0d1f2b)] px-5 py-24 text-white sm:px-8 md:py-32 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[86rem]">
           <SectionHeading
             eyebrow="The buyer journey"
@@ -517,11 +518,11 @@ export function HarborKeyHomes() {
                 data-hk-reveal
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
-                <span className="harborkey-serif text-5xl text-[#d6b978]/55">
+                <span className="harborkey-serif text-5xl text-[var(--theme-accent-secondary,#d6b978)]/55">
                   0{index + 1}
                 </span>
                 <Icon
-                  className="mt-8 h-6 w-6 text-[#9fc0b8]"
+                  className="mt-8 h-6 w-6 text-[var(--theme-accent-secondary,#9fc0b8)]"
                   strokeWidth={1.4}
                 />
                 <h3 className="harborkey-serif mt-5 text-2xl leading-tight text-white">
@@ -534,7 +535,7 @@ export function HarborKeyHomes() {
         </div>
       </section>
 
-      <section id="sell" className="bg-[#e8e4d7]">
+      <section id="sell" className="bg-[var(--theme-bg-surface,#e8e4d7)] [html.dark_&]:bg-[var(--theme-bg-surface,#10222f)] transition-colors duration-300">
         <div className="grid lg:grid-cols-2">
           <div className="min-h-[480px] lg:min-h-[670px]" data-hk-reveal>
             <img
@@ -553,15 +554,15 @@ export function HarborKeyHomes() {
                 title="Selling a Coastal Home With Strategy"
                 body="From pricing and presentation to buyer positioning, we create a thoughtful listing strategy designed to highlight the lifestyle, location, and long-term value of your home."
               />
-              <ul className="mt-8 grid gap-3 text-sm font-semibold text-[#415b65]">
+              <ul className="mt-8 grid gap-3 text-sm font-semibold text-[var(--theme-text-secondary,#415b65)] [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]">
                 {[
                   "Market-informed pricing",
                   "Editorial presentation",
                   "Qualified buyer positioning",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3">
-                    <span className="grid h-6 w-6 place-items-center rounded-full bg-[#c3d4cb]">
-                      <Check className="h-3.5 w-3.5 text-[#173e54]" />
+                    <span className="grid h-6 w-6 place-items-center rounded-full bg-[var(--theme-accent-secondary,#c3d4cb)]/40">
+                      <Check className="h-3.5 w-3.5 text-[var(--theme-accent-primary,#173e54)] [html.dark_&]:text-white" />
                     </span>
                     {item}
                   </li>
@@ -575,9 +576,9 @@ export function HarborKeyHomes() {
         </div>
       </section>
 
-      <section className="px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section className="px-5 py-24 sm:px-8 md:py-32 lg:px-12 bg-[var(--theme-bg-base,#f8f5ee)] [html.dark_&]:bg-[var(--theme-bg-base,#0c1a24)] transition-colors duration-300">
         <div
-          className="mx-auto grid max-w-[82rem] overflow-hidden rounded-[2rem] bg-[#dbe8e3] lg:grid-cols-[0.82fr_1.18fr]"
+          className="mx-auto grid max-w-[82rem] overflow-hidden rounded-[2rem] bg-[var(--theme-bg-surface,#dbe8e3)] [html.dark_&]:bg-[var(--theme-bg-card,#142938)] lg:grid-cols-[0.82fr_1.18fr]"
           data-hk-reveal
         >
           <img
@@ -587,22 +588,22 @@ export function HarborKeyHomes() {
           />
           <div className="flex items-center p-8 sm:p-14 lg:p-20">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#2d7593]">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--theme-accent-primary,#2d7593)]">
                 Trusted by coastal buyers and sellers
               </p>
               <Quote
-                className="mt-9 h-9 w-9 text-[#bd9657]"
+                className="mt-9 h-9 w-9 text-[var(--theme-accent-secondary,#bd9657)]"
                 strokeWidth={1.2}
               />
-              <blockquote className="harborkey-serif mt-5 text-[clamp(2rem,4vw,3.4rem)] leading-[1.08] tracking-[-0.025em] text-[#12384d]">
+              <blockquote className="harborkey-serif mt-5 text-[clamp(2rem,4vw,3.4rem)] leading-[1.08] tracking-[-0.025em] text-[var(--theme-text-primary,#12384d)] [html.dark_&]:text-white">
                 “HarborKey helped us understand the neighborhoods, compare homes
                 clearly, and move forward without pressure. We found a place
                 that truly fits our family.”
               </blockquote>
-              <p className="mt-8 text-sm font-bold text-[#294d5e]">
+              <p className="mt-8 text-sm font-bold text-[var(--theme-text-primary,#294d5e)] [html.dark_&]:text-[var(--theme-text-primary,#e2e8f0)]">
                 Emily &amp; Daniel R.
               </p>
-              <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#6e8588]">
+              <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[var(--theme-text-secondary,#6e8588)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                 Buyers · North Shore Village
               </p>
             </div>
@@ -612,17 +613,17 @@ export function HarborKeyHomes() {
 
       <section
         id="about"
-        className="border-y border-[#173e54]/10 bg-[#fbf9f4] px-5 py-24 sm:px-8 md:py-32 lg:px-12"
+        className="border-y border-[var(--theme-border,#173e54)]/10 [html.dark_&]:border-white/10 bg-[var(--theme-bg-surface,#fbf9f4)] [html.dark_&]:bg-[var(--theme-bg-surface,#0f212e)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="mx-auto grid max-w-[76rem] gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-24">
           <div className="relative mx-auto max-w-[28rem]" data-hk-reveal>
-            <div className="absolute -left-5 -top-5 h-full w-full rounded-[12rem_12rem_2rem_2rem] border border-[#bd985d]/50" />
+            <div className="absolute -left-5 -top-5 h-full w-full rounded-[12rem_12rem_2rem_2rem] border border-[var(--theme-accent-secondary,#bd985d)]/50" />
             <img
               src={brokerImage}
               alt="Claire Bennett, Principal Broker"
               className="relative aspect-[4/5] w-full rounded-[12rem_12rem_2rem_2rem] object-cover"
             />
-            <div className="absolute -bottom-5 -right-5 rounded-full bg-[#173e54] p-5 text-white shadow-xl">
+            <div className="absolute -bottom-5 -right-5 rounded-full bg-[var(--theme-accent-primary,#173e54)] p-5 text-white shadow-xl">
               <Waves className="h-7 w-7" strokeWidth={1.3} />
             </div>
           </div>
@@ -631,15 +632,15 @@ export function HarborKeyHomes() {
               eyebrow="Meet your advisor"
               title="Meet Your Coastal Real Estate Advisor"
             />
-            <div className="mt-8 border-l-2 border-[#c6a365] pl-6">
-              <h3 className="harborkey-serif text-3xl text-[#15394e]">
+            <div className="mt-8 border-l-2 border-[var(--theme-accent-secondary,#c6a365)] pl-6">
+              <h3 className="harborkey-serif text-3xl text-[var(--theme-text-primary,#15394e)] [html.dark_&]:text-white">
                 Claire Bennett
               </h3>
-              <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-[#66808a]">
+              <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-[var(--theme-text-secondary,#66808a)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                 Principal Broker, HarborKey Homes
               </p>
             </div>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-[#586d75]">
+            <p className="mt-7 max-w-xl text-lg leading-8 text-[var(--theme-text-secondary,#586d75)] [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]">
               Claire combines local market knowledge, calm negotiation, and
               thoughtful client care to help families make confident real-estate
               decisions along the coast.
@@ -655,10 +656,10 @@ export function HarborKeyHomes() {
 
       <section
         id="contact"
-        className="bg-[#285f76] px-5 py-24 text-center text-white sm:px-8 md:py-32 lg:px-12"
+        className="bg-[var(--theme-accent-primary,#285f76)] [html.dark_&]:bg-[var(--theme-bg-card,#142938)] px-5 py-24 text-center text-white sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="mx-auto max-w-4xl" data-hk-reveal>
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#ead5a7]">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[var(--theme-accent-secondary,#ead5a7)]">
             Your next chapter
           </p>
           <h2 className="harborkey-serif mt-5 text-[clamp(3.2rem,7vw,6.4rem)] leading-[0.92] tracking-[-0.04em]">
@@ -684,7 +685,7 @@ export function HarborKeyHomes() {
         </div>
       </section>
 
-      <footer className="bg-[#0d2c3d] px-5 py-14 text-white sm:px-8 lg:px-12">
+      <footer className="bg-[var(--theme-bg-dark,#0d2c3d)] [html.dark_&]:bg-[var(--theme-bg-dark,#07141d)] px-5 py-14 text-white sm:px-8 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[86rem]">
           <div className="grid gap-12 border-b border-white/10 pb-12 md:grid-cols-[1.2fr_0.8fr_1fr]">
             <div>
@@ -695,7 +696,7 @@ export function HarborKeyHomes() {
               </p>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d4b77d]">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#d4b77d)]">
                 Explore
               </p>
               <div className="mt-5 grid grid-cols-2 gap-3">
@@ -703,7 +704,7 @@ export function HarborKeyHomes() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-sm text-white/60 hover:text-white"
+                    className="text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {link.label}
                   </a>
@@ -711,19 +712,19 @@ export function HarborKeyHomes() {
               </div>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d4b77d]">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#d4b77d)]">
                 Start a conversation
               </p>
               <div className="mt-5 grid gap-3 text-sm">
                 <a
                   href="mailto:hello@harborkeyhomes.com"
-                  className="text-white/70 hover:text-white"
+                  className="text-white/70 hover:text-white transition-colors"
                 >
                   hello@harborkeyhomes.com
                 </a>
                 <a
                   href="tel:+15554182700"
-                  className="text-white/70 hover:text-white"
+                  className="text-white/70 hover:text-white transition-colors"
                 >
                   (555) 418-2700
                 </a>

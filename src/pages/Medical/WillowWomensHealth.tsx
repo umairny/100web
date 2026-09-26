@@ -185,55 +185,55 @@ const reviews = [
 ];
 
 const SoftIcon = ({ icon: Icon }: { icon: LucideIcon }) => (
-  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[#8a5570] shadow-sm shadow-[#7a405a]/8 ring-1 ring-[#ead5dc]">
+  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--theme-bg-card,#ffffff)] text-[var(--theme-accent-primary,#8a5570)] shadow-sm shadow-[var(--theme-accent-primary,#7a405a)]/8 ring-1 ring-[var(--theme-border,#ead5dc)] transition-colors duration-300">
     <Icon aria-hidden="true" size={22} strokeWidth={1.9} />
   </span>
 );
 
 export function WillowWomensHealth() {
   return (
-    <main className="bg-[#fff8f2] text-[#332a30]">
+    <main className="bg-[var(--theme-bg-base,#fff8f2)] text-[var(--theme-text-primary,#332a30)] transition-colors duration-300">
       <SubWebsiteNav
         brand="Willow Women's Health"
         links={navLinks}
         ctaLabel="Book a Visit"
         ctaHref="#contact"
         collectionPath="/medical"
-        className="mx-auto mt-3 max-w-[94rem] rounded-full border border-white/80 bg-[#fffaf5]/92 text-[#332a30] shadow-xl shadow-[#7a405a]/10 ring-1 ring-[#ead5dc]"
-        brandClassName="font-serif text-[#7a405a]"
-        linkClassName="rounded-full px-3 py-2 text-[#7d6b72] transition hover:bg-[#f9edf1] hover:text-[#7a405a]"
-        activeLinkClassName="active bg-[#f9edf1] text-[#7a405a]"
-        ctaClassName="bg-[#7a405a] text-white shadow-lg shadow-[#7a405a]/18 hover:bg-[#6b8a70]"
-        activeCtaClassName="active ring-2 ring-[#eec6d2] ring-offset-2"
-        menuButtonClassName="border-[#ead5dc] bg-[#fff1f4] text-[#7a405a] hover:bg-[#f9edf1]"
-        mobilePanelClassName="border border-[#ead5dc] bg-[#fffaf5]"
+        className="mx-auto mt-3 max-w-[94rem] rounded-full border border-[var(--theme-border,rgba(255,255,255,0.8))] bg-[var(--theme-bg-surface,#fffaf5)]/92 text-[var(--theme-text-primary,#332a30)] shadow-xl shadow-[var(--theme-accent-primary,#7a405a)]/10 ring-1 ring-[var(--theme-border,#ead5dc)] backdrop-blur-md transition-colors duration-300"
+        brandClassName="font-serif text-[var(--theme-accent-primary,#7a405a)]"
+        linkClassName="rounded-full px-3 py-2 text-[var(--theme-text-secondary,#7d6b72)] transition hover:bg-[var(--theme-accent-primary,#7a405a)]/10 hover:text-[var(--theme-accent-primary,#7a405a)]"
+        activeLinkClassName="active bg-[var(--theme-accent-primary,#7a405a)]/15 text-[var(--theme-accent-primary,#7a405a)] font-bold"
+        ctaClassName="bg-[var(--theme-accent-primary,#7a405a)] text-[var(--theme-accent-contrast,#ffffff)] shadow-lg shadow-[var(--theme-accent-primary,#7a405a)]/18 hover:bg-[var(--theme-accent-secondary,#6b8a70)]"
+        activeCtaClassName="active ring-2 ring-[var(--theme-accent-primary,#7a405a)]/40 ring-offset-2"
+        menuButtonClassName="border-[var(--theme-border,#ead5dc)] bg-[var(--theme-bg-surface,#fff1f4)] text-[var(--theme-accent-primary,#7a405a)] hover:bg-[var(--theme-accent-primary,#7a405a)]/10"
+        mobilePanelClassName="border border-[var(--theme-border,#ead5dc)] bg-[var(--theme-bg-surface,#fffaf5)] text-[var(--theme-text-primary,#332a30)]"
       />
 
-      <section className="relative isolate -mt-16 overflow-hidden bg-[#fff8f2] pt-32 md:pt-36">
-        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_14%_22%,rgba(238,198,210,0.55),transparent_30%),radial-gradient(circle_at_84%_12%,rgba(190,213,184,0.48),transparent_28%),linear-gradient(135deg,#fffaf5_0%,#faedf0_55%,#eef5ee_100%)]" />
-        <div className="absolute -right-24 top-24 -z-10 h-72 w-72 rounded-full border-[42px] border-[#eec6d2]/34" />
-        <div className="absolute -left-24 bottom-12 -z-10 h-80 w-80 rounded-full border-[36px] border-[#bed5b8]/34" />
+      <section className="relative isolate -mt-16 overflow-hidden bg-[var(--theme-bg-base,#fff8f2)] pt-32 md:pt-36 transition-colors duration-300">
+        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_14%_22%,var(--theme-accent-primary-light,rgba(238,198,210,0.55)),transparent_30%),radial-gradient(circle_at_84%_12%,var(--theme-accent-secondary-light,rgba(190,213,184,0.48)),transparent_28%),linear-gradient(135deg,var(--theme-bg-surface,#fffaf5)_0%,var(--theme-bg-base,#faedf0)_55%,var(--theme-bg-surface,#eef5ee)_100%)] opacity-80" />
+        <div className="absolute -right-24 top-24 -z-10 h-72 w-72 rounded-full border-[42px] border-[var(--theme-accent-primary,#eec6d2)]/25" />
+        <div className="absolute -left-24 bottom-12 -z-10 h-80 w-80 rounded-full border-[36px] border-[var(--theme-accent-secondary,#bed5b8)]/25" />
         <Container className="grid min-h-[calc(100vh-7rem)] gap-10 py-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
           <div className="relative order-2 lg:order-1">
-            <div className="absolute -left-7 top-10 h-32 w-32 rounded-full bg-[#f4d7df]/80 blur-sm" />
-            <div className="absolute -right-4 bottom-10 h-40 w-40 rounded-full bg-[#dcebd8]/90 blur-sm" />
+            <div className="absolute -left-7 top-10 h-32 w-32 rounded-full bg-[var(--theme-accent-primary,#f4d7df)]/60 blur-sm" />
+            <div className="absolute -right-4 bottom-10 h-40 w-40 rounded-full bg-[var(--theme-accent-secondary,#dcebd8)]/70 blur-sm" />
             <img
               src={imageUrl("medical/willow/hero.webp")}
               alt="Warm women's health consultation"
-              className="relative h-[34rem] w-full rounded-[3rem] object-cover shadow-2xl shadow-[#7a405a]/14 md:h-[40rem]"
+              className="relative h-[34rem] w-full rounded-[3rem] object-cover shadow-2xl shadow-[var(--theme-accent-primary,#7a405a)]/14 md:h-[40rem]"
             />
-            <div className="absolute bottom-5 left-5 right-5 rounded-[2rem] border border-white/70 bg-white/90 p-5 shadow-2xl shadow-[#7a405a]/12 backdrop-blur md:right-auto md:w-80">
-              <p className="text-xs font-black uppercase text-[#a7793d]">
+            <div className="absolute bottom-5 left-5 right-5 rounded-[2rem] border border-[var(--theme-border,rgba(255,255,255,0.7))] bg-[var(--theme-bg-card,#ffffff)]/90 p-5 shadow-2xl shadow-[var(--theme-accent-primary,#7a405a)]/12 backdrop-blur md:right-auto md:w-80 transition-colors duration-300">
+              <p className="text-xs font-black uppercase text-[var(--theme-accent-secondary,#a7793d)]">
                 Visit path
               </p>
               <div className="mt-4 grid gap-3">
                 {["Choose care", "Prepare", "Meet provider", "Follow up"].map(
                   (step, index) => (
                     <div key={step} className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f9edf1] text-sm font-black text-[#7a405a]">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--theme-accent-primary,#7a405a)]/15 text-sm font-black text-[var(--theme-accent-primary,#7a405a)]">
                         {index + 1}
                       </span>
-                      <span className="font-bold text-[#3b2632]">{step}</span>
+                      <span className="font-bold text-[var(--theme-text-primary,#3b2632)]">{step}</span>
                     </div>
                   ),
                 )}
@@ -241,15 +241,15 @@ export function WillowWomensHealth() {
             </div>
           </div>
 
-          <div className="order-1 rounded-[2.5rem] border border-white/70 bg-white/58 p-6 shadow-2xl shadow-[#7a405a]/8 backdrop-blur md:p-8 lg:order-2 lg:text-right">
-            <p className="inline-flex items-center gap-2 rounded-full border border-[#ead5dc] bg-white/70 px-4 py-2 text-sm font-black text-[#7a405a] shadow-sm shadow-[#7a405a]/5">
+          <div className="order-1 rounded-[2.5rem] border border-[var(--theme-border,rgba(255,255,255,0.7))] bg-[var(--theme-bg-card,#ffffff)]/60 p-6 shadow-2xl shadow-[var(--theme-accent-primary,#7a405a)]/8 backdrop-blur md:p-8 lg:order-2 lg:text-right transition-colors duration-300">
+            <p className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-border,#ead5dc)] bg-[var(--theme-bg-card,#ffffff)]/70 px-4 py-2 text-sm font-black text-[var(--theme-accent-primary,#7a405a)] shadow-sm shadow-[var(--theme-accent-primary,#7a405a)]/5">
               <Leaf aria-hidden="true" size={17} /> Supportive visit paths and
               patient resources
             </p>
-            <h1 className="mt-6 font-serif text-5xl leading-[1.02] tracking-normal text-[#3b2632] md:text-7xl">
+            <h1 className="mt-6 font-serif text-5xl leading-[1.02] tracking-normal text-[var(--theme-text-primary,#3b2632)] md:text-7xl">
               Supportive care with clearer visit paths.
             </h1>
-            <p className="mt-6 text-lg leading-8 text-[#675b61] md:ml-auto md:max-w-2xl md:text-xl">
+            <p className="mt-6 text-lg leading-8 text-[var(--theme-text-secondary,#675b61)] md:ml-auto md:max-w-2xl md:text-xl">
               Willow Women's Health helps patients understand services, prepare
               for appointments, access helpful resources, and feel supported
               through each step of care.
@@ -258,7 +258,7 @@ export function WillowWomensHealth() {
               <CTAButton
                 href="#contact"
                 size="lg"
-                className="rounded-full bg-[#7a405a] text-white hover:bg-[#6b8a70]"
+                className="rounded-full bg-[var(--theme-accent-primary,#7a405a)] text-[var(--theme-accent-contrast,#ffffff)] hover:bg-[var(--theme-accent-secondary,#6b8a70)]"
               >
                 Book a Visit
               </CTAButton>
@@ -267,7 +267,7 @@ export function WillowWomensHealth() {
                 variant="outline"
                 size="lg"
                 trailingIcon={<ArrowRight aria-hidden="true" size={20} />}
-                className="rounded-full border-[#cfa9b5] bg-white/70 text-[#7a405a] hover:bg-[#7a405a] hover:text-white"
+                className="rounded-full border-[var(--theme-border,#cfa9b5)] bg-[var(--theme-bg-card,#ffffff)]/70 text-[var(--theme-accent-primary,#7a405a)] hover:bg-[var(--theme-accent-primary,#7a405a)] hover:text-[var(--theme-accent-contrast,#ffffff)]"
               >
                 Explore Resources
               </CTAButton>
@@ -276,11 +276,11 @@ export function WillowWomensHealth() {
               {trustPoints.map((point) => (
                 <div
                   key={point}
-                  className="rounded-[1.5rem] border border-[#ead5dc] bg-white/70 p-4 text-sm font-bold text-[#675b61] shadow-sm shadow-[#7a405a]/5 backdrop-blur"
+                  className="rounded-[1.5rem] border border-[var(--theme-border,#ead5dc)] bg-[var(--theme-bg-card,#ffffff)]/70 p-4 text-sm font-bold text-[var(--theme-text-secondary,#675b61)] shadow-sm shadow-[var(--theme-accent-primary,#7a405a)]/5 backdrop-blur text-left lg:text-right transition-colors duration-300"
                 >
                   <CheckCircle
                     aria-hidden="true"
-                    className="mb-2 text-[#6b8a70] lg:ml-auto"
+                    className="mb-2 text-[var(--theme-accent-secondary,#6b8a70)] lg:ml-auto"
                     size={18}
                   />
                   {point}
@@ -289,37 +289,37 @@ export function WillowWomensHealth() {
             </div>
           </div>
         </Container>
-        <div className="h-14 bg-[#fff8f2] [clip-path:ellipse(76%_72%_at_50%_100%)]" />
+        <div className="h-14 bg-[var(--theme-bg-base,#fff8f2)] [clip-path:ellipse(76%_72%_at_50%_100%)] transition-colors duration-300" />
       </section>
 
-      <section id="services" className="bg-[#fff8f2] py-20 md:py-28">
+      <section id="services" className="bg-[var(--theme-bg-base,#fff8f2)] py-20 md:py-28 transition-colors duration-300">
         <Container>
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase text-[#7a405a]">
+              <p className="text-sm font-black uppercase text-[var(--theme-accent-primary,#7a405a)]">
                 Services
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-6xl">
+              <h2 className="mt-3 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#3b2632)] md:text-6xl">
                 Care for every stage and season.
               </h2>
             </div>
             <img
               src={imageUrl("medical/willow/preventive-care.webp")}
               alt="Preventive women's health care conversation"
-              className="h-60 w-full rounded-[2rem] object-cover shadow-xl shadow-[#7a405a]/10"
+              className="h-60 w-full rounded-[2rem] object-cover shadow-xl shadow-[var(--theme-accent-primary,#7a405a)]/10"
             />
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {services.map(({ title, text, icon, tone }) => (
               <article
                 key={title}
-                className={`rounded-[2rem] border border-white p-6 shadow-sm shadow-[#7a405a]/6 ring-1 ring-[#ead5dc] ${tone}`}
+                className={`rounded-[2rem] border border-[var(--theme-border,rgba(255,255,255,0.8))] p-6 shadow-sm shadow-[var(--theme-accent-primary,#7a405a)]/6 ring-1 ring-[var(--theme-border,#ead5dc)] ${tone} dark:!bg-[var(--theme-bg-card,#251320)] [html[data-theme-active=true]_&]:!bg-[var(--theme-bg-card,#ffffff)] transition-colors duration-300`}
               >
                 <SoftIcon icon={icon} />
-                <h3 className="mt-6 text-2xl font-black text-[#3b2632]">
+                <h3 className="mt-6 text-2xl font-black text-[var(--theme-text-primary,#3b2632)]">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[#675b61]">{text}</p>
+                <p className="mt-3 text-sm leading-7 text-[var(--theme-text-secondary,#675b61)]">{text}</p>
               </article>
             ))}
           </div>
@@ -328,43 +328,43 @@ export function WillowWomensHealth() {
 
       <section
         id="visit-paths"
-        className="relative overflow-hidden bg-[#f9edf1] py-20 md:py-28"
+        className="relative overflow-hidden bg-[var(--theme-bg-surface,#f9edf1)] py-20 md:py-28 transition-colors duration-300"
       >
-        <div className="absolute inset-x-0 top-0 h-16 bg-[#fff8f2] [clip-path:ellipse(72%_76%_at_50%_0%)]" />
+        <div className="absolute inset-x-0 top-0 h-16 bg-[var(--theme-bg-base,#fff8f2)] [clip-path:ellipse(72%_76%_at_50%_0%)] transition-colors duration-300" />
         <Container>
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <p className="text-sm font-black uppercase text-[#7a405a]">
+              <p className="text-sm font-black uppercase text-[var(--theme-accent-primary,#7a405a)]">
                 Visit paths
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-6xl">
+              <h2 className="mt-3 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#3b2632)] md:text-6xl">
                 Know where to start.
               </h2>
-              <p className="mt-5 text-lg leading-8 text-[#675b61]">
+              <p className="mt-5 text-lg leading-8 text-[var(--theme-text-secondary,#675b61)]">
                 A soft visit-path system helps patients choose the right entry
                 point before booking.
               </p>
               <img
                 src={imageUrl("medical/willow/visit-paths.webp")}
                 alt="Women's health visit path planning"
-                className="mt-8 h-80 w-full rounded-[2.5rem] object-cover shadow-xl shadow-[#7a405a]/10"
+                className="mt-8 h-80 w-full rounded-[2.5rem] object-cover shadow-xl shadow-[var(--theme-accent-primary,#7a405a)]/10"
               />
             </div>
             <div className="relative grid gap-4">
-              <div className="absolute left-8 top-8 hidden h-[calc(100%-4rem)] w-1 rounded-full bg-[#e7c0cc] md:block" />
+              <div className="absolute left-8 top-8 hidden h-[calc(100%-4rem)] w-1 rounded-full bg-[var(--theme-border,#e7c0cc)] md:block" />
               {visitPaths.map(([title, text], index) => (
                 <article
                   key={title}
-                  className="relative rounded-[2rem] border border-white bg-white/76 p-6 shadow-sm shadow-[#7a405a]/6 backdrop-blur"
+                  className="relative rounded-[2rem] border border-[var(--theme-border,rgba(255,255,255,0.8))] bg-[var(--theme-bg-card,#ffffff)]/76 p-6 shadow-sm shadow-[var(--theme-accent-primary,#7a405a)]/6 backdrop-blur transition-colors duration-300"
                 >
-                  <span className="absolute -left-1 top-6 hidden h-5 w-5 rounded-full border-4 border-[#f9edf1] bg-[#7a405a] md:block" />
-                  <p className="text-xs font-black uppercase text-[#a7793d]">
+                  <span className="absolute -left-1 top-6 hidden h-5 w-5 rounded-full border-4 border-[var(--theme-bg-surface,#f9edf1)] bg-[var(--theme-accent-primary,#7a405a)] md:block" />
+                  <p className="text-xs font-black uppercase text-[var(--theme-accent-secondary,#a7793d)]">
                     Path {index + 1}
                   </p>
-                  <h3 className="mt-2 text-2xl font-black text-[#3b2632]">
+                  <h3 className="mt-2 text-2xl font-black text-[var(--theme-text-primary,#3b2632)]">
                     {title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[#675b61]">
+                  <p className="mt-3 text-sm leading-7 text-[var(--theme-text-secondary,#675b61)]">
                     {text}
                   </p>
                 </article>
@@ -374,38 +374,38 @@ export function WillowWomensHealth() {
         </Container>
       </section>
 
-      <section id="resources" className="bg-[#fffaf5] py-20 md:py-28">
+      <section id="resources" className="bg-[var(--theme-bg-base,#fffaf5)] py-20 md:py-28 transition-colors duration-300">
         <Container>
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase text-[#7a405a]">
+              <p className="text-sm font-black uppercase text-[var(--theme-accent-primary,#7a405a)]">
                 Patient resources
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
+              <h2 className="mt-3 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#3b2632)] md:text-5xl">
                 Helpful resources before and after your visit.
               </h2>
             </div>
             <img
               src={imageUrl("medical/willow/patient-resources.webp")}
               alt="Patient resources and appointment notes"
-              className="h-56 w-full rounded-[2rem] object-cover shadow-xl shadow-[#7a405a]/10"
+              className="h-56 w-full rounded-[2rem] object-cover shadow-xl shadow-[var(--theme-accent-primary,#7a405a)]/10"
             />
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {resources.map((resource, index) => (
               <article
                 key={resource}
-                className="rounded-[1.75rem] border border-[#ead5dc] bg-white p-6 shadow-sm shadow-[#7a405a]/5"
+                className="rounded-[1.75rem] border border-[var(--theme-border,#ead5dc)] bg-[var(--theme-bg-card,#ffffff)] p-6 shadow-sm shadow-[var(--theme-accent-primary,#7a405a)]/5 transition-colors duration-300"
               >
                 <FileText
                   aria-hidden="true"
-                  className="text-[#7a405a]"
+                  className="text-[var(--theme-accent-primary,#7a405a)]"
                   size={24}
                 />
-                <h3 className="mt-5 text-xl font-black text-[#3b2632]">
+                <h3 className="mt-5 text-xl font-black text-[var(--theme-text-primary,#3b2632)]">
                   {resource}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[#675b61]">
+                <p className="mt-3 text-sm leading-7 text-[var(--theme-text-secondary,#675b61)]">
                   Resource {index + 1} keeps appointment preparation, questions,
                   and follow-up details easy to scan.
                 </p>
@@ -415,18 +415,18 @@ export function WillowWomensHealth() {
         </Container>
       </section>
 
-      <section id="providers" className="bg-[#eef5ee] py-20 md:py-28">
+      <section id="providers" className="bg-[var(--theme-bg-surface,#eef5ee)] py-20 md:py-28 transition-colors duration-300">
         <Container>
           <div className="mb-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase text-[#6b8a70]">
+              <p className="text-sm font-black uppercase text-[var(--theme-accent-secondary,#6b8a70)]">
                 Providers
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-6xl">
+              <h2 className="mt-3 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#3b2632)] md:text-6xl">
                 A team that listens and explains clearly.
               </h2>
             </div>
-            <p className="max-w-3xl text-lg leading-8 text-[#675b61]">
+            <p className="max-w-3xl text-lg leading-8 text-[var(--theme-text-secondary,#675b61)]">
               Provider cards stay warm and credible, with simple bios focused on
               listening, guidance, and practical visit support.
             </p>
@@ -435,26 +435,26 @@ export function WillowWomensHealth() {
             <img
               src={imageUrl("medical/willow/team.webp")}
               alt="Willow Women's Health care team"
-              className="h-full min-h-[32rem] w-full rounded-[2.5rem] object-cover shadow-xl shadow-[#7a405a]/10"
+              className="h-full min-h-[32rem] w-full rounded-[2.5rem] object-cover shadow-xl shadow-[var(--theme-accent-primary,#7a405a)]/10"
             />
             <div className="grid gap-4">
               {providers.map(({ name, role, bio }) => (
                 <article
                   key={name}
-                  className="rounded-[1.75rem] border border-[#d8e4d4] bg-white/82 p-6 shadow-sm shadow-[#6b8a70]/6"
+                  className="rounded-[1.75rem] border border-[var(--theme-border,#d8e4d4)] bg-[var(--theme-bg-card,#ffffff)]/82 p-6 shadow-sm shadow-[var(--theme-accent-secondary,#6b8a70)]/6 transition-colors duration-300"
                 >
                   <Users
                     aria-hidden="true"
-                    className="text-[#6b8a70]"
+                    className="text-[var(--theme-accent-secondary,#6b8a70)]"
                     size={24}
                   />
-                  <h3 className="mt-5 text-2xl font-black text-[#3b2632]">
+                  <h3 className="mt-5 text-2xl font-black text-[var(--theme-text-primary,#3b2632)]">
                     {name}
                   </h3>
-                  <p className="mt-1 text-sm font-black text-[#7a405a]">
+                  <p className="mt-1 text-sm font-black text-[var(--theme-accent-primary,#7a405a)]">
                     {role}
                   </p>
-                  <p className="mt-4 text-sm leading-7 text-[#675b61]">{bio}</p>
+                  <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#675b61)]">{bio}</p>
                 </article>
               ))}
             </div>
@@ -462,21 +462,21 @@ export function WillowWomensHealth() {
         </Container>
       </section>
 
-      <section className="bg-[#fff8f2] py-20 md:py-28">
+      <section className="bg-[var(--theme-bg-base,#fff8f2)] py-20 md:py-28 transition-colors duration-300">
         <Container className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <img
             src={imageUrl("medical/willow/room.webp")}
             alt="Warm women's health clinic room"
-            className="h-[34rem] w-full rounded-[2.5rem] object-cover shadow-xl shadow-[#7a405a]/10"
+            className="h-[34rem] w-full rounded-[2.5rem] object-cover shadow-xl shadow-[var(--theme-accent-primary,#7a405a)]/10"
           />
           <div>
-            <p className="text-sm font-black uppercase text-[#7a405a]">
+            <p className="text-sm font-black uppercase text-[var(--theme-accent-primary,#7a405a)]">
               Clinic environment
             </p>
-            <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
+            <h2 className="mt-3 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#3b2632)] md:text-5xl">
               A calm space designed around comfort.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-[#675b61]">
+            <p className="mt-5 text-lg leading-8 text-[var(--theme-text-secondary,#675b61)]">
               A warm, private clinic environment for conversations, checkups,
               care planning, and follow-up support.
             </p>
@@ -484,14 +484,14 @@ export function WillowWomensHealth() {
               {environmentPoints.map((point) => (
                 <div
                   key={point}
-                  className="flex items-center gap-3 rounded-2xl border border-[#ead5dc] bg-white p-4"
+                  className="flex items-center gap-3 rounded-2xl border border-[var(--theme-border,#ead5dc)] bg-[var(--theme-bg-card,#ffffff)] p-4 transition-colors duration-300"
                 >
                   <CheckCircle
                     aria-hidden="true"
-                    className="text-[#6b8a70]"
+                    className="text-[var(--theme-accent-secondary,#6b8a70)]"
                     size={20}
                   />
-                  <span className="font-black text-[#3b2632]">{point}</span>
+                  <span className="font-black text-[var(--theme-text-primary,#3b2632)]">{point}</span>
                 </div>
               ))}
             </div>
@@ -501,23 +501,23 @@ export function WillowWomensHealth() {
 
       <section
         id="telehealth"
-        className="bg-[#3b2632] py-20 text-white md:py-28"
+        className="bg-[var(--theme-bg-dark,#3b2632)] py-20 text-white md:py-28 transition-colors duration-300"
       >
         <Container className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
           <div>
-            <p className="text-sm font-black uppercase text-[#eec6d2]">
+            <p className="text-sm font-black uppercase text-[var(--theme-accent-light,#eec6d2)]">
               Telehealth
             </p>
-            <h2 className="mt-3 font-serif text-4xl leading-tight md:text-6xl">
+            <h2 className="mt-3 font-serif text-4xl leading-tight md:text-6xl text-white">
               Support that can start from home.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-white/72">
+            <p className="mt-5 text-lg leading-8 text-white/80">
               Virtual appointment options can support follow-up conversations,
               questions about care plans, resource review, and convenient
               next-step guidance.
             </p>
           </div>
-          <div className="rounded-[2.5rem] border border-white/14 bg-white/10 p-4 shadow-2xl shadow-black/18">
+          <div className="rounded-[2.5rem] border border-white/14 bg-white/10 p-4 shadow-2xl shadow-black/18 backdrop-blur">
             <img
               src={imageUrl("medical/willow/telehealth-support.webp")}
               alt="Telehealth support for women's health"
@@ -532,7 +532,7 @@ export function WillowWomensHealth() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="rounded-2xl bg-white/10 p-4 text-sm font-bold text-white/82 ring-1 ring-white/12"
+                  className="rounded-2xl bg-white/10 p-4 text-sm font-bold text-white ring-1 ring-white/12"
                 >
                   {item}
                 </div>
@@ -542,13 +542,13 @@ export function WillowWomensHealth() {
         </Container>
       </section>
 
-      <section className="bg-[#fffaf5] py-20 md:py-28">
+      <section className="bg-[var(--theme-bg-surface,#fffaf5)] py-20 md:py-28 transition-colors duration-300">
         <Container>
           <div className="mb-12 max-w-3xl">
-            <p className="text-sm font-black uppercase text-[#7a405a]">
+            <p className="text-sm font-black uppercase text-[var(--theme-accent-primary,#7a405a)]">
               Visit details
             </p>
-            <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
+            <h2 className="mt-3 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#3b2632)] md:text-5xl">
               Practical details before your visit.
             </h2>
           </div>
@@ -556,42 +556,42 @@ export function WillowWomensHealth() {
             {visitDetails.map(([title, text]) => (
               <article
                 key={title}
-                className="rounded-[1.75rem] border border-[#ead5dc] bg-white p-6"
+                className="rounded-[1.75rem] border border-[var(--theme-border,#ead5dc)] bg-[var(--theme-bg-card,#ffffff)] p-6 transition-colors duration-300"
               >
                 <Sparkles
                   aria-hidden="true"
-                  className="text-[#7a405a]"
+                  className="text-[var(--theme-accent-primary,#7a405a)]"
                   size={22}
                 />
-                <h3 className="mt-5 text-xl font-black text-[#3b2632]">
+                <h3 className="mt-5 text-xl font-black text-[var(--theme-text-primary,#3b2632)]">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[#675b61]">{text}</p>
+                <p className="mt-3 text-sm leading-7 text-[var(--theme-text-secondary,#675b61)]">{text}</p>
               </article>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="bg-[#f9edf1] py-20 md:py-28">
+      <section className="bg-[var(--theme-bg-surface,#f9edf1)] py-20 md:py-28 transition-colors duration-300">
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="text-sm font-black uppercase text-[#7a405a]">
+            <p className="text-sm font-black uppercase text-[var(--theme-accent-primary,#7a405a)]">
               Appointment access
             </p>
-            <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
+            <h2 className="mt-3 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#3b2632)] md:text-5xl">
               Choose the visit path that fits your needs.
             </h2>
             <img
               src={imageUrl("medical/willow/appointment.webp")}
               alt="Willow appointment access"
-              className="mt-7 h-56 w-full rounded-[2rem] object-cover shadow-xl shadow-[#7a405a]/10"
+              className="mt-7 h-56 w-full rounded-[2rem] object-cover shadow-xl shadow-[var(--theme-accent-primary,#7a405a)]/10"
             />
             <div className="mt-8">
               <CTAButton
                 href="#contact"
                 size="lg"
-                className="rounded-full bg-[#7a405a] text-white hover:bg-[#6b8a70]"
+                className="rounded-full bg-[var(--theme-accent-primary,#7a405a)] text-[var(--theme-accent-contrast,#ffffff)] hover:bg-[var(--theme-accent-secondary,#6b8a70)]"
               >
                 Book a Visit
               </CTAButton>
@@ -601,50 +601,50 @@ export function WillowWomensHealth() {
             {appointmentTypes.map((type) => (
               <div
                 key={type}
-                className="flex items-center gap-3 rounded-2xl border border-[#ead5dc] bg-white/80 p-4"
+                className="flex items-center gap-3 rounded-2xl border border-[var(--theme-border,#ead5dc)] bg-[var(--theme-bg-card,#ffffff)]/80 p-4 transition-colors duration-300"
               >
                 <CalendarCheck
                   aria-hidden="true"
-                  className="text-[#7a405a]"
+                  className="text-[var(--theme-accent-primary,#7a405a)]"
                   size={20}
                 />
-                <span className="font-bold text-[#3b2632]">{type}</span>
+                <span className="font-bold text-[var(--theme-text-primary,#3b2632)]">{type}</span>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <section id="reviews" className="bg-[#fff8f2] py-20 md:py-28">
+      <section id="reviews" className="bg-[var(--theme-bg-base,#fff8f2)] py-20 md:py-28 transition-colors duration-300">
         <Container>
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase text-[#7a405a]">
+              <p className="text-sm font-black uppercase text-[var(--theme-accent-primary,#7a405a)]">
                 Reviews
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight text-[#3b2632] md:text-5xl">
+              <h2 className="mt-3 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#3b2632)] md:text-5xl">
                 Patients notice when care feels clear and prepared.
               </h2>
             </div>
             <img
               src={imageUrl("medical/willow/supportive-consultation.webp")}
               alt="Supportive women's health consultation"
-              className="h-56 w-full rounded-[2rem] object-cover shadow-xl shadow-[#7a405a]/10"
+              className="h-56 w-full rounded-[2rem] object-cover shadow-xl shadow-[var(--theme-accent-primary,#7a405a)]/10"
             />
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {reviews.map(({ name, quote }) => (
               <blockquote
                 key={name}
-                className="rounded-[2rem] border border-[#ead5dc] bg-white p-7 shadow-sm shadow-[#7a405a]/5"
+                className="rounded-[2rem] border border-[var(--theme-border,#ead5dc)] bg-[var(--theme-bg-card,#ffffff)] p-7 shadow-sm shadow-[var(--theme-accent-primary,#7a405a)]/5 transition-colors duration-300"
               >
-                <p className="font-serif text-5xl leading-none text-[#c77d96]">
+                <p className="font-serif text-5xl leading-none text-[var(--theme-accent-primary,#c77d96)]">
                   &ldquo;
                 </p>
-                <p className="mt-2 text-lg font-bold leading-8 text-[#3b2632]">
+                <p className="mt-2 text-lg font-bold leading-8 text-[var(--theme-text-primary,#3b2632)]">
                   {quote}
                 </p>
-                <footer className="mt-6 text-sm font-black uppercase text-[#6b8a70]">
+                <footer className="mt-6 text-sm font-black uppercase text-[var(--theme-accent-secondary,#6b8a70)]">
                   {name}
                 </footer>
               </blockquote>
@@ -655,7 +655,7 @@ export function WillowWomensHealth() {
 
       <section
         id="contact"
-        className="relative isolate overflow-hidden bg-[#3b2632] py-20 text-white md:py-28"
+        className="relative isolate overflow-hidden bg-[var(--theme-bg-dark,#3b2632)] py-20 text-white md:py-28 transition-colors duration-300"
       >
         <img
           src={imageUrl("medical/willow/cta.webp")}
@@ -663,15 +663,15 @@ export function WillowWomensHealth() {
           aria-hidden="true"
           className="absolute inset-0 -z-20 h-full w-full object-cover opacity-30"
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(59,38,50,0.96),rgba(59,38,50,0.7))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,var(--theme-bg-dark,rgba(59,38,50,0.96)),var(--theme-bg-dark,rgba(59,38,50,0.7)))]" />
         <Container className="max-w-5xl">
-          <p className="text-sm font-black uppercase text-[#eec6d2]">
+          <p className="text-sm font-black uppercase text-[var(--theme-accent-light,#eec6d2)]">
             Start here
           </p>
-          <h2 className="mt-3 max-w-4xl font-serif text-4xl leading-tight md:text-6xl">
+          <h2 className="mt-3 max-w-4xl font-serif text-4xl leading-tight md:text-6xl text-white">
             Start with care that helps you feel prepared.
           </h2>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-white/74">
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-white/80">
             Book a visit with Willow Women's Health and get supportive guidance,
             practical resources, and clearer next steps for your care.
           </p>
@@ -679,7 +679,7 @@ export function WillowWomensHealth() {
             <CTAButton
               href="mailto:hello@willowwomens.example"
               size="lg"
-              className="rounded-full bg-[#eec6d2] text-[#3b2632] hover:bg-white"
+              className="rounded-full bg-[var(--theme-accent-light,#eec6d2)] text-[var(--theme-bg-dark,#3b2632)] hover:bg-white transition-colors"
             >
               Book a Visit
             </CTAButton>
@@ -700,23 +700,23 @@ export function WillowWomensHealth() {
         </Container>
       </section>
 
-      <footer className="bg-[#281a23] py-12 text-white">
+      <footer className="bg-[var(--theme-bg-dark,#281a23)] py-12 text-white/80 border-t border-[var(--theme-border,rgba(255,255,255,0.08))] transition-colors duration-300">
         <Container>
           <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr_1fr]">
             <div>
-              <h2 className="font-serif text-3xl">Willow Women's Health</h2>
-              <p className="mt-3 max-w-md leading-7 text-white/68">
+              <h2 className="font-serif text-3xl text-white">Willow Women's Health</h2>
+              <p className="mt-3 max-w-md leading-7 text-white/75">
                 Supportive visit paths and patient resources for patient-first
                 women's care.
               </p>
-              <p className="mt-5 text-sm leading-6 text-white/58">
+              <p className="mt-5 text-sm leading-6 text-white/60">
                 If you are experiencing a life-threatening emergency, call local
                 emergency services immediately.
               </p>
             </div>
             <nav
               aria-label="Footer navigation"
-              className="grid gap-2 text-sm font-bold text-white/72"
+              className="grid gap-2 text-sm font-bold text-white/80"
             >
               {[
                 "Services",
@@ -745,17 +745,17 @@ export function WillowWomensHealth() {
                                 ? "#reviews"
                                 : "#contact"
                   }
-                  className="hover:text-white"
+                  className="hover:text-[var(--theme-accent-light,#ffffff)] transition-colors"
                 >
                   {item}
                 </a>
               ))}
             </nav>
-            <div className="grid gap-3 text-sm text-white/72">
+            <div className="grid gap-3 text-sm text-white/80">
               <p className="flex gap-3">
                 <MapPin
                   aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#eec6d2]"
+                  className="mt-0.5 shrink-0 text-[var(--theme-accent-light,#eec6d2)]"
                   size={18}
                 />
                 <span>450 Willow Garden Avenue, Suite 180</span>
@@ -763,7 +763,7 @@ export function WillowWomensHealth() {
               <p className="flex gap-3">
                 <Clock
                   aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#eec6d2]"
+                  className="mt-0.5 shrink-0 text-[var(--theme-accent-light,#eec6d2)]"
                   size={18}
                 />
                 <span>Monday-Friday, 8 AM-6 PM</span>
@@ -771,7 +771,7 @@ export function WillowWomensHealth() {
               <p className="flex gap-3">
                 <CalendarCheck
                   aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#eec6d2]"
+                  className="mt-0.5 shrink-0 text-[var(--theme-accent-light,#eec6d2)]"
                   size={18}
                 />
                 <span>Saturday, 9 AM-1 PM</span>
@@ -779,10 +779,10 @@ export function WillowWomensHealth() {
               <p className="flex gap-3">
                 <Phone
                   aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#eec6d2]"
+                  className="mt-0.5 shrink-0 text-[var(--theme-accent-light,#eec6d2)]"
                   size={18}
                 />
-                <a href="tel:5550154289" className="hover:text-white">
+                <a href="tel:5550154289" className="hover:text-[var(--theme-accent-light,#ffffff)] transition-colors">
                   (555) 015-4289
                 </a>
               </p>
@@ -793,3 +793,5 @@ export function WillowWomensHealth() {
     </main>
   );
 }
+
+export default WillowWomensHealth;

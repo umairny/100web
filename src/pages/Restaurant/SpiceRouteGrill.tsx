@@ -158,12 +158,12 @@ const ImageWithFallback = ({
 };
 
 const SpiceDots = () => (
-  <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:radial-gradient(#f4a11a_1px,transparent_1px),radial-gradient(#8f1d1b_1px,transparent_1px)] [background-position:0_0,13px_13px] [background-size:26px_26px]" />
+  <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:radial-gradient(var(--theme-accent-primary,#f4a11a)_1px,transparent_1px),radial-gradient(var(--theme-accent-secondary,#8f1d1b)_1px,transparent_1px)] [background-position:0_0,13px_13px] [background-size:26px_26px]" />
 );
 
 export function SpiceRouteGrill() {
   return (
-    <main className="brand-motion motion-spiceroute bg-[#fff4dd] text-[#1f1b18]">
+    <main className="brand-motion motion-spiceroute bg-[var(--theme-bg-base,#fff4dd)] text-[var(--theme-text-primary,#1f1b18)] transition-colors duration-300">
       <SubWebsiteNav
         brand="SpiceRoute Grill"
         links={[
@@ -174,32 +174,32 @@ export function SpiceRouteGrill() {
         ]}
         ctaLabel="Reserve"
         ctaHref="#order"
-        className="border-b border-[#f4a11a]/25 bg-[#1f1b18]/95 text-[#fff4dd] shadow-lg shadow-black/10"
-        brandClassName="text-[#fff4dd]"
-        linkClassName="rounded-full px-3 py-2 text-[#fff4dd]/85 transition hover:bg-white/10 hover:text-[#f4a11a]"
-        ctaClassName="bg-[#f4a11a] text-[#1f1b18] shadow-sm hover:bg-[#ffc85b]"
-        menuButtonClassName="border-[#f4a11a]/35 text-[#fff4dd] hover:bg-white/10"
-        mobilePanelClassName="border border-[#f4a11a]/25 bg-[#1f1b18]"
+        className="border-b border-[var(--theme-border,#f4a11a)]/25 bg-[var(--theme-bg-dark,#1f1b18)]/95 text-[var(--theme-text-primary,#fff4dd)] shadow-lg shadow-black/10"
+        brandClassName="text-[var(--theme-text-primary,#fff4dd)]"
+        linkClassName="rounded-full px-3 py-2 text-[var(--theme-text-secondary,#fff4dd)]/85 transition hover:bg-white/10 hover:text-[var(--theme-accent-primary,#f4a11a)]"
+        ctaClassName="bg-[var(--theme-accent-primary,#f4a11a)] text-[var(--theme-accent-contrast,#1f1b18)] shadow-sm hover:opacity-90"
+        menuButtonClassName="border-[var(--theme-border,#f4a11a)]/35 text-[var(--theme-text-primary,#fff4dd)] hover:bg-white/10"
+        mobilePanelClassName="border border-[var(--theme-border,#f4a11a)]/25 bg-[var(--theme-bg-dark,#1f1b18)]"
       />
 
-      <section className="relative overflow-hidden bg-[#1f1b18] pt-28 text-[#fff4dd] md:pt-36">
+      <section className="relative overflow-hidden bg-[var(--theme-bg-dark,#1f1b18)] pt-28 text-[var(--theme-text-primary,#fff4dd)] md:pt-36">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(143,29,27,0.65),transparent_28%),radial-gradient(circle_at_84%_12%,rgba(244,161,26,0.24),transparent_24%),linear-gradient(135deg,#171211_0%,#271716_48%,#4b1114_100%)]" />
         <SpiceDots />
         <Container className="relative grid items-center gap-12 pb-20 md:grid-cols-[0.96fr_1.04fr] md:pb-28">
           <div>
             <Link
               to="/restaurant"
-              className="mb-8 inline-flex items-center rounded-full border border-[#f4a11a]/30 bg-white/10 px-4 py-2 text-sm font-black text-[#fff4dd] backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15 hover:text-[#f4a11a]"
+              className="mb-8 inline-flex items-center rounded-full border border-[var(--theme-accent-primary,#f4a11a)]/30 bg-white/10 px-4 py-2 text-sm font-black text-[var(--theme-text-primary,#fff4dd)] backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15 hover:text-[var(--theme-accent-primary,#f4a11a)]"
             >
               Back to Restaurant Collection
             </Link>
-            <p className="inline-flex rounded-full bg-[#8f1d1b] px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[#ffc85b] shadow-xl shadow-[#8f1d1b]/30">
+            <p className="inline-flex rounded-full bg-[var(--theme-accent-secondary,#8f1d1b)] px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-primary,#ffc85b)] shadow-xl shadow-black/30">
               Flame-Grilled • Spice Crafted • Family Style
             </p>
             <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[1.02] md:text-7xl">
               A Bold Grill Experience Inspired by the Spice Route
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#ead9bd]">
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--theme-text-secondary,#ead9bd)]">
               Flame-grilled tikka, rich house spices, warm naan, and family
               platters meet a polished modern dining room. SpiceRoute Grill
               brings the comfort of shared South Asian meals into a bold,
@@ -209,7 +209,7 @@ export function SpiceRouteGrill() {
               <CTAButton
                 href="#dishes"
                 size="lg"
-                className="rounded-full bg-[#f4a11a] text-[#1f1b18] shadow-xl shadow-[#f4a11a]/20 hover:-translate-y-0.5 hover:bg-[#ffc85b] hover:shadow-[#f4a11a]/35"
+                className="rounded-full bg-[var(--theme-accent-primary,#f4a11a)] text-[var(--theme-accent-contrast,#1f1b18)] shadow-xl shadow-black/20 hover:-translate-y-0.5 hover:opacity-95"
               >
                 Explore Menu
               </CTAButton>
@@ -217,7 +217,7 @@ export function SpiceRouteGrill() {
                 href="#order"
                 variant="outline"
                 size="lg"
-                className="rounded-full border-[#fff4dd] bg-white/5 text-[#fff4dd] hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-[#fff4dd]/10"
+                className="rounded-full border-[var(--theme-border,#fff4dd)] bg-white/5 text-[var(--theme-text-primary,#fff4dd)] hover:-translate-y-0.5 hover:bg-white/10"
               >
                 Reserve a Table
               </CTAButton>
@@ -231,12 +231,12 @@ export function SpiceRouteGrill() {
               ].map(([value, label], index) => (
                 <div
                   key={label}
-                  className={`reveal-card rounded-3xl border border-[#f4a11a]/25 bg-white/[0.07] p-5 backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#ffc85b]/50 hover:bg-white/[0.09] ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : ""}`}
+                  className={`reveal-card rounded-3xl border border-[var(--theme-border,#f4a11a)]/25 bg-white/[0.07] p-5 backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--theme-accent-primary,#ffc85b)]/50 hover:bg-white/[0.09] ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : ""}`}
                 >
-                  <p className="text-2xl font-black text-[#ffc85b] md:text-3xl">
+                  <p className="text-2xl font-black text-[var(--theme-accent-primary,#ffc85b)] md:text-3xl">
                     {value}
                   </p>
-                  <p className="mt-1 text-sm font-bold uppercase tracking-[0.16em] text-[#ead9bd]">
+                  <p className="mt-1 text-sm font-bold uppercase tracking-[0.16em] text-[var(--theme-text-secondary,#ead9bd)]">
                     {label}
                   </p>
                 </div>
@@ -245,22 +245,22 @@ export function SpiceRouteGrill() {
           </div>
 
           <div className="relative mx-auto w-full max-w-xl">
-            <div className="float-slow absolute -left-4 top-12 h-28 w-28 rounded-full bg-[#f4a11a]/25 blur-xl" />
-            <div className="pulse-soft absolute -right-3 bottom-16 h-36 w-36 rounded-[2rem] bg-[#8f1d1b]/45 blur-sm" />
+            <div className="float-slow absolute -left-4 top-12 h-28 w-28 rounded-full bg-[var(--theme-accent-primary,#f4a11a)]/25 blur-xl" />
+            <div className="pulse-soft absolute -right-3 bottom-16 h-36 w-36 rounded-[2rem] bg-[var(--theme-accent-secondary,#8f1d1b)]/45 blur-sm" />
             <ImageWithFallback
               image={imageAssets.hero}
-              className="shimmer-soft relative min-h-[460px] rounded-[2rem] border border-[#f4a11a]/25 shadow-2xl shadow-black/35"
+              className="shimmer-soft relative min-h-[460px] rounded-[2rem] border border-[var(--theme-border,#f4a11a)]/25 shadow-2xl shadow-black/35"
             >
               <div className="absolute inset-x-8 top-8 flex justify-center gap-6">
-                <span className="float-slow h-16 w-1 rounded-full bg-[#fff4dd]/30 blur-[1px]" />
-                <span className="float-slow delay-200 h-24 w-1 rounded-full bg-[#f4a11a]/35 blur-[1px]" />
-                <span className="float-slow delay-300 h-14 w-1 rounded-full bg-[#fff4dd]/25 blur-[1px]" />
+                <span className="float-slow h-16 w-1 rounded-full bg-[var(--theme-text-primary,#fff4dd)]/30 blur-[1px]" />
+                <span className="float-slow delay-200 h-24 w-1 rounded-full bg-[var(--theme-accent-primary,#f4a11a)]/35 blur-[1px]" />
+                <span className="float-slow delay-300 h-14 w-1 rounded-full bg-[var(--theme-text-primary,#fff4dd)]/25 blur-[1px]" />
               </div>
-              <div className="absolute bottom-8 left-6 right-6 rounded-[1.5rem] border border-[#f4a11a]/30 bg-[#1f1b18]/85 p-5 backdrop-blur">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f4a11a]">
+              <div className="absolute bottom-8 left-6 right-6 rounded-[1.5rem] border border-[var(--theme-border,#f4a11a)]/30 bg-[var(--theme-bg-dark,#1f1b18)]/85 p-5 backdrop-blur">
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#f4a11a)]">
                   Menu ticket
                 </p>
-                <p className="mt-2 text-2xl font-black">
+                <p className="mt-2 text-2xl font-black text-[var(--theme-text-primary,#fff4dd)]">
                   Tonight's flame grill: tikka, kebab, lamb chops.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -268,7 +268,7 @@ export function SpiceRouteGrill() {
                     (item) => (
                       <span
                         key={item}
-                        className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-[#ead9bd]"
+                        className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-[var(--theme-text-secondary,#ead9bd)]"
                       >
                         {item}
                       </span>
@@ -284,25 +284,25 @@ export function SpiceRouteGrill() {
       <section id="about" className="relative overflow-hidden py-20 md:py-28">
         <SpiceDots />
         <Container className="relative grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center">
-          <div className="rounded-[2rem] border border-[#e4c58a] bg-[#8f1d1b] p-8 text-[#fff4dd] shadow-2xl shadow-[#8f1d1b]/15">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#ffc85b]">
+          <div className="rounded-[2rem] border border-[var(--theme-border,#e4c58a)] bg-[var(--theme-accent-secondary,#8f1d1b)] p-8 text-[var(--theme-text-primary,#fff4dd)] shadow-2xl shadow-black/15">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[var(--theme-accent-primary,#ffc85b)]">
               Chef's spice note
             </p>
             <p className="mt-8 text-5xl font-black">21 spices</p>
-            <p className="mt-4 leading-7 text-[#ead9bd]">
+            <p className="mt-4 leading-7 text-[var(--theme-text-secondary,#ead9bd)]">
               Toasted, ground, and balanced for smoke, warmth, citrus
               brightness, and slow-building heat.
             </p>
-            <div className="mt-8 h-2 w-28 rounded-full bg-[#f4a11a]" />
+            <div className="mt-8 h-2 w-28 rounded-full bg-[var(--theme-accent-primary,#f4a11a)]" />
           </div>
           <div>
-            <p className="font-black uppercase tracking-[0.24em] text-[#8f1d1b]">
+            <p className="font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#8f1d1b)]">
               About SpiceRoute Grill
             </p>
-            <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+            <h2 className="mt-3 text-4xl font-black leading-tight text-[var(--theme-text-primary,#1f1b18)] md:text-5xl">
               A modern grill house shaped by routes, recipes, and shared tables.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-[#5c4035]">
+            <p className="mt-5 text-lg leading-8 text-[var(--theme-text-secondary,#5c4035)]">
               Our menu connects Indian and Pakistani grill traditions with
               polished hospitality: skewers over flame, creamy bowls, fragrant
               rice, fresh chutneys, and warm bread for tearing and sharing.
@@ -315,11 +315,11 @@ export function SpiceRouteGrill() {
 
       <section
         id="dishes"
-        className="bg-[#8f1d1b] py-20 text-[#fff4dd] md:py-28"
+        className="bg-[var(--theme-accent-secondary,#8f1d1b)] py-20 text-[var(--theme-text-primary,#fff4dd)] md:py-28"
       >
         <Container>
           <div className="mb-12 max-w-3xl">
-            <p className="font-black uppercase tracking-[0.24em] text-[#ffc85b]">
+            <p className="font-black uppercase tracking-[0.24em] text-[var(--theme-accent-primary,#ffc85b)]">
               Popular dishes
             </p>
             <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
@@ -330,38 +330,38 @@ export function SpiceRouteGrill() {
             {popularDishes.map((dish, index) => (
               <article
                 key={dish.name}
-                className={`group overflow-hidden rounded-[1.75rem] border border-[#f4a11a]/25 bg-[#1f1b18] shadow-xl shadow-black/15 transition duration-300 hover:-translate-y-1 hover:border-[#ffc85b] hover:shadow-2xl hover:shadow-black/25 ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : index === 3 ? "delay-300" : ""}`}
+                className={`group overflow-hidden rounded-[1.75rem] border border-[var(--theme-border,#f4a11a)]/25 bg-[var(--theme-bg-dark,#1f1b18)] shadow-xl shadow-black/15 transition duration-300 hover:-translate-y-1 hover:border-[var(--theme-accent-primary,#ffc85b)] hover:shadow-2xl hover:shadow-black/25 ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : index === 3 ? "delay-300" : ""}`}
               >
                 <ImageWithFallback image={dish.image} className="aspect-[4/3]">
-                  <span className="absolute right-4 top-4 rounded-full bg-[#fff4dd] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#8f1d1b]">
+                  <span className="absolute right-4 top-4 rounded-full bg-[var(--theme-bg-base,#fff4dd)] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--theme-accent-secondary,#8f1d1b)]">
                     {dish.label}
                   </span>
                 </ImageWithFallback>
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-4">
-                    <h3 className="text-2xl font-black leading-tight">
+                    <h3 className="text-2xl font-black leading-tight text-[var(--theme-text-primary,#fff4dd)]">
                       {dish.name}
                     </h3>
-                    <p className="rounded-full bg-[#f4a11a] px-3 py-1 text-sm font-black text-[#1f1b18]">
+                    <p className="rounded-full bg-[var(--theme-accent-primary,#f4a11a)] px-3 py-1 text-sm font-black text-[var(--theme-accent-contrast,#1f1b18)]">
                       {dish.price}
                     </p>
                   </div>
-                  <p className="mt-3 leading-7 text-[#ead9bd]">{dish.detail}</p>
+                  <p className="mt-3 leading-7 text-[var(--theme-text-secondary,#ead9bd)]">{dish.detail}</p>
                 </div>
               </article>
             ))}
           </div>
-          <div className="mt-10 rounded-[1.75rem] border border-[#f4a11a]/25 bg-[#1f1b18]/65 p-6 shadow-xl shadow-black/10">
+          <div className="mt-10 rounded-[1.75rem] border border-[var(--theme-border,#f4a11a)]/25 bg-[var(--theme-bg-dark,#1f1b18)]/65 p-6 shadow-xl shadow-black/10">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-[#f4a11a]">
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#f4a11a)]">
                   Menu preview
                 </p>
-                <h3 className="mt-2 text-3xl font-black">
+                <h3 className="mt-2 text-3xl font-black text-[var(--theme-text-primary,#fff4dd)]">
                   A quick look at the grill board.
                 </h3>
               </div>
-              <p className="max-w-md leading-7 text-[#ead9bd]">
+              <p className="max-w-md leading-7 text-[var(--theme-text-secondary,#ead9bd)]">
                 Rolls, kebabs, wings, bowls, drinks, and family platters for
                 dine-in or pickup.
               </p>
@@ -370,7 +370,7 @@ export function SpiceRouteGrill() {
               {menuPreview.map((item, index) => (
                 <div
                   key={item}
-                  className={`reveal-card rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 font-bold text-[#fff4dd] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#f4a11a]/35 hover:bg-white/[0.1] ${index % 4 === 1 ? "delay-100" : index % 4 === 2 ? "delay-200" : index % 4 === 3 ? "delay-300" : ""}`}
+                  className={`reveal-card rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 font-bold text-[var(--theme-text-primary,#fff4dd)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[var(--theme-accent-primary,#f4a11a)]/35 hover:bg-white/[0.1] ${index % 4 === 1 ? "delay-100" : index % 4 === 2 ? "delay-200" : index % 4 === 3 ? "delay-300" : ""}`}
                 >
                   {item}
                 </div>
@@ -383,10 +383,10 @@ export function SpiceRouteGrill() {
       <section id="journey" className="py-20 md:py-28">
         <Container>
           <div className="mb-12 max-w-3xl">
-            <p className="font-black uppercase tracking-[0.24em] text-[#8f1d1b]">
+            <p className="font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#8f1d1b)]">
               Flavor journey
             </p>
-            <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+            <h2 className="mt-3 text-4xl font-black leading-tight text-[var(--theme-text-primary,#1f1b18)] md:text-5xl">
               Layered from first aroma to last bite.
             </h2>
           </div>
@@ -394,13 +394,13 @@ export function SpiceRouteGrill() {
             {flavorSteps.map((step, index) => (
               <article
                 key={step.title}
-                className={`rounded-[1.5rem] border border-[#e4c58a] bg-white/70 p-6 shadow-sm transition-all duration-300 ease-out hover:border-[#f4a11a]/60 hover:shadow-xl ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : index === 3 ? "delay-300" : ""}`}
+                className={`rounded-[1.5rem] border border-[var(--theme-border,#e4c58a)] bg-[var(--theme-bg-card,#ffffff)]/70 p-6 shadow-sm transition-all duration-300 ease-out hover:border-[var(--theme-accent-primary,#f4a11a)]/60 hover:shadow-xl ${index === 1 ? "delay-100" : index === 2 ? "delay-200" : index === 3 ? "delay-300" : ""}`}
               >
-                <p className="text-3xl font-black text-[#f4a11a]">
+                <p className="text-3xl font-black text-[var(--theme-accent-primary,#f4a11a)]">
                   0{index + 1}
                 </p>
-                <h3 className="mt-6 text-xl font-black">{step.title}</h3>
-                <p className="mt-3 leading-7 text-[#5c4035]">{step.text}</p>
+                <h3 className="mt-6 text-xl font-black text-[var(--theme-text-primary,#1f1b18)]">{step.title}</h3>
+                <p className="mt-3 leading-7 text-[var(--theme-text-secondary,#5c4035)]">{step.text}</p>
               </article>
             ))}
           </div>
@@ -409,23 +409,23 @@ export function SpiceRouteGrill() {
 
       <section
         id="platters"
-        className="bg-[#1f1b18] py-20 text-[#fff4dd] md:py-28"
+        className="bg-[var(--theme-bg-dark,#1f1b18)] py-20 text-[var(--theme-text-primary,#fff4dd)] md:py-28"
       >
         <Container className="grid gap-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
           <div>
-            <p className="font-black uppercase tracking-[0.24em] text-[#f4a11a]">
+            <p className="font-black uppercase tracking-[0.24em] text-[var(--theme-accent-primary,#f4a11a)]">
               Catering and family platters
             </p>
             <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
               Built for the whole table.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-[#ead9bd]">
+            <p className="mt-5 text-lg leading-8 text-[var(--theme-text-secondary,#ead9bd)]">
               Choose mixed grills, biryani trays, naan baskets, chutney flights,
               and dessert add-ons for gatherings from an easy family dinner to a
               full celebration.
             </p>
-            <div className="mt-8 rounded-3xl border border-[#f4a11a]/25 bg-white/[0.07] p-5">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#ffc85b]">
+            <div className="mt-8 rounded-3xl border border-[var(--theme-border,#f4a11a)]/25 bg-white/[0.07] p-5">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#ffc85b)]">
                 Family platter callout
               </p>
               <p className="mt-2 text-xl font-black">
@@ -437,13 +437,13 @@ export function SpiceRouteGrill() {
           <div className="grid gap-5">
             <ImageWithFallback
               image={imageAssets.interior}
-              className="min-h-[260px] rounded-[1.75rem] border border-[#f4a11a]/25"
+              className="min-h-[260px] rounded-[1.75rem] border border-[var(--theme-border,#f4a11a)]/25"
             >
-              <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-[#1f1b18]/80 p-4 backdrop-blur">
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f4a11a]">
+              <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-[var(--theme-bg-dark,#1f1b18)]/80 p-4 backdrop-blur">
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#f4a11a)]">
                   Modern dining room
                 </p>
-                <p className="mt-1 text-xl font-black">
+                <p className="mt-1 text-xl font-black text-[var(--theme-text-primary,#fff4dd)]">
                   Warm amber lights, charcoal walls, and deep red accents.
                 </p>
               </div>
@@ -459,8 +459,8 @@ export function SpiceRouteGrill() {
                   key={platter}
                   className="rounded-2xl border border-white/15 bg-white/[0.06] p-5"
                 >
-                  <h3 className="text-xl font-black">{platter}</h3>
-                  <p className="mt-3 leading-7 text-[#ead9bd]">
+                  <h3 className="text-xl font-black text-[var(--theme-text-primary,#fff4dd)]">{platter}</h3>
+                  <p className="mt-3 leading-7 text-[var(--theme-text-secondary,#ead9bd)]">
                     Generous portions, fresh naan, sauces, and sides.
                   </p>
                 </div>
@@ -473,10 +473,10 @@ export function SpiceRouteGrill() {
       <section className="py-20 md:py-28">
         <Container>
           <div className="mb-12 text-center">
-            <p className="font-black uppercase tracking-[0.24em] text-[#8f1d1b]">
+            <p className="font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#8f1d1b)]">
               Testimonials
             </p>
-            <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
+            <h2 className="mt-3 text-4xl font-black leading-tight text-[var(--theme-text-primary,#1f1b18)] md:text-5xl">
               Guests come for the flame and stay for the hospitality.
             </h2>
           </div>
@@ -484,10 +484,10 @@ export function SpiceRouteGrill() {
             {testimonials.map((item) => (
               <blockquote
                 key={item.name}
-                className="rounded-[2rem] border border-[#e4c58a] bg-white p-8 shadow-sm"
+                className="rounded-[2rem] border border-[var(--theme-border,#e4c58a)] bg-[var(--theme-bg-card,#ffffff)] p-8 shadow-sm"
               >
-                <p className="text-xl font-bold leading-8">"{item.quote}"</p>
-                <footer className="mt-6 border-t border-[#ead6aa] pt-5 text-sm font-black uppercase tracking-[0.18em] text-[#8f1d1b]">
+                <p className="text-xl font-bold leading-8 text-[var(--theme-text-primary,#1f1b18)]">"{item.quote}"</p>
+                <footer className="mt-6 border-t border-[var(--theme-border,#ead6aa)] pt-5 text-sm font-black uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#8f1d1b)]">
                   {item.name}
                 </footer>
               </blockquote>
@@ -496,17 +496,17 @@ export function SpiceRouteGrill() {
         </Container>
       </section>
 
-      <section id="order" className="bg-[#f4a11a] py-20 md:py-28">
+      <section id="order" className="bg-[var(--theme-accent-primary,#f4a11a)] py-20 md:py-28">
         <Container>
-          <div className="grid gap-6 rounded-[2rem] border border-[#8f1d1b]/20 bg-[#fff4dd]/55 p-6 shadow-2xl shadow-[#8f1d1b]/15 md:grid-cols-[1.1fr_0.9fr] md:p-10">
-            <div className="rounded-[1.5rem] bg-[#1f1b18] p-7 text-[#fff4dd]">
-              <p className="font-black uppercase tracking-[0.22em] text-[#ffc85b]">
+          <div className="grid gap-6 rounded-[2rem] border border-[var(--theme-accent-secondary,#8f1d1b)]/20 bg-[var(--theme-bg-base,#fff4dd)]/55 p-6 shadow-2xl shadow-black/15 md:grid-cols-[1.1fr_0.9fr] md:p-10">
+            <div className="rounded-[1.5rem] bg-[var(--theme-bg-dark,#1f1b18)] p-7 text-[var(--theme-text-primary,#fff4dd)]">
+              <p className="font-black uppercase tracking-[0.22em] text-[var(--theme-accent-primary,#ffc85b)]">
                 Order or reserve
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
                 Bring the spice home or gather at our table.
               </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-[#ead9bd]">
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--theme-text-secondary,#ead9bd)]">
                 Order pickup, reserve a table, or ask about family platters for
                 your next gathering. We will help you build the right mix of
                 grills, naan, rice, and cooling sides.
@@ -514,29 +514,29 @@ export function SpiceRouteGrill() {
               <CTAButton
                 href="tel:5550199090"
                 size="lg"
-                className="mt-8 rounded-full bg-[#f4a11a] text-[#1f1b18] hover:-translate-y-0.5 hover:bg-[#ffc85b]"
+                className="mt-8 rounded-full bg-[var(--theme-accent-primary,#f4a11a)] text-[var(--theme-accent-contrast,#1f1b18)] hover:-translate-y-0.5 hover:opacity-95"
               >
                 Call (555) 019-9090
               </CTAButton>
             </div>
             <div className="grid gap-4">
-              <div className="rounded-[1.5rem] bg-[#fff4dd] p-6">
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#8f1d1b]">
+              <div className="rounded-[1.5rem] bg-[var(--theme-bg-surface,#fff4dd)] p-6">
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#8f1d1b)]">
                   Opening hours
                 </p>
-                <p className="mt-4 text-2xl font-black">
+                <p className="mt-4 text-2xl font-black text-[var(--theme-text-primary,#1f1b18)]">
                   Tue - Sun, 12 PM - 10 PM
                 </p>
-                <p className="mt-2 leading-7 text-[#5c4035]">
+                <p className="mt-2 leading-7 text-[var(--theme-text-secondary,#5c4035)]">
                   Lunch, dinner, catering, and weekend family platters.
                 </p>
               </div>
-              <div className="rounded-[1.5rem] bg-[#8f1d1b] p-6 text-[#fff4dd]">
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#ffc85b]">
+              <div className="rounded-[1.5rem] bg-[var(--theme-accent-secondary,#8f1d1b)] p-6 text-[var(--theme-text-primary,#fff4dd)]">
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#ffc85b)]">
                   Address and contact
                 </p>
                 <p className="mt-4 text-2xl font-black">610 Ember Road</p>
-                <p className="mt-2 leading-7 text-[#ead9bd]">
+                <p className="mt-2 leading-7 text-[var(--theme-text-secondary,#ead9bd)]">
                   Market Square, Suite 12
                   <br />
                   hello@spiceroute.example
@@ -547,52 +547,52 @@ export function SpiceRouteGrill() {
         </Container>
       </section>
 
-      <section className="border-y border-[#e4c58a] py-8">
+      <section className="border-y border-[var(--theme-border,#e4c58a)] py-8">
         <Container>
           <Link
             to="/restaurant"
-            className="font-black text-[#8f1d1b] transition hover:text-[#f4a11a]"
+            className="font-black text-[var(--theme-accent-secondary,#8f1d1b)] transition hover:text-[var(--theme-accent-primary,#f4a11a)]"
           >
             Back to Restaurant Collection
           </Link>
         </Container>
       </section>
 
-      <footer className="bg-[#1f1b18] py-12 text-[#fff4dd]">
+      <footer className="bg-[var(--theme-bg-dark,#1f1b18)] py-12 text-[var(--theme-text-primary,#fff4dd)]">
         <Container className="grid gap-8 md:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr]">
           <div>
             <p className="text-2xl font-black">SpiceRoute Grill</p>
-            <p className="mt-3 max-w-sm leading-7 text-[#ead9bd]">
+            <p className="mt-3 max-w-sm leading-7 text-[var(--theme-text-secondary,#ead9bd)]">
               Flame-grilled Indian-Pakistani fusion plates, warm naan, and
               family-style hospitality.
             </p>
           </div>
           <div>
-            <p className="font-black text-[#f4a11a]">Hours</p>
-            <p className="mt-3 leading-7 text-[#ead9bd]">
+            <p className="font-black text-[var(--theme-accent-primary,#f4a11a)]">Hours</p>
+            <p className="mt-3 leading-7 text-[var(--theme-text-secondary,#ead9bd)]">
               Tue - Sun
               <br />
               12 PM - 10 PM
             </p>
           </div>
           <div>
-            <p className="font-black text-[#f4a11a]">Location</p>
-            <p className="mt-3 leading-7 text-[#ead9bd]">
+            <p className="font-black text-[var(--theme-accent-primary,#f4a11a)]">Location</p>
+            <p className="mt-3 leading-7 text-[var(--theme-text-secondary,#ead9bd)]">
               610 Ember Road
               <br />
               Market Square
             </p>
           </div>
           <div>
-            <p className="font-black text-[#f4a11a]">Social</p>
+            <p className="font-black text-[var(--theme-accent-primary,#f4a11a)]">Social</p>
             <div className="mt-3 flex flex-wrap gap-3 text-sm font-bold">
-              <a href="#order" className="hover:text-[#f4a11a]">
+              <a href="#order" className="hover:text-[var(--theme-accent-primary,#f4a11a)]">
                 Instagram
               </a>
-              <a href="#order" className="hover:text-[#f4a11a]">
+              <a href="#order" className="hover:text-[var(--theme-accent-primary,#f4a11a)]">
                 Facebook
               </a>
-              <a href="#order" className="hover:text-[#f4a11a]">
+              <a href="#order" className="hover:text-[var(--theme-accent-primary,#f4a11a)]">
                 Reviews
               </a>
             </div>

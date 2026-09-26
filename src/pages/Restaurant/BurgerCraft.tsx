@@ -297,18 +297,18 @@ export function BurgerCraft() {
   };
 
   return (
-    <main className="motion-burgercraft min-h-screen overflow-x-hidden bg-[#fffcf7] text-[#211c18]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#d9c9b8] bg-[#fffdf9]/95 shadow-sm backdrop-blur-xl">
+    <main className="motion-burgercraft min-h-screen overflow-x-hidden bg-[var(--theme-bg-base,#fffcf7)] text-[var(--theme-text-primary,#211c18)] transition-colors duration-300">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--theme-border,#d9c9b8)] bg-[var(--theme-bg-surface,#fffdf9)]/95 shadow-sm backdrop-blur-xl transition-colors duration-300">
         <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
           <a
             href="#home"
             onClick={() => setMenuOpen(false)}
             className="leading-none"
           >
-            <span className="burger-script block text-3xl font-black text-[#c72b25] sm:text-4xl">
+            <span className="burger-script block text-3xl font-black text-[var(--theme-accent-primary,#c72b25)] sm:text-4xl">
               Built Fresh
             </span>
-            <span className="mt-1 block text-center text-[0.47rem] font-black uppercase tracking-[0.35em]">
+            <span className="mt-1 block text-center text-[0.47rem] font-black uppercase tracking-[0.35em] text-[var(--theme-text-secondary,#62584f)]">
               Smash burgers
             </span>
           </a>
@@ -323,11 +323,11 @@ export function BurgerCraft() {
                   key={href}
                   href={href}
                   aria-current={isActive ? "location" : undefined}
-                  className={`relative py-3 text-[0.68rem] font-black uppercase tracking-[0.08em] transition hover:text-[#c72b25] ${isActive ? "active text-[#c72b25]" : "text-[#211c18]"}`}
+                  className={`relative py-3 text-[0.68rem] font-black uppercase tracking-[0.08em] transition hover:text-[var(--theme-accent-primary,#c72b25)] ${isActive ? "active text-[var(--theme-accent-primary,#c72b25)]" : "text-[var(--theme-text-primary,#211c18)]"}`}
                 >
                   <span>{label}</span>
                   <span
-                    className={`absolute inset-x-0 bottom-1 h-[2px] origin-left rounded-full bg-[#c72b25] transition-transform duration-300 ${isActive ? "scale-x-100" : "scale-x-0"}`}
+                    className={`absolute inset-x-0 bottom-1 h-[2px] origin-left rounded-full bg-[var(--theme-accent-primary,#c72b25)] transition-transform duration-300 ${isActive ? "scale-x-100" : "scale-x-0"}`}
                   />
                 </a>
               );
@@ -337,21 +337,21 @@ export function BurgerCraft() {
             <button
               type="button"
               aria-label="Account"
-              className="grid h-10 w-10 place-items-center transition hover:text-[#c72b25]"
+              className="grid h-10 w-10 place-items-center text-[var(--theme-text-primary,#211c18)] transition hover:text-[var(--theme-accent-primary,#c72b25)]"
             >
               <Icon name="user" />
             </button>
             <button
               type="button"
               aria-label="Shopping bag"
-              className="grid h-10 w-10 place-items-center transition hover:text-[#c72b25]"
+              className="grid h-10 w-10 place-items-center text-[var(--theme-text-primary,#211c18)] transition hover:text-[var(--theme-accent-primary,#c72b25)]"
             >
               <Icon name="bag" />
             </button>
             <a
               href="#order"
               aria-current={activeSection === "order" ? "location" : undefined}
-              className={`rounded-2xl bg-[#c72b25] px-6 py-4 text-[0.65rem] font-black uppercase tracking-[0.08em] text-white shadow-lg shadow-red-800/10 transition hover:-translate-y-0.5 hover:bg-[#a91f1b] ${activeSection === "order" ? "active ring-4 ring-[#c72b25]/15" : ""}`}
+              className={`rounded-2xl bg-[var(--theme-accent-primary,#c72b25)] px-6 py-4 text-[0.65rem] font-black uppercase tracking-[0.08em] text-[var(--theme-accent-contrast,#ffffff)] shadow-lg shadow-red-800/10 transition hover:-translate-y-0.5 hover:opacity-90 ${activeSection === "order" ? "active ring-4 ring-[var(--theme-accent-primary,#c72b25)]/25" : ""}`}
             >
               Order now
             </a>
@@ -361,23 +361,23 @@ export function BurgerCraft() {
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((current) => !current)}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-[#ded0c2] sm:hidden"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--theme-border,#ded0c2)] text-[var(--theme-text-primary,#211c18)] sm:hidden"
           >
             <span className="flex w-5 flex-col gap-1.5">
               <span
-                className={`h-[2px] bg-[#211c18] transition ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
+                className={`h-[2px] bg-[var(--theme-text-primary,#211c18)] transition ${menuOpen ? "translate-y-2 rotate-45" : ""}`}
               />
               <span
-                className={`h-[2px] bg-[#211c18] transition ${menuOpen ? "opacity-0" : ""}`}
+                className={`h-[2px] bg-[var(--theme-text-primary,#211c18)] transition ${menuOpen ? "opacity-0" : ""}`}
               />
               <span
-                className={`h-[2px] bg-[#211c18] transition ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
+                className={`h-[2px] bg-[var(--theme-text-primary,#211c18)] transition ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`}
               />
             </span>
           </button>
         </div>
         <div
-          className={`overflow-hidden border-t border-[#e8ddd1] bg-[#fffaf3] transition-all duration-500 sm:hidden ${menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
+          className={`overflow-hidden border-t border-[var(--theme-border,#e8ddd1)] bg-[var(--theme-bg-surface,#fffaf3)] transition-all duration-500 sm:hidden ${menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
         >
           <div className="grid p-4">
             {[...navItems, ["Order Now", "#order"]].map(([label, href]) => {
@@ -388,10 +388,10 @@ export function BurgerCraft() {
                   href={href}
                   aria-current={isActive ? "location" : undefined}
                   onClick={() => setMenuOpen(false)}
-                  className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold transition ${isActive ? "active bg-[#c72b25] text-white" : "hover:bg-[#f6eadd]"}`}
+                  className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold transition ${isActive ? "active bg-[var(--theme-accent-primary,#c72b25)] text-[var(--theme-accent-contrast,#ffffff)]" : "text-[var(--theme-text-primary,#211c18)] hover:bg-[var(--theme-bg-base,#f6eadd)]"}`}
                 >
                   {label}
-                  <span className={isActive ? "text-white" : "text-[#c72b25]"}>
+                  <span className={isActive ? "text-[var(--theme-accent-contrast,#ffffff)]" : "text-[var(--theme-accent-primary,#c72b25)]"}>
                     →
                   </span>
                 </a>
@@ -410,7 +410,7 @@ export function BurgerCraft() {
           alt="Built Fresh double smash burger with golden fries and a thick shake"
           className="absolute inset-0 -z-30 h-full w-full object-cover object-[61%_center]"
         />
-        <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(255,252,247,0.99)_0%,rgba(255,252,247,0.94)_35%,rgba(255,252,247,0.24)_68%,rgba(255,252,247,0.02)_100%)]" />
+        <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,var(--theme-bg-base,#fffcf7)_0%,var(--theme-bg-base,#fffcf7)_35%,rgba(255,252,247,0.24)_68%,rgba(255,252,247,0.02)_100%)]" />
         <div className="mx-auto flex min-h-[640px] max-w-[1440px] items-center px-5 py-16 sm:min-h-[710px] sm:px-8 lg:px-12">
           <div className="max-w-[680px]" data-burger-reveal>
             <h1 className="burger-display text-[clamp(3.4rem,7vw,7.4rem)] font-black uppercase leading-[0.82] tracking-[-0.055em]">
@@ -418,12 +418,12 @@ export function BurgerCraft() {
               <br />
               Stacked high.
               <br />
-              <span className="burger-script normal-case text-[#c72b25]">
+              <span className="burger-script normal-case text-[var(--theme-accent-primary,#c72b25)]">
                 Served Hot.
               </span>
             </h1>
-            <span className="mt-4 block h-2 w-56 -rotate-2 rounded-full bg-[#e8a614] sm:w-72" />
-            <p className="mt-7 max-w-lg text-base font-medium leading-7 text-[#423a34] sm:text-lg sm:leading-8">
+            <span className="mt-4 block h-2 w-56 -rotate-2 rounded-full bg-[var(--theme-accent-secondary,#e8a614)] sm:w-72" />
+            <p className="mt-7 max-w-lg text-base font-medium leading-7 text-[var(--theme-text-secondary,#423a34)] sm:text-lg sm:leading-8">
               Smash-style burgers. Golden fries. House sauces. Thick shakes. All
               made fresh, crafted with care, and served hot for serious burger
               lovers.
@@ -431,13 +431,13 @@ export function BurgerCraft() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#order"
-                className="inline-flex items-center justify-center gap-3 rounded-2xl bg-[#c72b25] px-7 py-4 text-xs font-black uppercase tracking-[0.08em] text-white shadow-lg transition hover:-translate-y-1 hover:bg-[#aa211c]"
+                className="inline-flex items-center justify-center gap-3 rounded-2xl bg-[var(--theme-accent-primary,#c72b25)] px-7 py-4 text-xs font-black uppercase tracking-[0.08em] text-[var(--theme-accent-contrast,#ffffff)] shadow-lg transition hover:-translate-y-1 hover:opacity-90"
               >
                 Order now <Icon name="arrow" className="h-4 w-4" />
               </a>
               <a
                 href="#menu"
-                className="inline-flex items-center justify-center rounded-2xl border-2 border-[#df9e1a] bg-white/65 px-7 py-4 text-xs font-black uppercase tracking-[0.08em] text-[#b87707] transition hover:-translate-y-1 hover:bg-[#fff3d9]"
+                className="inline-flex items-center justify-center rounded-2xl border-2 border-[var(--theme-accent-secondary,#df9e1a)] bg-[var(--theme-bg-surface,#ffffff)]/80 px-7 py-4 text-xs font-black uppercase tracking-[0.08em] text-[var(--theme-accent-secondary,#b87707)] transition hover:-translate-y-1 hover:bg-[var(--theme-bg-card,#fff3d9)]"
               >
                 View menu
               </a>
@@ -445,8 +445,8 @@ export function BurgerCraft() {
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-[0.57rem] font-black uppercase tracking-[0.08em]">
               {[
                 ["leaf", "Fresh ingredients", "#5f8c2f"],
-                ["flame", "Cooked to order", "#c72b25"],
-                ["heart", "Made with care", "#c72b25"],
+                ["flame", "Cooked to order", "var(--theme-accent-primary,#c72b25)"],
+                ["heart", "Made with care", "var(--theme-accent-primary,#c72b25)"],
               ].map(([icon, text, color]) => (
                 <span
                   key={text}
@@ -454,7 +454,7 @@ export function BurgerCraft() {
                   style={{ color }}
                 >
                   <Icon name={icon} className="h-5 w-5" />
-                  <span className="text-[#3c352f]">{text}</span>
+                  <span className="text-[var(--theme-text-primary,#3c352f)]">{text}</span>
                 </span>
               ))}
             </div>
@@ -462,13 +462,13 @@ export function BurgerCraft() {
         </div>
       </section>
 
-      <section id="menu" className="bg-[#fffdf9] py-16 sm:py-20">
+      <section id="menu" className="bg-[var(--theme-bg-surface,#fffdf9)] py-16 sm:py-20 transition-colors duration-300">
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
           <div className="text-center" data-burger-reveal>
-            <p className="text-[0.63rem] font-black uppercase tracking-[0.13em] text-[#c72b25]">
+            <p className="text-[0.63rem] font-black uppercase tracking-[0.13em] text-[var(--theme-accent-primary,#c72b25)]">
               Our favorites
             </p>
-            <h2 className="burger-display mt-2 text-3xl font-black tracking-[-0.035em] sm:text-5xl">
+            <h2 className="burger-display mt-2 text-3xl font-black tracking-[-0.035em] sm:text-5xl text-[var(--theme-text-primary,#211c18)]">
               Made Fresh. Loved Daily.
             </h2>
           </div>
@@ -478,7 +478,7 @@ export function BurgerCraft() {
                 key={item.title}
                 data-burger-reveal
                 style={{ transitionDelay: `${index * 60}ms` }}
-                className="group overflow-hidden rounded-[1.4rem] border border-[#e4d6c8] bg-white shadow-[0_10px_30px_rgba(69,42,25,0.07)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_18px_45px_rgba(69,42,25,0.13)]"
+                className="group overflow-hidden rounded-[1.4rem] border border-[var(--theme-border,#e4d6c8)] bg-[var(--theme-bg-card,#ffffff)] shadow-[0_10px_30px_rgba(69,42,25,0.07)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_18px_45px_rgba(69,42,25,0.13)]"
               >
                 <div className="relative aspect-[1.45] overflow-hidden">
                   <img
@@ -495,15 +495,15 @@ export function BurgerCraft() {
                   </span>
                 </div>
                 <div className="p-5 pt-10">
-                  <h3 className="burger-display text-xl font-black">
+                  <h3 className="burger-display text-xl font-black text-[var(--theme-text-primary,#211c18)]">
                     {item.title}
                   </h3>
-                  <p className="mt-2 min-h-12 text-xs leading-5 text-[#62584f]">
+                  <p className="mt-2 min-h-12 text-xs leading-5 text-[var(--theme-text-secondary,#62584f)]">
                     {item.text}
                   </p>
                   <a
                     href="#order"
-                    className="mt-4 inline-flex items-center gap-2 text-[0.58rem] font-black uppercase tracking-[0.11em] text-[#c72b25]"
+                    className="mt-4 inline-flex items-center gap-2 text-[0.58rem] font-black uppercase tracking-[0.11em] text-[var(--theme-accent-primary,#c72b25)]"
                   >
                     Explore <Icon name="arrow" className="h-3 w-3" />
                   </a>
@@ -516,30 +516,30 @@ export function BurgerCraft() {
 
       <section id="story" className="px-5 pb-8 sm:px-8">
         <div
-          className="mx-auto grid max-w-[1240px] gap-6 rounded-[1.3rem] border border-[#e3d4c4] bg-[#faf5ec] p-6 lg:grid-cols-[1.15fr_repeat(4,1fr)] lg:gap-0"
+          className="mx-auto grid max-w-[1240px] gap-6 rounded-[1.3rem] border border-[var(--theme-border,#e3d4c4)] bg-[var(--theme-bg-surface,#faf5ec)] p-6 lg:grid-cols-[1.15fr_repeat(4,1fr)] lg:gap-0 transition-colors duration-300"
           data-burger-reveal
         >
           <div className="pr-6">
-            <p className="text-[0.57rem] font-black uppercase tracking-[0.13em] text-[#c72b25]">
+            <p className="text-[0.57rem] font-black uppercase tracking-[0.13em] text-[var(--theme-accent-primary,#c72b25)]">
               Real ingredients
             </p>
-            <h2 className="burger-display mt-2 text-3xl font-black leading-[0.9]">
+            <h2 className="burger-display mt-2 text-3xl font-black leading-[0.9] text-[var(--theme-text-primary,#211c18)]">
               Fresh is
               <br />
               Our Standard.
             </h2>
-            <p className="mt-3 text-xs leading-5 text-[#62584f]">
+            <p className="mt-3 text-xs leading-5 text-[var(--theme-text-secondary,#62584f)]">
               We use real ingredients, sourced responsibly and prepared daily.
             </p>
           </div>
           {values.map(([icon, title, text]) => (
             <div
               key={title}
-              className="border-t border-[#e3d4c4] pt-5 text-center lg:border-l lg:border-t-0 lg:px-5 lg:pt-0"
+              className="border-t border-[var(--theme-border,#e3d4c4)] pt-5 text-center lg:border-l lg:border-t-0 lg:px-5 lg:pt-0"
             >
               <Icon name={icon} className="mx-auto h-10 w-10 text-[#5f8c2f]" />
-              <h3 className="mt-3 text-sm font-black">{title}</h3>
-              <p className="mt-2 text-[0.68rem] leading-5 text-[#62584f]">
+              <h3 className="mt-3 text-sm font-black text-[var(--theme-text-primary,#211c18)]">{title}</h3>
+              <p className="mt-2 text-[0.68rem] leading-5 text-[var(--theme-text-secondary,#62584f)]">
                 {text}
               </p>
             </div>
@@ -549,7 +549,7 @@ export function BurgerCraft() {
 
       <section id="order" className="px-5 py-8 sm:px-8">
         <div
-          className="relative mx-auto min-h-[270px] max-w-[1240px] overflow-hidden rounded-[1.4rem] bg-[#171614] text-white"
+          className="relative mx-auto min-h-[270px] max-w-[1240px] overflow-hidden rounded-[1.4rem] bg-[var(--theme-bg-dark,#171614)] text-white"
           data-burger-reveal
         >
           <img
@@ -559,19 +559,19 @@ export function BurgerCraft() {
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="relative mr-auto flex min-h-[270px] max-w-xl flex-col items-center justify-center p-7 text-center">
-            <p className="burger-script text-3xl text-[#e5a516]">The</p>
+            <p className="burger-script text-3xl text-[var(--theme-accent-secondary,#e5a516)]">The</p>
             <h2 className="burger-display text-4xl font-black uppercase leading-[0.8] sm:text-6xl">
               Signature
               <br />
-              <span className="burger-script normal-case text-[#d73328]">
+              <span className="burger-script normal-case text-[var(--theme-accent-primary,#d73328)]">
                 Combo
               </span>
             </h2>
-            <p className="mt-3 text-[0.6rem] font-black uppercase tracking-[0.11em] text-[#e5a516]">
+            <p className="mt-3 text-[0.6rem] font-black uppercase tracking-[0.11em] text-[var(--theme-accent-secondary,#e5a516)]">
               Any signature burger + fries + thick shake
             </p>
             <div className="mt-5 flex items-center gap-4">
-              <span className="bg-[#e6a416] px-5 py-2 text-2xl font-black text-[#171614]">
+              <span className="bg-[var(--theme-accent-secondary,#e6a416)] px-5 py-2 text-2xl font-black text-[#171614]">
                 $15.99
               </span>
               <button
@@ -579,7 +579,7 @@ export function BurgerCraft() {
                 onClick={() =>
                   showNotice("Signature combo added to your order!")
                 }
-                className="inline-flex items-center gap-2 rounded-xl bg-[#c72b25] px-5 py-3 text-[0.6rem] font-black uppercase tracking-[0.08em] transition hover:-translate-y-1 hover:bg-[#a91f1b]"
+                className="inline-flex items-center gap-2 rounded-xl bg-[var(--theme-accent-primary,#c72b25)] px-5 py-3 text-[0.6rem] font-black uppercase tracking-[0.08em] text-[var(--theme-accent-contrast,#ffffff)] transition hover:-translate-y-1 hover:opacity-90"
               >
                 Order now <Icon name="arrow" className="h-4 w-4" />
               </button>
@@ -590,18 +590,18 @@ export function BurgerCraft() {
 
       <section className="px-5 py-4 sm:px-8">
         <div
-          className="mx-auto grid max-w-[1240px] gap-5 rounded-[1.3rem] border border-[#e3d4c4] bg-[#faf5ec] p-5 md:grid-cols-[1.2fr_repeat(3,1fr)_auto] md:items-center"
+          className="mx-auto grid max-w-[1240px] gap-5 rounded-[1.3rem] border border-[var(--theme-border,#e3d4c4)] bg-[var(--theme-bg-surface,#faf5ec)] p-5 md:grid-cols-[1.2fr_repeat(3,1fr)_auto] md:items-center transition-colors duration-300"
           data-burger-reveal
         >
           <div className="flex items-center gap-4">
-            <span className="grid h-14 w-14 place-items-center rounded-full bg-[#c72b25] text-white">
+            <span className="grid h-14 w-14 place-items-center rounded-full bg-[var(--theme-accent-primary,#c72b25)] text-[var(--theme-accent-contrast,#ffffff)]">
               <Icon name="bag" />
             </span>
             <div>
-              <h2 className="burger-display text-2xl font-black">
+              <h2 className="burger-display text-2xl font-black text-[var(--theme-text-primary,#211c18)]">
                 Craving Built Fresh?
               </h2>
-              <p className="text-xs text-[#62584f]">
+              <p className="text-xs text-[var(--theme-text-secondary,#62584f)]">
                 Order online for pickup or delivery.
               </p>
             </div>
@@ -614,26 +614,26 @@ export function BurgerCraft() {
             <div key={title} className="flex items-center gap-3">
               <Icon name={icon} className="h-8 w-8 text-[#5f8c2f]" />
               <div>
-                <p className="text-[0.56rem] font-black uppercase tracking-[0.1em] text-[#c72b25]">
+                <p className="text-[0.56rem] font-black uppercase tracking-[0.1em] text-[var(--theme-accent-primary,#c72b25)]">
                   {title}
                 </p>
-                <p className="mt-1 text-[0.65rem] text-[#62584f]">{text}</p>
+                <p className="mt-1 text-[0.65rem] text-[var(--theme-text-secondary,#62584f)]">{text}</p>
               </div>
             </div>
           ))}
           <button
             type="button"
             onClick={() => showNotice("Your order is ready to start!")}
-            className="rounded-xl bg-[#c72b25] px-5 py-3 text-[0.6rem] font-black uppercase text-white"
+            className="rounded-xl bg-[var(--theme-accent-primary,#c72b25)] px-5 py-3 text-[0.6rem] font-black uppercase text-[var(--theme-accent-contrast,#ffffff)] transition hover:opacity-90"
           >
             Order now →
           </button>
         </div>
       </section>
 
-      <section id="rewards" className="bg-[#fffdf9] py-16 sm:py-20">
+      <section id="rewards" className="bg-[var(--theme-bg-surface,#fffdf9)] py-16 sm:py-20 transition-colors duration-300">
         <div className="mx-auto max-w-[1180px] px-5 sm:px-8">
-          <p className="text-center text-[0.62rem] font-black uppercase tracking-[0.13em] text-[#c72b25]">
+          <p className="text-center text-[0.62rem] font-black uppercase tracking-[0.13em] text-[var(--theme-accent-primary,#c72b25)]">
             What our guests say
           </p>
           <div className="mt-7 grid gap-4 md:grid-cols-3">
@@ -641,15 +641,15 @@ export function BurgerCraft() {
               <blockquote
                 key={name}
                 data-burger-reveal
-                className="rounded-[1.2rem] border border-[#e5d8ca] bg-white p-6 shadow-sm"
+                className="rounded-[1.2rem] border border-[var(--theme-border,#e5d8ca)] bg-[var(--theme-bg-card,#ffffff)] p-6 shadow-sm transition-colors duration-300"
               >
-                <p className="text-[#e7a315]">★★★★★</p>
-                <p className="mt-4 text-sm leading-6 text-[#524940]">{quote}</p>
+                <p className="text-[var(--theme-accent-secondary,#e7a315)]">★★★★★</p>
+                <p className="mt-4 text-sm leading-6 text-[var(--theme-text-secondary,#524940)]">{quote}</p>
                 <footer className="mt-4 flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-[#f0ddc6] text-sm font-black text-[#8c4c2c]">
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-[var(--theme-bg-base,#f0ddc6)] text-sm font-black text-[var(--theme-accent-primary,#8c4c2c)]">
                     {index + 1}
                   </span>
-                  <span className="text-xs font-black">— {name}</span>
+                  <span className="text-xs font-black text-[var(--theme-text-primary,#211c18)]">— {name}</span>
                 </footer>
               </blockquote>
             ))}
@@ -659,26 +659,26 @@ export function BurgerCraft() {
 
       <section
         id="locations"
-        className="relative overflow-hidden border-y border-[#e3d4c4] bg-[#f8efe5] py-20 sm:py-24"
+        className="relative overflow-hidden border-y border-[var(--theme-border,#e3d4c4)] bg-[var(--theme-bg-surface,#f8efe5)] py-20 sm:py-24 transition-colors duration-300"
       >
-        <div className="absolute -left-24 top-12 h-72 w-72 rounded-full bg-[#e8a614]/10 blur-3xl" />
-        <div className="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[#c72b25]/[0.06] blur-3xl" />
+        <div className="absolute -left-24 top-12 h-72 w-72 rounded-full bg-[var(--theme-accent-secondary,#e8a614)]/10 blur-3xl" />
+        <div className="absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-[var(--theme-accent-primary,#c72b25)]/[0.06] blur-3xl" />
         <div className="relative mx-auto max-w-[1240px] px-5 sm:px-8">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="text-[0.62rem] font-black uppercase tracking-[0.14em] text-[#c72b25]">
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.14em] text-[var(--theme-accent-primary,#c72b25)]">
                 Find your Built Fresh
               </p>
-              <h2 className="burger-display mt-3 text-4xl font-black leading-[0.95] tracking-[-0.04em] sm:text-6xl">
+              <h2 className="burger-display mt-3 text-4xl font-black leading-[0.95] tracking-[-0.04em] sm:text-6xl text-[var(--theme-text-primary,#211c18)]">
                 Fresh burgers,
                 <br />
-                <span className="burger-script normal-case text-[#c72b25]">
+                <span className="burger-script normal-case text-[var(--theme-accent-primary,#c72b25)]">
                   right around the corner.
                 </span>
               </h2>
             </div>
             <div className="max-w-md">
-              <p className="text-sm leading-7 text-[#62584f]">
+              <p className="text-sm leading-7 text-[var(--theme-text-secondary,#62584f)]">
                 Choose your nearest kitchen for current hours, pickup, delivery,
                 and dine-in details.
               </p>
@@ -686,7 +686,7 @@ export function BurgerCraft() {
                 <span className="rounded-full bg-[#e4f0d1] px-3 py-2 text-[0.56rem] font-black uppercase tracking-[0.08em] text-[#567d2d]">
                   3 locations open
                 </span>
-                <span className="rounded-full bg-white px-3 py-2 text-[0.56rem] font-black uppercase tracking-[0.08em] text-[#806d5d]">
+                <span className="rounded-full border border-[var(--theme-border,#dfcfbf)] bg-[var(--theme-bg-card,#ffffff)] px-3 py-2 text-[0.56rem] font-black uppercase tracking-[0.08em] text-[var(--theme-text-secondary,#806d5d)]">
                   More coming soon
                 </span>
               </div>
@@ -699,25 +699,25 @@ export function BurgerCraft() {
                 <article
                   key={location.city}
                   style={{ transitionDelay: `${index * 70}ms` }}
-                  className="group grid gap-5 rounded-[1.4rem] border border-[#dfcfbf] bg-[#fffdf9] p-5 shadow-[0_12px_35px_rgba(67,40,23,0.06)] transition hover:-translate-y-1 hover:border-[#c72b25]/35 hover:shadow-[0_18px_45px_rgba(67,40,23,0.11)] sm:grid-cols-[1fr_auto] sm:items-center"
+                  className="group grid gap-5 rounded-[1.4rem] border border-[var(--theme-border,#dfcfbf)] bg-[var(--theme-bg-card,#fffdf9)] p-5 shadow-[0_12px_35px_rgba(67,40,23,0.06)] transition hover:-translate-y-1 hover:border-[var(--theme-accent-primary,#c72b25)]/35 hover:shadow-[0_18px_45px_rgba(67,40,23,0.11)] sm:grid-cols-[1fr_auto] sm:items-center"
                 >
                   <div className="flex min-w-0 gap-4">
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#c72b25] text-white shadow-md shadow-red-800/10">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[var(--theme-accent-primary,#c72b25)] text-[var(--theme-accent-contrast,#ffffff)] shadow-md shadow-red-800/10">
                       <Icon name="pin" className="h-5 w-5" />
                     </span>
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-baseline gap-x-3">
-                        <h3 className="burger-display text-2xl font-black">
+                        <h3 className="burger-display text-2xl font-black text-[var(--theme-text-primary,#211c18)]">
                           {location.city}
                         </h3>
-                        <span className="text-[0.57rem] font-black uppercase tracking-[0.12em] text-[#c72b25]">
+                        <span className="text-[0.57rem] font-black uppercase tracking-[0.12em] text-[var(--theme-accent-primary,#c72b25)]">
                           {location.neighborhood}
                         </span>
                       </div>
-                      <p className="mt-2 text-xs leading-5 text-[#62584f]">
+                      <p className="mt-2 text-xs leading-5 text-[var(--theme-text-secondary,#62584f)]">
                         {location.address}
                       </p>
-                      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[0.65rem] font-bold text-[#806d5d]">
+                      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[0.65rem] font-bold text-[var(--theme-text-secondary,#806d5d)]">
                         <span className="flex items-center gap-1.5">
                           <Icon
                             name="clock"
@@ -727,7 +727,7 @@ export function BurgerCraft() {
                         </span>
                         <a
                           href={`tel:${location.phone.replace(/\D/g, "")}`}
-                          className="flex items-center gap-1.5 hover:text-[#c72b25]"
+                          className="flex items-center gap-1.5 hover:text-[var(--theme-accent-primary,#c72b25)]"
                         >
                           <Icon
                             name="phone"
@@ -736,7 +736,7 @@ export function BurgerCraft() {
                           {location.phone}
                         </a>
                       </div>
-                      <p className="mt-2 text-[0.56rem] font-black uppercase tracking-[0.08em] text-[#927b68]">
+                      <p className="mt-2 text-[0.56rem] font-black uppercase tracking-[0.08em] text-[var(--theme-text-muted,#927b68)]">
                         {location.note}
                       </p>
                     </div>
@@ -746,7 +746,7 @@ export function BurgerCraft() {
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.address)}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex-1 rounded-xl border border-[#d8c7b5] px-4 py-2.5 text-center text-[0.58rem] font-black uppercase tracking-[0.07em] transition hover:border-[#211c18] hover:bg-[#211c18] hover:text-white"
+                      className="flex-1 rounded-xl border border-[var(--theme-border,#d8c7b5)] px-4 py-2.5 text-center text-[0.58rem] font-black uppercase tracking-[0.07em] text-[var(--theme-text-primary,#211c18)] transition hover:border-[var(--theme-accent-primary,#c72b25)] hover:bg-[var(--theme-accent-primary,#c72b25)] hover:text-white"
                     >
                       Directions
                     </a>
@@ -755,7 +755,7 @@ export function BurgerCraft() {
                       onClick={() =>
                         showNotice(`${location.city} selected for pickup`)
                       }
-                      className="flex-1 rounded-xl bg-[#c72b25] px-4 py-2.5 text-[0.58rem] font-black uppercase tracking-[0.07em] text-white transition hover:bg-[#aa211c]"
+                      className="flex-1 rounded-xl bg-[var(--theme-accent-primary,#c72b25)] px-4 py-2.5 text-[0.58rem] font-black uppercase tracking-[0.07em] text-[var(--theme-accent-contrast,#ffffff)] transition hover:opacity-90"
                     >
                       Order here
                     </button>
@@ -764,7 +764,7 @@ export function BurgerCraft() {
               ))}
             </div>
 
-            <div className="relative min-h-[430px] overflow-hidden rounded-[1.6rem] border border-[#d8c7b5] bg-[#f1e6d9] shadow-[0_18px_50px_rgba(67,40,23,0.1)]">
+            <div className="relative min-h-[430px] overflow-hidden rounded-[1.6rem] border border-[var(--theme-border,#d8c7b5)] bg-[var(--theme-bg-surface,#f1e6d9)] shadow-[0_18px_50px_rgba(67,40,23,0.1)]">
               <div className="absolute inset-0 opacity-55 [background-image:linear-gradient(28deg,transparent_46%,#d7c4ae_47%,#d7c4ae_49%,transparent_50%),linear-gradient(112deg,transparent_47%,#decdb9_48%,#decdb9_50%,transparent_51%)] [background-size:92px_92px,135px_135px]" />
               <div className="absolute inset-x-0 top-[42%] h-6 -rotate-6 bg-[#dfcfbc]/75" />
               <div className="absolute bottom-[32%] left-[45%] h-[120%] w-7 rotate-[24deg] bg-[#d4c1aa]/80" />
@@ -778,19 +778,19 @@ export function BurgerCraft() {
                   className={`absolute ${position} -translate-x-1/2 -translate-y-1/2`}
                 >
                   <span
-                    className={`grid place-items-center rounded-full border-4 border-white text-white shadow-xl ${index === 0 ? "h-14 w-14 bg-[#c72b25]" : "h-11 w-11 bg-[#211c18]"}`}
+                    className={`grid place-items-center rounded-full border-4 border-white text-white shadow-xl ${index === 0 ? "h-14 w-14 bg-[var(--theme-accent-primary,#c72b25)]" : "h-11 w-11 bg-[#211c18]"}`}
                   >
                     <Icon name="pin" className="h-5 w-5" />
                   </span>
-                  <span className="mt-2 block rounded-full bg-white/95 px-3 py-1 text-center text-[0.55rem] font-black uppercase shadow-sm">
+                  <span className="mt-2 block rounded-full bg-white/95 px-3 py-1 text-center text-[0.55rem] font-black uppercase shadow-sm text-[#211c18]">
                     {city}
                   </span>
                 </div>
               ))}
-              <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-[#211c18]/95 p-5 text-white shadow-2xl backdrop-blur">
+              <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-[var(--theme-bg-dark,#211c18)]/95 p-5 text-white shadow-2xl backdrop-blur">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-[0.56rem] font-black uppercase tracking-[0.12em] text-[#e8a614]">
+                    <p className="text-[0.56rem] font-black uppercase tracking-[0.12em] text-[var(--theme-accent-secondary,#e8a614)]">
                       Closest kitchen
                     </p>
                     <p className="burger-display mt-1 text-xl">
@@ -810,10 +810,10 @@ export function BurgerCraft() {
         </div>
       </section>
 
-      <section id="catering" className="bg-[#211c18] py-16 text-white">
+      <section id="catering" className="bg-[var(--theme-bg-dark,#211c18)] py-16 text-white transition-colors duration-300">
         <div className="mx-auto flex max-w-[1240px] flex-col justify-between gap-7 px-5 sm:px-8 md:flex-row md:items-center">
           <div>
-            <p className="text-[0.6rem] font-black uppercase tracking-[0.14em] text-[#e7a315]">
+            <p className="text-[0.6rem] font-black uppercase tracking-[0.14em] text-[var(--theme-accent-secondary,#e7a315)]">
               Big orders. Fresh flavor.
             </p>
             <h2 className="burger-display mt-2 text-3xl font-black sm:text-5xl">
@@ -822,26 +822,26 @@ export function BurgerCraft() {
           </div>
           <a
             href="mailto:catering@builtfresh.test"
-            className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#c72b25] px-7 py-4 text-xs font-black uppercase tracking-[0.08em] transition hover:-translate-y-1"
+            className="inline-flex items-center justify-center gap-3 rounded-xl bg-[var(--theme-accent-primary,#c72b25)] px-7 py-4 text-xs font-black uppercase tracking-[0.08em] text-[var(--theme-accent-contrast,#ffffff)] transition hover:-translate-y-1 hover:opacity-90"
           >
             Plan your order <Icon name="arrow" className="h-4 w-4" />
           </a>
         </div>
       </section>
 
-      <footer className="border-t border-[#e2d2c2] bg-[#fffaf3]">
+      <footer className="border-t border-[var(--theme-border,#e2d2c2)] bg-[var(--theme-bg-surface,#fffaf3)] transition-colors duration-300">
         <div className="mx-auto max-w-[1240px] px-5 py-14 sm:px-8 sm:py-16">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.7fr_0.85fr_1.15fr] lg:gap-12">
             <div>
               <a href="#home" className="inline-block leading-none">
-                <span className="burger-script block text-5xl font-black text-[#c72b25]">
+                <span className="burger-script block text-5xl font-black text-[var(--theme-accent-primary,#c72b25)]">
                   Built Fresh
                 </span>
-                <span className="mt-2 block text-center text-[0.48rem] font-black uppercase tracking-[0.35em]">
+                <span className="mt-2 block text-center text-[0.48rem] font-black uppercase tracking-[0.35em] text-[var(--theme-text-secondary,#62584f)]">
                   Smash burgers
                 </span>
               </a>
-              <p className="mt-5 max-w-sm text-sm leading-7 text-[#62584f]">
+              <p className="mt-5 max-w-sm text-sm leading-7 text-[var(--theme-text-secondary,#62584f)]">
                 Smash burgers, golden fries, house sauces and thick shakes—made
                 fresh every day.
               </p>
@@ -851,7 +851,7 @@ export function BurgerCraft() {
                     key={item}
                     href="#home"
                     aria-label={item}
-                    className="grid h-10 w-10 place-items-center rounded-full bg-[#211c18] text-xs font-black text-white transition hover:-translate-y-1 hover:bg-[#c72b25]"
+                    className="grid h-10 w-10 place-items-center rounded-full bg-[var(--theme-bg-dark,#211c18)] text-xs font-black text-white transition hover:-translate-y-1 hover:bg-[var(--theme-accent-primary,#c72b25)]"
                   >
                     {item}
                   </a>
@@ -859,93 +859,93 @@ export function BurgerCraft() {
               </div>
             </div>
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.1em]">
+              <p className="text-xs font-black uppercase tracking-[0.1em] text-[var(--theme-text-primary,#211c18)]">
                 Quick links
               </p>
-              <div className="mt-5 grid gap-3 text-sm text-[#62584f]">
+              <div className="mt-5 grid gap-3 text-sm text-[var(--theme-text-secondary,#62584f)]">
                 <a
                   href="#menu"
-                  className="transition hover:translate-x-1 hover:text-[#c72b25]"
+                  className="transition hover:translate-x-1 hover:text-[var(--theme-accent-primary,#c72b25)]"
                 >
                   Menu
                 </a>
                 <a
                   href="#story"
-                  className="transition hover:translate-x-1 hover:text-[#c72b25]"
+                  className="transition hover:translate-x-1 hover:text-[var(--theme-accent-primary,#c72b25)]"
                 >
                   Our story
                 </a>
                 <a
                   href="#locations"
-                  className="transition hover:translate-x-1 hover:text-[#c72b25]"
+                  className="transition hover:translate-x-1 hover:text-[var(--theme-accent-primary,#c72b25)]"
                 >
                   Locations
                 </a>
                 <a
                   href="#catering"
-                  className="transition hover:translate-x-1 hover:text-[#c72b25]"
+                  className="transition hover:translate-x-1 hover:text-[var(--theme-accent-primary,#c72b25)]"
                 >
                   Catering
                 </a>
                 <a
                   href="#rewards"
-                  className="transition hover:translate-x-1 hover:text-[#c72b25]"
+                  className="transition hover:translate-x-1 hover:text-[var(--theme-accent-primary,#c72b25)]"
                 >
                   Rewards
                 </a>
               </div>
             </div>
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.1em]">
+              <p className="text-xs font-black uppercase tracking-[0.1em] text-[var(--theme-text-primary,#211c18)]">
                 Visit &amp; contact
               </p>
-              <p className="mt-5 text-sm leading-7 text-[#62584f]">
+              <p className="mt-5 text-sm leading-7 text-[var(--theme-text-secondary,#62584f)]">
                 125 Craft Street
                 <br />
                 Nashville, TN 37203
                 <br />
-                <a href="tel:6155550123" className="hover:text-[#c72b25]">
+                <a href="tel:6155550123" className="hover:text-[var(--theme-accent-primary,#c72b25)]">
                   (615) 555-0123
                 </a>
                 <br />
                 <a
                   href="mailto:hello@builtfresh.test"
-                  className="break-all hover:text-[#c72b25]"
+                  className="break-all hover:text-[var(--theme-accent-primary,#c72b25)]"
                 >
                   hello@builtfresh.test
                 </a>
               </p>
-              <p className="mt-4 text-xs font-bold leading-6 text-[#8b7563]">
+              <p className="mt-4 text-xs font-bold leading-6 text-[var(--theme-text-muted,#8b7563)]">
                 Mon–Thu · 10:30 AM–9 PM
                 <br />
                 Fri–Sat · 10:30 AM–10 PM
               </p>
             </div>
-            <div className="rounded-2xl border border-[#e3d4c4] bg-white p-6 shadow-sm">
-              <p className="text-xs font-black uppercase tracking-[0.1em] text-[#c72b25]">
+            <div className="rounded-2xl border border-[var(--theme-border,#e3d4c4)] bg-[var(--theme-bg-card,#ffffff)] p-6 shadow-sm">
+              <p className="text-xs font-black uppercase tracking-[0.1em] text-[var(--theme-accent-primary,#c72b25)]">
                 Join the Built Fresh Club
               </p>
-              <h3 className="burger-display mt-3 text-2xl font-black">
+              <h3 className="burger-display mt-3 text-2xl font-black text-[var(--theme-text-primary,#211c18)]">
                 Fresh deals, straight to your inbox.
               </h3>
-              <p className="mt-3 text-xs leading-5 text-[#62584f]">
+              <p className="mt-3 text-xs leading-5 text-[var(--theme-text-secondary,#62584f)]">
                 Get exclusive offers, new menu drops, and rewards updates.
               </p>
               <form
                 onSubmit={submitEmail}
-                className="mt-5 flex overflow-hidden rounded-xl border border-[#d9c9b8] bg-[#fffaf3] focus-within:border-[#c72b25]"
+                className="mt-5 flex overflow-hidden rounded-xl border border-[var(--theme-border,#d9c9b8)] bg-[var(--theme-bg-surface,#fffaf3)] focus-within:border-[var(--theme-accent-primary,#c72b25)]"
               >
                 <input
                   required
                   type="email"
                   aria-label="Email address"
                   placeholder="Enter your email"
-                  className="min-w-0 flex-1 bg-transparent px-4 py-3 text-xs outline-none"
+                  className="min-w-0 flex-1 bg-transparent px-4 py-3 text-xs outline-none text-[var(--theme-text-primary,#211c18)] placeholder:text-[var(--theme-text-muted,#8b7563)]"
                 />
                 <button
                   type="submit"
                   aria-label="Join the club"
-                  className="grid w-12 place-items-center bg-[#c72b25] text-white transition hover:bg-[#a91f1b]"
+                  className="grid w-12 place-items-center bg-[var(--theme-accent-primary,#c72b25)] text-[var(--theme-accent-contrast,#ffffff)] transition hover:opacity-90"
                 >
                   <Icon name="arrow" className="h-4 w-4" />
                 </button>
@@ -953,17 +953,17 @@ export function BurgerCraft() {
             </div>
           </div>
         </div>
-        <div className="border-t border-[#e2d2c2] bg-[#f7eee4]">
-          <div className="mx-auto flex max-w-[1240px] flex-col justify-between gap-3 px-5 py-5 text-xs text-[#806d5d] sm:flex-row sm:items-center sm:px-8">
+        <div className="border-t border-[var(--theme-border,#e2d2c2)] bg-[var(--theme-bg-base,#f7eee4)] transition-colors duration-300">
+          <div className="mx-auto flex max-w-[1240px] flex-col justify-between gap-3 px-5 py-5 text-xs text-[var(--theme-text-muted,#806d5d)] sm:flex-row sm:items-center sm:px-8">
             <p>© 2026 Built Fresh. All rights reserved.</p>
             <div className="flex flex-wrap gap-x-5 gap-y-2">
-              <a href="#home" className="hover:text-[#c72b25]">
+              <a href="#home" className="hover:text-[var(--theme-accent-primary,#c72b25)]">
                 Privacy policy
               </a>
-              <a href="#home" className="hover:text-[#c72b25]">
+              <a href="#home" className="hover:text-[var(--theme-accent-primary,#c72b25)]">
                 Terms of service
               </a>
-              <Link to="/restaurant" className="font-bold text-[#c72b25]">
+              <Link to="/restaurant" className="font-bold text-[var(--theme-accent-primary,#c72b25)]">
                 Restaurant collection →
               </Link>
             </div>
@@ -973,7 +973,7 @@ export function BurgerCraft() {
 
       <div
         aria-live="polite"
-        className={`fixed bottom-6 right-6 z-[70] rounded-xl bg-[#211c18] px-5 py-3 text-sm font-bold text-white shadow-2xl transition duration-300 ${notice ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}
+        className={`fixed bottom-6 right-6 z-[70] rounded-xl bg-[var(--theme-bg-dark,#211c18)] border border-[var(--theme-border,#443830)] px-5 py-3 text-sm font-bold text-[var(--theme-accent-contrast,#ffffff)] shadow-2xl transition duration-300 ${notice ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}
       >
         {notice}
       </div>

@@ -1002,8 +1002,8 @@ blockquote {
 }
 
 .harborkey-site ::selection {
-  background: #bdd4ce;
-  color: #12384d;
+  background: var(--theme-accent-primary, #bdd4ce);
+  color: var(--theme-accent-contrast, #12384d);
 }
 
 .harborkey-site [data-hk-reveal] {
@@ -1031,8 +1031,8 @@ blockquote {
 }
 
 .apex-site ::selection {
-  background: #7a2948;
-  color: #f4f6f8;
+  background: var(--theme-accent-primary, #7a2948);
+  color: var(--theme-accent-contrast, #f4f6f8);
 }
 
 .apex-site [data-apex-reveal] {
@@ -1065,8 +1065,8 @@ blockquote {
 }
 
 .nestpath-site ::selection {
-  background: #e0af45;
-  color: #0e3d3f;
+  background: var(--theme-accent-secondary, #e0af45);
+  color: var(--theme-text-primary, #0e3d3f);
 }
 
 .nestpath-site [data-np-reveal] {
@@ -1102,8 +1102,8 @@ blockquote {
 }
 
 .cedar-site ::selection {
-  background: #a68e72;
-  color: #1f2d28;
+  background: var(--theme-accent-secondary, #a68e72);
+  color: var(--theme-bg-dark, #1f2d28);
 }
 
 .cedar-site [data-cedar-reveal] {
@@ -1125,6 +1125,10 @@ blockquote {
   }
 }
 
+.foundry-site section[id] {
+  scroll-margin-top: 5rem;
+}
+
 .metroloft-site {
   font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
   font-feature-settings: "kern" 1, "liga" 1;
@@ -1141,12 +1145,16 @@ blockquote {
 
 .metroloft-site .metro-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(90, 82, 200, 0.3);
+  border-color: var(--theme-accent-primary-light, rgba(90, 82, 200, 0.3));
   box-shadow: 0 24px 50px rgba(32, 36, 70, 0.11);
 }
 
 .metroloft-site input[type="date"] {
   color-scheme: light;
+}
+
+html.dark .metroloft-site input[type="date"] {
+  color-scheme: dark;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1203,8 +1211,17 @@ blockquote {
 
 .suncrest-site .suncrest-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(21, 149, 163, 0.3);
+  border-color: var(--theme-accent-primary-light, rgba(21, 149, 163, 0.3));
   box-shadow: 0 24px 55px rgba(16, 63, 74, 0.12);
+}
+
+html.dark .suncrest-site .suncrest-card {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35);
+}
+
+html.dark .suncrest-site .suncrest-card:hover {
+  border-color: var(--theme-accent-primary, #1595A3);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.5);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1232,12 +1249,12 @@ blockquote {
 
 .oakline-site .oak-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(61, 118, 87, 0.3);
+  border-color: var(--theme-accent-primary-light, rgba(61, 118, 87, 0.3));
   box-shadow: 0 22px 48px rgba(22, 50, 74, 0.11);
 }
 
 .oakline-site .oakline-nav-active {
-  box-shadow: inset 0 0 0 1px rgba(61, 118, 87, 0.16);
+  box-shadow: inset 0 0 0 1px var(--theme-accent-primary-light, rgba(61, 118, 87, 0.16));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1271,12 +1288,12 @@ blockquote {
 
 .keystart-site .key-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(63, 115, 85, 0.3);
+  border-color: var(--theme-accent-primary-light, rgba(63, 115, 85, 0.3));
   box-shadow: 0 22px 48px rgba(21, 52, 75, 0.11);
 }
 
 .keystart-site .keystart-nav-active {
-  box-shadow: inset 0 0 0 1px rgba(63, 115, 85, 0.16);
+  box-shadow: inset 0 0 0 1px var(--theme-accent-primary-light, rgba(63, 115, 85, 0.16));
 }
 
 .fitness-index-kinetic {
@@ -1646,59 +1663,178 @@ blockquote {
   }
 }
 
-/* Dynamic Theme Accent Tuner Engine */
-:root {
+/* Dynamic Theme Accent Tuner Engine & Semantic Design System */
+:root[data-theme-active="true"] {
+  --theme-mood: dark;
+  --theme-bg-base: #090a0f;
+  --theme-bg-surface: #11141e;
+  --theme-bg-card: #171b28;
+  --theme-bg-card-hover: #1e2436;
+  --theme-text-primary: #f8fafc;
+  --theme-text-secondary: #cbd5e1;
+  --theme-text-muted: #94a3b8;
+  --theme-border: rgba(255, 255, 255, 0.1);
+
   --theme-accent-primary: #06b6d4;
+  --theme-accent-primary-hover: #0891b2;
+  --theme-accent-primary-light: rgba(6, 182, 212, 0.12);
   --theme-accent-secondary: #a855f7;
-  --theme-accent-tertiary: #ec4899;
-  --theme-accent-quaternary: #10b981;
+  --theme-accent-secondary-hover: #9333ea;
+  --theme-accent-glow: rgba(6, 182, 212, 0.4);
+  --theme-accent-dark: #090a0f;
+  --theme-accent-light: #ffffff;
   --theme-accent-gradient: linear-gradient(135deg, #06b6d4, #a855f7);
   --theme-accent-gradient-radial: radial-gradient(circle, #06b6d4, #a855f7);
 }
 
+:root[data-theme-active="true"][data-theme-mood="light"],
+:root[data-theme-active="true"].light {
+  --theme-mood: light;
+  --theme-bg-base: #f8fafc;
+  --theme-bg-surface: #ffffff;
+  --theme-bg-card: #f1f5f9;
+  --theme-bg-card-hover: #e2e8f0;
+  --theme-text-primary: #0f172a;
+  --theme-text-secondary: #334155;
+  --theme-text-muted: #64748b;
+  --theme-border: rgba(0, 0, 0, 0.08);
+}
+
+/* Universal Theme Utility Classes */
+.theme-bg-base {
+  background-color: var(--theme-bg-base);
+}
+.theme-bg-surface {
+  background-color: var(--theme-bg-surface);
+}
+.theme-bg-card {
+  background-color: var(--theme-bg-card);
+}
+.theme-text-primary {
+  color: var(--theme-text-primary);
+}
+.theme-text-secondary {
+  color: var(--theme-text-secondary);
+}
+.theme-text-muted {
+  color: var(--theme-text-muted);
+}
+.theme-border {
+  border-color: var(--theme-border);
+}
+[data-theme-preset]:not([data-theme-preset="original"]) .theme-accent-btn {
+  background: var(--theme-accent-gradient);
+  color: #ffffff;
+  box-shadow: 0 4px 20px var(--theme-accent-glow);
+}
+
+/* Dynamic theme preset overrides: pure CSS custom properties cascading
+   seamlessly across all templates without dirty hue-rotate filters */
 [data-theme-preset]:not([data-theme-preset="original"]) {
   --color-primary: var(--theme-accent-primary);
   --color-accent: var(--theme-accent-secondary);
-  --color-tertiary: var(--theme-accent-tertiary, var(--theme-accent-secondary));
-  --color-quaternary: var(--theme-accent-quaternary, var(--theme-accent-secondary));
+  --color-tertiary: var(--theme-accent-secondary);
+  --color-quaternary: var(--theme-accent-secondary);
   --color-gradient: var(--theme-accent-gradient);
+
+  /* Education templates */
+  --sf-flame: var(--theme-accent-primary) !important;
+  --sf-flame-hover: var(--theme-accent-primary-hover) !important;
+  --sf-flame-glow: var(--theme-accent-glow) !important;
+  --sf-flame-gradient: var(--theme-accent-gradient) !important;
+  --sf-violet: var(--theme-accent-secondary) !important;
+  --sf-cyan: var(--theme-accent-secondary) !important;
+
+  --pt-gold: var(--theme-accent-primary) !important;
+  --pt-gold-light: var(--theme-accent-primary-hover) !important;
+  --pt-gold-glow: var(--theme-accent-glow) !important;
+  --pt-border-gold: var(--theme-accent-glow) !important;
+
+  --tl-indigo: var(--theme-accent-primary) !important;
+  --tl-indigo-light: var(--theme-accent-primary-hover) !important;
+  --tl-emerald: var(--theme-accent-secondary) !important;
+  --tl-glow-primary: 0 0 24px var(--theme-accent-glow) !important;
+
+  --ss-coral: var(--theme-accent-primary) !important;
+  --ss-coral-dark: var(--theme-accent-primary-hover) !important;
+  --ss-mint: var(--theme-accent-secondary) !important;
+  --ss-sky: var(--theme-accent-secondary) !important;
+
+  --eep-crimson: var(--theme-accent-primary) !important;
+  --eep-gold: var(--theme-accent-secondary) !important;
+  --ee-blue: var(--theme-accent-primary) !important;
+  --ee-blue-hover: var(--theme-accent-primary-hover) !important;
+  --ee-cyan: var(--theme-accent-secondary) !important;
+  --ee-border-blue: var(--theme-accent-glow) !important;
+
+  --acc-primary: var(--theme-accent-primary) !important;
+  --acc-secondary: var(--theme-accent-secondary) !important;
+  --lp-primary: var(--theme-accent-primary) !important;
+  --lp-secondary: var(--theme-accent-secondary) !important;
+  --fp-primary: var(--theme-accent-primary) !important;
+  --fp-secondary: var(--theme-accent-secondary) !important;
+
+  /* Ecommerce templates */
+  --cb-primary: var(--theme-accent-primary) !important;
+  --cb-accent: var(--theme-accent-secondary) !important;
+  --cbx-primary: var(--theme-accent-primary) !important;
+  --cbx-accent: var(--theme-accent-secondary) !important;
+  --dn-primary: var(--theme-accent-primary) !important;
+  --dn-accent: var(--theme-accent-secondary) !important;
+  --fn-primary: var(--theme-accent-primary) !important;
+  --fn-accent: var(--theme-accent-secondary) !important;
+  --gc-primary: var(--theme-accent-primary) !important;
+  --gc-accent: var(--theme-accent-secondary) !important;
+  --hl-primary: var(--theme-accent-primary) !important;
+  --hl-accent: var(--theme-accent-secondary) !important;
+  --ls-primary: var(--theme-accent-primary) !important;
+  --ls-accent: var(--theme-accent-secondary) !important;
+  --nk-primary: var(--theme-accent-primary) !important;
+  --nk-accent: var(--theme-accent-secondary) !important;
+  --pp-primary: var(--theme-accent-primary) !important;
+  --pp-accent: var(--theme-accent-secondary) !important;
+  --ppg-primary: var(--theme-accent-primary) !important;
+  --ppg-accent: var(--theme-accent-secondary) !important;
+
+  /* Medical templates */
+  --ph-primary: var(--theme-accent-primary) !important;
+  --ph-primary-hover: var(--theme-accent-primary-hover) !important;
+  --ph-primary-light: var(--theme-accent-primary-light) !important;
+  --ph-secondary: var(--theme-accent-secondary) !important;
+  --ph-accent: var(--theme-accent-secondary) !important;
+  --ph-glow: var(--theme-accent-glow) !important;
+  --ph-gradient: var(--theme-accent-gradient) !important;
+
+  /* Generic category tokens */
+  --brand-primary: var(--theme-accent-primary) !important;
+  --brand-accent: var(--theme-accent-secondary) !important;
 }
 
-/* Transform the active demo canvas content with the chosen aesthetic palette.
-   CRITICAL: Do NOT apply CSS filter to the .demo-canvas wrapper itself.
-   In the CSS specification, applying a CSS filter to any ancestor element creates a
-   new containing block, which breaks position: fixed and position: sticky on all
-   descendant navbars (causing them to shift and scroll away with the page).
-   Instead, we filter the page content sections directly while keeping navbars fixed to the viewport. */
+/* Adaptive canvas backgrounds & surfaces only when immersive bg mode is active */
+[data-theme-preset]:not([data-theme-preset="original"])[data-theme-bg-mode="immersive"],
+[data-theme-preset]:not([data-theme-preset="original"]) [data-theme-bg-mode="immersive"] {
+  --pt-bg: var(--theme-bg-dark, #090a0d) !important;
+  --pt-bg-surface: var(--theme-bg-surface, #101318) !important;
+  --pt-bg-card: var(--theme-bg-card, #151922) !important;
+  --pt-bg-card-hover: var(--theme-bg-card-hover, #1c222e) !important;
+
+  --sf-bg: var(--theme-bg-dark, #070b14) !important;
+  --sf-bg-surface: var(--theme-bg-surface, #0d1424) !important;
+  --sf-bg-card: var(--theme-bg-card, #121c32) !important;
+  --sf-bg-card-hover: var(--theme-bg-card-hover, #182544) !important;
+
+  --tl-bg-dark: var(--theme-bg-dark, #080c14) !important;
+  --tl-bg-surface: var(--theme-bg-surface, #0f172a) !important;
+  --tl-bg-card: var(--theme-bg-card, rgba(15, 23, 42, 0.75)) !important;
+
+  --ph-bg-base: var(--theme-bg-dark, #070e18) !important;
+  --ph-bg-surface: var(--theme-bg-surface, #0c1726) !important;
+  --ph-bg-card: var(--theme-bg-card, #111e30) !important;
+  --ph-bg-card-hover: var(--theme-bg-card-hover, #182840) !important;
+}
+
+/* Ensure no containing blocks or image filter distortions */
 .demo-canvas {
-  filter: none !important;
-}
-
-[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas section,
-[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas main > *:not(nav):not(header):not([class*="fixed"]):not([class*="sticky"]):not([class*="subnav"]),
-[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas > * > *:not(nav):not(header):not([class*="fixed"]):not([class*="sticky"]):not([class*="subnav"]):not(main) {
-  filter: var(--theme-canvas-filter, none);
-  transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Protect natural photographs and videos from being color distorted */
-[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas img,
-[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas video,
-[data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [data-preserve-color] {
-  filter: var(--theme-img-filter, none) !important;
-  transition: filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Ensure UI controls, modals, command palette, toolbars, and sticky/fixed navbars are never filtered or trapped */
-.showcase-toolbar,
-.command-palette,
-.shortlist-drawer,
-.demo-canvas nav,
-.demo-canvas header,
-.demo-canvas [class*="fixed"],
-.demo-canvas [class*="sticky"],
-nav,
-footer {
   filter: none !important;
 }
 
@@ -1721,6 +1857,11 @@ footer {
 [data-theme-preset]:not([data-theme-preset="original"]) .theme-accent-gradient-text {
   background: var(--theme-accent-gradient) !important;
   -webkit-background-clip: text !important;
+  background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
 }
 
+[data-theme-preset]:not([data-theme-preset="original"]) .keystart-site .keystart-nav-active {
+  background-color: var(--theme-accent-primary-light, rgba(63, 115, 85, 0.15)) !important;
+  color: var(--theme-accent-primary) !important;
+}

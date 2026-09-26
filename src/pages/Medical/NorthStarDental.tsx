@@ -316,34 +316,34 @@ export function NorthStarDental() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#07131b] font-sans text-slate-100 antialiased selection:bg-cyan-500 selection:text-white">
+    <main className="min-h-screen bg-[var(--theme-bg-base,#07131b)] font-sans text-[var(--theme-text-primary,#f1f5f9)] antialiased transition-colors duration-300 selection:bg-[var(--theme-accent-primary,#06b6d4)] selection:text-white">
       {/* ========================================================================= */}
       {/* 1. ARCHITECTURAL FLOATING CAPSULE NAVBAR                                  */}
       {/* ========================================================================= */}
       <div className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-4 md:px-6 pt-2 sm:pt-4 pointer-events-none">
         <div className="mx-auto max-w-7xl">
-          <header className="pointer-events-auto relative flex items-center justify-between rounded-full border border-white/10 bg-[#091a26]/90 px-3 py-2 sm:px-5 sm:py-2.5 shadow-2xl shadow-cyan-950/50 backdrop-blur-xl transition-all duration-300">
+          <header className="pointer-events-auto relative flex items-center justify-between rounded-full border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#091a26)]/90 px-3 py-2 sm:px-5 sm:py-2.5 shadow-2xl shadow-black/40 backdrop-blur-xl transition-all duration-300">
             {/* Studio Brand Identity */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               <Link
                 to="/"
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-tr from-cyan-500 to-teal-400 text-[#07131b] shadow-md shadow-cyan-500/20 transition-transform hover:scale-105 active:scale-95"
+                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-tr from-[var(--theme-accent-primary,#06b6d4)] to-[var(--theme-accent-secondary,#2dd4bf)] text-[var(--theme-accent-contrast,#07131b)] shadow-md shadow-cyan-500/20 transition-transform hover:scale-105 active:scale-95"
                 title="Return to Directory"
               >
                 <Sparkles size={16} strokeWidth={2.5} className="sm:w-[18px] sm:h-[18px]" />
               </Link>
               <a href="#hero" className="flex flex-col">
-                <span className="text-xs sm:text-sm font-black tracking-wider text-white flex items-center gap-1">
-                  NORTHSTAR <span className="text-cyan-400 font-light hidden min-[380px]:inline">STUDIO</span>
+                <span className="text-xs sm:text-sm font-black tracking-wider text-[var(--theme-text-primary,#ffffff)] flex items-center gap-1">
+                  NORTHSTAR <span className="text-[var(--theme-accent-primary,#22d3ee)] font-light hidden min-[380px]:inline">STUDIO</span>
                 </span>
-                <span className="text-[9px] uppercase font-semibold tracking-widest text-cyan-200/60 hidden md:inline">
+                <span className="text-[9px] uppercase font-semibold tracking-widest text-[var(--theme-accent-primary,#a5f3fc)]/60 hidden md:inline">
                   Architectural Dental Care
                 </span>
               </a>
             </div>
 
             {/* Desktop Capsule Navigation Links with ScrollSpy */}
-            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 rounded-full bg-white/5 p-1 border border-white/5 mx-2">
+            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 rounded-full bg-white/5 p-1 border border-[var(--theme-border,rgba(255,255,255,0.05))] mx-2">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
                 return (
@@ -352,8 +352,8 @@ export function NorthStarDental() {
                     href={link.href}
                     className={`relative rounded-full px-2.5 py-1 text-[11px] xl:px-3.5 xl:py-1.5 xl:text-xs font-semibold tracking-wide whitespace-nowrap transition-all duration-200 ${
                       isActive
-                        ? "bg-gradient-to-r from-cyan-500 to-teal-400 text-[#07131b] shadow-sm font-bold"
-                        : "text-slate-300 hover:text-white hover:bg-white/5"
+                        ? "bg-gradient-to-r from-[var(--theme-accent-primary,#06b6d4)] to-[var(--theme-accent-secondary,#2dd4bf)] text-[var(--theme-accent-contrast,#07131b)] shadow-sm font-bold"
+                        : "text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-text-primary,#ffffff)] hover:bg-white/5"
                     }`}
                   >
                     {link.label}
@@ -391,7 +391,7 @@ export function NorthStarDental() {
                   setBookingSubmitted(false);
                   setIsBookingOpen(true);
                 }}
-                className="flex items-center gap-1 rounded-full bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-extrabold text-[#07131b] shadow-lg shadow-cyan-500/25 transition-all duration-200 hover:scale-105 active:scale-95"
+                className="flex items-center gap-1 rounded-full bg-gradient-to-r from-[var(--theme-accent-primary,#22d3ee)] via-[var(--theme-accent-primary,#2dd4bf)] to-[var(--theme-accent-secondary,#34d399)] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-extrabold text-[var(--theme-accent-contrast,#07131b)] shadow-lg shadow-cyan-500/25 transition-all duration-200 hover:scale-105 active:scale-95"
               >
                 <Calendar size={13} strokeWidth={2.5} className="sm:w-[14px] sm:h-[14px]" />
                 <span className="hidden min-[400px]:inline">Reserve Chair</span>
@@ -403,7 +403,7 @@ export function NorthStarDental() {
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle navigation menu"
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 hover:bg-white/10 lg:hidden transition-colors"
+                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 text-[var(--theme-text-primary,#f1f5f9)] hover:bg-white/10 lg:hidden transition-colors"
               >
                 {isMobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
               </button>
@@ -421,21 +421,21 @@ export function NorthStarDental() {
           onClick={() => setIsMobileMenuOpen(false)}
         >
           <div
-            className="w-full max-w-xs sm:max-w-sm h-full bg-[#081722] border-l border-white/10 p-5 sm:p-6 flex flex-col justify-between overflow-y-auto shadow-2xl"
+            className="w-full max-w-xs sm:max-w-sm h-full bg-[var(--theme-bg-card,#081722)] border-l border-[var(--theme-border,rgba(255,255,255,0.1))] p-5 sm:p-6 flex flex-col justify-between overflow-y-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="space-y-6">
               {/* Drawer Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <div className="flex items-center justify-between pb-4 border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-tr from-cyan-500 to-teal-400 text-[#07131b]">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-tr from-[var(--theme-accent-primary,#06b6d4)] to-[var(--theme-accent-secondary,#2dd4bf)] text-[var(--theme-accent-contrast,#07131b)]">
                     <Sparkles size={16} strokeWidth={2.5} />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xs font-black tracking-wider text-white">
-                      NORTHSTAR <span className="text-cyan-400 font-light">STUDIO</span>
+                    <span className="text-xs font-black tracking-wider text-[var(--theme-text-primary,#ffffff)]">
+                      NORTHSTAR <span className="text-[var(--theme-accent-primary,#22d3ee)] font-light">STUDIO</span>
                     </span>
-                    <span className="text-[9px] uppercase font-semibold text-cyan-200/60">
+                    <span className="text-[9px] uppercase font-semibold text-[var(--theme-accent-primary,#a5f3fc)]/60">
                       Menu Directory
                     </span>
                   </div>
@@ -460,12 +460,12 @@ export function NorthStarDental() {
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold transition-all ${
                         isActive
-                          ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold"
-                          : "text-slate-300 hover:bg-white/5 hover:text-white"
+                          ? "bg-[var(--theme-accent-primary,#06b6d4)]/20 text-[var(--theme-accent-primary,#67e8f9)] border border-[var(--theme-accent-primary,#06b6d4)]/40 font-bold"
+                          : "text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-white/5 hover:text-[var(--theme-text-primary,#ffffff)]"
                       }`}
                     >
                       <span>{link.label}</span>
-                      <ChevronRight size={14} className={isActive ? "text-cyan-400" : "text-slate-500"} />
+                      <ChevronRight size={14} className={isActive ? "text-[var(--theme-accent-primary,#22d3ee)]" : "text-slate-500"} />
                     </a>
                   );
                 })}
@@ -480,7 +480,7 @@ export function NorthStarDental() {
                   setBookingSubmitted(false);
                   setIsBookingOpen(true);
                 }}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 py-3 text-xs font-black text-[#07131b] shadow-lg shadow-cyan-500/20"
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#22d3ee)] via-[var(--theme-accent-primary,#2dd4bf)] to-[var(--theme-accent-secondary,#34d399)] py-3 text-xs font-black text-[var(--theme-accent-contrast,#07131b)] shadow-lg shadow-cyan-500/20"
               >
                 <Calendar size={14} strokeWidth={2.5} />
                 <span>Reserve Studio Chair</span>
@@ -504,9 +504,9 @@ export function NorthStarDental() {
               </div>
             </div>
 
-            <div className="pt-5 border-t border-white/10 text-center text-[11px] text-slate-400 space-y-1">
-              <p className="text-white font-medium">410 Northstar Ave, Suite 300</p>
-              <p className="text-cyan-400 font-semibold">Mon-Sat · 7:30 AM - 7:00 PM</p>
+            <div className="pt-5 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] text-center text-[11px] text-slate-400 space-y-1">
+              <p className="text-[var(--theme-text-primary,#ffffff)] font-medium">410 Northstar Ave, Suite 300</p>
+              <p className="text-[var(--theme-accent-primary,#22d3ee)] font-semibold">Mon-Sat · 7:30 AM - 7:00 PM</p>
             </div>
           </div>
         </div>
@@ -517,22 +517,22 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       <section id="hero" className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden">
         {/* Ambient Light Orbs */}
-        <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-cyan-500/10 blur-[140px]" />
-        <div className="pointer-events-none absolute top-1/3 -left-40 h-[400px] w-[400px] rounded-full bg-teal-500/10 blur-[120px]" />
-        <div className="pointer-events-none absolute top-1/2 -right-40 h-[400px] w-[400px] rounded-full bg-emerald-500/10 blur-[120px]" />
+        <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-[var(--theme-accent-primary,#06b6d4)]/10 blur-[140px]" />
+        <div className="pointer-events-none absolute top-1/3 -left-40 h-[400px] w-[400px] rounded-full bg-[var(--theme-accent-secondary,#14b8a6)]/10 blur-[120px]" />
+        <div className="pointer-events-none absolute top-1/2 -right-40 h-[400px] w-[400px] rounded-full bg-[var(--theme-accent-secondary,#10b981)]/10 blur-[120px]" />
 
         <Container>
           {/* Editorial Top Eyebrow Pill */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-bold tracking-wider uppercase text-cyan-300 backdrop-blur-md">
-              <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-accent-primary,#22d3ee)]/30 bg-[var(--theme-accent-primary,#22d3ee)]/10 px-4 py-1.5 text-xs font-bold tracking-wider uppercase text-[var(--theme-accent-primary,#67e8f9)] backdrop-blur-md">
+              <span className="flex h-2 w-2 rounded-full bg-[var(--theme-accent-primary,#22d3ee)] animate-pulse" />
               Next-Gen Studio Dental
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/20 bg-amber-400/10 px-3.5 py-1.5 text-xs font-semibold text-amber-300">
               <Star size={13} className="fill-amber-300 text-amber-300" />
               4.98 Rating · 1,200+ Verified Patient Reviews
             </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs text-slate-300">
+            <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 px-3.5 py-1.5 text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
               <ShieldCheck size={13} className="text-emerald-400" />
               In-Network with 95% PPO Plans
             </span>
@@ -540,13 +540,13 @@ export function NorthStarDental() {
 
           {/* Bold Editorial Headline */}
           <div className="mx-auto max-w-4xl text-center space-y-6">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08]">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[var(--theme-text-primary,#ffffff)] leading-[1.08]">
               Dental Care Reimagined as an{" "}
-              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--theme-accent-primary,#22d3ee)] via-[var(--theme-accent-secondary,#5eead4)] to-[var(--theme-accent-secondary,#34d399)] bg-clip-text text-transparent">
                 Elevated Spa Experience.
               </span>
             </h1>
-            <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
+            <p className="mx-auto max-w-2xl text-base sm:text-lg text-[var(--theme-text-secondary,#cbd5e1)] font-normal leading-relaxed">
               Pain-free 3D digital impressions, ceiling entertainment, noise-cancelling Bose headsets, and master cosmetic craftsmanship — with zero wait time.
             </p>
 
@@ -559,7 +559,7 @@ export function NorthStarDental() {
                   setBookingSubmitted(false);
                   setIsBookingOpen(true);
                 }}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 px-8 py-4 text-base font-black text-[#07131b] shadow-xl shadow-cyan-500/20 hover:scale-105 active:scale-95 transition-all"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--theme-accent-primary,#22d3ee)] via-[var(--theme-accent-primary,#2dd4bf)] to-[var(--theme-accent-secondary,#34d399)] px-8 py-4 text-base font-black text-[var(--theme-accent-contrast,#07131b)] shadow-xl shadow-cyan-500/20 hover:scale-105 active:scale-95 transition-all"
               >
                 <Calendar size={18} strokeWidth={2.5} />
                 <span>Reserve Your Studio Chair</span>
@@ -568,9 +568,9 @@ export function NorthStarDental() {
 
               <a
                 href="#smile-reveal"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-base font-bold text-white hover:bg-white/10 transition-all backdrop-blur-md"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-white/5 px-6 py-4 text-base font-bold text-[var(--theme-text-primary,#ffffff)] hover:bg-white/10 transition-all backdrop-blur-md"
               >
-                <Sparkles size={18} className="text-cyan-400" />
+                <Sparkles size={18} className="text-[var(--theme-accent-primary,#22d3ee)]" />
                 <span>Try Smile Transformation Simulator</span>
               </a>
             </div>
@@ -578,19 +578,19 @@ export function NorthStarDental() {
             {/* Quick Micro Guarantees */}
             <div className="pt-4 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs text-slate-400">
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-cyan-400" />
+                <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#22d3ee)]" />
                 <span>Zero Putty (100% 3D Scans)</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-cyan-400" />
+                <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#22d3ee)]" />
                 <span>Computerized Painless Numbing</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-cyan-400" />
+                <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#22d3ee)]" />
                 <span>Same-Day Emergency Relief</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-cyan-400" />
+                <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#22d3ee)]" />
                 <span>$0 Copay on Most PPO Cleanings</span>
               </div>
             </div>
@@ -599,7 +599,7 @@ export function NorthStarDental() {
           {/* Hero Architectural Visual Stage */}
           <div className="mt-12 sm:mt-16 relative mx-auto max-w-6xl">
             {/* Visual Frame */}
-            <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-white/10 to-white/5 p-2 sm:p-3 shadow-2xl shadow-cyan-950/50 backdrop-blur-xl">
+            <div className="relative overflow-hidden rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-gradient-to-b from-white/10 to-white/5 p-2 sm:p-3 shadow-2xl shadow-black/50 backdrop-blur-xl">
               <div className="relative h-[360px] sm:h-[480px] lg:h-[580px] w-full overflow-hidden rounded-2xl">
                 <img
                   src={imageUrl("medical/northstar/hero.webp")}
@@ -607,33 +607,33 @@ export function NorthStarDental() {
                   className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
                   loading="eager"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#07131b] via-transparent to-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-dark,#07131b)] via-transparent to-black/30" />
 
                 {/* Floating Interactive Hotspots */}
-                <div className="absolute top-6 left-6 hidden sm:flex items-center gap-3 rounded-2xl border border-white/20 bg-[#091a26]/90 p-3 shadow-xl backdrop-blur-md">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-400">
+                <div className="absolute top-6 left-6 hidden sm:flex items-center gap-3 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-surface,#091a26)]/90 p-3 shadow-xl backdrop-blur-md">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--theme-accent-primary,#06b6d4)]/20 text-[var(--theme-accent-primary,#22d3ee)]">
                     <Tv size={20} />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-white">Ceiling 4K Entertainment</p>
-                    <p className="text-[11px] text-slate-300">Netflix, HBO & nature audio in chair</p>
+                    <p className="text-xs font-bold text-[var(--theme-text-primary,#ffffff)]">Ceiling 4K Entertainment</p>
+                    <p className="text-[11px] text-[var(--theme-text-secondary,#cbd5e1)]">Netflix, HBO & nature audio in chair</p>
                   </div>
                 </div>
 
-                <div className="absolute top-6 right-6 hidden sm:flex items-center gap-3 rounded-2xl border border-white/20 bg-[#091a26]/90 p-3 shadow-xl backdrop-blur-md">
+                <div className="absolute top-6 right-6 hidden sm:flex items-center gap-3 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-surface,#091a26)]/90 p-3 shadow-xl backdrop-blur-md">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
                     <Headphones size={20} />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-white">Bose Noise Cancelling</p>
-                    <p className="text-[11px] text-slate-300">Blocks 100% of clinical dental sounds</p>
+                    <p className="text-xs font-bold text-[var(--theme-text-primary,#ffffff)]">Bose Noise Cancelling</p>
+                    <p className="text-[11px] text-[var(--theme-text-secondary,#cbd5e1)]">Blocks 100% of clinical dental sounds</p>
                   </div>
                 </div>
 
                 {/* Bottom Live Clinic Status Card */}
-                <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-white/15 bg-[#091a26]/95 p-4 sm:p-5 shadow-2xl backdrop-blur-xl">
+                <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#091a26)]/95 p-4 sm:p-5 shadow-2xl backdrop-blur-xl">
                   <div className="flex items-center gap-3.5">
-                    <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-300">
+                    <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--theme-accent-primary,#06b6d4)]/20 text-[var(--theme-accent-primary,#67e8f9)]">
                       <Sparkles size={24} />
                       <span className="absolute -top-1 -right-1 flex h-3 w-3">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -642,12 +642,12 @@ export function NorthStarDental() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-extrabold text-white">Studio Chair Status: Live</span>
+                        <span className="text-sm font-extrabold text-[var(--theme-text-primary,#ffffff)]">Studio Chair Status: Live</span>
                         <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-300 border border-emerald-500/30">
                           ON TIME · ZERO WAIT
                         </span>
                       </div>
-                      <p className="text-xs text-slate-300">
+                      <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
                         2 Reserve emergency chairs open today · Average check-in wait: 4 minutes
                       </p>
                     </div>
@@ -661,13 +661,13 @@ export function NorthStarDental() {
                         setBookingStep(1);
                         setIsBookingOpen(true);
                       }}
-                      className="flex-1 sm:flex-none text-center rounded-xl border border-cyan-400/40 bg-cyan-500/10 px-4 py-2.5 text-xs font-bold text-cyan-300 hover:bg-cyan-500/20 transition-colors"
+                      className="flex-1 sm:flex-none text-center rounded-xl border border-[var(--theme-accent-primary,#22d3ee)]/40 bg-[var(--theme-accent-primary,#06b6d4)]/10 px-4 py-2.5 text-xs font-bold text-[var(--theme-accent-primary,#67e8f9)] hover:bg-[var(--theme-accent-primary,#06b6d4)]/20 transition-colors"
                     >
                       Instant Triage Check
                     </button>
                     <a
                       href="tel:5550187442"
-                      className="flex items-center justify-center gap-1.5 rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-[#07131b] hover:bg-cyan-400 transition-colors"
+                      className="flex items-center justify-center gap-1.5 rounded-xl bg-[var(--theme-accent-primary,#06b6d4)] px-4 py-2.5 text-xs font-bold text-[var(--theme-accent-contrast,#07131b)] hover:opacity-90 transition-colors"
                     >
                       <Phone size={14} /> Call Front Desk
                     </a>
@@ -682,18 +682,18 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 3. BENTO GRID OF HIGH-ARTISTRY SERVICES                                   */}
       {/* ========================================================================= */}
-      <section id="studio-bento" className="py-20 sm:py-28 relative bg-[#061017]">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/10 via-transparent to-transparent" />
+      <section id="studio-bento" className="py-20 sm:py-28 relative bg-[var(--theme-bg-dark,#061017)]">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[var(--theme-accent-primary,#06b6d4)]/10 via-transparent to-transparent" />
         
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-14 sm:mb-20">
-            <span className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-cyan-400">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#06b6d4)]/30 bg-[var(--theme-accent-primary,#06b6d4)]/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-[var(--theme-accent-primary,#22d3ee)]">
               Curated Treatment Portfolio
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#ffffff)] tracking-tight">
               State-of-the-Art Dental Artistry, Organized as a Modern Bento.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base">
               Every procedure engineered for minimal invasiveness, maximum longevity, and zero physical pain.
             </p>
           </div>
@@ -701,22 +701,22 @@ export function NorthStarDental() {
           {/* The Bento Layout */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6">
             {/* Bento 1 (Large - 7 cols): Porcelain Veneers & Cosmetic Smile Makeover */}
-            <div className="md:col-span-7 rounded-3xl border border-white/10 bg-gradient-to-br from-[#0a1e2b] to-[#071520] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group hover:border-cyan-500/40 transition-all duration-300">
+            <div className="md:col-span-7 rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-br from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#071520)] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group hover:border-[var(--theme-accent-primary,#06b6d4)]/40 transition-all duration-300">
               <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                <Sparkles size={160} className="text-cyan-400" />
+                <Sparkles size={160} className="text-[var(--theme-accent-primary,#22d3ee)]" />
               </div>
 
               <div className="space-y-4 relative z-10">
                 <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-bold text-cyan-300 border border-cyan-500/30">
+                  <span className="rounded-full bg-[var(--theme-accent-primary,#06b6d4)]/20 px-3 py-1 text-xs font-bold text-[var(--theme-accent-primary,#67e8f9)] border border-[var(--theme-accent-primary,#06b6d4)]/30">
                     Cosmetic Flagship
                   </span>
                   <span className="text-xs text-slate-400">Handcrafted in Studio Lab</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-white">
+                <h3 className="text-2xl sm:text-3xl font-black text-[var(--theme-text-primary,#ffffff)]">
                   Hand-Layered Porcelain Veneers & Smile Makeovers
                 </h3>
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
                   Ultra-thin custom porcelain shells tailored to your facial symmetry. We preview your final smile in 3D before a single tooth is touched. No unnatural bulky chiclet teeth.
                 </p>
 
@@ -738,8 +738,8 @@ export function NorthStarDental() {
                         onClick={() => setActiveShade(shade.code as any)}
                         className={`flex items-center gap-2 rounded-xl px-3 py-1.5 text-xs font-bold transition-all ${
                           activeShade === shade.code
-                            ? "border-2 border-cyan-400 bg-white/10 text-white shadow-md shadow-cyan-500/20"
-                            : "border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+                            ? "border-2 border-[var(--theme-accent-primary,#22d3ee)] bg-white/10 text-white shadow-md shadow-cyan-500/20"
+                            : "border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-white/10"
                         }`}
                       >
                         <span
@@ -753,10 +753,10 @@ export function NorthStarDental() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 relative z-10">
-                <div className="text-xs text-slate-300 space-y-0.5">
-                  <p className="font-bold text-white">Duration: 2 visits</p>
-                  <p className="text-cyan-300">Includes trial smile & digital photography</p>
+              <div className="mt-8 pt-6 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex flex-wrap items-center justify-between gap-4 relative z-10">
+                <div className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] space-y-0.5">
+                  <p className="font-bold text-[var(--theme-text-primary,#ffffff)]">Duration: 2 visits</p>
+                  <p className="text-[var(--theme-accent-primary,#67e8f9)]">Includes trial smile & digital photography</p>
                 </div>
                 <button
                   type="button"
@@ -773,7 +773,7 @@ export function NorthStarDental() {
             </div>
 
             {/* Bento 2 (5 cols): Putty-Free 3D Diagnostics & Airflow Hygiene */}
-            <div className="md:col-span-5 rounded-3xl border border-white/10 bg-gradient-to-br from-[#0a1e2b] to-[#071520] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group hover:border-teal-500/40 transition-all duration-300">
+            <div className="md:col-span-5 rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-br from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#071520)] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group hover:border-[var(--theme-accent-secondary,#14b8a6)]/40 transition-all duration-300">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-teal-500/20 px-3 py-1 text-xs font-bold text-teal-300 border border-teal-500/30">
@@ -781,14 +781,14 @@ export function NorthStarDental() {
                   </span>
                   <span className="text-xs text-emerald-400 font-semibold">$0 Copay with PPO</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-white">
+                <h3 className="text-xl sm:text-2xl font-black text-[var(--theme-text-primary,#ffffff)]">
                   Swiss AirFlow® Gentle Hygiene & 3D Scanning
                 </h3>
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs sm:text-sm leading-relaxed">
                   No painful metal scraping or choking impression putty. We use warm water and micronized erythritol powder to effortlessly sweep away staining, plaque, and biofilm.
                 </p>
 
-                <div className="rounded-2xl bg-white/5 border border-white/10 p-3 space-y-2 text-xs">
+                <div className="rounded-2xl bg-white/5 border border-[var(--theme-border,rgba(255,255,255,0.1))] p-3 space-y-2 text-xs">
                   <div className="flex items-center gap-2 text-slate-200">
                     <CheckCircle2 size={14} className="text-teal-400" />
                     <span>iTero 5D scan detects hidden cavities without radiation</span>
@@ -800,7 +800,7 @@ export function NorthStarDental() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+              <div className="mt-6 pt-4 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between">
                 <span className="text-xs text-slate-400">Duration: 60 mins</span>
                 <button
                   type="button"
@@ -809,7 +809,7 @@ export function NorthStarDental() {
                     setBookingStep(1);
                     setIsBookingOpen(true);
                   }}
-                  className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 text-xs font-bold text-white hover:bg-white/10"
+                  className="rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-white/5 px-4 py-2 text-xs font-bold text-white hover:bg-white/10"
                 >
                   Book Clean & Scan
                 </button>
@@ -847,24 +847,24 @@ export function NorthStarDental() {
             </div>
 
             {/* Bento 4 (4 cols): Invisalign Clear Aligners */}
-            <div className="md:col-span-4 rounded-3xl border border-white/10 bg-gradient-to-br from-[#0a1e2b] to-[#071520] p-6 flex flex-col justify-between relative overflow-hidden group hover:border-cyan-500/40 transition-all duration-300">
+            <div className="md:col-span-4 rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-br from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#071520)] p-6 flex flex-col justify-between relative overflow-hidden group hover:border-[var(--theme-accent-primary,#06b6d4)]/40 transition-all duration-300">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-bold text-cyan-300 border border-cyan-500/30">
+                  <span className="rounded-full bg-[var(--theme-accent-primary,#06b6d4)]/20 px-3 py-1 text-xs font-bold text-[var(--theme-accent-primary,#67e8f9)] border border-[var(--theme-accent-primary,#06b6d4)]/30">
                     Orthodontics
                   </span>
                   <span className="text-xs text-slate-400">Platinum Provider</span>
                 </div>
-                <h3 className="text-xl font-black text-white">Invisalign® Studio Aligners</h3>
-                <p className="text-slate-300 text-xs leading-relaxed">
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#ffffff)]">Invisalign® Studio Aligners</h3>
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs leading-relaxed">
                   Straighten your teeth without metal wires. Preview your predicted straight smile in 90 seconds using our 3D outcome simulator.
                 </p>
-                <div className="text-xs text-cyan-300 font-semibold">
+                <div className="text-xs text-[var(--theme-accent-primary,#67e8f9)] font-semibold">
                   Includes free laser whitening upon completion ($495 value)
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+              <div className="mt-6 pt-4 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between">
                 <span className="text-xs text-slate-400">From $119/mo</span>
                 <button
                   type="button"
@@ -873,7 +873,7 @@ export function NorthStarDental() {
                     setBookingStep(1);
                     setIsBookingOpen(true);
                   }}
-                  className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 text-xs font-bold text-white hover:bg-white/10"
+                  className="rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-white/5 px-4 py-2 text-xs font-bold text-white hover:bg-white/10"
                 >
                   3D Scan Preview
                 </button>
@@ -881,7 +881,7 @@ export function NorthStarDental() {
             </div>
 
             {/* Bento 5 (4 cols): Precision Guided Implants */}
-            <div className="md:col-span-4 rounded-3xl border border-white/10 bg-gradient-to-br from-[#0a1e2b] to-[#071520] p-6 flex flex-col justify-between relative overflow-hidden group hover:border-emerald-500/40 transition-all duration-300">
+            <div className="md:col-span-4 rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-br from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#071520)] p-6 flex flex-col justify-between relative overflow-hidden group hover:border-[var(--theme-accent-secondary,#10b981)]/40 transition-all duration-300">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-bold text-emerald-300 border border-emerald-500/30">
@@ -889,8 +889,8 @@ export function NorthStarDental() {
                   </span>
                   <span className="text-xs text-slate-400">Lifetime Warranty</span>
                 </div>
-                <h3 className="text-xl font-black text-white">Computer-Guided Implants</h3>
-                <p className="text-slate-300 text-xs leading-relaxed">
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#ffffff)]">Computer-Guided Implants</h3>
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs leading-relaxed">
                   Permanently replace missing or failing teeth. 3D surgical guide ensures sub-millimeter precision with minimal healing downtime.
                 </p>
                 <div className="text-xs text-emerald-300 font-semibold">
@@ -898,7 +898,7 @@ export function NorthStarDental() {
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+              <div className="mt-6 pt-4 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between">
                 <span className="text-xs text-slate-400">Single & Full Arch</span>
                 <button
                   type="button"
@@ -907,7 +907,7 @@ export function NorthStarDental() {
                     setBookingStep(1);
                     setIsBookingOpen(true);
                   }}
-                  className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 text-xs font-bold text-white hover:bg-white/10"
+                  className="rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-white/5 px-4 py-2 text-xs font-bold text-white hover:bg-white/10"
                 >
                   Implant Consult
                 </button>
@@ -920,23 +920,23 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 4. INTERACTIVE BEFORE & AFTER SMILE REVEAL SLIDER                         */}
       {/* ========================================================================= */}
-      <section id="smile-reveal" className="py-20 sm:py-28 relative bg-[#07131b] border-t border-b border-white/10">
+      <section id="smile-reveal" className="py-20 sm:py-28 relative bg-[var(--theme-bg-base,#07131b)] border-t border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-4xl text-center space-y-4 mb-12">
-            <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-cyan-300">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#22d3ee)]/30 bg-[var(--theme-accent-primary,#22d3ee)]/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-[var(--theme-accent-primary,#67e8f9)]">
               Interactive Patient Results
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#ffffff)] tracking-tight">
               Slide to Reveal the Transformation.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base">
               Drag the interactive slider below to witness the real transition from aged, discolored enamel to our custom handcrafted porcelain veneer smile.
             </p>
           </div>
 
           <div className="mx-auto max-w-4xl">
             {/* Interactive Before/After Visual Frame */}
-            <div className="relative overflow-hidden rounded-3xl border-2 border-white/20 bg-[#091a26] shadow-2xl select-none">
+            <div className="relative overflow-hidden rounded-3xl border-2 border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-card,#091a26)] shadow-2xl select-none">
               {/* Image Container with Slider Reveal */}
               <div className="relative h-[340px] sm:h-[480px] w-full overflow-hidden">
                 {/* AFTER Image (Full Layer) */}
@@ -945,7 +945,7 @@ export function NorthStarDental() {
                   alt="After Porcelain Veneer Makeover"
                   className="absolute inset-0 h-full w-full object-cover object-center"
                 />
-                <div className="absolute bottom-6 right-6 z-20 rounded-xl bg-cyan-950/85 border border-cyan-500/40 px-4 py-2 text-xs font-black uppercase tracking-wider text-cyan-300 backdrop-blur-md">
+                <div className="absolute bottom-6 right-6 z-20 rounded-xl bg-[var(--theme-bg-dark,#091a26)]/85 border border-[var(--theme-accent-primary,#06b6d4)]/40 px-4 py-2 text-xs font-black uppercase tracking-wider text-[var(--theme-accent-primary,#67e8f9)] backdrop-blur-md">
                   After · NorthStar Studio Veneers ({activeShade})
                 </div>
 
@@ -977,7 +977,7 @@ export function NorthStarDental() {
               </div>
 
               {/* Slider Control Bar */}
-              <div className="p-6 bg-[#0a1e2b] border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="p-6 bg-[var(--theme-bg-surface,#0a1e2b)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3 w-full sm:w-2/3">
                   <span className="text-xs font-bold text-amber-300 uppercase tracking-wider whitespace-nowrap">
                     Before
@@ -991,17 +991,17 @@ export function NorthStarDental() {
                     aria-label="Drag to compare before and after dental treatment"
                     className="w-full accent-cyan-400 cursor-pointer h-2 rounded-lg bg-white/20"
                   />
-                  <span className="text-xs font-bold text-cyan-300 uppercase tracking-wider whitespace-nowrap">
+                  <span className="text-xs font-bold text-[var(--theme-accent-primary,#67e8f9)] uppercase tracking-wider whitespace-nowrap">
                     After
                   </span>
                 </div>
 
                 <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-                  <span className="text-xs text-slate-300">Transformation: {revealPosition}%</span>
+                  <span className="text-xs text-[var(--theme-text-secondary,#cbd5e1)]">Transformation: {revealPosition}%</span>
                   <button
                     type="button"
                     onClick={() => setRevealPosition(50)}
-                    className="rounded-lg border border-white/20 bg-white/5 px-3 py-1.5 text-xs text-slate-300 hover:bg-white/10 flex items-center gap-1"
+                    className="rounded-lg border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-white/5 px-3 py-1.5 text-xs text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-white/10 flex items-center gap-1"
                   >
                     <RotateCcw size={12} /> Reset
                   </button>
@@ -1011,17 +1011,17 @@ export function NorthStarDental() {
 
             {/* Micro Details under reveal */}
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-2xl font-black text-cyan-400">100%</p>
-                <p className="text-xs text-slate-300 font-semibold">Custom Ceramic Shading</p>
+              <div className="rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 p-4">
+                <p className="text-2xl font-black text-[var(--theme-accent-primary,#22d3ee)]">100%</p>
+                <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] font-semibold">Custom Ceramic Shading</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div className="rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 p-4">
                 <p className="text-2xl font-black text-teal-400">0.3 mm</p>
-                <p className="text-xs text-slate-300 font-semibold">Ultra-Conservative Enamel Prep</p>
+                <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] font-semibold">Ultra-Conservative Enamel Prep</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div className="rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 p-4">
                 <p className="text-2xl font-black text-emerald-400">15+ Yrs</p>
-                <p className="text-xs text-slate-300 font-semibold">Expected Longevity with Proper Care</p>
+                <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] font-semibold">Expected Longevity with Proper Care</p>
               </div>
             </div>
           </div>
@@ -1031,73 +1031,73 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 5. THE SENSORY SPA EXPERIENCE ("WHY WE DONT FEEL LIKE A DENTIST")         */}
       {/* ========================================================================= */}
-      <section id="sensory-spa" className="py-20 sm:py-28 relative bg-[#061017]">
+      <section id="sensory-spa" className="py-20 sm:py-28 relative bg-[var(--theme-bg-dark,#061017)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-teal-500/30 bg-teal-500/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-teal-300">
+            <span className="rounded-full border border-[var(--theme-accent-secondary,#2dd4bf)]/30 bg-[var(--theme-accent-secondary,#2dd4bf)]/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-[var(--theme-accent-secondary,#2dd4bf)]">
               Sensory Architecture
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#ffffff)] tracking-tight">
               Designed Around Your Five Senses.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base">
               Traditional dental clinics smell like acrylic, buzz like power drills, and cause stress. We redesigned every sensory touchpoint from scratch.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Sight */}
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#0a1e2b] to-[#07131b] p-6 space-y-4 hover:border-cyan-400/40 transition-all">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/20 text-cyan-400">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-b from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#07131b)] p-6 space-y-4 hover:border-[var(--theme-accent-primary,#06b6d4)]/40 transition-all shadow-xl">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--theme-accent-primary,#06b6d4)]/20 text-[var(--theme-accent-primary,#06b6d4)]">
                 <Tv size={24} />
               </div>
-              <h3 className="text-xl font-black text-white">1. Sight · 4K Ceilings</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="text-xl font-black text-[var(--theme-text-primary,#ffffff)]">1. Sight · 4K Ceilings</h3>
+              <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                 Look up and immerse yourself in streaming Netflix, calming nature documentaries, or live concert audio while our doctors work silently below.
               </p>
-              <div className="rounded-xl bg-white/5 p-3 text-[11px] text-cyan-300 font-semibold border border-white/5">
+              <div className="rounded-xl bg-[var(--theme-bg-base,#07131b)]/50 p-3 text-[11px] text-[var(--theme-accent-primary,#22d3ee)] font-semibold border border-[var(--theme-border,rgba(255,255,255,0.1))]">
                 No blinding fluorescent glare in your eyes
               </div>
             </div>
 
             {/* Sound */}
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#0a1e2b] to-[#07131b] p-6 space-y-4 hover:border-teal-400/40 transition-all">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-500/20 text-teal-400">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-b from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#07131b)] p-6 space-y-4 hover:border-[var(--theme-accent-secondary,#2dd4bf)]/40 transition-all shadow-xl">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--theme-accent-secondary,#2dd4bf)]/20 text-[var(--theme-accent-secondary,#2dd4bf)]">
                 <Headphones size={24} />
               </div>
-              <h3 className="text-xl font-black text-white">2. Sound · Bose Audio</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="text-xl font-black text-[var(--theme-text-primary,#ffffff)]">2. Sound · Bose Audio</h3>
+              <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                 QuietComfort® active noise cancelling headsets completely isolate drill pitch and clinical sounds with your chosen Spotify playlist or white noise.
               </p>
-              <div className="rounded-xl bg-white/5 p-3 text-[11px] text-teal-300 font-semibold border border-white/5">
+              <div className="rounded-xl bg-[var(--theme-bg-base,#07131b)]/50 p-3 text-[11px] text-[var(--theme-accent-secondary,#2dd4bf)] font-semibold border border-[var(--theme-border,rgba(255,255,255,0.1))]">
                 Zero clinical drill frequencies audible
               </div>
             </div>
 
             {/* Scent & Atmosphere */}
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#0a1e2b] to-[#07131b] p-6 space-y-4 hover:border-emerald-400/40 transition-all">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-b from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#07131b)] p-6 space-y-4 hover:border-emerald-400/40 transition-all shadow-xl">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/20 text-emerald-400">
                 <Sparkles size={24} />
               </div>
-              <h3 className="text-xl font-black text-white">3. Scent · Pure Botanicals</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="text-xl font-black text-[var(--theme-text-primary,#ffffff)]">3. Scent · Pure Botanicals</h3>
+              <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                 Custom diffusers disperse calming notes of organic lavender, sandalwood, and eucalyptus throughout the suite. Say goodbye to the chemical dental smell.
               </p>
-              <div className="rounded-xl bg-white/5 p-3 text-[11px] text-emerald-300 font-semibold border border-white/5">
+              <div className="rounded-xl bg-[var(--theme-bg-base,#07131b)]/50 p-3 text-[11px] text-emerald-300 font-semibold border border-[var(--theme-border,rgba(255,255,255,0.1))]">
                 Aromatherapy warm towel post-visit
               </div>
             </div>
 
             {/* Taste & Comfort */}
-            <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#0a1e2b] to-[#07131b] p-6 space-y-4 hover:border-amber-400/40 transition-all">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-b from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#07131b)] p-6 space-y-4 hover:border-amber-400/40 transition-all shadow-xl">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-400">
                 <Coffee size={24} />
               </div>
-              <h3 className="text-xl font-black text-white">4. Taste · Beverage Bar</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="text-xl font-black text-[var(--theme-text-primary,#ffffff)]">4. Taste · Beverage Bar</h3>
+              <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                 Enjoy chilled sparkling water, ceremonial matcha, or fresh cold brew while checking in. Receive lip hydration balm before any lengthy cosmetic visit.
               </p>
-              <div className="rounded-xl bg-white/5 p-3 text-[11px] text-amber-300 font-semibold border border-white/5">
+              <div className="rounded-xl bg-[var(--theme-bg-base,#07131b)]/50 p-3 text-[11px] text-amber-300 font-semibold border border-[var(--theme-border,rgba(255,255,255,0.1))]">
                 Heated ergonomic massage recliners
               </div>
             </div>
@@ -1108,28 +1108,28 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 6. TRANSPARENT PRICING & REAL-TIME INSURANCE ESTIMATOR                     */}
       {/* ========================================================================= */}
-      <section id="pricing-calc" className="py-20 sm:py-28 relative bg-[#07131b] border-t border-white/10">
+      <section id="pricing-calc" className="py-20 sm:py-28 relative bg-[var(--theme-bg-base,#07131b)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-cyan-300">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#06b6d4)]/30 bg-[var(--theme-accent-primary,#06b6d4)]/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-[var(--theme-accent-primary,#22d3ee)]">
               Radical Price Transparency
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#ffffff)] tracking-tight">
               Real-Time Insurance & Copay Calculator.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base">
               No hidden facility fees or surprise bills in the mail. Select your procedure and insurance plan to see your projected out-of-pocket cost before you book.
             </p>
           </div>
 
           {/* Calculator Layout */}
-          <div className="mx-auto max-w-5xl rounded-3xl border border-white/15 bg-gradient-to-br from-[#091a26] to-[#061017] p-6 sm:p-10 shadow-2xl">
+          <div className="mx-auto max-w-5xl rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-gradient-to-br from-[var(--theme-bg-surface,#091a26)] to-[var(--theme-bg-dark,#061017)] p-6 sm:p-10 shadow-2xl">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               {/* Left Column: Selectors */}
               <div className="lg:col-span-7 space-y-6">
                 {/* 1. Treatment Selector */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-cyan-300 mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[var(--theme-accent-primary,#22d3ee)] mb-2">
                     1. Select Dental Service
                   </label>
                   <div className="space-y-2">
@@ -1142,19 +1142,19 @@ export function NorthStarDental() {
                           onClick={() => setSelectedTreatmentId(item.id)}
                           className={`w-full flex items-center justify-between p-3.5 rounded-2xl text-left border transition-all ${
                             isSelected
-                              ? "border-cyan-400 bg-cyan-500/15 text-white shadow-lg shadow-cyan-950/40"
-                              : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+                              ? "border-[var(--theme-accent-primary,#06b6d4)] bg-[var(--theme-accent-primary,#06b6d4)]/15 text-[var(--theme-text-primary,#ffffff)] shadow-lg shadow-cyan-950/40"
+                              : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-white/10"
                           }`}
                         >
                           <div className="space-y-0.5">
-                            <p className="text-sm font-bold text-white">{item.name}</p>
-                            <p className="text-xs text-slate-400">{item.duration} · {item.category}</p>
+                            <p className="text-sm font-bold text-[var(--theme-text-primary,#ffffff)]">{item.name}</p>
+                            <p className="text-xs text-[var(--theme-text-secondary,#94a3b8)]">{item.duration} · {item.category}</p>
                           </div>
                           <div className="text-right">
-                            <span className="text-sm font-black text-cyan-300">
+                            <span className="text-sm font-black text-[var(--theme-accent-primary,#22d3ee)]">
                               ${item.standardPrice}
                             </span>
-                            <p className="text-[10px] text-slate-400">standard fee</p>
+                            <p className="text-[10px] text-[var(--theme-text-secondary,#94a3b8)]">standard fee</p>
                           </div>
                         </button>
                       );
@@ -1164,14 +1164,14 @@ export function NorthStarDental() {
 
                 {/* 2. Insurance Provider Selector */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-cyan-300 mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[var(--theme-accent-primary,#22d3ee)] mb-2">
                     2. Select Dental Insurance Carrier
                   </label>
                   <div className="relative">
                     <select
                       value={selectedInsurance}
                       onChange={(e) => setSelectedInsurance(e.target.value)}
-                      className="w-full rounded-2xl border border-white/20 bg-[#07131b] px-4 py-3 text-sm text-white focus:border-cyan-400 focus:outline-none"
+                      className="w-full rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-base,#07131b)] px-4 py-3 text-sm text-[var(--theme-text-primary,#ffffff)] focus:border-[var(--theme-accent-primary,#06b6d4)] focus:outline-none"
                     >
                       {insuranceProviders.map((prov) => (
                         <option key={prov.name} value={prov.name}>
@@ -1180,17 +1180,17 @@ export function NorthStarDental() {
                       ))}
                     </select>
                   </div>
-                  <p className="mt-2 text-xs text-slate-400">
+                  <p className="mt-2 text-xs text-[var(--theme-text-secondary,#94a3b8)]">
                     Can't find your insurance? We accept all major PPO dental plans with out-of-network benefits.
                   </p>
                 </div>
               </div>
 
               {/* Right Column: Live Estimate Voucher Receipt */}
-              <div className="lg:col-span-5 rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-[#0d2333] to-[#081724] p-6 flex flex-col justify-between shadow-xl">
+              <div className="lg:col-span-5 rounded-3xl border border-[var(--theme-accent-primary,#06b6d4)]/30 bg-gradient-to-b from-[var(--theme-bg-card,#0d2333)] to-[var(--theme-bg-surface,#081724)] p-6 flex flex-col justify-between shadow-xl">
                 <div className="space-y-6">
-                  <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                    <span className="text-xs font-bold uppercase tracking-widest text-cyan-300">
+                  <div className="flex items-center justify-between pb-4 border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[var(--theme-accent-primary,#22d3ee)]">
                       Estimated Cost Breakdown
                     </span>
                     <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-300">
@@ -1199,38 +1199,38 @@ export function NorthStarDental() {
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="text-base font-extrabold text-white">
+                    <h4 className="text-base font-extrabold text-[var(--theme-text-primary,#ffffff)]">
                       {currentTreatment.name}
                     </h4>
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                       {currentTreatment.description}
                     </p>
                   </div>
 
-                  <div className="rounded-2xl bg-black/40 border border-white/10 p-4 space-y-3 text-xs">
-                    <div className="flex justify-between text-slate-400">
+                  <div className="rounded-2xl bg-[var(--theme-bg-base,#07131b)]/60 border border-[var(--theme-border,rgba(255,255,255,0.1))] p-4 space-y-3 text-xs">
+                    <div className="flex justify-between text-[var(--theme-text-secondary,#94a3b8)]">
                       <span>Standard Practice Fee:</span>
-                      <span className="text-slate-200 line-through">${currentTreatment.standardPrice}</span>
+                      <span className="text-[var(--theme-text-primary,#f1f5f9)] line-through">${currentTreatment.standardPrice}</span>
                     </div>
                     <div className="flex justify-between text-emerald-400 font-semibold">
                       <span>Insurance / VIP Allowance:</span>
                       <span>-${estimatedSavings}</span>
                     </div>
-                    <div className="border-t border-white/10 pt-2 flex justify-between items-baseline">
-                      <span className="font-extrabold text-white text-sm">Estimated Copay:</span>
-                      <span className="text-2xl font-black text-cyan-300">
+                    <div className="border-t border-[var(--theme-border,rgba(255,255,255,0.1))] pt-2 flex justify-between items-baseline">
+                      <span className="font-extrabold text-[var(--theme-text-primary,#ffffff)] text-sm">Estimated Copay:</span>
+                      <span className="text-2xl font-black text-[var(--theme-accent-primary,#22d3ee)]">
                         ${estimatedPatientCopay}
                       </span>
                     </div>
                   </div>
 
                   {/* Monthly Financing Option */}
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3 flex items-center justify-between text-xs">
+                  <div className="rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 p-3 flex items-center justify-between text-xs">
                     <div>
-                      <p className="font-bold text-white">0% APR Financing Option</p>
-                      <p className="text-slate-400 text-[11px]">Via CareCredit or Cherry</p>
+                      <p className="font-bold text-[var(--theme-text-primary,#ffffff)]">0% APR Financing Option</p>
+                      <p className="text-[var(--theme-text-secondary,#94a3b8)] text-[11px]">Via CareCredit or Cherry</p>
                     </div>
-                    <div className="text-right font-black text-cyan-300 text-sm">
+                    <div className="text-right font-black text-[var(--theme-accent-primary,#22d3ee)] text-sm">
                       ${currentTreatment.monthlyPlan}/mo
                     </div>
                   </div>
@@ -1244,12 +1244,12 @@ export function NorthStarDental() {
                       setBookingStep(1);
                       setIsBookingOpen(true);
                     }}
-                    className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 py-3.5 text-sm font-black text-[#07131b] hover:scale-105 transition-all shadow-lg"
+                    className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--theme-accent-primary,#06b6d4)] via-[var(--theme-accent-secondary,#2dd4bf)] to-emerald-400 py-3.5 text-sm font-black text-[#07131b] hover:scale-105 transition-all shadow-lg cursor-pointer"
                   >
                     <span>Reserve with Estimated Copay</span>
                     <ArrowRight size={16} />
                   </button>
-                  <p className="mt-2 text-center text-[10px] text-slate-400">
+                  <p className="mt-2 text-center text-[10px] text-[var(--theme-text-secondary,#94a3b8)]">
                     Final benefits verified directly with your carrier prior to treatment.
                   </p>
                 </div>
@@ -1262,16 +1262,16 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 7. CLINICAL MASTERS (DOCTOR PROFILES)                                     */}
       {/* ========================================================================= */}
-      <section id="dentists" className="py-20 sm:py-28 relative bg-[#061017]">
+      <section id="dentists" className="py-20 sm:py-28 relative bg-[var(--theme-bg-dark,#061017)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-teal-500/30 bg-teal-500/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-teal-300">
+            <span className="rounded-full border border-[var(--theme-accent-secondary,#2dd4bf)]/30 bg-[var(--theme-accent-secondary,#2dd4bf)]/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-[var(--theme-accent-secondary,#2dd4bf)]">
               Pedigree & Clinical Mastery
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#ffffff)] tracking-tight">
               World-Class Dentists. Zero Ego.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base">
               Trained at top tier medical institutions, holding fellowship honors, and dedicated to compassionate, gentle bedside manner.
             </p>
           </div>
@@ -1280,7 +1280,7 @@ export function NorthStarDental() {
             {clinicalTeam.map((doctor) => (
               <div
                 key={doctor.name}
-                className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#0a1e2b] to-[#07131b] overflow-hidden flex flex-col justify-between group hover:border-cyan-400/40 transition-all duration-300 shadow-xl"
+                className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-b from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#07131b)] overflow-hidden flex flex-col justify-between group hover:border-[var(--theme-accent-primary,#06b6d4)]/40 transition-all duration-300 shadow-xl"
               >
                 <div>
                   <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-slate-800">
@@ -1289,12 +1289,12 @@ export function NorthStarDental() {
                       alt={doctor.name}
                       className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a1e2b] via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-card,#0a1e2b)] via-transparent to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-1.5">
                       {doctor.badges.map((badge) => (
                         <span
                           key={badge}
-                          className="rounded-full bg-black/70 border border-white/20 px-2.5 py-0.5 text-[10px] font-bold text-cyan-300 backdrop-blur-md"
+                          className="rounded-full bg-black/70 border border-[var(--theme-border,rgba(255,255,255,0.2))] px-2.5 py-0.5 text-[10px] font-bold text-[var(--theme-accent-primary,#22d3ee)] backdrop-blur-md"
                         >
                           {badge}
                         </span>
@@ -1304,16 +1304,16 @@ export function NorthStarDental() {
 
                   <div className="p-6 space-y-3">
                     <div>
-                      <h3 className="text-xl font-black text-white">{doctor.name}</h3>
-                      <p className="text-xs font-bold text-cyan-400">{doctor.role}</p>
-                      <p className="text-xs text-slate-400 mt-0.5">{doctor.education}</p>
+                      <h3 className="text-xl font-black text-[var(--theme-text-primary,#ffffff)]">{doctor.name}</h3>
+                      <p className="text-xs font-bold text-[var(--theme-accent-primary,#22d3ee)]">{doctor.role}</p>
+                      <p className="text-xs text-[var(--theme-text-secondary,#94a3b8)] mt-0.5">{doctor.education}</p>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">{doctor.bio}</p>
+                    <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">{doctor.bio}</p>
                   </div>
                 </div>
 
-                <div className="p-6 pt-0 border-t border-white/10 mt-4 flex items-center justify-between">
-                  <span className="text-xs text-slate-400 font-semibold">Exp: {doctor.experience}</span>
+                <div className="p-6 pt-0 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] mt-4 flex items-center justify-between">
+                  <span className="text-xs text-[var(--theme-text-secondary,#94a3b8)] font-semibold">Exp: {doctor.experience}</span>
                   <button
                     type="button"
                     onClick={() => {
@@ -1321,7 +1321,7 @@ export function NorthStarDental() {
                       setBookingStep(1);
                       setIsBookingOpen(true);
                     }}
-                    className="rounded-xl border border-cyan-400/40 bg-cyan-500/10 px-4 py-2 text-xs font-bold text-cyan-300 hover:bg-cyan-500/20"
+                    className="rounded-xl border border-[var(--theme-accent-primary,#06b6d4)]/40 bg-[var(--theme-accent-primary,#06b6d4)]/10 px-4 py-2 text-xs font-bold text-[var(--theme-accent-primary,#22d3ee)] hover:bg-[var(--theme-accent-primary,#06b6d4)]/20 cursor-pointer transition-colors"
                   >
                     Book with {doctor.name.split(" ")[1]}
                   </button>
@@ -1335,26 +1335,26 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 8. INSTANT 3-STEP ONLINE BOOKING SUITE                                    */}
       {/* ========================================================================= */}
-      <section id="booking-suite" className="py-20 sm:py-28 relative bg-[#07131b] border-t border-white/10">
+      <section id="booking-suite" className="py-20 sm:py-28 relative bg-[var(--theme-bg-base,#07131b)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-12">
-            <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-cyan-300">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#06b6d4)]/30 bg-[var(--theme-accent-primary,#06b6d4)]/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-[var(--theme-accent-primary,#22d3ee)]">
               Frictionless Scheduling
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#ffffff)] tracking-tight">
               Reserve Your Chair in Under 60 Seconds.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base">
               Select your procedure, choose your preferred doctor, and claim your morning or afternoon studio slot.
             </p>
           </div>
 
-          <div className="mx-auto max-w-3xl rounded-3xl border border-white/15 bg-gradient-to-b from-[#091a26] to-[#071520] p-6 sm:p-10 shadow-2xl">
+          <div className="mx-auto max-w-3xl rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-gradient-to-b from-[var(--theme-bg-surface,#091a26)] to-[var(--theme-bg-dark,#071520)] p-6 sm:p-10 shadow-2xl">
             {/* Step Indicators */}
-            <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10 text-xs">
+            <div className="flex items-center justify-between mb-8 pb-4 border-b border-[var(--theme-border,rgba(255,255,255,0.1))] text-xs">
               <div
                 className={`flex items-center gap-2 font-bold ${
-                  bookingStep >= 1 ? "text-cyan-400" : "text-slate-500"
+                  bookingStep >= 1 ? "text-[var(--theme-accent-primary,#22d3ee)]" : "text-[var(--theme-text-secondary,#94a3b8)]"
                 }`}
               >
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 border border-current text-xs">
@@ -1365,7 +1365,7 @@ export function NorthStarDental() {
               <div className="h-0.5 w-8 bg-white/10" />
               <div
                 className={`flex items-center gap-2 font-bold ${
-                  bookingStep >= 2 ? "text-cyan-400" : "text-slate-500"
+                  bookingStep >= 2 ? "text-[var(--theme-accent-primary,#22d3ee)]" : "text-[var(--theme-text-secondary,#94a3b8)]"
                 }`}
               >
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 border border-current text-xs">
@@ -1376,7 +1376,7 @@ export function NorthStarDental() {
               <div className="h-0.5 w-8 bg-white/10" />
               <div
                 className={`flex items-center gap-2 font-bold ${
-                  bookingStep >= 3 ? "text-cyan-400" : "text-slate-500"
+                  bookingStep >= 3 ? "text-[var(--theme-accent-primary,#22d3ee)]" : "text-[var(--theme-text-secondary,#94a3b8)]"
                 }`}
               >
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 border border-current text-xs">
@@ -1390,7 +1390,7 @@ export function NorthStarDental() {
             {bookingStep === 1 && (
               <div className="space-y-6">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[var(--theme-text-secondary,#cbd5e1)] mb-2">
                     Select Your Reason for Visit
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -1406,10 +1406,10 @@ export function NorthStarDental() {
                         key={reason}
                         type="button"
                         onClick={() => setBookingTreatment(reason)}
-                        className={`p-3 rounded-xl text-left text-xs font-bold border transition-all ${
+                        className={`p-3 rounded-xl text-left text-xs font-bold border transition-all cursor-pointer ${
                           bookingTreatment === reason
-                            ? "border-cyan-400 bg-cyan-500/20 text-white"
-                            : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+                            ? "border-[var(--theme-accent-primary,#06b6d4)] bg-[var(--theme-accent-primary,#06b6d4)]/20 text-[var(--theme-text-primary,#ffffff)]"
+                            : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-white/10"
                         }`}
                       >
                         {reason}
@@ -1419,7 +1419,7 @@ export function NorthStarDental() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[var(--theme-text-secondary,#cbd5e1)] mb-2">
                     Select Clinical Provider
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -1433,10 +1433,10 @@ export function NorthStarDental() {
                         key={doc}
                         type="button"
                         onClick={() => setBookingDoctor(doc)}
-                        className={`p-3 rounded-xl text-left text-xs font-bold border transition-all ${
+                        className={`p-3 rounded-xl text-left text-xs font-bold border transition-all cursor-pointer ${
                           bookingDoctor === doc
-                            ? "border-cyan-400 bg-cyan-500/20 text-white"
-                            : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+                            ? "border-[var(--theme-accent-primary,#06b6d4)] bg-[var(--theme-accent-primary,#06b6d4)]/20 text-[var(--theme-text-primary,#ffffff)]"
+                            : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-white/10"
                         }`}
                       >
                         {doc}
@@ -1449,7 +1449,7 @@ export function NorthStarDental() {
                   <button
                     type="button"
                     onClick={() => setBookingStep(2)}
-                    className="flex items-center gap-2 rounded-2xl bg-cyan-400 px-6 py-3 text-xs font-black text-[#07131b] hover:bg-cyan-300"
+                    className="flex items-center gap-2 rounded-2xl bg-[var(--theme-accent-primary,#06b6d4)] px-6 py-3 text-xs font-black text-[#07131b] hover:brightness-110 cursor-pointer transition-all"
                   >
                     <span>Choose Time Slot</span>
                     <ArrowRight size={16} />
@@ -1462,7 +1462,7 @@ export function NorthStarDental() {
             {bookingStep === 2 && (
               <div className="space-y-6">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[var(--theme-text-secondary,#cbd5e1)] mb-2">
                     Select Day
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -1480,10 +1480,10 @@ export function NorthStarDental() {
                         key={day}
                         type="button"
                         onClick={() => setBookingDay(day)}
-                        className={`p-3 rounded-xl text-center text-xs font-bold border transition-all ${
+                        className={`p-3 rounded-xl text-center text-xs font-bold border transition-all cursor-pointer ${
                           bookingDay === day
-                            ? "border-cyan-400 bg-cyan-500/20 text-white"
-                            : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+                            ? "border-[var(--theme-accent-primary,#06b6d4)] bg-[var(--theme-accent-primary,#06b6d4)]/20 text-[var(--theme-text-primary,#ffffff)]"
+                            : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-white/10"
                         }`}
                       >
                         {day}
@@ -1493,7 +1493,7 @@ export function NorthStarDental() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[var(--theme-text-secondary,#cbd5e1)] mb-2">
                     Select Available Time Slot
                   </label>
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -1512,10 +1512,10 @@ export function NorthStarDental() {
                         key={slot}
                         type="button"
                         onClick={() => setBookingSlot(slot)}
-                        className={`p-2.5 rounded-xl text-center text-xs font-bold border transition-all ${
+                        className={`p-2.5 rounded-xl text-center text-xs font-bold border transition-all cursor-pointer ${
                           bookingSlot === slot
-                            ? "border-cyan-400 bg-cyan-500/20 text-white"
-                            : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+                            ? "border-[var(--theme-accent-primary,#06b6d4)] bg-[var(--theme-accent-primary,#06b6d4)]/20 text-[var(--theme-text-primary,#ffffff)]"
+                            : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-white/5 text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-white/10"
                         }`}
                       >
                         {slot}
@@ -1528,14 +1528,14 @@ export function NorthStarDental() {
                   <button
                     type="button"
                     onClick={() => setBookingStep(1)}
-                    className="text-xs text-slate-400 hover:text-white"
+                    className="text-xs text-[var(--theme-text-secondary,#94a3b8)] hover:text-[var(--theme-text-primary,#ffffff)] cursor-pointer"
                   >
                     ← Back to Visit Type
                   </button>
                   <button
                     type="button"
                     onClick={() => setBookingStep(3)}
-                    className="flex items-center gap-2 rounded-2xl bg-cyan-400 px-6 py-3 text-xs font-black text-[#07131b] hover:bg-cyan-300"
+                    className="flex items-center gap-2 rounded-2xl bg-[var(--theme-accent-primary,#06b6d4)] px-6 py-3 text-xs font-black text-[#07131b] hover:brightness-110 cursor-pointer transition-all"
                   >
                     <span>Enter Patient Info</span>
                     <ArrowRight size={16} />
@@ -1557,7 +1557,7 @@ export function NorthStarDental() {
                   >
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-slate-300 mb-1">
+                        <label className="block text-xs font-bold text-[var(--theme-text-secondary,#cbd5e1)] mb-1">
                           Full Legal Name *
                         </label>
                         <input
@@ -1566,11 +1566,11 @@ export function NorthStarDental() {
                           value={patientName}
                           onChange={(e) => setPatientName(e.target.value)}
                           placeholder="e.g. Jordan Miller"
-                          className="w-full rounded-xl border border-white/20 bg-[#07131b] px-4 py-2.5 text-xs text-white focus:border-cyan-400 focus:outline-none"
+                          className="w-full rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-base,#07131b)] px-4 py-2.5 text-xs text-[var(--theme-text-primary,#ffffff)] focus:border-[var(--theme-accent-primary,#06b6d4)] focus:outline-none"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-bold text-slate-300 mb-1">
+                        <label className="block text-xs font-bold text-[var(--theme-text-secondary,#cbd5e1)] mb-1">
                           Mobile Phone Number (for SMS confirmation) *
                         </label>
                         <input
@@ -1579,13 +1579,13 @@ export function NorthStarDental() {
                           value={patientPhone}
                           onChange={(e) => setPatientPhone(e.target.value)}
                           placeholder="(555) 000-0000"
-                          className="w-full rounded-xl border border-white/20 bg-[#07131b] px-4 py-2.5 text-xs text-white focus:border-cyan-400 focus:outline-none"
+                          className="w-full rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-base,#07131b)] px-4 py-2.5 text-xs text-[var(--theme-text-primary,#ffffff)] focus:border-[var(--theme-accent-primary,#06b6d4)] focus:outline-none"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-1">
+                      <label className="block text-xs font-bold text-[var(--theme-text-secondary,#cbd5e1)] mb-1">
                         Dental Insurance Plan (or specify "No Insurance / Self Pay")
                       </label>
                       <input
@@ -1593,22 +1593,22 @@ export function NorthStarDental() {
                         value={patientInsurance}
                         onChange={(e) => setPatientInsurance(e.target.value)}
                         placeholder="e.g. Delta Dental Premier or Aetna PPO"
-                        className="w-full rounded-xl border border-white/20 bg-[#07131b] px-4 py-2.5 text-xs text-white focus:border-cyan-400 focus:outline-none"
+                        className="w-full rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-base,#07131b)] px-4 py-2.5 text-xs text-[var(--theme-text-primary,#ffffff)] focus:border-[var(--theme-accent-primary,#06b6d4)] focus:outline-none"
                       />
                     </div>
 
-                    <div className="rounded-2xl bg-cyan-950/40 border border-cyan-500/30 p-4 text-xs space-y-1.5">
-                      <div className="flex justify-between text-slate-300">
+                    <div className="rounded-2xl bg-[var(--theme-accent-primary,#06b6d4)]/10 border border-[var(--theme-accent-primary,#06b6d4)]/30 p-4 text-xs space-y-1.5">
+                      <div className="flex justify-between text-[var(--theme-text-secondary,#cbd5e1)]">
                         <span>Selected Treatment:</span>
-                        <span className="font-bold text-white">{bookingTreatment}</span>
+                        <span className="font-bold text-[var(--theme-text-primary,#ffffff)]">{bookingTreatment}</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[var(--theme-text-secondary,#cbd5e1)]">
                         <span>Doctor / Hygienist:</span>
-                        <span className="font-bold text-white">{bookingDoctor}</span>
+                        <span className="font-bold text-[var(--theme-text-primary,#ffffff)]">{bookingDoctor}</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[var(--theme-text-secondary,#cbd5e1)]">
                         <span>Date & Time:</span>
-                        <span className="font-bold text-cyan-300">{bookingDay} · {bookingSlot}</span>
+                        <span className="font-bold text-[var(--theme-accent-primary,#22d3ee)]">{bookingDay} · {bookingSlot}</span>
                       </div>
                     </div>
 
@@ -1616,13 +1616,13 @@ export function NorthStarDental() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(2)}
-                        className="text-xs text-slate-400 hover:text-white"
+                        className="text-xs text-[var(--theme-text-secondary,#94a3b8)] hover:text-[var(--theme-text-primary,#ffffff)] cursor-pointer"
                       >
                         ← Back to Date
                       </button>
                       <button
                         type="submit"
-                        className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-400 to-emerald-400 px-8 py-3.5 text-xs font-black text-[#07131b] shadow-lg shadow-cyan-500/20 hover:scale-105"
+                        className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--theme-accent-primary,#06b6d4)] to-emerald-400 px-8 py-3.5 text-xs font-black text-[#07131b] shadow-lg shadow-cyan-500/20 hover:scale-105 cursor-pointer transition-all"
                       >
                         <CheckCircle2 size={16} />
                         <span>Confirm Appointment Reservation</span>
@@ -1635,27 +1635,27 @@ export function NorthStarDental() {
                     <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
                       <CheckCircle2 size={36} strokeWidth={2.5} />
                     </div>
-                    <h3 className="text-2xl font-black text-white">Studio Chair Confirmed!</h3>
-                    <p className="text-xs text-slate-300 max-w-md mx-auto">
+                    <h3 className="text-2xl font-black text-[var(--theme-text-primary,#ffffff)]">Studio Chair Confirmed!</h3>
+                    <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] max-w-md mx-auto">
                       Thank you, {patientName || "valued patient"}! A digital check-in link and calendar invite have been sent to {patientPhone || "your phone"}.
                     </p>
 
-                    <div className="mx-auto max-w-md rounded-2xl bg-white/5 border border-white/10 p-5 text-left text-xs space-y-2">
-                      <div className="flex justify-between text-slate-300">
+                    <div className="mx-auto max-w-md rounded-2xl bg-white/5 border border-[var(--theme-border,rgba(255,255,255,0.1))] p-5 text-left text-xs space-y-2">
+                      <div className="flex justify-between text-[var(--theme-text-secondary,#cbd5e1)]">
                         <span>Treatment:</span>
-                        <span className="font-bold text-white">{bookingTreatment}</span>
+                        <span className="font-bold text-[var(--theme-text-primary,#ffffff)]">{bookingTreatment}</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[var(--theme-text-secondary,#cbd5e1)]">
                         <span>Provider:</span>
-                        <span className="font-bold text-white">{bookingDoctor}</span>
+                        <span className="font-bold text-[var(--theme-text-primary,#ffffff)]">{bookingDoctor}</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[var(--theme-text-secondary,#cbd5e1)]">
                         <span>Reserved Time:</span>
-                        <span className="font-bold text-cyan-400">{bookingDay} at {bookingSlot}</span>
+                        <span className="font-bold text-[var(--theme-accent-primary,#22d3ee)]">{bookingDay} at {bookingSlot}</span>
                       </div>
-                      <div className="flex justify-between text-slate-300">
+                      <div className="flex justify-between text-[var(--theme-text-secondary,#cbd5e1)]">
                         <span>Studio Suite:</span>
-                        <span className="font-bold text-white">410 Northstar Ave, 3rd Floor</span>
+                        <span className="font-bold text-[var(--theme-text-primary,#ffffff)]">410 Northstar Ave, 3rd Floor</span>
                       </div>
                     </div>
 
@@ -1665,7 +1665,7 @@ export function NorthStarDental() {
                         setBookingSubmitted(false);
                         setBookingStep(1);
                       }}
-                      className="rounded-xl border border-white/20 bg-white/5 px-6 py-2.5 text-xs font-bold text-white hover:bg-white/10"
+                      className="rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-white/5 px-6 py-2.5 text-xs font-bold text-[var(--theme-text-primary,#ffffff)] hover:bg-white/10 cursor-pointer"
                     >
                       Book Another Visit
                     </button>
@@ -1680,16 +1680,16 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 9. VERIFIED PATIENT REVIEWS & GOOGLE WALL                                  */}
       {/* ========================================================================= */}
-      <section id="reviews" className="py-20 sm:py-28 relative bg-[#061017]">
+      <section id="reviews" className="py-20 sm:py-28 relative bg-[var(--theme-bg-dark,#061017)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
             <span className="rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-amber-300">
               Honest Feedback
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#ffffff)] tracking-tight">
               Loved by Those Who Used to Dread the Dentist.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base">
               Over 1,200 verified five-star reviews from patients who switched to NorthStar Studio.
             </p>
           </div>
@@ -1698,7 +1698,7 @@ export function NorthStarDental() {
             {patientReviews.map((rev) => (
               <div
                 key={rev.id}
-                className="rounded-3xl border border-white/10 bg-gradient-to-b from-[#0a1e2b] to-[#07131b] p-6 space-y-4 shadow-xl flex flex-col justify-between"
+                className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-b from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#07131b)] p-6 space-y-4 shadow-xl flex flex-col justify-between"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
@@ -1707,17 +1707,17 @@ export function NorthStarDental() {
                         <Star key={i} size={14} className="fill-amber-400" />
                       ))}
                     </div>
-                    <span className="text-[11px] text-slate-400">{rev.time}</span>
+                    <span className="text-[11px] text-[var(--theme-text-secondary,#94a3b8)]">{rev.time}</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-[var(--theme-text-primary,#f1f5f9)] leading-relaxed italic">
                     "{rev.comment}"
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div className="pt-4 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between">
                   <div>
-                    <p className="text-xs font-bold text-white">{rev.patient}</p>
-                    <p className="text-[10px] text-cyan-400">{rev.type}</p>
+                    <p className="text-xs font-bold text-[var(--theme-text-primary,#ffffff)]">{rev.patient}</p>
+                    <p className="text-[10px] text-[var(--theme-accent-primary,#22d3ee)]">{rev.type}</p>
                   </div>
                   <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[9px] font-bold text-emerald-300 border border-emerald-500/30">
                     {rev.verified}
@@ -1732,16 +1732,16 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 10. INTERACTIVE FAQ ACCORDION                                             */}
       {/* ========================================================================= */}
-      <section id="faq" className="py-20 sm:py-28 relative bg-[#07131b] border-t border-white/10">
+      <section id="faq" className="py-20 sm:py-28 relative bg-[var(--theme-bg-base,#07131b)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-cyan-300">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#06b6d4)]/30 bg-[var(--theme-accent-primary,#06b6d4)]/10 px-4 py-1.5 text-xs font-bold tracking-widest uppercase text-[var(--theme-accent-primary,#22d3ee)]">
               Clear Answers
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#ffffff)] tracking-tight">
               Frequently Asked Questions.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base">
               Everything you need to know about our comfort amenities, billing, and scheduling.
             </p>
           </div>
@@ -1752,16 +1752,16 @@ export function NorthStarDental() {
               return (
                 <div
                   key={item.question}
-                  className="rounded-2xl border border-white/10 bg-gradient-to-r from-[#0a1e2b] to-[#071520] overflow-hidden transition-colors"
+                  className="rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-gradient-to-r from-[var(--theme-bg-card,#0a1e2b)] to-[var(--theme-bg-surface,#071520)] overflow-hidden transition-colors"
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between p-5 text-left text-sm sm:text-base font-bold text-white hover:text-cyan-300 transition-colors"
+                    className="w-full flex items-center justify-between p-5 text-left text-sm sm:text-base font-bold text-[var(--theme-text-primary,#ffffff)] hover:text-[var(--theme-accent-primary,#22d3ee)] transition-colors cursor-pointer"
                   >
                     <span>{item.question}</span>
                     <span
-                      className={`ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-cyan-300 transition-transform ${
+                      className={`ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-[var(--theme-accent-primary,#22d3ee)] transition-transform ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     >
@@ -1770,7 +1770,7 @@ export function NorthStarDental() {
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-3">
+                    <div className="px-5 pb-5 text-xs sm:text-sm text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed border-t border-[var(--theme-border,rgba(255,255,255,0.05))] pt-3">
                       {item.answer}
                     </div>
                   )}
@@ -1784,25 +1784,25 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 11. LUXURY FOOTER                                                         */}
       {/* ========================================================================= */}
-      <footer className="bg-[#050c12] border-t border-white/10 py-16 text-slate-400 text-xs">
+      <footer className="bg-[var(--theme-bg-dark,#050c12)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))] py-16 text-[var(--theme-text-secondary,#94a3b8)] text-xs">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-white font-black text-base">
-                <Sparkles size={18} className="text-cyan-400" />
+              <div className="flex items-center gap-2 text-[var(--theme-text-primary,#ffffff)] font-black text-base">
+                <Sparkles size={18} className="text-[var(--theme-accent-primary,#06b6d4)]" />
                 <span>NORTHSTAR STUDIO DENTAL</span>
               </div>
-              <p className="text-slate-400 leading-relaxed">
+              <p className="text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                 Elevating oral healthcare through precision 3D technology, zero-fear sensory comfort, and master cosmetic artistry.
               </p>
-              <div className="text-cyan-400 font-semibold">
+              <div className="text-[var(--theme-accent-primary,#22d3ee)] font-semibold">
                 (555) 018-7442 · concierge@northstardental.com
               </div>
             </div>
 
             <div className="space-y-3">
-              <p className="font-bold uppercase tracking-wider text-white">Studio Location</p>
-              <p className="leading-relaxed">
+              <p className="font-bold uppercase tracking-wider text-[var(--theme-text-primary,#ffffff)]">Studio Location</p>
+              <p className="leading-relaxed text-[var(--theme-text-secondary,#cbd5e1)]">
                 NorthStar Plaza Suite 300<br />
                 410 Northstar Avenue<br />
                 Metropolitan District, MD 20852
@@ -1811,19 +1811,19 @@ export function NorthStarDental() {
             </div>
 
             <div className="space-y-3">
-              <p className="font-bold uppercase tracking-wider text-white">Studio Hours</p>
+              <p className="font-bold uppercase tracking-wider text-[var(--theme-text-primary,#ffffff)]">Studio Hours</p>
               <div className="space-y-1">
                 <div className="flex justify-between">
                   <span>Monday – Thursday:</span>
-                  <span className="text-white">7:30 AM – 7:00 PM</span>
+                  <span className="text-[var(--theme-text-primary,#ffffff)]">7:30 AM – 7:00 PM</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Friday:</span>
-                  <span className="text-white">7:30 AM – 5:00 PM</span>
+                  <span className="text-[var(--theme-text-primary,#ffffff)]">7:30 AM – 5:00 PM</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Saturday:</span>
-                  <span className="text-white">8:30 AM – 2:00 PM</span>
+                  <span className="text-[var(--theme-text-primary,#ffffff)]">8:30 AM – 2:00 PM</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Sunday:</span>
@@ -1833,18 +1833,18 @@ export function NorthStarDental() {
             </div>
 
             <div className="space-y-3">
-              <p className="font-bold uppercase tracking-wider text-white">Quick Access</p>
+              <p className="font-bold uppercase tracking-wider text-[var(--theme-text-primary,#ffffff)]">Quick Access</p>
               <div className="flex flex-col space-y-1.5">
-                <a href="#studio-bento" className="hover:text-cyan-300">Curated Bento Treatments</a>
-                <a href="#smile-reveal" className="hover:text-cyan-300">Smile Transformation Reveal</a>
-                <a href="#pricing-calc" className="hover:text-cyan-300">Insurance & Copay Calculator</a>
-                <a href="#booking-suite" className="hover:text-cyan-300">Reserve Online Chair</a>
-                <Link to="/" className="text-cyan-400 hover:underline">← Back to 100Web Directory</Link>
+                <a href="#studio-bento" className="hover:text-[var(--theme-accent-primary,#22d3ee)] transition-colors">Curated Bento Treatments</a>
+                <a href="#smile-reveal" className="hover:text-[var(--theme-accent-primary,#22d3ee)] transition-colors">Smile Transformation Reveal</a>
+                <a href="#pricing-calc" className="hover:text-[var(--theme-accent-primary,#22d3ee)] transition-colors">Insurance & Copay Calculator</a>
+                <a href="#booking-suite" className="hover:text-[var(--theme-accent-primary,#22d3ee)] transition-colors">Reserve Online Chair</a>
+                <Link to="/" className="text-[var(--theme-accent-primary,#22d3ee)] hover:underline">← Back to 100Web Directory</Link>
               </div>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div className="pt-8 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[var(--theme-text-secondary,#64748b)]">
             <p>© {new Date().getFullYear()} NorthStar Studio Dental Care, PLLC. All Rights Reserved.</p>
             <div className="flex gap-4">
               <span>HIPAA Compliant</span>
@@ -1858,7 +1858,7 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {/* 12. FLOATING MOBILE CONCIERGE DOCK                                        */}
       {/* ========================================================================= */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#081722]/95 border-t border-white/10 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--theme-bg-surface,#081722)]/95 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden">
         <div className="flex items-center gap-2">
           <a
             href="tel:5550187442"
@@ -1875,7 +1875,7 @@ export function NorthStarDental() {
               setBookingSubmitted(false);
               setIsBookingOpen(true);
             }}
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 py-2.5 text-xs font-black text-[#07131b] shadow-md shadow-cyan-500/25 active:scale-95"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#06b6d4)] via-[var(--theme-accent-secondary,#2dd4bf)] to-emerald-400 py-2.5 text-xs font-black text-[#07131b] shadow-md shadow-cyan-500/25 active:scale-95 cursor-pointer"
           >
             <Calendar size={14} strokeWidth={2.5} />
             <span>Book Chair</span>
@@ -1888,31 +1888,31 @@ export function NorthStarDental() {
       {/* ========================================================================= */}
       {isBookingOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-lg rounded-3xl border border-white/20 bg-[#091a26] p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
+          <div className="relative w-full max-w-lg rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-card,#091a26)] p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh]">
             <button
               type="button"
               onClick={() => setIsBookingOpen(false)}
-              className="absolute top-5 right-5 text-slate-400 hover:text-white"
+              className="absolute top-5 right-5 text-[var(--theme-text-secondary,#94a3b8)] hover:text-[var(--theme-text-primary,#ffffff)] cursor-pointer"
             >
               <X size={20} />
             </button>
 
             <div className="mb-4">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-cyan-400">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--theme-accent-primary,#22d3ee)]">
                 Direct Studio Concierge
               </span>
-              <h3 className="text-xl font-black text-white mt-1">
+              <h3 className="text-xl font-black text-[var(--theme-text-primary,#ffffff)] mt-1">
                 Reserve Studio Appointment
               </h3>
             </div>
 
             <div className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-300 font-bold mb-1">Reason for Visit</label>
+                <label className="block text-[var(--theme-text-secondary,#cbd5e1)] font-bold mb-1">Reason for Visit</label>
                 <select
                   value={bookingTreatment}
                   onChange={(e) => setBookingTreatment(e.target.value)}
-                  className="w-full rounded-xl border border-white/20 bg-[#07131b] px-3 py-2.5 text-white"
+                  className="w-full rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-base,#07131b)] px-3 py-2.5 text-[var(--theme-text-primary,#ffffff)] focus:border-[var(--theme-accent-primary,#06b6d4)] focus:outline-none"
                 >
                   <option value="Routine Exam & 3D Scan">Routine Exam & 3D Scan</option>
                   <option value="Same-Day Emergency Relief">Same-Day Emergency Relief</option>
@@ -1923,11 +1923,11 @@ export function NorthStarDental() {
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold mb-1">Preferred Doctor</label>
+                <label className="block text-[var(--theme-text-secondary,#cbd5e1)] font-bold mb-1">Preferred Doctor</label>
                 <select
                   value={bookingDoctor}
                   onChange={(e) => setBookingDoctor(e.target.value)}
-                  className="w-full rounded-xl border border-white/20 bg-[#07131b] px-3 py-2.5 text-white"
+                  className="w-full rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-base,#07131b)] px-3 py-2.5 text-[var(--theme-text-primary,#ffffff)] focus:border-[var(--theme-accent-primary,#06b6d4)] focus:outline-none"
                 >
                   <option value="First Available Doctor">First Available Doctor (Fastest)</option>
                   <option value="Dr. Marcus Morgan, DDS">Dr. Marcus Morgan, DDS</option>
@@ -1938,23 +1938,23 @@ export function NorthStarDental() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1">Full Name</label>
+                  <label className="block text-[var(--theme-text-secondary,#cbd5e1)] font-bold mb-1">Full Name</label>
                   <input
                     type="text"
                     value={patientName}
                     onChange={(e) => setPatientName(e.target.value)}
                     placeholder="Your Name"
-                    className="w-full rounded-xl border border-white/20 bg-[#07131b] px-3 py-2.5 text-white"
+                    className="w-full rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-base,#07131b)] px-3 py-2.5 text-[var(--theme-text-primary,#ffffff)] focus:border-[var(--theme-accent-primary,#06b6d4)] focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1">Phone Number</label>
+                  <label className="block text-[var(--theme-text-secondary,#cbd5e1)] font-bold mb-1">Phone Number</label>
                   <input
                     type="tel"
                     value={patientPhone}
                     onChange={(e) => setPatientPhone(e.target.value)}
                     placeholder="(555) 000-0000"
-                    className="w-full rounded-xl border border-white/20 bg-[#07131b] px-3 py-2.5 text-white"
+                    className="w-full rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-base,#07131b)] px-3 py-2.5 text-[var(--theme-text-primary,#ffffff)] focus:border-[var(--theme-accent-primary,#06b6d4)] focus:outline-none"
                   />
                 </div>
               </div>
@@ -1967,7 +1967,7 @@ export function NorthStarDental() {
                     const el = document.getElementById("booking-suite");
                     if (el) el.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="w-full rounded-xl bg-gradient-to-r from-cyan-400 to-teal-400 py-3 text-xs font-black text-[#07131b] hover:scale-105 transition-all shadow-md"
+                  className="w-full rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#06b6d4)] to-[var(--theme-accent-secondary,#2dd4bf)] py-3 text-xs font-black text-[#07131b] hover:scale-105 transition-all shadow-md cursor-pointer"
                 >
                   Proceed to Time Slot Selection
                 </button>

@@ -206,7 +206,7 @@ const reviews = [
 ];
 
 const ServiceIcon = ({ icon: Icon }: { icon: LucideIcon }) => (
-  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#fffaf4] text-[#a4613e] ring-1 ring-[#eadccd]">
+  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--theme-bg-surface,#fffaf4)] text-[var(--theme-accent-primary,#a4613e)] ring-1 ring-[var(--theme-border,#eadccd)]">
     <Icon aria-hidden="true" size={21} strokeWidth={1.9} />
   </span>
 );
@@ -231,24 +231,24 @@ export function ClearSkinDermatology() {
     setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
 
   return (
-    <main className="bg-[#fbf7f1] text-[#2b2520]">
+    <main className="bg-[var(--theme-bg-base,#fbf7f1)] text-[var(--theme-text-primary,#2b2520)] transition-colors duration-300">
       <SubWebsiteNav
         brand="ClearSkin Dermatology"
         links={navLinks}
         ctaLabel="Book Consultation"
         ctaHref="#contact"
         collectionPath="/medical"
-        className="border-b border-[#e8ded2] bg-[#fffaf4]/94 text-[#2b2520] shadow-sm shadow-[#2b2520]/5"
-        brandClassName="font-serif text-lg tracking-normal text-[#6e4a38]"
-        linkClassName="rounded-full px-3 py-2 text-[#71645b] transition hover:bg-[#f2e7dc] hover:text-[#6e4a38]"
-        activeLinkClassName="active bg-[#f2e7dc] text-[#6e4a38]"
-        ctaClassName="bg-[#6e4a38] text-white shadow-lg shadow-[#6e4a38]/18 hover:bg-[#8a5b43]"
-        activeCtaClassName="active ring-2 ring-[#c78b5f] ring-offset-2"
-        menuButtonClassName="border-[#e8ded2] bg-[#fffaf4] text-[#6e4a38] hover:bg-[#f2e7dc]"
-        mobilePanelClassName="border border-[#e8ded2] bg-[#fffaf4]"
+        className="border-b border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-surface,#fffaf4)]/94 text-[var(--theme-text-primary,#2b2520)] shadow-sm shadow-black/5"
+        brandClassName="font-serif text-lg tracking-normal text-[var(--theme-accent-primary,#6e4a38)]"
+        linkClassName="rounded-full px-3 py-2 text-[var(--theme-text-secondary,#71645b)] transition hover:bg-[var(--theme-bg-surface,#f2e7dc)] hover:text-[var(--theme-accent-primary,#6e4a38)]"
+        activeLinkClassName="active bg-[var(--theme-bg-surface,#f2e7dc)] text-[var(--theme-accent-primary,#6e4a38)]"
+        ctaClassName="bg-[var(--theme-accent-primary,#6e4a38)] text-[var(--theme-accent-contrast,#ffffff)] shadow-lg shadow-black/15 hover:bg-[var(--theme-accent-hover,#8a5b43)]"
+        activeCtaClassName="active ring-2 ring-[var(--theme-accent-primary,#c78b5f)] ring-offset-2"
+        menuButtonClassName="border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-surface,#fffaf4)] text-[var(--theme-accent-primary,#6e4a38)] hover:bg-[var(--theme-bg-surface,#f2e7dc)]"
+        mobilePanelClassName="border border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-surface,#fffaf4)]"
       />
 
-      <section className="relative isolate -mt-16 min-h-screen overflow-hidden bg-[#2b2520] pt-32 text-white md:pt-36">
+      <section className="relative isolate -mt-16 min-h-screen overflow-hidden bg-[var(--theme-bg-dark,#2b2520)] pt-32 text-white md:pt-36">
         {heroSlides.map((slide, index) => (
           <img
             key={slide.image}
@@ -266,7 +266,7 @@ export function ClearSkinDermatology() {
 
         <Container className="flex min-h-[calc(100vh-8rem)] flex-col justify-center gap-8 py-10">
           <div className="mx-auto max-w-5xl text-center">
-            <p className="inline-flex items-center justify-center gap-2 border border-white/28 bg-white/12 px-4 py-2 text-sm font-black uppercase text-[#f1d6c1] shadow-sm backdrop-blur">
+            <p className="inline-flex items-center justify-center gap-2 border border-white/28 bg-white/12 px-4 py-2 text-sm font-black uppercase text-[var(--theme-accent-secondary,#f1d6c1)] shadow-sm backdrop-blur">
               <Sparkles aria-hidden="true" size={17} /> Medical skin care and
               consultation flow
             </p>
@@ -282,7 +282,7 @@ export function ClearSkinDermatology() {
               <CTAButton
                 href="#contact"
                 size="lg"
-                className="rounded-full bg-[#d8b08e] text-[#2b2520] hover:bg-white"
+                className="rounded-full bg-[var(--theme-accent-primary,#d8b08e)] text-[var(--theme-accent-contrast,#2b2520)] hover:bg-white"
               >
                 Book Consultation
               </CTAButton>
@@ -300,7 +300,7 @@ export function ClearSkinDermatology() {
 
           <div className="mx-auto grid w-full max-w-6xl gap-4 lg:grid-cols-[0.78fr_1.44fr_0.78fr] lg:items-end">
             <div className="rounded-[1.5rem] border border-white/18 bg-white/12 p-5 shadow-2xl shadow-black/18 backdrop-blur">
-              <p className="text-xs font-black uppercase text-[#f1d6c1]">
+              <p className="text-xs font-black uppercase text-[var(--theme-accent-secondary,#f1d6c1)]">
                 {activeSlide.label}
               </p>
               <p className="mt-3 text-sm leading-7 text-white/76">
@@ -316,7 +316,7 @@ export function ClearSkinDermatology() {
                     onClick={() => setActiveHeroSlide(index)}
                     className={`h-2.5 rounded-full transition ${
                       index === activeHeroSlide
-                        ? "w-8 bg-[#d8b08e]"
+                        ? "w-8 bg-[var(--theme-accent-primary,#d8b08e)]"
                         : "w-2.5 bg-white/42 hover:bg-white/72"
                     }`}
                   />
@@ -332,7 +332,7 @@ export function ClearSkinDermatology() {
                 >
                   <CheckCircle
                     aria-hidden="true"
-                    className="mx-auto mb-2 text-[#d8b08e]"
+                    className="mx-auto mb-2 text-[var(--theme-accent-secondary,#d8b08e)]"
                     size={18}
                   />
                   {point}
@@ -340,8 +340,8 @@ export function ClearSkinDermatology() {
               ))}
             </div>
 
-            <div className="border border-white/22 bg-white/90 p-5 text-[#2b2520] shadow-2xl shadow-black/18 backdrop-blur">
-              <p className="text-xs font-black uppercase text-[#a4613e]">
+            <div className="border border-white/22 bg-[var(--theme-bg-card,#ffffff)]/90 p-5 text-[var(--theme-text-primary,#2b2520)] shadow-2xl shadow-black/18 backdrop-blur">
+              <p className="text-xs font-black uppercase text-[var(--theme-accent-primary,#a4613e)]">
                 Consultation card
               </p>
               <div className="mt-4 grid gap-3">
@@ -351,10 +351,10 @@ export function ClearSkinDermatology() {
                       key={step}
                       className="grid grid-cols-[2rem_1fr] items-center gap-3"
                     >
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f2e7dc] text-xs font-black text-[#6e4a38]">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--theme-bg-surface,#f2e7dc)] text-xs font-black text-[var(--theme-accent-primary,#6e4a38)]">
                         {index + 1}
                       </span>
-                      <span className="font-bold text-[#2b2520]">{step}</span>
+                      <span className="font-bold text-[var(--theme-text-primary,#2b2520)]">{step}</span>
                     </div>
                   ),
                 )}
@@ -379,7 +379,7 @@ export function ClearSkinDermatology() {
               type="button"
               aria-label="Next hero image"
               onClick={showNextSlide}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#d8b08e] text-[#2b2520] transition hover:bg-white"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[var(--theme-accent-primary,#d8b08e)] text-[var(--theme-accent-contrast,#2b2520)] transition hover:bg-white"
             >
               <ChevronRight aria-hidden="true" size={20} />
             </button>
@@ -389,38 +389,38 @@ export function ClearSkinDermatology() {
 
       <section
         id="services"
-        className="border-y border-[#e8ded2] bg-[#fffaf4] py-20 md:py-28"
+        className="border-y border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-surface,#fffaf4)] py-20 md:py-28"
       >
         <Container>
-          <div className="mb-12 grid gap-8 border-b border-[#e8ded2] pb-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div className="mb-12 grid gap-8 border-b border-[var(--theme-border,#e8ded2)] pb-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a5b43]">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-hover,#8a5b43)]">
                 Services
               </p>
-              <h2 className="mt-4 max-w-3xl font-serif text-4xl leading-tight text-[#2b2520] md:text-6xl">
+              <h2 className="mt-4 max-w-3xl font-serif text-4xl leading-tight text-[var(--theme-text-primary,#2b2520)] md:text-6xl">
                 Dermatology care with clear guidance.
               </h2>
             </div>
             <img
               src={imageUrl("medical/clearskin/acne-care.webp")}
               alt="Medical skincare consultation detail"
-              className="h-64 w-full object-cover shadow-xl shadow-[#6e4a38]/10"
+              className="h-64 w-full object-cover shadow-xl shadow-black/10"
             />
           </div>
-          <div className="grid gap-0 border-x border-[#e8ded2] bg-white md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-0 border-x border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-card,#ffffff)] md:grid-cols-2 xl:grid-cols-3">
             {services.map(({ title, text, icon }) => (
               <article
                 key={title}
-                className="border-b border-r border-[#e8ded2] bg-white p-6 transition duration-300 hover:bg-[#fbf7f1]"
+                className="border-b border-r border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-card,#ffffff)] p-6 transition duration-300 hover:bg-[var(--theme-bg-base,#fbf7f1)]"
               >
                 <div className="mb-6 flex items-center justify-between gap-4">
                   <ServiceIcon icon={icon} />
-                  <span className="h-px flex-1 bg-[#e8ded2]" />
+                  <span className="h-px flex-1 bg-[var(--theme-border,#e8ded2)]" />
                 </div>
-                <h3 className="font-serif text-2xl leading-tight text-[#2b2520]">
+                <h3 className="font-serif text-2xl leading-tight text-[var(--theme-text-primary,#2b2520)]">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[#6f6258]">{text}</p>
+                <p className="mt-3 text-sm leading-7 text-[var(--theme-text-secondary,#6f6258)]">{text}</p>
               </article>
             ))}
           </div>
@@ -429,12 +429,12 @@ export function ClearSkinDermatology() {
 
       <section
         id="consultation-flow"
-        className="bg-[#2b2520] py-20 text-white md:py-28"
+        className="bg-[var(--theme-bg-dark,#2b2520)] py-20 text-white md:py-28"
       >
         <Container>
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d8b08e]">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-secondary,#d8b08e)]">
                 Consultation flow
               </p>
               <h2 className="mt-4 font-serif text-4xl leading-tight md:text-6xl">
@@ -459,7 +459,7 @@ export function ClearSkinDermatology() {
                   key={title}
                   className="grid gap-4 border-b border-white/16 p-6 last:border-b-0 md:grid-cols-[8rem_1fr] md:items-start"
                 >
-                  <span className="font-serif text-6xl leading-none text-[#d8b08e]">
+                  <span className="font-serif text-6xl leading-none text-[var(--theme-accent-secondary,#d8b08e)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -477,38 +477,38 @@ export function ClearSkinDermatology() {
         </Container>
       </section>
 
-      <section id="resources" className="bg-[#fbf7f1] py-20 md:py-28">
+      <section id="resources" className="bg-[var(--theme-bg-base,#fbf7f1)] py-20 md:py-28">
         <Container>
           <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a5b43]">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-hover,#8a5b43)]">
                 Skin resources
               </p>
-              <h2 className="mt-4 font-serif text-4xl leading-tight text-[#2b2520] md:text-5xl">
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#2b2520)] md:text-5xl">
                 Helpful skin care resources before and after your visit.
               </h2>
             </div>
-            <p className="max-w-xl text-base leading-8 text-[#6f6258]">
+            <p className="max-w-xl text-base leading-8 text-[var(--theme-text-secondary,#6f6258)]">
               A magazine-style resource shelf keeps preparation, product notes,
               and follow-up questions easy to scan without turning into
               diagnosis advice.
             </p>
           </div>
           <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="grid gap-0 border border-[#e8ded2] bg-white">
+            <div className="grid gap-0 border border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-card,#ffffff)]">
               {resources.slice(0, 3).map((resource, index) => (
                 <article
                   key={resource}
-                  className="grid gap-4 border-b border-[#e8ded2] p-6 last:border-b-0 sm:grid-cols-[4rem_1fr]"
+                  className="grid gap-4 border-b border-[var(--theme-border,#e8ded2)] p-6 last:border-b-0 sm:grid-cols-[4rem_1fr]"
                 >
-                  <span className="font-serif text-4xl text-[#a4613e]">
+                  <span className="font-serif text-4xl text-[var(--theme-accent-primary,#a4613e)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h3 className="font-serif text-2xl leading-tight text-[#2b2520]">
+                    <h3 className="font-serif text-2xl leading-tight text-[var(--theme-text-primary,#2b2520)]">
                       {resource}
                     </h3>
-                    <p className="mt-3 text-sm leading-7 text-[#6f6258]">
+                    <p className="mt-3 text-sm leading-7 text-[var(--theme-text-secondary,#6f6258)]">
                       General preparation prompt for dermatology conversations
                       and follow-up clarity.
                     </p>
@@ -520,17 +520,17 @@ export function ClearSkinDermatology() {
               {resources.slice(3).map((resource) => (
                 <article
                   key={resource}
-                  className="border border-[#e8ded2] bg-[#fffaf4] p-6"
+                  className="border border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-surface,#fffaf4)] p-6"
                 >
                   <FileText
                     aria-hidden="true"
-                    className="text-[#a4613e]"
+                    className="text-[var(--theme-accent-primary,#a4613e)]"
                     size={22}
                   />
-                  <h3 className="mt-5 font-serif text-2xl leading-tight text-[#2b2520]">
+                  <h3 className="mt-5 font-serif text-2xl leading-tight text-[var(--theme-text-primary,#2b2520)]">
                     {resource}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[#6f6258]">
+                  <p className="mt-3 text-sm leading-7 text-[var(--theme-text-secondary,#6f6258)]">
                     A concise note for visit planning, routine context, and
                     clinic communication.
                   </p>
@@ -541,22 +541,22 @@ export function ClearSkinDermatology() {
         </Container>
       </section>
 
-      <section className="border-y border-[#e8ded2] bg-white py-20 md:py-28">
+      <section className="border-y border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-surface,#ffffff)] py-20 md:py-28">
         <Container className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-stretch">
-          <div className="flex flex-col justify-between border-l-4 border-[#c78b5f] pl-6 lg:py-4">
+          <div className="flex flex-col justify-between border-l-4 border-[var(--theme-accent-primary,#c78b5f)] pl-6 lg:py-4">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a5b43]">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-hover,#8a5b43)]">
                 Medical skin care
               </p>
-              <h2 className="mt-4 font-serif text-4xl leading-tight text-[#2b2520] md:text-6xl">
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#2b2520)] md:text-6xl">
                 Clinical guidance without the confusion.
               </h2>
-              <p className="mt-6 text-lg leading-8 text-[#6f6258]">
+              <p className="mt-6 text-lg leading-8 text-[var(--theme-text-secondary,#6f6258)]">
                 A provider-led approach keeps skin care conversations practical,
                 specific, and easy to understand.
               </p>
             </div>
-            <div className="mt-10 divide-y divide-[#e8ded2] border-y border-[#e8ded2]">
+            <div className="mt-10 divide-y divide-[var(--theme-border,#e8ded2)] border-y border-[var(--theme-border,#e8ded2)]">
               {featurePoints.map((point) => (
                 <div key={point} className="flex items-center gap-4 py-5">
                   <CheckCircle
@@ -564,7 +564,7 @@ export function ClearSkinDermatology() {
                     className="shrink-0 text-[#778463]"
                     size={20}
                   />
-                  <span className="font-bold leading-6 text-[#2b2520]">
+                  <span className="font-bold leading-6 text-[var(--theme-text-primary,#2b2520)]">
                     {point}
                   </span>
                 </div>
@@ -574,23 +574,23 @@ export function ClearSkinDermatology() {
           <img
             src={imageUrl("medical/clearskin/medical-skin-care.webp")}
             alt="Medical skin care consultation"
-            className="h-[36rem] w-full object-cover shadow-xl shadow-[#6e4a38]/10"
+            className="h-[36rem] w-full object-cover shadow-xl shadow-black/10"
           />
         </Container>
       </section>
 
-      <section id="providers" className="bg-[#eee5da] py-20 md:py-28">
+      <section id="providers" className="bg-[var(--theme-bg-surface,#eee5da)] py-20 md:py-28">
         <Container>
-          <div className="mb-12 grid gap-6 border-b border-[#d9c8b9] pb-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <div className="mb-12 grid gap-6 border-b border-[var(--theme-border,#d9c8b9)] pb-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a5b43]">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-hover,#8a5b43)]">
                 Providers
               </p>
-              <h2 className="mt-4 font-serif text-4xl leading-tight text-[#2b2520] md:text-6xl">
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#2b2520)] md:text-6xl">
                 Dermatology providers focused on clarity.
               </h2>
             </div>
-            <p className="max-w-3xl text-lg leading-8 text-[#6f6258]">
+            <p className="max-w-3xl text-lg leading-8 text-[var(--theme-text-secondary,#6f6258)]">
               Provider cards emphasize calm communication, clear consultation
               steps, and practical dermatology guidance.
             </p>
@@ -599,27 +599,27 @@ export function ClearSkinDermatology() {
             <img
               src={imageUrl("medical/clearskin/team.webp")}
               alt="ClearSkin Dermatology provider team"
-              className="h-full min-h-[32rem] w-full object-cover shadow-xl shadow-[#6e4a38]/10"
+              className="h-full min-h-[32rem] w-full object-cover shadow-xl shadow-black/10"
             />
-            <div className="grid border-y border-[#d9c8b9] bg-white">
+            <div className="grid border-y border-[var(--theme-border,#d9c8b9)] bg-[var(--theme-bg-card,#ffffff)]">
               {providers.map(({ name, role, bio }) => (
                 <article
                   key={name}
-                  className="grid gap-5 border-b border-[#d9c8b9] p-6 last:border-b-0 sm:grid-cols-[3rem_1fr]"
+                  className="grid gap-5 border-b border-[var(--theme-border,#d9c8b9)] p-6 last:border-b-0 sm:grid-cols-[3rem_1fr]"
                 >
                   <Users
                     aria-hidden="true"
-                    className="mt-1 text-[#a4613e]"
+                    className="mt-1 text-[var(--theme-accent-primary,#a4613e)]"
                     size={24}
                   />
                   <div>
-                    <h3 className="font-serif text-3xl leading-tight text-[#2b2520]">
+                    <h3 className="font-serif text-3xl leading-tight text-[var(--theme-text-primary,#2b2520)]">
                       {name}
                     </h3>
-                    <p className="mt-1 text-xs font-black uppercase tracking-[0.16em] text-[#8a5b43]">
+                    <p className="mt-1 text-xs font-black uppercase tracking-[0.16em] text-[var(--theme-accent-hover,#8a5b43)]">
                       {role}
                     </p>
-                    <p className="mt-4 text-sm leading-7 text-[#6f6258]">
+                    <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#6f6258)]">
                       {bio}
                     </p>
                   </div>
@@ -630,31 +630,31 @@ export function ClearSkinDermatology() {
         </Container>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-[var(--theme-bg-surface,#ffffff)] py-20 md:py-28">
         <Container className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a5b43]">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-hover,#8a5b43)]">
               Clinic environment
             </p>
-            <h2 className="mt-4 font-serif text-4xl leading-tight text-[#2b2520] md:text-6xl">
+            <h2 className="mt-4 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#2b2520)] md:text-6xl">
               A calm space for focused skin care.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-[#6f6258]">
+            <p className="mt-5 text-lg leading-8 text-[var(--theme-text-secondary,#6f6258)]">
               A refined, private setting for consultations, skin checks, care
               planning, and follow-up conversations.
             </p>
-            <div className="mt-10 grid border border-[#e8ded2] md:grid-cols-3 lg:grid-cols-1">
+            <div className="mt-10 grid border border-[var(--theme-border,#e8ded2)] md:grid-cols-3 lg:grid-cols-1">
               {environmentPoints.map((point) => (
                 <div
                   key={point}
-                  className="flex items-center gap-3 border-b border-[#e8ded2] bg-[#fbf7f1] p-5 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 lg:border-b lg:border-r-0 lg:last:border-b-0"
+                  className="flex items-center gap-3 border-b border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-base,#fbf7f1)] p-5 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 lg:border-b lg:border-r-0 lg:last:border-b-0"
                 >
                   <CheckCircle
                     aria-hidden="true"
                     className="text-[#778463]"
                     size={20}
                   />
-                  <span className="font-bold leading-6 text-[#2b2520]">
+                  <span className="font-bold leading-6 text-[var(--theme-text-primary,#2b2520)]">
                     {point}
                   </span>
                 </div>
@@ -664,93 +664,93 @@ export function ClearSkinDermatology() {
           <img
             src={imageUrl("medical/clearskin/room.webp")}
             alt="Clean dermatology treatment room"
-            className="h-[34rem] w-full object-cover shadow-xl shadow-[#6e4a38]/10"
+            className="h-[34rem] w-full object-cover shadow-xl shadow-black/10"
           />
         </Container>
       </section>
 
-      <section id="visit-info" className="bg-[#fbf7f1] py-20 md:py-28">
+      <section id="visit-info" className="bg-[var(--theme-bg-base,#fbf7f1)] py-20 md:py-28">
         <Container>
-          <div className="mb-12 grid gap-8 border-b border-[#e8ded2] pb-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div className="mb-12 grid gap-8 border-b border-[var(--theme-border,#e8ded2)] pb-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a5b43]">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-hover,#8a5b43)]">
                 Visit info
               </p>
-              <h2 className="mt-4 font-serif text-4xl leading-tight text-[#2b2520] md:text-5xl">
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#2b2520)] md:text-5xl">
                 Practical details before your appointment.
               </h2>
             </div>
             <img
               src={imageUrl("medical/clearskin/skin-screening.webp")}
               alt="Dermatology skin screening visit"
-              className="h-56 w-full object-cover shadow-xl shadow-[#6e4a38]/10"
+              className="h-56 w-full object-cover shadow-xl shadow-black/10"
             />
           </div>
-          <div className="grid gap-0 border-l border-t border-[#e8ded2] md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-0 border-l border-t border-[var(--theme-border,#e8ded2)] md:grid-cols-2 lg:grid-cols-3">
             {visitDetails.map(([title, text], index) => (
               <article
                 key={title}
-                className="border-b border-r border-[#e8ded2] bg-white p-6"
+                className="border-b border-r border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-card,#ffffff)] p-6"
               >
                 <div className="flex items-center justify-between gap-4">
                   <ShieldCheck
                     aria-hidden="true"
-                    className="text-[#a4613e]"
+                    className="text-[var(--theme-accent-primary,#a4613e)]"
                     size={22}
                   />
-                  <span className="font-serif text-3xl text-[#d9c8b9]">
+                  <span className="font-serif text-3xl text-[var(--theme-border,#d9c8b9)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="mt-6 font-serif text-2xl leading-tight text-[#2b2520]">
+                <h3 className="mt-6 font-serif text-2xl leading-tight text-[var(--theme-text-primary,#2b2520)]">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[#6f6258]">{text}</p>
+                <p className="mt-3 text-sm leading-7 text-[var(--theme-text-secondary,#6f6258)]">{text}</p>
               </article>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-[var(--theme-bg-surface,#ffffff)] py-20 md:py-28">
         <Container className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a5b43]">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-hover,#8a5b43)]">
               Appointment access
             </p>
-            <h2 className="mt-4 font-serif text-4xl leading-tight text-[#2b2520] md:text-5xl">
+            <h2 className="mt-4 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#2b2520)] md:text-5xl">
               Choose the right skin-care visit with less guesswork.
             </h2>
             <img
               src={imageUrl("medical/clearskin/appointment.webp")}
               alt="Dermatology appointment access"
-              className="mt-8 h-72 w-full object-cover shadow-xl shadow-[#6e4a38]/10"
+              className="mt-8 h-72 w-full object-cover shadow-xl shadow-black/10"
             />
             <div className="mt-8">
               <CTAButton
                 href="#contact"
                 size="lg"
-                className="rounded-full bg-[#6e4a38] text-white hover:bg-[#8a5b43]"
+                className="rounded-full bg-[var(--theme-accent-primary,#6e4a38)] text-[var(--theme-accent-contrast,#ffffff)] hover:bg-[var(--theme-accent-hover,#8a5b43)]"
               >
                 Book Consultation
               </CTAButton>
             </div>
           </div>
-          <div className="grid gap-0 border border-[#e8ded2] sm:grid-cols-2">
+          <div className="grid gap-0 border border-[var(--theme-border,#e8ded2)] sm:grid-cols-2">
             {appointmentTypes.map((type, index) => (
               <div
                 key={type}
-                className="flex min-h-28 items-center gap-4 border-b border-[#e8ded2] bg-[#fbf7f1] p-5 sm:border-r even:sm:border-r-0"
+                className="flex min-h-28 items-center gap-4 border-b border-[var(--theme-border,#e8ded2)] bg-[var(--theme-bg-base,#fbf7f1)] p-5 sm:border-r even:sm:border-r-0"
               >
                 <CalendarCheck
                   aria-hidden="true"
-                  className="text-[#a4613e]"
+                  className="text-[var(--theme-accent-primary,#a4613e)]"
                   size={20}
                 />
-                <span className="font-serif text-2xl leading-tight text-[#2b2520]">
+                <span className="font-serif text-2xl leading-tight text-[var(--theme-text-primary,#2b2520)]">
                   {type}
                 </span>
-                <span className="ml-auto self-start font-serif text-2xl text-[#d9c8b9]">
+                <span className="ml-auto self-start font-serif text-2xl text-[var(--theme-border,#d9c8b9)]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -759,33 +759,33 @@ export function ClearSkinDermatology() {
         </Container>
       </section>
 
-      <section id="reviews" className="bg-[#eee5da] py-20 md:py-28">
+      <section id="reviews" className="bg-[var(--theme-bg-surface,#eee5da)] py-20 md:py-28">
         <Container>
           <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#8a5b43]">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-hover,#8a5b43)]">
                 Reviews
               </p>
-              <h2 className="mt-4 font-serif text-4xl leading-tight text-[#2b2520] md:text-5xl">
+              <h2 className="mt-4 font-serif text-4xl leading-tight text-[var(--theme-text-primary,#2b2520)] md:text-5xl">
                 Patients value clear dermatology conversations.
               </h2>
             </div>
             <img
               src={imageUrl("medical/clearskin/skin-consultation.webp")}
               alt="Dermatology skin consultation"
-              className="h-56 w-full object-cover shadow-xl shadow-[#6e4a38]/10"
+              className="h-56 w-full object-cover shadow-xl shadow-black/10"
             />
           </div>
-          <div className="grid gap-0 border-l border-t border-[#d9c8b9] md:grid-cols-3">
+          <div className="grid gap-0 border-l border-t border-[var(--theme-border,#d9c8b9)] md:grid-cols-3">
             {reviews.map(({ name, quote }) => (
               <blockquote
                 key={name}
-                className="border-b border-r border-[#d9c8b9] bg-white p-7"
+                className="border-b border-r border-[var(--theme-border,#d9c8b9)] bg-[var(--theme-bg-card,#ffffff)] p-7"
               >
-                <p className="font-serif text-6xl leading-none text-[#a4613e]">
+                <p className="font-serif text-6xl leading-none text-[var(--theme-accent-primary,#a4613e)]">
                   &ldquo;
                 </p>
-                <p className="mt-2 font-serif text-2xl leading-9 text-[#2b2520]">
+                <p className="mt-2 font-serif text-2xl leading-9 text-[var(--theme-text-primary,#2b2520)]">
                   {quote}
                 </p>
                 <footer className="mt-6 text-xs font-black uppercase tracking-[0.16em] text-[#778463]">
@@ -799,7 +799,7 @@ export function ClearSkinDermatology() {
 
       <section
         id="contact"
-        className="relative isolate overflow-hidden bg-[#2b2520] py-20 text-white md:py-28"
+        className="relative isolate overflow-hidden bg-[var(--theme-bg-dark,#2b2520)] py-20 text-white md:py-28"
       >
         <img
           src={imageUrl("medical/clearskin/cta.webp")}
@@ -809,7 +809,7 @@ export function ClearSkinDermatology() {
         />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(43,37,32,0.96),rgba(43,37,32,0.74))]" />
         <Container className="max-w-5xl">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#d8b08e]">
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--theme-accent-secondary,#d8b08e)]">
             Start here
           </p>
           <h2 className="mt-4 max-w-4xl font-serif text-4xl leading-tight md:text-6xl">
@@ -824,7 +824,7 @@ export function ClearSkinDermatology() {
             <CTAButton
               href="mailto:hello@clearskin.example"
               size="lg"
-              className="rounded-full bg-[#d8b08e] text-[#2b2520] hover:bg-white"
+              className="rounded-full bg-[var(--theme-accent-primary,#d8b08e)] text-[var(--theme-accent-contrast,#2b2520)] hover:bg-white"
             >
               Book Consultation
             </CTAButton>
@@ -846,7 +846,7 @@ export function ClearSkinDermatology() {
         </Container>
       </section>
 
-      <footer className="bg-[#1b1714] py-12 text-white">
+      <footer className="bg-[var(--theme-bg-dark,#1b1714)] py-12 text-white">
         <Container>
           <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr_1fr]">
             <div>
@@ -902,7 +902,7 @@ export function ClearSkinDermatology() {
               <p className="flex gap-3">
                 <MapPin
                   aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#d8b08e]"
+                  className="mt-0.5 shrink-0 text-[var(--theme-accent-secondary,#d8b08e)]"
                   size={18}
                 />
                 <span>265 ClearSkin Lane, Suite 310</span>
@@ -910,7 +910,7 @@ export function ClearSkinDermatology() {
               <p className="flex gap-3">
                 <Clock
                   aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#d8b08e]"
+                  className="mt-0.5 shrink-0 text-[var(--theme-accent-secondary,#d8b08e)]"
                   size={18}
                 />
                 <span>Monday-Friday, 8 AM-6 PM</span>
@@ -918,7 +918,7 @@ export function ClearSkinDermatology() {
               <p className="flex gap-3">
                 <CalendarCheck
                   aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#d8b08e]"
+                  className="mt-0.5 shrink-0 text-[var(--theme-accent-secondary,#d8b08e)]"
                   size={18}
                 />
                 <span>Saturday, 9 AM-1 PM</span>
@@ -926,7 +926,7 @@ export function ClearSkinDermatology() {
               <p className="flex gap-3">
                 <Phone
                   aria-hidden="true"
-                  className="mt-0.5 shrink-0 text-[#d8b08e]"
+                  className="mt-0.5 shrink-0 text-[var(--theme-accent-secondary,#d8b08e)]"
                   size={18}
                 />
                 <a href="tel:5550116942" className="hover:text-white">

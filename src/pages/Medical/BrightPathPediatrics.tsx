@@ -406,7 +406,7 @@ export function BrightPathPediatrics() {
   };
 
   return (
-    <main className="min-h-screen bg-[#faf8f5] font-sans text-slate-800 antialiased selection:bg-amber-300 selection:text-blue-900">
+    <main className="min-h-screen bg-[var(--theme-bg-base,#faf8f5)] font-sans text-slate-800 antialiased selection:bg-amber-300 selection:text-blue-900 transition-colors duration-300">
       {/* ========================================================================= */}
       {/* 1. ARCHITECTURAL FROSTED IVORY CAPSULE NAVBAR                             */}
       {/* ========================================================================= */}
@@ -423,10 +423,10 @@ export function BrightPathPediatrics() {
                 <Baby size={18} className="stroke-[2.5]" />
               </Link>
               <a href="#hero" className="flex flex-col">
-                <span className="text-xs sm:text-sm font-black tracking-tight text-[#18253e] flex items-center gap-1 leading-tight">
-                  BRIGHTPATH <span className="text-[#2f65b8] font-black hidden min-[380px]:inline">PEDIATRICS</span>
+                <span className="text-xs sm:text-sm font-black tracking-tight text-[var(--theme-text-primary,#18253e)] flex items-center gap-1 leading-tight">
+                  BRIGHTPATH <span className="text-[var(--theme-accent-primary,#2f65b8)] font-black hidden min-[380px]:inline">PEDIATRICS</span>
                 </span>
-                <span className="text-[9px] uppercase font-extrabold tracking-widest text-[#2f65b8] hidden md:inline leading-none mt-0.5">
+                <span className="text-[9px] uppercase font-extrabold tracking-widest text-[var(--theme-accent-primary,#2f65b8)] hidden md:inline leading-none mt-0.5">
                   Children & Family Health
                 </span>
               </a>
@@ -442,8 +442,8 @@ export function BrightPathPediatrics() {
                     href={link.href}
                     className={`relative rounded-full px-2.5 py-1 text-[11px] xl:px-3.5 xl:py-1.5 xl:text-xs font-bold tracking-wide whitespace-nowrap transition-all duration-200 ${
                       isActive
-                        ? "bg-gradient-to-r from-[#2f65b8] to-[#1e40af] text-white shadow-sm"
-                        : "text-slate-600 hover:text-[#2f65b8] hover:bg-white"
+                        ? "bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] to-[var(--theme-accent-secondary,#1e40af)] text-white shadow-sm"
+                        : "text-slate-600 hover:text-[var(--theme-accent-primary,#2f65b8)] hover:bg-white"
                     }`}
                   >
                     {link.label}
@@ -457,17 +457,17 @@ export function BrightPathPediatrics() {
               {/* Full phone pill on large desktop */}
               <a
                 href="tel:5550193267"
-                className="hidden xl:flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-1.5 text-xs font-bold text-[#2f65b8] hover:bg-blue-100 transition-colors"
+                className="hidden xl:flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-1.5 text-xs font-bold text-[var(--theme-accent-primary,#2f65b8)] hover:bg-blue-100 transition-colors"
                 title="Immediate Pediatric Front Desk"
               >
-                <Phone size={13} className="text-[#2f65b8]" />
+                <Phone size={13} className="text-[var(--theme-accent-primary,#2f65b8)]" />
                 <span>(555) 019-3267</span>
               </a>
 
               {/* Compact phone button on sm to lg screens */}
               <a
                 href="tel:5550193267"
-                className="hidden sm:flex xl:hidden items-center justify-center h-8 w-8 rounded-full border border-blue-200 bg-blue-50 text-[#2f65b8] hover:bg-blue-100 transition-colors"
+                className="hidden sm:flex xl:hidden items-center justify-center h-8 w-8 rounded-full border border-blue-200 bg-blue-50 text-[var(--theme-accent-primary,#2f65b8)] hover:bg-blue-100 transition-colors"
                 title="Call Pediatric Clinic"
               >
                 <Phone size={14} />
@@ -477,7 +477,7 @@ export function BrightPathPediatrics() {
               <button
                 type="button"
                 onClick={() => handleStartBooking()}
-                className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#2f65b8] via-[#2555a3] to-[#1e40af] px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-black text-white shadow-lg shadow-blue-900/20 transition-all duration-200 hover:scale-105 active:scale-95"
+                className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] via-[var(--theme-accent-secondary,#2555a3)] to-[var(--theme-accent-secondary,#1e40af)] px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-black text-white shadow-lg shadow-blue-900/20 transition-all duration-200 hover:scale-105 active:scale-95"
               >
                 <Calendar size={13} strokeWidth={2.5} className="sm:w-[14px] sm:h-[14px]" />
                 <span className="hidden min-[400px]:inline">Book Child Visit</span>
@@ -518,8 +518,8 @@ export function BrightPathPediatrics() {
                     <Baby size={16} className="stroke-[2.5]" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xs font-black tracking-wider text-[#18253e]">
-                      BRIGHTPATH <span className="text-[#2f65b8]">PEDIATRICS</span>
+                    <span className="text-xs font-black tracking-wider text-[var(--theme-text-primary,#18253e)]">
+                      BRIGHTPATH <span className="text-[var(--theme-accent-primary,#2f65b8)]">PEDIATRICS</span>
                     </span>
                     <span className="text-[9px] uppercase font-bold text-slate-400">
                       Family Menu Directory
@@ -529,7 +529,7 @@ export function BrightPathPediatrics() {
                 <button
                   type="button"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:text-[#18253e] transition-colors"
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:text-[var(--theme-text-primary,#18253e)] transition-colors"
                 >
                   <X size={16} />
                 </button>
@@ -546,12 +546,12 @@ export function BrightPathPediatrics() {
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold transition-all ${
                         isActive
-                          ? "bg-blue-50 text-[#2f65b8] border border-blue-200"
-                          : "text-slate-700 hover:bg-slate-50 hover:text-[#2f65b8]"
+                          ? "bg-blue-50 text-[var(--theme-accent-primary,#2f65b8)] border border-blue-200"
+                          : "text-slate-700 hover:bg-slate-50 hover:text-[var(--theme-accent-primary,#2f65b8)]"
                       }`}
                     >
                       <span>{link.label}</span>
-                      <ChevronRight size={14} className={isActive ? "text-[#2f65b8]" : "text-slate-400"} />
+                      <ChevronRight size={14} className={isActive ? "text-[var(--theme-accent-primary,#2f65b8)]" : "text-slate-400"} />
                     </a>
                   );
                 })}
@@ -564,7 +564,7 @@ export function BrightPathPediatrics() {
                   setIsMobileMenuOpen(false);
                   handleStartBooking();
                 }}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2f65b8] to-[#1e40af] py-3 text-xs font-black text-white shadow-lg shadow-blue-900/20"
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] to-[var(--theme-accent-secondary,#1e40af)] py-3 text-xs font-black text-white shadow-lg shadow-blue-900/20"
               >
                 <Calendar size={14} strokeWidth={2.5} />
                 <span>Schedule a Child Visit</span>
@@ -581,7 +581,7 @@ export function BrightPathPediatrics() {
                 </p>
                 <a
                   href="tel:5550193267"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2f65b8] py-2.5 text-xs font-bold text-white hover:bg-[#2555a3] transition-colors"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--theme-accent-primary,#2f65b8)] py-2.5 text-xs font-bold text-white hover:bg-[var(--theme-accent-secondary,#2555a3)] transition-colors"
                 >
                   <Phone size={14} /> Call Desk: (555) 019-3267
                 </a>
@@ -589,8 +589,8 @@ export function BrightPathPediatrics() {
             </div>
 
             <div className="pt-5 border-t border-slate-100 text-center text-[11px] text-slate-500 space-y-1">
-              <p className="text-[#18253e] font-semibold">245 Brightpath Lane, Suite 120</p>
-              <p className="text-[#2f65b8] font-bold">Mon–Fri 8am–5pm · Sat 9am–1pm</p>
+              <p className="text-[var(--theme-text-primary,#18253e)] font-semibold">245 Brightpath Lane, Suite 120</p>
+              <p className="text-[var(--theme-accent-primary,#2f65b8)] font-bold">Mon–Fri 8am–5pm · Sat 9am–1pm</p>
             </div>
           </div>
         </div>
@@ -599,7 +599,7 @@ export function BrightPathPediatrics() {
       {/* ========================================================================= */}
       {/* 2. STORYBOOK PLAYGROUND HERO SECTION WITH AGE-STAGE SWITCHER              */}
       {/* ========================================================================= */}
-      <section id="hero" className="relative pt-24 sm:pt-32 pb-14 sm:pb-20 overflow-hidden bg-gradient-to-b from-[#fffefc] via-[#fbf8f2] to-[#faf8f5]">
+      <section id="hero" className="relative pt-24 sm:pt-32 pb-14 sm:pb-20 overflow-hidden bg-gradient-to-b from-[var(--theme-bg-surface,#fffefc)] via-[var(--theme-bg-surface,#fbf8f2)] to-[var(--theme-bg-base,#faf8f5)]">
         {/* Soft Background Playful Orbs */}
         <div className="pointer-events-none absolute -top-28 -right-28 h-[600px] w-[600px] rounded-full bg-blue-200/35 blur-[140px]" />
         <div className="pointer-events-none absolute top-36 -left-28 h-[500px] w-[500px] rounded-full bg-amber-200/45 blur-[130px]" />
@@ -611,7 +611,7 @@ export function BrightPathPediatrics() {
               <Sparkles size={14} className="text-amber-600" />
               <span>Family-First Pediatric Practice · Welcoming Newborns & New Families</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 text-xs font-bold text-[#2f65b8]">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 text-xs font-bold text-[var(--theme-accent-primary,#2f65b8)]">
               <Star size={13} className="fill-amber-400 text-amber-400" />
               <span>4.98 Rating · 620+ Verified Local Parent Reviews</span>
             </span>
@@ -619,9 +619,9 @@ export function BrightPathPediatrics() {
 
           {/* Warm Pediatric Main Headline */}
           <div className="mx-auto max-w-4xl text-center space-y-4">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#18253e] leading-[1.12]">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[var(--theme-text-primary,#18253e)] leading-[1.12]">
               Pediatric care as{" "}
-              <span className="bg-gradient-to-r from-[#2f65b8] via-[#2555a3] to-[#1e40af] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] via-[var(--theme-accent-secondary,#2555a3)] to-[var(--theme-accent-secondary,#1e40af)] bg-clip-text text-transparent">
                 gentle & cheerful
               </span>{" "}
               as childhood itself.
@@ -646,8 +646,8 @@ export function BrightPathPediatrics() {
                       onClick={() => setHeroStageId(stage.id)}
                       className={`flex items-center gap-2 rounded-2xl px-3.5 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm font-extrabold transition-all duration-300 active:scale-95 ${
                         isActive
-                          ? "bg-gradient-to-r from-[#2f65b8] to-[#1e40af] text-white shadow-md shadow-blue-900/25 ring-2 ring-amber-300 scale-105"
-                          : "bg-slate-50 text-slate-700 hover:bg-blue-50 hover:text-[#2f65b8]"
+                          ? "bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] to-[var(--theme-accent-secondary,#1e40af)] text-white shadow-md shadow-blue-900/25 ring-2 ring-amber-300 scale-105"
+                          : "bg-slate-50 text-slate-700 hover:bg-blue-50 hover:text-[var(--theme-accent-primary,#2f65b8)]"
                       }`}
                     >
                       <span className="text-base sm:text-lg">{stage.emoji}</span>
@@ -679,10 +679,10 @@ export function BrightPathPediatrics() {
                       {currentHeroStage.emoji}
                     </span>
                     <div>
-                      <h3 className="text-lg font-black text-[#18253e]">
+                      <h3 className="text-lg font-black text-[var(--theme-text-primary,#18253e)]">
                         {currentHeroStage.label} ({currentHeroStage.age})
                       </h3>
-                      <p className="text-xs font-bold text-[#2f65b8]">
+                      <p className="text-xs font-bold text-[var(--theme-accent-primary,#2f65b8)]">
                         {currentHeroStage.badge}
                       </p>
                     </div>
@@ -703,13 +703,13 @@ export function BrightPathPediatrics() {
 
                 {/* Stage Care Highlights */}
                 <div className="space-y-2.5 rounded-2xl bg-blue-50/70 p-4 border border-blue-100/80">
-                  <div className="text-[11px] font-black uppercase tracking-wider text-[#2f65b8]">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2f65b8)]">
                     What Parents Appreciate Most:
                   </div>
                   <div className="space-y-1.5">
                     {currentHeroStage.highlights.map((h) => (
                       <div key={h} className="flex items-center gap-2 text-xs text-slate-700">
-                        <CheckCircle2 size={15} className="text-[#2f65b8] shrink-0" />
+                        <CheckCircle2 size={15} className="text-[var(--theme-accent-primary,#2f65b8)] shrink-0" />
                         <span className="font-semibold">{h}</span>
                       </div>
                     ))}
@@ -723,7 +723,7 @@ export function BrightPathPediatrics() {
                     onClick={() =>
                       handleStartBooking(currentHeroStage.visitType, currentHeroStage.provider)
                     }
-                    className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#2f65b8] to-[#1e40af] py-3.5 text-sm font-black text-white shadow-lg shadow-blue-900/20 hover:from-[#2555a3] hover:to-[#17338a] transition-all hover:-translate-y-0.5 active:translate-y-0"
+                    className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] to-[var(--theme-accent-secondary,#1e40af)] py-3.5 text-sm font-black text-white shadow-lg shadow-blue-900/20 hover:from-[#2555a3] hover:to-[#17338a] transition-all hover:-translate-y-0.5 active:translate-y-0"
                   >
                     <Calendar size={16} />
                     <span>Schedule {currentHeroStage.label} Visit</span>
@@ -731,8 +731,8 @@ export function BrightPathPediatrics() {
                   </button>
 
                   <div className="flex items-center justify-between text-xs text-slate-500 px-1 pt-1">
-                    <span>Next Slot: <strong className="text-[#18253e]">{currentHeroStage.nextSlot}</strong></span>
-                    <a href="tel:5550193267" className="font-bold text-[#2f65b8] hover:underline">
+                    <span>Next Slot: <strong className="text-[var(--theme-text-primary,#18253e)]">{currentHeroStage.nextSlot}</strong></span>
+                    <a href="tel:5550193267" className="font-bold text-[var(--theme-accent-primary,#2f65b8)] hover:underline">
                       (555) 019-3267
                     </a>
                   </div>
@@ -756,10 +756,10 @@ export function BrightPathPediatrics() {
                     alt={`${currentHeroStage.label} care at BrightPath Pediatrics`}
                     className="h-[360px] w-full object-cover sm:h-[460px] md:h-[500px] lg:h-[540px] xl:h-[580px] transition-all duration-700 hover:scale-[1.02]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#18253e]/80 via-[#18253e]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-dark,#18253e)]/80 via-[var(--theme-bg-dark,#18253e)]/20 to-transparent" />
 
                   {/* Top-Left Live Status Badge */}
-                  <div className="absolute top-3.5 left-3.5 sm:top-5 sm:left-5 flex items-center gap-2 rounded-full border border-white/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-[#18253e] shadow-lg backdrop-blur-md">
+                  <div className="absolute top-3.5 left-3.5 sm:top-5 sm:left-5 flex items-center gap-2 rounded-full border border-white/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-[var(--theme-text-primary,#18253e)] shadow-lg backdrop-blur-md">
                     <span className="relative flex h-2.5 w-2.5">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                       <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
@@ -768,20 +768,20 @@ export function BrightPathPediatrics() {
                   </div>
 
                   {/* Top-Right Rapid Triage Pill */}
-                  <div className="hidden sm:flex absolute top-5 right-5 items-center gap-1.5 rounded-full border border-white/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-[#2f65b8] shadow-lg backdrop-blur-md">
+                  <div className="hidden sm:flex absolute top-5 right-5 items-center gap-1.5 rounded-full border border-white/80 bg-white/95 px-3.5 py-1.5 text-xs font-bold text-[var(--theme-accent-primary,#2f65b8)] shadow-lg backdrop-blur-md">
                     <Clock size={13} className="text-amber-500" />
                     <span>Same-Day Sick Care Reserved</span>
                   </div>
 
                   {/* Bottom Overlay Card: Provider & Slot */}
-                  <div className="absolute right-3 bottom-3 left-3 sm:right-5 sm:bottom-5 sm:left-auto sm:max-w-md rounded-2xl border border-white/80 bg-white/95 p-4 text-[#18253e] shadow-2xl backdrop-blur-xl sm:p-5">
+                  <div className="absolute right-3 bottom-3 left-3 sm:right-5 sm:bottom-5 sm:left-auto sm:max-w-md rounded-2xl border border-white/80 bg-white/95 p-4 text-[var(--theme-text-primary,#18253e)] shadow-2xl backdrop-blur-xl sm:p-5">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-[#2f65b8]">
+                        <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2f65b8)]">
                           <span className="h-2 w-2 rounded-full bg-emerald-500" />
                           <span>Recommended Clinician</span>
                         </div>
-                        <h2 className="mt-0.5 text-sm font-black sm:text-base text-[#18253e]">
+                        <h2 className="mt-0.5 text-sm font-black sm:text-base text-[var(--theme-text-primary,#18253e)]">
                           {currentHeroStage.provider}
                         </h2>
                         <p className="mt-0.5 text-xs text-slate-500">
@@ -793,7 +793,7 @@ export function BrightPathPediatrics() {
                         onClick={() =>
                           handleStartBooking(currentHeroStage.visitType, currentHeroStage.provider)
                         }
-                        className="shrink-0 rounded-xl bg-gradient-to-r from-[#2f65b8] to-[#1e40af] px-3.5 py-2 text-xs font-bold text-white shadow-md hover:from-[#2555a3] hover:to-[#17338a] transition active:scale-95"
+                        className="shrink-0 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] to-[var(--theme-accent-secondary,#1e40af)] px-3.5 py-2 text-xs font-bold text-white shadow-md hover:from-[#2555a3] hover:to-[#17338a] transition active:scale-95"
                       >
                         Claim Slot
                       </button>
@@ -808,19 +808,19 @@ export function BrightPathPediatrics() {
                   <Smile size={22} />
                 </div>
                 <div className="text-xs">
-                  <div className="font-extrabold text-[#18253e]">Zero Cold Instruments</div>
+                  <div className="font-extrabold text-[var(--theme-text-primary,#18253e)]">Zero Cold Instruments</div>
                   <div className="text-slate-500">Warm stethoscopes & calm sensory exam suites</div>
                 </div>
               </div>
 
               {/* Top-Right Floating Rating Badge */}
-              <div className="hidden xl:flex absolute -top-4 -right-4 items-center gap-2 rounded-2xl border border-slate-200 bg-white/98 px-3.5 py-2 text-[#18253e] shadow-2xl backdrop-blur-md">
+              <div className="hidden xl:flex absolute -top-4 -right-4 items-center gap-2 rounded-2xl border border-slate-200 bg-white/98 px-3.5 py-2 text-[var(--theme-text-primary,#18253e)] shadow-2xl backdrop-blur-md">
                 <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
                   <Star size={16} className="fill-amber-500 text-amber-500" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-[#18253e] leading-tight">4.98 Parent Rating</div>
-                  <div className="text-[10px] text-[#2f65b8] font-semibold">Top Rated Pediatric Clinic</div>
+                  <div className="text-xs font-bold text-[var(--theme-text-primary,#18253e)] leading-tight">4.98 Parent Rating</div>
+                  <div className="text-[10px] text-[var(--theme-accent-primary,#2f65b8)] font-semibold">Top Rated Pediatric Clinic</div>
                 </div>
               </div>
             </div>
@@ -833,17 +833,17 @@ export function BrightPathPediatrics() {
                 <Star size={18} className="fill-amber-500 text-amber-500" />
               </div>
               <div>
-                <div className="text-sm font-black text-[#18253e] leading-tight">4.98 / 5.0</div>
+                <div className="text-sm font-black text-[var(--theme-text-primary,#18253e)] leading-tight">4.98 / 5.0</div>
                 <div className="text-[11px] text-slate-500">620+ Parent Reviews</div>
               </div>
             </div>
 
             <div className="flex items-center gap-3 rounded-2xl bg-white p-3.5 border border-blue-200/80 shadow-xs">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-[#2f65b8]">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-[var(--theme-accent-primary,#2f65b8)]">
                 <Clock size={18} />
               </div>
               <div>
-                <div className="text-sm font-black text-[#18253e] leading-tight">Same-Day</div>
+                <div className="text-sm font-black text-[var(--theme-text-primary,#18253e)] leading-tight">Same-Day</div>
                 <div className="text-[11px] text-slate-500">Sick Slots Daily</div>
               </div>
             </div>
@@ -853,7 +853,7 @@ export function BrightPathPediatrics() {
                 <ShieldCheck size={18} />
               </div>
               <div>
-                <div className="text-sm font-black text-[#18253e] leading-tight">FAAP MDs</div>
+                <div className="text-sm font-black text-[var(--theme-text-primary,#18253e)] leading-tight">FAAP MDs</div>
                 <div className="text-[11px] text-slate-500">Board-Certified</div>
               </div>
             </div>
@@ -863,7 +863,7 @@ export function BrightPathPediatrics() {
                 <Heart size={18} />
               </div>
               <div>
-                <div className="text-sm font-black text-[#18253e] leading-tight">Ages 0–18</div>
+                <div className="text-sm font-black text-[var(--theme-text-primary,#18253e)] leading-tight">Ages 0–18</div>
                 <div className="text-[11px] text-slate-500">Newborn to Teen</div>
               </div>
             </div>
@@ -877,10 +877,10 @@ export function BrightPathPediatrics() {
       <section id="services" className="py-20 sm:py-28 bg-white border-t border-b border-slate-200/70">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[#2f65b8]">
+            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#2f65b8)]">
               Family-First Care Portfolio
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#18253e] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#18253e)] tracking-tight">
               Gentle Pediatric Services, Organized as a Modern Bento.
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
@@ -900,7 +900,7 @@ export function BrightPathPediatrics() {
                     $0 Copay on Most Insurances
                   </span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#18253e]">
+                <h3 className="text-2xl sm:text-3xl font-black text-[var(--theme-text-primary,#18253e)]">
                   Newborn Wellness & Infant Feeding Suite
                 </h3>
                 <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
@@ -909,15 +909,15 @@ export function BrightPathPediatrics() {
 
                 <div className="rounded-2xl bg-white/90 border border-amber-200/80 p-4 space-y-2 text-xs">
                   <div className="flex items-center gap-2 text-slate-800">
-                    <CheckCircle2 size={15} className="text-[#2f65b8] shrink-0" />
+                    <CheckCircle2 size={15} className="text-[var(--theme-accent-primary,#2f65b8)] shrink-0" />
                     <span>Protected infant waiting room zone (zero contact with sick children)</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-800">
-                    <CheckCircle2 size={15} className="text-[#2f65b8] shrink-0" />
+                    <CheckCircle2 size={15} className="text-[var(--theme-accent-primary,#2f65b8)] shrink-0" />
                     <span>Certified lactation and formula feeding roadmaps</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-800">
-                    <CheckCircle2 size={15} className="text-[#2f65b8] shrink-0" />
+                    <CheckCircle2 size={15} className="text-[var(--theme-accent-primary,#2f65b8)] shrink-0" />
                     <span>Direct phone access to on-call pediatrician for newborn questions</span>
                   </div>
                 </div>
@@ -928,7 +928,7 @@ export function BrightPathPediatrics() {
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Newborn First Checkup (2–5 Days)", "Dr. Emily Carter, MD, FAAP")}
-                  className="rounded-xl bg-[#2f65b8] px-5 py-2.5 text-xs font-extrabold text-white hover:bg-[#2555a3] transition-colors shadow-md"
+                  className="rounded-xl bg-[var(--theme-accent-primary,#2f65b8)] px-5 py-2.5 text-xs font-extrabold text-white hover:bg-[var(--theme-accent-secondary,#2555a3)] transition-colors shadow-md"
                 >
                   Schedule Newborn Exam
                 </button>
@@ -945,7 +945,7 @@ export function BrightPathPediatrics() {
                   </span>
                   <span className="text-xs font-bold text-rose-600">Reserved Today</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-[#18253e]">
+                <h3 className="text-xl sm:text-2xl font-black text-[var(--theme-text-primary,#18253e)]">
                   Rapid Sick Visit & Prescription Triage
                 </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -980,16 +980,16 @@ export function BrightPathPediatrics() {
             <div className="md:col-span-4 rounded-3xl border border-blue-200 bg-gradient-to-br from-[#f8fbff] to-[#eff6ff] p-6 flex flex-col justify-between shadow-md hover:shadow-xl transition-all duration-300">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-black text-[#2f65b8]">
+                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-black text-[var(--theme-accent-primary,#2f65b8)]">
                     Wellness Care
                   </span>
                   <span className="text-xs text-slate-500">Ages 1–18</span>
                 </div>
-                <h3 className="text-xl font-black text-[#18253e]">Well-Child Milestones</h3>
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#18253e)]">Well-Child Milestones</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">
                   Full physical checkup, speech and motor development reviews, nutrition guidance, and gentle tear-free vaccines.
                 </p>
-                <div className="text-xs text-[#2f65b8] font-bold">
+                <div className="text-xs text-[var(--theme-accent-primary,#2f65b8)] font-bold">
                   Includes full digital growth curve sent to your phone app
                 </div>
               </div>
@@ -999,7 +999,7 @@ export function BrightPathPediatrics() {
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Well-Child Preventive Exam", "Dr. Noah Williams, MD, FAAP")}
-                  className="rounded-xl border border-blue-300 bg-white px-4 py-2 text-xs font-bold text-[#2f65b8] hover:bg-blue-50"
+                  className="rounded-xl border border-blue-300 bg-white px-4 py-2 text-xs font-bold text-[var(--theme-accent-primary,#2f65b8)] hover:bg-blue-50"
                 >
                   Book Checkup
                 </button>
@@ -1015,7 +1015,7 @@ export function BrightPathPediatrics() {
                   </span>
                   <span className="text-xs text-emerald-700 font-bold">Fast Forms</span>
                 </div>
-                <h3 className="text-xl font-black text-[#18253e]">School & Sports Physicals</h3>
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#18253e)]">School & Sports Physicals</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">
                   Cardiovascular clearance, vision screenings, joint range-of-motion, and state athletic forms stamped the exact same day.
                 </p>
@@ -1045,7 +1045,7 @@ export function BrightPathPediatrics() {
                   </span>
                   <span className="text-xs text-slate-500">Ages 11–18</span>
                 </div>
-                <h3 className="text-xl font-black text-[#18253e]">Teen Health & Wellness</h3>
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#18253e)]">Teen Health & Wellness</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">
                   Confidential private discussions, acne management, sports injury prevention, and compassionate mental health screenings.
                 </p>
@@ -1072,13 +1072,13 @@ export function BrightPathPediatrics() {
       {/* ========================================================================= */}
       {/* 4. INTERACTIVE MILESTONES & CDC VACCINE PLAYGROUND                        */}
       {/* ========================================================================= */}
-      <section id="milestones" className="py-20 sm:py-28 bg-[#faf8f5]">
+      <section id="milestones" className="py-20 sm:py-28 bg-[var(--theme-bg-base,#faf8f5)]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
             <span className="rounded-full border border-amber-300 bg-amber-100 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-amber-900">
               Interactive Parent Guide
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#18253e] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#18253e)] tracking-tight">
               Childhood Growth & Vaccine Roadmap.
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
@@ -1097,7 +1097,7 @@ export function BrightPathPediatrics() {
                   onClick={() => setActiveMilestoneAge(m.id)}
                   className={`rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-black transition-all ${
                     isSelected
-                      ? "bg-[#2f65b8] text-white shadow-md shadow-blue-900/20 ring-2 ring-amber-300 scale-105"
+                      ? "bg-[var(--theme-accent-primary,#2f65b8)] text-white shadow-md shadow-blue-900/20 ring-2 ring-amber-300 scale-105"
                       : "bg-white text-slate-700 hover:bg-blue-50 border border-slate-200"
                   }`}
                 >
@@ -1111,17 +1111,17 @@ export function BrightPathPediatrics() {
           <div className="mx-auto max-w-4xl rounded-3xl border border-amber-200 bg-white p-6 sm:p-10 shadow-xl space-y-8">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
               <div>
-                <span className="text-xs font-black uppercase tracking-wider text-[#2f65b8]">
+                <span className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2f65b8)]">
                   Milestone Focus for {currentMilestone.label}
                 </span>
-                <h3 className="text-2xl font-black text-[#18253e] mt-1">
+                <h3 className="text-2xl font-black text-[var(--theme-text-primary,#18253e)] mt-1">
                   {currentMilestone.headline}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => handleStartBooking(`${currentMilestone.label} Well-Child Visit`)}
-                className="rounded-xl bg-[#2f65b8] px-5 py-2.5 text-xs font-black text-white hover:bg-[#2555a3] shadow-md shrink-0"
+                className="rounded-xl bg-[var(--theme-accent-primary,#2f65b8)] px-5 py-2.5 text-xs font-black text-white hover:bg-[var(--theme-accent-secondary,#2555a3)] shadow-md shrink-0"
               >
                 Schedule {currentMilestone.label} Exam
               </button>
@@ -1165,10 +1165,10 @@ export function BrightPathPediatrics() {
             {/* Vaccine & Pediatrician Tip Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
               <div className="rounded-2xl border border-blue-200 bg-blue-50/70 p-4 space-y-1.5">
-                <div className="text-xs font-black uppercase tracking-wider text-[#2f65b8]">
+                <div className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2f65b8)]">
                   CDC Recommended Immunizations:
                 </div>
-                <p className="text-xs sm:text-sm font-bold text-[#18253e]">
+                <p className="text-xs sm:text-sm font-bold text-[var(--theme-text-primary,#18253e)]">
                   {currentMilestone.vaccines}
                 </p>
                 <p className="text-[11px] text-slate-600">
@@ -1195,10 +1195,10 @@ export function BrightPathPediatrics() {
       <section id="the-visit" className="py-20 sm:py-28 bg-white border-t border-b border-slate-200/70">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[#2f65b8]">
+            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#2f65b8)]">
               Child-First Environment
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#18253e] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#18253e)] tracking-tight">
               Why BrightPath is 100% Tear-Free.
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
@@ -1211,17 +1211,17 @@ export function BrightPathPediatrics() {
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-600 text-xl font-black">
                 01
               </div>
-              <h3 className="text-lg font-black text-[#18253e]">1. Warm Stethoscopes</h3>
+              <h3 className="text-lg font-black text-[var(--theme-text-primary,#18253e)]">1. Warm Stethoscopes</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 No icy metal on tiny chests. All instruments are pre-warmed, and doctors let toddlers touch instruments before exams.
               </p>
             </div>
 
             <div className="rounded-3xl border border-slate-200 bg-gradient-to-b from-[#fffefc] to-[#fbf8f2] p-6 space-y-4 shadow-sm hover:shadow-md transition-all">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-[#2f65b8] text-xl font-black">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-[var(--theme-accent-primary,#2f65b8)] text-xl font-black">
                 02
               </div>
-              <h3 className="text-lg font-black text-[#18253e]">2. Bubble Distraction</h3>
+              <h3 className="text-lg font-black text-[var(--theme-text-primary,#18253e)]">2. Bubble Distraction</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Exam suites feature soft LED ceilings, calming bubble wands, and sweet-ease distraction techniques that keep children smiling.
               </p>
@@ -1231,7 +1231,7 @@ export function BrightPathPediatrics() {
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-600 text-xl font-black">
                 03
               </div>
-              <h3 className="text-lg font-black text-[#18253e]">3. Zero Waiting Delay</h3>
+              <h3 className="text-lg font-black text-[var(--theme-text-primary,#18253e)]">3. Zero Waiting Delay</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Check in directly from your smartphone at the curb and head straight into a private exam room with zero crowded lobby exposure.
               </p>
@@ -1241,7 +1241,7 @@ export function BrightPathPediatrics() {
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-100 text-rose-600 text-xl font-black">
                 04
               </div>
-              <h3 className="text-lg font-black text-[#18253e]">4. Treasure Box Prizes</h3>
+              <h3 className="text-lg font-black text-[var(--theme-text-primary,#18253e)]">4. Treasure Box Prizes</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Every child ends their visit with a trip to our legendary treasure chest to pick out stickers, coloring pads, and courage medals.
               </p>
@@ -1253,13 +1253,13 @@ export function BrightPathPediatrics() {
       {/* ========================================================================= */}
       {/* 6. INTERACTIVE SYMPTOM & CARE FINDER TRIAGE WIDGET                       */}
       {/* ========================================================================= */}
-      <section id="navigator" className="py-20 sm:py-28 bg-[#faf8f5]">
+      <section id="navigator" className="py-20 sm:py-28 bg-[var(--theme-bg-base,#faf8f5)]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[#2f65b8]">
+            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#2f65b8)]">
               Interactive Care Finder
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#18253e] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#18253e)] tracking-tight">
               Not Sure Which Appointment You Need?
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
@@ -1282,12 +1282,12 @@ export function BrightPathPediatrics() {
                     onClick={() => setSelectedTriageIdx(idx)}
                     className={`w-full flex items-center justify-between p-4 rounded-2xl text-left border transition-all ${
                       isSelected
-                        ? "border-[#2f65b8] bg-blue-50 text-[#18253e] font-black shadow-sm"
+                        ? "border-[var(--theme-accent-primary,#2f65b8)] bg-blue-50 text-[var(--theme-text-primary,#18253e)] font-black shadow-sm"
                         : "border-slate-200 bg-slate-50/60 text-slate-700 hover:bg-slate-100"
                     }`}
                   >
                     <span className="text-xs sm:text-sm">{item.symptom}</span>
-                    <ChevronRight size={16} className={isSelected ? "text-[#2f65b8]" : "text-slate-400"} />
+                    <ChevronRight size={16} className={isSelected ? "text-[var(--theme-accent-primary,#2f65b8)]" : "text-slate-400"} />
                   </button>
                 );
               })}
@@ -1296,30 +1296,30 @@ export function BrightPathPediatrics() {
             {/* Right: Recommended Care Card */}
             <div className="lg:col-span-5 rounded-3xl border border-blue-200 bg-gradient-to-b from-blue-50/90 to-white p-6 flex flex-col justify-between shadow-sm">
               <div className="space-y-4">
-                <span className="rounded-full bg-[#2f65b8] px-3 py-1 text-[10px] font-black text-white uppercase tracking-wider">
+                <span className="rounded-full bg-[var(--theme-accent-primary,#2f65b8)] px-3 py-1 text-[10px] font-black text-white uppercase tracking-wider">
                   Recommended Visit Format
                 </span>
-                <h4 className="text-xl font-black text-[#18253e] leading-snug">
+                <h4 className="text-xl font-black text-[var(--theme-text-primary,#18253e)] leading-snug">
                   {currentTriage.visitType}
                 </h4>
 
                 <div className="space-y-2 text-xs text-slate-700 border-t border-blue-100 pt-3">
                   <div className="flex justify-between">
                     <span className="text-slate-500">Format:</span>
-                    <span className="font-bold text-[#18253e]">{currentTriage.format}</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#18253e)]">{currentTriage.format}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Timeframe:</span>
-                    <span className="font-bold text-[#2f65b8]">{currentTriage.timeframe}</span>
+                    <span className="font-bold text-[var(--theme-accent-primary,#2f65b8)]">{currentTriage.timeframe}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Suggested Doctor:</span>
-                    <span className="font-bold text-[#18253e]">{currentTriage.recommendedDoc}</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#18253e)]">{currentTriage.recommendedDoc}</span>
                   </div>
                 </div>
 
                 <div className="rounded-xl bg-white border border-blue-200 p-3 text-xs space-y-1">
-                  <span className="font-black text-[#2f65b8] uppercase text-[10px]">Preparation Tip:</span>
+                  <span className="font-black text-[var(--theme-accent-primary,#2f65b8)] uppercase text-[10px]">Preparation Tip:</span>
                   <p className="text-slate-600 leading-relaxed">{currentTriage.prepTip}</p>
                 </div>
               </div>
@@ -1328,7 +1328,7 @@ export function BrightPathPediatrics() {
                 <button
                   type="button"
                   onClick={() => handleStartBooking(currentTriage.visitType, currentTriage.recommendedDoc)}
-                  className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#2f65b8] to-[#1e40af] py-3.5 text-xs font-black text-white shadow-lg shadow-blue-900/20 hover:scale-105 transition-all"
+                  className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] to-[var(--theme-accent-secondary,#1e40af)] py-3.5 text-xs font-black text-white shadow-lg shadow-blue-900/20 hover:scale-105 transition-all"
                 >
                   <Calendar size={14} />
                   <span>Book This Visit</span>
@@ -1345,10 +1345,10 @@ export function BrightPathPediatrics() {
       <section id="providers" className="py-20 sm:py-28 bg-white border-t border-b border-slate-200/70">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[#2f65b8]">
+            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#2f65b8)]">
               Clinical Excellence
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#18253e] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#18253e)] tracking-tight">
               Board-Certified Doctors Who Truly Listen.
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
@@ -1371,7 +1371,7 @@ export function BrightPathPediatrics() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4">
-                      <span className="rounded-full bg-white/90 border border-white/40 px-3 py-1 text-[10px] font-black text-[#2f65b8]">
+                      <span className="rounded-full bg-white/90 border border-white/40 px-3 py-1 text-[10px] font-black text-[var(--theme-accent-primary,#2f65b8)]">
                         {doc.experience}
                       </span>
                     </div>
@@ -1379,8 +1379,8 @@ export function BrightPathPediatrics() {
 
                   <div className="p-6 space-y-3">
                     <div>
-                      <h3 className="text-lg font-black text-[#18253e]">{doc.name}</h3>
-                      <p className="text-xs font-bold text-[#2f65b8]">{doc.role}</p>
+                      <h3 className="text-lg font-black text-[var(--theme-text-primary,#18253e)]">{doc.name}</h3>
+                      <p className="text-xs font-bold text-[var(--theme-accent-primary,#2f65b8)]">{doc.role}</p>
                       <p className="text-[11px] text-slate-500 mt-0.5">{doc.education}</p>
                     </div>
                     <p className="text-xs text-slate-600 leading-relaxed italic">
@@ -1397,7 +1397,7 @@ export function BrightPathPediatrics() {
                   <button
                     type="button"
                     onClick={() => handleStartBooking("Well-Child Preventive Exam", doc.name)}
-                    className="rounded-xl bg-[#2f65b8] px-4 py-2 text-xs font-bold text-white hover:bg-[#2555a3] transition-colors shadow-sm"
+                    className="rounded-xl bg-[var(--theme-accent-primary,#2f65b8)] px-4 py-2 text-xs font-bold text-white hover:bg-[var(--theme-accent-secondary,#2555a3)] transition-colors shadow-sm"
                   >
                     Book with {doc.name.split(" ")[1]}
                   </button>
@@ -1411,13 +1411,13 @@ export function BrightPathPediatrics() {
       {/* ========================================================================= */}
       {/* 8. VERIFIED PARENT REVIEWS & TESTIMONIALS                                */}
       {/* ========================================================================= */}
-      <section id="reviews" className="py-20 sm:py-28 bg-[#faf8f5]">
+      <section id="reviews" className="py-20 sm:py-28 bg-[var(--theme-bg-base,#faf8f5)]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
             <span className="rounded-full border border-amber-300 bg-amber-100 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-amber-900">
               Verified Parent Love
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#18253e] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#18253e)] tracking-tight">
               Loved by Over 620+ Local Families.
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
@@ -1446,8 +1446,8 @@ export function BrightPathPediatrics() {
                 </div>
 
                 <div className="pt-4 border-t border-slate-100">
-                  <p className="text-xs font-black text-[#18253e]">{rev.name}</p>
-                  <p className="text-[11px] text-[#2f65b8] font-bold">{rev.tag}</p>
+                  <p className="text-xs font-black text-[var(--theme-text-primary,#18253e)]">{rev.name}</p>
+                  <p className="text-[11px] text-[var(--theme-accent-primary,#2f65b8)] font-bold">{rev.tag}</p>
                 </div>
               </div>
             ))}
@@ -1461,10 +1461,10 @@ export function BrightPathPediatrics() {
       <section id="faq" className="py-20 sm:py-28 bg-white border-t border-slate-200/70">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[#2f65b8]">
+            <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#2f65b8)]">
               Parent FAQs
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#18253e] tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[var(--theme-text-primary,#18253e)] tracking-tight">
               Frequently Asked Questions.
             </h2>
             <p className="text-slate-600 text-sm sm:text-base">
@@ -1483,12 +1483,12 @@ export function BrightPathPediatrics() {
                   <button
                     type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between p-5 text-left text-sm sm:text-base font-bold text-[#18253e] hover:text-[#2f65b8] transition-colors"
+                    className="w-full flex items-center justify-between p-5 text-left text-sm sm:text-base font-bold text-[var(--theme-text-primary,#18253e)] hover:text-[var(--theme-accent-primary,#2f65b8)] transition-colors"
                   >
                     <span>{faq.q}</span>
                     <span
                       className={`ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-transform ${
-                        isOpen ? "rotate-180 text-[#2f65b8] bg-blue-100" : ""
+                        isOpen ? "rotate-180 text-[var(--theme-accent-primary,#2f65b8)] bg-blue-100" : ""
                       }`}
                     >
                       <ChevronDown size={14} />
@@ -1510,7 +1510,7 @@ export function BrightPathPediatrics() {
       {/* ========================================================================= */}
       {/* 10. WARM PEDIATRIC FOOTER                                                 */}
       {/* ========================================================================= */}
-      <footer className="bg-[#18253e] text-slate-300 py-16 text-xs">
+      <footer className="bg-[var(--theme-bg-dark,#18253e)] text-slate-300 py-16 text-xs">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div className="space-y-4">
@@ -1584,7 +1584,7 @@ export function BrightPathPediatrics() {
         <div className="flex items-center gap-2">
           <a
             href="tel:5550193267"
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-blue-200 bg-blue-50 py-2.5 text-xs font-bold text-[#2f65b8] active:scale-95"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-blue-200 bg-blue-50 py-2.5 text-xs font-bold text-[var(--theme-accent-primary,#2f65b8)] active:scale-95"
           >
             <Phone size={14} />
             <span>Call Clinic</span>
@@ -1593,7 +1593,7 @@ export function BrightPathPediatrics() {
           <button
             type="button"
             onClick={() => handleStartBooking()}
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[#2f65b8] via-[#2555a3] to-[#1e40af] py-2.5 text-xs font-black text-white shadow-md active:scale-95"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] via-[var(--theme-accent-secondary,#2555a3)] to-[var(--theme-accent-secondary,#1e40af)] py-2.5 text-xs font-black text-white shadow-md active:scale-95"
           >
             <Calendar size={14} strokeWidth={2.5} />
             <span>Book Visit</span>
@@ -1618,25 +1618,25 @@ export function BrightPathPediatrics() {
             {!bookingConfirmed ? (
               <div>
                 <div className="mb-6">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#2f65b8]">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[var(--theme-accent-primary,#2f65b8)]">
                     BrightPath Parent Scheduler
                   </span>
-                  <h3 className="text-xl font-black text-[#18253e] mt-0.5">
+                  <h3 className="text-xl font-black text-[var(--theme-text-primary,#18253e)] mt-0.5">
                     Schedule Your Child's Visit
                   </h3>
                 </div>
 
                 {/* Step indicators */}
                 <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100 text-xs">
-                  <span className={`font-bold ${bookingStep >= 1 ? "text-[#2f65b8]" : "text-slate-400"}`}>
+                  <span className={`font-bold ${bookingStep >= 1 ? "text-[var(--theme-accent-primary,#2f65b8)]" : "text-slate-400"}`}>
                     1. Visit & Doctor
                   </span>
                   <ChevronRight size={14} className="text-slate-300" />
-                  <span className={`font-bold ${bookingStep >= 2 ? "text-[#2f65b8]" : "text-slate-400"}`}>
+                  <span className={`font-bold ${bookingStep >= 2 ? "text-[var(--theme-accent-primary,#2f65b8)]" : "text-slate-400"}`}>
                     2. Date & Time
                   </span>
                   <ChevronRight size={14} className="text-slate-300" />
-                  <span className={`font-bold ${bookingStep >= 3 ? "text-[#2f65b8]" : "text-slate-400"}`}>
+                  <span className={`font-bold ${bookingStep >= 3 ? "text-[var(--theme-accent-primary,#2f65b8)]" : "text-slate-400"}`}>
                     3. Child Info
                   </span>
                 </div>
@@ -1648,7 +1648,7 @@ export function BrightPathPediatrics() {
                       <select
                         value={selectedVisitType}
                         onChange={(e) => setSelectedVisitType(e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-slate-800 focus:border-[#2f65b8] focus:outline-none"
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-slate-800 focus:border-[var(--theme-accent-primary,#2f65b8)] focus:outline-none"
                       >
                         <option value="Well-Child Preventive Exam">Well-Child Preventive Exam</option>
                         <option value="Newborn First Checkup (2–5 Days)">Newborn First Checkup (2–5 Days)</option>
@@ -1664,7 +1664,7 @@ export function BrightPathPediatrics() {
                       <select
                         value={selectedProvider}
                         onChange={(e) => setSelectedProvider(e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-slate-800 focus:border-[#2f65b8] focus:outline-none"
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-slate-800 focus:border-[var(--theme-accent-primary,#2f65b8)] focus:outline-none"
                       >
                         <option value="First Available Doctor">First Available Clinician (Fastest)</option>
                         <option value="Dr. Emily Carter, MD, FAAP">Dr. Emily Carter, MD, FAAP (Lead Pediatrician)</option>
@@ -1677,7 +1677,7 @@ export function BrightPathPediatrics() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(2)}
-                        className="rounded-xl bg-[#2f65b8] px-6 py-2.5 font-bold text-white hover:bg-[#2555a3]"
+                        className="rounded-xl bg-[var(--theme-accent-primary,#2f65b8)] px-6 py-2.5 font-bold text-white hover:bg-[var(--theme-accent-secondary,#2555a3)]"
                       >
                         Select Date & Time →
                       </button>
@@ -1697,7 +1697,7 @@ export function BrightPathPediatrics() {
                             onClick={() => setSelectedDay(day)}
                             className={`p-2 rounded-xl text-center font-bold border transition-all ${
                               selectedDay === day
-                                ? "border-[#2f65b8] bg-blue-50 text-[#2f65b8]"
+                                ? "border-[var(--theme-accent-primary,#2f65b8)] bg-blue-50 text-[var(--theme-accent-primary,#2f65b8)]"
                                 : "border-slate-200 bg-slate-50 text-slate-700"
                             }`}
                           >
@@ -1717,7 +1717,7 @@ export function BrightPathPediatrics() {
                             onClick={() => setSelectedTime(time)}
                             className={`p-2 rounded-xl text-center font-bold border transition-all ${
                               selectedTime === time
-                                ? "border-[#2f65b8] bg-blue-50 text-[#2f65b8]"
+                                ? "border-[var(--theme-accent-primary,#2f65b8)] bg-blue-50 text-[var(--theme-accent-primary,#2f65b8)]"
                                 : "border-slate-200 bg-slate-50 text-slate-700"
                             }`}
                           >
@@ -1738,7 +1738,7 @@ export function BrightPathPediatrics() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(3)}
-                        className="rounded-xl bg-[#2f65b8] px-6 py-2.5 font-bold text-white hover:bg-[#2555a3]"
+                        className="rounded-xl bg-[var(--theme-accent-primary,#2f65b8)] px-6 py-2.5 font-bold text-white hover:bg-[var(--theme-accent-secondary,#2555a3)]"
                       >
                         Enter Child's Details →
                       </button>
@@ -1762,7 +1762,7 @@ export function BrightPathPediatrics() {
                         value={childName}
                         onChange={(e) => setChildName(e.target.value)}
                         placeholder="e.g. Leo Parker"
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 focus:border-[#2f65b8] focus:outline-none"
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 focus:border-[var(--theme-accent-primary,#2f65b8)] focus:outline-none"
                       />
                     </div>
 
@@ -1775,7 +1775,7 @@ export function BrightPathPediatrics() {
                           value={parentName}
                           onChange={(e) => setParentName(e.target.value)}
                           placeholder="e.g. Sarah Parker"
-                          className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 focus:border-[#2f65b8] focus:outline-none"
+                          className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 focus:border-[var(--theme-accent-primary,#2f65b8)] focus:outline-none"
                         />
                       </div>
                       <div>
@@ -1786,7 +1786,7 @@ export function BrightPathPediatrics() {
                           value={parentPhone}
                           onChange={(e) => setParentPhone(e.target.value)}
                           placeholder="(555) 000-0000"
-                          className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 focus:border-[#2f65b8] focus:outline-none"
+                          className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 focus:border-[var(--theme-accent-primary,#2f65b8)] focus:outline-none"
                         />
                       </div>
                     </div>
@@ -1794,15 +1794,15 @@ export function BrightPathPediatrics() {
                     <div className="rounded-xl bg-blue-50 border border-blue-200 p-3 space-y-1 text-slate-700">
                       <div className="flex justify-between">
                         <span>Visit:</span>
-                        <span className="font-bold text-[#18253e]">{selectedVisitType}</span>
+                        <span className="font-bold text-[var(--theme-text-primary,#18253e)]">{selectedVisitType}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Doctor:</span>
-                        <span className="font-bold text-[#18253e]">{selectedProvider}</span>
+                        <span className="font-bold text-[var(--theme-text-primary,#18253e)]">{selectedProvider}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Time:</span>
-                        <span className="font-bold text-[#2f65b8]">{selectedDay} at {selectedTime}</span>
+                        <span className="font-bold text-[var(--theme-accent-primary,#2f65b8)]">{selectedDay} at {selectedTime}</span>
                       </div>
                     </div>
 
@@ -1816,7 +1816,7 @@ export function BrightPathPediatrics() {
                       </button>
                       <button
                         type="submit"
-                        className="rounded-xl bg-gradient-to-r from-[#2f65b8] to-[#1e40af] px-6 py-2.5 font-bold text-white shadow-md hover:scale-105 transition-all"
+                        className="rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#2f65b8)] to-[var(--theme-accent-secondary,#1e40af)] px-6 py-2.5 font-bold text-white shadow-md hover:scale-105 transition-all"
                       >
                         Confirm Appointment
                       </button>
@@ -1830,7 +1830,7 @@ export function BrightPathPediatrics() {
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                   <CheckCircle2 size={32} strokeWidth={2.5} />
                 </div>
-                <h3 className="text-2xl font-black text-[#18253e]">
+                <h3 className="text-2xl font-black text-[var(--theme-text-primary,#18253e)]">
                   Child Visit Confirmed!
                 </h3>
                 <p className="text-xs text-slate-600 max-w-sm mx-auto">
@@ -1840,30 +1840,30 @@ export function BrightPathPediatrics() {
                 <div className="rounded-2xl bg-slate-50 border border-slate-200 p-4 text-left text-xs space-y-2">
                   <div className="flex justify-between">
                     <span className="text-slate-500">Child:</span>
-                    <span className="font-bold text-[#18253e]">{childName || "Child Patient"}</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#18253e)]">{childName || "Child Patient"}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Visit Type:</span>
-                    <span className="font-bold text-[#18253e]">{selectedVisitType}</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#18253e)]">{selectedVisitType}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Pediatrician:</span>
-                    <span className="font-bold text-[#18253e]">{selectedProvider}</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#18253e)]">{selectedProvider}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Scheduled Time:</span>
-                    <span className="font-bold text-[#2f65b8]">{selectedDay} · {selectedTime}</span>
+                    <span className="font-bold text-[var(--theme-accent-primary,#2f65b8)]">{selectedDay} · {selectedTime}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Location:</span>
-                    <span className="font-bold text-[#18253e]">245 Brightpath Lane, Suite 120</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#18253e)]">245 Brightpath Lane, Suite 120</span>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setIsBookingOpen(false)}
-                  className="w-full rounded-xl bg-[#18253e] py-3 text-xs font-bold text-white hover:bg-slate-800"
+                  className="w-full rounded-xl bg-[var(--theme-bg-dark,#18253e)] py-3 text-xs font-bold text-white hover:bg-slate-800"
                 >
                   Done & Return to Site
                 </button>

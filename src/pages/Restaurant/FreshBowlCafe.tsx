@@ -284,11 +284,11 @@ export function FreshBowlCafe() {
   }, [goalFilter]);
 
   return (
-    <main className="brand-motion motion-freshbowl min-h-screen bg-[#f5f3ec] text-[#16221b] selection:bg-[#2d5a3c] selection:text-white">
+    <main className="brand-motion motion-freshbowl min-h-screen bg-[var(--theme-bg-base,#f5f3ec)] text-[var(--theme-text-primary,#16221b)] selection:bg-[var(--theme-accent-primary,#2d5a3c)] selection:text-white transition-colors duration-300">
       {/* ── APOTHECARY STATUS TICKER ─────────────────────────────────────── */}
-      <div className="border-b border-[#e2dcce] bg-[#16221b] px-4 py-2.5 text-xs text-[#f5f3ec]">
+      <div className="border-b border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-dark,#16221b)] px-4 py-2.5 text-xs text-[var(--theme-bg-base,#f5f3ec)]">
         <Container className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 font-mono text-[11px] text-[#8fad66]">
+          <div className="flex items-center gap-2 font-mono text-[11px] text-[var(--theme-accent-secondary,#8fad66)]">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-bold">HARVEST DISPENSARY LIVE:</span>
             <span className="text-white/80">Batch #041 Pressed at 5:45 AM Today</span>
@@ -314,12 +314,12 @@ export function FreshBowlCafe() {
         ]}
         ctaLabel="Order for 8-Min Pickup"
         ctaHref="#pickup-card"
-        className="sticky top-0 z-40 border-b border-[#e2dcce] bg-[#f5f3ec]/95 backdrop-blur-md"
-        brandClassName="text-[#2d5a3c] font-black tracking-tight hover:opacity-80 transition"
-        linkClassName="rounded-full px-3.5 py-1.5 text-xs font-bold text-[#4a5e50] hover:bg-[#2d5a3c]/10 hover:text-[#2d5a3c] transition"
-        ctaClassName="rounded-full bg-[#2d5a3c] px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-sm hover:bg-[#1e3e29] transition"
-        menuButtonClassName="border-[#e2dcce] text-[#2d5a3c] hover:bg-[#2d5a3c]/10"
-        mobilePanelClassName="border border-[#e2dcce] bg-[#f5f3ec]"
+        className="sticky top-0 z-40 border-b border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-base,#f5f3ec)]/95 backdrop-blur-md"
+        brandClassName="text-[var(--theme-accent-primary,#2d5a3c)] font-black tracking-tight hover:opacity-80 transition"
+        linkClassName="rounded-full px-3.5 py-1.5 text-xs font-bold text-[var(--theme-text-secondary,#4a5e50)] hover:bg-[var(--theme-accent-primary,#2d5a3c)]/10 hover:text-[var(--theme-accent-primary,#2d5a3c)] transition"
+        ctaClassName="rounded-full bg-[var(--theme-accent-primary,#2d5a3c)] px-4 py-2 text-xs font-black uppercase tracking-wider text-[var(--theme-accent-contrast,#ffffff)] shadow-sm hover:opacity-90 transition"
+        menuButtonClassName="border-[var(--theme-border,#e2dcce)] text-[var(--theme-accent-primary,#2d5a3c)] hover:bg-[var(--theme-accent-primary,#2d5a3c)]/10"
+        mobilePanelClassName="border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#f5f3ec)]"
       />
 
       {/* ── ASYMMETRICAL LIVING FARM HERO ────────────────────────────────── */}
@@ -329,12 +329,12 @@ export function FreshBowlCafe() {
           <div className="mb-6 flex flex-wrap items-center gap-3">
             <Link
               to="/restaurant"
-              className="inline-flex items-center gap-2 rounded-full border border-[#e2dcce] bg-white px-3.5 py-1 text-xs font-bold text-[#4a5e50] shadow-2xs hover:border-[#2d5a3c] hover:text-[#2d5a3c] transition"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] px-3.5 py-1 text-xs font-bold text-[var(--theme-text-secondary,#4a5e50)] shadow-2xs hover:border-[var(--theme-accent-primary,#2d5a3c)] hover:text-[var(--theme-accent-primary,#2d5a3c)] transition"
             >
               <ArrowRight className="h-3 w-3 rotate-180" />
               <span>Restaurant Showcase</span>
             </Link>
-            <span className="rounded-full bg-[#2d5a3c]/10 px-3.5 py-1 text-xs font-black uppercase tracking-wider text-[#2d5a3c]">
+            <span className="rounded-full bg-[var(--theme-accent-primary,#2d5a3c)]/10 px-3.5 py-1 text-xs font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2d5a3c)]">
               Functional Nutrition Kitchen
             </span>
           </div>
@@ -342,11 +342,11 @@ export function FreshBowlCafe() {
           {/* Hero Grid */}
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <h1 className="text-4xl font-black tracking-tight text-[#16221b] sm:text-6xl lg:text-7xl lg:leading-[1.04]">
-                Clean nutrition engineered for your <span className="font-serif italic text-[#2d5a3c]">biology.</span>
+              <h1 className="text-4xl font-black tracking-tight text-[var(--theme-text-primary,#16221b)] sm:text-6xl lg:text-7xl lg:leading-[1.04]">
+                Clean nutrition engineered for your <span className="font-serif italic text-[var(--theme-accent-primary,#2d5a3c)]">biology.</span>
               </h1>
 
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-[#4a5e50] sm:text-lg">
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--theme-text-secondary,#4a5e50)] sm:text-lg">
                 Warm sprouted grain bowls, cold-pressed living juices, and superfood blends formulated with whole plants, pasture-raised proteins, and certified zero industrial seed oils.
               </p>
 
@@ -354,44 +354,44 @@ export function FreshBowlCafe() {
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <a
                   href="#signature"
-                  className="inline-flex items-center gap-2.5 rounded-full bg-[#2d5a3c] px-7 py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-xl shadow-[#2d5a3c]/20 hover:bg-[#1e3e29] hover:scale-105 active:scale-95 transition"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-[var(--theme-accent-primary,#2d5a3c)] px-7 py-3.5 text-xs font-black uppercase tracking-wider text-[var(--theme-accent-contrast,#ffffff)] shadow-xl shadow-[var(--theme-accent-primary,#2d5a3c)]/20 hover:opacity-90 hover:scale-105 active:scale-95 transition"
                 >
                   <ShoppingBag className="h-4 w-4" />
                   <span>Explore Daily Bowls</span>
                 </a>
                 <a
                   href="#assembly"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#4a5e50]/30 bg-white px-6 py-3.5 text-xs font-bold text-[#16221b] shadow-sm hover:border-[#2d5a3c] hover:text-[#2d5a3c] transition"
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-text-secondary,#4a5e50)]/30 bg-[var(--theme-bg-card,#ffffff)] px-6 py-3.5 text-xs font-bold text-[var(--theme-text-primary,#16221b)] shadow-sm hover:border-[var(--theme-accent-primary,#2d5a3c)] hover:text-[var(--theme-accent-primary,#2d5a3c)] transition"
                 >
-                  <Sliders className="h-4 w-4 text-[#8fad66]" />
+                  <Sliders className="h-4 w-4 text-[var(--theme-accent-secondary,#8fad66)]" />
                   <span>Custom Assembly Station</span>
                 </a>
               </div>
 
               {/* Micro Nutrition Standards */}
-              <div className="mt-12 grid grid-cols-3 gap-3 border-t border-[#e2dcce] pt-8 max-w-lg">
-                <div className="rounded-2xl border border-[#e2dcce] bg-white p-3.5">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#2d5a3c]">
+              <div className="mt-12 grid grid-cols-3 gap-3 border-t border-[var(--theme-border,#e2dcce)] pt-8 max-w-lg">
+                <div className="rounded-2xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] p-3.5">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[var(--theme-accent-primary,#2d5a3c)]">
                     <Activity className="h-3.5 w-3.5" />
                     <span>Metabolic Fuel</span>
                   </div>
-                  <p className="mt-1 text-xs text-[#4a5e50]">High fiber & low glycemic curves</p>
+                  <p className="mt-1 text-xs text-[var(--theme-text-secondary,#4a5e50)]">High fiber & low glycemic curves</p>
                 </div>
 
-                <div className="rounded-2xl border border-[#e2dcce] bg-white p-3.5">
+                <div className="rounded-2xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] p-3.5">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#b86a42]">
                     <ShieldCheck className="h-3.5 w-3.5" />
                     <span>Zero Seed Oils</span>
                   </div>
-                  <p className="mt-1 text-xs text-[#4a5e50]">100% EVOO & avocado fats only</p>
+                  <p className="mt-1 text-xs text-[var(--theme-text-secondary,#4a5e50)]">100% EVOO & avocado fats only</p>
                 </div>
 
-                <div className="rounded-2xl border border-[#e2dcce] bg-white p-3.5">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#2d5a3c]">
+                <div className="rounded-2xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] p-3.5">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[var(--theme-accent-primary,#2d5a3c)]">
                     <Clock className="h-3.5 w-3.5" />
                     <span>8m Pickup</span>
                   </div>
-                  <p className="mt-1 text-xs text-[#4a5e50]">Tossed fresh to your arrival</p>
+                  <p className="mt-1 text-xs text-[var(--theme-text-secondary,#4a5e50)]">Tossed fresh to your arrival</p>
                 </div>
               </div>
             </div>
@@ -400,14 +400,14 @@ export function FreshBowlCafe() {
             <div className="relative">
               <div className="grid grid-cols-2 gap-4">
                 {/* Main Hero Card 1: Seared Salmon Bowl */}
-                <div className="group relative col-span-2 overflow-hidden rounded-3xl border border-[#e2dcce] bg-white shadow-xl aspect-[16/10]">
+                <div className="group relative col-span-2 overflow-hidden rounded-3xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] shadow-xl aspect-[16/10]">
                   <img
                     src={imageAssets.salmon.src}
                     alt={imageAssets.salmon.alt}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute top-4 left-4 rounded-full bg-white/95 px-3.5 py-1 text-[11px] font-black uppercase tracking-wider text-[#2d5a3c] shadow-md backdrop-blur-xs">
+                  <div className="absolute top-4 left-4 rounded-full bg-[var(--theme-bg-card,#ffffff)]/95 px-3.5 py-1 text-[11px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2d5a3c)] shadow-md backdrop-blur-xs">
                     Spring Feature: Wild Salmon Goddess
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-bold">
@@ -417,27 +417,27 @@ export function FreshBowlCafe() {
                 </div>
 
                 {/* Secondary Card 2: Cafe Space Snapshot */}
-                <div className="relative overflow-hidden rounded-2xl border border-[#e2dcce] bg-white shadow-md aspect-[4/3]">
+                <div className="relative overflow-hidden rounded-2xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] shadow-md aspect-[4/3]">
                   <img
                     src={imageAssets.interior.src}
                     alt={imageAssets.interior.alt}
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/20" />
-                  <span className="absolute bottom-2.5 left-2.5 rounded-md bg-white/90 px-2 py-0.5 text-[10px] font-bold text-[#16221b]">
+                  <span className="absolute bottom-2.5 left-2.5 rounded-md bg-[var(--theme-bg-card,#ffffff)]/90 px-2 py-0.5 text-[10px] font-bold text-[var(--theme-text-primary,#16221b)]">
                     Sunlit Dining Room
                   </span>
                 </div>
 
                 {/* Secondary Card 3: Cold-Pressed Juice */}
-                <div className="relative overflow-hidden rounded-2xl border border-[#e2dcce] bg-white shadow-md aspect-[4/3]">
+                <div className="relative overflow-hidden rounded-2xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] shadow-md aspect-[4/3]">
                   <img
                     src={imageAssets.coldPressed.src}
                     alt={imageAssets.coldPressed.alt}
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/20" />
-                  <span className="absolute bottom-2.5 left-2.5 rounded-md bg-[#16221b]/90 px-2 py-0.5 text-[10px] font-bold text-white">
+                  <span className="absolute bottom-2.5 left-2.5 rounded-md bg-[var(--theme-bg-dark,#16221b)]/90 px-2 py-0.5 text-[10px] font-bold text-white">
                     Raw Press: Batch #041
                   </span>
                 </div>
@@ -448,18 +448,18 @@ export function FreshBowlCafe() {
       </section>
 
       {/* ── LIVING FARM MARQUEE TICKER ───────────────────────────────────── */}
-      <div className="border-y border-[#e2dcce] bg-white py-3.5 overflow-hidden">
-        <div className="flex gap-8 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-[#4a5e50]/80 animate-marquee">
+      <div className="border-y border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] py-3.5 overflow-hidden">
+        <div className="flex gap-8 whitespace-nowrap text-xs font-bold uppercase tracking-widest text-[var(--theme-text-secondary,#4a5e50)]/80 animate-marquee">
           <span>🥑 Hass Avocados · Carpinteria, CA</span>
-          <span className="text-[#8fad66]">✦</span>
+          <span className="text-[var(--theme-accent-secondary,#8fad66)]">✦</span>
           <span>🐟 Wild Sockeye Salmon · Bristol Bay, AK</span>
-          <span className="text-[#8fad66]">✦</span>
+          <span className="text-[var(--theme-accent-secondary,#8fad66)]">✦</span>
           <span>🌿 Lacinato Dinosaur Kale · Salinas Valley</span>
-          <span className="text-[#8fad66]">✦</span>
+          <span className="text-[var(--theme-accent-secondary,#8fad66)]">✦</span>
           <span>🍠 Organic Jewel Yams · Livingston, CA</span>
-          <span className="text-[#8fad66]">✦</span>
+          <span className="text-[var(--theme-accent-secondary,#8fad66)]">✦</span>
           <span>🫐 Wild Forest Acai · Belem, Brazil</span>
-          <span className="text-[#8fad66]">✦</span>
+          <span className="text-[var(--theme-accent-secondary,#8fad66)]">✦</span>
           <span>🍵 Ceremonial Uji Matcha · Kyoto, Japan</span>
         </div>
       </div>
@@ -470,14 +470,14 @@ export function FreshBowlCafe() {
           {/* Section Header */}
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end mb-12">
             <div>
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#2d5a3c]">
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#2d5a3c)]">
                 Formulated Bowls
               </span>
-              <h2 className="mt-2 text-3xl font-black tracking-tight text-[#16221b] sm:text-5xl">
+              <h2 className="mt-2 text-3xl font-black tracking-tight text-[var(--theme-text-primary,#16221b)] sm:text-5xl">
                 Curated for how you want to feel.
               </h2>
             </div>
-            <p className="max-w-md text-xs leading-relaxed text-[#4a5e50] sm:text-sm">
+            <p className="max-w-md text-xs leading-relaxed text-[var(--theme-text-secondary,#4a5e50)] sm:text-sm">
               Filter by biological focus: High-Protein Muscle Repair, Gut Microbiome Fiber, Anti-Inflammatory Recovery, or Low-Carb Clarity.
             </p>
           </div>
@@ -496,8 +496,8 @@ export function FreshBowlCafe() {
                 onClick={() => setGoalFilter(pill.id)}
                 className={`rounded-full px-5 py-2 text-xs font-bold transition-all ${
                   goalFilter === pill.id
-                    ? "bg-[#2d5a3c] text-white shadow-md"
-                    : "border border-[#e2dcce] bg-white text-[#4a5e50] hover:border-[#2d5a3c] hover:text-[#2d5a3c]"
+                    ? "bg-[var(--theme-accent-primary,#2d5a3c)] text-[var(--theme-accent-contrast,#ffffff)] shadow-md"
+                    : "border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] text-[var(--theme-text-secondary,#4a5e50)] hover:border-[var(--theme-accent-primary,#2d5a3c)] hover:text-[var(--theme-accent-primary,#2d5a3c)]"
                 }`}
               >
                 {pill.label}
@@ -512,11 +512,11 @@ export function FreshBowlCafe() {
               return (
                 <article
                   key={bowl.id}
-                  className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-[#e2dcce] bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-[#2d5a3c]/40 hover:shadow-2xl hover:shadow-[#2d5a3c]/10"
+                  className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] p-5 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--theme-accent-primary,#2d5a3c)]/40 hover:shadow-2xl hover:shadow-[var(--theme-accent-primary,#2d5a3c)]/10"
                 >
                   <div>
                     {/* Visual Card Top */}
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#eaf0e6]">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[var(--theme-accent-primary,#2d5a3c)]/10">
                       <img
                         src={bowl.image}
                         alt={bowl.name}
@@ -524,7 +524,7 @@ export function FreshBowlCafe() {
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       {bowl.featuredBadge && (
-                        <span className="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#2d5a3c] shadow-sm">
+                        <span className="absolute top-3 left-3 rounded-full bg-[var(--theme-bg-card,#ffffff)]/95 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2d5a3c)] shadow-sm">
                           {bowl.featuredBadge}
                         </span>
                       )}
@@ -538,14 +538,14 @@ export function FreshBowlCafe() {
                     <div className="mt-5">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <span className="text-[10px] font-black uppercase tracking-widest text-[#2d5a3c]">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-[var(--theme-accent-primary,#2d5a3c)]">
                             {bowl.category}
                           </span>
-                          <h3 className="text-lg font-black text-[#16221b] mt-0.5">
+                          <h3 className="text-lg font-black text-[var(--theme-text-primary,#16221b)] mt-0.5">
                             {bowl.name}
                           </h3>
                         </div>
-                        <span className="text-lg font-black text-[#2d5a3c]">
+                        <span className="text-lg font-black text-[var(--theme-accent-primary,#2d5a3c)]">
                           ${bowl.price.toFixed(2)}
                         </span>
                       </div>
@@ -556,28 +556,28 @@ export function FreshBowlCafe() {
                       </p>
 
                       {/* Macro Meters Bar */}
-                      <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl bg-[#f5f3ec] p-3 text-center">
+                      <div className="mt-4 grid grid-cols-3 gap-2 rounded-xl bg-[var(--theme-bg-base,#f5f3ec)] p-3 text-center">
                         <div>
-                          <p className="text-xs font-black text-[#16221b]">{bowl.macros.protein}g</p>
-                          <p className="text-[9px] font-bold uppercase text-[#4a5e50]">Protein</p>
+                          <p className="text-xs font-black text-[var(--theme-text-primary,#16221b)]">{bowl.macros.protein}g</p>
+                          <p className="text-[9px] font-bold uppercase text-[var(--theme-text-secondary,#4a5e50)]">Protein</p>
                         </div>
                         <div>
-                          <p className="text-xs font-black text-[#16221b]">{bowl.macros.fiber}g</p>
-                          <p className="text-[9px] font-bold uppercase text-[#4a5e50]">Fiber</p>
+                          <p className="text-xs font-black text-[var(--theme-text-primary,#16221b)]">{bowl.macros.fiber}g</p>
+                          <p className="text-[9px] font-bold uppercase text-[var(--theme-text-secondary,#4a5e50)]">Fiber</p>
                         </div>
                         <div>
-                          <p className="text-xs font-black text-[#16221b]">{bowl.calories}</p>
-                          <p className="text-[9px] font-bold uppercase text-[#4a5e50]">Calories</p>
+                          <p className="text-xs font-black text-[var(--theme-text-primary,#16221b)]">{bowl.calories}</p>
+                          <p className="text-[9px] font-bold uppercase text-[var(--theme-text-secondary,#4a5e50)]">Calories</p>
                         </div>
                       </div>
 
                       {/* Ingredients List */}
                       <div className="mt-3.5">
-                        <p className="text-[11px] leading-relaxed text-[#4a5e50]">
-                          <span className="font-bold text-[#16221b]">Bowl Base: </span>
+                        <p className="text-[11px] leading-relaxed text-[var(--theme-text-secondary,#4a5e50)]">
+                          <span className="font-bold text-[var(--theme-text-primary,#16221b)]">Bowl Base: </span>
                           {bowl.ingredients.join(", ")}.
                         </p>
-                        <p className="mt-1 text-[11px] font-medium text-[#2d5a3c]">
+                        <p className="mt-1 text-[11px] font-medium text-[var(--theme-accent-primary,#2d5a3c)]">
                           <span className="font-bold">Dressing: </span>
                           {bowl.dressing}
                         </p>
@@ -586,22 +586,22 @@ export function FreshBowlCafe() {
                   </div>
 
                   {/* Add to Bag Action */}
-                  <div className="mt-6 border-t border-[#e2dcce] pt-4 flex items-center justify-between">
+                  <div className="mt-6 border-t border-[var(--theme-border,#e2dcce)] pt-4 flex items-center justify-between">
                     {qty > 0 ? (
-                      <div className="flex items-center gap-3 rounded-full border border-[#2d5a3c] bg-[#2d5a3c]/10 px-3.5 py-1.5">
+                      <div className="flex items-center gap-3 rounded-full border border-[var(--theme-accent-primary,#2d5a3c)] bg-[var(--theme-accent-primary,#2d5a3c)]/10 px-3.5 py-1.5">
                         <button
                           type="button"
                           onClick={() => removeFromCart(bowl.id)}
-                          className="text-[#2d5a3c] hover:scale-125 transition"
+                          className="text-[var(--theme-accent-primary,#2d5a3c)] hover:scale-125 transition"
                           aria-label="Remove item"
                         >
                           <Minus className="h-3.5 w-3.5" />
                         </button>
-                        <span className="text-xs font-black text-[#16221b]">{qty}</span>
+                        <span className="text-xs font-black text-[var(--theme-text-primary,#16221b)]">{qty}</span>
                         <button
                           type="button"
                           onClick={() => addToCart(bowl.id)}
-                          className="text-[#2d5a3c] hover:scale-125 transition"
+                          className="text-[var(--theme-accent-primary,#2d5a3c)] hover:scale-125 transition"
                           aria-label="Add more"
                         >
                           <Plus className="h-3.5 w-3.5" />
@@ -611,14 +611,14 @@ export function FreshBowlCafe() {
                       <button
                         type="button"
                         onClick={() => addToCart(bowl.id)}
-                        className="flex items-center gap-1.5 rounded-full border border-[#e2dcce] bg-[#f5f3ec] px-4 py-2 text-xs font-bold text-[#16221b] hover:border-[#2d5a3c] hover:bg-[#2d5a3c] hover:text-white transition"
+                        className="flex items-center gap-1.5 rounded-full border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-base,#f5f3ec)] px-4 py-2 text-xs font-bold text-[var(--theme-text-primary,#16221b)] hover:border-[var(--theme-accent-primary,#2d5a3c)] hover:bg-[var(--theme-accent-primary,#2d5a3c)] hover:text-[var(--theme-accent-contrast,#ffffff)] transition"
                       >
                         <Plus className="h-3.5 w-3.5" />
                         <span>Add to Order</span>
                       </button>
                     )}
 
-                    <span className="text-[10px] font-bold text-[#4a5e50]/70 uppercase">
+                    <span className="text-[10px] font-bold text-[var(--theme-text-secondary,#4a5e50)]/70 uppercase">
                       Tossed Fresh
                     </span>
                   </div>
@@ -630,31 +630,31 @@ export function FreshBowlCafe() {
       </section>
 
       {/* ── THE ASSEMBLY STATION: VISUAL STEP-BY-STEP BAR ─────────────────── */}
-      <section id="assembly" className="py-20 md:py-28 bg-white border-y border-[#e2dcce]">
+      <section id="assembly" className="py-20 md:py-28 bg-[var(--theme-bg-card,#ffffff)] border-y border-[var(--theme-border,#e2dcce)]">
         <Container>
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#2d5a3c]/20 bg-[#2d5a3c]/10 px-4 py-1 text-xs font-black uppercase tracking-widest text-[#2d5a3c]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-accent-primary,#2d5a3c)]/20 bg-[var(--theme-accent-primary,#2d5a3c)]/10 px-4 py-1 text-xs font-black uppercase tracking-widest text-[var(--theme-accent-primary,#2d5a3c)]">
               <Layers className="h-3.5 w-3.5" />
               The Assembly Line
             </span>
-            <h2 className="mt-3 text-3xl font-black tracking-tight text-[#16221b] sm:text-5xl">
+            <h2 className="mt-3 text-3xl font-black tracking-tight text-[var(--theme-text-primary,#16221b)] sm:text-5xl">
               Construct your custom metabolic formula.
             </h2>
-            <p className="mt-3 text-sm text-[#4a5e50]">
+            <p className="mt-3 text-sm text-[var(--theme-text-secondary,#4a5e50)]">
               Click through the four phases below. Your live nutrition monitor calculates real-time calories and clean protein.
             </p>
           </div>
 
           <div className="grid gap-10 lg:grid-cols-[1.3fr_0.7fr]">
             {/* Left Steps Assembly Box */}
-            <div className="space-y-8 rounded-3xl border border-[#e2dcce] bg-[#f5f3ec] p-6 sm:p-9">
+            <div className="space-y-8 rounded-3xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-base,#f5f3ec)] p-6 sm:p-9">
               {/* Step 1: Base */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-black uppercase tracking-wider text-[#16221b]">
+                  <h3 className="text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#16221b)]">
                     01. Sprouted Warm Base
                   </h3>
-                  <span className="text-[11px] font-bold text-[#2d5a3c]">Select 1 Foundation</span>
+                  <span className="text-[11px] font-bold text-[var(--theme-accent-primary,#2d5a3c)]">Select 1 Foundation</span>
                 </div>
                 <div className="grid gap-2.5 sm:grid-cols-2">
                   {bases.map((base) => (
@@ -664,18 +664,18 @@ export function FreshBowlCafe() {
                       onClick={() => setSelectedBase(base)}
                       className={`flex items-center justify-between rounded-2xl border p-3.5 text-left text-xs font-bold transition ${
                         selectedBase.name === base.name
-                          ? "border-[#2d5a3c] bg-white text-[#2d5a3c] shadow-xs ring-2 ring-[#2d5a3c]/20"
-                          : "border-[#e2dcce] bg-white/60 text-[#4a5e50] hover:bg-white"
+                          ? "border-[var(--theme-accent-primary,#2d5a3c)] bg-[var(--theme-bg-card,#ffffff)] text-[var(--theme-accent-primary,#2d5a3c)] shadow-xs ring-2 ring-[var(--theme-accent-primary,#2d5a3c)]/20"
+                          : "border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)]/60 text-[var(--theme-text-secondary,#4a5e50)] hover:bg-[var(--theme-bg-card,#ffffff)]"
                       }`}
                     >
                       <div>
                         <p>{base.name}</p>
-                        <p className="text-[10px] text-[#4a5e50]/70 font-normal">
+                        <p className="text-[10px] text-[var(--theme-text-secondary,#4a5e50)]/70 font-normal">
                           {base.cal} kcal · {base.tag}
                         </p>
                       </div>
                       {selectedBase.name === base.name && (
-                        <Check className="h-4 w-4 text-[#2d5a3c]" />
+                        <Check className="h-4 w-4 text-[var(--theme-accent-primary,#2d5a3c)]" />
                       )}
                     </button>
                   ))}
@@ -683,12 +683,12 @@ export function FreshBowlCafe() {
               </div>
 
               {/* Step 2: Protein */}
-              <div className="border-t border-[#e2dcce] pt-6">
+              <div className="border-t border-[var(--theme-border,#e2dcce)] pt-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-black uppercase tracking-wider text-[#16221b]">
+                  <h3 className="text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#16221b)]">
                     02. Pasture-Raised Protein
                   </h3>
-                  <span className="text-[11px] font-bold text-[#2d5a3c]">Select 1 Protein</span>
+                  <span className="text-[11px] font-bold text-[var(--theme-accent-primary,#2d5a3c)]">Select 1 Protein</span>
                 </div>
                 <div className="grid gap-2.5 sm:grid-cols-2">
                   {proteins.map((prot) => (
@@ -698,18 +698,18 @@ export function FreshBowlCafe() {
                       onClick={() => setSelectedProtein(prot)}
                       className={`flex items-center justify-between rounded-2xl border p-3.5 text-left text-xs font-bold transition ${
                         selectedProtein.name === prot.name
-                          ? "border-[#2d5a3c] bg-white text-[#2d5a3c] shadow-xs ring-2 ring-[#2d5a3c]/20"
-                          : "border-[#e2dcce] bg-white/60 text-[#4a5e50] hover:bg-white"
+                          ? "border-[var(--theme-accent-primary,#2d5a3c)] bg-[var(--theme-bg-card,#ffffff)] text-[var(--theme-accent-primary,#2d5a3c)] shadow-xs ring-2 ring-[var(--theme-accent-primary,#2d5a3c)]/20"
+                          : "border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)]/60 text-[var(--theme-text-secondary,#4a5e50)] hover:bg-[var(--theme-bg-card,#ffffff)]"
                       }`}
                     >
                       <div>
                         <p>{prot.name}</p>
-                        <p className="text-[10px] text-[#4a5e50]/70 font-normal">
+                        <p className="text-[10px] text-[var(--theme-text-secondary,#4a5e50)]/70 font-normal">
                           +{prot.protein}g protein · {prot.cal} kcal
                         </p>
                       </div>
                       {selectedProtein.name === prot.name && (
-                        <Check className="h-4 w-4 text-[#2d5a3c]" />
+                        <Check className="h-4 w-4 text-[var(--theme-accent-primary,#2d5a3c)]" />
                       )}
                     </button>
                   ))}
@@ -717,12 +717,12 @@ export function FreshBowlCafe() {
               </div>
 
               {/* Step 3: Boosters */}
-              <div className="border-t border-[#e2dcce] pt-6">
+              <div className="border-t border-[var(--theme-border,#e2dcce)] pt-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-black uppercase tracking-wider text-[#16221b]">
+                  <h3 className="text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#16221b)]">
                     03. Farm Boosters & Crunch
                   </h3>
-                  <span className="text-[11px] font-bold text-[#2d5a3c]">
+                  <span className="text-[11px] font-bold text-[var(--theme-accent-primary,#2d5a3c)]">
                     {selectedBoosters.length}/4 Selected
                   </span>
                 </div>
@@ -736,13 +736,13 @@ export function FreshBowlCafe() {
                         onClick={() => toggleBooster(b.name)}
                         className={`rounded-2xl border p-3 text-center text-xs font-bold transition ${
                           active
-                            ? "border-[#2d5a3c] bg-[#2d5a3c] text-white shadow-sm"
-                            : "border-[#e2dcce] bg-white text-[#4a5e50] hover:border-[#2d5a3c]/50 hover:bg-white"
+                            ? "border-[var(--theme-accent-primary,#2d5a3c)] bg-[var(--theme-accent-primary,#2d5a3c)] text-[var(--theme-accent-contrast,#ffffff)] shadow-sm"
+                            : "border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] text-[var(--theme-text-secondary,#4a5e50)] hover:border-[var(--theme-accent-primary,#2d5a3c)]/50 hover:bg-[var(--theme-bg-card,#ffffff)]"
                         }`}
                       >
                         <span className="text-base block mb-1">{b.icon}</span>
                         <span className="block truncate">{b.name}</span>
-                        <span className={`text-[9px] block ${active ? "text-white/80" : "text-[#4a5e50]/60"}`}>
+                        <span className={`text-[9px] block ${active ? "text-white/80" : "text-[var(--theme-text-secondary,#4a5e50)]/60"}`}>
                           +{b.cal} kcal
                         </span>
                       </button>
@@ -752,12 +752,12 @@ export function FreshBowlCafe() {
               </div>
 
               {/* Step 4: Dressing */}
-              <div className="border-t border-[#e2dcce] pt-6">
+              <div className="border-t border-[var(--theme-border,#e2dcce)] pt-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-black uppercase tracking-wider text-[#16221b]">
+                  <h3 className="text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#16221b)]">
                     04. Scratch Emulsion Dressing
                   </h3>
-                  <span className="text-[11px] font-bold text-[#2d5a3c]">Zero Seed Oil Recipe</span>
+                  <span className="text-[11px] font-bold text-[var(--theme-accent-primary,#2d5a3c)]">Zero Seed Oil Recipe</span>
                 </div>
                 <div className="grid gap-2.5 sm:grid-cols-2">
                   {dressings.map((d) => (
@@ -767,16 +767,16 @@ export function FreshBowlCafe() {
                       onClick={() => setSelectedDressing(d)}
                       className={`flex items-center justify-between rounded-2xl border p-3.5 text-left text-xs font-bold transition ${
                         selectedDressing.name === d.name
-                          ? "border-[#2d5a3c] bg-white text-[#2d5a3c] shadow-xs ring-2 ring-[#2d5a3c]/20"
-                          : "border-[#e2dcce] bg-white/60 text-[#4a5e50] hover:bg-white"
+                          ? "border-[var(--theme-accent-primary,#2d5a3c)] bg-[var(--theme-bg-card,#ffffff)] text-[var(--theme-accent-primary,#2d5a3c)] shadow-xs ring-2 ring-[var(--theme-accent-primary,#2d5a3c)]/20"
+                          : "border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)]/60 text-[var(--theme-text-secondary,#4a5e50)] hover:bg-[var(--theme-bg-card,#ffffff)]"
                       }`}
                     >
                       <div>
                         <p>{d.name}</p>
-                        <p className="text-[10px] text-[#4a5e50]/70 font-normal">{d.tag}</p>
+                        <p className="text-[10px] text-[var(--theme-text-secondary,#4a5e50)]/70 font-normal">{d.tag}</p>
                       </div>
                       {selectedDressing.name === d.name && (
-                        <Check className="h-4 w-4 text-[#2d5a3c]" />
+                        <Check className="h-4 w-4 text-[var(--theme-accent-primary,#2d5a3c)]" />
                       )}
                     </button>
                   ))}
@@ -785,8 +785,8 @@ export function FreshBowlCafe() {
             </div>
 
             {/* Right Side: Live Recipe & Macro Meter Display */}
-            <div className="sticky top-28 self-start rounded-3xl border border-[#16221b] bg-[#16221b] p-7 text-white shadow-2xl">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#8fad66]">
+            <div className="sticky top-28 self-start rounded-3xl border border-[var(--theme-border,#16221b)] bg-[var(--theme-bg-dark,#16221b)] p-7 text-white shadow-2xl">
+              <span className="text-[10px] font-black uppercase tracking-widest text-[var(--theme-accent-secondary,#8fad66)]">
                 Formula Monitor
               </span>
               <h3 className="text-2xl font-black text-white mt-1">My Daily Power Bowl</h3>
@@ -794,7 +794,7 @@ export function FreshBowlCafe() {
               {/* Macro Gauge Cards */}
               <div className="mt-6 grid grid-cols-2 gap-3 rounded-2xl bg-white/5 p-4 border border-white/10">
                 <div>
-                  <p className="text-2xl font-black text-[#8fad66]">{customTotalProtein}g</p>
+                  <p className="text-2xl font-black text-[var(--theme-accent-secondary,#8fad66)]">{customTotalProtein}g</p>
                   <p className="text-[10px] font-bold uppercase text-white/60">Estimated Clean Protein</p>
                 </div>
                 <div>
@@ -821,7 +821,7 @@ export function FreshBowlCafe() {
                 </div>
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-white/50">Dressing:</span>
-                  <p className="font-bold text-[#8fad66] mt-0.5">{selectedDressing.name}</p>
+                  <p className="font-bold text-[var(--theme-accent-secondary,#8fad66)] mt-0.5">{selectedDressing.name}</p>
                 </div>
               </div>
 
@@ -837,7 +837,7 @@ export function FreshBowlCafe() {
                 <button
                   type="button"
                   onClick={handleAddCustomBowl}
-                  className="rounded-full bg-[#8fad66] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-[#16221b] shadow-lg hover:bg-white transition active:scale-95"
+                  className="rounded-full bg-[var(--theme-accent-secondary,#8fad66)] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-[var(--theme-bg-dark,#16221b)] shadow-lg hover:bg-white transition active:scale-95"
                 >
                   {customToast ? "Added to Order! ✓" : "Toss This Bowl"}
                 </button>
@@ -848,10 +848,10 @@ export function FreshBowlCafe() {
       </section>
 
       {/* ── THE RAW COLD-PRESSED DISPENSARY ───────────────────────────────── */}
-      <section id="dispensary" className="py-20 md:py-28 bg-[#16221b] text-white">
+      <section id="dispensary" className="py-20 md:py-28 bg-[var(--theme-bg-dark,#16221b)] text-white">
         <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <span className="text-xs font-black uppercase tracking-[0.2em] text-[#8fad66]">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#8fad66)]">
               Apothecary Cold-Press
             </span>
             <h2 className="mt-3 text-3xl font-black leading-tight sm:text-5xl">
@@ -867,7 +867,7 @@ export function FreshBowlCafe() {
                   <p className="text-sm font-bold text-white">Deep Green Alkalizer (16oz)</p>
                   <p className="text-xs text-white/60">Lacinato Kale, Cucumber, Celery, Green Apple, Ginger, Lemon</p>
                 </div>
-                <span className="text-sm font-black text-[#8fad66]">$9.00</span>
+                <span className="text-sm font-black text-[var(--theme-accent-secondary,#8fad66)]">$9.00</span>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-between">
@@ -875,7 +875,7 @@ export function FreshBowlCafe() {
                   <p className="text-sm font-bold text-white">Golden Turmeric Shot (4oz)</p>
                   <p className="text-xs text-white/60">Fresh Hawaiian Turmeric, Ginger, Orange, Black Pepper Extract</p>
                 </div>
-                <span className="text-sm font-black text-[#8fad66]">$5.50</span>
+                <span className="text-sm font-black text-[var(--theme-accent-secondary,#8fad66)]">$5.50</span>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-between">
@@ -883,7 +883,7 @@ export function FreshBowlCafe() {
                   <p className="text-sm font-bold text-white">Ceremonial Uji Matcha Latte (12oz)</p>
                   <p className="text-xs text-white/60">First-Harvest Organic Matcha, House Sprouted Oat Milk, Vanilla</p>
                 </div>
-                <span className="text-sm font-black text-[#8fad66]">$8.00</span>
+                <span className="text-sm font-black text-[var(--theme-accent-secondary,#8fad66)]">$8.00</span>
               </div>
             </div>
           </div>
@@ -901,44 +901,44 @@ export function FreshBowlCafe() {
       </section>
 
       {/* ── SUNLIT CAFE SPACE & WELLNESS COMMUNITY ─────────────────────────── */}
-      <section id="space" className="py-20 md:py-28 bg-[#f5f3ec]">
+      <section id="space" className="py-20 md:py-28 bg-[var(--theme-bg-base,#f5f3ec)]">
         <Container className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="relative">
-            <div className="overflow-hidden rounded-3xl border border-[#e2dcce] shadow-2xl aspect-[16/10]">
+            <div className="overflow-hidden rounded-3xl border border-[var(--theme-border,#e2dcce)] shadow-2xl aspect-[16/10]">
               <img
                 src={imageAssets.interior.src}
                 alt={imageAssets.interior.alt}
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-5 -left-5 hidden sm:block rounded-2xl border border-[#e2dcce] bg-white p-5 shadow-xl">
-              <p className="text-xs font-black uppercase tracking-wider text-[#2d5a3c]">Design Architecture</p>
-              <p className="text-sm font-bold text-[#16221b] mt-0.5">Blonde Oak, Japanese Terrazzo & Clean Air Filtration</p>
+            <div className="absolute -bottom-5 -left-5 hidden sm:block rounded-2xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] p-5 shadow-xl">
+              <p className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2d5a3c)]">Design Architecture</p>
+              <p className="text-sm font-bold text-[var(--theme-text-primary,#16221b)] mt-0.5">Blonde Oak, Japanese Terrazzo & Clean Air Filtration</p>
             </div>
           </div>
 
           <div>
-            <span className="text-xs font-black uppercase tracking-[0.2em] text-[#2d5a3c]">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#2d5a3c)]">
               The Space & Vibe
             </span>
-            <h2 className="mt-3 text-3xl font-black tracking-tight text-[#16221b] sm:text-5xl">
+            <h2 className="mt-3 text-3xl font-black tracking-tight text-[var(--theme-text-primary,#16221b)] sm:text-5xl">
               A serene oasis for mindful lunchtime resets.
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-[#4a5e50]">
+            <p className="mt-5 text-base leading-relaxed text-[var(--theme-text-secondary,#4a5e50)]">
               Leave the noisy workday outside. Step into a space bathed in morning sunlight, lush tropical greenery, and minimalist blonde timber. Plug in for a focused 45-minute lunch break or grab your express bowl from our dedicated pickup cubby.
             </p>
 
             <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-[#e2dcce] bg-white p-4">
-                <Clock className="h-5 w-5 text-[#2d5a3c]" />
-                <p className="mt-2 text-sm font-black text-[#16221b]">Cafe Hours</p>
-                <p className="text-xs text-[#4a5e50] mt-0.5">7:30 AM – 8:30 PM Daily</p>
+              <div className="rounded-2xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] p-4">
+                <Clock className="h-5 w-5 text-[var(--theme-accent-primary,#2d5a3c)]" />
+                <p className="mt-2 text-sm font-black text-[var(--theme-text-primary,#16221b)]">Cafe Hours</p>
+                <p className="text-xs text-[var(--theme-text-secondary,#4a5e50)] mt-0.5">7:30 AM – 8:30 PM Daily</p>
               </div>
 
-              <div className="rounded-2xl border border-[#e2dcce] bg-white p-4">
+              <div className="rounded-2xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] p-4">
                 <MapPin className="h-5 w-5 text-[#b86a42]" />
-                <p className="mt-2 text-sm font-black text-[#16221b]">Neighborhood</p>
-                <p className="text-xs text-[#4a5e50] mt-0.5">75 Wellness Way, Suite A</p>
+                <p className="mt-2 text-sm font-black text-[var(--theme-text-primary,#16221b)]">Neighborhood</p>
+                <p className="text-xs text-[var(--theme-text-secondary,#4a5e50)] mt-0.5">75 Wellness Way, Suite A</p>
               </div>
             </div>
           </div>
@@ -946,13 +946,13 @@ export function FreshBowlCafe() {
       </section>
 
       {/* ── NUTRITION PURITY PLEDGE ────────────────────────────────────────── */}
-      <section id="purity" className="py-20 md:py-28 bg-white border-y border-[#e2dcce]">
+      <section id="purity" className="py-20 md:py-28 bg-[var(--theme-bg-card,#ffffff)] border-y border-[var(--theme-border,#e2dcce)]">
         <Container>
           <div className="mx-auto max-w-2xl text-center mb-14">
-            <span className="text-xs font-black uppercase tracking-[0.2em] text-[#2d5a3c]">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#2d5a3c)]">
               The Purity Standard
             </span>
-            <h2 className="mt-2 text-3xl font-black text-[#16221b] sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-black text-[var(--theme-text-primary,#16221b)] sm:text-4xl">
               What we refuse to put in your body.
             </h2>
           </div>
@@ -978,13 +978,13 @@ export function FreshBowlCafe() {
             ].map((card) => (
               <div
                 key={card.title}
-                className="rounded-3xl border border-[#e2dcce] bg-[#f5f3ec] p-6 text-left"
+                className="rounded-3xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-base,#f5f3ec)] p-6 text-left"
               >
-                <div className="h-8 w-8 rounded-full bg-[#2d5a3c]/10 text-[#2d5a3c] grid place-items-center mb-4">
+                <div className="h-8 w-8 rounded-full bg-[var(--theme-accent-primary,#2d5a3c)]/10 text-[var(--theme-accent-primary,#2d5a3c)] grid place-items-center mb-4">
                   <Check className="h-4 w-4" />
                 </div>
-                <h3 className="text-base font-black text-[#16221b]">{card.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-[#4a5e50]">{card.desc}</p>
+                <h3 className="text-base font-black text-[var(--theme-text-primary,#16221b)]">{card.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-[var(--theme-text-secondary,#4a5e50)]">{card.desc}</p>
               </div>
             ))}
           </div>
@@ -992,24 +992,24 @@ export function FreshBowlCafe() {
       </section>
 
       {/* ── 8-MINUTE CURBSIDE PICKUP CARD ──────────────────────────────────── */}
-      <section id="pickup-card" className="py-20 md:py-28 bg-[#f5f3ec]">
+      <section id="pickup-card" className="py-20 md:py-28 bg-[var(--theme-bg-base,#f5f3ec)]">
         <Container>
-          <div className="rounded-3xl border border-[#e2dcce] bg-white p-8 sm:p-14 shadow-sm grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div className="rounded-3xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-card,#ffffff)] p-8 sm:p-14 shadow-sm grid gap-8 lg:grid-cols-2 lg:items-center">
             <div>
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#2d5a3c]">
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#2d5a3c)]">
                 Rapid Digital Ordering
               </span>
-              <h2 className="mt-2 text-3xl font-black text-[#16221b] sm:text-5xl">
+              <h2 className="mt-2 text-3xl font-black text-[var(--theme-text-primary,#16221b)] sm:text-5xl">
                 Ready in 8 minutes. Walk in & take off.
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-[#4a5e50]">
+              <p className="mt-4 text-sm leading-relaxed text-[var(--theme-text-secondary,#4a5e50)]">
                 Lock in your order online and bypass all lunch counter lines. Your warm bowl will be waiting in our temperature-controlled pickup cubby under your first name.
               </p>
 
               <div className="mt-8 flex items-center gap-4">
                 <a
                   href="tel:5550166600"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#2d5a3c] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-md hover:bg-[#1e3e29] transition"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--theme-accent-primary,#2d5a3c)] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-[var(--theme-accent-contrast,#ffffff)] shadow-md hover:opacity-90 transition"
                 >
                   <Phone className="h-3.5 w-3.5" />
                   <span>Call (555) 016-6600</span>
@@ -1017,18 +1017,18 @@ export function FreshBowlCafe() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[#e2dcce] bg-[#f5f3ec] p-6 sm:p-8 space-y-4">
-              <h3 className="text-base font-black text-[#16221b]">Express Pickup Protocol</h3>
-              <div className="flex items-start gap-3 text-xs text-[#4a5e50]">
-                <CheckCircle2 className="h-4 w-4 text-[#2d5a3c] shrink-0 mt-0.5" />
+            <div className="rounded-2xl border border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-base,#f5f3ec)] p-6 sm:p-8 space-y-4">
+              <h3 className="text-base font-black text-[var(--theme-text-primary,#16221b)]">Express Pickup Protocol</h3>
+              <div className="flex items-start gap-3 text-xs text-[var(--theme-text-secondary,#4a5e50)]">
+                <CheckCircle2 className="h-4 w-4 text-[var(--theme-accent-primary,#2d5a3c)] shrink-0 mt-0.5" />
                 <span>Text alert dispatched with cubby shelf number the second your bowl is sealed.</span>
               </div>
-              <div className="flex items-start gap-3 text-xs text-[#4a5e50]">
-                <CheckCircle2 className="h-4 w-4 text-[#2d5a3c] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 text-xs text-[var(--theme-text-secondary,#4a5e50)]">
+                <CheckCircle2 className="h-4 w-4 text-[var(--theme-accent-primary,#2d5a3c)] shrink-0 mt-0.5" />
                 <span>Dressings packaged in cold side ramekins to maintain maximum leaf crunch.</span>
               </div>
-              <div className="flex items-start gap-3 text-xs text-[#4a5e50]">
-                <CheckCircle2 className="h-4 w-4 text-[#2d5a3c] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 text-xs text-[var(--theme-text-secondary,#4a5e50)]">
+                <CheckCircle2 className="h-4 w-4 text-[var(--theme-accent-primary,#2d5a3c)] shrink-0 mt-0.5" />
                 <span>Curbside trunk drop-off available for vehicle pickup on Wellness Way.</span>
               </div>
             </div>
@@ -1039,18 +1039,18 @@ export function FreshBowlCafe() {
       {/* ── STICKY PICKUP ORDER INDICATOR ──────────────────────────────────── */}
       {totalCartCount > 0 && (
         <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#16221b]/95 px-5 py-3 text-white shadow-2xl backdrop-blur-xl">
+          <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[var(--theme-bg-dark,#16221b)]/95 px-5 py-3 text-white shadow-2xl backdrop-blur-xl">
             <div className="flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-full bg-[#2d5a3c] text-xs font-black">
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-[var(--theme-accent-primary,#2d5a3c)] text-xs font-black text-[var(--theme-accent-contrast,#ffffff)]">
                 {totalCartCount}
               </span>
               <span className="text-xs font-bold">
-                Order Total: <span className="text-[#8fad66] font-black">${totalCartPrice.toFixed(2)}</span>
+                Order Total: <span className="text-[var(--theme-accent-secondary,#8fad66)] font-black">${totalCartPrice.toFixed(2)}</span>
               </span>
             </div>
             <a
               href="#pickup-card"
-              className="rounded-full bg-[#8fad66] px-4 py-1.5 text-xs font-black uppercase text-[#16221b] hover:bg-white transition"
+              className="rounded-full bg-[var(--theme-accent-secondary,#8fad66)] px-4 py-1.5 text-xs font-black uppercase text-[var(--theme-bg-dark,#16221b)] hover:bg-white transition"
             >
               Checkout
             </a>
@@ -1059,12 +1059,12 @@ export function FreshBowlCafe() {
       )}
 
       {/* ── REFINED MINIMALIST FOOTER ──────────────────────────────────────── */}
-      <footer className="border-t border-[#e2dcce] bg-[#16221b] py-14 text-white">
+      <footer className="border-t border-[var(--theme-border,#e2dcce)] bg-[var(--theme-bg-dark,#16221b)] py-14 text-white">
         <Container>
           <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
             <div>
               <div className="flex items-center gap-2.5">
-                <div className="grid h-8 w-8 place-items-center rounded-lg bg-[#2d5a3c] text-sm font-black text-white">
+                <div className="grid h-8 w-8 place-items-center rounded-lg bg-[var(--theme-accent-primary,#2d5a3c)] text-sm font-black text-[var(--theme-accent-contrast,#ffffff)]">
                   🥗
                 </div>
                 <p className="text-xl font-black text-white">FreshBowl Lab & Cafe</p>
@@ -1075,7 +1075,7 @@ export function FreshBowlCafe() {
               <div className="mt-5">
                 <Link
                   to="/restaurant"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#8fad66] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--theme-accent-secondary,#8fad66)] hover:underline"
                 >
                   <ArrowRight className="h-3.5 w-3.5 rotate-180" />
                   <span>Return to 100Web Restaurant Portfolio</span>
@@ -1084,7 +1084,7 @@ export function FreshBowlCafe() {
             </div>
 
             <div>
-              <p className="text-xs font-black uppercase tracking-wider text-[#8fad66]">Hours</p>
+              <p className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-secondary,#8fad66)]">Hours</p>
               <div className="mt-3 space-y-1 text-xs text-white/70">
                 <p className="font-semibold text-white">Monday – Friday</p>
                 <p>7:30 AM – 8:30 PM</p>
@@ -1094,7 +1094,7 @@ export function FreshBowlCafe() {
             </div>
 
             <div>
-              <p className="text-xs font-black uppercase tracking-wider text-[#8fad66]">Dispensary & Cafe</p>
+              <p className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-secondary,#8fad66)]">Dispensary & Cafe</p>
               <div className="mt-3 space-y-1 text-xs text-white/70">
                 <p>75 Wellness Way, Suite A</p>
                 <p>Green Market District</p>
@@ -1104,7 +1104,7 @@ export function FreshBowlCafe() {
             </div>
 
             <div>
-              <p className="text-xs font-black uppercase tracking-wider text-[#8fad66]">Focus Menus</p>
+              <p className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-secondary,#8fad66)]">Focus Menus</p>
               <ul className="mt-3 space-y-1.5 text-xs text-white/70 font-semibold">
                 <li><a href="#signature" className="hover:text-white transition">Wild Salmon Bowl</a></li>
                 <li><a href="#signature" className="hover:text-white transition">Avocado Garden Harvest</a></li>

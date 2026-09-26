@@ -562,14 +562,14 @@ export function SkylineRealtyGroup() {
   };
 
   return (
-    <main className="skyline-app bg-[#f8fafc] text-[#0f172a] selection:bg-[#c5a069]/30">
+    <main className="skyline-app bg-[var(--theme-bg-base,#f8fafc)] [html.dark_&]:bg-[var(--theme-bg-base,#09111f)] text-[var(--theme-text-primary,#0f172a)] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] selection:bg-[var(--theme-accent-secondary,#c5a069)]/30 transition-colors duration-300">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
         .skyline-app { font-family: 'Outfit', -apple-system, sans-serif; }
         .skyline-display { font-family: 'Cormorant Garamond', Georgia, serif; }
-        .skyline-gold { color: #c5a069; }
-        .bg-skyline-gold { background-color: #c5a069; }
-        .border-skyline-gold { border-color: #c5a069; }
+        .skyline-gold { color: var(--theme-accent-secondary, #c5a069); }
+        .bg-skyline-gold { background-color: var(--theme-accent-secondary, #c5a069); }
+        .border-skyline-gold { border-color: var(--theme-accent-secondary, #c5a069); }
         section[id] { scroll-margin-top: 96px; }
       `}</style>
 
@@ -580,16 +580,16 @@ export function SkylineRealtyGroup() {
         ctaLabel="Private Consultation"
         ctaHref="#contact"
         collectionPath="/real-estate"
-        className="border-b border-[#e2e8f0] bg-white/95 text-[#0f172a] shadow-sm backdrop-blur-md"
-        brandClassName="text-[#153e75] font-extrabold tracking-tight"
-        linkClassName="text-slate-600 hover:text-[#153e75] text-[0.82rem] font-semibold tracking-wide"
-        ctaClassName="bg-[#153e75] text-white hover:bg-[#0b1324] text-[0.8rem] font-bold tracking-wider uppercase transition shadow-md"
-        menuButtonClassName="border-[#dbe4ef] text-[#153e75] hover:bg-[#eff6ff]"
-        mobilePanelClassName="border border-[#dbe4ef] bg-white"
+        className="border-b border-[#e2e8f0] [html.dark_&]:border-white/10 bg-white/95 [html.dark_&]:bg-[var(--theme-bg-base,#09111f)]/95 text-[var(--theme-text-primary,#0f172a)] [html.dark_&]:text-white shadow-sm backdrop-blur-md transition-colors duration-300"
+        brandClassName="text-[var(--theme-accent-primary,#153e75)] [html.dark_&]:text-white font-extrabold tracking-tight"
+        linkClassName="text-slate-600 [html.dark_&]:text-slate-300 hover:text-[var(--theme-accent-primary,#153e75)] [html.dark_&]:hover:text-white text-[0.82rem] font-semibold tracking-wide"
+        ctaClassName="bg-[var(--theme-accent-primary,#153e75)] text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 text-[0.8rem] font-bold tracking-wider uppercase transition shadow-md"
+        menuButtonClassName="border-[#dbe4ef] [html.dark_&]:border-white/15 text-[var(--theme-accent-primary,#153e75)] [html.dark_&]:text-white hover:bg-[#eff6ff] [html.dark_&]:hover:bg-white/5"
+        mobilePanelClassName="border border-[#dbe4ef] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)]"
       />
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[880px] overflow-hidden bg-[#09111f] pb-24 pt-32 text-white md:pt-40">
+      <section className="relative min-h-[880px] overflow-hidden bg-[#09111f] [html.dark_&]:bg-[var(--theme-bg-dark,#070d18)] pb-24 pt-32 text-white md:pt-40 transition-colors duration-300">
         <div className="absolute inset-0">
           <EditorialImage
             src={heroImage}
@@ -606,8 +606,8 @@ export function SkylineRealtyGroup() {
         <Container>
           <div className="relative grid min-h-[660px] gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-[#c5a069]/40 bg-[#c5a069]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.24em] text-[#e6cfa3] backdrop-blur-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#c5a069]" />
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-[var(--theme-accent-secondary,#c5a069)]/40 bg-[var(--theme-accent-secondary,#c5a069)]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.24em] text-[#e6cfa3] backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--theme-accent-secondary,#c5a069)]" />
                 Architectural Brokerage Group
               </div>
 
@@ -623,7 +623,7 @@ export function SkylineRealtyGroup() {
                 <CTAButton
                   href="#listings"
                   size="lg"
-                  className="bg-[#c5a069] text-[#09111f] font-bold tracking-wide uppercase hover:bg-white transition shadow-xl"
+                  className="bg-[var(--theme-accent-secondary,#c5a069)] text-[#09111f] font-bold tracking-wide uppercase hover:bg-white transition shadow-xl"
                 >
                   Explore Residences
                 </CTAButton>
@@ -658,10 +658,10 @@ export function SkylineRealtyGroup() {
 
             {/* Floating Market Desk Desk Card */}
             <div className="self-end lg:justify-self-end w-full max-w-md">
-              <div className="border border-white/20 bg-white/[0.08] p-7 shadow-2xl backdrop-blur-xl rounded-sm">
+              <div className="border border-white/20 bg-white/[0.08] [html.dark_&]:bg-black/30 p-7 shadow-2xl backdrop-blur-xl rounded-sm">
                 <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.2em] text-[#e6cfa3]">
                   <span>Private Market Desk</span>
-                  <span className="rounded-full bg-[#c5a069]/20 px-2.5 py-0.5 text-[0.65rem] text-[#e6cfa3] border border-[#c5a069]/40">
+                  <span className="rounded-full bg-[var(--theme-accent-secondary,#c5a069)]/20 px-2.5 py-0.5 text-[0.65rem] text-[#e6cfa3] border border-[var(--theme-accent-secondary,#c5a069)]/40">
                     Live Autumn 2026
                   </span>
                 </div>
@@ -691,7 +691,7 @@ export function SkylineRealtyGroup() {
                   <button
                     type="button"
                     onClick={() => focusInquiry("Buy")}
-                    className="flex w-full items-center justify-center gap-2 bg-[#c5a069] px-5 py-3.5 text-xs font-black uppercase tracking-[0.14em] text-[#09111f] transition hover:bg-white"
+                    className="flex w-full items-center justify-center gap-2 bg-[var(--theme-accent-secondary,#c5a069)] px-5 py-3.5 text-xs font-black uppercase tracking-[0.14em] text-[#09111f] transition hover:bg-white"
                   >
                     <span>Request VIP Buyer Brief</span>
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -715,31 +715,31 @@ export function SkylineRealtyGroup() {
         <Container>
           <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#c5a069]">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#c5a069)]">
                 Curated Portfolio
               </p>
-              <h2 className="skyline-display mt-2 text-4xl font-normal text-[#09111f] md:text-5xl">
+              <h2 className="skyline-display mt-2 text-4xl font-normal text-[#09111f] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] transition-colors duration-300 md:text-5xl">
                 Featured Residences
               </h2>
-              <p className="mt-2 text-base text-slate-600 max-w-xl">
+              <p className="mt-2 text-base text-slate-600 [html.dark_&]:text-slate-400 max-w-xl transition-colors duration-300">
                 Compare architectural character, square footage, neighborhood positioning, and monthly carries without losing the details that make each home distinctive.
               </p>
             </div>
 
             {savedPropertyIds.length > 0 && (
-              <div className="flex items-center gap-2 rounded-full border border-[#c5a069]/40 bg-[#fbf9f5] px-4 py-2 text-xs font-bold text-[#153e75]">
-                <Heart className="h-3.5 w-3.5 fill-[#c5a069] text-[#c5a069]" />
+              <div className="flex items-center gap-2 rounded-full border border-[var(--theme-accent-secondary,#c5a069)]/40 bg-[#fbf9f5] [html.dark_&]:bg-white/5 px-4 py-2 text-xs font-bold text-[var(--theme-accent-primary,#153e75)] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] transition-colors duration-300">
+                <Heart className="h-3.5 w-3.5 fill-[var(--theme-accent-secondary,#c5a069)] text-[var(--theme-accent-secondary,#c5a069)]" />
                 <span>{savedPropertyIds.length} Saved in your private shortlist</span>
               </div>
             )}
           </div>
 
           {/* Interactive Search & Filter Bar */}
-          <div className="mb-10 rounded-xl border border-[#dbe4ef] bg-white p-5 shadow-sm">
+          <div className="mb-10 rounded-xl border border-[#dbe4ef] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] p-5 shadow-sm transition-colors duration-300">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {/* Search Keyword */}
               <div className="lg:col-span-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 [html.dark_&]:text-slate-400 block mb-1.5">
                   Search Property / Address
                 </label>
                 <div className="relative">
@@ -749,7 +749,7 @@ export function SkylineRealtyGroup() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="e.g. Penthouse, terrace, Alder..."
-                    className="h-11 w-full rounded-md border border-slate-200 pl-10 pr-3 text-sm focus:border-[#153e75] focus:outline-none"
+                    className="h-11 w-full rounded-md border border-slate-200 [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-[var(--theme-bg-base,#09111f)] pl-10 pr-3 text-sm text-slate-800 [html.dark_&]:text-slate-200 focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none transition-colors duration-300"
                   />
                   {searchQuery && (
                     <button
@@ -765,13 +765,13 @@ export function SkylineRealtyGroup() {
 
               {/* Neighborhood */}
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 [html.dark_&]:text-slate-400 block mb-1.5">
                   Neighborhood
                 </label>
                 <select
                   value={neighborhoodFilter}
                   onChange={(e) => setNeighborhoodFilter(e.target.value)}
-                  className="h-11 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-700 font-medium focus:border-[#153e75] focus:outline-none"
+                  className="h-11 w-full rounded-md border border-slate-200 [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-[var(--theme-bg-base,#09111f)] px-3 text-sm text-slate-700 [html.dark_&]:text-slate-200 font-medium focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none transition-colors duration-300"
                 >
                   <option value="All">All Neighborhoods</option>
                   {neighborhoods.map((n) => (
@@ -784,13 +784,13 @@ export function SkylineRealtyGroup() {
 
               {/* Bedrooms */}
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 [html.dark_&]:text-slate-400 block mb-1.5">
                   Bedrooms
                 </label>
                 <select
                   value={bedsFilter}
                   onChange={(e) => setBedsFilter(e.target.value)}
-                  className="h-11 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-700 font-medium focus:border-[#153e75] focus:outline-none"
+                  className="h-11 w-full rounded-md border border-slate-200 [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-[var(--theme-bg-base,#09111f)] px-3 text-sm text-slate-700 [html.dark_&]:text-slate-200 font-medium focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none transition-colors duration-300"
                 >
                   <option value="All">Any Bedrooms</option>
                   <option value="2">2+ Beds</option>
@@ -801,13 +801,13 @@ export function SkylineRealtyGroup() {
 
               {/* Maximum Price */}
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-500 [html.dark_&]:text-slate-400 block mb-1.5">
                   Max Price
                 </label>
                 <select
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
-                  className="h-11 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-700 font-medium focus:border-[#153e75] focus:outline-none"
+                  className="h-11 w-full rounded-md border border-slate-200 [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-[var(--theme-bg-base,#09111f)] px-3 text-sm text-slate-700 [html.dark_&]:text-slate-200 font-medium focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none transition-colors duration-300"
                 >
                   <option value="Any">Any Price</option>
                   <option value="800000">Up to $800,000</option>
@@ -818,7 +818,7 @@ export function SkylineRealtyGroup() {
             </div>
 
             {/* Quick Status / Reset Row */}
-            <div className="mt-4 flex flex-wrap items-center justify-between border-t border-slate-100 pt-3 text-xs text-slate-500">
+            <div className="mt-4 flex flex-wrap items-center justify-between border-t border-slate-100 [html.dark_&]:border-white/10 pt-3 text-xs text-slate-500 [html.dark_&]:text-slate-400">
               <span aria-live="polite">
                 Showing <b>{filteredListings.length}</b> of {listings.length} residences
               </span>
@@ -831,7 +831,7 @@ export function SkylineRealtyGroup() {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="font-bold text-[#153e75] hover:underline"
+                  className="font-bold text-[var(--theme-accent-primary,#153e75)] [html.dark_&]:text-[var(--theme-accent-secondary,#c5a069)] hover:underline"
                 >
                   Reset all filters
                 </button>
@@ -849,7 +849,7 @@ export function SkylineRealtyGroup() {
                 return (
                   <article
                     key={listing.id}
-                    className="group relative flex flex-col overflow-hidden rounded-xl border border-[#dbe4ef] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#c5a069]/60"
+                    className="group relative flex flex-col overflow-hidden rounded-xl border border-[#dbe4ef] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--theme-accent-secondary,#c5a069)]/60"
                   >
                     {/* Image Header with Badges */}
                     <div className="relative aspect-[16/11] overflow-hidden bg-slate-900">
@@ -863,7 +863,7 @@ export function SkylineRealtyGroup() {
 
                       {/* Top Badges */}
                       <div className="absolute left-4 top-4 flex items-center gap-2">
-                        <span className="rounded-full bg-white/95 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-[#153e75] shadow-md backdrop-blur-sm">
+                        <span className="rounded-full bg-white/95 [html.dark_&]:bg-slate-900/95 px-3 py-1 text-[0.68rem] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#153e75)] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] shadow-md backdrop-blur-sm">
                           {listing.statusBadge}
                         </span>
                         <span className="rounded-full bg-black/60 px-2.5 py-1 text-[0.68rem] font-medium text-white/90 backdrop-blur-md">
@@ -904,33 +904,33 @@ export function SkylineRealtyGroup() {
                     <div className="flex flex-1 flex-col p-6">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <h3 className="text-xl font-bold text-[#09111f] group-hover:text-[#153e75] transition">
+                          <h3 className="text-xl font-bold text-[#09111f] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] group-hover:text-[var(--theme-accent-primary,#153e75)] [html.dark_&]:group-hover:text-[var(--theme-accent-secondary,#c5a069)] transition-colors duration-300">
                             {listing.title}
                           </h3>
-                          <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
-                            <MapPin className="h-3.5 w-3.5 text-[#c5a069]" />
+                          <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500 [html.dark_&]:text-slate-400">
+                            <MapPin className="h-3.5 w-3.5 text-[var(--theme-accent-secondary,#c5a069)]" />
                             <span>{listing.address}</span>
                           </p>
                         </div>
                       </div>
 
-                      <p className="mt-3 text-xs leading-relaxed text-slate-600 line-clamp-2">
+                      <p className="mt-3 text-xs leading-relaxed text-slate-600 [html.dark_&]:text-slate-400 line-clamp-2 transition-colors duration-300">
                         {listing.description}
                       </p>
 
                       {/* Specs Matrix */}
-                      <dl className="mt-5 grid grid-cols-3 border-y border-slate-100 py-3 text-center text-xs">
-                        <div className="border-r border-slate-100">
+                      <dl className="mt-5 grid grid-cols-3 border-y border-slate-100 [html.dark_&]:border-white/10 py-3 text-center text-xs transition-colors duration-300">
+                        <div className="border-r border-slate-100 [html.dark_&]:border-white/10">
                           <dt className="text-[0.68rem] uppercase tracking-wider text-slate-400">Beds</dt>
-                          <dd className="mt-0.5 font-bold text-slate-800">{listing.beds}</dd>
+                          <dd className="mt-0.5 font-bold text-slate-800 [html.dark_&]:text-slate-200">{listing.beds}</dd>
                         </div>
-                        <div className="border-r border-slate-100">
+                        <div className="border-r border-slate-100 [html.dark_&]:border-white/10">
                           <dt className="text-[0.68rem] uppercase tracking-wider text-slate-400">Baths</dt>
-                          <dd className="mt-0.5 font-bold text-slate-800">{listing.baths}</dd>
+                          <dd className="mt-0.5 font-bold text-slate-800 [html.dark_&]:text-slate-200">{listing.baths}</dd>
                         </div>
                         <div>
                           <dt className="text-[0.68rem] uppercase tracking-wider text-slate-400">Square Ft</dt>
-                          <dd className="mt-0.5 font-bold text-slate-800">{listing.squareFeet}</dd>
+                          <dd className="mt-0.5 font-bold text-slate-800 [html.dark_&]:text-slate-200">{listing.squareFeet}</dd>
                         </div>
                       </dl>
 
@@ -939,7 +939,7 @@ export function SkylineRealtyGroup() {
                         {listing.architecturalHighlights.slice(0, 2).map((h) => (
                           <span
                             key={h}
-                            className="rounded bg-[#f1f5f9] px-2 py-0.5 text-[0.68rem] font-medium text-slate-600 truncate max-w-[210px]"
+                            className="rounded bg-[#f1f5f9] [html.dark_&]:bg-white/5 px-2 py-0.5 text-[0.68rem] font-medium text-slate-600 [html.dark_&]:text-slate-300 truncate max-w-[210px] transition-colors duration-300"
                           >
                             ✦ {h}
                           </span>
@@ -951,7 +951,7 @@ export function SkylineRealtyGroup() {
                         <button
                           type="button"
                           onClick={() => openPropertyModal(listing)}
-                          className="flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 py-2.5 text-xs font-bold text-slate-700 transition hover:bg-slate-50"
+                          className="flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 [html.dark_&]:border-white/15 py-2.5 text-xs font-bold text-slate-700 [html.dark_&]:text-slate-200 transition hover:bg-slate-50 [html.dark_&]:hover:bg-white/5"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           <span>Specs & Tour</span>
@@ -963,7 +963,7 @@ export function SkylineRealtyGroup() {
                             setSelectedListing(listing);
                             setTourConfirmed(false);
                           }}
-                          className="flex items-center justify-center gap-1.5 rounded-lg bg-[#153e75] py-2.5 text-xs font-bold text-white transition hover:bg-[#09111f] shadow-sm"
+                          className="flex items-center justify-center gap-1.5 rounded-lg bg-[var(--theme-accent-primary,#153e75)] py-2.5 text-xs font-bold text-[var(--theme-accent-contrast,#ffffff)] transition hover:opacity-90 shadow-sm"
                         >
                           <Calendar className="h-3.5 w-3.5" />
                           <span>Book Showing</span>
@@ -975,18 +975,18 @@ export function SkylineRealtyGroup() {
               })}
             </div>
           ) : (
-            <div className="rounded-xl border border-dashed border-slate-300 bg-white p-12 text-center">
+            <div className="rounded-xl border border-dashed border-slate-300 [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] p-12 text-center transition-colors duration-300">
               <Building2 className="mx-auto h-12 w-12 text-slate-300" />
-              <h3 className="skyline-display mt-4 text-3xl font-medium text-slate-800">
+              <h3 className="skyline-display mt-4 text-3xl font-medium text-slate-800 [html.dark_&]:text-slate-200">
                 No residences match this search.
               </h3>
-              <p className="mt-2 text-sm text-slate-500">
+              <p className="mt-2 text-sm text-slate-500 [html.dark_&]:text-slate-400">
                 Try widening your price range or clearing neighborhood filters to see all properties.
               </p>
               <button
                 type="button"
                 onClick={clearFilters}
-                className="mt-5 rounded-lg bg-[#153e75] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#09111f]"
+                className="mt-5 rounded-lg bg-[var(--theme-accent-primary,#153e75)] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:opacity-90"
               >
                 Clear Filters
               </button>
@@ -996,37 +996,37 @@ export function SkylineRealtyGroup() {
       </section>
 
       {/* SECTION: NEIGHBORHOOD INTELLIGENCE WITH TRANSIT & WALK SCORES */}
-      <section id="neighborhoods" className="border-y border-[#dbe4ef] bg-[#edf4fb] py-20 md:py-28">
+      <section id="neighborhoods" className="border-y border-[#dbe4ef] [html.dark_&]:border-white/10 bg-[#edf4fb] [html.dark_&]:bg-[var(--theme-bg-surface,#0c1626)] py-20 md:py-28">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#c5a069]">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#c5a069)]">
                 Neighborhood Intelligence
               </p>
-              <h2 className="skyline-display mt-2 text-4xl font-normal text-[#09111f] md:text-5xl">
+              <h2 className="skyline-display mt-2 text-4xl font-normal text-[#09111f] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] md:text-5xl">
                 The right home begins with the right block.
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600 [html.dark_&]:text-slate-300">
                 Skyline compares pedestrian cadence, transit corridors, and long-term resale liquidity before a client commits capital.
               </p>
             </div>
 
-            <div className="rounded-xl border border-[#c9d8e8] bg-white p-5 shadow-lg">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#153e75]">
+            <div className="rounded-xl border border-[#c9d8e8] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] p-5 shadow-lg">
+              <p className="text-xs font-bold uppercase tracking-widest text-[var(--theme-accent-primary,#153e75)]">
                 Locational Due Diligence Matrix
               </p>
               <div className="mt-3 grid gap-2.5 sm:grid-cols-3">
-                <div className="rounded-lg bg-[#f8fafc] p-3 border border-slate-200">
-                  <span className="block text-xs font-bold text-slate-900">Pedestrian Rhythm</span>
-                  <span className="text-[0.72rem] text-slate-500">WalkScores 84–98 across all prime hubs</span>
+                <div className="rounded-lg bg-[#f8fafc] [html.dark_&]:bg-slate-800/60 p-3 border border-slate-200 [html.dark_&]:border-slate-700">
+                  <span className="block text-xs font-bold text-slate-900 [html.dark_&]:text-white">Pedestrian Rhythm</span>
+                  <span className="text-[0.72rem] text-slate-500 [html.dark_&]:text-slate-400">WalkScores 84–98 across all prime hubs</span>
                 </div>
-                <div className="rounded-lg bg-[#f8fafc] p-3 border border-slate-200">
-                  <span className="block text-xs font-bold text-slate-900">Commute Velocity</span>
-                  <span className="text-[0.72rem] text-slate-500">Direct ferry, rail, and arterial connection</span>
+                <div className="rounded-lg bg-[#f8fafc] [html.dark_&]:bg-slate-800/60 p-3 border border-slate-200 [html.dark_&]:border-slate-700">
+                  <span className="block text-xs font-bold text-slate-900 [html.dark_&]:text-white">Commute Velocity</span>
+                  <span className="text-[0.72rem] text-slate-500 [html.dark_&]:text-slate-400">Direct ferry, rail, and arterial connection</span>
                 </div>
-                <div className="rounded-lg bg-[#f8fafc] p-3 border border-slate-200">
-                  <span className="block text-xs font-bold text-slate-900">Capital Stability</span>
-                  <span className="text-[0.72rem] text-slate-500">Top quartile historical price retention</span>
+                <div className="rounded-lg bg-[#f8fafc] [html.dark_&]:bg-slate-800/60 p-3 border border-slate-200 [html.dark_&]:border-slate-700">
+                  <span className="block text-xs font-bold text-slate-900 [html.dark_&]:text-white">Capital Stability</span>
+                  <span className="text-[0.72rem] text-slate-500 [html.dark_&]:text-slate-400">Top quartile historical price retention</span>
                 </div>
               </div>
             </div>
@@ -1036,7 +1036,7 @@ export function SkylineRealtyGroup() {
             {neighborhoods.map((item, index) => (
               <article
                 key={item.name}
-                className="group flex flex-col overflow-hidden rounded-xl border border-[#c9d8e8] bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#c5a069]"
+                className="group flex flex-col overflow-hidden rounded-xl border border-[#c9d8e8] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[var(--theme-accent-secondary,#c5a069)]"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
                   <EditorialImage
@@ -1049,10 +1049,10 @@ export function SkylineRealtyGroup() {
 
                   {/* Badges */}
                   <div className="absolute left-4 right-4 top-4 flex items-center justify-between">
-                    <span className="rounded-full bg-white/95 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-[#153e75] shadow">
+                    <span className="rounded-full bg-white/95 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-[var(--theme-accent-primary,#153e75)] shadow">
                       District 0{index + 1}
                     </span>
-                    <span className="rounded-full bg-[#c5a069] px-3 py-1 text-[0.68rem] font-bold text-[#09111f] shadow">
+                    <span className="rounded-full bg-[var(--theme-accent-secondary,#c5a069)] px-3 py-1 text-[0.68rem] font-bold text-[#09111f] shadow">
                       WalkScore: {item.walkScore}
                     </span>
                   </div>
@@ -1070,17 +1070,17 @@ export function SkylineRealtyGroup() {
                 <div className="flex flex-1 flex-col p-6">
                   {/* District Metrics */}
                   <div className="space-y-2 text-xs">
-                    <div className="flex justify-between border-b border-slate-100 pb-2">
-                      <span className="text-slate-500">Transit Core:</span>
-                      <span className="font-bold text-slate-800">{item.transitTime}</span>
+                    <div className="flex justify-between border-b border-slate-100 [html.dark_&]:border-slate-800 pb-2">
+                      <span className="text-slate-500 [html.dark_&]:text-slate-400">Transit Core:</span>
+                      <span className="font-bold text-slate-800 [html.dark_&]:text-slate-200">{item.transitTime}</span>
                     </div>
-                    <div className="flex justify-between border-b border-slate-100 pb-2">
-                      <span className="text-slate-500">Median Price Band:</span>
-                      <span className="font-bold text-slate-800">{item.medianPrice}</span>
+                    <div className="flex justify-between border-b border-slate-100 [html.dark_&]:border-slate-800 pb-2">
+                      <span className="text-slate-500 [html.dark_&]:text-slate-400">Median Price Band:</span>
+                      <span className="font-bold text-slate-800 [html.dark_&]:text-slate-200">{item.medianPrice}</span>
                     </div>
                     <div className="flex justify-between pb-1">
-                      <span className="text-slate-500">Housing Type:</span>
-                      <span className="font-bold text-slate-800">{item.homes}</span>
+                      <span className="text-slate-500 [html.dark_&]:text-slate-400">Housing Type:</span>
+                      <span className="font-bold text-slate-800 [html.dark_&]:text-slate-200">{item.homes}</span>
                     </div>
                   </div>
 
@@ -1089,7 +1089,7 @@ export function SkylineRealtyGroup() {
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-[#f1f5f9] px-2.5 py-0.5 text-[0.68rem] font-semibold text-slate-600"
+                        className="rounded-full bg-[#f1f5f9] [html.dark_&]:bg-slate-800 px-2.5 py-0.5 text-[0.68rem] font-semibold text-slate-600 [html.dark_&]:text-slate-300"
                       >
                         {tag}
                       </span>
@@ -1103,7 +1103,7 @@ export function SkylineRealtyGroup() {
                         setNeighborhoodFilter(item.name);
                         document.getElementById("listings")?.scrollIntoView({ behavior: "smooth" });
                       }}
-                      className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#153e75] py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-[#09111f]"
+                      className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--theme-accent-primary,#153e75)] py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-[#09111f] [html.dark_&]:hover:bg-slate-800"
                     >
                       <span>Filter Homes Here</span>
                       <ArrowRight className="h-3.5 w-3.5" />
@@ -1117,7 +1117,7 @@ export function SkylineRealtyGroup() {
       </section>
 
       {/* SECTION: ABOUT MAYA BENNETT, PRINCIPAL BROKER */}
-      <section id="about" className="bg-[#09111f] py-20 text-white md:py-28">
+      <section id="about" className="bg-[#09111f] [html.dark_&]:bg-[var(--theme-bg-dark,#070d18)] py-20 text-white md:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div className="relative">
@@ -1129,8 +1129,8 @@ export function SkylineRealtyGroup() {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-5 -right-5 rounded-lg border border-[#c5a069]/40 bg-[#09111f]/95 p-4 shadow-xl backdrop-blur-md hidden sm:block">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#c5a069]">
+              <div className="absolute -bottom-5 -right-5 rounded-lg border border-[var(--theme-accent-secondary,#c5a069)]/40 bg-[#09111f]/95 [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)]/95 p-4 shadow-xl backdrop-blur-md hidden sm:block">
+                <p className="text-xs font-bold uppercase tracking-wider text-[var(--theme-accent-secondary,#c5a069)]">
                   14+ Years in City Brokerage
                 </p>
                 <p className="mt-1 text-sm font-semibold text-white">
@@ -1140,7 +1140,7 @@ export function SkylineRealtyGroup() {
             </div>
 
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#c5a069]">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#c5a069)]">
                 Meet Your Principal Broker
               </p>
               <h2 className="skyline-display mt-2 text-4xl font-normal leading-tight md:text-6xl">
@@ -1156,7 +1156,7 @@ export function SkylineRealtyGroup() {
                     key={title}
                     className="rounded-lg border border-white/15 bg-white/5 p-5 backdrop-blur-sm"
                   >
-                    <h3 className="text-base font-bold text-[#e6cfa3]">{title}</h3>
+                    <h3 className="text-base font-bold text-[var(--theme-accent-secondary,#e6cfa3)]">{title}</h3>
                     <p className="mt-2 text-xs leading-relaxed text-white/60">{text}</p>
                   </article>
                 ))}
@@ -1166,7 +1166,7 @@ export function SkylineRealtyGroup() {
                 <button
                   type="button"
                   onClick={() => focusInquiry("Consultation", "", "I would like to schedule a private advisory consultation with Maya Bennett.")}
-                  className="rounded-full bg-[#c5a069] px-7 py-3 text-xs font-black uppercase tracking-[0.14em] text-[#09111f] transition hover:bg-white"
+                  className="rounded-full bg-[var(--theme-accent-secondary,#c5a069)] px-7 py-3 text-xs font-black uppercase tracking-[0.14em] text-[#09111f] transition hover:bg-white"
                 >
                   Book Private Consult
                 </button>
@@ -1187,13 +1187,13 @@ export function SkylineRealtyGroup() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#c5a069]">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#c5a069)]">
                 Seller Advisory & Valuation
               </p>
-              <h2 className="skyline-display mt-2 text-4xl font-normal leading-tight text-[#09111f] md:text-5xl">
+              <h2 className="skyline-display mt-2 text-4xl font-normal leading-tight text-[#09111f] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] md:text-5xl">
                 A calibrated launch with zero surprises.
               </h2>
-              <p className="mt-4 text-base text-slate-600">
+              <p className="mt-4 text-base text-slate-600 [html.dark_&]:text-slate-300">
                 We position residential real estate as a prized architectural asset, generating buyer competitive tension while preserving your privacy.
               </p>
 
@@ -1201,14 +1201,14 @@ export function SkylineRealtyGroup() {
                 {sellerSteps.map(([number, title, text]) => (
                   <article
                     key={title}
-                    className="grid grid-cols-[auto_1fr] gap-4 rounded-xl border border-[#dbe4ef] bg-white p-5 shadow-sm"
+                    className="grid grid-cols-[auto_1fr] gap-4 rounded-xl border border-[#dbe4ef] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] p-5 shadow-sm"
                   >
-                    <span className="skyline-display text-4xl font-medium text-[#c5a069]">
+                    <span className="skyline-display text-4xl font-medium text-[var(--theme-accent-secondary,#c5a069)]">
                       {number}
                     </span>
                     <div>
-                      <h3 className="text-base font-bold text-slate-900">{title}</h3>
-                      <p className="mt-1 text-xs leading-relaxed text-slate-600">{text}</p>
+                      <h3 className="text-base font-bold text-slate-900 [html.dark_&]:text-white">{title}</h3>
+                      <p className="mt-1 text-xs leading-relaxed text-slate-600 [html.dark_&]:text-slate-400">{text}</p>
                     </div>
                   </article>
                 ))}
@@ -1216,28 +1216,28 @@ export function SkylineRealtyGroup() {
             </div>
 
             {/* Interactive Instant Home Valuation Widget */}
-            <div className="rounded-2xl border border-[#c9d8e8] bg-white p-7 shadow-xl">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div className="rounded-2xl border border-[#c9d8e8] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] p-7 shadow-xl">
+              <div className="flex items-center justify-between border-b border-slate-100 [html.dark_&]:border-slate-800 pb-3">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#c5a069]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[var(--theme-accent-secondary,#c5a069)]">
                     Instant Market Estimator
                   </span>
-                  <h3 className="text-lg font-bold text-slate-900">
+                  <h3 className="text-lg font-bold text-slate-900 [html.dark_&]:text-white">
                     Estimate Your Home's Value
                   </h3>
                 </div>
-                <Calculator className="h-5 w-5 text-[#153e75]" />
+                <Calculator className="h-5 w-5 text-[var(--theme-accent-primary,#153e75)]" />
               </div>
 
               <div className="mt-5 space-y-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-600 block mb-1">
+                  <label className="text-xs font-bold text-slate-600 [html.dark_&]:text-slate-300 block mb-1">
                     Select Neighborhood
                   </label>
                   <select
                     value={sellerNeighborhood}
                     onChange={(e) => setSellerNeighborhood(e.target.value)}
-                    className="h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-800"
+                    className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 px-3 text-xs font-medium text-slate-800 [html.dark_&]:text-slate-100 focus:outline-none focus:border-[var(--theme-accent-primary,#153e75)]"
                   >
                     <option value="River North">River North (Est. ~$665/sqft)</option>
                     <option value="West Harbor">West Harbor (Est. ~$555/sqft)</option>
@@ -1246,13 +1246,13 @@ export function SkylineRealtyGroup() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-600 block mb-1">
+                  <label className="text-xs font-bold text-slate-600 [html.dark_&]:text-slate-300 block mb-1">
                     Property Configuration
                   </label>
                   <select
                     value={sellerHomeType}
                     onChange={(e) => setSellerHomeType(e.target.value)}
-                    className="h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-800"
+                    className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 px-3 text-xs font-medium text-slate-800 [html.dark_&]:text-slate-100 focus:outline-none focus:border-[var(--theme-accent-primary,#153e75)]"
                   >
                     <option value="Condo / Loft">Condo / Loft</option>
                     <option value="Townhome">Urban Townhome</option>
@@ -1262,9 +1262,9 @@ export function SkylineRealtyGroup() {
                 </div>
 
                 <div>
-                  <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
+                  <div className="flex justify-between text-xs font-bold text-slate-700 [html.dark_&]:text-slate-200 mb-1">
                     <span>Approximate Square Footage:</span>
-                    <span className="text-[#153e75]">{sellerSqFt.toLocaleString()} sqft</span>
+                    <span className="text-[var(--theme-accent-primary,#153e75)]">{sellerSqFt.toLocaleString()} sqft</span>
                   </div>
                   <input
                     type="range"
@@ -1273,9 +1273,9 @@ export function SkylineRealtyGroup() {
                     step={50}
                     value={sellerSqFt}
                     onChange={(e) => setSellerSqFt(Number(e.target.value))}
-                    className="w-full accent-[#153e75]"
+                    className="w-full accent-[var(--theme-accent-primary,#153e75)]"
                   />
-                  <div className="flex justify-between text-[0.68rem] text-slate-400">
+                  <div className="flex justify-between text-[0.68rem] text-slate-400 [html.dark_&]:text-slate-500">
                     <span>800 sqft</span>
                     <span>2,500 sqft</span>
                     <span>5,000 sqft</span>
@@ -1283,14 +1283,14 @@ export function SkylineRealtyGroup() {
                 </div>
 
                 {/* Valuation Result Box */}
-                <div className="rounded-xl border border-[#c5a069]/40 bg-[#fbf9f5] p-5 text-center">
-                  <span className="text-[0.68rem] font-bold uppercase tracking-widest text-slate-500">
+                <div className="rounded-xl border border-[var(--theme-accent-secondary,#c5a069)]/40 bg-[#fbf9f5] [html.dark_&]:bg-slate-800/60 p-5 text-center">
+                  <span className="text-[0.68rem] font-bold uppercase tracking-widest text-slate-500 [html.dark_&]:text-slate-400">
                     Indicative Valuation Range
                   </span>
-                  <p className="skyline-display mt-1 text-3xl sm:text-4xl font-normal text-[#153e75]">
+                  <p className="skyline-display mt-1 text-3xl sm:text-4xl font-normal text-[var(--theme-accent-primary,#153e75)]">
                     ${calculatedValuation.low.toLocaleString()} – ${calculatedValuation.high.toLocaleString()}
                   </p>
-                  <p className="mt-1 text-[0.7rem] text-slate-500">
+                  <p className="mt-1 text-[0.7rem] text-slate-500 [html.dark_&]:text-slate-400">
                     Based on recent neighborhood closing velocity (${calculatedValuation.pricePerSqft}/sqft avg).
                   </p>
 
@@ -1303,7 +1303,7 @@ export function SkylineRealtyGroup() {
                         `I would like a formal Comparative Market Analysis (CMA) for my ${sellerSqFt.toLocaleString()} sqft ${sellerHomeType} in ${sellerNeighborhood}.`
                       )
                     }
-                    className="mt-4 w-full rounded-lg bg-[#09111f] py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-[#c5a069] hover:text-[#09111f]"
+                    className="mt-4 w-full rounded-lg bg-[#09111f] [html.dark_&]:bg-[var(--theme-accent-primary,#153e75)] py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-[var(--theme-accent-secondary,#c5a069)] hover:text-[#09111f]"
                   >
                     Request Comprehensive CMA Plan →
                   </button>
@@ -1315,25 +1315,25 @@ export function SkylineRealtyGroup() {
       </section>
 
       {/* SECTION: INTERACTIVE MORTGAGE & MONTHLY INVESTMENT CALCULATOR */}
-      <section id="calculator" className="border-y border-[#dbe4ef] bg-[#edf4fb] py-20 md:py-28">
+      <section id="calculator" className="border-y border-[#dbe4ef] [html.dark_&]:border-white/10 bg-[#edf4fb] [html.dark_&]:bg-[var(--theme-bg-surface,#0c1626)] py-20 md:py-28">
         <Container>
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#c5a069]">
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#c5a069)]">
               Financial Modeling Suite
             </p>
-            <h2 className="skyline-display mt-2 text-4xl font-normal text-[#09111f] md:text-5xl">
+            <h2 className="skyline-display mt-2 text-4xl font-normal text-[#09111f] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] md:text-5xl">
               Monthly Carry & Mortgage Estimator
             </h2>
-            <p className="mt-3 text-sm text-slate-600">
+            <p className="mt-3 text-sm text-slate-600 [html.dark_&]:text-slate-300">
               Calculate principal, interest, taxes, and association fees to model your true monthly capital obligation across various down payment tiers.
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] max-w-5xl mx-auto rounded-2xl border border-[#c9d8e8] bg-white p-6 sm:p-10 shadow-xl">
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] max-w-5xl mx-auto rounded-2xl border border-[#c9d8e8] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] p-6 sm:p-10 shadow-xl">
             {/* Inputs Column */}
             <div className="space-y-6">
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-600 block mb-1.5">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-600 [html.dark_&]:text-slate-300 block mb-1.5">
                   Home Purchase Price
                 </label>
                 <div className="relative">
@@ -1343,7 +1343,7 @@ export function SkylineRealtyGroup() {
                     step={10000}
                     value={calcPrice}
                     onChange={(e) => setCalcPrice(Number(e.target.value))}
-                    className="h-11 w-full rounded-md border border-slate-200 pl-8 pr-3 text-base font-bold text-slate-800 focus:border-[#153e75] focus:outline-none"
+                    className="h-11 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 pl-8 pr-3 text-base font-bold text-slate-800 [html.dark_&]:text-white focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                   />
                 </div>
                 {/* Fast Presets from Listings */}
@@ -1354,7 +1354,7 @@ export function SkylineRealtyGroup() {
                       key={l.id}
                       type="button"
                       onClick={() => setCalcPrice(l.price)}
-                      className="rounded bg-slate-100 px-2 py-0.5 text-[0.68rem] font-semibold text-slate-700 hover:bg-[#c5a069] hover:text-white transition"
+                      className="rounded bg-slate-100 [html.dark_&]:bg-slate-800 px-2 py-0.5 text-[0.68rem] font-semibold text-slate-700 [html.dark_&]:text-slate-300 hover:bg-[var(--theme-accent-secondary,#c5a069)] hover:text-white transition"
                     >
                       {l.title} ({l.priceLabel})
                     </button>
@@ -1364,9 +1364,9 @@ export function SkylineRealtyGroup() {
 
               {/* Down Payment Slider */}
               <div>
-                <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
+                <div className="flex justify-between text-xs font-bold text-slate-700 [html.dark_&]:text-slate-200 mb-1">
                   <span>Down Payment ({downPaymentPercent}%):</span>
-                  <span className="text-[#153e75]">
+                  <span className="text-[var(--theme-accent-primary,#153e75)]">
                     ${calculatedMortgage.downPaymentAmount.toLocaleString()}
                   </span>
                 </div>
@@ -1377,9 +1377,9 @@ export function SkylineRealtyGroup() {
                   step={5}
                   value={downPaymentPercent}
                   onChange={(e) => setDownPaymentPercent(Number(e.target.value))}
-                  className="w-full accent-[#153e75]"
+                  className="w-full accent-[var(--theme-accent-primary,#153e75)]"
                 />
-                <div className="flex justify-between text-[0.68rem] text-slate-400">
+                <div className="flex justify-between text-[0.68rem] text-slate-400 [html.dark_&]:text-slate-500">
                   <span>10% ($128K)</span>
                   <span>20% Conventional</span>
                   <span>50% Low LTV</span>
@@ -1389,7 +1389,7 @@ export function SkylineRealtyGroup() {
               {/* Interest Rate & Loan Term */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-600 block mb-1">
+                  <label className="text-xs font-bold uppercase tracking-wider text-slate-600 [html.dark_&]:text-slate-300 block mb-1">
                     Interest Rate (%)
                   </label>
                   <input
@@ -1397,17 +1397,17 @@ export function SkylineRealtyGroup() {
                     step={0.125}
                     value={interestRate}
                     onChange={(e) => setInterestRate(Number(e.target.value))}
-                    className="h-10 w-full rounded-md border border-slate-200 px-3 text-sm font-bold text-slate-800 focus:border-[#153e75] focus:outline-none"
+                    className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 px-3 text-sm font-bold text-slate-800 [html.dark_&]:text-white focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-600 block mb-1">
+                  <label className="text-xs font-bold uppercase tracking-wider text-slate-600 [html.dark_&]:text-slate-300 block mb-1">
                     Loan Term
                   </label>
                   <select
                     value={loanTermYears}
                     onChange={(e) => setLoanTermYears(Number(e.target.value))}
-                    className="h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-sm font-bold text-slate-800"
+                    className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 px-3 text-sm font-bold text-slate-800 [html.dark_&]:text-white focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                   >
                     <option value={30}>30 Years Fixed</option>
                     <option value={15}>15 Years Fixed</option>
@@ -1417,9 +1417,9 @@ export function SkylineRealtyGroup() {
             </div>
 
             {/* Payment Summary Column */}
-            <div className="flex flex-col justify-between rounded-xl bg-[#09111f] p-6 sm:p-8 text-white">
+            <div className="flex flex-col justify-between rounded-xl bg-[#09111f] [html.dark_&]:bg-[var(--theme-bg-dark,#070d18)] p-6 sm:p-8 text-white">
               <div>
-                <span className="text-[0.68rem] font-bold uppercase tracking-widest text-[#e6cfa3]">
+                <span className="text-[0.68rem] font-bold uppercase tracking-widest text-[var(--theme-accent-secondary,#e6cfa3)]">
                   Estimated Monthly Outlay
                 </span>
                 <p className="skyline-display mt-2 text-4xl sm:text-5xl font-normal text-white">
@@ -1461,7 +1461,7 @@ export function SkylineRealtyGroup() {
                       `I am modeling financing for a $${calcPrice.toLocaleString()} property with a $${calculatedMortgage.downPaymentAmount.toLocaleString()} down payment.`
                     )
                   }
-                  className="w-full rounded-lg bg-[#c5a069] py-3 text-xs font-black uppercase tracking-[0.14em] text-[#09111f] hover:bg-white transition"
+                  className="w-full rounded-lg bg-[var(--theme-accent-secondary,#c5a069)] py-3 text-xs font-black uppercase tracking-[0.14em] text-[#09111f] hover:bg-white transition"
                 >
                   Connect with Preferred Lender →
                 </button>
@@ -1472,7 +1472,7 @@ export function SkylineRealtyGroup() {
       </section>
 
       {/* SECTION: CLIENT TESTIMONIALS */}
-      <section className="border-b border-[#dbe4ef] bg-white py-20 md:py-28">
+      <section className="border-b border-[#dbe4ef] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-base,#09111f)] py-20 md:py-28">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-stretch">
             <div className="relative overflow-hidden rounded-xl">
@@ -1482,21 +1482,21 @@ export function SkylineRealtyGroup() {
                 tone="from-[#f8fafc] via-[#7e9bb8] to-[#153e75]"
                 className="h-full min-h-[440px] w-full object-cover"
               />
-              <div className="absolute inset-x-5 bottom-5 rounded-lg bg-[#09111f]/95 p-6 text-white backdrop-blur-md">
+              <div className="absolute inset-x-5 bottom-5 rounded-lg bg-[#09111f]/95 [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)]/95 p-6 text-white backdrop-blur-md">
                 <p className="skyline-display text-2xl font-normal leading-snug">
                   “{testimonials[0].quote}”
                 </p>
-                <p className="mt-3 text-xs font-bold uppercase tracking-wider text-[#e6cfa3]">
+                <p className="mt-3 text-xs font-bold uppercase tracking-wider text-[var(--theme-accent-secondary,#e6cfa3)]">
                   {testimonials[0].name} · {testimonials[0].role}
                 </p>
               </div>
             </div>
 
             <div className="flex flex-col justify-center">
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#c5a069]">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#c5a069)]">
                 Client Endorsements
               </p>
-              <h2 className="skyline-display mt-2 text-4xl font-normal leading-tight md:text-5xl">
+              <h2 className="skyline-display mt-2 text-4xl font-normal leading-tight text-[#09111f] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] md:text-5xl">
                 Disciplined advice yields lasting confidence.
               </h2>
 
@@ -1504,12 +1504,12 @@ export function SkylineRealtyGroup() {
                 {testimonials.slice(1).map((item) => (
                   <blockquote
                     key={item.name}
-                    className="rounded-lg border-l-4 border-[#c5a069] bg-[#f8fafc] p-6 shadow-sm"
+                    className="rounded-lg border-l-4 border-[var(--theme-accent-secondary,#c5a069)] bg-[#f8fafc] [html.dark_&]:bg-slate-800/60 p-6 shadow-sm"
                   >
-                    <p className="text-sm font-medium leading-relaxed text-slate-800">
+                    <p className="text-sm font-medium leading-relaxed text-slate-800 [html.dark_&]:text-slate-200">
                       “{item.quote}”
                     </p>
-                    <footer className="mt-3 text-xs font-bold text-[#153e75]">
+                    <footer className="mt-3 text-xs font-bold text-[var(--theme-accent-primary,#153e75)]">
                       {item.name} · {item.role}
                     </footer>
                   </blockquote>
@@ -1525,18 +1525,18 @@ export function SkylineRealtyGroup() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#c5a069]">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#c5a069)]">
                 Frequently Addressed
               </p>
-              <h2 className="skyline-display mt-2 text-4xl font-normal leading-tight md:text-5xl">
+              <h2 className="skyline-display mt-2 text-4xl font-normal leading-tight text-[#09111f] [html.dark_&]:text-[var(--theme-text-primary,#f8fafc)] md:text-5xl">
                 Clarity before commitment.
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-slate-600">
+              <p className="mt-4 text-sm leading-relaxed text-slate-600 [html.dark_&]:text-slate-300">
                 Transparent answers regarding representation protocol, private off-market tours, and fiduciary standards.
               </p>
             </div>
 
-            <div className="divide-y divide-[#dbe4ef] border-y border-[#dbe4ef]">
+            <div className="divide-y divide-[#dbe4ef] [html.dark_&]:divide-white/10 border-y border-[#dbe4ef] [html.dark_&]:border-white/10">
               {faqs.map(([question, answer], index) => {
                 const isOpen = openFaq === index;
                 return (
@@ -1547,10 +1547,10 @@ export function SkylineRealtyGroup() {
                         aria-expanded={isOpen}
                         aria-controls={`faq-panel-${index}`}
                         onClick={() => setOpenFaq(isOpen ? -1 : index)}
-                        className="flex w-full items-center justify-between gap-5 py-5 text-left text-base font-bold text-slate-900 transition hover:text-[#153e75]"
+                        className="flex w-full items-center justify-between gap-5 py-5 text-left text-base font-bold text-slate-900 [html.dark_&]:text-white transition hover:text-[var(--theme-accent-primary,#153e75)]"
                       >
                         <span>{question}</span>
-                        <span aria-hidden="true" className="text-xl font-normal text-[#c5a069]">
+                        <span aria-hidden="true" className="text-xl font-normal text-[var(--theme-accent-secondary,#c5a069)]">
                           {isOpen ? "−" : "+"}
                         </span>
                       </button>
@@ -1558,7 +1558,7 @@ export function SkylineRealtyGroup() {
                     {isOpen && (
                       <div
                         id={`faq-panel-${index}`}
-                        className="pb-5 pr-8 text-xs leading-relaxed text-slate-600"
+                        className="pb-5 pr-8 text-xs leading-relaxed text-slate-600 [html.dark_&]:text-slate-400"
                       >
                         {answer}
                       </div>
@@ -1572,11 +1572,11 @@ export function SkylineRealtyGroup() {
       </section>
 
       {/* SECTION: CONTACT & PRIVATE CONSULTATION */}
-      <section id="contact" className="bg-[#09111f] py-20 text-white md:py-28">
+      <section id="contact" className="bg-[#09111f] [html.dark_&]:bg-[var(--theme-bg-dark,#070d18)] py-20 text-white md:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-[#c5a069]">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#c5a069)]">
                 Discreet Advisory
               </p>
               <h2 className="skyline-display mt-2 text-4xl font-normal leading-tight md:text-5xl">
@@ -1587,19 +1587,19 @@ export function SkylineRealtyGroup() {
               </p>
 
               <div className="mt-8 space-y-3 text-xs font-semibold text-white/80">
-                <a href="tel:+15550301000" className="flex items-center gap-2 hover:text-[#e6cfa3] transition">
-                  <Phone className="h-4 w-4 text-[#c5a069]" />
+                <a href="tel:+15550301000" className="flex items-center gap-2 hover:text-[var(--theme-accent-secondary,#e6cfa3)] transition">
+                  <Phone className="h-4 w-4 text-[var(--theme-accent-secondary,#c5a069)]" />
                   <span>(555) 030-1000 (Direct Broker Desk)</span>
                 </a>
-                <a href="mailto:hello@skylinerealty.example" className="flex items-center gap-2 hover:text-[#e6cfa3] transition">
-                  <Mail className="h-4 w-4 text-[#c5a069]" />
+                <a href="mailto:hello@skylinerealty.example" className="flex items-center gap-2 hover:text-[var(--theme-accent-secondary,#e6cfa3)] transition">
+                  <Mail className="h-4 w-4 text-[var(--theme-accent-secondary,#c5a069)]" />
                   <span>advisory@skylinerealty.example</span>
                 </a>
               </div>
             </div>
 
             {/* Contact Form Card */}
-            <div className="rounded-xl bg-white p-6 sm:p-8 text-[#0f172a] shadow-2xl">
+            <div className="rounded-xl bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] p-6 sm:p-8 text-[#0f172a] [html.dark_&]:text-white shadow-2xl border border-transparent [html.dark_&]:border-white/10">
               {submitted ? (
                 <div
                   role="status"
@@ -1612,24 +1612,24 @@ export function SkylineRealtyGroup() {
                   <h3 className="skyline-display mt-5 text-3xl font-medium">
                     Consultation Brief Received
                   </h3>
-                  <p className="mt-2 max-w-md text-xs leading-relaxed text-slate-600">
+                  <p className="mt-2 max-w-md text-xs leading-relaxed text-slate-600 [html.dark_&]:text-slate-300">
                     Thank you, {form.name}. Maya Bennett’s desk will review your {form.intent.toLowerCase()} inquiry and reply via {form.contactMethod.toLowerCase()} within 4 business hours.
                   </p>
                   <button
                     type="button"
                     onClick={resetInquiry}
-                    className="mt-6 rounded-lg bg-[#153e75] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#09111f]"
+                    className="mt-6 rounded-lg bg-[var(--theme-accent-primary,#153e75)] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#09111f] [html.dark_&]:hover:bg-slate-800"
                   >
                     Start Another Inquiry
                   </button>
                 </div>
               ) : (
                 <form noValidate onSubmit={submitInquiry}>
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                    <p className="text-xs font-bold uppercase tracking-wider text-[#153e75]">
+                  <div className="flex items-center justify-between border-b border-slate-100 [html.dark_&]:border-slate-800 pb-3">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[var(--theme-accent-primary,#153e75)]">
                       Confidential Advisory Form
                     </p>
-                    <span className="text-[0.65rem] text-slate-400">Strictly Private</span>
+                    <span className="text-[0.65rem] text-slate-400 [html.dark_&]:text-slate-500">Strictly Private</span>
                   </div>
 
                   {Object.keys(errors).length > 0 && (
@@ -1645,13 +1645,13 @@ export function SkylineRealtyGroup() {
 
                   <div className="mt-4 grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="text-xs font-bold text-slate-700 block mb-1">
+                      <label className="text-xs font-bold text-slate-700 [html.dark_&]:text-slate-300 block mb-1">
                         Primary Objective
                       </label>
                       <select
                         value={form.intent}
                         onChange={(e) => updateForm("intent", e.target.value)}
-                        className="h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-xs"
+                        className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 px-3 text-xs focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                       >
                         <option>Buy a Residence</option>
                         <option>Sell a Property</option>
@@ -1661,13 +1661,13 @@ export function SkylineRealtyGroup() {
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-slate-700 block mb-1">
+                      <label className="text-xs font-bold text-slate-700 [html.dark_&]:text-slate-300 block mb-1">
                         Referenced Property
                       </label>
                       <select
                         value={form.property}
                         onChange={(e) => updateForm("property", e.target.value)}
-                        className="h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-xs"
+                        className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 px-3 text-xs focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                       >
                         <option value="">No specific residence</option>
                         {listings.map((l) => (
@@ -1679,7 +1679,7 @@ export function SkylineRealtyGroup() {
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-slate-700 block mb-1">
+                      <label className="text-xs font-bold text-slate-700 [html.dark_&]:text-slate-300 block mb-1">
                         Full Name *
                       </label>
                       <input
@@ -1687,7 +1687,7 @@ export function SkylineRealtyGroup() {
                         value={form.name}
                         onChange={(e) => updateForm("name", e.target.value)}
                         placeholder="e.g. Julian Vance"
-                        className="h-10 w-full rounded-md border border-slate-200 px-3 text-xs focus:border-[#153e75] focus:outline-none"
+                        className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 px-3 text-xs focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                       />
                       {errors.name && (
                         <span className="text-[0.68rem] text-red-600 block mt-0.5">{errors.name}</span>
@@ -1695,7 +1695,7 @@ export function SkylineRealtyGroup() {
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-slate-700 block mb-1">
+                      <label className="text-xs font-bold text-slate-700 [html.dark_&]:text-slate-300 block mb-1">
                         Email Address *
                       </label>
                       <input
@@ -1703,7 +1703,7 @@ export function SkylineRealtyGroup() {
                         value={form.email}
                         onChange={(e) => updateForm("email", e.target.value)}
                         placeholder="julian@example.com"
-                        className="h-10 w-full rounded-md border border-slate-200 px-3 text-xs focus:border-[#153e75] focus:outline-none"
+                        className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 px-3 text-xs focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                       />
                       {errors.email && (
                         <span className="text-[0.68rem] text-red-600 block mt-0.5">{errors.email}</span>
@@ -1711,7 +1711,7 @@ export function SkylineRealtyGroup() {
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-slate-700 block mb-1">
+                      <label className="text-xs font-bold text-slate-700 [html.dark_&]:text-slate-300 block mb-1">
                         Direct Phone (Optional)
                       </label>
                       <input
@@ -1719,18 +1719,18 @@ export function SkylineRealtyGroup() {
                         value={form.phone}
                         onChange={(e) => updateForm("phone", e.target.value)}
                         placeholder="(555) 000-0000"
-                        className="h-10 w-full rounded-md border border-slate-200 px-3 text-xs focus:border-[#153e75] focus:outline-none"
+                        className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 px-3 text-xs focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                       />
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-slate-700 block mb-1">
+                      <label className="text-xs font-bold text-slate-700 [html.dark_&]:text-slate-300 block mb-1">
                         Preferred Contact Method
                       </label>
                       <select
                         value={form.contactMethod}
                         onChange={(e) => updateForm("contactMethod", e.target.value)}
-                        className="h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-xs"
+                        className="h-10 w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 px-3 text-xs focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                       >
                         <option>Email</option>
                         <option>Phone Call</option>
@@ -1740,7 +1740,7 @@ export function SkylineRealtyGroup() {
                   </div>
 
                   <div className="mt-4">
-                    <label className="text-xs font-bold text-slate-700 block mb-1">
+                    <label className="text-xs font-bold text-slate-700 [html.dark_&]:text-slate-300 block mb-1">
                       Brief Message or Timing Goals *
                     </label>
                     <textarea
@@ -1748,7 +1748,7 @@ export function SkylineRealtyGroup() {
                       value={form.message}
                       onChange={(e) => updateForm("message", e.target.value)}
                       placeholder="Share details regarding your target neighborhoods, budget parameters, or property questions..."
-                      className="w-full rounded-md border border-slate-200 p-3 text-xs focus:border-[#153e75] focus:outline-none"
+                      className="w-full rounded-md border border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 p-3 text-xs focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                     />
                     {errors.message && (
                       <span className="text-[0.68rem] text-red-600 block mt-0.5">{errors.message}</span>
@@ -1757,7 +1757,7 @@ export function SkylineRealtyGroup() {
 
                   <button
                     type="submit"
-                    className="mt-5 w-full rounded-lg bg-[#153e75] py-3.5 text-xs font-black uppercase tracking-[0.14em] text-white transition hover:bg-[#09111f] shadow-md"
+                    className="mt-5 w-full rounded-lg bg-[var(--theme-accent-primary,#153e75)] py-3.5 text-xs font-black uppercase tracking-[0.14em] text-white transition hover:bg-[#09111f] [html.dark_&]:hover:bg-slate-800 shadow-md"
                   >
                     Submit Advisory Request →
                   </button>
@@ -1769,11 +1769,11 @@ export function SkylineRealtyGroup() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-800 bg-[#060c17] py-12 text-white">
+      <footer className="border-t border-slate-800 bg-[#060c17] [html.dark_&]:bg-[var(--theme-bg-dark,#040810)] py-12 text-white">
         <Container>
           <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
             <div>
-              <p className="skyline-display text-2xl font-normal text-[#e6cfa3]">
+              <p className="skyline-display text-2xl font-normal text-[var(--theme-accent-secondary,#e6cfa3)]">
                 Skyline Realty Group
               </p>
               <p className="mt-2 max-w-xl text-xs leading-relaxed text-white/50">
@@ -1787,7 +1787,7 @@ export function SkylineRealtyGroup() {
               <a href="#about" className="hover:text-white transition">About</a>
               <a href="#sellers" className="hover:text-white transition">Seller Advisory</a>
               <a href="#calculator" className="hover:text-white transition">Mortgage</a>
-              <Link to="/real-estate" className="text-[#c5a069] hover:text-white transition">
+              <Link to="/real-estate" className="text-[var(--theme-accent-secondary,#c5a069)] hover:text-white transition">
                 ← All Real Estate Concepts
               </Link>
             </div>
@@ -1804,7 +1804,7 @@ export function SkylineRealtyGroup() {
           onClick={() => setSelectedListing(null)}
         >
           <div
-            className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+            className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white [html.dark_&]:bg-[var(--theme-bg-card,#0f172a)] text-slate-900 [html.dark_&]:text-slate-100 border border-transparent [html.dark_&]:border-white/10 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header Image */}
@@ -1827,7 +1827,7 @@ export function SkylineRealtyGroup() {
               </button>
 
               <div className="absolute bottom-4 left-6 right-6 text-white">
-                <span className="rounded-full bg-[#c5a069] px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-[#09111f]">
+                <span className="rounded-full bg-[var(--theme-accent-secondary,#c5a069)] px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wider text-[#09111f]">
                   {selectedListing.statusBadge}
                 </span>
                 <h3 className="skyline-display mt-2 text-3xl sm:text-4xl font-normal">
@@ -1840,49 +1840,49 @@ export function SkylineRealtyGroup() {
             {/* Modal Body */}
             <div className="p-6 sm:p-8">
               {/* Key Specs Bar */}
-              <div className="grid grid-cols-4 divide-x divide-slate-200 border-y border-slate-200 py-3 text-center text-xs">
+              <div className="grid grid-cols-4 divide-x divide-slate-200 [html.dark_&]:divide-slate-700 border-y border-slate-200 [html.dark_&]:border-slate-700 py-3 text-center text-xs">
                 <div>
                   <span className="text-slate-400 block text-[0.68rem] uppercase">Price</span>
-                  <span className="font-bold text-slate-900 text-sm">{selectedListing.priceLabel}</span>
+                  <span className="font-bold text-slate-900 [html.dark_&]:text-white text-sm">{selectedListing.priceLabel}</span>
                 </div>
                 <div>
                   <span className="text-slate-400 block text-[0.68rem] uppercase">Beds / Baths</span>
-                  <span className="font-bold text-slate-900 text-sm">
+                  <span className="font-bold text-slate-900 [html.dark_&]:text-white text-sm">
                     {selectedListing.beds} / {selectedListing.baths}
                   </span>
                 </div>
                 <div>
                   <span className="text-slate-400 block text-[0.68rem] uppercase">Interior Size</span>
-                  <span className="font-bold text-slate-900 text-sm">{selectedListing.squareFeet} sqft</span>
+                  <span className="font-bold text-slate-900 [html.dark_&]:text-white text-sm">{selectedListing.squareFeet} sqft</span>
                 </div>
                 <div>
                   <span className="text-slate-400 block text-[0.68rem] uppercase">Monthly Carry</span>
-                  <span className="font-bold text-[#153e75] text-sm">${selectedListing.hoaPerMonth}/mo</span>
+                  <span className="font-bold text-[var(--theme-accent-primary,#153e75)] text-sm">${selectedListing.hoaPerMonth}/mo</span>
                 </div>
               </div>
 
               {/* Description */}
               <div className="mt-5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 [html.dark_&]:text-slate-400">
                   Architectural Narrative
                 </h4>
-                <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-700">
+                <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-700 [html.dark_&]:text-slate-300">
                   {selectedListing.description}
                 </p>
               </div>
 
               {/* Architectural Highlights */}
               <div className="mt-5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 [html.dark_&]:text-slate-400 mb-2">
                   Signature Features
                 </h4>
                 <div className="grid sm:grid-cols-2 gap-2">
                   {selectedListing.architecturalHighlights.map((h) => (
                     <div
                       key={h}
-                      className="flex items-center gap-2 rounded-lg bg-slate-50 p-2 text-xs font-medium text-slate-800 border border-slate-100"
+                      className="flex items-center gap-2 rounded-lg bg-slate-50 [html.dark_&]:bg-slate-800/70 p-2 text-xs font-medium text-slate-800 [html.dark_&]:text-slate-200 border border-slate-100 [html.dark_&]:border-slate-700"
                     >
-                      <CheckCircle2 className="h-3.5 w-3.5 text-[#c5a069]" />
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[var(--theme-accent-secondary,#c5a069)]" />
                       <span>{h}</span>
                     </div>
                   ))}
@@ -1890,32 +1890,32 @@ export function SkylineRealtyGroup() {
               </div>
 
               {/* Schedule Private Showing Sub-Form */}
-              <div className="mt-8 rounded-xl border border-[#c5a069]/40 bg-[#fbf9f5] p-5">
+              <div className="mt-8 rounded-xl border border-[var(--theme-accent-secondary,#c5a069)]/40 bg-[#fbf9f5] [html.dark_&]:bg-slate-800/50 p-5">
                 {tourConfirmed ? (
                   <div className="py-4 text-center">
                     <CheckCircle2 className="mx-auto h-10 w-10 text-emerald-600" />
-                    <h5 className="skyline-display mt-2 text-2xl font-normal text-slate-900">
+                    <h5 className="skyline-display mt-2 text-2xl font-normal text-slate-900 [html.dark_&]:text-white">
                       Private Showing Confirmed
                     </h5>
-                    <p className="mt-1 text-xs text-slate-600">
+                    <p className="mt-1 text-xs text-slate-600 [html.dark_&]:text-slate-300">
                       Your {showingType === "in-person" ? "in-person walkthrough" : "4K live video tour"} reservation for{" "}
                       <b>{showingDate}</b> during the <b>{showingSlot}</b> slot has been logged. Maya’s concierge desk will reach out shortly.
                     </p>
                     <button
                       type="button"
                       onClick={() => setSelectedListing(null)}
-                      className="mt-4 rounded-lg bg-[#153e75] px-5 py-2 text-xs font-bold uppercase tracking-wider text-white"
+                      className="mt-4 rounded-lg bg-[var(--theme-accent-primary,#153e75)] px-5 py-2 text-xs font-bold uppercase tracking-wider text-white"
                     >
                       Close Window
                     </button>
                   </div>
                 ) : (
                   <form onSubmit={handleConfirmTour}>
-                    <div className="flex items-center justify-between border-b border-slate-200/70 pb-2 mb-3">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#153e75]">
+                    <div className="flex items-center justify-between border-b border-slate-200/70 [html.dark_&]:border-slate-700 pb-2 mb-3">
+                      <span className="text-xs font-bold uppercase tracking-wider text-[var(--theme-accent-primary,#153e75)]">
                         Schedule Private Showing
                       </span>
-                      <span className="text-[0.68rem] text-slate-500">Zero Obligation</span>
+                      <span className="text-[0.68rem] text-slate-500 [html.dark_&]:text-slate-400">Zero Obligation</span>
                     </div>
 
                     {/* In-Person vs Video Toggle */}
@@ -1925,8 +1925,8 @@ export function SkylineRealtyGroup() {
                         onClick={() => setShowingType("in-person")}
                         className={`py-2 text-xs font-bold rounded-md border transition ${
                           showingType === "in-person"
-                            ? "border-[#153e75] bg-[#153e75] text-white shadow-sm"
-                            : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                            ? "border-[var(--theme-accent-primary,#153e75)] bg-[var(--theme-accent-primary,#153e75)] text-white shadow-sm"
+                            : "border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 text-slate-700 [html.dark_&]:text-slate-300 hover:bg-slate-50 [html.dark_&]:hover:bg-slate-700"
                         }`}
                       >
                         In-Person Walkthrough
@@ -1936,8 +1936,8 @@ export function SkylineRealtyGroup() {
                         onClick={() => setShowingType("video")}
                         className={`py-2 text-xs font-bold rounded-md border transition ${
                           showingType === "video"
-                            ? "border-[#153e75] bg-[#153e75] text-white shadow-sm"
-                            : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                            ? "border-[var(--theme-accent-primary,#153e75)] bg-[var(--theme-accent-primary,#153e75)] text-white shadow-sm"
+                            : "border-slate-200 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 text-slate-700 [html.dark_&]:text-slate-300 hover:bg-slate-50 [html.dark_&]:hover:bg-slate-700"
                         }`}
                       >
                         4K Live Video Tour
@@ -1946,25 +1946,25 @@ export function SkylineRealtyGroup() {
 
                     <div className="grid sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[0.68rem] font-bold uppercase text-slate-600 block mb-1">
+                        <label className="text-[0.68rem] font-bold uppercase text-slate-600 [html.dark_&]:text-slate-300 block mb-1">
                           Preferred Date
                         </label>
                         <input
                           type="date"
                           value={showingDate}
                           onChange={(e) => setShowingDate(e.target.value)}
-                          className="h-9 w-full rounded border border-slate-200 px-2 text-xs bg-white"
+                          className="h-9 w-full rounded border border-slate-200 [html.dark_&]:border-slate-700 px-2 text-xs bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                         />
                       </div>
 
                       <div>
-                        <label className="text-[0.68rem] font-bold uppercase text-slate-600 block mb-1">
+                        <label className="text-[0.68rem] font-bold uppercase text-slate-600 [html.dark_&]:text-slate-300 block mb-1">
                           Time Slot
                         </label>
                         <select
                           value={showingSlot}
                           onChange={(e) => setShowingSlot(e.target.value)}
-                          className="h-9 w-full rounded border border-slate-200 px-2 text-xs bg-white"
+                          className="h-9 w-full rounded border border-slate-200 [html.dark_&]:border-slate-700 px-2 text-xs bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                         >
                           <option>10:00 (Morning Light)</option>
                           <option>14:00 (Afternoon Light)</option>
@@ -1973,7 +1973,7 @@ export function SkylineRealtyGroup() {
                       </div>
 
                       <div>
-                        <label className="text-[0.68rem] font-bold uppercase text-slate-600 block mb-1">
+                        <label className="text-[0.68rem] font-bold uppercase text-slate-600 [html.dark_&]:text-slate-300 block mb-1">
                           Your Name
                         </label>
                         <input
@@ -1981,12 +1981,12 @@ export function SkylineRealtyGroup() {
                           value={tourName}
                           onChange={(e) => setTourName(e.target.value)}
                           placeholder="Your Name"
-                          className="h-9 w-full rounded border border-slate-200 px-2 text-xs bg-white"
+                          className="h-9 w-full rounded border border-slate-200 [html.dark_&]:border-slate-700 px-2 text-xs bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                         />
                       </div>
 
                       <div>
-                        <label className="text-[0.68rem] font-bold uppercase text-slate-600 block mb-1">
+                        <label className="text-[0.68rem] font-bold uppercase text-slate-600 [html.dark_&]:text-slate-300 block mb-1">
                           Your Email / Mobile
                         </label>
                         <input
@@ -1994,7 +1994,7 @@ export function SkylineRealtyGroup() {
                           value={tourEmail}
                           onChange={(e) => setTourEmail(e.target.value)}
                           placeholder="Email or Mobile"
-                          className="h-9 w-full rounded border border-slate-200 px-2 text-xs bg-white"
+                          className="h-9 w-full rounded border border-slate-200 [html.dark_&]:border-slate-700 px-2 text-xs bg-white [html.dark_&]:bg-slate-800 text-slate-800 [html.dark_&]:text-slate-100 focus:border-[var(--theme-accent-primary,#153e75)] focus:outline-none"
                         />
                       </div>
                     </div>
@@ -2002,7 +2002,7 @@ export function SkylineRealtyGroup() {
                     <div className="mt-4 flex gap-3">
                       <button
                         type="submit"
-                        className="flex-1 rounded-lg bg-[#c5a069] py-2.5 text-xs font-black uppercase tracking-wider text-[#09111f] hover:bg-[#153e75] hover:text-white transition shadow"
+                        className="flex-1 rounded-lg bg-[var(--theme-accent-secondary,#c5a069)] py-2.5 text-xs font-black uppercase tracking-wider text-[#09111f] hover:bg-[var(--theme-accent-primary,#153e75)] hover:text-white transition shadow"
                       >
                         Confirm Showing Reservation
                       </button>
@@ -2010,7 +2010,7 @@ export function SkylineRealtyGroup() {
                       <button
                         type="button"
                         onClick={() => loadListingIntoCalculator(selectedListing)}
-                        className="rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-100 transition"
+                        className="rounded-lg border border-slate-300 [html.dark_&]:border-slate-700 bg-white [html.dark_&]:bg-slate-800 px-3 py-2.5 text-xs font-bold text-slate-700 [html.dark_&]:text-slate-200 hover:bg-slate-100 [html.dark_&]:hover:bg-slate-700 transition"
                         title="Model mortgage carries for this residence"
                       >
                         <Calculator className="h-4 w-4" />

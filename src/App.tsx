@@ -38,7 +38,18 @@ function AppShell() {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isShortlistOpen, setIsShortlistOpen] = useState(false);
-  const { currentPreset, isOriginal, resetTheme, activePresetId, customPrimary, customThemes } = useThemeAccent(pathname);
+  const {
+    currentPreset,
+    isOriginal,
+    resetTheme,
+    activePresetId,
+    customPrimary,
+    customThemes,
+    themeBgMode,
+    themeMood,
+    customBg,
+    effectiveMood,
+  } = useThemeAccent(pathname);
   const rawDevice = searchParams.get('device');
   const initialDevice: DeviceMode = (rawDevice === 'tablet' || rawDevice === 'mobile') ? rawDevice : 'desktop';
   const [deviceMode, setDeviceMode] = useState<DeviceMode>(initialDevice);
@@ -139,11 +150,31 @@ function AppShell() {
   useEffect(() => {
     if (!isEmbed && isDemoPage && deviceMode !== 'desktop') {
       const timer = setTimeout(() => {
-        applyThemeVariables(activePresetId, customPrimary, customThemes);
+        applyThemeVariables(
+          activePresetId,
+          customPrimary,
+          customThemes,
+          pathname,
+          themeBgMode,
+          themeMood,
+          customBg
+        );
       }, 150);
       return () => clearTimeout(timer);
     }
-  }, [isEmbed, isDemoPage, deviceMode, activePresetId, customPrimary, customThemes]);
+  }, [
+    isEmbed,
+    isDemoPage,
+    deviceMode,
+    activePresetId,
+    customPrimary,
+    customThemes,
+    pathname,
+    themeBgMode,
+    themeMood,
+    customBg,
+  ]);
+
 
   // If in embedded mode (inside phone/tablet preview iframe), render template directly without outer chrome
   if (isEmbed) {
@@ -247,7 +278,15 @@ function AppShell() {
               src={`${pathname}?embed=true`}
               title={`${deviceMode} preview`}
               onLoad={() => {
-                applyThemeVariables(activePresetId, customPrimary, customThemes);
+                applyThemeVariables(
+                  activePresetId,
+                  customPrimary,
+                  customThemes,
+                  pathname,
+                  themeBgMode,
+                  themeMood,
+                  customBg
+                );
               }}
               className="w-full flex-grow border-none bg-white select-auto"
             />

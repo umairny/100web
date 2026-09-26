@@ -191,7 +191,7 @@ video {
 }
 
 .pt-btn-gold {
-  background: linear-gradient(135deg, #ff334b 0%, #d81b32 100%);
+  background: linear-gradient(135deg, var(--pt-gold) 0%, var(--pt-gold-light, #ff5c6f) 100%);
   color: #ffffff;
   border: none;
   padding: 12px 24px;
@@ -211,11 +211,12 @@ video {
 }
 
 .pt-btn-gold:hover {
-  background: linear-gradient(135deg, #ff5266 0%, #e8253b 100%);
+  background: linear-gradient(135deg, var(--pt-gold-light, #ff5266) 0%, var(--pt-gold) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(255, 51, 75, 0.55);
+  box-shadow: 0 6px 24px var(--pt-gold-glow);
   color: #ffffff;
 }
+
 
 .pt-btn-gold.full-w {
   width: 100%;

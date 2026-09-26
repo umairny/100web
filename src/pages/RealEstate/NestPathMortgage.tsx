@@ -134,11 +134,11 @@ function NestPathLogo({ light = false }: { light?: boolean }) {
   return (
     <a
       href="#home"
-      className={`inline-flex items-center gap-3 ${light ? "text-[#F4F1EA]" : "text-[#0E3D3F]"}`}
+      className={`inline-flex items-center gap-3 transition-colors duration-300 ${light ? "text-[#F4F1EA]" : "text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)]"}`}
       aria-label="NestPath Mortgage home"
     >
       <span
-        className={`grid h-11 w-11 place-items-center rounded-[1rem] ${light ? "bg-white/10 text-[#E0AF45]" : "bg-[#197D7A] text-white"}`}
+        className={`grid h-11 w-11 place-items-center rounded-[1rem] ${light ? "bg-white/10 text-[var(--theme-accent-secondary,#E0AF45)]" : "bg-[var(--theme-accent-primary,#197D7A)] text-white"}`}
       >
         <Home className="h-5 w-5" strokeWidth={2.2} />
       </span>
@@ -147,7 +147,7 @@ function NestPathLogo({ light = false }: { light?: boolean }) {
           NestPath
         </strong>
         <span
-          className={`mt-1 block text-[0.58rem] font-bold uppercase tracking-[0.24em] ${light ? "text-white/55" : "text-[#197D7A]"}`}
+          className={`mt-1 block text-[0.58rem] font-bold uppercase tracking-[0.24em] ${light ? "text-white/55" : "text-[var(--theme-accent-primary,#197D7A)]"}`}
         >
           Mortgage
         </span>
@@ -175,18 +175,18 @@ function SectionHeading({
       data-np-reveal
     >
       <p
-        className={`text-[0.68rem] font-extrabold uppercase tracking-[0.24em] ${light ? "text-[#E0AF45]" : "text-[#197D7A]"}`}
+        className={`text-[0.68rem] font-extrabold uppercase tracking-[0.24em] ${light ? "text-[var(--theme-accent-secondary,#E0AF45)]" : "text-[var(--theme-accent-primary,#197D7A)]"}`}
       >
         {eyebrow}
       </p>
       <h2
-        className={`mt-4 text-[clamp(2.25rem,5vw,4.6rem)] font-extrabold leading-[1.02] tracking-[-0.045em] ${light ? "text-[#F4F1EA]" : "text-[#0E3D3F]"}`}
+        className={`mt-4 text-[clamp(2.25rem,5vw,4.6rem)] font-extrabold leading-[1.02] tracking-[-0.045em] transition-colors duration-300 ${light ? "text-[#F4F1EA]" : "text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)]"}`}
       >
         {title}
       </h2>
       {text && (
         <p
-          className={`mt-6 text-base leading-8 md:text-lg ${light ? "text-white/70" : "text-[#263333]/70"}`}
+          className={`mt-6 text-base leading-8 md:text-lg transition-colors duration-300 ${light ? "text-white/70" : "text-[#263333]/70 [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]/80"}`}
         >
           {text}
         </p>
@@ -206,10 +206,10 @@ function PathButton({
 }) {
   const styles = {
     primary:
-      "bg-[#197D7A] text-white shadow-[0_14px_30px_rgba(25,125,122,0.2)] hover:bg-[#0E3D3F]",
-    secondary: "bg-[#E0AF45] text-[#0E3D3F] hover:bg-[#f0c65f]",
+      "bg-[var(--theme-accent-primary,#197D7A)] text-[var(--theme-accent-contrast,#ffffff)] shadow-[0_14px_30px_rgba(25,125,122,0.2)] hover:opacity-90",
+    secondary: "bg-[var(--theme-accent-secondary,#E0AF45)] text-[#0E3D3F] hover:opacity-90",
     light:
-      "border border-[#0E3D3F]/15 bg-white text-[#0E3D3F] hover:border-[#197D7A] hover:text-[#197D7A]",
+      "border border-[#0E3D3F]/15 [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142c2e)] text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)] hover:border-[var(--theme-accent-primary,#197D7A)] hover:text-[var(--theme-accent-primary,#197D7A)]",
   };
   return (
     <a
@@ -265,8 +265,8 @@ export function NestPathMortgage() {
   }, []);
 
   return (
-    <main className="nestpath-site overflow-hidden bg-[#F4F1EA] text-[#263333]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#0E3D3F]/10 bg-[#F4F1EA]/95 backdrop-blur-xl">
+    <main className="nestpath-site overflow-hidden bg-[var(--theme-bg-base,#F4F1EA)] [html.dark_&]:bg-[var(--theme-bg-base,#0a1b1d)] text-[var(--theme-text-primary,#263333)] [html.dark_&]:text-[var(--theme-text-primary,#f1f5f9)] transition-colors duration-300">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--theme-border,#0E3D3F)]/10 [html.dark_&]:border-white/10 bg-[var(--theme-bg-base,#F4F1EA)]/95 [html.dark_&]:bg-[var(--theme-bg-base,#0a1b1d)]/95 backdrop-blur-xl transition-colors duration-300">
         <div className="mx-auto flex h-20 max-w-[90rem] items-center justify-between px-5 sm:px-8 lg:px-12">
           <NestPathLogo />
           <nav
@@ -281,7 +281,7 @@ export function NestPathMortgage() {
                   href={link.href}
                   onClick={() => setActiveSection(link.href.slice(1))}
                   aria-current={isActive ? "page" : undefined}
-                  className={`rounded-full px-3 py-2 text-[0.76rem] font-bold transition ${isActive ? "active bg-[#197D7A]/10 text-[#197D7A]" : "text-[#0E3D3F] hover:text-[#197D7A]"}`}
+                  className={`rounded-full px-3 py-2 text-[0.76rem] font-bold transition ${isActive ? "active bg-[#197D7A]/10 [html.dark_&]:bg-[var(--theme-accent-primary,#197D7A)]/20 text-[var(--theme-accent-primary,#197D7A)]" : "text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-accent-primary,#197D7A)] [html.dark_&]:hover:text-white"}`}
                 >
                   {link.label}
                 </a>
@@ -291,14 +291,14 @@ export function NestPathMortgage() {
           <div className="flex items-center gap-3">
             <a
               href="#contact"
-              className="hidden rounded-full bg-[#197D7A] px-5 py-3 text-xs font-extrabold text-white transition hover:bg-[#0E3D3F] sm:inline-flex"
+              className="hidden rounded-full bg-[var(--theme-accent-primary,#197D7A)] px-5 py-3 text-xs font-extrabold text-[var(--theme-accent-contrast,#ffffff)] transition hover:opacity-90 sm:inline-flex"
             >
               Get Guidance
             </a>
             <button
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
-              className="grid h-11 w-11 place-items-center rounded-full border border-[#0E3D3F]/15 text-[#0E3D3F] lg:hidden"
+              className="grid h-11 w-11 place-items-center rounded-full border border-[var(--theme-border,#0E3D3F)]/15 [html.dark_&]:border-white/15 text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)] lg:hidden"
               aria-label="Toggle navigation"
               aria-expanded={menuOpen}
             >
@@ -312,7 +312,7 @@ export function NestPathMortgage() {
         </div>
         {menuOpen && (
           <nav
-            className="border-t border-[#0E3D3F]/10 bg-[#F4F1EA] px-5 py-4 lg:hidden"
+            className="border-t border-[var(--theme-border,#0E3D3F)]/10 [html.dark_&]:border-white/10 bg-[var(--theme-bg-base,#F4F1EA)] [html.dark_&]:bg-[var(--theme-bg-base,#0a1b1d)] px-5 py-4 lg:hidden"
             aria-label="Mobile navigation"
           >
             <div className="mx-auto grid max-w-[90rem]">
@@ -327,7 +327,7 @@ export function NestPathMortgage() {
                       setMenuOpen(false);
                     }}
                     aria-current={isActive ? "page" : undefined}
-                    className={`border-b border-[#0E3D3F]/10 px-3 py-4 text-sm font-bold transition ${isActive ? "active bg-[#197D7A]/10 text-[#197D7A]" : "text-[#0E3D3F]"}`}
+                    className={`border-b border-[var(--theme-border,#0E3D3F)]/10 [html.dark_&]:border-white/10 px-3 py-4 text-sm font-bold transition ${isActive ? "active bg-[#197D7A]/10 [html.dark_&]:bg-[var(--theme-accent-primary,#197D7A)]/20 text-[var(--theme-accent-primary,#197D7A)]" : "text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]"}`}
                   >
                     {link.label}
                   </a>
@@ -342,21 +342,21 @@ export function NestPathMortgage() {
         id="home"
         className="relative px-5 pb-20 pt-28 sm:px-8 md:pb-28 lg:px-12 lg:pt-36"
       >
-        <div className="absolute -left-20 top-40 h-64 w-64 rounded-full bg-[#E0AF45]/10 blur-3xl" />
+        <div className="absolute -left-20 top-40 h-64 w-64 rounded-full bg-[var(--theme-accent-secondary,#E0AF45)]/10 blur-3xl" />
         <div className="mx-auto grid max-w-[90rem] gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div className="relative z-10" data-np-reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#197D7A]/15 bg-white/60 px-4 py-2 text-[0.67rem] font-extrabold uppercase tracking-[0.16em] text-[#197D7A]">
-              <Sparkles className="h-3.5 w-3.5 text-[#E0AF45]" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-accent-primary,#197D7A)]/15 [html.dark_&]:border-white/15 bg-white/60 [html.dark_&]:bg-white/5 px-4 py-2 text-[0.67rem] font-extrabold uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#197D7A)]">
+              <Sparkles className="h-3.5 w-3.5 text-[var(--theme-accent-secondary,#E0AF45)]" />
               Friendly mortgage guidance
             </div>
-            <h1 className="mt-7 max-w-3xl text-[clamp(3.2rem,6.8vw,6.7rem)] font-extrabold leading-[0.92] tracking-[-0.065em] text-[#0E3D3F]">
+            <h1 className="mt-7 max-w-3xl text-[clamp(3.2rem,6.8vw,6.7rem)] font-extrabold leading-[0.92] tracking-[-0.065em] text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)] transition-colors duration-300">
               Your Clear Path to{" "}
-              <span className="relative text-[#197D7A]">
+              <span className="relative text-[var(--theme-accent-primary,#197D7A)]">
                 Home Ownership
-                <span className="absolute -bottom-2 left-1 right-1 h-2 rounded-full bg-[#E0AF45]/65" />
+                <span className="absolute -bottom-2 left-1 right-1 h-2 rounded-full bg-[var(--theme-accent-secondary,#E0AF45)]/65" />
               </span>
             </h1>
-            <p className="mt-8 max-w-2xl text-base leading-8 text-[#263333]/72 md:text-lg">
+            <p className="mt-8 max-w-2xl text-base leading-8 text-[#263333]/72 [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]/80 transition-colors duration-300 md:text-lg">
               NestPath Mortgage helps first-time buyers, homeowners, and
               families understand their mortgage options with practical
               guidance, simple steps, and reassuring support.
@@ -367,28 +367,28 @@ export function NestPathMortgage() {
                 Explore Refinancing
               </PathButton>
             </div>
-            <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-xs font-bold text-[#0E3D3F]/65">
+            <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-xs font-bold text-[#0E3D3F]/65 [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]/80">
               {[
                 "Plain-language help",
                 "No-pressure guidance",
                 "Practical next steps",
               ].map((item) => (
                 <span key={item} className="flex items-center gap-2">
-                  <Check className="h-4 w-4 rounded-full bg-[#197D7A] p-0.5 text-white" />
+                  <Check className="h-4 w-4 rounded-full bg-[var(--theme-accent-primary,#197D7A)] p-0.5 text-white" />
                   {item}
                 </span>
               ))}
             </div>
           </div>
           <div className="relative" data-np-reveal>
-            <div className="overflow-hidden rounded-[2.5rem] rounded-tr-[8rem] bg-[#D8DDD8] shadow-[0_30px_80px_rgba(14,61,63,0.16)]">
+            <div className="overflow-hidden rounded-[2.5rem] rounded-tr-[8rem] bg-[#D8DDD8] [html.dark_&]:bg-[#122b2d] shadow-[0_30px_80px_rgba(14,61,63,0.16)]">
               <img
                 src={heroImage}
                 alt="Family feeling at home in a bright, welcoming house"
                 className="aspect-[1.08] h-full w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-8 left-3 right-3 grid gap-2 rounded-[1.5rem] border border-white/70 bg-white/95 p-3 shadow-xl sm:left-8 sm:right-8 sm:grid-cols-3">
+            <div className="absolute -bottom-8 left-3 right-3 grid gap-2 rounded-[1.5rem] border border-white/70 [html.dark_&]:border-white/10 bg-white/95 [html.dark_&]:bg-[var(--theme-bg-card,#142c2e)]/95 p-3 shadow-xl transition-colors duration-300 sm:left-8 sm:right-8 sm:grid-cols-3">
               {[
                 ["First-Time", "Buyer Support"],
                 ["Refinance", "Guidance"],
@@ -396,10 +396,10 @@ export function NestPathMortgage() {
               ].map(([top, bottom], index) => (
                 <div
                   key={bottom}
-                  className="flex items-center gap-3 rounded-2xl bg-[#F4F1EA] p-3"
+                  className="flex items-center gap-3 rounded-2xl bg-[#F4F1EA] [html.dark_&]:bg-white/5 p-3 transition-colors duration-300"
                 >
                   <span
-                    className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${index === 1 ? "bg-[#E0AF45] text-[#0E3D3F]" : "bg-[#197D7A] text-white"}`}
+                    className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${index === 1 ? "bg-[var(--theme-accent-secondary,#E0AF45)] text-[#0E3D3F]" : "bg-[var(--theme-accent-primary,#197D7A)] text-white"}`}
                   >
                     {index === 0 ? (
                       <KeyRound className="h-4 w-4" />
@@ -410,8 +410,8 @@ export function NestPathMortgage() {
                     )}
                   </span>
                   <span>
-                    <b className="block text-xs text-[#0E3D3F]">{top}</b>
-                    <small className="text-[0.65rem] text-[#263333]/55">
+                    <b className="block text-xs text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)]">{top}</b>
+                    <small className="text-[0.65rem] text-[#263333]/55 [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]/60">
                       {bottom}
                     </small>
                   </span>
@@ -424,7 +424,7 @@ export function NestPathMortgage() {
 
       <section
         id="guidance"
-        className="bg-[#EFE8DA] px-5 py-24 sm:px-8 md:py-32 lg:px-12"
+        className="bg-[#EFE8DA] [html.dark_&]:bg-[var(--theme-bg-surface,#0f2426)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[88rem]">
           <SectionHeading
@@ -437,7 +437,7 @@ export function NestPathMortgage() {
             {guidancePaths.map((path, index) => (
               <article
                 key={path.title}
-                className="group overflow-hidden rounded-[2rem] bg-white p-3 shadow-[0_16px_50px_rgba(14,61,63,0.08)] transition duration-300 hover:-translate-y-1"
+                className="group overflow-hidden rounded-[2rem] bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142c2e)] [html.dark_&]:border [html.dark_&]:border-white/10 p-3 shadow-[0_16px_50px_rgba(14,61,63,0.08)] transition duration-300 hover:-translate-y-1"
                 data-np-reveal
                 style={{ transitionDelay: `${index * 70}ms` }}
               >
@@ -449,18 +449,18 @@ export function NestPathMortgage() {
                   />
                 </div>
                 <div className="p-5 pb-6">
-                  <span className="inline-flex rounded-full bg-[#197D7A]/10 px-3 py-1.5 text-[0.62rem] font-extrabold uppercase tracking-[0.14em] text-[#197D7A]">
+                  <span className="inline-flex rounded-full bg-[#197D7A]/10 [html.dark_&]:bg-[var(--theme-accent-primary,#197D7A)]/20 px-3 py-1.5 text-[0.62rem] font-extrabold uppercase tracking-[0.14em] text-[var(--theme-accent-primary,#197D7A)]">
                     {path.badge}
                   </span>
-                  <h3 className="mt-5 text-2xl font-extrabold tracking-[-0.03em] text-[#0E3D3F]">
+                  <h3 className="mt-5 text-2xl font-extrabold tracking-[-0.03em] text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)] transition-colors duration-300">
                     {path.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[#263333]/65">
+                  <p className="mt-3 text-sm leading-7 text-[#263333]/65 [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]/75 transition-colors duration-300">
                     {path.text}
                   </p>
                   <a
                     href={path.href}
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-[#197D7A]"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-[var(--theme-accent-primary,#197D7A)]"
                   >
                     Learn More{" "}
                     <ChevronRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -480,20 +480,20 @@ export function NestPathMortgage() {
             centered
           />
           <div className="relative mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div className="absolute left-[12%] right-[12%] top-8 hidden h-px bg-[#E0AF45]/60 lg:block" />
+            <div className="absolute left-[12%] right-[12%] top-8 hidden h-px bg-[var(--theme-accent-secondary,#E0AF45)]/60 lg:block" />
             {steps.map(([title, text], index) => (
               <article
                 key={title}
-                className="relative rounded-[1.6rem] border border-[#0E3D3F]/10 bg-white p-6 text-center shadow-sm"
+                className="relative rounded-[1.6rem] border border-[var(--theme-border,#0E3D3F)]/10 [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142c2e)] p-6 text-center shadow-sm transition-colors duration-300"
                 data-np-reveal
               >
-                <span className="relative z-10 mx-auto grid h-16 w-16 place-items-center rounded-full border-8 border-[#F4F1EA] bg-[#E0AF45] text-lg font-extrabold text-[#0E3D3F]">
+                <span className="relative z-10 mx-auto grid h-16 w-16 place-items-center rounded-full border-8 border-[#F4F1EA] [html.dark_&]:border-[var(--theme-bg-card,#142c2e)] bg-[var(--theme-accent-secondary,#E0AF45)] text-lg font-extrabold text-[#0E3D3F]">
                   0{index + 1}
                 </span>
-                <h3 className="mt-6 text-xl font-extrabold text-[#0E3D3F]">
+                <h3 className="mt-6 text-xl font-extrabold text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)] transition-colors duration-300">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[#263333]/65">
+                <p className="mt-3 text-sm leading-7 text-[#263333]/65 [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]/75 transition-colors duration-300">
                   {text}
                 </p>
               </article>
@@ -504,7 +504,7 @@ export function NestPathMortgage() {
 
       <section
         id="first-time-buyers"
-        className="bg-white px-5 py-24 sm:px-8 md:py-32 lg:px-12"
+        className="bg-white [html.dark_&]:bg-[var(--theme-bg-base,#0a1b1d)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="mx-auto grid max-w-[88rem] gap-14 lg:grid-cols-2 lg:items-center">
           <div data-np-reveal>
@@ -522,9 +522,9 @@ export function NestPathMortgage() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-4 rounded-2xl bg-[#F4F1EA] p-4 text-sm font-bold text-[#0E3D3F]"
+                  className="flex items-center gap-4 rounded-2xl bg-[#F4F1EA] [html.dark_&]:bg-[var(--theme-bg-card,#142c2e)] [html.dark_&]:border [html.dark_&]:border-white/10 p-4 text-sm font-bold text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)] transition-colors duration-300"
                 >
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#197D7A] text-white">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[var(--theme-accent-primary,#197D7A)] text-white">
                     <Check className="h-4 w-4" />
                   </span>
                   {item}
@@ -545,7 +545,7 @@ export function NestPathMortgage() {
                 className="aspect-[1.04] h-full w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-5 right-4 max-w-[16rem] rounded-2xl bg-[#E0AF45] p-5 text-[#0E3D3F] shadow-xl">
+            <div className="absolute -bottom-5 right-4 max-w-[16rem] rounded-2xl bg-[var(--theme-accent-secondary,#E0AF45)] p-5 text-[#0E3D3F] shadow-xl">
               <MessageCircleHeart className="h-6 w-6" />
               <p className="mt-3 text-sm font-extrabold leading-6">
                 Questions are welcome. Clear answers come first.
@@ -557,7 +557,7 @@ export function NestPathMortgage() {
 
       <section
         id="refinance"
-        className="bg-[#0E3D3F] px-5 py-24 text-[#F4F1EA] sm:px-8 md:py-32 lg:px-12"
+        className="bg-[#0E3D3F] [html.dark_&]:bg-[var(--theme-bg-dark,#071e20)] px-5 py-24 text-[#F4F1EA] sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="mx-auto grid max-w-[90rem] gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div className="relative" data-np-reveal>
@@ -568,7 +568,7 @@ export function NestPathMortgage() {
                 className="aspect-[1.06] h-full w-full object-cover"
               />
             </div>
-            <span className="absolute left-5 top-5 rounded-full bg-[#F4F1EA] px-4 py-2 text-xs font-extrabold text-[#0E3D3F]">
+            <span className="absolute left-5 top-5 rounded-full bg-[#F4F1EA] [html.dark_&]:bg-white px-4 py-2 text-xs font-extrabold text-[#0E3D3F]">
               Refinance guidance
             </span>
           </div>
@@ -591,8 +591,8 @@ export function NestPathMortgage() {
                     key={String(title)}
                     className="rounded-2xl border border-white/10 bg-white/5 p-5"
                   >
-                    <CardIcon className="h-6 w-6 text-[#E0AF45]" />
-                    <div className="mt-5 h-0.5 w-9 bg-[#E0AF45]" />
+                    <CardIcon className="h-6 w-6 text-[var(--theme-accent-secondary,#E0AF45)]" />
+                    <div className="mt-5 h-0.5 w-9 bg-[var(--theme-accent-secondary,#E0AF45)]" />
                     <p className="mt-4 text-sm font-extrabold leading-6">
                       {String(title)}
                     </p>
@@ -631,30 +631,30 @@ export function NestPathMortgage() {
             {loanOptions.map(({ icon: Icon, title, text }, index) => (
               <article
                 key={title}
-                className="rounded-[1.6rem] border border-[#0E3D3F]/10 bg-white p-6 shadow-sm transition hover:border-[#197D7A]/35 hover:shadow-lg"
+                className="rounded-[1.6rem] border border-[var(--theme-border,#0E3D3F)]/10 [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142c2e)] p-6 shadow-sm transition hover:border-[var(--theme-accent-primary,#197D7A)]/35 hover:shadow-lg"
                 data-np-reveal
                 style={{ transitionDelay: `${(index % 3) * 60}ms` }}
               >
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#197D7A]/10 text-[#197D7A]">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#197D7A]/10 [html.dark_&]:bg-[var(--theme-accent-primary,#197D7A)]/20 text-[var(--theme-accent-primary,#197D7A)]">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-5 text-xl font-extrabold text-[#0E3D3F]">
+                <h3 className="mt-5 text-xl font-extrabold text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)] transition-colors duration-300">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[#263333]/65">
+                <p className="mt-3 text-sm leading-7 text-[#263333]/65 [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]/75 transition-colors duration-300">
                   {text}
                 </p>
               </article>
             ))}
           </div>
-          <p className="mt-6 text-center text-xs leading-6 text-[#263333]/55">
+          <p className="mt-6 text-center text-xs leading-6 text-[#263333]/55 [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]/60">
             Loan availability and requirements vary. These summaries are
             educational and are not personalized financial or legal advice.
           </p>
         </div>
       </section>
 
-      <section className="bg-[#EFE8DA] px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section className="bg-[#EFE8DA] [html.dark_&]:bg-[var(--theme-bg-surface,#0f2426)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <SectionHeading
             eyebrow="Our approach"
@@ -673,14 +673,14 @@ export function NestPathMortgage() {
               return (
                 <article
                   key={String(title)}
-                  className="rounded-[1.6rem] bg-white p-6 text-center shadow-sm"
+                  className="rounded-[1.6rem] bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142c2e)] [html.dark_&]:border [html.dark_&]:border-white/10 p-6 text-center shadow-sm transition-colors duration-300"
                   data-np-reveal
                   style={{ transitionDelay: `${index * 60}ms` }}
                 >
-                  <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[#E0AF45]/25 text-[#0E3D3F]">
+                  <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[#E0AF45]/25 [html.dark_&]:bg-[var(--theme-accent-secondary,#E0AF45)]/20 text-[#0E3D3F] [html.dark_&]:text-[var(--theme-accent-secondary,#E0AF45)]">
                     <TrustIcon className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-5 text-lg font-extrabold leading-6 text-[#0E3D3F]">
+                  <h3 className="mt-5 text-lg font-extrabold leading-6 text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)] transition-colors duration-300">
                     {String(title)}
                   </h3>
                 </article>
@@ -690,7 +690,7 @@ export function NestPathMortgage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section className="bg-white [html.dark_&]:bg-[var(--theme-bg-base,#0a1b1d)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <SectionHeading
             eyebrow="Helpful resources"
@@ -701,22 +701,22 @@ export function NestPathMortgage() {
             {resources.map((resource, index) => (
               <article
                 key={resource.title}
-                className="group flex min-h-[300px] flex-col rounded-[1.8rem] border border-[#0E3D3F]/10 bg-[#F4F1EA] p-7 transition hover:-translate-y-1 hover:shadow-lg"
+                className="group flex min-h-[300px] flex-col rounded-[1.8rem] border border-[var(--theme-border,#0E3D3F)]/10 [html.dark_&]:border-white/10 bg-[#F4F1EA] [html.dark_&]:bg-[var(--theme-bg-card,#142c2e)] p-7 transition hover:-translate-y-1 hover:shadow-lg"
                 data-np-reveal
                 style={{ transitionDelay: `${index * 70}ms` }}
               >
-                <span className="w-fit rounded-full bg-[#197D7A]/10 px-3 py-1.5 text-[0.62rem] font-extrabold uppercase tracking-[0.14em] text-[#197D7A]">
+                <span className="w-fit rounded-full bg-[#197D7A]/10 [html.dark_&]:bg-[var(--theme-accent-primary,#197D7A)]/20 px-3 py-1.5 text-[0.62rem] font-extrabold uppercase tracking-[0.14em] text-[var(--theme-accent-primary,#197D7A)]">
                   {resource.tag}
                 </span>
-                <h3 className="mt-6 text-2xl font-extrabold leading-tight tracking-[-0.03em] text-[#0E3D3F]">
+                <h3 className="mt-6 text-2xl font-extrabold leading-tight tracking-[-0.03em] text-[#0E3D3F] [html.dark_&]:text-[var(--theme-text-primary,#F4F1EA)] transition-colors duration-300">
                   {resource.title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-[#263333]/65">
+                <p className="mt-4 text-sm leading-7 text-[#263333]/65 [html.dark_&]:text-[var(--theme-text-secondary,#cbd5e1)]/75 transition-colors duration-300">
                   {resource.text}
                 </p>
                 <a
                   href="#contact"
-                  className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-extrabold text-[#197D7A]"
+                  className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-extrabold text-[var(--theme-accent-primary,#197D7A)]"
                 >
                   Read Guide{" "}
                   <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -729,7 +729,7 @@ export function NestPathMortgage() {
 
       <section
         id="contact"
-        className="relative overflow-hidden bg-[#0E3D3F] px-5 py-24 text-[#F4F1EA] sm:px-8 md:py-32 lg:px-12"
+        className="relative overflow-hidden bg-[#0E3D3F] [html.dark_&]:bg-[var(--theme-bg-dark,#071e20)] px-5 py-24 text-[#F4F1EA] sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="absolute inset-y-0 right-0 hidden w-[46%] lg:block">
           <img
@@ -737,11 +737,11 @@ export function NestPathMortgage() {
             alt="A welcoming path leading home"
             className="h-full w-full object-cover opacity-55"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0E3D3F] via-[#0E3D3F]/55 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0E3D3F] [html.dark_&]:from-[var(--theme-bg-dark,#071e20)] via-[#0E3D3F]/55 [html.dark_&]:via-[var(--theme-bg-dark,#071e20)]/55 to-transparent" />
         </div>
-        <div className="absolute -bottom-24 left-[38%] h-72 w-72 rounded-full border border-[#E0AF45]/20" />
+        <div className="absolute -bottom-24 left-[38%] h-72 w-72 rounded-full border border-[var(--theme-accent-secondary,#E0AF45)]/20" />
         <div className="relative mx-auto max-w-[88rem]" data-np-reveal>
-          <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.24em] text-[#E0AF45]">
+          <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#E0AF45)]">
             Your next step
           </p>
           <h2 className="mt-5 max-w-3xl text-[clamp(2.8rem,6vw,5.8rem)] font-extrabold leading-[0.98] tracking-[-0.055em]">
@@ -762,7 +762,7 @@ export function NestPathMortgage() {
         </div>
       </section>
 
-      <footer className="bg-[#092f31] px-5 py-14 text-[#F4F1EA] sm:px-8 lg:px-12">
+      <footer className="bg-[#092f31] [html.dark_&]:bg-[#041213] px-5 py-14 text-[#F4F1EA] sm:px-8 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-[1.3fr_0.7fr_0.8fr_1fr]">
             <div>
@@ -773,7 +773,7 @@ export function NestPathMortgage() {
               </p>
             </div>
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#E0AF45]">
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#E0AF45)]">
                 Quick links
               </p>
               <div className="mt-5 grid gap-3">
@@ -789,7 +789,7 @@ export function NestPathMortgage() {
               </div>
             </div>
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#E0AF45]">
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#E0AF45)]">
                 Guidance paths
               </p>
               <div className="mt-5 grid gap-3 text-sm text-white/55">
@@ -799,7 +799,7 @@ export function NestPathMortgage() {
               </div>
             </div>
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#E0AF45]">
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#E0AF45)]">
                 Contact
               </p>
               <div className="mt-5 grid gap-3 text-sm text-white/55">

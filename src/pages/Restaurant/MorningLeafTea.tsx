@@ -290,7 +290,7 @@ export function MorningLeafTea() {
   }, [activeCategory]);
 
   return (
-    <main className="brand-motion motion-morningleaf min-h-screen bg-[#f8f6f0] text-[#181f19] selection:bg-[#2d4a32] selection:text-white">
+    <main className="brand-motion motion-morningleaf min-h-screen bg-[var(--theme-bg-base,#f8f6f0)] text-[var(--theme-text-primary,#181f19)] selection:bg-[var(--theme-accent-primary,#2d4a32)] selection:text-white transition-colors duration-300">
       {/* ── REFINED SUB-WEBSITE NAVIGATION (FROSTED GLASS ON TOP OF HERO) ──── */}
       <SubWebsiteNav
         brand="MorningLeaf Tea Sanctuary"
@@ -302,16 +302,16 @@ export function MorningLeafTea() {
         ]}
         ctaLabel="Reserve a Tea Table"
         ctaHref="#reserve"
-        className="sticky top-0 z-40 border-b border-[#e5dfd2]/80 bg-[#f8f6f0]/95 backdrop-blur-md shadow-2xs"
-        brandClassName="text-[#2d4a32] font-serif text-xl tracking-wide font-black"
-        linkClassName="rounded-full px-3.5 py-1.5 text-xs font-bold text-[#556456] transition hover:bg-[#2d4a32]/10 hover:text-[#2d4a32]"
-        ctaClassName="rounded-full bg-[#2d4a32] px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-sm hover:bg-[#1f3423] transition"
-        menuButtonClassName="border-[#e5dfd2] text-[#2d4a32] hover:bg-[#2d4a32]/10"
-        mobilePanelClassName="border border-[#e5dfd2] bg-[#f8f6f0]"
+        className="sticky top-0 z-40 border-b border-[var(--theme-border,#e5dfd2)]/80 bg-[var(--theme-bg-base,#f8f6f0)]/95 backdrop-blur-md shadow-2xs"
+        brandClassName="text-[var(--theme-accent-primary,#2d4a32)] font-serif text-xl tracking-wide font-black"
+        linkClassName="rounded-full px-3.5 py-1.5 text-xs font-bold text-[var(--theme-text-secondary,#556456)] transition hover:bg-[var(--theme-accent-primary,#2d4a32)]/10 hover:text-[var(--theme-accent-primary,#2d4a32)]"
+        ctaClassName="rounded-full bg-[var(--theme-accent-primary,#2d4a32)] px-4 py-2 text-xs font-black uppercase tracking-wider text-[var(--theme-accent-contrast,#ffffff)] shadow-sm hover:opacity-90 transition"
+        menuButtonClassName="border-[var(--theme-border,#e5dfd2)] text-[var(--theme-accent-primary,#2d4a32)] hover:bg-[var(--theme-accent-primary,#2d4a32)]/10"
+        mobilePanelClassName="border border-[var(--theme-border,#e5dfd2)] bg-[var(--theme-bg-card,#f8f6f0)]"
       />
 
       {/* ── FULL BACKGROUND CINEMATIC HERO SECTION ───────────────────────── */}
-      <section className="relative min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#181f19] text-white">
+      <section className="relative min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[var(--theme-bg-dark,#181f19)] text-white">
         {/* Full-bleed background photograph */}
         <div className="absolute inset-0">
           <img
@@ -320,7 +320,7 @@ export function MorningLeafTea() {
             className="h-full w-full object-cover object-center scale-105 transition-transform duration-1000 ease-out"
           />
           {/* Deep atmospheric Sumi-ink Japanese gradient vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#181f19] via-[#181f19]/65 to-[#181f19]/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-dark,#181f19)] via-[var(--theme-bg-dark,#181f19)]/65 to-[var(--theme-bg-dark,#181f19)]/45" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,rgba(24,31,25,0.7)_80%)]" />
         </div>
 
@@ -330,13 +330,13 @@ export function MorningLeafTea() {
             <div className="flex items-center justify-between border-b border-white/15 pb-6">
               <Link
                 to="/restaurant"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/75 hover:text-[#d4a359] transition"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/75 hover:text-[var(--theme-accent-secondary,#d4a359)] transition"
               >
                 <ArrowRight className="h-3.5 w-3.5 rotate-180" />
                 <span>Restaurant Collection</span>
               </Link>
 
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 text-xs font-serif text-[#d4a359] backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-4 py-1.5 text-xs font-serif text-[var(--theme-accent-secondary,#d4a359)] backdrop-blur-md">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>朝葉 · 静寂の茶 · Kyoto Uji & Alishan Harvests</span>
               </div>
@@ -348,12 +348,12 @@ export function MorningLeafTea() {
         <div className="relative z-10 py-16 md:py-24">
           <Container>
             <div className="max-w-3xl">
-              <span className="inline-block font-serif text-sm md:text-base tracking-[0.25em] uppercase text-[#d4a359] mb-4">
+              <span className="inline-block font-serif text-sm md:text-base tracking-[0.25em] uppercase text-[var(--theme-accent-secondary,#d4a359)] mb-4">
                 Single-Origin Tea Sanctuary
               </span>
 
               <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal leading-[1.08] tracking-tight text-white drop-shadow-md">
-                Slow down. The kettle is <span className="italic font-normal text-[#d4a359]">whispering.</span>
+                Slow down. The kettle is <span className="italic font-normal text-[var(--theme-accent-secondary,#d4a359)]">whispering.</span>
               </h1>
 
               <p className="mt-6 max-w-2xl text-base sm:text-xl font-light leading-relaxed text-white/85 drop-shadow-sm">
@@ -364,7 +364,7 @@ export function MorningLeafTea() {
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <a
                   href="#scrolls"
-                  className="inline-flex items-center gap-2.5 rounded-full bg-[#d4a359] px-8 py-4 text-xs font-black uppercase tracking-wider text-[#181f19] shadow-2xl hover:bg-white hover:scale-105 active:scale-95 transition"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-[var(--theme-accent-secondary,#d4a359)] px-8 py-4 text-xs font-black uppercase tracking-wider text-[var(--theme-bg-dark,#181f19)] shadow-2xl hover:bg-white hover:scale-105 active:scale-95 transition"
                 >
                   <ShoppingBag className="h-4 w-4" />
                   <span>Explore Tea Scrolls</span>
@@ -374,7 +374,7 @@ export function MorningLeafTea() {
                   href="#timer"
                   className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/35 px-7 py-4 text-xs font-bold text-white backdrop-blur-md hover:bg-white/20 transition"
                 >
-                  <Clock className="h-4 w-4 text-[#d4a359]" />
+                  <Clock className="h-4 w-4 text-[var(--theme-accent-secondary,#d4a359)]" />
                   <span>Interactive Steep Master</span>
                 </a>
               </div>
@@ -387,19 +387,19 @@ export function MorningLeafTea() {
           <Container>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-white">
               <div className="border-l border-white/20 pl-4">
-                <p className="font-serif text-lg font-bold text-[#d4a359]">80°C Precision</p>
+                <p className="font-serif text-lg font-bold text-[var(--theme-accent-secondary,#d4a359)]">80°C Precision</p>
                 <p className="text-xs text-white/70 mt-0.5">Custom thermal curve per harvest</p>
               </div>
               <div className="border-l border-white/20 pl-4">
-                <p className="font-serif text-lg font-bold text-[#d4a359]">100% Whole Leaf</p>
+                <p className="font-serif text-lg font-bold text-[var(--theme-accent-secondary,#d4a359)]">100% Whole Leaf</p>
                 <p className="text-xs text-white/70 mt-0.5">Uji, Shizuoka & Alishan single estates</p>
               </div>
               <div className="border-l border-white/20 pl-4">
-                <p className="font-serif text-lg font-bold text-[#d4a359]">Woven Tatami</p>
+                <p className="font-serif text-lg font-bold text-[var(--theme-accent-secondary,#d4a359)]">Woven Tatami</p>
                 <p className="text-xs text-white/70 mt-0.5">Barefoot screen-free sanctuary</p>
               </div>
               <div className="border-l border-white/20 pl-4">
-                <p className="font-serif text-lg font-bold text-[#d4a359]">Quiet Hours</p>
+                <p className="font-serif text-lg font-bold text-[var(--theme-accent-secondary,#d4a359)]">Quiet Hours</p>
                 <p className="text-xs text-white/70 mt-0.5">Daily 8:00 AM – 7:30 PM</p>
               </div>
             </div>
@@ -408,19 +408,19 @@ export function MorningLeafTea() {
       </section>
 
       {/* ── THE TEA SCROLLS (HORIZONTAL LEDGER CARDS - DISTINCT DESIGN) ──── */}
-      <section id="scrolls" className="py-20 md:py-28 bg-[#f8f6f0]">
+      <section id="scrolls" className="py-20 md:py-28 bg-[var(--theme-bg-base,#f8f6f0)]">
         <Container>
           {/* Header */}
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end mb-14">
             <div>
-              <span className="text-xs font-black uppercase tracking-[0.25em] text-[#2d4a32]">
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-[var(--theme-accent-primary,#2d4a32)]">
                 The Botanical Ledger
               </span>
-              <h2 className="mt-2 font-serif text-3xl tracking-tight text-[#181f19] sm:text-5xl">
+              <h2 className="mt-2 font-serif text-3xl tracking-tight text-[var(--theme-text-primary,#181f19)] sm:text-5xl">
                 Curated Single-Estate Tea Scrolls
               </h2>
             </div>
-            <p className="max-w-md text-xs leading-relaxed text-[#556456] sm:text-sm">
+            <p className="max-w-md text-xs leading-relaxed text-[var(--theme-text-secondary,#556456)] sm:text-sm">
               Each harvest is selected for mineral terroir, aroma complexity, and meditative feeling. Served by the ceramic pot for your table or packaged into airtight washi canisters.
             </p>
           </div>
@@ -439,8 +439,8 @@ export function MorningLeafTea() {
                 onClick={() => setActiveCategory(tab.id)}
                 className={`rounded-full px-5 py-2 text-xs font-bold transition-all ${
                   activeCategory === tab.id
-                    ? "bg-[#2d4a32] text-white shadow-md"
-                    : "border border-[#e5dfd2] bg-white text-[#556456] hover:border-[#2d4a32] hover:text-[#2d4a32]"
+                    ? "bg-[var(--theme-accent-primary,#2d4a32)] text-[var(--theme-accent-contrast,#ffffff)] shadow-md"
+                    : "border border-[var(--theme-border,#e5dfd2)] bg-[var(--theme-bg-card,#ffffff)] text-[var(--theme-text-secondary,#556456)] hover:border-[var(--theme-accent-primary,#2d4a32)] hover:text-[var(--theme-accent-primary,#2d4a32)]"
                 }`}
               >
                 {tab.label}
@@ -455,10 +455,10 @@ export function MorningLeafTea() {
               return (
                 <article
                   key={tea.id}
-                  className="group rounded-3xl border border-[#e5dfd2] bg-white p-6 shadow-xs transition-all duration-300 hover:border-[#2d4a32]/50 hover:shadow-xl grid gap-6 md:grid-cols-[160px_1fr_auto] md:items-center"
+                  className="group rounded-3xl border border-[var(--theme-border,#e5dfd2)] bg-[var(--theme-bg-card,#ffffff)] p-6 shadow-xs transition-all duration-300 hover:border-[var(--theme-accent-primary,#2d4a32)]/50 hover:shadow-xl grid gap-6 md:grid-cols-[160px_1fr_auto] md:items-center"
                 >
                   {/* Photo with Kanji Seal */}
-                  <div className="relative aspect-square w-full max-w-[160px] overflow-hidden rounded-2xl bg-[#f0ebe1] mx-auto md:mx-0">
+                  <div className="relative aspect-square w-full max-w-[160px] overflow-hidden rounded-2xl bg-[var(--theme-border,#f0ebe1)] mx-auto md:mx-0">
                     <img
                       src={tea.image}
                       alt={tea.name}
@@ -466,7 +466,7 @@ export function MorningLeafTea() {
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                    <span className="absolute bottom-2 left-2 rounded-md bg-[#181f19]/85 px-2 py-0.5 text-[9px] font-mono font-bold text-white">
+                    <span className="absolute bottom-2 left-2 rounded-md bg-[var(--theme-bg-dark,#181f19)]/85 px-2 py-0.5 text-[9px] font-mono font-bold text-white">
                       {tea.kanji}
                     </span>
                   </div>
@@ -474,32 +474,32 @@ export function MorningLeafTea() {
                   {/* Tea Description & Flavor Ledger */}
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="font-serif text-2xl font-bold text-[#181f19]">
+                      <h3 className="font-serif text-2xl font-bold text-[var(--theme-text-primary,#181f19)]">
                         {tea.name}
                       </h3>
                       {tea.badge && (
-                        <span className="rounded-full bg-[#2d4a32]/10 px-2.5 py-0.5 text-[10px] font-black uppercase text-[#2d4a32]">
+                        <span className="rounded-full bg-[var(--theme-accent-primary,#2d4a32)]/10 px-2.5 py-0.5 text-[10px] font-black uppercase text-[var(--theme-accent-primary,#2d4a32)]">
                           {tea.badge}
                         </span>
                       )}
-                      <span className="text-xs text-[#556456]">· {tea.harvestYear}</span>
+                      <span className="text-xs text-[var(--theme-text-secondary,#556456)]">· {tea.harvestYear}</span>
                     </div>
 
-                    <p className="mt-1 text-xs font-semibold text-[#c9933b]">
+                    <p className="mt-1 text-xs font-semibold text-[var(--theme-accent-secondary,#c9933b)]">
                       ✦ Origin: {tea.origin}
                     </p>
 
-                    <p className="mt-2 text-xs leading-relaxed text-[#556456] max-w-2xl">
+                    <p className="mt-2 text-xs leading-relaxed text-[var(--theme-text-secondary,#556456)] max-w-2xl">
                       {tea.description}
                     </p>
 
                     {/* Tasting Profile Tags */}
                     <div className="mt-3.5 flex flex-wrap items-center gap-2">
-                      <span className="text-[10px] uppercase font-bold text-[#556456]/70">Notes:</span>
+                      <span className="text-[10px] uppercase font-bold text-[var(--theme-text-secondary,#556456)]/70">Notes:</span>
                       {tea.tastingNotes.map((note) => (
                         <span
                           key={note}
-                          className="rounded-full border border-[#e5dfd2] bg-[#f8f6f0] px-2.5 py-0.5 text-[10px] font-medium text-[#556456]"
+                          className="rounded-full border border-[var(--theme-border,#e5dfd2)] bg-[var(--theme-bg-base,#f8f6f0)] px-2.5 py-0.5 text-[10px] font-medium text-[var(--theme-text-secondary,#556456)]"
                         >
                           {note}
                         </span>
@@ -511,30 +511,30 @@ export function MorningLeafTea() {
                   </div>
 
                   {/* Pricing & Table Action */}
-                  <div className="flex flex-row md:flex-col items-center md:items-end justify-between gap-4 border-t md:border-t-0 md:border-l border-[#e5dfd2] pt-4 md:pt-0 md:pl-6">
+                  <div className="flex flex-row md:flex-col items-center md:items-end justify-between gap-4 border-t md:border-t-0 md:border-l border-[var(--theme-border,#e5dfd2)] pt-4 md:pt-0 md:pl-6">
                     <div className="text-left md:text-right">
-                      <span className="font-serif text-2xl font-bold text-[#2d4a32]">
+                      <span className="font-serif text-2xl font-bold text-[var(--theme-accent-primary,#2d4a32)]">
                         ${tea.priceDineIn.toFixed(2)}
                       </span>
-                      <p className="text-[10px] text-[#556456]">Fresh Table Pot</p>
-                      <p className="text-[10px] text-[#c9933b] font-bold mt-0.5">50g Washi Tin: ${tea.priceCanister}</p>
+                      <p className="text-[10px] text-[var(--theme-text-secondary,#556456)]">Fresh Table Pot</p>
+                      <p className="text-[10px] text-[var(--theme-accent-secondary,#c9933b)] font-bold mt-0.5">50g Washi Tin: ${tea.priceCanister}</p>
                     </div>
 
                     {qty > 0 ? (
-                      <div className="flex items-center gap-3 rounded-full border border-[#2d4a32] bg-[#2d4a32]/10 px-3.5 py-1.5">
+                      <div className="flex items-center gap-3 rounded-full border border-[var(--theme-accent-primary,#2d4a32)] bg-[var(--theme-accent-primary,#2d4a32)]/10 px-3.5 py-1.5">
                         <button
                           type="button"
                           onClick={() => removeFromCart(tea.id)}
-                          className="text-[#2d4a32] hover:scale-125 transition"
+                          className="text-[var(--theme-accent-primary,#2d4a32)] hover:scale-125 transition"
                           aria-label="Remove pot"
                         >
                           <Minus className="h-3.5 w-3.5" />
                         </button>
-                        <span className="text-xs font-black text-[#181f19]">{qty}</span>
+                        <span className="text-xs font-black text-[var(--theme-text-primary,#181f19)]">{qty}</span>
                         <button
                           type="button"
                           onClick={() => addToCart(tea.id)}
-                          className="text-[#2d4a32] hover:scale-125 transition"
+                          className="text-[var(--theme-accent-primary,#2d4a32)] hover:scale-125 transition"
                           aria-label="Add pot"
                         >
                           <Plus className="h-3.5 w-3.5" />
@@ -544,7 +544,7 @@ export function MorningLeafTea() {
                       <button
                         type="button"
                         onClick={() => addToCart(tea.id)}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-[#2d4a32] px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-sm hover:bg-[#1f3423] transition active:scale-95"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-[var(--theme-accent-primary,#2d4a32)] px-5 py-2.5 text-xs font-black uppercase tracking-wider text-[var(--theme-accent-contrast,#ffffff)] shadow-sm hover:opacity-90 transition active:scale-95"
                       >
                         <Plus className="h-3.5 w-3.5" />
                         <span>Order Pot</span>
@@ -559,17 +559,17 @@ export function MorningLeafTea() {
       </section>
 
       {/* ── INTERACTIVE STEEP TIMER & RITUAL MASTER ───────────────────────── */}
-      <section id="timer" className="py-20 md:py-28 bg-white border-y border-[#e5dfd2]">
+      <section id="timer" className="py-20 md:py-28 bg-[var(--theme-bg-card,#ffffff)] border-y border-[var(--theme-border,#e5dfd2)]">
         <Container>
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#2d4a32]/20 bg-[#2d4a32]/10 px-4 py-1 text-xs font-black uppercase tracking-widest text-[#2d4a32]">
-              <Clock className="h-3.5 w-3.5 text-[#c9933b]" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-accent-primary,#2d4a32)]/20 bg-[var(--theme-accent-primary,#2d4a32)]/10 px-4 py-1 text-xs font-black uppercase tracking-widest text-[var(--theme-accent-primary,#2d4a32)]">
+              <Clock className="h-3.5 w-3.5 text-[var(--theme-accent-secondary,#c9933b)]" />
               The Steep Master
             </span>
-            <h2 className="mt-3 font-serif text-3xl tracking-tight text-[#181f19] sm:text-5xl">
+            <h2 className="mt-3 font-serif text-3xl tracking-tight text-[var(--theme-text-primary,#181f19)] sm:text-5xl">
               Water Temperature & Unhurried Seconds
             </h2>
-            <p className="mt-3 text-sm text-[#556456]">
+            <p className="mt-3 text-sm text-[var(--theme-text-secondary,#556456)]">
               Calibrate water heat, leaf weight, and start the live countdown for the optimal steep.
             </p>
           </div>
@@ -586,29 +586,29 @@ export function MorningLeafTea() {
                     onClick={() => selectRitual(ritual)}
                     className={`w-full text-left rounded-3xl border p-5 sm:p-6 transition-all ${
                       isSelected
-                        ? "border-[#2d4a32] bg-[#f8f6f0] ring-2 ring-[#2d4a32]/20 shadow-md"
-                        : "border-[#e5dfd2] bg-white hover:border-[#2d4a32]/40 hover:bg-[#f8f6f0]/50"
+                        ? "border-[var(--theme-accent-primary,#2d4a32)] bg-[var(--theme-bg-base,#f8f6f0)] ring-2 ring-[var(--theme-accent-primary,#2d4a32)]/20 shadow-md"
+                        : "border-[var(--theme-border,#e5dfd2)] bg-[var(--theme-bg-card,#ffffff)] hover:border-[var(--theme-accent-primary,#2d4a32)]/40 hover:bg-[var(--theme-bg-base,#f8f6f0)]/50"
                     }`}
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                       <div>
-                        <span className="text-[10px] font-black uppercase tracking-wider text-[#c9933b]">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-[var(--theme-accent-secondary,#c9933b)]">
                           {ritual.vibe}
                         </span>
-                        <h3 className="font-serif text-xl font-bold text-[#181f19] mt-0.5">
+                        <h3 className="font-serif text-xl font-bold text-[var(--theme-text-primary,#181f19)] mt-0.5">
                           {ritual.name}
                         </h3>
                       </div>
                       <div className="flex items-center gap-3 text-xs font-bold">
-                        <span className="rounded-full bg-white px-3 py-1 text-[#2d4a32] border border-[#e5dfd2]">
+                        <span className="rounded-full bg-[var(--theme-bg-card,#ffffff)] px-3 py-1 text-[var(--theme-accent-primary,#2d4a32)] border border-[var(--theme-border,#e5dfd2)]">
                           {ritual.temp}
                         </span>
-                        <span className="rounded-full bg-[#2d4a32] px-3 py-1 text-white">
+                        <span className="rounded-full bg-[var(--theme-accent-primary,#2d4a32)] px-3 py-1 text-[var(--theme-accent-contrast,#ffffff)]">
                           {ritual.seconds}s Steep
                         </span>
                       </div>
                     </div>
-                    <p className="mt-3 text-xs leading-relaxed text-[#556456]">
+                    <p className="mt-3 text-xs leading-relaxed text-[var(--theme-text-secondary,#556456)]">
                       {ritual.tip}
                     </p>
                   </button>
@@ -617,8 +617,8 @@ export function MorningLeafTea() {
             </div>
 
             {/* Live Interactive Timer Widget */}
-            <div className="rounded-3xl border border-[#2d4a32]/20 bg-[#181f19] p-8 sm:p-10 text-white shadow-2xl text-center">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#d4a359]">
+            <div className="rounded-3xl border border-[var(--theme-accent-primary,#2d4a32)]/20 bg-[var(--theme-bg-dark,#181f19)] p-8 sm:p-10 text-white shadow-2xl text-center">
+              <span className="text-[10px] font-black uppercase tracking-widest text-[var(--theme-accent-secondary,#d4a359)]">
                 Steeping Chamber
               </span>
               <h3 className="font-serif text-2xl font-bold text-white mt-1">
@@ -628,7 +628,7 @@ export function MorningLeafTea() {
               {/* Big Animated Timer Circle */}
               <div className="my-8 mx-auto relative flex h-48 w-48 items-center justify-center rounded-full border-4 border-white/10 bg-white/5 shadow-inner">
                 <div className="text-center">
-                  <p className="font-serif text-5xl font-black text-[#d4a359] tracking-tight">
+                  <p className="font-serif text-5xl font-black text-[var(--theme-accent-secondary,#d4a359)] tracking-tight">
                     {Math.floor(timerSeconds / 60)}:
                     {(timerSeconds % 60).toString().padStart(2, "0")}
                   </p>
@@ -643,7 +643,7 @@ export function MorningLeafTea() {
                 <button
                   type="button"
                   onClick={() => setTimerRunning((prev) => !prev)}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#d4a359] px-7 py-3 text-xs font-black uppercase tracking-wider text-[#181f19] shadow-lg hover:bg-white transition active:scale-95"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--theme-accent-secondary,#d4a359)] px-7 py-3 text-xs font-black uppercase tracking-wider text-[var(--theme-bg-dark,#181f19)] shadow-lg hover:bg-white transition active:scale-95"
                 >
                   {timerRunning ? (
                     <>
@@ -673,44 +673,44 @@ export function MorningLeafTea() {
       </section>
 
       {/* ── THE TATAMI PAVILION & ZEN ARCHITECTURE ────────────────────────── */}
-      <section id="space" className="py-20 md:py-28 bg-[#f0ebe1] border-y border-[#e5dfd2]">
+      <section id="space" className="py-20 md:py-28 bg-[var(--theme-bg-surface,#f0ebe1)] border-y border-[var(--theme-border,#e5dfd2)]">
         <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="relative">
-            <div className="overflow-hidden rounded-3xl border border-[#e5dfd2] shadow-2xl aspect-[16/10]">
+            <div className="overflow-hidden rounded-3xl border border-[var(--theme-border,#e5dfd2)] shadow-2xl aspect-[16/10]">
               <img
                 src={imageAssets.tatami.src}
                 alt={imageAssets.tatami.alt}
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 -right-6 hidden sm:block rounded-2xl border border-[#e5dfd2] bg-white p-5 shadow-xl">
-              <p className="text-xs font-black uppercase tracking-wider text-[#2d4a32]">Architecture</p>
-              <p className="font-serif text-sm font-bold text-[#181f19] mt-0.5">Woven Igusa Tatami & Cedar Wood Lattice</p>
+            <div className="absolute -bottom-6 -right-6 hidden sm:block rounded-2xl border border-[var(--theme-border,#e5dfd2)] bg-[var(--theme-bg-card,#ffffff)] p-5 shadow-xl">
+              <p className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-primary,#2d4a32)]">Architecture</p>
+              <p className="font-serif text-sm font-bold text-[var(--theme-text-primary,#181f19)] mt-0.5">Woven Igusa Tatami & Cedar Wood Lattice</p>
             </div>
           </div>
 
           <div>
-            <span className="text-xs font-black uppercase tracking-[0.2em] text-[#2d4a32]">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#2d4a32)]">
               The Tea House Setting
             </span>
-            <h2 className="mt-3 font-serif text-3xl tracking-tight text-[#181f19] sm:text-5xl">
+            <h2 className="mt-3 font-serif text-3xl tracking-tight text-[var(--theme-text-primary,#181f19)] sm:text-5xl">
               A serene refuge where time moves at a gentler cadence.
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-[#556456]">
+            <p className="mt-5 text-base leading-relaxed text-[var(--theme-text-secondary,#556456)]">
               Step out of your shoes and onto woven tatami mats. Filtered morning light through washi paper screens, steaming iron tetsubin kettles, and quiet garden vistas of moss and bamboo create an immediate somatic calm.
             </p>
 
             <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl border border-[#e5dfd2] bg-white p-4">
-                <Clock className="h-5 w-5 text-[#2d4a32]" />
-                <p className="font-serif text-sm font-bold text-[#181f19] mt-2">Opening Hours</p>
-                <p className="text-xs text-[#556456] mt-0.5">8:00 AM – 7:30 PM Daily</p>
+              <div className="rounded-2xl border border-[var(--theme-border,#e5dfd2)] bg-[var(--theme-bg-card,#ffffff)] p-4">
+                <Clock className="h-5 w-5 text-[var(--theme-accent-primary,#2d4a32)]" />
+                <p className="font-serif text-sm font-bold text-[var(--theme-text-primary,#181f19)] mt-2">Opening Hours</p>
+                <p className="text-xs text-[var(--theme-text-secondary,#556456)] mt-0.5">8:00 AM – 7:30 PM Daily</p>
               </div>
 
-              <div className="rounded-2xl border border-[#e5dfd2] bg-white p-4">
-                <MapPin className="h-5 w-5 text-[#c9933b]" />
-                <p className="font-serif text-sm font-bold text-[#181f19] mt-2">Garden Location</p>
-                <p className="text-xs text-[#556456] mt-0.5">123 Leafy Lane, Bamboo Courtyard</p>
+              <div className="rounded-2xl border border-[var(--theme-border,#e5dfd2)] bg-[var(--theme-bg-card,#ffffff)] p-4">
+                <MapPin className="h-5 w-5 text-[var(--theme-accent-secondary,#c9933b)]" />
+                <p className="font-serif text-sm font-bold text-[var(--theme-text-primary,#181f19)] mt-2">Garden Location</p>
+                <p className="text-xs text-[var(--theme-text-secondary,#556456)] mt-0.5">123 Leafy Lane, Bamboo Courtyard</p>
               </div>
             </div>
           </div>
@@ -718,11 +718,11 @@ export function MorningLeafTea() {
       </section>
 
       {/* ── TABLE & CEREMONY RESERVATIONS ──────────────────────────────────── */}
-      <section id="reserve" className="py-20 md:py-28 bg-[#181f19] text-white">
+      <section id="reserve" className="py-20 md:py-28 bg-[var(--theme-bg-dark,#181f19)] text-white">
         <Container>
           <div className="grid gap-12 rounded-3xl border border-white/15 bg-gradient-to-br from-[#242e26] via-[#181f19] to-[#121613] p-8 sm:p-14 shadow-2xl lg:grid-cols-2 lg:items-center">
             <div>
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#d4a359]">
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#d4a359)]">
                 Tea Table Bookings
               </span>
               <h2 className="mt-3 font-serif text-3xl leading-tight sm:text-5xl">
@@ -734,15 +734,15 @@ export function MorningLeafTea() {
 
               <div className="mt-8 space-y-3">
                 <div className="flex items-center gap-3 text-xs text-white/80">
-                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
+                  <CheckCircle2 className="h-4 w-4 text-[var(--theme-accent-secondary,#d4a359)]" />
                   <span>Complimentary first steeping guided by our tea sommelier</span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-white/80">
-                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
+                  <CheckCircle2 className="h-4 w-4 text-[var(--theme-accent-secondary,#d4a359)]" />
                   <span>Shoes checked into private cedar lockers at entry</span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-white/80">
-                  <CheckCircle2 className="h-4 w-4 text-[#d4a359]" />
+                  <CheckCircle2 className="h-4 w-4 text-[var(--theme-accent-secondary,#d4a359)]" />
                   <span>Handmade seasonal wagashi sweets paired with every pot</span>
                 </div>
               </div>
@@ -759,7 +759,7 @@ export function MorningLeafTea() {
                   <p className="text-xs text-white/70 mt-1">
                     {bookingState.tableType} for {bookingState.guests} at {bookingState.time}.
                   </p>
-                  <p className="text-xs text-[#d4a359] font-bold mt-2">
+                  <p className="text-xs text-[var(--theme-accent-secondary,#d4a359)] font-bold mt-2">
                     A confirmation email has been dispatched with directions.
                   </p>
                   <button
@@ -787,7 +787,7 @@ export function MorningLeafTea() {
                         onChange={(e) =>
                           setBookingState((prev) => ({ ...prev, tableType: e.target.value }))
                         }
-                        className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs font-bold text-white focus:border-[#d4a359] focus:outline-none"
+                        className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs font-bold text-white focus:border-[var(--theme-accent-secondary,#d4a359)] focus:outline-none"
                       >
                         <option value="Tatami Garden Room" className="bg-[#181f19]">Tatami Garden Room (Barefoot / Low Tables)</option>
                         <option value="Sunlit Reading Hearth" className="bg-[#181f19]">Sunlit Reading Hearth (Armchairs)</option>
@@ -805,7 +805,7 @@ export function MorningLeafTea() {
                           onChange={(e) =>
                             setBookingState((prev) => ({ ...prev, guests: e.target.value }))
                           }
-                          className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs font-bold text-white focus:border-[#d4a359] focus:outline-none"
+                          className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs font-bold text-white focus:border-[var(--theme-accent-secondary,#d4a359)] focus:outline-none"
                         >
                           <option value="1 Guest" className="bg-[#181f19]">1 Guest (Solo Reset)</option>
                           <option value="2 Guests" className="bg-[#181f19]">2 Guests (Intimate)</option>
@@ -823,7 +823,7 @@ export function MorningLeafTea() {
                           onChange={(e) =>
                             setBookingState((prev) => ({ ...prev, time: e.target.value }))
                           }
-                          className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs font-bold text-white focus:border-[#d4a359] focus:outline-none"
+                          className="w-full rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-xs font-bold text-white focus:border-[var(--theme-accent-secondary,#d4a359)] focus:outline-none"
                         >
                           <option value="10:30 AM" className="bg-[#181f19]">10:30 AM (Morning Calm)</option>
                           <option value="1:00 PM" className="bg-[#181f19]">1:00 PM</option>
@@ -839,7 +839,7 @@ export function MorningLeafTea() {
                       onClick={() =>
                         setBookingState((prev) => ({ ...prev, isConfirmed: true }))
                       }
-                      className="w-full rounded-full bg-[#d4a359] py-3.5 text-xs font-black uppercase tracking-wider text-[#181f19] shadow-xl hover:bg-white transition active:scale-95"
+                      className="w-full rounded-full bg-[var(--theme-accent-secondary,#d4a359)] py-3.5 text-xs font-black uppercase tracking-wider text-[var(--theme-bg-dark,#181f19)] shadow-xl hover:bg-white transition active:scale-95"
                     >
                       Confirm Tea Table Reservation
                     </button>
@@ -854,18 +854,18 @@ export function MorningLeafTea() {
       {/* ── STICKY TEA ORDER BADGE ─────────────────────────────────────────── */}
       {totalCartCount > 0 && (
         <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#181f19]/95 px-5 py-3 text-white shadow-2xl backdrop-blur-xl">
+          <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[var(--theme-bg-dark,#181f19)]/95 px-5 py-3 text-white shadow-2xl backdrop-blur-xl">
             <div className="flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-full bg-[#2d4a32] text-xs font-black">
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-[var(--theme-accent-primary,#2d4a32)] text-xs font-black text-[var(--theme-accent-contrast,#ffffff)]">
                 {totalCartCount}
               </span>
               <span className="text-xs font-bold">
-                Table Pots: <span className="text-[#d4a359] font-black">${totalCartPrice.toFixed(2)}</span>
+                Table Pots: <span className="text-[var(--theme-accent-secondary,#d4a359)] font-black">${totalCartPrice.toFixed(2)}</span>
               </span>
             </div>
             <a
               href="#reserve"
-              className="rounded-full bg-[#d4a359] px-4 py-1.5 text-xs font-black uppercase text-[#181f19] hover:bg-white transition"
+              className="rounded-full bg-[var(--theme-accent-secondary,#d4a359)] px-4 py-1.5 text-xs font-black uppercase text-[var(--theme-bg-dark,#181f19)] hover:bg-white transition"
             >
               Finish Order
             </a>
@@ -874,12 +874,12 @@ export function MorningLeafTea() {
       )}
 
       {/* ── CALM JAPANESE MINIMALIST FOOTER ────────────────────────────────── */}
-      <footer className="border-t border-[#e5dfd2] bg-[#121613] py-14 text-white">
+      <footer className="border-t border-[var(--theme-border,#e5dfd2)] bg-[var(--theme-bg-dark,#121613)] py-14 text-white">
         <Container>
           <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
             <div>
               <div className="flex items-center gap-2.5">
-                <div className="grid h-8 w-8 place-items-center rounded-lg bg-[#2d4a32] text-sm font-black text-white">
+                <div className="grid h-8 w-8 place-items-center rounded-lg bg-[var(--theme-accent-primary,#2d4a32)] text-sm font-black text-[var(--theme-accent-contrast,#ffffff)]">
                   🍵
                 </div>
                 <p className="font-serif text-xl font-bold text-white">MorningLeaf</p>
@@ -890,7 +890,7 @@ export function MorningLeafTea() {
               <div className="mt-5">
                 <Link
                   to="/restaurant"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#d4a359] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--theme-accent-secondary,#d4a359)] hover:underline"
                 >
                   <ArrowRight className="h-3.5 w-3.5 rotate-180" />
                   <span>Return to 100Web Restaurant Collection</span>
@@ -899,7 +899,7 @@ export function MorningLeafTea() {
             </div>
 
             <div>
-              <p className="text-xs font-black uppercase tracking-wider text-[#d4a359]">Hours</p>
+              <p className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-secondary,#d4a359)]">Hours</p>
               <div className="mt-3 space-y-1 text-xs text-white/70">
                 <p className="font-semibold text-white">Monday – Friday</p>
                 <p>8:00 AM – 7:30 PM</p>
@@ -909,7 +909,7 @@ export function MorningLeafTea() {
             </div>
 
             <div>
-              <p className="text-xs font-black uppercase tracking-wider text-[#d4a359]">Location</p>
+              <p className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-secondary,#d4a359)]">Location</p>
               <div className="mt-3 space-y-1 text-xs text-white/70">
                 <p>123 Leafy Lane</p>
                 <p>Bamboo Courtyard District</p>
@@ -919,7 +919,7 @@ export function MorningLeafTea() {
             </div>
 
             <div>
-              <p className="text-xs font-black uppercase tracking-wider text-[#d4a359]">Tea Quick Links</p>
+              <p className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-secondary,#d4a359)]">Tea Quick Links</p>
               <ul className="mt-3 space-y-1.5 text-xs text-white/70 font-semibold">
                 <li><a href="#scrolls" className="hover:text-white transition">First-Harvest Matcha</a></li>
                 <li><a href="#scrolls" className="hover:text-white transition">Yuzu Citrus Sencha</a></li>

@@ -473,230 +473,155 @@ export function RenewPhysicalTherapy() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f8faf9] font-sans text-slate-900 antialiased selection:bg-emerald-500 selection:text-white">
+    <main className="min-h-screen bg-[var(--theme-bg-base,#071711)] font-sans text-[var(--theme-text-primary,#f8fafc)] antialiased transition-colors duration-300 selection:bg-[var(--theme-accent-primary,#10b981)] selection:text-[var(--theme-accent-contrast,#ffffff)]">
       {/* ========================================================================= */}
-      {/* 1. TOP ATHLETIC DIRECT ACCESS & CLINIC UTILITY BAR                        */}
+      {/* 1. CLEAN TOP UTILITY STRIP (DIRECT ACCESS & CLINIC DESK)                  */}
       {/* ========================================================================= */}
-      <div className="relative z-50 border-b border-emerald-500/15 bg-[#040f0b] px-3 sm:px-6 py-2 text-xs text-emerald-100/90">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2.5">
-          {/* Left: Medical Showcase Index & Direct Access Pill */}
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-            <Link
-              to="/medical"
-              className="group inline-flex shrink-0 items-center gap-1 font-bold text-lime-400 transition-colors hover:text-white text-[11px] sm:text-xs"
-              title="Return to Medical Showcase Directory"
-            >
-              <span className="hidden sm:inline">← Medical Showcase</span>
-              <span className="sm:hidden text-[11px]">← Showcase</span>
-            </Link>
-            <span className="text-emerald-800/80">|</span>
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/25 px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-xs text-emerald-200 truncate">
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-400" />
-              </span>
-              <span className="font-semibold truncate">
-                <span className="hidden md:inline">Maryland Direct Access Law: </span>No MD Referral Needed · In-Network Insurance
-              </span>
-            </div>
-          </div>
+      <div className="relative z-50 border-b border-[var(--theme-border,rgba(255,255,255,0.08))] bg-[var(--theme-bg-surface,#040f0b)] px-3 sm:px-6 py-1.5 text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+          <Link
+            to="/medical"
+            className="group inline-flex items-center gap-1.5 font-semibold text-[var(--theme-accent-primary,#84cc16)] hover:text-[var(--theme-text-primary,#f8fafc)] transition-colors text-[11px] sm:text-xs shrink-0"
+            title="Return to Medical Showcase Directory"
+          >
+            <span>← Medical Showcase</span>
+          </Link>
 
-          {/* Right: Hotline, Live Slot & Hours */}
-          <div className="flex shrink-0 items-center gap-2 sm:gap-4 text-xs">
-            <div className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-2.5 py-0.5 text-[11px] text-emerald-300 font-medium">
-              <Zap size={11} className="text-lime-400 shrink-0" />
-              <span>Next Eval: <strong className="text-white font-bold">Tomorrow 9:00 AM</strong></span>
-            </div>
+          <div className="flex items-center gap-3 sm:gap-6 text-[11px] sm:text-xs">
+            <span className="hidden md:inline-flex items-center gap-1.5 text-[var(--theme-text-muted,#94a3b8)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--theme-accent-primary,#84cc16)] animate-pulse" />
+              Direct Access Law: <strong className="text-[var(--theme-accent-primary,#84cc16)] font-bold">No MD Referral Needed</strong>
+            </span>
+            <span className="text-[var(--theme-border,rgba(255,255,255,0.2))] hidden sm:inline">|</span>
             <a
               href="tel:5550174826"
-              className="inline-flex items-center gap-1.5 rounded-full bg-lime-400/10 hover:bg-lime-400/20 border border-lime-400/30 px-2 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-bold text-lime-300 transition-colors"
-              title="Click to call direct clinician desk"
+              className="inline-flex items-center gap-1.5 font-bold text-[var(--theme-text-primary,#f8fafc)] hover:text-[var(--theme-accent-primary,#84cc16)] transition-colors"
             >
-              <Phone size={11} className="text-lime-400 shrink-0" />
-              <span className="hidden sm:inline">(555) 017-4826</span>
-              <span className="sm:hidden">Call</span>
+              <Phone size={12} className="text-[var(--theme-accent-primary,#84cc16)]" />
+              <span>(555) 017-4826</span>
             </a>
           </div>
         </div>
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. STICKY KINETIC FLOATING DOCK NAVBAR                                    */}
+      {/* 2. SIMPLIFIED STICKY PHYSICAL THERAPY NAVBAR                              */}
       {/* ========================================================================= */}
-      <div className="sticky top-0 z-40 w-full border-b border-emerald-500/20 bg-[#061610]/95 backdrop-blur-2xl text-white shadow-xl shadow-black/25 transition-all">
-        {/* Top Kinetic Neon Hairline Accent */}
-        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-lime-400/80 to-transparent" />
-
-        <div className="mx-auto flex h-14 sm:h-[70px] max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-2">
-          {/* Brand Identity */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
-            <Link
-              to="/medical"
-              className="group relative flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-lime-400 via-emerald-500 to-teal-700 p-0.5 text-slate-950 shadow-md shadow-lime-500/20 ring-2 ring-lime-400/40 transition-transform duration-300 hover:scale-105 active:scale-95 shrink-0"
-              title="Return to Medical Showcase Directory"
-            >
-              <div className="flex h-full w-full items-center justify-center rounded-[12px] sm:rounded-[14px] bg-[#071912] text-lime-400 group-hover:bg-transparent group-hover:text-slate-950 transition-colors">
-                <Activity size={18} className="sm:w-[22px] sm:h-[22px]" strokeWidth={2.6} />
-              </div>
-            </Link>
-            <a href="#hero" className="flex flex-col min-w-0">
-              <span className="text-xs sm:text-base font-black tracking-tight text-white leading-tight truncate">
-                RENEW <span className="text-lime-400 font-extrabold">PHYSICAL THERAPY</span>
+      <header className="sticky top-0 z-40 w-full border-b border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#061610)]/95 backdrop-blur-xl text-[var(--theme-text-primary,#f8fafc)] shadow-md">
+        <div className="mx-auto flex h-16 sm:h-20 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-4">
+          {/* Simple Clean Brand Logo */}
+          <a href="#hero" className="flex items-center gap-3 group shrink-0">
+            <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] text-[var(--theme-accent-contrast,#ffffff)] shadow-md shadow-black/40 group-hover:scale-105 transition-transform">
+              <Activity size={22} className="animate-pulse" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm sm:text-base font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)] leading-none">
+                RENEW<span className="text-[var(--theme-accent-primary,#84cc16)]">PT</span>
               </span>
-              <div className="hidden xs:flex items-center gap-1.5 text-[9px] uppercase font-extrabold tracking-widest text-emerald-400 leading-none mt-0.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-lime-400 inline-block animate-pulse" />
-                <span className="truncate">Sports Motion Lab · Orthopedic Care</span>
-              </div>
-            </a>
-          </div>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--theme-text-muted,#94a3b8)] mt-1">
+                Physical Therapy Clinic
+              </span>
+            </div>
+          </a>
 
-          {/* Desktop Navigation Links with Live Kinetic ScrollSpy */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 rounded-full bg-black/45 p-1 border border-white/10 shadow-inner backdrop-blur-md">
-            {navLinks.map((link) => {
+          {/* Simple Desktop Nav Links */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {navLinks.slice(0, 7).map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
                   key={link.id}
                   href={link.href}
-                  className={`relative rounded-full px-2.5 xl:px-3 py-1.5 text-xs font-bold tracking-tight transition-all duration-200 whitespace-nowrap ${
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
                     isActive
-                      ? "bg-gradient-to-r from-lime-400 via-emerald-400 to-lime-300 text-slate-950 font-black shadow-[0_0_15px_rgba(163,230,53,0.35)] scale-[1.02]"
-                      : "text-slate-300 hover:text-white hover:bg-white/10"
+                      ? "bg-[var(--theme-accent-primary,#84cc16)]/15 text-[var(--theme-accent-primary,#84cc16)] border border-[var(--theme-accent-primary,#84cc16)]/30 font-bold"
+                      : "text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-text-primary,#f8fafc)] hover:bg-[var(--theme-accent-primary,#84cc16)]/10"
                   }`}
                 >
-                  <span className="flex items-center gap-1">
-                    {isActive && <span className="h-1.5 w-1.5 rounded-full bg-slate-950 animate-pulse shrink-0" />}
-                    <span>{link.label}</span>
-                  </span>
+                  {link.label}
                 </a>
               );
             })}
           </nav>
 
-          {/* Right Action: Evaluation Hotline, Main CTA & Hamburger */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-            {/* Direct Line Badge (Desktop XL) */}
+          {/* Right Action: Clean Consultation Button + Mobile Toggle */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <a
               href="tel:5550174826"
-              className="hidden xl:flex items-center gap-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 px-3.5 py-1.5 text-xs font-bold text-slate-200 transition-all shadow-xs group"
-              title="Fast Clinician Inquiries"
+              className="hidden xl:inline-flex items-center gap-1.5 rounded-lg border border-[var(--theme-border,rgba(255,255,255,0.15))] px-3 py-2 text-xs font-semibold text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-text-primary,#f8fafc)] hover:border-[var(--theme-accent-primary,#84cc16)]/40 transition-colors"
             >
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-lime-400/20 text-lime-400 group-hover:bg-lime-400 group-hover:text-slate-950 transition-colors">
-                <Phone size={11} />
-              </div>
+              <Phone size={13} className="text-[var(--theme-accent-primary,#84cc16)]" />
               <span>(555) 017-4826</span>
             </a>
 
-            {/* High-Impact CTA Button */}
             <button
               type="button"
               onClick={() => handleStartBooking()}
-              className="group relative inline-flex items-center gap-1 sm:gap-2 rounded-full bg-gradient-to-r from-lime-400 via-emerald-400 to-green-400 px-2.5 sm:px-5 py-1.5 sm:py-2.5 text-xs sm:text-sm font-black text-slate-950 shadow-lg shadow-lime-400/20 hover:shadow-lime-400/40 hover:scale-105 active:scale-95 transition-all duration-200 shrink-0 whitespace-nowrap overflow-hidden"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] text-[var(--theme-accent-contrast,#ffffff)] px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs font-bold shadow-md shadow-black/30 transition-all hover:scale-102 active:scale-98"
             >
-              <Calendar size={13} strokeWidth={2.5} className="shrink-0 sm:w-[14px] sm:h-[14px]" />
-              <span className="hidden sm:inline">Book 60-Min Eval</span>
-              <span className="sm:hidden text-[11px] font-black">Book</span>
-              <ArrowRight size={13} className="hidden sm:inline transition-transform duration-200 group-hover:translate-x-0.5" />
+              <Calendar size={14} />
+              <span>Book Eval</span>
             </button>
 
-            {/* Mobile Menu Hamburger Button */}
+            {/* Mobile Menu Hamburger */}
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation menu"
               aria-expanded={isMobileMenuOpen}
-              className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-slate-100 hover:bg-white/15 hover:border-lime-400/40 lg:hidden transition-all shadow-sm active:scale-95 shrink-0"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0a1e17)] text-[var(--theme-text-primary,#f8fafc)] hover:bg-[var(--theme-accent-primary,#84cc16)]/10 lg:hidden transition-colors"
             >
-              {isMobileMenuOpen ? <X size={18} className="text-lime-400" /> : <Menu size={18} />}
+              {isMobileMenuOpen ? <X size={20} className="text-[var(--theme-accent-primary,#84cc16)]" /> : <Menu size={20} />}
             </button>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* ========================================================================= */}
-      {/* 3. MOBILE SLIDE-OVER PERFORMANCE DRAWER                                   */}
+      {/* 3. SIMPLIFIED MOBILE MENU                                                 */}
       {/* ========================================================================= */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xl lg:hidden flex justify-end transition-opacity duration-300"
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md lg:hidden flex justify-end animate-in fade-in duration-200"
           onClick={() => setIsMobileMenuOpen(false)}
         >
           <div
-            className="w-full max-w-sm sm:max-w-md h-full bg-[#05140e] border-l border-emerald-500/20 flex flex-col overflow-hidden text-white shadow-2xl shadow-emerald-950/80 animate-in slide-in-from-right duration-300"
+            className="w-full max-w-xs sm:max-w-sm h-full bg-[var(--theme-bg-card,#0a1e17)] border-l border-[var(--theme-border,rgba(255,255,255,0.1))] flex flex-col justify-between text-[var(--theme-text-primary,#f8fafc)] p-5 overflow-y-auto overscroll-contain animate-in slide-in-from-right duration-250 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* 3A. Fixed Top Header with Safe Area Padding */}
-            <div className="shrink-0 p-4 sm:p-5 border-b border-white/10 bg-[#071912]/95 backdrop-blur-md space-y-3 pt-[max(1rem,env(safe-area-inset-top))]">
-              <div className="flex items-center justify-between">
+            {/* Top Branding & Close */}
+            <div className="space-y-6 pt-[max(0.5rem,env(safe-area-inset-top))]">
+              <div className="flex items-center justify-between pb-4 border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-lime-400 to-emerald-500 text-slate-950 font-black shadow-md shadow-lime-400/20">
-                    <Activity size={20} strokeWidth={2.5} />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] text-[var(--theme-accent-contrast,#ffffff)] shadow-md">
+                    <Activity size={20} />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs font-black tracking-wider text-white">
-                      RENEW <span className="text-lime-400 font-light">PHYSICAL THERAPY</span>
-                    </span>
-                    <span className="text-[9px] uppercase font-bold text-emerald-400">
-                      Kinetic Motion Lab Directory
-                    </span>
+                  <div>
+                    <div className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)]">
+                      RENEW<span className="text-[var(--theme-accent-primary,#84cc16)]">PT</span>
+                    </div>
+                    <div className="text-[10px] text-[var(--theme-text-muted,#94a3b8)] font-semibold uppercase">Physical Therapy</div>
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  aria-label="Close navigation menu"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-slate-300 hover:text-white hover:bg-white/20 transition-colors"
+                  aria-label="Close navigation"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#040f0b)] text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-text-primary,#f8fafc)]"
                 >
                   <X size={18} />
                 </button>
               </div>
 
-              {/* Active Section Telemetry Chip */}
-              <div className="flex items-center justify-between rounded-xl bg-black/40 border border-emerald-500/25 px-3 py-1.5 text-[11px]">
-                <span className="flex items-center gap-1.5 text-emerald-300 font-semibold">
-                  <span className="h-2 w-2 rounded-full bg-lime-400 animate-pulse" />
-                  Currently In View:
-                </span>
-                <span className="font-bold text-white uppercase tracking-wider text-[10px] bg-emerald-950/80 px-2 py-0.5 rounded-md border border-emerald-500/30">
-                  {navLinks.find((l) => l.id === activeSection)?.fullLabel || "Clinical Overview"}
-                </span>
-              </div>
-            </div>
-
-            {/* 3B. Scrollable Middle Body */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 overscroll-contain">
-              {/* Quick-Access Action Grid */}
-              <div className="grid grid-cols-1 gap-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    handleStartBooking();
-                  }}
-                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-lime-400 via-emerald-400 to-green-400 py-3 text-xs font-black text-slate-950 shadow-lg shadow-lime-400/20 hover:brightness-110 active:scale-98 transition-all"
-                >
-                  <Calendar size={15} strokeWidth={2.5} />
-                  <span>Schedule 60-Min Evaluation Online</span>
-                </button>
-                <a
-                  href="tel:5550174826"
-                  className="w-full flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 py-2.5 text-xs font-bold text-white hover:bg-white/10 transition-colors"
-                >
-                  <Phone size={13} className="text-lime-400" />
-                  <span>Direct PT Clinical Desk: (555) 017-4826</span>
-                </a>
-              </div>
-
-              {/* Chronological Section Links in Strict DOM Sequence */}
-              <div className="space-y-1 pt-1">
-                <div className="px-2 py-1 text-[10px] font-black uppercase tracking-widest text-lime-400/80 flex items-center justify-between">
-                  <span>Sections in Motion Order</span>
-                  <span className="text-emerald-500 font-normal">01 – 08</span>
-                </div>
-                {navLinks.map((link, idx) => {
+              {/* Navigation Links */}
+              <div className="space-y-1">
+                {navLinks.map((link) => {
                   const isActive = activeSection === link.id;
                   const Icon = link.icon;
-                  const stepNumber = String(idx + 1).padStart(2, "0");
                   return (
                     <a
                       key={link.id}
@@ -705,69 +630,45 @@ export function RenewPhysicalTherapy() {
                         e.preventDefault();
                         handleNavClick(link.href);
                       }}
-                      className={`group flex items-center justify-between rounded-xl p-2.5 sm:p-3 text-xs transition-all ${
+                      className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-colors ${
                         isActive
-                          ? "bg-gradient-to-r from-emerald-500/25 to-lime-500/15 text-white border border-lime-400/40 shadow-sm"
-                          : "text-slate-300 hover:bg-white/5 hover:text-white border border-transparent"
+                          ? "bg-[var(--theme-accent-primary,#84cc16)] text-[var(--theme-accent-contrast,#ffffff)] font-bold shadow-md"
+                          : "text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-[var(--theme-accent-primary,#84cc16)]/10 hover:text-[var(--theme-text-primary,#f8fafc)]"
                       }`}
                     >
-                      <div className="flex items-center gap-3 min-w-0">
-                        <span className={`text-[10px] font-black tracking-widest ${isActive ? "text-lime-400" : "text-slate-600"}`}>
-                          {stepNumber}
-                        </span>
-                        <div
-                          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${
-                            isActive
-                              ? "bg-lime-400 text-slate-950 font-black shadow-md shadow-lime-400/30"
-                              : "bg-white/5 text-slate-400 group-hover:text-lime-300 group-hover:bg-white/10"
-                          }`}
-                        >
-                          <Icon size={15} />
-                        </div>
-                        <div className="flex flex-col min-w-0 text-left">
-                          <div className="flex items-center gap-2">
-                            <span className={`font-bold truncate ${isActive ? "text-white" : "text-slate-200"}`}>
-                              {link.fullLabel}
-                            </span>
-                            {isActive && (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-lime-400/20 px-1.5 py-0.5 text-[9px] font-black text-lime-300 border border-lime-400/30 shrink-0">
-                                <span className="h-1.5 w-1.5 rounded-full bg-lime-400 animate-pulse" />
-                                In View
-                              </span>
-                            )}
-                          </div>
-                          <span className="text-[10px] text-slate-400 truncate mt-0.5">
-                            {link.desc}
-                          </span>
-                        </div>
-                      </div>
-                      <ChevronRight
-                        size={14}
-                        className={`shrink-0 ml-2 transition-transform group-hover:translate-x-0.5 ${
-                          isActive ? "text-lime-300" : "text-slate-600"
-                        }`}
-                      />
+                      <Icon size={16} className={isActive ? "text-[var(--theme-accent-contrast,#ffffff)]" : "text-[var(--theme-accent-primary,#84cc16)]"} />
+                      <span>{link.label}</span>
                     </a>
                   );
                 })}
               </div>
-
-              {/* Direct Access Fast Facts Guarantee Box */}
-              <div className="rounded-2xl border border-lime-500/30 bg-lime-500/10 p-3.5 space-y-1.5">
-                <div className="flex items-center gap-1.5 text-lime-300 text-[11px] font-bold uppercase tracking-wider">
-                  <ShieldCheck size={14} className="text-lime-400" />
-                  No Physician Referral Required
-                </div>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  Maryland Direct Access law enables immediate evaluation & therapy by a licensed Doctor of Physical Therapy. In-network with CareFirst, Medicare, Aetna, Cigna & United.
-                </p>
-              </div>
             </div>
 
-            {/* 3C. Fixed Bottom Footer with Safe Area Padding */}
-            <div className="shrink-0 p-3 sm:p-4 border-t border-white/10 bg-[#030d09] text-center text-[10px] text-slate-400 space-y-0.5 pb-[max(1rem,env(safe-area-inset-bottom))]">
-              <p className="text-white font-medium">620 Renewal Way, Suite 140 · Bethesda, MD</p>
-              <p className="text-lime-400 font-semibold">Mon–Fri 6:30 AM – 7:00 PM · Dedicated Athlete Parking</p>
+            {/* Bottom Actions & Hotline */}
+            <div className="space-y-3 pt-6 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleStartBooking();
+                }}
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] py-3 text-xs font-bold text-[var(--theme-accent-contrast,#ffffff)] shadow-md"
+              >
+                <Calendar size={15} />
+                <span>Schedule Evaluation</span>
+              </button>
+
+              <a
+                href="tel:5550174826"
+                className="w-full flex items-center justify-center gap-2 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#040f0b)] py-2.5 text-xs font-semibold text-[var(--theme-text-primary,#f8fafc)] hover:bg-[var(--theme-accent-primary,#84cc16)]/10"
+              >
+                <Phone size={14} className="text-[var(--theme-accent-primary,#84cc16)]" />
+                <span>Call Desk: (555) 017-4826</span>
+              </a>
+
+              <p className="text-[10px] text-center text-[var(--theme-text-muted,#94a3b8)] pt-1">
+                Direct Access: <strong className="text-[var(--theme-accent-primary,#84cc16)]">No MD referral required</strong>
+              </p>
             </div>
           </div>
         </div>
@@ -776,25 +677,25 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 3. KINETIC SPORTS MOTION LAB HERO SECTION                                 */}
       {/* ========================================================================= */}
-      <section id="hero" className="relative pt-8 sm:pt-14 pb-16 sm:pb-24 overflow-hidden bg-[#071711] text-white">
+      <section id="hero" className="relative pt-8 sm:pt-14 pb-16 sm:pb-24 overflow-hidden bg-[var(--theme-bg-base,#071711)] text-[var(--theme-text-primary,#f8fafc)]">
         {/* Soft Kinetic Ambient Radiance Orbs */}
-        <div className="pointer-events-none absolute -top-36 -right-36 h-[700px] w-[700px] rounded-full bg-lime-500/12 blur-[170px]" />
-        <div className="pointer-events-none absolute top-48 -left-36 h-[600px] w-[600px] rounded-full bg-emerald-600/15 blur-[160px]" />
-        <div className="pointer-events-none absolute bottom-0 right-1/3 h-[500px] w-[500px] rounded-full bg-green-400/8 blur-[140px]" />
+        <div className="pointer-events-none absolute -top-36 -right-36 h-[700px] w-[700px] rounded-full bg-[var(--theme-accent-primary,#84cc16)]/12 blur-[170px]" />
+        <div className="pointer-events-none absolute top-48 -left-36 h-[600px] w-[600px] rounded-full bg-[var(--theme-accent-secondary,#10b981)]/15 blur-[160px]" />
+        <div className="pointer-events-none absolute bottom-0 right-1/3 h-[500px] w-[500px] rounded-full bg-[var(--theme-accent-primary,#84cc16)]/8 blur-[140px]" />
 
         <Container>
           {/* Eyebrow Trust Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-center mb-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-extrabold text-white shadow-xs backdrop-blur-md">
-              <Activity size={14} className="text-lime-400" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0a1e17)]/80 px-4 py-1.5 text-xs font-extrabold text-[var(--theme-text-primary,#f8fafc)] shadow-xs backdrop-blur-md">
+              <Activity size={14} className="text-[var(--theme-accent-primary,#84cc16)]" />
               <span>Biomechanical Sports Recovery & Orthopedic Physical Therapy</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-lime-400/30 bg-lime-400/10 px-3.5 py-1.5 text-xs font-bold text-lime-300">
-              <Star size={13} className="fill-lime-400 text-lime-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--theme-accent-primary,#84cc16)]/30 bg-[var(--theme-accent-primary,#84cc16)]/10 px-3.5 py-1.5 text-xs font-bold text-[var(--theme-accent-primary,#84cc16)]">
+              <Star size={13} className="fill-[var(--theme-accent-primary,#84cc16)] text-[var(--theme-accent-primary,#84cc16)]" />
               <span>4.98 Rating · 620+ Active Patients Recovered</span>
             </span>
-            <span className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3.5 py-1.5 text-xs font-bold text-emerald-300">
-              <ShieldCheck size={13} className="text-emerald-400" />
+            <span className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-[var(--theme-accent-secondary,#10b981)]/30 bg-[var(--theme-accent-secondary,#10b981)]/10 px-3.5 py-1.5 text-xs font-bold text-[var(--theme-accent-secondary,#10b981)]">
+              <ShieldCheck size={13} className="text-[var(--theme-accent-secondary,#10b981)]" />
               <span>Direct Access · No MD Referral Needed</span>
             </span>
           </div>
@@ -804,13 +705,13 @@ export function RenewPhysicalTherapy() {
             {/* Left: Kinetic Copy & Metrics (7 cols) */}
             <div className="lg:col-span-7 space-y-6 text-left">
               <div className="space-y-4">
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)] leading-[1.08]">
                   Rebuild peak movement.{" "}
-                  <span className="bg-gradient-to-r from-lime-400 via-emerald-300 to-teal-300 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] via-[var(--theme-accent-secondary,#10b981)] to-[var(--theme-accent-secondary,#10b981)] bg-clip-text text-transparent">
                     Reclaim pain-free performance.
                   </span>
                 </h1>
-                <p className="max-w-2xl text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed">
+                <p className="max-w-2xl text-sm sm:text-base lg:text-lg text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                   One-on-one 60-minute sessions exclusively with board-certified Doctors of Physical Therapy.
                   No aides, no double-booking, and no generic exercise printouts. Powered by high-speed 3D motion capture,
                   force plates, and targeted heavy loading.
@@ -819,21 +720,21 @@ export function RenewPhysicalTherapy() {
 
               {/* Athletic Highlights Chips */}
               <div className="grid grid-cols-3 gap-2 sm:gap-3 py-1 max-w-xl">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-3 text-left backdrop-blur-md">
-                  <div className="text-xl sm:text-2xl font-black text-lime-400">94%</div>
-                  <div className="text-[10px] sm:text-xs text-slate-300 font-semibold leading-tight mt-0.5">
+                <div className="rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0a1e17)]/80 p-3 text-left backdrop-blur-md">
+                  <div className="text-xl sm:text-2xl font-black text-[var(--theme-accent-primary,#84cc16)]">94%</div>
+                  <div className="text-[10px] sm:text-xs text-[var(--theme-text-muted,#94a3b8)] font-semibold leading-tight mt-0.5">
                     Return to Sport on Target
                   </div>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-3 text-left backdrop-blur-md">
-                  <div className="text-xl sm:text-2xl font-black text-white">60 Min</div>
-                  <div className="text-[10px] sm:text-xs text-slate-300 font-semibold leading-tight mt-0.5">
+                <div className="rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0a1e17)]/80 p-3 text-left backdrop-blur-md">
+                  <div className="text-xl sm:text-2xl font-black text-[var(--theme-text-primary,#f8fafc)]">60 Min</div>
+                  <div className="text-[10px] sm:text-xs text-[var(--theme-text-muted,#94a3b8)] font-semibold leading-tight mt-0.5">
                     1-on-1 with Doctor of PT
                   </div>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-3 text-left backdrop-blur-md">
-                  <div className="text-xl sm:text-2xl font-black text-emerald-400">0 Days</div>
-                  <div className="text-[10px] sm:text-xs text-slate-300 font-semibold leading-tight mt-0.5">
+                <div className="rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.12))] bg-[var(--theme-bg-card,#0a1e17)]/80 p-3 text-left backdrop-blur-md">
+                  <div className="text-xl sm:text-2xl font-black text-[var(--theme-accent-secondary,#10b981)]">0 Days</div>
+                  <div className="text-[10px] sm:text-xs text-[var(--theme-text-muted,#94a3b8)] font-semibold leading-tight mt-0.5">
                     MD Referral Wait Time
                   </div>
                 </div>
@@ -845,75 +746,75 @@ export function RenewPhysicalTherapy() {
                   <button
                     type="button"
                     onClick={() => handleStartBooking("Initial Kinetic Movement Evaluation")}
-                    className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-400 via-lime-400 to-green-500 px-6 py-4 text-xs sm:text-sm font-black text-slate-950 shadow-xl shadow-lime-500/20 hover:scale-105 active:scale-95 transition-all"
+                    className="group flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] text-[var(--theme-accent-contrast,#ffffff)] px-6 py-4 text-xs sm:text-sm font-black shadow-xl shadow-black/40 hover:scale-105 active:scale-95 transition-all duration-200"
                   >
                     <Calendar size={16} strokeWidth={2.5} />
                     <span>Schedule 60-Min Evaluation</span>
-                    <ArrowRight size={16} strokeWidth={2.5} />
+                    <ArrowRight size={16} strokeWidth={2.5} className="transition-transform group-hover:translate-x-1" />
                   </button>
 
                   <a
                     href="#body-navigator"
-                    className="inline-flex items-center gap-1.5 rounded-2xl border border-white/15 bg-white/5 px-5 py-4 text-xs sm:text-sm font-bold text-white hover:bg-white/10 hover:border-white/25 transition-all"
+                    className="inline-flex items-center gap-1.5 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-card,#0a1e17)] px-5 py-4 text-xs sm:text-sm font-bold text-[var(--theme-text-primary,#f8fafc)] hover:bg-[var(--theme-bg-surface,#061610)] transition-all"
                   >
-                    <Target size={16} className="text-lime-400" />
+                    <Target size={16} className="text-[var(--theme-accent-primary,#84cc16)]" />
                     <span>Joint & Pain Navigator</span>
                   </a>
                 </div>
 
                 {/* Live Chair Opening Callout */}
-                <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400 pt-1">
+                <div className="flex flex-wrap items-center gap-2 text-xs text-[var(--theme-text-muted,#94a3b8)] pt-1">
                   <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-500" />
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--theme-accent-primary,#84cc16)] opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--theme-accent-primary,#84cc16)]" />
                   </span>
-                  <span className="text-slate-300 font-medium">Next open evaluation chair:</span>
-                  <span className="font-bold text-lime-300">Tomorrow at 9:00 AM</span>
-                  <span className="text-slate-600">·</span>
-                  <span className="text-slate-300 font-semibold">Dr. Maya Collins, PT, DPT, OCS</span>
+                  <span className="text-[var(--theme-text-secondary,#cbd5e1)] font-medium">Next open evaluation chair:</span>
+                  <span className="font-bold text-[var(--theme-accent-primary,#84cc16)]">Tomorrow at 9:00 AM</span>
+                  <span className="text-[var(--theme-border,rgba(255,255,255,0.2))]">·</span>
+                  <span className="text-[var(--theme-text-primary,#f8fafc)] font-semibold">Dr. Maya Collins, PT, DPT, OCS</span>
                 </div>
               </div>
             </div>
 
             {/* Right: Athletic Photography Stage with Floating Telemetry (5 cols) */}
             <div className="lg:col-span-5">
-              <div className="relative overflow-hidden rounded-[2.25rem] border border-white/15 bg-[#091a14] p-3 shadow-2xl ring-1 ring-lime-400/20">
+              <div className="relative overflow-hidden rounded-[2.25rem] border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#091a14)] p-3 shadow-2xl ring-1 ring-[var(--theme-accent-primary,#84cc16)]/20">
                 <div className="relative overflow-hidden rounded-[1.75rem] aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/4.5]">
                   <img
                     src={imageUrl("medical/renewphysical/hero.webp")}
                     alt="Renew Physical Therapy Kinetic Evaluation"
                     className="h-full w-full object-cover transition-all duration-700 hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#061510]/90 via-[#061510]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-base,#061510)]/90 via-[var(--theme-bg-base,#061510)]/20 to-transparent" />
 
                   {/* Top-Right Force Plate Telemetry Badge */}
-                  <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 flex items-center gap-2 rounded-2xl border border-white/20 bg-[#061510]/85 px-3.5 py-2 text-xs text-white shadow-xl backdrop-blur-md">
-                    <TrendingUp size={14} className="text-lime-400" />
+                  <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 flex items-center gap-2 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-surface,#061510)]/90 px-3.5 py-2 text-xs text-[var(--theme-text-primary,#f8fafc)] shadow-xl backdrop-blur-md">
+                    <TrendingUp size={14} className="text-[var(--theme-accent-primary,#84cc16)]" />
                     <div>
-                      <div className="text-[10px] uppercase font-bold text-slate-400">Ground Force Symmetry</div>
-                      <div className="text-xs font-black text-lime-300">50.8% Left · 49.2% Right</div>
+                      <div className="text-[10px] uppercase font-bold text-[var(--theme-text-muted,#94a3b8)]">Ground Force Symmetry</div>
+                      <div className="text-xs font-black text-[var(--theme-accent-primary,#84cc16)]">50.8% Left · 49.2% Right</div>
                     </div>
                   </div>
 
                   {/* Bottom Care Card Voucher */}
-                  <div className="absolute right-3 bottom-3 left-3 rounded-2xl border border-white/15 bg-[#0a1e17]/90 p-4 text-white shadow-2xl backdrop-blur-xl">
+                  <div className="absolute right-3 bottom-3 left-3 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-card,#0a1e17)]/95 p-4 text-[var(--theme-text-primary,#f8fafc)] shadow-2xl backdrop-blur-xl">
                     <div className="flex items-center justify-between gap-3">
                       <div className="min-w-0">
-                        <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-lime-400">
-                          <span className="h-1.5 w-1.5 rounded-full bg-lime-400 animate-pulse" />
+                        <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#84cc16)]">
+                          <span className="h-1.5 w-1.5 rounded-full bg-[var(--theme-accent-primary,#84cc16)] animate-pulse" />
                           <span>Featured Clinical Lead</span>
                         </div>
-                        <h4 className="text-sm font-black text-white truncate mt-0.5">
+                        <h4 className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)] truncate mt-0.5">
                           Dr. Maya Collins, PT, DPT, OCS
                         </h4>
-                        <p className="text-[11px] text-slate-300 truncate mt-0.5">
+                        <p className="text-[11px] text-[var(--theme-text-secondary,#cbd5e1)] truncate mt-0.5">
                           Spine & Orthopedic Clinical Specialist · Tomorrow 9:00 AM
                         </p>
                       </div>
                       <button
                         type="button"
                         onClick={() => handleStartBooking("Initial Kinetic Movement Evaluation", "Dr. Maya Collins, PT, DPT, OCS")}
-                        className="shrink-0 rounded-xl bg-gradient-to-r from-lime-400 to-emerald-400 px-3 py-1.5 text-xs font-extrabold text-slate-950 shadow-md hover:brightness-110 active:scale-95 transition-all"
+                        className="shrink-0 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] px-3.5 py-1.5 text-xs font-black text-[var(--theme-accent-contrast,#ffffff)] shadow-md hover:brightness-110 active:scale-95 transition-all"
                       >
                         Select
                       </button>
@@ -926,43 +827,43 @@ export function RenewPhysicalTherapy() {
 
           {/* Quick Pillar Strip */}
           <div className="mt-12 sm:mt-16 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-lime-400/20 text-lime-400">
+            <div className="flex items-center gap-3 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0a1e17)]/80 p-3.5 backdrop-blur-md">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--theme-accent-primary,#84cc16)]/20 text-[var(--theme-accent-primary,#84cc16)]">
                 <Award size={18} />
               </div>
               <div>
-                <div className="text-sm font-black text-white leading-tight">OCS & SCS Boarded</div>
-                <div className="text-[11px] text-slate-400">Top 5% of US Physical Therapists</div>
+                <div className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)] leading-tight">OCS & SCS Boarded</div>
+                <div className="text-[11px] text-[var(--theme-text-muted,#94a3b8)]">Top 5% of US Physical Therapists</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-400/20 text-emerald-400">
+            <div className="flex items-center gap-3 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0a1e17)]/80 p-3.5 backdrop-blur-md">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--theme-accent-secondary,#10b981)]/20 text-[var(--theme-accent-secondary,#10b981)]">
                 <UserCheck size={18} />
               </div>
               <div>
-                <div className="text-sm font-black text-white leading-tight">100% 1-on-1 Sessions</div>
-                <div className="text-[11px] text-slate-400">Zero aides or tech handoffs</div>
+                <div className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)] leading-tight">100% 1-on-1 Sessions</div>
+                <div className="text-[11px] text-[var(--theme-text-muted,#94a3b8)]">Zero aides or tech handoffs</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-400/20 text-teal-300">
+            <div className="flex items-center gap-3 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0a1e17)]/80 p-3.5 backdrop-blur-md">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--theme-accent-primary,#84cc16)]/20 text-[var(--theme-accent-primary,#84cc16)]">
                 <Activity size={18} />
               </div>
               <div>
-                <div className="text-sm font-black text-white leading-tight">AlterG & BFR Lab</div>
-                <div className="text-[11px] text-slate-400">Anti-gravity & hypertrophy tech</div>
+                <div className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)] leading-tight">AlterG & BFR Lab</div>
+                <div className="text-[11px] text-[var(--theme-text-muted,#94a3b8)]">Anti-gravity & hypertrophy tech</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-400/20 text-green-300">
+            <div className="flex items-center gap-3 rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0a1e17)]/80 p-3.5 backdrop-blur-md">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--theme-accent-secondary,#10b981)]/20 text-[var(--theme-accent-secondary,#10b981)]">
                 <ShieldCheck size={18} />
               </div>
               <div>
-                <div className="text-sm font-black text-white leading-tight">In-Network Insurance</div>
-                <div className="text-[11px] text-slate-400">BCBS, Medicare, Aetna & Cigna</div>
+                <div className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)] leading-tight">In-Network Insurance</div>
+                <div className="text-[11px] text-[var(--theme-text-muted,#94a3b8)]">BCBS, Medicare, Aetna & Cigna</div>
               </div>
             </div>
           </div>
@@ -972,16 +873,16 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 4. ASYMMETRICAL CLINICAL SERVICES BENTO GRID                              */}
       {/* ========================================================================= */}
-      <section id="services" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-white border-t border-b border-slate-200/80">
+      <section id="services" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-surface,#0b1e17)] border-t border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-emerald-800">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#84cc16)]/30 bg-[var(--theme-accent-primary,#84cc16)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#84cc16)]">
               Evidence-Based Clinical Services
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Precision therapy designed for human movement.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               We replace passive hot packs and ultrasound with active movement retraining, progressive loading,
               and advanced neuromuscular conditioning.
             </p>
@@ -990,36 +891,36 @@ export function RenewPhysicalTherapy() {
           {/* Bento Grid */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {/* Bento Card 1: Sports & Orthopedics (Span 2 cols on lg) */}
-            <div className="lg:col-span-2 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-900 to-[#0d281f] p-8 sm:p-10 text-white relative overflow-hidden shadow-xl flex flex-col justify-between">
-              <div className="pointer-events-none absolute -right-20 -bottom-20 h-72 w-72 rounded-full bg-lime-500/20 blur-3xl" />
+            <div className="lg:col-span-2 rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-gradient-to-br from-[var(--theme-bg-card,#0f2820)] to-[var(--theme-bg-base,#071711)] p-8 sm:p-10 text-[var(--theme-text-primary,#f8fafc)] relative overflow-hidden shadow-xl flex flex-col justify-between">
+              <div className="pointer-events-none absolute -right-20 -bottom-20 h-72 w-72 rounded-full bg-[var(--theme-accent-primary,#84cc16)]/15 blur-3xl" />
               <div className="space-y-4 relative z-10 max-w-xl">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-lime-400/20 border border-lime-400/30 px-3 py-1 text-xs font-extrabold text-lime-300">
-                  <Flame size={13} className="text-lime-400" />
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--theme-accent-primary,#84cc16)]/20 border border-[var(--theme-accent-primary,#84cc16)]/30 px-3 py-1 text-xs font-extrabold text-[var(--theme-accent-primary,#84cc16)]">
+                  <Flame size={13} className="text-[var(--theme-accent-primary,#84cc16)]" />
                   <span>Flagship Specialty</span>
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-black leading-tight text-white">
+                <h3 className="text-2xl sm:text-3xl font-black leading-tight text-[var(--theme-text-primary,#f8fafc)]">
                   Orthopedic & Sports Physical Therapy
                 </h3>
-                <p className="text-slate-300 text-sm leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm leading-relaxed">
                   Comprehensive diagnosis and high-load rehabilitation for complex joint sprains, tendon tears,
                   rotator cuff dysfunctions, labral repairs, and chronic joint instability. Built to return you
                   safely to high-velocity sport.
                 </p>
-                <div className="grid grid-cols-2 gap-2 text-xs text-slate-300 pt-2">
+                <div className="grid grid-cols-2 gap-2 text-xs text-[var(--theme-text-secondary,#cbd5e1)] pt-2">
                   <div className="flex items-center gap-1.5">
-                    <CheckCircle2 size={14} className="text-lime-400" />
+                    <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#84cc16)] shrink-0" />
                     <span>Rotator cuff & labrum loading</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <CheckCircle2 size={14} className="text-lime-400" />
+                    <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#84cc16)] shrink-0" />
                     <span>ACL & Meniscus repair protocols</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <CheckCircle2 size={14} className="text-lime-400" />
+                    <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#84cc16)] shrink-0" />
                     <span>Heavy Slow Resistance tendinopathy</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <CheckCircle2 size={14} className="text-lime-400" />
+                    <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#84cc16)] shrink-0" />
                     <span>Dynamometer limb symmetry checks</span>
                   </div>
                 </div>
@@ -1029,33 +930,33 @@ export function RenewPhysicalTherapy() {
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Orthopedic & Sports Physical Therapy")}
-                  className="rounded-xl bg-lime-400 px-5 py-2.5 text-xs font-extrabold text-slate-950 shadow-md hover:bg-lime-300 transition active:scale-95"
+                  className="rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] px-5 py-2.5 text-xs font-black text-[var(--theme-accent-contrast,#ffffff)] shadow-md hover:brightness-110 transition active:scale-95"
                 >
                   Schedule Orthopedic Evaluation →
                 </button>
-                <span className="text-xs text-slate-400 font-bold hidden sm:inline">60-Min Sessions</span>
+                <span className="text-xs text-[var(--theme-text-muted,#94a3b8)] font-bold hidden sm:inline">60-Min Sessions</span>
               </div>
             </div>
 
             {/* Bento Card 2: 3D Video Running Gait Analysis */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-lg flex flex-col justify-between hover:border-emerald-300 transition-all">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0f2820)] p-7 shadow-lg flex flex-col justify-between hover:border-[var(--theme-accent-primary,#84cc16)]/40 transition-all">
               <div className="space-y-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-800 font-black">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--theme-accent-secondary,#10b981)]/20 text-[var(--theme-accent-secondary,#10b981)] font-black">
                   <Activity size={22} />
                 </div>
-                <h3 className="text-xl font-black text-slate-900">
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                   3D Biomechanical Running Gait Analysis
                 </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs sm:text-sm leading-relaxed">
                   240fps multi-camera capture breaks down footstrike angle, vertical oscillation, cadence, and pelvic drop to permanently eliminate runner's knee and shinsplints.
                 </p>
               </div>
-              <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs font-bold text-emerald-700">Endurance Lab</span>
+              <div className="pt-6 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between">
+                <span className="text-xs font-bold text-[var(--theme-accent-secondary,#10b981)]">Endurance Lab</span>
                 <button
                   type="button"
                   onClick={() => handleStartBooking("3D Running Gait Analysis")}
-                  className="text-xs font-black text-slate-900 hover:text-emerald-600 flex items-center gap-1"
+                  className="text-xs font-black text-[var(--theme-text-primary,#f8fafc)] hover:text-[var(--theme-accent-primary,#84cc16)] flex items-center gap-1"
                 >
                   <span>Book Gait Scan</span>
                   <ArrowRight size={13} />
@@ -1064,24 +965,24 @@ export function RenewPhysicalTherapy() {
             </div>
 
             {/* Bento Card 3: Integrative Dry Needling */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-lg flex flex-col justify-between hover:border-emerald-300 transition-all">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0f2820)] p-7 shadow-lg flex flex-col justify-between hover:border-[var(--theme-accent-primary,#84cc16)]/40 transition-all">
               <div className="space-y-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-100 text-lime-800 font-black">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--theme-accent-primary,#84cc16)]/20 text-[var(--theme-accent-primary,#84cc16)] font-black">
                   <Zap size={22} />
                 </div>
-                <h3 className="text-xl font-black text-slate-900">
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                   Integrative Dry Needling & Myofascial Release
                 </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs sm:text-sm leading-relaxed">
                   Ultra-fine monofilament needles stimulate stubborn intramuscular trigger points, dramatically accelerating blood flow, resetting neuromuscular hypertonicity, and relieving chronic headaches.
                 </p>
               </div>
-              <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs font-bold text-lime-700">Rapid Pain Reset</span>
+              <div className="pt-6 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between">
+                <span className="text-xs font-bold text-[var(--theme-accent-primary,#84cc16)]">Rapid Pain Reset</span>
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Dry Needling & Manual Therapy")}
-                  className="text-xs font-black text-slate-900 hover:text-emerald-600 flex items-center gap-1"
+                  className="text-xs font-black text-[var(--theme-text-primary,#f8fafc)] hover:text-[var(--theme-accent-primary,#84cc16)] flex items-center gap-1"
                 >
                   <span>Explore Needling</span>
                   <ArrowRight size={13} />
@@ -1090,24 +991,24 @@ export function RenewPhysicalTherapy() {
             </div>
 
             {/* Bento Card 4: Blood Flow Restriction (BFR) */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-lg flex flex-col justify-between hover:border-emerald-300 transition-all">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0f2820)] p-7 shadow-lg flex flex-col justify-between hover:border-[var(--theme-accent-primary,#84cc16)]/40 transition-all">
               <div className="space-y-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-100 text-cyan-800 font-black">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--theme-accent-secondary,#10b981)]/20 text-[var(--theme-accent-secondary,#10b981)] font-black">
                   <HeartPulse size={22} />
                 </div>
-                <h3 className="text-xl font-black text-slate-900">
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                   Personalized Blood Flow Restriction (BFR)
                 </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs sm:text-sm leading-relaxed">
                   Delfi automated tourniquet technology safely restricts venous return during low-load exercises (20% 1RM), inducing dramatic muscle hypertrophy and bone remodeling with zero joint strain.
                 </p>
               </div>
-              <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs font-bold text-cyan-700">Hypertrophy Tech</span>
+              <div className="pt-6 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between">
+                <span className="text-xs font-bold text-[var(--theme-accent-secondary,#10b981)]">Hypertrophy Tech</span>
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Blood Flow Restriction (BFR) Session")}
-                  className="text-xs font-black text-slate-900 hover:text-emerald-600 flex items-center gap-1"
+                  className="text-xs font-black text-[var(--theme-text-primary,#f8fafc)] hover:text-[var(--theme-accent-primary,#84cc16)] flex items-center gap-1"
                 >
                   <span>View BFR Info</span>
                   <ArrowRight size={13} />
@@ -1116,24 +1017,24 @@ export function RenewPhysicalTherapy() {
             </div>
 
             {/* Bento Card 5: Post-Operative Joint Rehab */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-lg flex flex-col justify-between hover:border-emerald-300 transition-all">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0f2820)] p-7 shadow-lg flex flex-col justify-between hover:border-[var(--theme-accent-primary,#84cc16)]/40 transition-all">
               <div className="space-y-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-100 text-teal-800 font-black">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--theme-accent-primary,#84cc16)]/20 text-[var(--theme-accent-primary,#84cc16)] font-black">
                   <ShieldCheck size={22} />
                 </div>
-                <h3 className="text-xl font-black text-slate-900">
+                <h3 className="text-xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                   Post-Surgical Joint Reconstruction Rehab
                 </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs sm:text-sm leading-relaxed">
                   Direct surgeon-coordinated protocols for total hip/knee replacements, rotator cuff anchors, spinal fusions, and ankle syndesmosis repairs. Controlled swelling management and progressive range recovery.
                 </p>
               </div>
-              <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs font-bold text-teal-700">Surgeon Aligned</span>
+              <div className="pt-6 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between">
+                <span className="text-xs font-bold text-[var(--theme-accent-primary,#84cc16)]">Surgeon Aligned</span>
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Post-Op Surgical Rehabilitation")}
-                  className="text-xs font-black text-slate-900 hover:text-emerald-600 flex items-center gap-1"
+                  className="text-xs font-black text-[var(--theme-text-primary,#f8fafc)] hover:text-[var(--theme-accent-primary,#84cc16)] flex items-center gap-1"
                 >
                   <span>Post-Op Care</span>
                   <ArrowRight size={13} />
@@ -1147,20 +1048,20 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 5. INTERACTIVE BODY PAIN & INJURY TARGET NAVIGATOR                         */}
       {/* ========================================================================= */}
-      <section id="body-navigator" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[#091a14] text-white relative overflow-hidden">
+      <section id="body-navigator" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-base,#071711)] text-[var(--theme-text-primary,#f8fafc)] relative overflow-hidden">
         {/* Soft Ambient Radiance */}
-        <div className="pointer-events-none absolute -top-24 right-0 h-[500px] w-[500px] rounded-full bg-lime-500/10 blur-[150px]" />
-        <div className="pointer-events-none absolute bottom-0 left-0 h-[450px] w-[450px] rounded-full bg-emerald-600/15 blur-[140px]" />
+        <div className="pointer-events-none absolute -top-24 right-0 h-[500px] w-[500px] rounded-full bg-[var(--theme-accent-primary,#84cc16)]/10 blur-[150px]" />
+        <div className="pointer-events-none absolute bottom-0 left-0 h-[450px] w-[450px] rounded-full bg-[var(--theme-accent-secondary,#10b981)]/15 blur-[140px]" />
 
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-12">
-            <span className="rounded-full border border-lime-400/30 bg-lime-400/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-lime-300">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#84cc16)]/30 bg-[var(--theme-accent-primary,#84cc16)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#84cc16)]">
               Interactive Joint & Injury Navigator
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Where does movement feel restricted?
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               Select an anatomical zone to discover our evidence-based biomechanical protocol, expected timeline, and assigned clinical doctor.
             </p>
           </div>
@@ -1176,8 +1077,8 @@ export function RenewPhysicalTherapy() {
                   onClick={() => setSelectedZoneId(zone.id)}
                   className={`flex items-center gap-2 rounded-2xl px-4 py-2.5 text-xs sm:text-sm font-extrabold transition-all duration-200 active:scale-95 ${
                     isSelected
-                      ? "bg-gradient-to-r from-lime-400 to-emerald-400 text-slate-950 shadow-lg shadow-lime-500/20 font-black scale-105"
-                      : "bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white border border-white/10"
+                      ? "bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] text-[var(--theme-accent-contrast,#ffffff)] shadow-lg shadow-[var(--theme-accent-primary,#84cc16)]/20 font-black scale-105"
+                      : "bg-[var(--theme-bg-card,#0f2820)] text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-[var(--theme-bg-card-hover,#16382d)] hover:text-[var(--theme-text-primary,#f8fafc)] border border-[var(--theme-border,rgba(255,255,255,0.1))]"
                   }`}
                 >
                   <span className="text-base">{zone.icon}</span>
@@ -1188,32 +1089,32 @@ export function RenewPhysicalTherapy() {
           </div>
 
           {/* Dynamic Zone Display Card */}
-          <div className="rounded-3xl border border-white/15 bg-white/[0.04] p-6 sm:p-10 backdrop-blur-xl shadow-2xl">
+          <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f2820)]/85 p-6 sm:p-10 backdrop-blur-xl shadow-2xl">
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               {/* Left Column: Details (7 cols) */}
               <div className="lg:col-span-7 space-y-5 text-left">
                 <div className="space-y-1.5">
-                  <span className="text-xs font-black uppercase tracking-wider text-lime-400">
+                  <span className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-primary,#84cc16)]">
                     {currentZone.tagline}
                   </span>
-                  <h3 className="text-2xl sm:text-4xl font-black text-white">
+                  <h3 className="text-2xl sm:text-4xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                     {currentZone.title}
                   </h3>
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                   {currentZone.overview}
                 </p>
 
                 {/* Protocols list */}
-                <div className="space-y-2 rounded-2xl bg-white/5 p-4 border border-white/10">
-                  <div className="text-[11px] font-black uppercase tracking-wider text-lime-300">
+                <div className="space-y-2 rounded-2xl bg-[var(--theme-bg-surface,#0b1e17)] p-4 border border-[var(--theme-border,rgba(255,255,255,0.1))]">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#84cc16)]">
                     Target Clinical Protocol:
                   </div>
-                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-slate-200">
+                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
                     {currentZone.protocol.map((step) => (
                       <div key={step} className="flex items-start gap-2">
-                        <CheckCircle2 size={14} className="text-lime-400 shrink-0 mt-0.5" />
+                        <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#84cc16)] shrink-0 mt-0.5" />
                         <span>{step}</span>
                       </div>
                     ))}
@@ -1222,17 +1123,17 @@ export function RenewPhysicalTherapy() {
 
                 {/* Outcome & Specialist Row */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                    <div className="text-[10px] uppercase font-bold text-slate-400">Expected Timeline</div>
-                    <div className="text-xs font-black text-white mt-0.5">{currentZone.timeline}</div>
+                  <div className="rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1e17)] p-3">
+                    <div className="text-[10px] uppercase font-bold text-[var(--theme-text-muted,#94a3b8)]">Expected Timeline</div>
+                    <div className="text-xs font-black text-[var(--theme-text-primary,#f8fafc)] mt-0.5">{currentZone.timeline}</div>
                   </div>
-                  <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                    <div className="text-[10px] uppercase font-bold text-slate-400">Lead Specialist</div>
-                    <div className="text-xs font-black text-lime-300 mt-0.5 truncate">{currentZone.specialist}</div>
+                  <div className="rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1e17)] p-3">
+                    <div className="text-[10px] uppercase font-bold text-[var(--theme-text-muted,#94a3b8)]">Lead Specialist</div>
+                    <div className="text-xs font-black text-[var(--theme-accent-primary,#84cc16)] mt-0.5 truncate">{currentZone.specialist}</div>
                   </div>
-                  <div className="col-span-2 sm:col-span-1 rounded-xl border border-white/10 bg-white/5 p-3">
-                    <div className="text-[10px] uppercase font-bold text-slate-400">Clinical Stat</div>
-                    <div className="text-xs font-black text-emerald-300 mt-0.5">{currentZone.stats}</div>
+                  <div className="col-span-2 sm:col-span-1 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1e17)] p-3">
+                    <div className="text-[10px] uppercase font-bold text-[var(--theme-text-muted,#94a3b8)]">Clinical Stat</div>
+                    <div className="text-xs font-black text-[var(--theme-accent-secondary,#10b981)] mt-0.5">{currentZone.stats}</div>
                   </div>
                 </div>
 
@@ -1241,14 +1142,14 @@ export function RenewPhysicalTherapy() {
                   <button
                     type="button"
                     onClick={() => handleStartBooking(currentZone.title, currentZone.specialist)}
-                    className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-lime-400 to-emerald-400 px-5 py-3 text-xs sm:text-sm font-black text-slate-950 shadow-md hover:brightness-110 active:scale-95 transition-all"
+                    className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] px-5 py-3 text-xs sm:text-sm font-black text-[var(--theme-accent-contrast,#ffffff)] shadow-md hover:brightness-110 active:scale-95 transition-all"
                   >
                     <Calendar size={15} strokeWidth={2.5} />
                     <span>Book Evaluation for {currentZone.label}</span>
                   </button>
                   <a
                     href="#recovery-milestones"
-                    className="text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1"
+                    className="text-xs font-bold text-[var(--theme-text-secondary,#cbd5e1)] hover:text-[var(--theme-text-primary,#f8fafc)] flex items-center gap-1"
                   >
                     <span>View 4-Phase Milestones</span>
                     <ArrowRight size={13} />
@@ -1258,17 +1159,17 @@ export function RenewPhysicalTherapy() {
 
               {/* Right Column: High-Res Image (5 cols) */}
               <div className="lg:col-span-5">
-                <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-black/40 p-2.5 shadow-2xl">
+                <div className="relative overflow-hidden rounded-2xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f2820)] p-2.5 shadow-2xl">
                   <img
                     src={imageUrl(currentZone.image)}
                     alt={currentZone.title}
                     className="h-[300px] sm:h-[380px] w-full rounded-xl object-cover transition-all duration-500 hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#091a14]/90 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/20 bg-[#091a14]/85 p-3 text-white backdrop-blur-md">
-                    <div className="text-[10px] font-black uppercase tracking-wider text-lime-400">Target Care Plan</div>
-                    <div className="text-xs font-bold text-white mt-0.5 truncate">{currentZone.title}</div>
-                    <div className="text-[11px] text-slate-300 mt-0.5">{currentZone.timeline}</div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-card,#091a14)]/90 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.2))] bg-[var(--theme-bg-card,#091a14)]/90 p-3 text-[var(--theme-text-primary,#f8fafc)] backdrop-blur-md">
+                    <div className="text-[10px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#84cc16)]">Target Care Plan</div>
+                    <div className="text-xs font-bold text-[var(--theme-text-primary,#f8fafc)] mt-0.5 truncate">{currentZone.title}</div>
+                    <div className="text-[11px] text-[var(--theme-text-secondary,#cbd5e1)] mt-0.5">{currentZone.timeline}</div>
                   </div>
                 </div>
               </div>
@@ -1280,62 +1181,62 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 6. KINETIC MODALITY & MOTION TECH LAB                                     */}
       {/* ========================================================================= */}
-      <section id="tech-modalities" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-white border-b border-slate-200">
+      <section id="tech-modalities" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-surface,#0b1e17)] border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-emerald-800">
+            <span className="rounded-full border border-[var(--theme-accent-secondary,#10b981)]/30 bg-[var(--theme-accent-secondary,#10b981)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-secondary,#10b981)]">
               State-of-the-Art Recovery Modalities
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Technology that accelerates biological healing.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               We invest in elite sports performance modalities utilized by Olympic centers, European soccer clubs, and professional sports teams.
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 space-y-4 hover:border-emerald-400 transition-all">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-600 text-white font-black shadow-md">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0f2820)] p-6 space-y-4 hover:border-[var(--theme-accent-primary,#84cc16)]/40 transition-all">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--theme-accent-secondary,#10b981)]/20 text-[var(--theme-accent-secondary,#10b981)] font-black shadow-md">
                 <Activity size={22} />
               </div>
-              <h3 className="text-xl font-black text-slate-900">
+              <h3 className="text-xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                 AlterG Anti-Gravity Treadmill
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs sm:text-sm leading-relaxed">
                 NASA-patented differential air pressure gently unweights your body by up to 80% in 1% increments. Walk and jog weeks earlier after fractures or ACL reconstructions without impact pain.
               </p>
-              <div className="pt-2 text-xs font-bold text-emerald-700 flex items-center gap-1">
+              <div className="pt-2 text-xs font-bold text-[var(--theme-accent-secondary,#10b981)] flex items-center gap-1">
                 <span>Precision Unweighting to 20%</span>
               </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 space-y-4 hover:border-emerald-400 transition-all">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-lime-500 text-slate-950 font-black shadow-md">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0f2820)] p-6 space-y-4 hover:border-[var(--theme-accent-primary,#84cc16)]/40 transition-all">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--theme-accent-primary,#84cc16)]/20 text-[var(--theme-accent-primary,#84cc16)] font-black shadow-md">
                 <Flame size={22} />
               </div>
-              <h3 className="text-xl font-black text-slate-900">
+              <h3 className="text-xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                 Delfi Personalized BFR System
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs sm:text-sm leading-relaxed">
                 FDA-cleared personalized tourniquet cuffs calculate your exact limb occlusion pressure (LOP), allowing rapid muscle building with featherlight 5lb dumbbells while fully protecting healing joints.
               </p>
-              <div className="pt-2 text-xs font-bold text-lime-700 flex items-center gap-1">
+              <div className="pt-2 text-xs font-bold text-[var(--theme-accent-primary,#84cc16)] flex items-center gap-1">
                 <span>Automated Limb Occlusion Pressure</span>
               </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 space-y-4 hover:border-emerald-400 transition-all">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-600 text-white font-black shadow-md">
+            <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0f2820)] p-6 space-y-4 hover:border-[var(--theme-accent-primary,#84cc16)]/40 transition-all">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--theme-accent-primary,#84cc16)]/20 text-[var(--theme-accent-primary,#84cc16)] font-black shadow-md">
                 <TrendingUp size={22} />
               </div>
-              <h3 className="text-xl font-black text-slate-900">
+              <h3 className="text-xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                 Dual Force Plate Symmetrical Loading
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-xs sm:text-sm leading-relaxed">
                 Objective 1000Hz dual force plates measure ground reaction forces during vertical jumping, landing, and squats. Completely removes human guessing before clearing an athlete to return to competition.
               </p>
-              <div className="pt-2 text-xs font-bold text-teal-700 flex items-center gap-1">
+              <div className="pt-2 text-xs font-bold text-[var(--theme-accent-primary,#84cc16)] flex items-center gap-1">
                 <span>1000Hz Force Symmetry Data</span>
               </div>
             </div>
@@ -1346,16 +1247,16 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 7. INTERACTIVE 4-PHASE RECOVERY MILESTONES TIMELINE                        */}
       {/* ========================================================================= */}
-      <section id="recovery-milestones" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[#f3f7f5]">
+      <section id="recovery-milestones" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-base,#071711)] text-[var(--theme-text-primary,#f8fafc)]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-emerald-300 bg-emerald-100 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-emerald-900">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#84cc16)]/30 bg-[var(--theme-accent-primary,#84cc16)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#84cc16)]">
               Objective Discharge Roadmap
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               The 4-Phase Return-to-Play System.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               We never guess your progress based on how many weeks have passed. You advance to the next phase only when you hit objective clinical strength and mobility criteria.
             </p>
           </div>
@@ -1371,19 +1272,19 @@ export function RenewPhysicalTherapy() {
                   onClick={() => setActivePhaseIndex(idx)}
                   className={`p-4 rounded-2xl border text-left transition-all ${
                     isActive
-                      ? "bg-[#091a14] text-white border-lime-400 shadow-lg scale-102 ring-2 ring-lime-400/30"
-                      : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
+                      ? "bg-[var(--theme-bg-card,#0f2820)] text-[var(--theme-text-primary,#f8fafc)] border-[var(--theme-accent-primary,#84cc16)] shadow-lg scale-102 ring-2 ring-[var(--theme-accent-primary,#84cc16)]/30"
+                      : "bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-secondary,#cbd5e1)] border-[var(--theme-border,rgba(255,255,255,0.1))] hover:border-[var(--theme-accent-primary,#84cc16)]/30"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className={`text-[10px] font-black uppercase tracking-wider ${isActive ? "text-lime-400" : "text-slate-400"}`}>
+                    <span className={`text-[10px] font-black uppercase tracking-wider ${isActive ? "text-[var(--theme-accent-primary,#84cc16)]" : "text-[var(--theme-text-muted,#94a3b8)]"}`}>
                       {phase.phase}
                     </span>
-                    <span className={`text-[10px] font-bold ${isActive ? "text-emerald-300" : "text-slate-500"}`}>
+                    <span className={`text-[10px] font-bold ${isActive ? "text-[var(--theme-accent-secondary,#10b981)]" : "text-[var(--theme-text-muted,#94a3b8)]"}`}>
                       {phase.weeks}
                     </span>
                   </div>
-                  <h4 className={`text-xs sm:text-sm font-black mt-1 line-clamp-2 ${isActive ? "text-white" : "text-slate-900"}`}>
+                  <h4 className={`text-xs sm:text-sm font-black mt-1 line-clamp-2 ${isActive ? "text-[var(--theme-text-primary,#f8fafc)]" : "text-[var(--theme-text-secondary,#cbd5e1)]"}`}>
                     {phase.name}
                   </h4>
                 </button>
@@ -1392,46 +1293,46 @@ export function RenewPhysicalTherapy() {
           </div>
 
           {/* Active Phase Deep Dive Card */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xl">
+          <div className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f2820)] p-6 sm:p-10 shadow-xl">
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-7 space-y-5">
                 <div className="flex items-center gap-2">
-                  <span className="rounded-full bg-emerald-100 text-emerald-800 px-3 py-1 text-xs font-black uppercase">
+                  <span className="rounded-full bg-[var(--theme-accent-secondary,#10b981)]/20 text-[var(--theme-accent-secondary,#10b981)] border border-[var(--theme-accent-secondary,#10b981)]/30 px-3 py-1 text-xs font-black uppercase">
                     {currentPhase.phase} · {currentPhase.weeks}
                   </span>
-                  <span className="text-xs font-bold text-slate-500 italic">
+                  <span className="text-xs font-bold text-[var(--theme-text-muted,#94a3b8)] italic">
                     "{currentPhase.theme}"
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
+                <h3 className="text-2xl sm:text-3xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                   {currentPhase.name}
                 </h3>
 
-                <p className="text-slate-600 text-sm leading-relaxed">
+                <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm leading-relaxed">
                   {currentPhase.goal}
                 </p>
 
                 {/* Criteria Box */}
-                <div className="rounded-2xl bg-emerald-50 border border-emerald-200 p-4 space-y-1">
-                  <div className="text-[11px] font-black uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
-                    <CheckCircle2 size={14} className="text-emerald-600" />
+                <div className="rounded-2xl bg-[var(--theme-bg-surface,#0b1e17)] border border-[var(--theme-border,rgba(255,255,255,0.1))] p-4 space-y-1">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#84cc16)] flex items-center gap-1.5">
+                    <CheckCircle2 size={14} className="text-[var(--theme-accent-primary,#84cc16)]" />
                     Objective Advancement Criteria:
                   </div>
-                  <p className="text-xs font-bold text-emerald-800">
+                  <p className="text-xs font-bold text-[var(--theme-text-secondary,#cbd5e1)]">
                     {currentPhase.criteria}
                   </p>
                 </div>
 
                 {/* Treatment Interventions */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-black uppercase tracking-wider text-slate-700">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)]">
                     Typical Session Interventions:
                   </div>
-                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-slate-600">
+                  <div className="grid gap-2 sm:grid-cols-2 text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
                     {currentPhase.treatments.map((t) => (
                       <div key={t} className="flex items-center gap-1.5">
-                        <CheckCircle2 size={13} className="text-lime-600 shrink-0" />
+                        <CheckCircle2 size={13} className="text-[var(--theme-accent-primary,#84cc16)] shrink-0" />
                         <span className="font-semibold">{t}</span>
                       </div>
                     ))}
@@ -1439,24 +1340,24 @@ export function RenewPhysicalTherapy() {
                 </div>
               </div>
 
-              <div className="lg:col-span-5 rounded-2xl bg-slate-900 text-white p-6 space-y-4">
-                <div className="text-xs font-black uppercase tracking-wider text-lime-400">
+              <div className="lg:col-span-5 rounded-2xl bg-[var(--theme-bg-surface,#0b1e17)] border border-[var(--theme-border,rgba(255,255,255,0.1))] text-[var(--theme-text-primary,#f8fafc)] p-6 space-y-4">
+                <div className="text-xs font-black uppercase tracking-wider text-[var(--theme-accent-primary,#84cc16)]">
                   Patient Progress Signals
                 </div>
                 <div className="space-y-3">
                   <div>
                     <div className="flex justify-between text-xs font-bold mb-1">
                       <span>Resting Pain Reduction</span>
-                      <span className="text-lime-400">
+                      <span className="text-[var(--theme-accent-primary,#84cc16)]">
                         {activePhaseIndex === 0 && "65% Achieved"}
                         {activePhaseIndex === 1 && "85% Achieved"}
                         {activePhaseIndex === 2 && "95% Achieved"}
                         {activePhaseIndex === 3 && "100% Pain-Free"}
                       </span>
                     </div>
-                    <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-2 rounded-full bg-[var(--theme-border,rgba(255,255,255,0.1))] overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-emerald-500 to-lime-400 rounded-full transition-all duration-500"
+                        className="h-full bg-gradient-to-r from-[var(--theme-accent-secondary,#10b981)] to-[var(--theme-accent-primary,#84cc16)] rounded-full transition-all duration-500"
                         style={{
                           width:
                             activePhaseIndex === 0 ? "65%" : activePhaseIndex === 1 ? "85%" : activePhaseIndex === 2 ? "95%" : "100%",
@@ -1468,16 +1369,16 @@ export function RenewPhysicalTherapy() {
                   <div>
                     <div className="flex justify-between text-xs font-bold mb-1">
                       <span>Limb Symmetry Index (LSI)</span>
-                      <span className="text-lime-400">
+                      <span className="text-[var(--theme-accent-primary,#84cc16)]">
                         {activePhaseIndex === 0 && "60% Symmetrical"}
                         {activePhaseIndex === 1 && "75% Symmetrical"}
                         {activePhaseIndex === 2 && "85% Symmetrical"}
                         {activePhaseIndex === 3 && "98% Symmetrical"}
                       </span>
                     </div>
-                    <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-2 rounded-full bg-[var(--theme-border,rgba(255,255,255,0.1))] overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-emerald-500 to-lime-400 rounded-full transition-all duration-500"
+                        className="h-full bg-gradient-to-r from-[var(--theme-accent-secondary,#10b981)] to-[var(--theme-accent-primary,#84cc16)] rounded-full transition-all duration-500"
                         style={{
                           width:
                             activePhaseIndex === 0 ? "60%" : activePhaseIndex === 1 ? "75%" : activePhaseIndex === 2 ? "85%" : "98%",
@@ -1491,7 +1392,7 @@ export function RenewPhysicalTherapy() {
                   <button
                     type="button"
                     onClick={() => handleStartBooking(`Milestone Assessment: ${currentPhase.name}`)}
-                    className="w-full rounded-xl bg-gradient-to-r from-lime-400 to-emerald-400 py-3 text-xs font-black text-slate-950 shadow-md hover:brightness-110 transition active:scale-95"
+                    className="w-full rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] py-3 text-xs font-black text-[var(--theme-accent-contrast,#ffffff)] shadow-md hover:brightness-110 transition active:scale-95"
                   >
                     Schedule Assessment for {currentPhase.phase}
                   </button>
@@ -1505,16 +1406,16 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 8. BOARD-CERTIFIED DOCTORS OF PHYSICAL THERAPY                            */}
       {/* ========================================================================= */}
-      <section id="therapists" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-white border-t border-b border-slate-200">
+      <section id="therapists" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-surface,#0b1e17)] border-t border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-emerald-800">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#84cc16)]/30 bg-[var(--theme-accent-primary,#84cc16)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#84cc16)]">
               Elite Clinical Faculty
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Led by Doctors of Physical Therapy.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               Every appointment is conducted one-on-one by licensed, board-certified physical therapy clinicians.
               We are scholars, athletes, and dedicated movement specialists.
             </p>
@@ -1524,7 +1425,7 @@ export function RenewPhysicalTherapy() {
             {careTeam.map((member) => (
               <div
                 key={member.name}
-                className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-7 shadow-lg flex flex-col justify-between hover:border-emerald-300 hover:shadow-xl transition-all"
+                className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0f2820)] p-6 sm:p-7 shadow-lg flex flex-col justify-between hover:border-[var(--theme-accent-primary,#84cc16)]/40 hover:shadow-xl transition-all"
               >
                 <div className="space-y-4">
                   <div className="relative overflow-hidden rounded-2xl aspect-[4/3.5]">
@@ -1533,29 +1434,29 @@ export function RenewPhysicalTherapy() {
                       alt={member.name}
                       className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                     />
-                    <div className="absolute bottom-2 left-2 rounded-lg bg-[#081711]/85 px-2.5 py-1 text-[10px] font-extrabold text-lime-400 backdrop-blur-md">
+                    <div className="absolute bottom-2 left-2 rounded-lg bg-[var(--theme-bg-base,#081711)]/85 px-2.5 py-1 text-[10px] font-extrabold text-[var(--theme-accent-primary,#84cc16)] backdrop-blur-md border border-[var(--theme-border,rgba(255,255,255,0.1))]">
                       {member.credentials.split("·")[0]}
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-black text-slate-900">
+                    <h3 className="text-lg font-black text-[var(--theme-text-primary,#f8fafc)]">
                       {member.name}
                     </h3>
-                    <p className="text-xs font-bold text-emerald-700">
+                    <p className="text-xs font-bold text-[var(--theme-accent-primary,#84cc16)]">
                       {member.title}
                     </p>
                   </div>
 
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
                     {member.bio}
                   </p>
 
                   <div className="space-y-1.5 pt-1">
-                    <div className="text-[10px] font-black uppercase tracking-wider text-slate-400">Clinical Focus:</div>
+                    <div className="text-[10px] font-black uppercase tracking-wider text-[var(--theme-text-muted,#94a3b8)]">Clinical Focus:</div>
                     <div className="flex flex-wrap gap-1.5">
                       {member.specialties.map((spec) => (
-                        <span key={spec} className="rounded-lg bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-700">
+                        <span key={spec} className="rounded-lg bg-[var(--theme-bg-surface,#0b1e17)] border border-[var(--theme-border,rgba(255,255,255,0.1))] px-2 py-0.5 text-[10px] font-bold text-[var(--theme-text-secondary,#cbd5e1)]">
                           {spec}
                         </span>
                       ))}
@@ -1563,11 +1464,11 @@ export function RenewPhysicalTherapy() {
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-slate-100 mt-6">
+                <div className="pt-6 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] mt-6">
                   <button
                     type="button"
                     onClick={() => handleStartBooking("1-on-1 Evaluation", member.name)}
-                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-slate-900 py-2.5 text-xs font-black text-white hover:bg-emerald-700 transition active:scale-95"
+                    className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-[var(--theme-bg-base,#071711)] border border-[var(--theme-border,rgba(255,255,255,0.15))] py-2.5 text-xs font-black text-[var(--theme-text-primary,#f8fafc)] hover:bg-[var(--theme-accent-primary,#84cc16)] hover:text-[var(--theme-accent-contrast,#ffffff)] transition active:scale-95"
                   >
                     <span>Request Appointment with {member.name.split(" ")[1]}</span>
                     <ArrowRight size={13} />
@@ -1582,34 +1483,34 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 9. DIRECT ACCESS & IN-NETWORK INSURANCE COVERAGE                          */}
       {/* ========================================================================= */}
-      <section id="visit-info" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[#f8faf9]">
+      <section id="visit-info" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-base,#071711)] text-[var(--theme-text-primary,#f8fafc)]">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
             {/* Left: Direct Access Explanation (6 cols) */}
             <div className="lg:col-span-6 space-y-6">
-              <span className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-emerald-800">
+              <span className="rounded-full border border-[var(--theme-accent-secondary,#10b981)]/30 bg-[var(--theme-accent-secondary,#10b981)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-secondary,#10b981)]">
                 Maryland Direct Access Law
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)] leading-tight">
                 No doctor referral needed. Start recovering today.
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
                 In Maryland, you have the legal right to be directly evaluated and treated by a licensed Doctor of Physical Therapy
                 without wasting 2 to 4 weeks waiting for an MD appointment or prescription.
               </p>
 
               <div className="space-y-3">
-                <div className="flex items-start gap-3 rounded-2xl bg-white p-4 border border-slate-200">
-                  <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
-                  <div className="text-xs text-slate-700">
-                    <strong className="block text-slate-900 font-black">Faster Resolution & Lower Total Cost:</strong>
+                <div className="flex items-start gap-3 rounded-2xl bg-[var(--theme-bg-card,#0f2820)] p-4 border border-[var(--theme-border,rgba(255,255,255,0.1))]">
+                  <CheckCircle2 size={18} className="text-[var(--theme-accent-secondary,#10b981)] shrink-0 mt-0.5" />
+                  <div className="text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
+                    <strong className="block text-[var(--theme-text-primary,#f8fafc)] font-black">Faster Resolution & Lower Total Cost:</strong>
                     Patients who start PT within 14 days of an acute injury require 68% fewer opioids and 80% fewer MRIs.
                   </div>
                 </div>
-                <div className="flex items-start gap-3 rounded-2xl bg-white p-4 border border-slate-200">
-                  <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
-                  <div className="text-xs text-slate-700">
-                    <strong className="block text-slate-900 font-black">Direct Insurance Claim Billing:</strong>
+                <div className="flex items-start gap-3 rounded-2xl bg-[var(--theme-bg-card,#0f2820)] p-4 border border-[var(--theme-border,rgba(255,255,255,0.1))]">
+                  <CheckCircle2 size={18} className="text-[var(--theme-accent-secondary,#10b981)] shrink-0 mt-0.5" />
+                  <div className="text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
+                    <strong className="block text-[var(--theme-text-primary,#f8fafc)] font-black">Direct Insurance Claim Billing:</strong>
                     We verify your specific insurance benefits in real-time and file all claims directly on your behalf.
                   </div>
                 </div>
@@ -1619,7 +1520,7 @@ export function RenewPhysicalTherapy() {
                 <button
                   type="button"
                   onClick={() => handleStartBooking("Direct Access Initial Evaluation")}
-                  className="rounded-2xl bg-slate-900 px-6 py-3.5 text-xs sm:text-sm font-black text-white hover:bg-emerald-700 transition active:scale-95 shadow-md"
+                  className="rounded-2xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] px-6 py-3.5 text-xs sm:text-sm font-black text-[var(--theme-accent-contrast,#ffffff)] hover:brightness-110 transition active:scale-95 shadow-md"
                 >
                   Book Direct Access Evaluation Now →
                 </button>
@@ -1627,12 +1528,12 @@ export function RenewPhysicalTherapy() {
             </div>
 
             {/* Right: In-Network Plans List (6 cols) */}
-            <div className="lg:col-span-6 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xl space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 className="text-base font-black text-slate-900">
+            <div className="lg:col-span-6 rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f2820)] p-6 sm:p-8 shadow-xl space-y-4">
+              <div className="flex items-center justify-between border-b border-[var(--theme-border,rgba(255,255,255,0.1))] pb-3">
+                <h3 className="text-base font-black text-[var(--theme-text-primary,#f8fafc)]">
                   Accepted In-Network Insurance Plans
                 </h3>
-                <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">
+                <span className="text-xs font-bold text-[var(--theme-accent-secondary,#10b981)] bg-[var(--theme-accent-secondary,#10b981)]/10 border border-[var(--theme-accent-secondary,#10b981)]/20 px-2.5 py-1 rounded-full">
                   100% Transparent Copays
                 </span>
               </div>
@@ -1641,20 +1542,20 @@ export function RenewPhysicalTherapy() {
                 {insurancePlans.map((plan) => (
                   <div
                     key={plan.name}
-                    className="flex items-center justify-between p-3 rounded-xl border border-slate-100 bg-slate-50/70 hover:bg-emerald-50/50 transition-colors"
+                    className="flex items-center justify-between p-3 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.08))] bg-[var(--theme-bg-surface,#0b1e17)] hover:bg-[var(--theme-accent-primary,#84cc16)]/10 transition-colors"
                   >
                     <div>
-                      <div className="text-xs font-bold text-slate-900">{plan.name}</div>
-                      <div className="text-[11px] text-slate-500">{plan.note}</div>
+                      <div className="text-xs font-bold text-[var(--theme-text-primary,#f8fafc)]">{plan.name}</div>
+                      <div className="text-[11px] text-[var(--theme-text-muted,#94a3b8)]">{plan.note}</div>
                     </div>
-                    <span className="shrink-0 rounded-lg bg-white border border-slate-200 px-2.5 py-1 text-[10px] font-black text-slate-800 shadow-xs">
+                    <span className="shrink-0 rounded-lg bg-[var(--theme-bg-card,#0f2820)] border border-[var(--theme-border,rgba(255,255,255,0.15))] px-2.5 py-1 text-[10px] font-black text-[var(--theme-accent-primary,#84cc16)] shadow-xs">
                       {plan.tier}
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
+              <div className="pt-3 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] text-center text-xs text-[var(--theme-text-muted,#94a3b8)]">
                 Don't see your insurance listed? We also offer clear, transparent out-of-network reimbursement receipts.
               </div>
             </div>
@@ -1665,16 +1566,16 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 10. PATIENT RECOVERY STORIES & TESTIMONIALS                                */}
       {/* ========================================================================= */}
-      <section id="reviews" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[#091a14] text-white">
+      <section id="reviews" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-surface,#091a14)] text-[var(--theme-text-primary,#f8fafc)]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-16">
-            <span className="rounded-full border border-lime-400/30 bg-lime-400/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-lime-300">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#84cc16)]/30 bg-[var(--theme-accent-primary,#84cc16)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#84cc16)]">
               Verified Patient Transformations
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Real athletes. Real workers. Fearless movement.
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               Read honest stories from patients who overcame chronic pain and severe post-surgical setbacks at Renew.
             </p>
           </div>
@@ -1683,33 +1584,33 @@ export function RenewPhysicalTherapy() {
             {recoveryStories.map((review) => (
               <div
                 key={review.name}
-                className="rounded-3xl border border-white/15 bg-white/[0.04] p-7 backdrop-blur-md shadow-xl flex flex-col justify-between space-y-6"
+                className="rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-card,#0f2820)] p-7 backdrop-blur-md shadow-xl flex flex-col justify-between space-y-6"
               >
                 <div className="space-y-4">
-                  <div className="flex items-center gap-1 text-lime-400">
+                  <div className="flex items-center gap-1 text-[var(--theme-accent-primary,#84cc16)]">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} size={15} className="fill-lime-400 text-lime-400" />
+                      <Star key={i} size={15} className="fill-[var(--theme-accent-primary,#84cc16)] text-[var(--theme-accent-primary,#84cc16)]" />
                     ))}
                   </div>
                   <div className="space-y-1">
-                    <span className="text-[10px] uppercase font-bold text-lime-400 tracking-wider">
+                    <span className="text-[10px] uppercase font-bold text-[var(--theme-accent-primary,#84cc16)] tracking-wider">
                       {review.injury}
                     </span>
-                    <h4 className="text-sm font-black text-white">
+                    <h4 className="text-sm font-black text-[var(--theme-text-primary,#f8fafc)]">
                       {review.result}
                     </h4>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed italic">
                     "{review.quote}"
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+                <div className="pt-4 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] flex items-center justify-between text-xs">
                   <div>
-                    <div className="font-black text-white">{review.name}</div>
-                    <div className="text-[11px] text-slate-400">{review.role}</div>
+                    <div className="font-black text-[var(--theme-text-primary,#f8fafc)]">{review.name}</div>
+                    <div className="text-[11px] text-[var(--theme-text-muted,#94a3b8)]">{review.role}</div>
                   </div>
-                  <div className="text-[10px] text-right text-emerald-400 font-semibold">
+                  <div className="text-[10px] text-right text-[var(--theme-accent-secondary,#10b981)] font-semibold">
                     {review.therapist}
                   </div>
                 </div>
@@ -1722,24 +1623,24 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 11. INTERACTIVE MOVEMENT TRIAGE & SELF-SCREENER                           */}
       {/* ========================================================================= */}
-      <section id="screener" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-white border-t border-slate-200">
+      <section id="screener" className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-28 bg-[var(--theme-bg-base,#071711)] border-t border-[var(--theme-border,rgba(255,255,255,0.1))] text-[var(--theme-text-primary,#f8fafc)]">
         <Container>
           <div className="mx-auto max-w-3xl text-center space-y-4 mb-14">
-            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-emerald-800">
+            <span className="rounded-full border border-[var(--theme-accent-primary,#84cc16)]/30 bg-[var(--theme-accent-primary,#84cc16)]/10 px-4 py-1.5 text-xs font-black tracking-widest uppercase text-[var(--theme-accent-primary,#84cc16)]">
               Free Online Symptom Screener
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
               Not sure where to start? Check in 30 seconds.
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-[var(--theme-text-secondary,#cbd5e1)] text-sm sm:text-base leading-relaxed">
               Select your primary symptom zone and recovery goals to see our recommended clinical pathway.
             </p>
           </div>
 
-          <div className="mx-auto max-w-2xl rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-10 shadow-lg space-y-6">
+          <div className="mx-auto max-w-2xl rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f2820)] p-6 sm:p-10 shadow-lg space-y-6 text-[var(--theme-text-primary,#f8fafc)]">
             {/* Question 1 */}
             <div>
-              <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-2">
+              <label className="block text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)] mb-2">
                 1. Where is your primary discomfort or movement limit?
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -1753,8 +1654,8 @@ export function RenewPhysicalTherapy() {
                     }}
                     className={`p-2.5 rounded-xl text-xs font-bold border transition-all text-center ${
                       screenerZone === opt
-                        ? "border-emerald-600 bg-emerald-600 text-white shadow-sm"
-                        : "border-slate-200 bg-white text-slate-700 hover:bg-slate-100"
+                        ? "border-[var(--theme-accent-primary,#84cc16)] bg-[var(--theme-accent-primary,#84cc16)] text-[var(--theme-accent-contrast,#ffffff)] shadow-sm font-black"
+                        : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-[var(--theme-accent-primary,#84cc16)]/10 hover:text-[var(--theme-text-primary,#f8fafc)]"
                     }`}
                   >
                     {opt}
@@ -1765,7 +1666,7 @@ export function RenewPhysicalTherapy() {
 
             {/* Question 2 */}
             <div>
-              <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-2">
+              <label className="block text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)] mb-2">
                 2. How long have you experienced these symptoms?
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -1779,8 +1680,8 @@ export function RenewPhysicalTherapy() {
                     }}
                     className={`p-2.5 rounded-xl text-xs font-bold border transition-all text-center ${
                       screenerDuration === opt
-                        ? "border-emerald-600 bg-emerald-600 text-white shadow-sm"
-                        : "border-slate-200 bg-white text-slate-700 hover:bg-slate-100"
+                        ? "border-[var(--theme-accent-primary,#84cc16)] bg-[var(--theme-accent-primary,#84cc16)] text-[var(--theme-accent-contrast,#ffffff)] shadow-sm font-black"
+                        : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-[var(--theme-accent-primary,#84cc16)]/10 hover:text-[var(--theme-text-primary,#f8fafc)]"
                     }`}
                   >
                     {opt}
@@ -1791,7 +1692,7 @@ export function RenewPhysicalTherapy() {
 
             {/* Question 3 */}
             <div>
-              <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-2">
+              <label className="block text-xs font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8fafc)] mb-2">
                 3. What is your #1 target outcome?
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -1805,8 +1706,8 @@ export function RenewPhysicalTherapy() {
                     }}
                     className={`p-2.5 rounded-xl text-xs font-bold border transition-all text-center ${
                       screenerGoal === opt
-                        ? "border-emerald-600 bg-emerald-600 text-white shadow-sm"
-                        : "border-slate-200 bg-white text-slate-700 hover:bg-slate-100"
+                        ? "border-[var(--theme-accent-primary,#84cc16)] bg-[var(--theme-accent-primary,#84cc16)] text-[var(--theme-accent-contrast,#ffffff)] shadow-sm font-black"
+                        : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-secondary,#cbd5e1)] hover:bg-[var(--theme-accent-primary,#84cc16)]/10 hover:text-[var(--theme-text-primary,#f8fafc)]"
                     }`}
                   >
                     {opt}
@@ -1817,27 +1718,27 @@ export function RenewPhysicalTherapy() {
 
             {/* Screener Result Card */}
             {screenerResultVisible && (
-              <div className="rounded-2xl bg-emerald-950 text-white p-5 space-y-3 animate-in fade-in duration-300">
+              <div className="rounded-2xl bg-[var(--theme-bg-surface,#0b1e17)] border border-[var(--theme-accent-primary,#84cc16)]/40 text-[var(--theme-text-primary,#f8fafc)] p-5 space-y-3 animate-in fade-in duration-300">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-lime-400">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-[var(--theme-accent-primary,#84cc16)]">
                     Recommended Triage Match
                   </span>
-                  <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">
+                  <span className="text-[10px] bg-[var(--theme-accent-primary,#84cc16)]/15 border border-[var(--theme-accent-primary,#84cc16)]/30 px-2 py-0.5 rounded text-[var(--theme-accent-primary,#84cc16)] font-bold">
                     Direct Access Approved
                   </span>
                 </div>
-                <h4 className="text-base font-black text-white">
+                <h4 className="text-base font-black text-[var(--theme-text-primary,#f8fafc)]">
                   60-Minute Comprehensive {screenerZone} Motion Evaluation
                 </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Based on your {screenerDuration.toLowerCase()} symptoms and goal to reach <strong>"{screenerGoal}"</strong>,
+                <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed">
+                  Based on your {screenerDuration.toLowerCase()} symptoms and goal to reach <strong className="text-[var(--theme-text-primary,#f8fafc)]">"{screenerGoal}"</strong>,
                   we recommend starting with an objective joint mobility and dynamometer strength assessment.
                 </p>
                 <div className="pt-2">
                   <button
                     type="button"
                     onClick={() => handleStartBooking(`Screener Match: ${screenerZone} Evaluation`)}
-                    className="w-full rounded-xl bg-gradient-to-r from-lime-400 to-emerald-400 py-3 text-xs font-black text-slate-950 shadow-md hover:brightness-110 active:scale-95 transition-all"
+                    className="w-full rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] py-3 text-xs font-black text-[var(--theme-accent-contrast,#ffffff)] shadow-md hover:brightness-110 active:scale-95 transition-all"
                   >
                     Claim Recommended Slot for {screenerZone} →
                   </button>
@@ -1851,72 +1752,70 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 12. HIGH-PERFORMANCE CLINICAL FOOTER                                      */}
       {/* ========================================================================= */}
-      <footer className="bg-[#061510] text-slate-300 py-16 pb-28 sm:pb-16 text-xs border-t border-emerald-950">
+      <footer id="contact" className="scroll-mt-20 sm:scroll-mt-24 bg-[var(--theme-bg-base,#071711)] text-[var(--theme-text-primary,#f8fafc)] pt-16 pb-24 sm:pb-16 border-t border-[var(--theme-border,rgba(255,255,255,0.1))]">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-white font-black text-base">
-                <Activity size={20} className="text-lime-400 stroke-[2.5]" />
-                <span>RENEW PHYSICAL THERAPY</span>
+          <div className="grid gap-10 lg:grid-cols-12 pb-12 border-b border-[var(--theme-border,rgba(255,255,255,0.1))]">
+            {/* Col 1: Brand & Bio (4 Cols) */}
+            <div className="lg:col-span-4 space-y-4 text-left">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] text-[var(--theme-accent-contrast,#ffffff)] font-black shadow-md">
+                  <Activity size={18} />
+                </div>
+                <div className="text-base font-black tracking-tight text-[var(--theme-text-primary,#f8fafc)]">
+                  RENEW <span className="text-[var(--theme-accent-primary,#84cc16)] font-light">PHYSICAL THERAPY</span>
+                </div>
               </div>
-              <p className="text-slate-400 leading-relaxed">
+              <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] leading-relaxed max-w-sm">
                 Biomechanical sports physical therapy, post-op joint rehabilitation, and 3D motion capture. Exclusively 1-on-1 sessions with licensed Doctors of Physical Therapy.
               </p>
-              <div className="text-lime-300 font-bold">
-                (555) 017-4826 · care@renewphysicaltherapy.example
+              <div className="rounded-xl border border-[var(--theme-accent-primary,#84cc16)]/30 bg-[var(--theme-accent-primary,#84cc16)]/15 p-3 text-[11px] text-[var(--theme-text-secondary,#cbd5e1)]">
+                <strong className="block text-[var(--theme-accent-primary,#84cc16)] font-bold mb-0.5">Direct Access Notice:</strong>
+                Maryland state law permits evaluation and treatment directly by licensed Doctors of PT with zero physician prescription or referral required.
               </div>
             </div>
 
-            <div className="space-y-3">
-              <p className="font-bold uppercase tracking-wider text-white">Motion Studio Location</p>
-              <p className="leading-relaxed">
-                Renew Physical Therapy & Motion Lab<br />
-                620 Renewal Way, Suite 140<br />
-                Athletic Performance Plaza, MD 20852
+            {/* Col 2: Motion Studio Location & Hours (4 Cols) */}
+            <div className="lg:col-span-4 space-y-3 text-left text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
+              <div className="font-black text-[var(--theme-text-primary,#f8fafc)] uppercase tracking-wider text-xs">Motion Studio Location</div>
+              <p className="flex items-start gap-2">
+                <MapPin size={16} className="text-[var(--theme-accent-primary,#84cc16)] shrink-0 mt-0.5" />
+                <span>620 Renewal Way, Suite 140 · Athletic Performance Plaza, MD 20852 · Free Dedicated Athlete Parking</span>
               </p>
-              <p className="text-lime-400">Reserved athlete parking directly in front</p>
+              <p className="flex items-start gap-2">
+                <Clock size={16} className="text-[var(--theme-accent-primary,#84cc16)] shrink-0 mt-0.5" />
+                <span>Monday–Friday: 6:30 AM – 7:00 PM · Saturday: 8:00 AM – 1:00 PM</span>
+              </p>
+              <p className="flex items-start gap-2">
+                <Phone size={16} className="text-[var(--theme-accent-primary,#84cc16)] shrink-0 mt-0.5" />
+                <a href="tel:5550174826" className="hover:text-[var(--theme-accent-primary,#84cc16)] font-bold text-[var(--theme-text-primary,#f8fafc)]">
+                  (555) 017-4826
+                </a>
+              </p>
             </div>
 
-            <div className="space-y-3">
-              <p className="font-bold uppercase tracking-wider text-white">Clinical Hours</p>
-              <div className="space-y-1">
-                <div className="flex justify-between">
-                  <span>Monday – Friday:</span>
-                  <span className="text-white">6:30 AM – 7:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Saturday:</span>
-                  <span className="text-white">8:00 AM – 1:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sunday:</span>
-                  <span className="text-slate-500">Closed for Recovery</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <p className="font-bold uppercase tracking-wider text-white">Quick Navigation</p>
-              <div className="flex flex-col space-y-1.5">
-                <a href="#services" className="hover:text-lime-300">Clinical Services</a>
-                <a href="#body-navigator" className="hover:text-lime-300">Joint & Pain Target Navigator</a>
-                <a href="#tech-modalities" className="hover:text-lime-300">Kinetic Modalities & Motion Lab</a>
-                <a href="#recovery-milestones" className="hover:text-lime-300">4-Phase Recovery Milestones</a>
-                <a href="#therapists" className="hover:text-lime-300">Doctors of Physical Therapy</a>
-                <a href="#visit-info" className="hover:text-lime-300">Direct Access & In-Network Insurance</a>
-                <a href="#reviews" className="hover:text-lime-300">Verified Patient Transformations</a>
-                <a href="#screener" className="hover:text-lime-300">Interactive Symptom Screener</a>
-                <Link to="/medical" className="text-lime-400 hover:underline pt-1">← Medical Showcase Index</Link>
+            {/* Col 3: Section Directory in Strict DOM Order (4 Cols) */}
+            <div className="lg:col-span-4 space-y-3 text-left text-xs text-[var(--theme-text-secondary,#cbd5e1)]">
+              <div className="font-black text-[var(--theme-text-primary,#f8fafc)] uppercase tracking-wider text-xs">Clinical Navigation Directory</div>
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <a href="#services" className="hover:text-[var(--theme-accent-primary,#84cc16)]">Clinical Services</a>
+                <a href="#body-navigator" className="hover:text-[var(--theme-accent-primary,#84cc16)]">Joint Navigator</a>
+                <a href="#tech-modalities" className="hover:text-[var(--theme-accent-primary,#84cc16)]">Tech & Motion Lab</a>
+                <a href="#recovery-milestones" className="hover:text-[var(--theme-accent-primary,#84cc16)]">4-Phase Milestones</a>
+                <a href="#therapists" className="hover:text-[var(--theme-accent-primary,#84cc16)]">Doctors of PT</a>
+                <a href="#visit-info" className="hover:text-[var(--theme-accent-primary,#84cc16)]">Direct Access</a>
+                <a href="#reviews" className="hover:text-[var(--theme-accent-primary,#84cc16)]">Patient Stories</a>
+                <a href="#screener" className="hover:text-[var(--theme-accent-primary,#84cc16)]">Symptom Screener</a>
+                <Link to="/medical" className="col-span-2 text-[var(--theme-accent-primary,#84cc16)] hover:underline pt-1">← Medical Index</Link>
               </div>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-            <p>© {new Date().getFullYear()} Renew Physical Therapy & Kinetic Performance, PLLC. All Rights Reserved.</p>
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[var(--theme-text-muted,#94a3b8)] text-center sm:text-left">
+            <p>© {new Date().getFullYear()} Renew Physical Therapy & Kinetic Performance, PLLC. All Rights Reserved. HIPAA Compliant Outpatient Facility.</p>
             <div className="flex gap-4">
               <span>American Physical Therapy Association (APTA)</span>
               <span>Fellow AAOMPT</span>
-              <span>HIPAA Secure</span>
+              <span>Direct Access Certified</span>
             </div>
           </div>
         </Container>
@@ -1925,20 +1824,20 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {/* 13. FLOATING MOBILE CONCIERGE DOCK                                        */}
       {/* ========================================================================= */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#081711]/95 border-t border-emerald-900/50 p-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden shadow-2xl">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--theme-bg-surface,#061610)]/95 border-t border-[var(--theme-border,rgba(255,255,255,0.1))] p-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:hidden shadow-2xl">
         <div className="flex items-center gap-2">
           <a
             href="tel:5550174826"
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/5 py-2.5 text-xs font-bold text-white active:scale-95"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f2820)] py-2.5 text-xs font-bold text-[var(--theme-text-primary,#f8fafc)] active:scale-95"
           >
-            <Phone size={13} className="text-lime-400" />
+            <Phone size={13} className="text-[var(--theme-accent-primary,#84cc16)]" />
             <span>Call Clinic</span>
           </a>
 
           <button
             type="button"
             onClick={() => handleStartBooking()}
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-emerald-400 via-lime-400 to-green-500 py-2.5 text-xs font-black text-slate-950 shadow-md active:scale-95"
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] py-2.5 text-xs font-black text-[var(--theme-accent-contrast,#ffffff)] shadow-md active:scale-95"
           >
             <Calendar size={13} strokeWidth={2.5} />
             <span>Book Evaluation</span>
@@ -1951,11 +1850,11 @@ export function RenewPhysicalTherapy() {
       {/* ========================================================================= */}
       {isBookingOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] text-slate-900">
+          <div className="relative w-full max-w-lg rounded-3xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-card,#0f2820)] p-6 sm:p-8 shadow-2xl overflow-y-auto max-h-[90vh] text-[var(--theme-text-primary,#f8fafc)]">
             <button
               type="button"
               onClick={() => setIsBookingOpen(false)}
-              className="absolute top-5 right-5 text-slate-400 hover:text-slate-800"
+              className="absolute top-5 right-5 text-[var(--theme-text-muted,#94a3b8)] hover:text-[var(--theme-text-primary,#f8fafc)] transition-colors"
             >
               <X size={20} />
             </button>
@@ -1963,29 +1862,29 @@ export function RenewPhysicalTherapy() {
             {!bookingConfirmed ? (
               <div>
                 <div className="mb-6">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[var(--theme-accent-primary,#84cc16)]">
                     Renew Online Evaluation Concierge
                   </span>
-                  <h3 className="text-xl font-black text-slate-900 mt-0.5">
+                  <h3 className="text-xl font-black text-[var(--theme-text-primary,#f8fafc)] mt-0.5">
                     Schedule Your 60-Minute Evaluation
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] mt-1">
                     Direct Access: No doctor referral or prior prescription needed.
                   </p>
                 </div>
 
                 {/* Step indicator */}
                 <div className="flex items-center gap-2 mb-6 text-xs">
-                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 1 ? "bg-emerald-600" : "bg-slate-200"}`} />
-                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 2 ? "bg-emerald-600" : "bg-slate-200"}`} />
-                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 3 ? "bg-emerald-600" : "bg-slate-200"}`} />
+                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 1 ? "bg-[var(--theme-accent-primary,#84cc16)]" : "bg-[var(--theme-border,rgba(255,255,255,0.15))]"}`} />
+                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 2 ? "bg-[var(--theme-accent-primary,#84cc16)]" : "bg-[var(--theme-border,rgba(255,255,255,0.15))]"}`} />
+                  <div className={`flex-1 h-1.5 rounded-full ${bookingStep >= 3 ? "bg-[var(--theme-accent-primary,#84cc16)]" : "bg-[var(--theme-border,rgba(255,255,255,0.15))]"}`} />
                 </div>
 
                 {/* Step 1: Select Service & Doctor */}
                 {bookingStep === 1 && (
                   <div className="space-y-4 text-xs">
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Select Service Focus</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1.5">Select Service Focus</label>
                       <div className="space-y-2">
                         {[
                           "Initial Kinetic Movement Evaluation (60 Min)",
@@ -2000,8 +1899,8 @@ export function RenewPhysicalTherapy() {
                             onClick={() => setBookingService(srv)}
                             className={`w-full text-left p-3 rounded-xl border transition-all ${
                               bookingService === srv
-                                ? "border-emerald-600 bg-emerald-50 text-slate-900 font-bold"
-                                : "border-slate-200 bg-slate-50/60 text-slate-700 hover:bg-slate-100"
+                                ? "border-[var(--theme-accent-primary,#84cc16)] bg-[var(--theme-accent-primary,#84cc16)]/15 text-[var(--theme-accent-primary,#84cc16)] font-bold shadow-xs"
+                                : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-secondary,#cbd5e1)] hover:border-[var(--theme-accent-primary,#84cc16)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                             }`}
                           >
                             {srv}
@@ -2011,16 +1910,16 @@ export function RenewPhysicalTherapy() {
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Doctor of Physical Therapy</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1.5">Doctor of Physical Therapy</label>
                       <select
                         value={bookingTherapist}
                         onChange={(e) => setBookingTherapist(e.target.value)}
-                        className="w-full p-2.5 rounded-xl border border-slate-200 bg-white font-medium text-slate-900 focus:border-emerald-600 focus:outline-hidden"
+                        className="w-full p-2.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1e17)] font-medium text-[var(--theme-text-primary,#f8fafc)] focus:border-[var(--theme-accent-primary,#84cc16)] focus:outline-hidden"
                       >
-                        <option>First Available Doctor of PT</option>
-                        <option>Dr. Maya Collins, PT, DPT, OCS (Spine & Orthopedics)</option>
-                        <option>Jordan Hayes, PT, DPT, SCS, CSCS (Sports & ACL)</option>
-                        <option>Elena Brooks, PTA, FMS (Movement Coach)</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">First Available Doctor of PT</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">Dr. Maya Collins, PT, DPT, OCS (Spine & Orthopedics)</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">Jordan Hayes, PT, DPT, SCS, CSCS (Sports & ACL)</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">Elena Brooks, PTA, FMS (Movement Coach)</option>
                       </select>
                     </div>
 
@@ -2028,7 +1927,7 @@ export function RenewPhysicalTherapy() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(2)}
-                        className="rounded-xl bg-slate-900 px-6 py-2.5 font-bold text-white hover:bg-emerald-700 transition-all"
+                        className="rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] px-6 py-2.5 font-bold text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition-all shadow-md"
                       >
                         Select Date & Slot →
                       </button>
@@ -2040,7 +1939,7 @@ export function RenewPhysicalTherapy() {
                 {bookingStep === 2 && (
                   <div className="space-y-4 text-xs">
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Select Preferred Day</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1.5">Select Preferred Day</label>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                         {["Tomorrow (Priority)", "Wednesday", "Thursday", "Friday"].map((day) => (
                           <button
@@ -2049,8 +1948,8 @@ export function RenewPhysicalTherapy() {
                             onClick={() => setBookingDay(day)}
                             className={`p-2 rounded-xl text-center font-bold border transition-all ${
                               bookingDay === day
-                                ? "border-emerald-600 bg-emerald-50 text-slate-900"
-                                : "border-slate-200 bg-slate-50 text-slate-700"
+                                ? "border-[var(--theme-accent-primary,#84cc16)] bg-[var(--theme-accent-primary,#84cc16)]/15 text-[var(--theme-accent-primary,#84cc16)] font-bold shadow-xs"
+                                : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-secondary,#cbd5e1)] hover:border-[var(--theme-accent-primary,#84cc16)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                             }`}
                           >
                             {day}
@@ -2060,7 +1959,7 @@ export function RenewPhysicalTherapy() {
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1.5">Available 60-Min Evaluation Slot</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1.5">Available 60-Min Evaluation Slot</label>
                       <div className="grid grid-cols-3 gap-2">
                         {["7:00 AM", "8:15 AM", "9:00 AM", "11:30 AM", "2:00 PM", "4:30 PM"].map((slot) => (
                           <button
@@ -2069,8 +1968,8 @@ export function RenewPhysicalTherapy() {
                             onClick={() => setBookingSlot(slot)}
                             className={`p-2 rounded-xl text-center font-bold border transition-all ${
                               bookingSlot === slot
-                                ? "border-emerald-600 bg-emerald-50 text-slate-900"
-                                : "border-slate-200 bg-slate-50 text-slate-700"
+                                ? "border-[var(--theme-accent-primary,#84cc16)] bg-[var(--theme-accent-primary,#84cc16)]/15 text-[var(--theme-accent-primary,#84cc16)] font-bold shadow-xs"
+                                : "border-[var(--theme-border,rgba(255,255,255,0.1))] bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-secondary,#cbd5e1)] hover:border-[var(--theme-accent-primary,#84cc16)]/40 hover:text-[var(--theme-text-primary,#f8fafc)]"
                             }`}
                           >
                             {slot}
@@ -2083,14 +1982,14 @@ export function RenewPhysicalTherapy() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(1)}
-                        className="text-slate-500 hover:text-slate-800 font-bold"
+                        className="text-[var(--theme-text-muted,#94a3b8)] hover:text-[var(--theme-text-primary,#f8fafc)] font-bold transition-colors"
                       >
                         ← Back
                       </button>
                       <button
                         type="button"
                         onClick={() => setBookingStep(3)}
-                        className="rounded-xl bg-slate-900 px-6 py-2.5 font-bold text-white hover:bg-emerald-700 transition-all"
+                        className="rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] px-6 py-2.5 font-bold text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition-all shadow-md"
                       >
                         Patient Details →
                       </button>
@@ -2108,56 +2007,66 @@ export function RenewPhysicalTherapy() {
                     className="space-y-4 text-xs"
                   >
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1">Full Patient Name</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1">Full Patient Name</label>
                       <input
                         type="text"
                         required
                         value={patientName}
                         onChange={(e) => setPatientName(e.target.value)}
                         placeholder="e.g. Alex Henderson"
-                        className="w-full p-2.5 rounded-xl border border-slate-200 focus:border-emerald-600 focus:outline-hidden"
+                        className="w-full p-2.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)] placeholder:text-[var(--theme-text-muted,#94a3b8)]/50 focus:border-[var(--theme-accent-primary,#84cc16)] focus:outline-hidden"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1">Mobile Phone (For SMS Appointment Pass)</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1">Mobile Phone (For SMS Appointment Pass)</label>
                       <input
                         type="tel"
                         required
                         value={patientPhone}
                         onChange={(e) => setPatientPhone(e.target.value)}
                         placeholder="(555) 000-0000"
-                        className="w-full p-2.5 rounded-xl border border-slate-200 focus:border-emerald-600 focus:outline-hidden"
+                        className="w-full p-2.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)] placeholder:text-[var(--theme-text-muted,#94a3b8)]/50 focus:border-[var(--theme-accent-primary,#84cc16)] focus:outline-hidden"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-slate-700 font-bold mb-1">Primary Insurance or Self-Pay</label>
+                      <label className="block text-[var(--theme-text-primary,#f8fafc)] font-bold mb-1">Primary Insurance or Self-Pay</label>
                       <select
                         value={patientInsurance}
                         onChange={(e) => setPatientInsurance(e.target.value)}
-                        className="w-full p-2.5 rounded-xl border border-slate-200 bg-white font-medium text-slate-900 focus:border-emerald-600 focus:outline-hidden"
+                        className="w-full p-2.5 rounded-xl border border-[var(--theme-border,rgba(255,255,255,0.15))] bg-[var(--theme-bg-surface,#0b1e17)] font-medium text-[var(--theme-text-primary,#f8fafc)] focus:border-[var(--theme-accent-primary,#84cc16)] focus:outline-hidden"
                       >
-                        <option>CareFirst BlueCross BlueShield</option>
-                        <option>Medicare Part B</option>
-                        <option>Aetna Healthcare</option>
-                        <option>Cigna Health Care</option>
-                        <option>UnitedHealthcare</option>
-                        <option>Tricare Military</option>
-                        <option>HSA / FSA Direct Pay</option>
-                        <option>Out-of-Network Self-Pay</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">CareFirst BlueCross BlueShield</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">Medicare Part B</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">Aetna Healthcare</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">Cigna Health Care</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">UnitedHealthcare</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">Tricare Military</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">HSA / FSA Direct Pay</option>
+                        <option className="bg-[var(--theme-bg-surface,#0b1e17)] text-[var(--theme-text-primary,#f8fafc)]">Out-of-Network Self-Pay</option>
                       </select>
                     </div>
 
+                    <div className="rounded-xl bg-[var(--theme-accent-primary,#84cc16)]/10 border border-[var(--theme-accent-primary,#84cc16)]/30 p-3 text-[11px] text-[var(--theme-text-primary,#f8fafc)] space-y-1">
+                      <div className="font-bold flex items-center gap-1 text-[var(--theme-accent-primary,#84cc16)]">
+                        <ShieldCheck size={13} />
+                        Physical Therapy Pre-Verification Guarantee
+                      </div>
+                      <p className="text-[var(--theme-text-secondary,#cbd5e1)]">
+                        Your evaluation slot is held immediately. Our team verifies your benefits and texts your digital intake movement pass within 2 hours.
+                      </p>
+                    </div>
+
                     {/* Summary box */}
-                    <div className="rounded-xl bg-slate-50 border border-slate-200 p-3 space-y-1 text-slate-600">
-                      <div className="flex justify-between font-bold text-slate-800">
+                    <div className="rounded-xl bg-[var(--theme-bg-surface,#0b1e17)] border border-[var(--theme-border,rgba(255,255,255,0.1))] p-3 space-y-1 text-[var(--theme-text-secondary,#cbd5e1)]">
+                      <div className="flex justify-between font-bold text-[var(--theme-text-primary,#f8fafc)]">
                         <span>Selected Slot:</span>
-                        <span className="text-emerald-700">{bookingDay} at {bookingSlot}</span>
+                        <span className="text-[var(--theme-accent-primary,#84cc16)]">{bookingDay} at {bookingSlot}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Provider:</span>
-                        <span className="font-semibold text-slate-700">{bookingTherapist}</span>
+                        <span className="font-semibold text-[var(--theme-text-secondary,#cbd5e1)]">{bookingTherapist}</span>
                       </div>
                     </div>
 
@@ -2165,13 +2074,13 @@ export function RenewPhysicalTherapy() {
                       <button
                         type="button"
                         onClick={() => setBookingStep(2)}
-                        className="text-slate-500 hover:text-slate-800 font-bold"
+                        className="text-[var(--theme-text-muted,#94a3b8)] hover:text-[var(--theme-text-primary,#f8fafc)] font-bold transition-colors"
                       >
                         ← Back
                       </button>
                       <button
                         type="submit"
-                        className="rounded-xl bg-gradient-to-r from-emerald-600 to-lime-500 px-6 py-2.5 font-black text-slate-950 shadow-md hover:scale-105 transition-all"
+                        className="rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] px-6 py-2.5 font-bold text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 shadow-md active:scale-95 transition-all"
                       >
                         Confirm Evaluation
                       </button>
@@ -2182,43 +2091,43 @@ export function RenewPhysicalTherapy() {
             ) : (
               /* Confirmation Voucher Card */
               <div className="text-center py-4 space-y-4">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--theme-accent-primary,#84cc16)]/20 text-[var(--theme-accent-primary,#84cc16)]">
                   <CheckCircle2 size={32} strokeWidth={2.5} />
                 </div>
-                <h3 className="text-2xl font-black text-slate-900">
+                <h3 className="text-2xl font-black text-[var(--theme-text-primary,#f8fafc)]">
                   Kinetic Evaluation Confirmed!
                 </h3>
-                <p className="text-xs text-slate-600 max-w-sm mx-auto">
+                <p className="text-xs text-[var(--theme-text-secondary,#cbd5e1)] max-w-sm mx-auto">
                   Thank you, {patientName || "valued patient"}! A digital confirmation pass and movement intake questionnaire have been sent to {patientPhone || "your mobile phone"}.
                 </p>
 
-                <div className="rounded-2xl bg-slate-50 border border-slate-200 p-4 text-left text-xs space-y-2">
+                <div className="rounded-2xl bg-[var(--theme-bg-surface,#0b1e17)] border border-[var(--theme-border,rgba(255,255,255,0.1))] p-4 text-left text-xs space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Patient:</span>
-                    <span className="font-bold text-slate-900">{patientName || "Patient"}</span>
+                    <span className="text-[var(--theme-text-muted,#94a3b8)]">Patient:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#f8fafc)]">{patientName || "Patient"}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Clinical Focus:</span>
-                    <span className="font-bold text-slate-900">{bookingService}</span>
+                    <span className="text-[var(--theme-text-muted,#94a3b8)]">Clinical Focus:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#f8fafc)]">{bookingService}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Doctor of PT:</span>
-                    <span className="font-bold text-slate-900">{bookingTherapist}</span>
+                    <span className="text-[var(--theme-text-muted,#94a3b8)]">Doctor of PT:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#f8fafc)]">{bookingTherapist}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Scheduled Time:</span>
-                    <span className="font-bold text-emerald-700">{bookingDay} · {bookingSlot}</span>
+                    <span className="text-[var(--theme-text-muted,#94a3b8)]">Scheduled Time:</span>
+                    <span className="font-bold text-[var(--theme-accent-primary,#84cc16)]">{bookingDay} · {bookingSlot}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-500">Facility Location:</span>
-                    <span className="font-bold text-slate-900">620 Renewal Way, Suite 140</span>
+                    <span className="text-[var(--theme-text-muted,#94a3b8)]">Facility Location:</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#f8fafc)]">620 Renewal Way, Suite 140</span>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setIsBookingOpen(false)}
-                  className="w-full rounded-xl bg-slate-900 py-3 text-xs font-bold text-white hover:bg-slate-800"
+                  className="w-full rounded-xl bg-gradient-to-r from-[var(--theme-accent-primary,#84cc16)] to-[var(--theme-accent-secondary,#10b981)] py-3 text-xs font-bold text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition-all shadow-md"
                 >
                   Done & Return to Motion Studio
                 </button>

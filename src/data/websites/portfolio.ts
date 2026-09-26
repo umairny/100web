@@ -162,7 +162,7 @@ export const portfolioWebsites: WebsiteDesign[] = [
     shortDescription:
       "The art of the hand, timeless objects: bespoke craftsmanship for those who value authenticity, 5-step journey from dust to dignity, collector commissions, and confident bespoke inquiry path",
     slug: "artisan-objects",
-    image: "/images/artisan/hero-potter-wheel.webp",
+    image: "/images/artisan/hero-artisan-pottery.jpg",
     colors: {
       primary: "#a8522d",
       secondary: "#fbf8f3",

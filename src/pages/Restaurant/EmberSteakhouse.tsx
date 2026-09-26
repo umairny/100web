@@ -136,8 +136,8 @@ function Icon({
 
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="flex items-center gap-3 text-[0.62rem] font-bold uppercase tracking-[0.26em] text-[#d88932]">
-      <span className="h-px w-10 bg-gradient-to-r from-[#b87333] to-[#f0b35a]" />
+    <p className="flex items-center gap-3 text-[0.62rem] font-bold uppercase tracking-[0.26em] text-[var(--theme-accent-primary,#d88932)]">
+      <span className="h-px w-10 bg-gradient-to-r from-[var(--theme-accent-secondary,#b87333)] to-[var(--theme-accent-primary,#f0b35a)]" />
       {children}
     </p>
   );
@@ -265,15 +265,15 @@ export function EmberSteakhouse() {
   };
 
   return (
-    <main className="motion-ember min-h-screen overflow-x-hidden bg-[#070606] text-[#f8f3eb] lg:pl-[5.5rem]">
+    <main className="motion-ember min-h-screen overflow-x-hidden bg-[var(--theme-bg-base,#070606)] text-[var(--theme-text-primary,#f8f3eb)] transition-colors duration-300 lg:pl-[5.5rem]">
       {/* Desktop Vertical Rail Navigation */}
-      <aside className="fixed inset-y-0 left-0 z-50 hidden w-[5.5rem] flex-col border-r border-[#c67c2f]/25 bg-[#0b0a09] lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-50 hidden w-[5.5rem] flex-col border-r border-[var(--theme-border,#c67c2f)]/25 bg-[var(--theme-bg-surface,#0b0a09)] transition-colors duration-300 lg:flex">
         <a
           href="#home"
           aria-label="Ember Steakhouse home"
-          className="grid h-[5.5rem] place-items-center border-b border-[#c67c2f]/20 text-[#f0b35a] transition hover:text-white"
+          className="grid h-[5.5rem] place-items-center border-b border-[var(--theme-border,#c67c2f)]/20 text-[var(--theme-accent-primary,#f0b35a)] transition hover:text-white"
         >
-          <div className="grid h-11 w-11 place-items-center rounded-xl border border-[#c67c2f]/40 bg-gradient-to-br from-[#7e451f]/40 to-[#b87333]/10 text-[#f0b35a] shadow-[0_0_15px_rgba(216,137,50,0.25)]">
+          <div className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--theme-border,#c67c2f)]/40 bg-gradient-to-br from-[#7e451f]/40 to-[#b87333]/10 text-[var(--theme-accent-primary,#f0b35a)] shadow-[0_0_15px_rgba(216,137,50,0.25)]">
             <Icon name="flame" className="h-6 w-6" />
           </div>
         </a>
@@ -292,12 +292,12 @@ export function EmberSteakhouse() {
                 onClick={() => setActiveSection(item.id)}
                 className={`group relative grid h-[4.4rem] place-items-center border-y border-transparent transition duration-300 ${
                   isActive
-                    ? "border-[#c67c2f]/25 bg-gradient-to-r from-[#7e451f]/65 to-[#b87333]/25 text-[#f0b35a]"
-                    : "text-[#80776e] hover:border-[#c67c2f]/20 hover:bg-[#17130f] hover:text-[#f0b35a]"
+                    ? "border-[var(--theme-border,#c67c2f)]/25 bg-gradient-to-r from-[#7e451f]/65 to-[#b87333]/25 text-[var(--theme-accent-primary,#f0b35a)]"
+                    : "text-[var(--theme-text-muted,#80776e)] hover:border-[var(--theme-border,#c67c2f)]/20 hover:bg-[#17130f] hover:text-[var(--theme-accent-primary,#f0b35a)]"
                 }`}
               >
                 {isActive && (
-                  <span className="absolute right-0 h-full w-[2px] bg-[#d88932] shadow-[0_0_14px_#d88932]" />
+                  <span className="absolute right-0 h-full w-[2px] bg-[var(--theme-accent-primary,#d88932)] shadow-[0_0_14px_currentColor]" />
                 )}
                 <Icon name={item.icon} className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
                 <span className="sr-only">{item.label}</span>
@@ -308,27 +308,27 @@ export function EmberSteakhouse() {
         <Link
           to="/restaurant"
           aria-label="Back to restaurant collection"
-          className="grid h-[5.5rem] place-items-center border-t border-[#c67c2f]/20 text-xs font-black text-[#80776e] transition hover:text-[#f0b35a]"
+          className="grid h-[5.5rem] place-items-center border-t border-[var(--theme-border,#c67c2f)]/20 text-xs font-black text-[var(--theme-text-muted,#80776e)] transition hover:text-[var(--theme-accent-primary,#f0b35a)]"
         >
           100
         </Link>
       </aside>
 
       {/* Top Header Bar */}
-      <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[#c67c2f]/25 bg-[#070606]/95 px-4 backdrop-blur-xl transition-all duration-300 sm:px-6 lg:left-[5.5rem] lg:h-[5.5rem] lg:px-10">
+      <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[var(--theme-border,#c67c2f)]/25 bg-[var(--theme-bg-surface,#070606)]/95 px-4 backdrop-blur-xl transition-all duration-300 sm:px-6 lg:left-[5.5rem] lg:h-[5.5rem] lg:px-10">
         <a
           href="#home"
           onClick={() => setActiveSection("home")}
           className="group flex items-center gap-2.5 sm:gap-3 select-none"
         >
-          <span className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-xl border border-[#c67c2f]/50 bg-gradient-to-br from-[#7e451f]/50 to-[#b87333]/15 text-[#f0b35a] shadow-[0_0_18px_rgba(216,137,50,0.3)] transition-transform duration-300 group-hover:scale-105">
+          <span className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-xl border border-[var(--theme-border,#c67c2f)]/50 bg-gradient-to-br from-[#7e451f]/50 to-[#b87333]/15 text-[var(--theme-accent-primary,#f0b35a)] shadow-[0_0_18px_rgba(216,137,50,0.3)] transition-transform duration-300 group-hover:scale-105">
             <Icon name="flame" className="h-5 w-5" />
           </span>
           <span>
-            <span className="block text-sm sm:text-base font-black uppercase tracking-[0.24em] text-[#f8f3eb]">
+            <span className="block text-sm sm:text-base font-black uppercase tracking-[0.24em] text-[var(--theme-text-primary,#f8f3eb)]">
               Ember
             </span>
-            <span className="block text-[0.5rem] sm:text-[0.52rem] font-bold uppercase tracking-[0.28em] text-[#d88932]">
+            <span className="block text-[0.5rem] sm:text-[0.52rem] font-bold uppercase tracking-[0.28em] text-[var(--theme-accent-primary,#d88932)]">
               Prime Steakhouse
             </span>
           </span>
@@ -337,7 +337,7 @@ export function EmberSteakhouse() {
         {/* Center Nav Links for tablet / medium screens */}
         <nav
           aria-label="Tablet steakhouse navigation"
-          className="hidden md:flex lg:hidden items-center gap-1 rounded-full border border-[#c67c2f]/30 bg-[#12100e]/90 p-1 backdrop-blur-md"
+          className="hidden md:flex lg:hidden items-center gap-1 rounded-full border border-[var(--theme-border,#c67c2f)]/30 bg-[var(--theme-bg-surface,#12100e)]/90 p-1 backdrop-blur-md"
         >
           {navigation.map((item) => {
             const isActive = activeSection === item.id;
@@ -348,8 +348,8 @@ export function EmberSteakhouse() {
                 onClick={() => setActiveSection(item.id)}
                 className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider transition ${
                   isActive
-                    ? "bg-[#d88932] text-[#070606] font-black shadow-sm"
-                    : "text-[#8f8479] hover:bg-[#c67c2f]/15 hover:text-[#f0b35a]"
+                    ? "bg-[var(--theme-accent-primary,#d88932)] text-[var(--theme-bg-base,#070606)] font-black shadow-sm"
+                    : "text-[var(--theme-text-secondary,#8f8479)] hover:bg-[var(--theme-border,#c67c2f)]/15 hover:text-[var(--theme-accent-primary,#f0b35a)]"
                 }`}
               >
                 {item.label}
@@ -360,8 +360,8 @@ export function EmberSteakhouse() {
 
         <div className="flex items-center gap-2 sm:gap-4">
           {/* Dinner Hours Tag (Desktop) */}
-          <div className="hidden items-center gap-2 rounded-full border border-[#c67c2f]/30 bg-[#14100c]/80 px-3.5 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#c9b29b] xl:flex">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#d88932] shadow-[0_0_8px_#d88932] animate-pulse" />
+          <div className="hidden items-center gap-2 rounded-full border border-[var(--theme-border,#c67c2f)]/30 bg-[var(--theme-bg-card,#14100c)]/80 px-3.5 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[var(--theme-text-secondary,#c9b29b)] xl:flex">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--theme-accent-primary,#d88932)] shadow-[0_0_8px_currentColor] animate-pulse" />
             <span>Dinner nightly · 5 PM–12 AM</span>
           </div>
 
@@ -369,7 +369,7 @@ export function EmberSteakhouse() {
           <a
             href="#reserve"
             onClick={() => setActiveSection("reserve")}
-            className="inline-flex items-center gap-1.5 sm:gap-2 rounded-sm bg-gradient-to-r from-[#a85f29] via-[#c4772b] to-[#d88932] px-3.5 py-2 sm:px-5 sm:py-2.5 text-[0.6rem] sm:text-[0.65rem] font-black uppercase tracking-[0.16em] text-[#f8f3eb] shadow-[0_8px_30px_rgba(184,115,51,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(216,137,50,0.38)] active:translate-y-0"
+            className="inline-flex items-center gap-1.5 sm:gap-2 rounded-sm bg-gradient-to-r from-[var(--theme-accent-secondary,#a85f29)] via-[var(--theme-accent-primary,#c4772b)] to-[var(--theme-accent-primary,#d88932)] px-3.5 py-2 sm:px-5 sm:py-2.5 text-[0.6rem] sm:text-[0.65rem] font-black uppercase tracking-[0.16em] text-[var(--theme-accent-contrast,#f8f3eb)] shadow-[0_8px_30px_rgba(184,115,51,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(216,137,50,0.38)] active:translate-y-0"
           >
             <span>Reserve</span>
             <Icon name="arrow" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -381,7 +381,7 @@ export function EmberSteakhouse() {
             aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={mobileMenuOpen}
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="grid h-10 w-10 place-items-center rounded-lg border border-[#c67c2f]/40 bg-[#12100e] text-[#f0b35a] transition hover:border-[#d88932] hover:bg-[#1a1511] lg:hidden active:scale-95 shadow-sm"
+            className="grid h-10 w-10 place-items-center rounded-lg border border-[var(--theme-border,#c67c2f)]/40 bg-[var(--theme-bg-surface,#12100e)] text-[var(--theme-accent-primary,#f0b35a)] transition hover:border-[var(--theme-accent-primary,#d88932)] hover:bg-[#1a1511] lg:hidden active:scale-95 shadow-sm"
           >
             <span className="sr-only">Toggle navigation</span>
             <div className="relative h-4 w-5">
@@ -417,15 +417,15 @@ export function EmberSteakhouse() {
 
           {/* Slide-down Sheet */}
           <div
-            className="fixed inset-x-0 top-16 z-50 border-b border-[#c67c2f]/30 bg-[#0a0807]/98 px-4 pt-3 pb-6 shadow-2xl backdrop-blur-2xl lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto"
+            className="fixed inset-x-0 top-16 z-50 border-b border-[var(--theme-border,#c67c2f)]/30 bg-[var(--theme-bg-surface,#0a0807)]/98 px-4 pt-3 pb-6 shadow-2xl backdrop-blur-2xl lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto"
           >
             {/* Live Hearth Status */}
-            <div className="mb-3 flex items-center justify-between rounded-xl border border-[#c67c2f]/25 bg-[#14100c] px-3.5 py-2 text-xs">
-              <span className="flex items-center gap-2 font-bold text-[#f0b35a]">
-                <span className="h-2 w-2 rounded-full bg-[#d88932] animate-pulse shadow-[0_0_8px_#d88932]" />
+            <div className="mb-3 flex items-center justify-between rounded-xl border border-[var(--theme-border,#c67c2f)]/25 bg-[var(--theme-bg-card,#14100c)] px-3.5 py-2 text-xs">
+              <span className="flex items-center gap-2 font-bold text-[var(--theme-accent-primary,#f0b35a)]">
+                <span className="h-2 w-2 rounded-full bg-[var(--theme-accent-primary,#d88932)] animate-pulse shadow-[0_0_8px_currentColor]" />
                 Live Fire Hearth Open
               </span>
-              <span className="text-[11px] font-medium text-[#8f8479]">
+              <span className="text-[11px] font-medium text-[var(--theme-text-secondary,#8f8479)]">
                 5 PM – 12 AM
               </span>
             </div>
@@ -444,45 +444,45 @@ export function EmberSteakhouse() {
                     }}
                     className={`flex items-center justify-between rounded-xl p-3 transition-all ${
                       isActive
-                        ? "border border-[#d88932]/50 bg-gradient-to-r from-[#7e451f]/70 to-[#b87333]/30 text-[#f8f3eb] shadow-md"
-                        : "border border-transparent bg-[#14100c]/70 text-[#c9b29b] hover:border-[#c67c2f]/20 hover:bg-[#1a1511] active:bg-[#201914]"
+                        ? "border border-[var(--theme-accent-primary,#d88932)]/50 bg-gradient-to-r from-[#7e451f]/70 to-[#b87333]/30 text-[var(--theme-text-primary,#f8f3eb)] shadow-md"
+                        : "border border-transparent bg-[var(--theme-bg-card,#14100c)]/70 text-[var(--theme-text-secondary,#c9b29b)] hover:border-[var(--theme-border,#c67c2f)]/20 hover:bg-[#1a1511] active:bg-[#201914]"
                     }`}
                   >
                     <div className="flex items-center gap-3.5">
                       <div
                         className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg border ${
                           isActive
-                            ? "border-[#d88932]/60 bg-[#7e451f]/50 text-[#f0b35a]"
-                            : "border-[#c67c2f]/30 bg-[#0d0c0b] text-[#80776e]"
+                            ? "border-[var(--theme-accent-primary,#d88932)]/60 bg-[#7e451f]/50 text-[var(--theme-accent-primary,#f0b35a)]"
+                            : "border-[var(--theme-border,#c67c2f)]/30 bg-[#0d0c0b] text-[var(--theme-text-muted,#80776e)]"
                         }`}
                       >
                         <Icon name={item.icon} className="h-4.5 w-4.5" />
                       </div>
                       <div>
-                        <div className="text-sm font-black uppercase tracking-wider text-[#f8f3eb]">
+                        <div className="text-sm font-black uppercase tracking-wider text-[var(--theme-text-primary,#f8f3eb)]">
                           {item.label}
                         </div>
-                        <div className="text-[11px] text-[#8f8479]">
+                        <div className="text-[11px] text-[var(--theme-text-secondary,#8f8479)]">
                           {item.desc}
                         </div>
                       </div>
                     </div>
-                    <span className="text-xs font-bold text-[#d88932]">→</span>
+                    <span className="text-xs font-bold text-[var(--theme-accent-primary,#d88932)]">→</span>
                   </a>
                 );
               })}
             </nav>
 
             {/* Steakhouse Info Card */}
-            <div className="mt-4 rounded-2xl border border-[#c67c2f]/25 bg-[#120e0b] p-4 shadow-sm">
-              <div className="grid grid-cols-2 gap-3 text-xs text-[#8f8479] border-b border-[#c67c2f]/20 pb-3 mb-3">
+            <div className="mt-4 rounded-2xl border border-[var(--theme-border,#c67c2f)]/25 bg-[var(--theme-bg-card,#120e0b)] p-4 shadow-sm">
+              <div className="grid grid-cols-2 gap-3 text-xs text-[var(--theme-text-secondary,#8f8479)] border-b border-[var(--theme-border,#c67c2f)]/20 pb-3 mb-3">
                 <div>
-                  <span className="font-bold uppercase tracking-wider text-[#d88932] block">Hours</span>
+                  <span className="font-bold uppercase tracking-wider text-[var(--theme-accent-primary,#d88932)] block">Hours</span>
                   <span>Sun–Thu 5–11 PM</span>
                   <span className="block">Fri–Sat 5 PM–12 AM</span>
                 </div>
                 <div>
-                  <span className="font-bold uppercase tracking-wider text-[#d88932] block">Location</span>
+                  <span className="font-bold uppercase tracking-wider text-[var(--theme-accent-primary,#d88932)] block">Location</span>
                   <span>19 Ashford Lane</span>
                   <span className="block">New York, NY</span>
                 </div>
@@ -492,14 +492,14 @@ export function EmberSteakhouse() {
                 <a
                   href="#reserve"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#a85f29] to-[#d88932] py-3 text-center text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-[#b87333]/20 hover:brightness-110 transition active:scale-[0.99]"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--theme-accent-secondary,#a85f29)] to-[var(--theme-accent-primary,#d88932)] py-3 text-center text-xs font-black uppercase tracking-wider text-[var(--theme-accent-contrast,#ffffff)] shadow-lg shadow-[#b87333]/20 hover:brightness-110 transition active:scale-[0.99]"
                 >
                   <Icon name="profile" className="h-4 w-4" />
                   <span>Reserve a Table</span>
                 </a>
                 <a
                   href="tel:555-017-7700"
-                  className="flex items-center justify-center gap-2 rounded-xl border border-[#c67c2f]/30 bg-[#17120e] py-2.5 text-xs font-bold text-[#d88932] hover:bg-[#201812] transition"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-[var(--theme-border,#c67c2f)]/30 bg-[var(--theme-bg-card,#17120e)] py-2.5 text-xs font-bold text-[var(--theme-accent-primary,#d88932)] hover:bg-[#201812] transition"
                 >
                   <span>Call: (555) 017-7700</span>
                 </a>
@@ -511,16 +511,16 @@ export function EmberSteakhouse() {
 
       <section
         id="home"
-        className="relative isolate min-h-[820px] overflow-hidden border-b border-[#c67c2f]/20 pt-16 lg:min-h-[900px] lg:pt-[5.5rem]"
+        className="relative isolate min-h-[820px] overflow-hidden border-b border-[var(--theme-border,#c67c2f)]/20 pt-16 lg:min-h-[900px] lg:pt-[5.5rem]"
       >
         <img
           src={emberImages.hero}
           alt="Prime steak seared over live embers with rosemary and wine"
           className="absolute inset-0 -z-30 h-full w-full object-cover object-[64%_center]"
         />
-        <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,#070606_0%,rgba(7,6,6,0.95)_30%,rgba(7,6,6,0.52)_57%,rgba(7,6,6,0.16)_82%,rgba(7,6,6,0.34)_100%)]" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,#070606_0%,transparent_28%,rgba(0,0,0,0.12)_100%)]" />
-        <div className="absolute left-[8%] top-[22%] -z-10 h-72 w-72 rounded-full bg-[#b87333]/10 blur-[100px]" />
+        <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,var(--theme-bg-base,#070606)_0%,rgba(7,6,6,0.95)_30%,rgba(7,6,6,0.52)_57%,rgba(7,6,6,0.16)_82%,rgba(7,6,6,0.34)_100%)]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,var(--theme-bg-base,#070606)_0%,transparent_28%,rgba(0,0,0,0.12)_100%)]" />
+        <div className="absolute left-[8%] top-[22%] -z-10 h-72 w-72 rounded-full bg-[var(--theme-accent-primary,#b87333)]/10 blur-[100px]" />
 
         <div className="mx-auto flex min-h-[755px] max-w-[1440px] items-end px-5 pb-36 sm:px-8 lg:min-h-[812px] lg:items-center lg:px-14 lg:pb-36 xl:px-20">
           <div className="max-w-2xl" data-ember-reveal>
@@ -528,31 +528,31 @@ export function EmberSteakhouse() {
             <h1 className="mt-7 text-[clamp(3.5rem,7.4vw,7.4rem)] font-black uppercase leading-[0.84] tracking-[-0.065em]">
               Prime cuts.
               <br />
-              <span className="bg-gradient-to-r from-[#b87333] via-[#f0b35a] to-[#d88932] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--theme-accent-secondary,#b87333)] via-[var(--theme-accent-primary,#f0b35a)] to-[var(--theme-accent-primary,#d88932)] bg-clip-text text-transparent">
                 Ember fire.
               </span>
             </h1>
-            <p className="mt-7 max-w-xl text-base leading-8 text-[#a59b8f] sm:text-lg">
+            <p className="mt-7 max-w-xl text-base leading-8 text-[var(--theme-text-secondary,#a59b8f)] sm:text-lg">
               A luxury steakhouse experience built around fire, flavor, and
               unforgettable nights.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#reserve"
-                className="inline-flex items-center justify-center gap-3 rounded-sm bg-gradient-to-r from-[#a85f29] to-[#d88932] px-7 py-4 text-xs font-black uppercase tracking-[0.16em] shadow-[0_14px_40px_rgba(184,115,51,0.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(216,137,50,0.3)]"
+                className="inline-flex items-center justify-center gap-3 rounded-sm bg-gradient-to-r from-[var(--theme-accent-secondary,#a85f29)] to-[var(--theme-accent-primary,#d88932)] px-7 py-4 text-xs font-black uppercase tracking-[0.16em] text-[var(--theme-accent-contrast,#f8f3eb)] shadow-[0_14px_40px_rgba(184,115,51,0.2)] transition hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(216,137,50,0.3)]"
               >
                 Reserve table <Icon name="arrow" className="h-4 w-4" />
               </a>
               <a
                 href="#menu"
-                className="inline-flex items-center justify-center rounded-sm border border-[#c67c2f]/40 bg-black/15 px-7 py-4 text-xs font-black uppercase tracking-[0.16em] backdrop-blur transition hover:-translate-y-1 hover:border-[#f0b35a]/60 hover:bg-[#171512]"
+                className="inline-flex items-center justify-center rounded-sm border border-[var(--theme-border,#c67c2f)]/40 bg-black/15 px-7 py-4 text-xs font-black uppercase tracking-[0.16em] text-[var(--theme-text-primary,#f8f3eb)] backdrop-blur transition hover:-translate-y-1 hover:border-[var(--theme-accent-primary,#f0b35a)]/60 hover:bg-[#171512]"
               >
                 Explore cuts
               </a>
             </div>
-            <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-[#c67c2f]/20 pt-5 text-[0.57rem] font-bold uppercase tracking-[0.22em] text-[#746b62]">
+            <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-[var(--theme-border,#c67c2f)]/20 pt-5 text-[0.57rem] font-bold uppercase tracking-[0.22em] text-[var(--theme-text-muted,#746b62)]">
               <span className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#d88932] shadow-[0_0_10px_#d88932]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--theme-accent-primary,#d88932)] shadow-[0_0_10px_currentColor]" />
                 Open tonight
               </span>
               <span>Dry-aged in house</span>
@@ -562,13 +562,13 @@ export function EmberSteakhouse() {
         </div>
 
         <div
-          className="absolute bottom-28 right-8 hidden border border-[#c67c2f]/30 bg-[#0c0b0a]/70 p-5 backdrop-blur-md xl:block"
+          className="absolute bottom-28 right-8 hidden border border-[var(--theme-border,#c67c2f)]/30 bg-[var(--theme-bg-card,#0c0b0a)]/70 p-5 backdrop-blur-md xl:block"
           data-ember-reveal
         >
-          <p className="text-[0.56rem] font-bold uppercase tracking-[0.2em] text-[#d88932]">
+          <p className="text-[0.56rem] font-bold uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#d88932)]">
             Chef's fire
           </p>
-          <p className="mt-2 text-lg font-bold">Oak · Hickory · 900°F</p>
+          <p className="mt-2 text-lg font-bold text-[var(--theme-text-primary,#f8f3eb)]">Oak · Hickory · 900°F</p>
         </div>
       </section>
 
@@ -578,33 +578,33 @@ export function EmberSteakhouse() {
       >
         <form
           onSubmit={submitReservation}
-          className="mx-auto grid max-w-[1320px] gap-2 border border-[#c67c2f]/35 bg-[#0d0c0b]/95 p-3 shadow-[0_25px_80px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:grid-cols-2 lg:grid-cols-[repeat(4,1fr)_1.05fr]"
+          className="mx-auto grid max-w-[1320px] gap-2 border border-[var(--theme-border,#c67c2f)]/35 bg-[var(--theme-bg-surface,#0d0c0b)]/95 p-3 shadow-[0_25px_80px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:grid-cols-2 lg:grid-cols-[repeat(4,1fr)_1.05fr] transition-colors duration-300"
           data-ember-reveal
         >
-          <label className="flex min-w-0 items-center gap-3 border border-[#c67c2f]/20 bg-[#171512] px-4 py-3 text-[#d88932]">
+          <label className="flex min-w-0 items-center gap-3 border border-[var(--theme-border,#c67c2f)]/20 bg-[var(--theme-bg-card,#171512)] px-4 py-3 text-[var(--theme-accent-primary,#d88932)]">
             <Icon name="calendar" />
             <span className="min-w-0 flex-1">
-              <span className="block text-[0.5rem] font-bold uppercase tracking-[0.18em] text-[#746b62]">
+              <span className="block text-[0.5rem] font-bold uppercase tracking-[0.18em] text-[var(--theme-text-muted,#746b62)]">
                 Date
               </span>
               <input
                 required
                 type="date"
                 aria-label="Reservation date"
-                className="ember-date mt-1 w-full bg-transparent text-xs font-bold text-[#f8f3eb] outline-none"
+                className="ember-date mt-1 w-full bg-transparent text-xs font-bold text-[var(--theme-text-primary,#f8f3eb)] outline-none"
               />
             </span>
           </label>
-          <label className="flex min-w-0 items-center gap-3 border border-[#c67c2f]/20 bg-[#171512] px-4 py-3 text-[#d88932]">
+          <label className="flex min-w-0 items-center gap-3 border border-[var(--theme-border,#c67c2f)]/20 bg-[var(--theme-bg-card,#171512)] px-4 py-3 text-[var(--theme-accent-primary,#d88932)]">
             <Icon name="users" />
             <span className="min-w-0 flex-1">
-              <span className="block text-[0.5rem] font-bold uppercase tracking-[0.18em] text-[#746b62]">
+              <span className="block text-[0.5rem] font-bold uppercase tracking-[0.18em] text-[var(--theme-text-muted,#746b62)]">
                 Guests
               </span>
               <select
                 aria-label="Number of guests"
                 defaultValue="2 Guests"
-                className="mt-1 w-full bg-[#171512] text-xs font-bold text-[#f8f3eb] outline-none"
+                className="mt-1 w-full bg-[var(--theme-bg-card,#171512)] text-xs font-bold text-[var(--theme-text-primary,#f8f3eb)] outline-none"
               >
                 <option>2 Guests</option>
                 <option>3 Guests</option>
@@ -615,16 +615,16 @@ export function EmberSteakhouse() {
               </select>
             </span>
           </label>
-          <label className="flex min-w-0 items-center gap-3 border border-[#c67c2f]/20 bg-[#171512] px-4 py-3 text-[#d88932]">
+          <label className="flex min-w-0 items-center gap-3 border border-[var(--theme-border,#c67c2f)]/20 bg-[var(--theme-bg-card,#171512)] px-4 py-3 text-[var(--theme-accent-primary,#d88932)]">
             <Icon name="clock" />
             <span className="min-w-0 flex-1">
-              <span className="block text-[0.5rem] font-bold uppercase tracking-[0.18em] text-[#746b62]">
+              <span className="block text-[0.5rem] font-bold uppercase tracking-[0.18em] text-[var(--theme-text-muted,#746b62)]">
                 Time
               </span>
               <select
                 aria-label="Reservation time"
                 defaultValue="7:30 PM"
-                className="mt-1 w-full bg-[#171512] text-xs font-bold text-[#f8f3eb] outline-none"
+                className="mt-1 w-full bg-[var(--theme-bg-card,#171512)] text-xs font-bold text-[var(--theme-text-primary,#f8f3eb)] outline-none"
               >
                 <option>5:30 PM</option>
                 <option>6:30 PM</option>
@@ -634,16 +634,16 @@ export function EmberSteakhouse() {
               </select>
             </span>
           </label>
-          <label className="flex min-w-0 items-center gap-3 border border-[#c67c2f]/20 bg-[#171512] px-4 py-3 text-[#d88932]">
+          <label className="flex min-w-0 items-center gap-3 border border-[var(--theme-border,#c67c2f)]/20 bg-[var(--theme-bg-card,#171512)] px-4 py-3 text-[var(--theme-accent-primary,#d88932)]">
             <Icon name="occasion" />
             <span className="min-w-0 flex-1">
-              <span className="block text-[0.5rem] font-bold uppercase tracking-[0.18em] text-[#746b62]">
+              <span className="block text-[0.5rem] font-bold uppercase tracking-[0.18em] text-[var(--theme-text-muted,#746b62)]">
                 Occasion
               </span>
               <select
                 aria-label="Reservation occasion"
                 defaultValue="Dinner"
-                className="mt-1 w-full bg-[#171512] text-xs font-bold text-[#f8f3eb] outline-none"
+                className="mt-1 w-full bg-[var(--theme-bg-card,#171512)] text-xs font-bold text-[var(--theme-text-primary,#f8f3eb)] outline-none"
               >
                 <option>Dinner</option>
                 <option>Anniversary</option>
@@ -655,14 +655,14 @@ export function EmberSteakhouse() {
           </label>
           <button
             type="submit"
-            className="inline-flex min-h-16 items-center justify-center gap-3 bg-gradient-to-r from-[#a85f29] to-[#d88932] px-6 text-[0.62rem] font-black uppercase tracking-[0.17em] shadow-[0_0_30px_rgba(216,137,50,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_0_35px_rgba(216,137,50,0.3)]"
+            className="inline-flex min-h-16 items-center justify-center gap-3 bg-gradient-to-r from-[var(--theme-accent-secondary,#a85f29)] to-[var(--theme-accent-primary,#d88932)] px-6 text-[0.62rem] font-black uppercase tracking-[0.17em] text-[var(--theme-accent-contrast,#ffffff)] shadow-[0_0_30px_rgba(216,137,50,0.1)] transition hover:-translate-y-0.5 hover:shadow-[0_0_35px_rgba(216,137,50,0.3)]"
           >
             Reserve table <Icon name="arrow" className="h-4 w-4" />
           </button>
         </form>
         <p
           aria-live="polite"
-          className={`mx-auto mt-3 max-w-[1320px] text-center text-xs font-bold text-[#f0b35a] transition ${reserved ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"}`}
+          className={`mx-auto mt-3 max-w-[1320px] text-center text-xs font-bold text-[var(--theme-accent-primary,#f0b35a)] transition ${reserved ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"}`}
         >
           Your table request has been received. Our host will confirm shortly.
         </p>
@@ -670,7 +670,7 @@ export function EmberSteakhouse() {
 
       <section
         id="menu"
-        className="bg-[#070606] pb-24 pt-16 sm:pb-28 sm:pt-20 lg:pb-32"
+        className="bg-[var(--theme-bg-base,#070606)] pb-24 pt-16 sm:pb-28 sm:pt-20 lg:pb-32 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14 xl:px-20">
           <div
@@ -679,11 +679,11 @@ export function EmberSteakhouse() {
           >
             <div>
               <Eyebrow>Signature cuts</Eyebrow>
-              <h2 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] sm:text-6xl">
+              <h2 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] sm:text-6xl text-[var(--theme-text-primary,#f8f3eb)]">
                 From the ember.
               </h2>
             </div>
-            <p className="max-w-md text-sm leading-7 text-[#8f8479]">
+            <p className="max-w-md text-sm leading-7 text-[var(--theme-text-secondary,#8f8479)]">
               Prime beef, patient aging and a hard sear over open flame. Sauces
               are offered, never required.
             </p>
@@ -694,37 +694,37 @@ export function EmberSteakhouse() {
                 key={steak.name}
                 data-ember-reveal
                 style={{ transitionDelay: `${index * 70}ms` }}
-                className="group overflow-hidden border border-[#c67c2f]/25 bg-[#11100e] transition duration-500 hover:-translate-y-2 hover:border-[#d88932]/60 hover:shadow-[0_22px_60px_rgba(184,115,51,0.12)]"
+                className="group overflow-hidden border border-[var(--theme-border,#c67c2f)]/25 bg-[var(--theme-bg-card,#11100e)] transition duration-500 hover:-translate-y-2 hover:border-[var(--theme-accent-primary,#d88932)]/60 hover:shadow-[0_22px_60px_rgba(184,115,51,0.12)]"
               >
-                <div className="relative aspect-[1.18] overflow-hidden bg-[#171512]">
+                <div className="relative aspect-[1.18] overflow-hidden bg-[var(--theme-bg-base,#171512)]">
                   <img
                     src={steak.image}
                     alt={steak.alt}
                     loading="lazy"
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.08]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#11100e]/75 via-transparent to-transparent" />
-                  <span className="absolute left-4 top-4 border border-[#c67c2f]/30 bg-black/55 px-3 py-2 text-[0.52rem] font-bold uppercase tracking-[0.18em] text-[#f0b35a] backdrop-blur">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-card,#11100e)]/75 via-transparent to-transparent" />
+                  <span className="absolute left-4 top-4 border border-[var(--theme-border,#c67c2f)]/30 bg-black/55 px-3 py-2 text-[0.52rem] font-bold uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#f0b35a)] backdrop-blur">
                     Prime selection
                   </span>
                 </div>
                 <div className="relative min-h-48 p-5">
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-xl font-black uppercase tracking-[-0.02em]">
+                    <h3 className="text-xl font-black uppercase tracking-[-0.02em] text-[var(--theme-text-primary,#f8f3eb)]">
                       {steak.name}
                     </h3>
-                    <span className="font-black text-[#f0b35a]">
+                    <span className="font-black text-[var(--theme-accent-primary,#f0b35a)]">
                       {steak.price}
                     </span>
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-[#8f8479]">
+                  <p className="mt-3 text-sm leading-6 text-[var(--theme-text-secondary,#8f8479)]">
                     {steak.detail}
                   </p>
-                  <span className="absolute bottom-6 left-5 h-px w-9 bg-gradient-to-r from-[#b87333] to-[#f0b35a]" />
+                  <span className="absolute bottom-6 left-5 h-px w-9 bg-gradient-to-r from-[var(--theme-accent-secondary,#b87333)] to-[var(--theme-accent-primary,#f0b35a)]" />
                   <button
                     type="button"
                     aria-label={`View ${steak.name} details`}
-                    className="absolute bottom-4 right-4 grid h-9 w-9 place-items-center rounded-full border border-[#c67c2f]/40 text-[#d88932] transition group-hover:rotate-90 group-hover:border-[#f0b35a] group-hover:bg-[#b87333] group-hover:text-white"
+                    className="absolute bottom-4 right-4 grid h-9 w-9 place-items-center rounded-full border border-[var(--theme-border,#c67c2f)]/40 text-[var(--theme-accent-primary,#d88932)] transition group-hover:rotate-90 group-hover:border-[var(--theme-accent-primary,#f0b35a)] group-hover:bg-[var(--theme-accent-primary,#b87333)] group-hover:text-white"
                   >
                     <Icon name="plus" className="h-4 w-4" />
                   </button>
@@ -737,7 +737,7 @@ export function EmberSteakhouse() {
 
       <section
         id="specials"
-        className="border-y border-[#c67c2f]/20 bg-[#11100e] py-24 sm:py-28"
+        className="border-y border-[var(--theme-border,#c67c2f)]/20 bg-[var(--theme-bg-surface,#11100e)] py-24 sm:py-28 transition-colors duration-300"
       >
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 sm:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-20 lg:px-14 xl:px-20">
           <div className="relative" data-ember-reveal>
@@ -747,20 +747,20 @@ export function EmberSteakhouse() {
               loading="lazy"
               className="aspect-[1.22] w-full object-cover shadow-[0_28px_80px_rgba(0,0,0,0.45)]"
             />
-            <div className="absolute inset-0 border border-[#c67c2f]/25 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-            <div className="absolute bottom-5 left-5 border border-[#c67c2f]/35 bg-black/65 px-5 py-4 backdrop-blur">
-              <p className="text-[0.55rem] font-bold uppercase tracking-[0.2em] text-[#d88932]">
+            <div className="absolute inset-0 border border-[var(--theme-border,#c67c2f)]/25 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 border border-[var(--theme-border,#c67c2f)]/35 bg-black/65 px-5 py-4 backdrop-blur">
+              <p className="text-[0.55rem] font-bold uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#d88932)]">
                 The flame room
               </p>
-              <p className="mt-1 font-bold">Intimate seating · 42 guests</p>
+              <p className="mt-1 font-bold text-[var(--theme-text-primary,#f8f3eb)]">Intimate seating · 42 guests</p>
             </div>
           </div>
           <div data-ember-reveal>
             <Eyebrow>The Ember experience</Eyebrow>
-            <h2 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] sm:text-6xl">
+            <h2 className="mt-5 text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] sm:text-6xl text-[var(--theme-text-primary,#f8f3eb)]">
               Dinner, wrapped in firelight.
             </h2>
-            <p className="mt-6 text-base leading-8 text-[#a59b8f]">
+            <p className="mt-6 text-base leading-8 text-[var(--theme-text-secondary,#a59b8f)]">
               An intimate dining room wrapped in warm amber light, dark
               textures, and the quiet drama of open-fire cooking.
             </p>
@@ -773,7 +773,7 @@ export function EmberSteakhouse() {
               ].map((feature) => (
                 <span
                   key={feature}
-                  className="border border-[#c67c2f]/30 bg-[#171512] px-4 py-3 text-[0.62rem] font-bold uppercase tracking-[0.13em] text-[#c2b6a9]"
+                  className="border border-[var(--theme-border,#c67c2f)]/30 bg-[var(--theme-bg-card,#171512)] px-4 py-3 text-[0.62rem] font-bold uppercase tracking-[0.13em] text-[var(--theme-text-secondary,#c2b6a9)]"
                 >
                   {feature}
                 </span>
@@ -781,7 +781,7 @@ export function EmberSteakhouse() {
             </div>
             <a
               href="#reserve"
-              className="mt-9 inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.16em] text-[#f0b35a] transition hover:gap-5"
+              className="mt-9 inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#f0b35a)] transition hover:gap-5"
             >
               Plan your evening <Icon name="arrow" className="h-4 w-4" />
             </a>
@@ -789,39 +789,39 @@ export function EmberSteakhouse() {
         </div>
       </section>
 
-      <section id="wine" className="bg-[#070606] py-24 sm:py-28">
+      <section id="wine" className="bg-[var(--theme-bg-base,#070606)] py-24 sm:py-28 transition-colors duration-300">
         <div className="mx-auto grid max-w-[1440px] gap-4 px-5 sm:px-8 lg:grid-cols-2 lg:px-14 xl:px-20">
           <article
             data-ember-reveal
-            className="relative overflow-hidden border border-[#c67c2f]/25 bg-[#171512] p-7 sm:p-10"
+            className="relative overflow-hidden border border-[var(--theme-border,#c67c2f)]/25 bg-[var(--theme-bg-card,#171512)] p-7 sm:p-10"
           >
-            <span className="absolute -right-10 -top-10 text-[#b87333]/10">
+            <span className="absolute -right-10 -top-10 text-[var(--theme-accent-primary,#b87333)]/10">
               <Icon name="wine" className="h-52 w-52" />
             </span>
             <Eyebrow>The cellar</Eyebrow>
-            <h2 className="relative mt-5 max-w-xl text-3xl font-black uppercase leading-tight sm:text-5xl">
+            <h2 className="relative mt-5 max-w-xl text-3xl font-black uppercase leading-tight sm:text-5xl text-[var(--theme-text-primary,#f8f3eb)]">
               Bold reds. Old-world bottles. A pairing for every cut.
             </h2>
-            <p className="relative mt-5 max-w-lg text-sm leading-7 text-[#8f8479]">
+            <p className="relative mt-5 max-w-lg text-sm leading-7 text-[var(--theme-text-secondary,#8f8479)]">
               Explore a cellar led by Cabernet, Barolo and Rhône reds, with
               thoughtful bottles by the glass.
             </p>
           </article>
           <article
             data-ember-reveal
-            className="relative overflow-hidden border border-[#c67c2f]/25 bg-gradient-to-br from-[#2a160e] to-[#11100e] p-7 sm:p-10"
+            className="relative overflow-hidden border border-[var(--theme-border,#c67c2f)]/25 bg-gradient-to-br from-[#2a160e] to-[var(--theme-bg-card,#11100e)] p-7 sm:p-10"
           >
             <Eyebrow>Private dining</Eyebrow>
-            <h2 className="mt-5 max-w-xl text-3xl font-black uppercase leading-tight sm:text-5xl">
+            <h2 className="mt-5 max-w-xl text-3xl font-black uppercase leading-tight sm:text-5xl text-[var(--theme-text-primary,#f8f3eb)]">
               Your room. Your menu. Our fire.
             </h2>
-            <p className="mt-5 max-w-lg text-sm leading-7 text-[#8f8479]">
+            <p className="mt-5 max-w-lg text-sm leading-7 text-[var(--theme-text-secondary,#8f8479)]">
               A twelve-seat private room with dedicated service, custom tasting
               menus and curated pairings.
             </p>
             <a
               href="#reserve"
-              className="mt-8 inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.15em] text-[#f0b35a]"
+              className="mt-8 inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.15em] text-[var(--theme-accent-primary,#f0b35a)]"
             >
               Make an inquiry <Icon name="arrow" className="h-4 w-4" />
             </a>
@@ -831,12 +831,12 @@ export function EmberSteakhouse() {
 
       <section
         id="reviews"
-        className="border-y border-[#c67c2f]/20 bg-[#11100e] py-24 sm:py-28"
+        className="border-y border-[var(--theme-border,#c67c2f)]/20 bg-[var(--theme-bg-surface,#11100e)] py-24 sm:py-28 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14 xl:px-20">
           <div className="text-center" data-ember-reveal>
             <Eyebrow>Guest notes</Eyebrow>
-            <h2 className="mt-5 text-4xl font-black uppercase tracking-[-0.04em] sm:text-6xl">
+            <h2 className="mt-5 text-4xl font-black uppercase tracking-[-0.04em] sm:text-6xl text-[var(--theme-text-primary,#f8f3eb)]">
               After the last course.
             </h2>
           </div>
@@ -858,13 +858,13 @@ export function EmberSteakhouse() {
               <blockquote
                 key={name}
                 data-ember-reveal
-                className="border border-[#c67c2f]/20 bg-[#171512] p-7 transition hover:border-[#d88932]/50"
+                className="border border-[var(--theme-border,#c67c2f)]/20 bg-[var(--theme-bg-card,#171512)] p-7 transition hover:border-[var(--theme-accent-primary,#d88932)]/50"
               >
-                <Icon name="quote" className="h-7 w-7 text-[#b87333]" />
-                <p className="mt-6 text-lg font-bold leading-8 text-[#d8cfc5]">
+                <Icon name="quote" className="h-7 w-7 text-[var(--theme-accent-secondary,#b87333)]" />
+                <p className="mt-6 text-lg font-bold leading-8 text-[var(--theme-text-primary,#d8cfc5)]">
                   “{quote}”
                 </p>
-                <footer className="mt-7 border-t border-[#c67c2f]/15 pt-4 text-[0.6rem] font-black uppercase tracking-[0.18em] text-[#d88932]">
+                <footer className="mt-7 border-t border-[var(--theme-border,#c67c2f)]/15 pt-4 text-[0.6rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#d88932)]">
                   {name} · Ember guest
                 </footer>
               </blockquote>
@@ -881,70 +881,70 @@ export function EmberSteakhouse() {
           loading="lazy"
           className="absolute inset-0 -z-20 h-full w-full object-cover object-center opacity-35"
         />
-        <div className="absolute inset-0 -z-10 bg-[#070606]/78" />
+        <div className="absolute inset-0 -z-10 bg-[var(--theme-bg-base,#070606)]/78" />
         <div className="mx-auto max-w-3xl px-5" data-ember-reveal>
-          <p className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-[#c67c2f]/40 text-[#f0b35a]">
+          <p className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-[var(--theme-border,#c67c2f)]/40 text-[var(--theme-accent-primary,#f0b35a)]">
             <Icon name="flame" />
           </p>
-          <h2 className="mt-7 text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] sm:text-6xl">
+          <h2 className="mt-7 text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] sm:text-6xl text-[var(--theme-text-primary,#f8f3eb)]">
             Your evening begins at the ember.
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-[#a59b8f]">
+          <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-[var(--theme-text-secondary,#a59b8f)]">
             Dinner nightly from 5 PM. Private dining and celebration menus
             available.
           </p>
           <a
             href="#reserve"
-            className="mt-8 inline-flex items-center gap-3 bg-gradient-to-r from-[#a85f29] to-[#d88932] px-8 py-4 text-xs font-black uppercase tracking-[0.16em] transition hover:-translate-y-1"
+            className="mt-8 inline-flex items-center gap-3 bg-gradient-to-r from-[var(--theme-accent-secondary,#a85f29)] to-[var(--theme-accent-primary,#d88932)] px-8 py-4 text-xs font-black uppercase tracking-[0.16em] text-[var(--theme-accent-contrast,#ffffff)] transition hover:-translate-y-1"
           >
             Reserve table <Icon name="arrow" className="h-4 w-4" />
           </a>
         </div>
       </section>
 
-      <footer className="border-t border-[#c67c2f]/20 bg-[#070606] pb-28 pt-12 md:pb-12">
+      <footer className="border-t border-[var(--theme-border,#c67c2f)]/20 bg-[var(--theme-bg-base,#070606)] pb-28 pt-12 md:pb-12 transition-colors duration-300">
         <div className="mx-auto grid max-w-[1440px] gap-8 px-5 text-sm sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr] lg:px-14 xl:px-20">
           <div>
-            <p className="text-xl font-black uppercase tracking-[0.16em]">
+            <p className="text-xl font-black uppercase tracking-[0.16em] text-[var(--theme-text-primary,#f8f3eb)]">
               Ember
             </p>
-            <p className="mt-3 max-w-sm leading-7 text-[#746b62]">
+            <p className="mt-3 max-w-sm leading-7 text-[var(--theme-text-muted,#746b62)]">
               Prime cuts, open fire and an intimate room made for unhurried
               evenings.
             </p>
           </div>
           <div>
-            <p className="text-[0.6rem] font-black uppercase tracking-[0.18em] text-[#d88932]">
+            <p className="text-[0.6rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#d88932)]">
               Visit
             </p>
-            <p className="mt-3 leading-7 text-[#8f8479]">
+            <p className="mt-3 leading-7 text-[var(--theme-text-secondary,#8f8479)]">
               19 Ashford Lane
               <br />
               New York, NY 10013
             </p>
           </div>
           <div>
-            <p className="text-[0.6rem] font-black uppercase tracking-[0.18em] text-[#d88932]">
+            <p className="text-[0.6rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#d88932)]">
               Hours
             </p>
-            <p className="mt-3 leading-7 text-[#8f8479]">
+            <p className="mt-3 leading-7 text-[var(--theme-text-secondary,#8f8479)]">
               Sun–Thu · 5–11 PM
               <br />
               Fri–Sat · 5 PM–12 AM
             </p>
           </div>
           <div>
-            <p className="text-[0.6rem] font-black uppercase tracking-[0.18em] text-[#d88932]">
+            <p className="text-[0.6rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#d88932)]">
               Connect
             </p>
-            <p className="mt-3 leading-7 text-[#8f8479]">
+            <p className="mt-3 leading-7 text-[var(--theme-text-secondary,#8f8479)]">
               (555) 017-7700
               <br />
               Instagram · Facebook
             </p>
             <Link
               to="/restaurant"
-              className="mt-3 inline-block font-bold text-[#f0b35a]"
+              className="mt-3 inline-block font-bold text-[var(--theme-accent-primary,#f0b35a)]"
             >
               ← Restaurant collection
             </Link>

@@ -234,8 +234,8 @@ function BrewNestNav() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#fbf6ef]/96 backdrop-blur-xl border-b border-[#d7c7b3] shadow-[0_8px_30px_rgba(45,33,26,0.08)] py-2.5 sm:py-3"
-          : "bg-[#fbf6ef]/92 backdrop-blur-md border-b border-[#d7c7b3]/60 py-3 sm:py-4"
+          ? "bg-[var(--theme-bg-surface,#fbf6ef)]/96 backdrop-blur-xl border-b border-[var(--theme-border,#d7c7b3)] shadow-[0_8px_30px_rgba(45,33,26,0.08)] py-2.5 sm:py-3"
+          : "bg-[var(--theme-bg-surface,#fbf6ef)]/92 backdrop-blur-md border-b border-[var(--theme-border,#d7c7b3)]/60 py-3 sm:py-4"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -249,24 +249,30 @@ function BrewNestNav() {
           }}
           className="group flex items-center gap-2.5 sm:gap-3 select-none"
         >
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#caa56f] via-[#b88755] to-[#6c4a34] text-white shadow-md shadow-[#2d211a]/20 ring-1 ring-white/40 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">
+          <div
+            className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1 ring-1 ring-white/30"
+            style={{
+              background:
+                "var(--theme-accent-gradient, linear-gradient(135deg, #caa56f, #6c4a34))",
+            }}
+          >
             <Coffee className="h-5 w-5" />
             <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d9b274] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#caa56f]"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--theme-accent-primary,#caa56f)] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--theme-accent-primary,#caa56f)]"></span>
             </span>
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <span className="font-serif text-lg sm:text-xl font-black tracking-tight text-[#2d211a] leading-none">
-                BrewNest<span className="text-[#caa56f]">.</span>
+              <span className="font-serif text-lg sm:text-xl font-black tracking-tight text-[var(--theme-text-primary,#2d211a)] leading-none">
+                BrewNest<span className="text-[var(--theme-accent-primary,#caa56f)]">.</span>
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/30 bg-emerald-500/10 px-2 py-0.5 text-[9.5px] font-bold text-emerald-800">
+              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-600/30 bg-emerald-500/10 px-2 py-0.5 text-[9.5px] font-bold text-emerald-800 dark:text-emerald-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-600"></span>
                 <span>Open</span>
               </span>
             </div>
-            <span className="mt-0.5 text-[8.5px] sm:text-[9px] font-black uppercase tracking-[0.2em] text-[#8d6748]">
+            <span className="mt-0.5 text-[8.5px] sm:text-[9px] font-black uppercase tracking-[0.2em] text-[var(--theme-text-muted,#8d6748)]">
               Artisan Roasters &amp; Slow Bar
             </span>
           </div>
@@ -275,7 +281,7 @@ function BrewNestNav() {
         {/* Center Desktop Navigation Pills */}
         <nav
           aria-label="BrewNest Main Navigation"
-          className="hidden md:flex items-center gap-1 rounded-full border border-[#d7c7b3]/70 bg-white/60 p-1 backdrop-blur-md shadow-2xs"
+          className="hidden md:flex items-center gap-1 rounded-full border border-[var(--theme-border,#d7c7b3)]/70 bg-[var(--theme-bg-card,#ffffff)]/60 p-1 backdrop-blur-md shadow-2xs"
         >
           {navItems.map((item) => {
             const isActive = activeHash === item.href;
@@ -287,8 +293,8 @@ function BrewNestNav() {
                 onClick={() => setActiveHash(item.href)}
                 className={`relative rounded-full px-3.5 py-1.5 text-xs font-bold transition-all duration-200 ${
                   isActive
-                    ? "bg-[#2d211a] text-white shadow-xs font-black"
-                    : "text-[#5a4638] hover:bg-[#6c4a34]/10 hover:text-[#6c4a34]"
+                    ? "bg-[var(--theme-accent-primary,#2d211a)] text-white shadow-xs font-black"
+                    : "text-[var(--theme-text-secondary,#5a4638)] hover:text-[var(--theme-accent-primary,#6c4a34)] hover:bg-[var(--theme-accent-primary-light,rgba(108,74,52,0.08))]"
                 }`}
               >
                 {item.label}
@@ -300,25 +306,29 @@ function BrewNestNav() {
         {/* Right Desktop CTA & Mobile Toggle */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Quick Hours Pill (Large screens) */}
-          <div className="hidden lg:flex items-center gap-2 text-xs font-semibold text-[#6c4a34] bg-white/70 border border-[#d7c7b3]/80 rounded-full px-3 py-1.5">
-            <Clock className="h-3.5 w-3.5 text-[#b88755]" />
+          <div className="hidden lg:flex items-center gap-2 text-xs font-semibold text-[var(--theme-text-secondary,#6c4a34)] bg-[var(--theme-bg-surface,#ffffff)]/70 border border-[var(--theme-border,#d7c7b3)]/80 rounded-full px-3 py-1.5">
+            <Clock className="h-3.5 w-3.5 text-[var(--theme-accent-primary,#b88755)]" />
             <span>6:30 AM – 7 PM</span>
           </div>
 
           {/* Primary CTA (Desktop & Tablet) */}
           <a
             href="#visit"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[#2d211a] px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-[#2d211a]/15 transition-all duration-300 hover:bg-[#6c4a34] hover:-translate-y-0.5 active:translate-y-0"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-black uppercase tracking-wider text-white shadow-md transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0"
+            style={{
+              background:
+                "var(--theme-accent-gradient, linear-gradient(135deg, #2d211a, #6c4a34))",
+            }}
           >
             <span>Visit Cafe</span>
-            <ArrowRight className="h-3.5 w-3.5 text-[#d9b274]" />
+            <ArrowRight className="h-3.5 w-3.5 text-[var(--theme-accent-primary,#d9b274)]" />
           </a>
 
           {/* Mobile Visit Icon Button */}
           <a
             href="#visit"
             aria-label="Visit Cafe Location"
-            className="sm:hidden flex h-10 w-10 items-center justify-center rounded-xl border border-[#d7c7b3] bg-white/80 text-[#6c4a34] shadow-xs active:scale-95 transition"
+            className="sm:hidden flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--theme-border,#d7c7b3)] bg-[var(--theme-bg-surface,#ffffff)]/80 text-[var(--theme-text-secondary,#6c4a34)] shadow-xs active:scale-95 transition"
           >
             <MapPin className="h-4 w-4" />
           </a>
@@ -329,22 +339,22 @@ function BrewNestNav() {
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileMenuOpen}
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#d7c7b3] bg-white/80 text-[#2d211a] transition hover:bg-white hover:border-[#6c4a34] md:hidden shadow-xs active:scale-95"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--theme-border,#d7c7b3)] bg-[var(--theme-bg-surface,#ffffff)]/80 text-[var(--theme-text-primary,#2d211a)] transition hover:border-[var(--theme-accent-primary,#6c4a34)] md:hidden shadow-xs active:scale-95"
           >
             <span className="sr-only">Toggle navigation menu</span>
             <div className="relative h-4 w-5">
               <span
-                className={`absolute left-0 top-0 block h-0.5 w-5 rounded-full bg-[#2d211a] transition-all duration-300 ${
+                className={`absolute left-0 top-0 block h-0.5 w-5 rounded-full bg-[var(--theme-text-primary,#2d211a)] transition-all duration-300 ${
                   isMobileMenuOpen ? "top-2 rotate-45" : ""
                 }`}
               />
               <span
-                className={`absolute left-0 top-1.5 block h-0.5 w-5 rounded-full bg-[#2d211a] transition-all duration-200 ${
+                className={`absolute left-0 top-1.5 block h-0.5 w-5 rounded-full bg-[var(--theme-text-primary,#2d211a)] transition-all duration-200 ${
                   isMobileMenuOpen ? "opacity-0" : ""
                 }`}
               />
               <span
-                className={`absolute left-0 top-3 block h-0.5 w-5 rounded-full bg-[#2d211a] transition-all duration-300 ${
+                className={`absolute left-0 top-3 block h-0.5 w-5 rounded-full bg-[var(--theme-text-primary,#2d211a)] transition-all duration-300 ${
                   isMobileMenuOpen ? "top-2 -rotate-45" : ""
                 }`}
               />
@@ -358,22 +368,22 @@ function BrewNestNav() {
         <>
           {/* Backdrop Dimmer */}
           <div
-            className="fixed inset-0 top-[58px] sm:top-[66px] z-40 bg-black/40 backdrop-blur-xs md:hidden"
+            className="fixed inset-0 top-[58px] sm:top-[66px] z-40 bg-black/50 backdrop-blur-xs md:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
           {/* Slide-down Sheet */}
           <div
-            className="relative z-50 border-b border-[#d7c7b3] bg-[#fbf6ef]/98 px-4 pt-3 pb-6 shadow-2xl backdrop-blur-2xl md:hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto"
+            className="relative z-50 border-b border-[var(--theme-border,#d7c7b3)] bg-[var(--theme-bg-surface,#fbf6ef)]/98 px-4 pt-3 pb-6 shadow-2xl backdrop-blur-2xl md:hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto"
           >
             {/* Quick Status Bar */}
-            <div className="mb-3 flex items-center justify-between rounded-xl bg-white/80 border border-[#e5d9ca] px-3.5 py-2 text-xs">
-              <span className="flex items-center gap-2 font-bold text-[#6c4a34]">
+            <div className="mb-3 flex items-center justify-between rounded-xl bg-[var(--theme-bg-card,#ffffff)]/80 border border-[var(--theme-border,#e5d9ca)] px-3.5 py-2 text-xs">
+              <span className="flex items-center gap-2 font-bold text-[var(--theme-text-secondary,#6c4a34)]">
                 <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
                 Slow Bar Serving Now
               </span>
-              <span className="text-[11px] font-medium text-[#8d6748]">
+              <span className="text-[11px] font-medium text-[var(--theme-text-muted,#8d6748)]">
                 Old Town Market
               </span>
             </div>
@@ -393,16 +403,16 @@ function BrewNestNav() {
                     }}
                     className={`flex items-center justify-between rounded-xl p-2.5 transition-all ${
                       isActive
-                        ? "bg-[#2d211a] text-white shadow-sm"
-                        : "bg-white/70 text-[#2d211a] hover:bg-white active:bg-[#f0e3d2]"
+                        ? "bg-[var(--theme-accent-primary,#2d211a)] text-white shadow-sm"
+                        : "bg-[var(--theme-bg-card,#ffffff)]/70 text-[var(--theme-text-primary,#2d211a)] hover:bg-[var(--theme-bg-card,#ffffff)]"
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <div
                         className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
                           isActive
-                            ? "bg-white/15 text-[#d9b274]"
-                            : "bg-[#f0e3d2] text-[#6c4a34]"
+                            ? "bg-white/20 text-white"
+                            : "bg-[var(--theme-bg-card,#f0e3d2)] text-[var(--theme-text-secondary,#6c4a34)]"
                         }`}
                       >
                         <IconComponent className="h-4.5 w-4.5" />
@@ -413,7 +423,7 @@ function BrewNestNav() {
                         </div>
                         <div
                           className={`text-[11px] ${
-                            isActive ? "text-white/70" : "text-[#7a6657]"
+                            isActive ? "text-white/80" : "text-[var(--theme-text-muted,#7a6657)]"
                           }`}
                         >
                           {item.desc}
@@ -422,7 +432,7 @@ function BrewNestNav() {
                     </div>
                     <ChevronRight
                       className={`h-4 w-4 shrink-0 ${
-                        isActive ? "text-[#d9b274]" : "text-[#b88755]"
+                        isActive ? "text-white" : "text-[var(--theme-accent-primary,#b88755)]"
                       }`}
                     />
                   </a>
@@ -431,19 +441,19 @@ function BrewNestNav() {
             </nav>
 
             {/* Cafe Details Card */}
-            <div className="mt-4 rounded-2xl border border-[#d7c7b3] bg-white/90 p-4 shadow-sm">
-              <div className="grid grid-cols-2 gap-3 text-xs text-[#5f4a3d] border-b border-[#ebdcd0] pb-3 mb-3">
+            <div className="mt-4 rounded-2xl border border-[var(--theme-border,#d7c7b3)] bg-[var(--theme-bg-card,#ffffff)]/90 p-4 shadow-sm">
+              <div className="grid grid-cols-2 gap-3 text-xs text-[var(--theme-text-secondary,#5f4a3d)] border-b border-[var(--theme-border,#ebdcd0)] pb-3 mb-3">
                 <div className="flex items-start gap-2">
-                  <Clock className="h-3.5 w-3.5 text-[#b88755] shrink-0 mt-0.5" />
+                  <Clock className="h-3.5 w-3.5 text-[var(--theme-accent-primary,#b88755)] shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold text-[#2d211a] block">Hours</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#2d211a)] block">Hours</span>
                     <span>Daily 6:30am–7pm</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <MapPin className="h-3.5 w-3.5 text-[#b88755] shrink-0 mt-0.5" />
+                  <MapPin className="h-3.5 w-3.5 text-[var(--theme-accent-primary,#b88755)] shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold text-[#2d211a] block">Location</span>
+                    <span className="font-bold text-[var(--theme-text-primary,#2d211a)] block">Location</span>
                     <span>Old Town Market</span>
                   </div>
                 </div>
@@ -453,16 +463,20 @@ function BrewNestNav() {
                 <a
                   href="#visit"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#2d211a] py-3 text-center text-xs font-black uppercase tracking-wider text-white shadow-md hover:bg-[#6c4a34] transition active:scale-[0.99]"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl py-3 text-center text-xs font-black uppercase tracking-wider text-white shadow-md transition active:scale-[0.99]"
+                  style={{
+                    background:
+                      "var(--theme-accent-gradient, linear-gradient(135deg, #2d211a, #6c4a34))",
+                  }}
                 >
-                  <Coffee className="h-4 w-4 text-[#d9b274]" />
+                  <Coffee className="h-4 w-4 text-[var(--theme-accent-primary,#d9b274)]" />
                   <span>Plan Your Visit</span>
                 </a>
                 <a
                   href="tel:555-123-4567"
-                  className="flex items-center justify-center gap-2 rounded-xl border border-[#d7c7b3] bg-white py-2.5 text-xs font-bold text-[#6c4a34] hover:bg-[#f6efe5] transition"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-[var(--theme-border,#d7c7b3)] bg-[var(--theme-bg-surface,#ffffff)] py-2.5 text-xs font-bold text-[var(--theme-text-secondary,#6c4a34)] hover:opacity-90 transition"
                 >
-                  <Phone className="h-3.5 w-3.5 text-[#b88755]" />
+                  <Phone className="h-3.5 w-3.5 text-[var(--theme-accent-primary,#b88755)]" />
                   <span>Call: (555) 123-4567</span>
                 </a>
               </div>
@@ -476,18 +490,19 @@ function BrewNestNav() {
 
 export function BrewNestCoffee() {
   return (
-    <main className="brand-motion motion-brewnest bg-[#f6efe5] text-[#251c16]">
+    <main className="brand-motion motion-brewnest bg-[var(--theme-bg-base,#f6efe5)] text-[var(--theme-text-primary,#251c16)] min-h-screen transition-colors duration-300">
       <BrewNestNav />
 
-      <section className="relative isolate overflow-hidden border-b border-[#4c382b] bg-[#241a14] pt-20 text-[#f8f1e8] md:pt-24">
+      {/* Hero Section */}
+      <section className="relative isolate overflow-hidden border-b border-[var(--theme-border,#4c382b)] bg-[var(--theme-bg-dark,#241a14)] pt-20 text-[#f8f1e8] md:pt-24">
         <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_18%_24%,rgba(192,145,94,0.18),transparent_28%),linear-gradient(115deg,#241a14_0%,#2d211a_52%,#17100c_100%)]" />
         <div className="absolute inset-0 -z-10 opacity-[0.045] [background-image:linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(#fff_1px,transparent_1px)] [background-size:42px_42px]" />
-        <div className="absolute -left-32 bottom-0 -z-10 h-96 w-96 rounded-full bg-[#b88755]/10 blur-[100px]" />
+        <div className="absolute -left-32 bottom-0 -z-10 h-96 w-96 rounded-full bg-[var(--theme-accent-primary,#b88755)]/10 blur-[100px]" />
 
         <Container className="relative pb-14 pt-10 sm:pb-20 md:pt-14 lg:pb-24">
-          <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 text-[0.61rem] font-bold uppercase tracking-[0.18em] text-white/48">
-            <span className="flex items-center gap-2 text-[#d9b274]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#d9b274] shadow-[0_0_10px_#d9b274]" />
+          <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 text-[0.61rem] font-bold uppercase tracking-[0.18em] text-white/50">
+            <span className="flex items-center gap-2 text-[var(--theme-accent-primary,#d9b274)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--theme-accent-primary,#d9b274)] shadow-[0_0_10px_currentColor]" />
               Slow bar open now
             </span>
             <span>Old Town Market · 6:30 AM–7 PM</span>
@@ -495,34 +510,38 @@ export function BrewNestCoffee() {
 
           <div className="grid items-center gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:gap-16">
             <div className="relative z-10">
-              <p className="flex items-center gap-3 text-[0.68rem] font-black uppercase tracking-[0.22em] text-[#d9b274]">
-                <span className="h-px w-9 bg-[#d9b274]" />
+              <p className="flex items-center gap-3 text-[0.68rem] font-black uppercase tracking-[0.22em] text-[var(--theme-accent-primary,#d9b274)]">
+                <span className="h-px w-9 bg-[var(--theme-accent-primary,#d9b274)]" />
                 Roasted slowly · poured with care
               </p>
               <h1 className="mt-7 max-w-3xl text-[clamp(3.6rem,7vw,7.1rem)] font-black leading-[0.86] tracking-[-0.06em]">
                 Coffee worth
                 <br />
-                <span className="font-serif font-normal italic text-[#d9b274]">
+                <span className="font-serif font-normal italic text-[var(--theme-accent-primary,#d9b274)]">
                   slowing down for.
                 </span>
               </h1>
-              <p className="mt-7 max-w-xl text-base leading-8 text-white/58 sm:text-lg">
+              <p className="mt-7 max-w-xl text-base leading-8 text-white/65 sm:text-lg">
                 Hand-pulled espresso, small-batch roasts, and warm pastry
                 shelves in a room designed to make mornings feel unhurried.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <CTAButton
+                <a
                   href="#menu"
-                  size="lg"
-                  className="rounded-full bg-[#d4ad78] text-[#241a14] shadow-xl shadow-black/15 hover:bg-[#edd0a8]"
+                  className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-black transition-all duration-300 hover:opacity-90 hover:scale-[1.02] shadow-xl shadow-black/20"
+                  style={{
+                    background:
+                      "var(--theme-accent-gradient, linear-gradient(135deg, #d4ad78, #edd0a8))",
+                    color: "var(--theme-bg-dark, #241a14)",
+                  }}
                 >
                   Explore Today's Menu
-                </CTAButton>
+                </a>
                 <CTAButton
                   href="#visit"
                   variant="outline"
                   size="lg"
-                  className="rounded-full border-white/30 text-white hover:border-white/55 hover:bg-white/8"
+                  className="rounded-full border-white/30 text-white hover:border-white/55 hover:bg-white/10"
                 >
                   Plan a Visit
                 </CTAButton>
@@ -541,7 +560,7 @@ export function BrewNestCoffee() {
                     <p className="text-xl font-black text-[#f8f1e8] sm:text-2xl">
                       {stat.value}
                     </p>
-                    <p className="mt-1 text-[0.5rem] font-black uppercase tracking-[0.15em] text-white/38 sm:text-[0.58rem]">
+                    <p className="mt-1 text-[0.5rem] font-black uppercase tracking-[0.15em] text-white/40 sm:text-[0.58rem]">
                       {stat.label}
                     </p>
                   </div>
@@ -550,8 +569,8 @@ export function BrewNestCoffee() {
             </div>
 
             <div className="relative mx-auto w-full max-w-2xl pb-8 sm:pb-12">
-              <div className="absolute -right-5 -top-5 h-48 w-48 rounded-full border border-[#d9b274]/20 sm:-right-10 sm:-top-10 sm:h-72 sm:w-72" />
-              <div className="absolute -right-1 top-7 h-28 w-28 rounded-full border border-[#d9b274]/10 sm:h-44 sm:w-44" />
+              <div className="absolute -right-5 -top-5 h-48 w-48 rounded-full border border-[var(--theme-accent-primary,#d9b274)]/20 sm:-right-10 sm:-top-10 sm:h-72 sm:w-72" />
+              <div className="absolute -right-1 top-7 h-28 w-28 rounded-full border border-[var(--theme-accent-primary,#d9b274)]/10 sm:h-44 sm:w-44" />
               <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#3a2a20] shadow-[0_35px_90px_rgba(0,0,0,0.42)] sm:rounded-[2.8rem]">
                 <img
                   src={signatureDrinks[0].image}
@@ -561,31 +580,38 @@ export function BrewNestCoffee() {
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(26,17,12,0.7)_100%)]" />
                 <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-5 p-6 sm:p-8">
                   <div>
-                    <p className="text-[0.56rem] font-black uppercase tracking-[0.2em] text-[#e4bd86]">
+                    <p className="text-[0.56rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#e4bd86)]">
                       House signature
                     </p>
-                    <p className="mt-2 text-2xl font-black sm:text-3xl">
+                    <p className="mt-2 text-2xl font-black sm:text-3xl text-white">
                       Velvet Roast Latte
                     </p>
-                    <p className="mt-1 text-xs text-white/55">
+                    <p className="mt-1 text-xs text-white/60">
                       Caramel · cocoa · silky finish
                     </p>
                   </div>
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#f8f1e8] text-sm font-black text-[#241a14]">
+                  <span
+                    className="grid h-12 w-12 shrink-0 place-items-center rounded-full text-sm font-black shadow-md"
+                    style={{
+                      background:
+                        "var(--theme-accent-primary, #f8f1e8)",
+                      color: "var(--theme-bg-dark, #241a14)",
+                    }}
+                  >
                     $6.50
                   </span>
                 </div>
               </div>
 
-              <div className="absolute -bottom-1 left-4 rounded-2xl border border-[#dfc69f]/30 bg-[#f8f1e8] p-4 text-[#2d211a] shadow-2xl sm:-left-7 sm:bottom-2 sm:p-5">
-                <p className="text-[0.52rem] font-black uppercase tracking-[0.18em] text-[#8d6748]">
+              <div className="absolute -bottom-1 left-4 rounded-2xl border border-[var(--theme-border,#dfc69f)]/30 bg-[var(--theme-bg-surface,#f8f1e8)] p-4 text-[var(--theme-text-primary,#2d211a)] shadow-2xl sm:-left-7 sm:bottom-2 sm:p-5">
+                <p className="text-[0.52rem] font-black uppercase tracking-[0.18em] text-[var(--theme-text-muted,#8d6748)]">
                   Barista note
                 </p>
                 <p className="mt-2 max-w-[12rem] text-sm font-bold leading-5">
                   Best enjoyed here, without checking the clock.
                 </p>
               </div>
-              <div className="absolute right-4 top-4 rounded-full border border-white/15 bg-[#241a14]/75 px-4 py-2 text-[0.54rem] font-black uppercase tracking-[0.16em] text-[#e4bd86] backdrop-blur sm:right-6 sm:top-6">
+              <div className="absolute right-4 top-4 rounded-full border border-white/15 bg-black/60 px-4 py-2 text-[0.54rem] font-black uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#e4bd86)] backdrop-blur sm:right-6 sm:top-6">
                 Guest favorite
               </div>
             </div>
@@ -593,46 +619,47 @@ export function BrewNestCoffee() {
         </Container>
       </section>
 
+      {/* About Section */}
       <section id="about" className="py-20 md:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="rounded-[2rem] border border-[#e2d4c3] bg-white/80 p-8 shadow-sm">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-[#8d6748]">
+            <div className="rounded-[2rem] border border-[var(--theme-border,#e2d4c3)] bg-[var(--theme-bg-surface,rgba(255,255,255,0.85))] p-8 shadow-sm">
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#8d6748)]">
                 About BrewNest
               </p>
-              <p className="mt-8 text-5xl font-black text-[#2d211a]">
+              <p className="mt-8 text-5xl font-black text-[var(--theme-text-primary,#2d211a)]">
                 Since 2018
               </p>
-              <p className="mt-4 text-lg leading-8 text-[#5f4a3d]">
+              <p className="mt-4 text-lg leading-8 text-[var(--theme-text-secondary,#5f4a3d)]">
                 We built BrewNest to feel like the best part of a good morning:
                 steady, welcoming, and full of care.
               </p>
             </div>
             <div>
-              <h2 className="text-4xl font-black leading-tight text-[#2d211a] md:text-5xl">
+              <h2 className="text-4xl font-black leading-tight text-[var(--theme-text-primary,#2d211a)] md:text-5xl">
                 A coffee house shaped by craft, comfort, and familiar faces.
               </h2>
-              <p className="mt-6 text-lg leading-8 text-[#5f4a3d]">
+              <p className="mt-6 text-lg leading-8 text-[var(--theme-text-secondary,#5f4a3d)]">
                 BrewNest works closely with local roasting partners, seasonal
                 bakers, and a bar team that values consistency as much as
                 hospitality. The result is a premium cafe experience that still
                 feels deeply neighborhood.
               </p>
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl bg-[#f0e3d2] p-5">
-                  <p className="text-sm font-black uppercase tracking-[0.16em] text-[#8d6748]">
+                <div className="rounded-2xl border border-[var(--theme-border,transparent)] bg-[var(--theme-bg-card,#f0e3d2)] p-5">
+                  <p className="text-sm font-black uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#8d6748)]">
                     Fresh every morning
                   </p>
-                  <p className="mt-2 text-[#5f4a3d]">
+                  <p className="mt-2 text-[var(--theme-text-secondary,#5f4a3d)]">
                     Espresso dialed in daily, pastries delivered warm, and beans
                     resting at their ideal window.
                   </p>
                 </div>
-                <div className="rounded-2xl bg-[#f9f2e8] p-5">
-                  <p className="text-sm font-black uppercase tracking-[0.16em] text-[#8d6748]">
+                <div className="rounded-2xl border border-[var(--theme-border,transparent)] bg-[var(--theme-bg-surface,#f9f2e8)] p-5">
+                  <p className="text-sm font-black uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#8d6748)]">
                     Made to linger
                   </p>
-                  <p className="mt-2 text-[#5f4a3d]">
+                  <p className="mt-2 text-[var(--theme-text-secondary,#5f4a3d)]">
                     Quiet corners, generous seating, and a pace that gives your
                     morning room to unfold.
                   </p>
@@ -643,21 +670,22 @@ export function BrewNestCoffee() {
         </Container>
       </section>
 
+      {/* Featured Coffee Section */}
       <section
         id="coffee"
-        className="border-y border-[#e2d4c3] bg-[#fbf6ef] py-20 md:py-28"
+        className="border-y border-[var(--theme-border,#e2d4c3)] bg-[var(--theme-bg-surface,#fbf6ef)] py-20 md:py-28"
       >
         <Container>
           <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#8d6748]">
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[var(--theme-accent-primary,#8d6748)]">
                 Featured Coffee
               </p>
-              <h2 className="mt-3 text-4xl font-black leading-tight text-[#2d211a] md:text-5xl">
+              <h2 className="mt-3 text-4xl font-black leading-tight text-[var(--theme-text-primary,#2d211a)] md:text-5xl">
                 Our signature pours, built to feel memorable.
               </h2>
             </div>
-            <p className="max-w-md text-base leading-7 text-[#5f4a3d]">
+            <p className="max-w-md text-base leading-7 text-[var(--theme-text-secondary,#5f4a3d)]">
               A tighter, more thoughtful menu of drinks that regulars come back
               for and new guests ask about by name.
             </p>
@@ -667,7 +695,7 @@ export function BrewNestCoffee() {
             {signatureDrinks.map((drink) => (
               <article
                 key={drink.name}
-                className="group rounded-[2rem] border border-[#e2d4c3] bg-white/85 p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="group rounded-[2rem] border border-[var(--theme-border,#e2d4c3)] bg-[var(--theme-bg-card,rgba(255,255,255,0.85))] p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 <div
                   className={`relative h-48 overflow-hidden rounded-[1.5rem] bg-gradient-to-br ${drink.background}`}
@@ -678,28 +706,26 @@ export function BrewNestCoffee() {
                     className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2d211a]/50 via-transparent to-transparent" />
-                  <div className="absolute left-4 top-4 rounded-full bg-white/85 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#6c4a34] shadow-sm">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--theme-text-primary,#6c4a34)] shadow-sm">
                     {drink.label}
-                  </div>
-                  <div className="absolute bottom-5 right-5 grid gap-2">
-                    {Array.from({ length: 4 }).map((_, index) => (
-                      <span
-                        key={index}
-                        className="h-3 w-5 rounded-full border border-white/50 bg-white/20"
-                      />
-                    ))}
                   </div>
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
-                  <h3 className="text-2xl font-black text-[#2d211a]">
+                  <h3 className="text-2xl font-black text-[var(--theme-text-primary,#2d211a)]">
                     {drink.name}
                   </h3>
-                  <span className="rounded-full bg-[#2d211a] px-3 py-1 text-sm font-black text-white">
+                  <span
+                    className="rounded-full px-3 py-1 text-sm font-black text-white shadow-xs"
+                    style={{
+                      background:
+                        "var(--theme-accent-primary, #2d211a)",
+                    }}
+                  >
                     {drink.price}
                   </span>
                 </div>
-                <p className="mt-3 leading-7 text-[#5f4a3d]">
+                <p className="mt-3 leading-7 text-[var(--theme-text-secondary,#5f4a3d)]">
                   {drink.description}
                 </p>
               </article>
@@ -708,13 +734,14 @@ export function BrewNestCoffee() {
         </Container>
       </section>
 
+      {/* Why Choose BrewNest */}
       <section id="why" className="py-20 md:py-28">
         <Container>
           <div className="mb-14 text-center">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#8d6748]">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[var(--theme-accent-primary,#8d6748)]">
               Why Choose BrewNest
             </p>
-            <h2 className="mt-3 text-4xl font-black text-[#2d211a] md:text-5xl">
+            <h2 className="mt-3 text-4xl font-black text-[var(--theme-text-primary,#2d211a)] md:text-5xl">
               A cafe experience that feels quietly elevated.
             </h2>
           </div>
@@ -722,13 +749,19 @@ export function BrewNestCoffee() {
             {reasons.map((reason) => (
               <article
                 key={reason.title}
-                className="rounded-[2rem] border border-[#e2d4c3] bg-white/80 p-8 shadow-sm"
+                className="rounded-[2rem] border border-[var(--theme-border,#e2d4c3)] bg-[var(--theme-bg-surface,rgba(255,255,255,0.85))] p-8 shadow-sm transition hover:border-[var(--theme-accent-primary,#caa56f)]/50"
               >
-                <div className="mb-6 h-2 w-20 rounded-full bg-[#caa56f]" />
-                <h3 className="text-2xl font-black text-[#2d211a]">
+                <div
+                  className="mb-6 h-2 w-20 rounded-full"
+                  style={{
+                    background:
+                      "var(--theme-accent-primary, #caa56f)",
+                  }}
+                />
+                <h3 className="text-2xl font-black text-[var(--theme-text-primary,#2d211a)]">
                   {reason.title}
                 </h3>
-                <p className="mt-4 leading-7 text-[#5f4a3d]">
+                <p className="mt-4 leading-7 text-[var(--theme-text-secondary,#5f4a3d)]">
                   {reason.description}
                 </p>
               </article>
@@ -737,19 +770,20 @@ export function BrewNestCoffee() {
         </Container>
       </section>
 
+      {/* Menu Preview */}
       <section
         id="menu"
-        className="border-y border-[#e2d4c3] bg-white py-20 md:py-28"
+        className="border-y border-[var(--theme-border,#e2d4c3)] bg-[var(--theme-bg-base,#ffffff)] py-20 md:py-28"
       >
         <Container>
           <div className="mb-14 text-center">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#8d6748]">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[var(--theme-accent-primary,#8d6748)]">
               Menu Preview
             </p>
-            <h2 className="mt-3 text-4xl font-black text-[#2d211a] md:text-5xl">
+            <h2 className="mt-3 text-4xl font-black text-[var(--theme-text-primary,#2d211a)] md:text-5xl">
               A daily menu that feels refined, not overworked.
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#5f4a3d]">
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[var(--theme-text-secondary,#5f4a3d)]">
               Coffee first, bakery always, and just enough savory breakfast to
               make BrewNest an everyday stop.
             </p>
@@ -759,24 +793,24 @@ export function BrewNestCoffee() {
             {menuColumns.map((column) => (
               <article
                 key={column.title}
-                className="rounded-[2rem] border border-[#e2d4c3] bg-[#fbf6ef] p-8 shadow-sm"
+                className="rounded-[2rem] border border-[var(--theme-border,#e2d4c3)] bg-[var(--theme-bg-surface,#fbf6ef)] p-8 shadow-sm"
               >
-                <h3 className="text-3xl font-black text-[#6c4a34]">
+                <h3 className="text-3xl font-black text-[var(--theme-accent-primary,#6c4a34)]">
                   {column.title}
                 </h3>
                 <div className="mt-8 space-y-5">
                   {column.items.map((item) => (
                     <div
                       key={item.name}
-                      className="flex items-start justify-between gap-4 border-b border-[#eadfd1] pb-4 last:border-b-0 last:pb-0"
+                      className="flex items-start justify-between gap-4 border-b border-[var(--theme-border,#eadfd1)] pb-4 last:border-b-0 last:pb-0"
                     >
                       <div>
-                        <p className="font-black text-[#2d211a]">{item.name}</p>
-                        <p className="mt-1 text-sm text-[#7a6657]">
+                        <p className="font-black text-[var(--theme-text-primary,#2d211a)]">{item.name}</p>
+                        <p className="mt-1 text-sm text-[var(--theme-text-muted,#7a6657)]">
                           {item.note}
                         </p>
                       </div>
-                      <span className="font-black text-[#8d6748]">
+                      <span className="font-black text-[var(--theme-accent-primary,#8d6748)]">
                         {item.price}
                       </span>
                     </div>
@@ -788,13 +822,14 @@ export function BrewNestCoffee() {
         </Container>
       </section>
 
+      {/* Testimonials */}
       <section id="testimonials" className="py-20 md:py-28">
         <Container>
           <div className="mb-14 text-center">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#8d6748]">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[var(--theme-accent-primary,#8d6748)]">
               Testimonials
             </p>
-            <h2 className="mt-3 text-4xl font-black text-[#2d211a] md:text-5xl">
+            <h2 className="mt-3 text-4xl font-black text-[var(--theme-text-primary,#2d211a)] md:text-5xl">
               What guests say after the first cup.
             </h2>
           </div>
@@ -803,21 +838,19 @@ export function BrewNestCoffee() {
             {testimonials.map((testimonial) => (
               <blockquote
                 key={testimonial.name}
-                className="rounded-[2rem] border border-[#e2d4c3] bg-white/85 p-8 shadow-sm"
+                className="rounded-[2rem] border border-[var(--theme-border,#e2d4c3)] bg-[var(--theme-bg-surface,rgba(255,255,255,0.85))] p-8 shadow-sm"
               >
-                <div className="mb-5 flex gap-1 text-[#caa56f]">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <span key={index}>*</span>
-                  ))}
+                <div className="mb-5 flex gap-1 text-[var(--theme-accent-primary,#caa56f)] font-serif text-xl">
+                  {"★".repeat(5)}
                 </div>
-                <p className="text-lg leading-8 text-[#4f3d30]">
+                <p className="text-lg leading-8 text-[var(--theme-text-secondary,#4f3d30)]">
                   "{testimonial.quote}"
                 </p>
                 <footer className="mt-6">
-                  <p className="font-black text-[#2d211a]">
+                  <p className="font-black text-[var(--theme-text-primary,#2d211a)]">
                     {testimonial.name}
                   </p>
-                  <p className="text-sm text-[#7a6657]">{testimonial.role}</p>
+                  <p className="text-sm text-[var(--theme-text-muted,#7a6657)]">{testimonial.role}</p>
                 </footer>
               </blockquote>
             ))}
@@ -825,33 +858,38 @@ export function BrewNestCoffee() {
         </Container>
       </section>
 
+      {/* Visit Section */}
       <section
         id="visit"
-        className="relative overflow-hidden bg-[#2d211a] py-20 text-white md:py-28"
+        className="relative overflow-hidden bg-[var(--theme-bg-dark,#2d211a)] py-20 text-white md:py-28"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_24%,rgba(202,165,111,0.18),transparent_24%),radial-gradient(circle_at_82%_20%,rgba(255,255,255,0.06),transparent_22%)]" />
         <Container className="relative">
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d9b274]">
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[var(--theme-accent-primary,#d9b274)]">
                 Visit BrewNest
               </p>
               <h2 className="mt-3 text-4xl font-black leading-tight md:text-5xl">
                 Find your corner table, order your favorite cup, and stay a
                 little longer.
               </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/78">
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/80">
                 We are open early, roast for freshness, and keep the room warm
                 from the first pour to the last pastry run.
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <CTAButton
+                <a
                   href="tel:555-123-4567"
-                  size="lg"
-                  className="bg-white text-[#2d211a] hover:bg-[#f6efe5]"
+                  className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-black shadow-lg transition hover:opacity-90"
+                  style={{
+                    background:
+                      "var(--theme-accent-gradient, linear-gradient(135deg, #ffffff, #f6efe5))",
+                    color: "var(--theme-bg-dark, #2d211a)",
+                  }}
                 >
                   Call the Cafe
-                </CTAButton>
+                </a>
                 <CTAButton
                   href="#menu"
                   variant="outline"
@@ -864,11 +902,11 @@ export function BrewNestCoffee() {
             </div>
 
             <div className="grid gap-5 md:grid-cols-2">
-              <div className="rounded-[2rem] border border-white/10 bg-white/8 p-6 backdrop-blur">
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d9b274]">
+              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur">
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#d9b274)]">
                   Hours
                 </p>
-                <div className="mt-5 space-y-3 text-sm text-white/82">
+                <div className="mt-5 space-y-3 text-sm text-white/85">
                   <div className="flex justify-between gap-4">
                     <span>Mon - Fri</span>
                     <span className="font-bold">6:30 AM - 7 PM</span>
@@ -879,11 +917,11 @@ export function BrewNestCoffee() {
                   </div>
                 </div>
               </div>
-              <div className="rounded-[2rem] border border-white/10 bg-white/8 p-6 backdrop-blur">
-                <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d9b274]">
+              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur">
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#d9b274)]">
                   Find Us
                 </p>
-                <div className="mt-5 space-y-3 text-sm text-white/82">
+                <div className="mt-5 space-y-3 text-sm text-white/85">
                   <p>123 Coffee Street</p>
                   <p>Old Town Market District</p>
                   <p>(555) 123-4567</p>
@@ -894,7 +932,8 @@ export function BrewNestCoffee() {
         </Container>
       </section>
 
-      <footer className="border-t border-[#3b2d24] bg-[#211813] py-12 text-white">
+      {/* Footer */}
+      <footer className="border-t border-[var(--theme-border,#3b2d24)] bg-[var(--theme-bg-dark,#211813)] py-12 text-white">
         <Container>
           <div className="grid gap-8 md:grid-cols-3">
             <div>
@@ -907,19 +946,19 @@ export function BrewNestCoffee() {
               </p>
             </div>
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d9b274]">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#d9b274)]">
                 Hours
               </p>
-              <div className="mt-4 space-y-2 text-sm text-white/72">
+              <div className="mt-4 space-y-2 text-sm text-white/75">
                 <p>Mon - Fri: 6:30 AM - 7 PM</p>
                 <p>Sat - Sun: 7 AM - 8 PM</p>
               </div>
             </div>
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d9b274]">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#d9b274)]">
                 Location & Social
               </p>
-              <div className="mt-4 space-y-2 text-sm text-white/72">
+              <div className="mt-4 space-y-2 text-sm text-white/75">
                 <p>123 Coffee Street, Old Town</p>
                 <p>Instagram</p>
                 <p>Facebook</p>
@@ -930,17 +969,18 @@ export function BrewNestCoffee() {
         </Container>
       </footer>
 
-      <section className="border-t border-[#d7c7b3] bg-[#fbf6ef] py-10">
+      {/* Sub navigation portfolio footer */}
+      <section className="border-t border-[var(--theme-border,#d7c7b3)] bg-[var(--theme-bg-surface,#fbf6ef)] py-10">
         <Container className="flex flex-col items-center justify-center gap-4 text-center sm:flex-row">
           <Link
             to="/restaurant"
-            className="font-bold text-[#6c4a34] hover:text-[#2d211a]"
+            className="font-bold text-[var(--theme-text-secondary,#6c4a34)] hover:text-[var(--theme-accent-primary,#2d211a)]"
           >
             Back to Restaurant Collection
           </Link>
           <Link
             to="/"
-            className="font-bold text-[#7a6657] hover:text-[#2d211a]"
+            className="font-bold text-[var(--theme-text-muted,#7a6657)] hover:text-[var(--theme-accent-primary,#2d211a)]"
           >
             Back to 100 Designs Portfolio
           </Link>

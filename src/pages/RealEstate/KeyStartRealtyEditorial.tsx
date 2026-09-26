@@ -156,7 +156,7 @@ function KeyButton({
   return (
     <a
       href={href}
-      className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-extrabold transition duration-300 hover:-translate-y-0.5 ${secondary ? "border border-[#C9D6CF] bg-white text-[#15344B] hover:border-[#3F7355]" : "bg-[#3F7355] text-white shadow-[0_12px_28px_rgba(63,115,85,.22)] hover:bg-[#346247]"} ${className}`}
+      className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-extrabold transition duration-300 hover:-translate-y-0.5 ${secondary ? "border border-[#C9D6CF] [html.dark_&]:border-white/20 bg-white [html.dark_&]:bg-white/10 text-[#15344B] [html.dark_&]:text-white hover:border-[#3F7355]" : "bg-[#3F7355] text-white shadow-[0_12px_28px_rgba(63,115,85,.22)] hover:opacity-90"} ${className}`}
     >
       {children}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -178,18 +178,18 @@ function KeyHeading({
   return (
     <div className="max-w-3xl">
       <p
-        className={`text-[0.66rem] font-black uppercase tracking-[0.24em] ${light ? "text-[#B7C7A1]" : "text-[#3F7355]"}`}
+        className={`text-[0.66rem] font-black uppercase tracking-[0.24em] ${light ? "text-[var(--theme-accent-secondary,#B7C7A1)]" : "text-[var(--theme-accent-primary,#3F7355)]"}`}
       >
         {label}
       </p>
       <h2
-        className={`mt-4 text-[clamp(2.5rem,5vw,5.2rem)] font-black leading-[0.92] tracking-[-0.06em] ${light ? "text-white" : "text-[#15344B]"}`}
+        className={`mt-4 text-[clamp(2.5rem,5vw,5.2rem)] font-black leading-[0.92] tracking-[-0.06em] ${light ? "text-white" : "text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white"}`}
       >
         {title}
       </h2>
       {text && (
         <p
-          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg ${light ? "text-white/68" : "text-[#627076]"}`}
+          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg ${light ? "text-white/68" : "text-[var(--theme-text-secondary,#627076)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]"}`}
         >
           {text}
         </p>
@@ -202,12 +202,12 @@ function KeyLogo({ light = false }: { light?: boolean }) {
   return (
     <a
       href="#home"
-      className={`flex items-center gap-3 ${light ? "text-white" : "text-[#15344B]"}`}
+      className={`flex items-center gap-3 ${light ? "text-white" : "text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white"}`}
       aria-label="KeyStart Realty home"
     >
-      <span className="relative grid h-11 w-11 place-items-center rounded-xl bg-[#3F7355] text-white">
+      <span className="relative grid h-11 w-11 place-items-center rounded-xl bg-[var(--theme-accent-primary,#3F7355)] text-[var(--theme-accent-contrast,#ffffff)]">
         <KeyRound className="h-5 w-5" />
-        <span className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-full border-2 border-white bg-[#9BAD83]">
+        <span className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-full border-2 border-white [html.dark_&]:border-[#152c3c] bg-[var(--theme-accent-secondary,#9BAD83)] text-[var(--theme-accent-contrast,#ffffff)]">
           <Home className="h-2.5 w-2.5" />
         </span>
       </span>
@@ -216,7 +216,7 @@ function KeyLogo({ light = false }: { light?: boolean }) {
           KeyStart
         </strong>
         <span
-          className={`mt-1 block text-[0.56rem] font-bold uppercase tracking-[0.2em] ${light ? "text-white/52" : "text-[#6E7C76]"}`}
+          className={`mt-1 block text-[0.56rem] font-bold uppercase tracking-[0.2em] ${light ? "text-white/52" : "text-[var(--theme-text-secondary,#6E7C76)] [html.dark_&]:text-white/60"}`}
         >
           Realty
         </span>
@@ -309,9 +309,9 @@ export function KeyStartRealty() {
   }, []);
 
   return (
-    <main className="keystart-site keystart-editorial w-full max-w-full overflow-x-hidden bg-[#F7F1E5] text-[#354147] selection:bg-[#9BAD83] selection:text-white">
+    <main className="keystart-site keystart-editorial w-full max-w-full overflow-x-hidden bg-[var(--theme-bg-base,#F7F1E5)] [html.dark_&]:bg-[var(--theme-bg-base,#0c1a24)] text-[var(--theme-text-primary,#354147)] [html.dark_&]:text-[var(--theme-text-primary,#e2e8f0)] selection:bg-[var(--theme-accent-secondary,#9BAD83)] selection:text-white transition-colors duration-300">
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3">
-        <div className="mx-auto flex h-[4.25rem] max-w-[88rem] items-center justify-between rounded-2xl border border-[#D7E1DA] bg-white/95 px-4 shadow-[0_12px_40px_rgba(21,52,75,.08)] backdrop-blur-xl lg:px-6">
+        <div className="mx-auto flex h-[4.25rem] max-w-[88rem] items-center justify-between rounded-2xl border border-[var(--theme-border,#D7E1DA)] [html.dark_&]:border-white/10 bg-white/95 [html.dark_&]:bg-[var(--theme-bg-surface,#0f212e)]/95 px-4 shadow-[0_12px_40px_rgba(21,52,75,.08)] [html.dark_&]:shadow-[0_12px_40px_rgba(0,0,0,0.3)] backdrop-blur-xl lg:px-6">
           <KeyLogo />
           <nav
             className="hidden items-center gap-1 lg:flex"
@@ -324,7 +324,7 @@ export function KeyStartRealty() {
                   key={label}
                   href={href}
                   aria-current={active ? "location" : undefined}
-                  className={`rounded-xl px-4 py-2 text-sm font-bold transition ${active ? "keystart-nav-active bg-[#E8F0EA] text-[#3F7355]" : "text-[#5E6C72] hover:bg-[#F3F7F4] hover:text-[#3F7355]"}`}
+                  className={`rounded-xl px-4 py-2 text-sm font-bold transition ${active ? "keystart-nav-active bg-[#3F7355]/15 text-[#3F7355] [html.dark_&]:text-white" : "text-[var(--theme-text-secondary,#5E6C72)] [html.dark_&]:text-white/70 hover:bg-[var(--theme-bg-surface,#F3F7F4)] [html.dark_&]:hover:bg-white/10 hover:text-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:hover:text-white"}`}
                 >
                   {label}
                 </a>
@@ -342,7 +342,7 @@ export function KeyStartRealty() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-[#D7E1DA] text-[#15344B] lg:hidden transition active:scale-95 hover:border-[#3F7355]"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--theme-border,#D7E1DA)] [html.dark_&]:border-white/15 text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white lg:hidden transition active:scale-95 hover:border-[var(--theme-accent-primary,#3F7355)]"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -359,7 +359,7 @@ export function KeyStartRealty() {
               onClick={() => setMenuOpen(false)}
               aria-hidden="true"
             />
-            <nav className="relative z-50 mx-auto mt-2 max-w-[88rem] rounded-2xl border border-[#D7E1DA] bg-white/98 p-4 shadow-2xl backdrop-blur-2xl lg:hidden">
+            <nav className="relative z-50 mx-auto mt-2 max-w-[88rem] rounded-2xl border border-[var(--theme-border,#D7E1DA)] [html.dark_&]:border-white/10 bg-white/98 [html.dark_&]:bg-[var(--theme-bg-surface,#0f212e)]/98 p-4 shadow-2xl backdrop-blur-2xl lg:hidden">
               <div className="space-y-1">
                 {navLinks.map(([label, href]) => {
                   const active = activeSection === href.slice(1);
@@ -371,12 +371,12 @@ export function KeyStartRealty() {
                       onClick={() => setMenuOpen(false)}
                       className={`flex items-center justify-between rounded-xl px-4 py-3 font-bold transition ${
                         active
-                          ? "keystart-nav-active bg-[#E8F0EA] text-[#3F7355] font-extrabold"
-                          : "text-[#56666C] hover:bg-[#F3F7F4] hover:text-[#3F7355]"
+                          ? "keystart-nav-active bg-[#3F7355]/15 text-[#3F7355] [html.dark_&]:text-white font-extrabold"
+                          : "text-[var(--theme-text-secondary,#56666C)] [html.dark_&]:text-white/70 hover:bg-[var(--theme-bg-surface,#F3F7F4)] [html.dark_&]:hover:bg-white/10 hover:text-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:hover:text-white"
                       }`}
                     >
                       <span>{label}</span>
-                      <span className="text-xs text-[#3F7355]">→</span>
+                      <span className="text-xs text-[var(--theme-accent-primary,#3F7355)]">→</span>
                     </a>
                   );
                 })}
@@ -392,14 +392,14 @@ export function KeyStartRealty() {
       >
         <div className="absolute left-[8%] top-40 h-40 w-40 rounded-full border-[28px] border-[#9BAD83]/15" />
         <div className="mx-auto max-w-[90rem] text-center">
-          <p className="mx-auto inline-flex items-center gap-2 rounded-full border border-[#CED9CB] bg-white px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-[#3F7355]">
+          <p className="mx-auto inline-flex items-center gap-2 rounded-full border border-[var(--theme-border,#CED9CB)] [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-white/10 px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:text-white">
             <Sparkles className="h-4 w-4" /> First-time buyer field guide
           </p>
-          <h1 className="mx-auto mt-7 max-w-6xl text-[clamp(4rem,8.7vw,9rem)] font-semibold leading-[0.84] tracking-[-0.065em] text-[#15344B]">
+          <h1 className="mx-auto mt-7 max-w-6xl text-[clamp(4rem,8.7vw,9rem)] font-semibold leading-[0.84] tracking-[-0.065em] text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white">
             Your First Home Search,{" "}
-            <span className="text-[#3F7355]">Made Simple.</span>
+            <span className="text-[var(--theme-accent-primary,#3F7355)]">Made Simple.</span>
           </h1>
-          <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-[#627076]">
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-[var(--theme-text-secondary,#627076)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
             Understand each step, compare homes with confidence, and move from
             unsure to ready with practical buyer-first guidance.
           </p>
@@ -411,8 +411,8 @@ export function KeyStartRealty() {
           </div>
 
           <div className="mt-16 grid gap-4 text-left lg:grid-cols-[.7fr_1.6fr_.7fr] lg:items-end">
-            <div className="order-2 rounded-[1.75rem] bg-[#15344B] p-6 text-white lg:order-1 lg:-rotate-2 lg:translate-y-8">
-              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#B7C7A1]">
+            <div className="order-2 rounded-[1.75rem] bg-[var(--theme-bg-dark,#15344B)] p-6 text-white lg:order-1 lg:-rotate-2 lg:translate-y-8">
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#B7C7A1)]">
                 Your next step
               </p>
               <p className="mt-5 text-3xl font-black tracking-[-0.05em]">
@@ -422,31 +422,31 @@ export function KeyStartRealty() {
                 Budget, routine, location, and timing come before the perfect
                 kitchen.
               </p>
-              <Calculator className="mt-8 h-8 w-8 text-[#B7C7A1]" />
+              <Calculator className="mt-8 h-8 w-8 text-[var(--theme-accent-secondary,#B7C7A1)]" />
             </div>
-            <div className="order-1 relative overflow-hidden rounded-t-[11rem] rounded-b-[2rem] bg-[#DDE7DF] p-3 shadow-[0_30px_80px_rgba(21,52,75,.16)] lg:order-2">
+            <div className="order-1 relative overflow-hidden rounded-t-[11rem] rounded-b-[2rem] bg-[#DDE7DF]/50 p-3 shadow-[0_30px_80px_rgba(21,52,75,.16)] lg:order-2">
               <img
                 src={heroImage}
                 alt="Welcoming first home exterior for a KeyStart buyer"
                 className="h-[34rem] w-full rounded-t-[10rem] rounded-b-[1.4rem] object-cover md:h-[43rem]"
               />
-              <span className="absolute bottom-7 left-7 rounded-full bg-white/94 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#3F7355] backdrop-blur">
+              <span className="absolute bottom-7 left-7 rounded-full bg-white/94 [html.dark_&]:bg-[var(--theme-bg-dark,#0c1a24)]/94 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:text-white backdrop-blur">
                 A place to begin
               </span>
             </div>
-            <div className="order-3 rounded-[1.75rem] border border-[#D7E1DA] bg-white p-6 lg:rotate-2 lg:translate-y-4">
-              <ClipboardCheck className="h-7 w-7 text-[#3F7355]" />
-              <p className="mt-5 text-xl font-black text-[#15344B]">
+            <div className="order-3 rounded-[1.75rem] border border-[var(--theme-border,#D7E1DA)] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142938)] p-6 lg:rotate-2 lg:translate-y-4">
+              <ClipboardCheck className="h-7 w-7 text-[var(--theme-accent-primary,#3F7355)]" />
+              <p className="mt-5 text-xl font-black text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white">
                 No mystery steps.
               </p>
-              <div className="mt-5 grid gap-3 text-sm text-[#66747A]">
+              <div className="mt-5 grid gap-3 text-sm text-[var(--theme-text-secondary,#66747A)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                 {[
                   "Know the process",
                   "Compare with context",
                   "Decide at your pace",
                 ].map((item) => (
                   <span key={item} className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-[#3F7355]" />
+                    <Check className="h-4 w-4 text-[var(--theme-accent-primary,#3F7355)]" />
                     {item}
                   </span>
                 ))}
@@ -458,7 +458,7 @@ export function KeyStartRealty() {
 
       <section
         id="how-it-works"
-        className="bg-[#15344B] px-5 py-24 text-white lg:px-10 lg:py-32"
+        className="bg-[var(--theme-bg-dark,#15344B)] px-5 py-24 text-white lg:px-10 lg:py-32 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[90rem]">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
@@ -478,7 +478,7 @@ export function KeyStartRealty() {
                 key={number}
                 className="relative border border-white/12 bg-white/[0.04] p-6 lg:border-y lg:border-l lg:border-r-0 lg:last:border-r"
               >
-                <span className="relative z-10 grid h-12 w-12 place-items-center rounded-full bg-[#9BAD83] text-sm font-black text-[#15344B] ring-8 ring-[#15344B]">
+                <span className="relative z-10 grid h-12 w-12 place-items-center rounded-full bg-[var(--theme-accent-secondary,#9BAD83)] text-sm font-black text-[var(--theme-text-primary,#15344B)] ring-8 ring-[var(--theme-bg-dark,#15344B)]">
                   {number}
                 </span>
                 <h3 className="mt-10 text-xl font-black">{title}</h3>
@@ -491,7 +491,7 @@ export function KeyStartRealty() {
 
       <section
         id="buyer-guide"
-        className="bg-[#F3F7F4] px-5 py-24 lg:px-10 lg:py-32"
+        className="bg-[var(--theme-bg-surface,#F3F7F4)] [html.dark_&]:bg-[var(--theme-bg-surface,#10222f)] px-5 py-24 lg:px-10 lg:py-32 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[90rem]">
           <KeyHeading
@@ -503,7 +503,7 @@ export function KeyStartRealty() {
             {buyerGroups.map((card, index) => (
               <article
                 key={card.title}
-                className={`key-card group grid overflow-hidden rounded-[2rem] border border-[#D7E1DA] bg-white ${index === 0 ? "lg:col-span-2 lg:grid-cols-[1.2fr_.8fr]" : ""}`}
+                className={`key-card group grid overflow-hidden rounded-[2rem] border border-[var(--theme-border,#D7E1DA)] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142938)] ${index === 0 ? "lg:col-span-2 lg:grid-cols-[1.2fr_.8fr]" : ""}`}
               >
                 <div
                   className={`relative overflow-hidden ${index === 0 ? "min-h-80" : "aspect-[16/10]"}`}
@@ -513,24 +513,24 @@ export function KeyStartRealty() {
                     alt=""
                     className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-5 top-5 grid h-10 w-10 place-items-center rounded-full bg-white text-xs font-black text-[#3F7355]">
+                  <span className="absolute left-5 top-5 grid h-10 w-10 place-items-center rounded-full bg-white [html.dark_&]:bg-[var(--theme-bg-dark,#0c1a24)] text-xs font-black text-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:text-white">
                     {card.number}
                   </span>
                 </div>
                 <div className="flex items-center p-7 lg:p-9">
                   <div>
-                    <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[#9BAD83]">
+                    <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#9BAD83)]">
                       {card.label}
                     </p>
-                    <h3 className="mt-3 text-3xl font-black tracking-[-0.05em] text-[#15344B]">
+                    <h3 className="mt-3 text-3xl font-black tracking-[-0.05em] text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white">
                       {card.title}
                     </h3>
-                    <p className="mt-4 max-w-md text-sm leading-7 text-[#66747A]">
+                    <p className="mt-4 max-w-md text-sm leading-7 text-[var(--theme-text-secondary,#66747A)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                       {card.text}
                     </p>
                     <a
                       href="#contact"
-                      className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[#3F7355]"
+                      className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[var(--theme-accent-primary,#3F7355)]"
                     >
                       Learn More <ArrowDownRight className="h-4 w-4" />
                     </a>
@@ -542,14 +542,14 @@ export function KeyStartRealty() {
         </div>
       </section>
 
-      <section id="homes" className="bg-white px-5 py-24 lg:px-10 lg:py-32">
+      <section id="homes" className="bg-white [html.dark_&]:bg-[var(--theme-bg-base,#0c1a24)] px-5 py-24 lg:px-10 lg:py-32 transition-colors duration-300">
         <div className="mx-auto max-w-[90rem]">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <KeyHeading
               label="Simple home search"
               title="Starter Homes, Told as Stories"
             />
-            <p className="max-w-md text-sm leading-7 text-[#61716B]">
+            <p className="max-w-md text-sm leading-7 text-[var(--theme-text-secondary,#61716B)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
               Rather than a wall of listings, start with three distinct ways a
               first home might fit real life.
             </p>
@@ -558,7 +558,7 @@ export function KeyStartRealty() {
             {homes.map((home, index) => (
               <article
                 key={home.title}
-                className="key-card grid overflow-hidden rounded-[2rem] border border-[#D7E1DA] bg-[#F8FBF9] lg:grid-cols-2"
+                className="key-card grid overflow-hidden rounded-[2rem] border border-[var(--theme-border,#D7E1DA)] [html.dark_&]:border-white/10 bg-[var(--theme-bg-card,#F8FBF9)] [html.dark_&]:bg-[var(--theme-bg-card,#142938)] lg:grid-cols-2"
               >
                 <div
                   className={`relative min-h-[24rem] overflow-hidden ${index % 2 === 1 ? "lg:order-2" : ""}`}
@@ -568,7 +568,7 @@ export function KeyStartRealty() {
                     alt={`${home.title} starter property`}
                     className="absolute inset-0 h-full w-full object-cover"
                   />
-                  <span className="absolute left-5 top-5 rounded-full bg-white/94 px-4 py-2 text-[0.62rem] font-black uppercase tracking-[0.14em] text-[#3F7355]">
+                  <span className="absolute left-5 top-5 rounded-full bg-white/94 [html.dark_&]:bg-[var(--theme-bg-dark,#0c1a24)]/94 px-4 py-2 text-[0.62rem] font-black uppercase tracking-[0.14em] text-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:text-white">
                     {home.badge}
                   </span>
                   <span className="absolute bottom-4 right-5 text-7xl font-black tracking-[-0.08em] text-white/45">
@@ -578,21 +578,21 @@ export function KeyStartRealty() {
                 <div className="flex items-center p-8 lg:p-12">
                   <div>
                     <div className="flex flex-wrap items-center gap-3">
-                      <span className="rounded-full bg-[#E8F0EA] px-3 py-1 text-[0.62rem] font-black uppercase tracking-[0.15em] text-[#3F7355]">
+                      <span className="rounded-full bg-[var(--theme-bg-surface,#E8F0EA)] [html.dark_&]:bg-white/10 px-3 py-1 text-[0.62rem] font-black uppercase tracking-[0.15em] text-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:text-white">
                         {home.type}
                       </span>
-                      <span className="text-sm font-black text-[#15344B]">
+                      <span className="text-sm font-black text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white">
                         {home.price}
                       </span>
                     </div>
-                    <h3 className="mt-6 text-[clamp(2.4rem,4vw,4.2rem)] font-black leading-[0.9] tracking-[-0.06em] text-[#15344B]">
+                    <h3 className="mt-6 text-[clamp(2.4rem,4vw,4.2rem)] font-black leading-[0.9] tracking-[-0.06em] text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white">
                       {home.title}
                     </h3>
-                    <p className="mt-4 flex items-center gap-2 text-sm text-[#66747A]">
-                      <MapPin className="h-4 w-4 text-[#9BAD83]" />
+                    <p className="mt-4 flex items-center gap-2 text-sm text-[var(--theme-text-secondary,#66747A)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
+                      <MapPin className="h-4 w-4 text-[var(--theme-accent-secondary,#9BAD83)]" />
                       {home.location}
                     </p>
-                    <p className="mt-5 max-w-lg leading-8 text-[#66747A]">
+                    <p className="mt-5 max-w-lg leading-8 text-[var(--theme-text-secondary,#66747A)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                       {home.text}
                     </p>
                     <KeyButton href="#contact" className="mt-7">
@@ -603,14 +603,14 @@ export function KeyStartRealty() {
               </article>
             ))}
           </div>
-          <p className="mt-6 text-xs leading-6 text-[#73807B]">
+          <p className="mt-6 text-xs leading-6 text-[var(--theme-text-secondary,#73807B)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
             Sample property information is illustrative. Prices and availability
             are subject to change.
           </p>
         </div>
       </section>
 
-      <section className="bg-[#E8F0EA] px-5 py-24 lg:px-10 lg:py-32">
+      <section className="bg-[var(--theme-bg-surface,#E8F0EA)] [html.dark_&]:bg-[var(--theme-bg-surface,#10222f)] px-5 py-24 lg:px-10 lg:py-32 transition-colors duration-300">
         <div className="mx-auto grid max-w-[90rem] gap-12 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
           <div>
             <KeyHeading
@@ -629,15 +629,15 @@ export function KeyStartRealty() {
                 return (
                   <div
                     key={title as string}
-                    className="flex items-center justify-between rounded-2xl border border-white bg-white p-4"
+                    className="flex items-center justify-between rounded-2xl border border-white [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142938)] p-4"
                   >
-                    <span className="flex items-center gap-3 font-black text-[#15344B]">
-                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#E8F0EA] text-[#3F7355]">
+                    <span className="flex items-center gap-3 font-black text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white">
+                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--theme-bg-surface,#E8F0EA)] [html.dark_&]:bg-white/10 text-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:text-white">
                         <SupportIcon className="h-5 w-5" />
                       </span>
                       {title as string}
                     </span>
-                    <span className="text-xs font-black text-[#9BAD83]">
+                    <span className="text-xs font-black text-[var(--theme-accent-secondary,#9BAD83)]">
                       0{index + 1}
                     </span>
                   </div>
@@ -651,8 +651,8 @@ export function KeyStartRealty() {
               alt="KeyStart agent supporting a first-time home buyer"
               className="min-h-[42rem] w-full rounded-[12rem_2rem_2rem_2rem] object-cover"
             />
-            <div className="absolute bottom-6 right-6 max-w-xs rounded-2xl bg-[#15344B] p-5 text-white shadow-xl">
-              <HeartHandshake className="h-6 w-6 text-[#B7C7A1]" />
+            <div className="absolute bottom-6 right-6 max-w-xs rounded-2xl bg-[var(--theme-bg-dark,#15344B)] p-5 text-white shadow-xl">
+              <HeartHandshake className="h-6 w-6 text-[var(--theme-accent-secondary,#B7C7A1)]" />
               <p className="mt-3 font-black">
                 Questions are part of the process.
               </p>
@@ -664,7 +664,7 @@ export function KeyStartRealty() {
         </div>
       </section>
 
-      <section className="grid bg-[#3F7355] lg:grid-cols-2">
+      <section className="grid bg-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:bg-[var(--theme-bg-card,#142938)] lg:grid-cols-2 transition-colors duration-300">
         <img
           src={simpleSearchImage}
           alt="Clear and simple first home search"
@@ -672,7 +672,7 @@ export function KeyStartRealty() {
         />
         <div className="flex items-center p-8 text-white md:p-12 lg:p-16 xl:p-20">
           <div>
-            <p className="text-[0.66rem] font-black uppercase tracking-[0.24em] text-[#DCE7CE]">
+            <p className="text-[0.66rem] font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#DCE7CE)]">
               Home search made simple
             </p>
             <h2 className="mt-4 text-[clamp(3rem,5.4vw,5.5rem)] font-black leading-[0.9] tracking-[-0.065em]">
@@ -692,7 +692,7 @@ export function KeyStartRealty() {
                   key={item}
                   className="flex items-center gap-3 border-b border-white/15 pb-3 font-bold"
                 >
-                  <Check className="h-5 w-5 text-[#DCE7CE]" />
+                  <Check className="h-5 w-5 text-[var(--theme-accent-secondary,#DCE7CE)]" />
                   {item}
                 </div>
               ))}
@@ -701,7 +701,7 @@ export function KeyStartRealty() {
         </div>
       </section>
 
-      <section className="bg-[#F7F1E5] px-5 py-24 lg:px-10 lg:py-32">
+      <section className="bg-[var(--theme-bg-base,#F7F1E5)] [html.dark_&]:bg-[var(--theme-bg-base,#0c1a24)] px-5 py-24 lg:px-10 lg:py-32 transition-colors duration-300">
         <div className="mx-auto grid max-w-[90rem] gap-12 lg:grid-cols-[.75fr_1.25fr]">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <KeyHeading
@@ -709,7 +709,7 @@ export function KeyStartRealty() {
               title="Ask the Questions Everyone Starts With"
               text="Simple educational starting points—not legal or financial advice."
             />
-            <CircleHelp className="mt-8 h-16 w-16 text-[#9BAD83]" />
+            <CircleHelp className="mt-8 h-16 w-16 text-[var(--theme-accent-secondary,#9BAD83)]" />
           </div>
           <div className="grid gap-3">
             {faqs.map(([question, answer], index) => {
@@ -717,7 +717,7 @@ export function KeyStartRealty() {
               return (
                 <article
                   key={question}
-                  className="overflow-hidden rounded-2xl border border-[#DED8CA] bg-white"
+                  className="overflow-hidden rounded-2xl border border-[var(--theme-border,#DED8CA)] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142938)]"
                 >
                   <button
                     type="button"
@@ -725,18 +725,18 @@ export function KeyStartRealty() {
                     aria-expanded={open}
                     className="flex w-full items-center gap-5 p-5 text-left"
                   >
-                    <span className="text-xs font-black text-[#9BAD83]">
+                    <span className="text-xs font-black text-[var(--theme-accent-secondary,#9BAD83)]">
                       0{index + 1}
                     </span>
-                    <span className="flex-1 font-black text-[#15344B]">
+                    <span className="flex-1 font-black text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white">
                       {question}
                     </span>
                     <ChevronDown
-                      className={`h-5 w-5 text-[#3F7355] transition ${open ? "rotate-180" : ""}`}
+                      className={`h-5 w-5 text-[var(--theme-accent-primary,#3F7355)] transition ${open ? "rotate-180" : ""}`}
                     />
                   </button>
                   {open && (
-                    <p className="border-t border-[#E9E4D8] px-5 py-5 pl-14 text-sm leading-7 text-[#66747A]">
+                    <p className="border-t border-[var(--theme-border,#E9E4D8)] [html.dark_&]:border-white/10 px-5 py-5 pl-14 text-sm leading-7 text-[var(--theme-text-secondary,#66747A)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                       {answer}
                     </p>
                   )}
@@ -747,7 +747,7 @@ export function KeyStartRealty() {
         </div>
       </section>
 
-      <section id="resources" className="bg-white px-5 py-24 lg:px-10 lg:py-32">
+      <section id="resources" className="bg-white [html.dark_&]:bg-[var(--theme-bg-surface,#10222f)] px-5 py-24 lg:px-10 lg:py-32 transition-colors duration-300">
         <div className="mx-auto max-w-[90rem]">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
             <KeyHeading
@@ -760,7 +760,7 @@ export function KeyStartRealty() {
               className="h-56 w-full rounded-[1.5rem_5rem_1.5rem_1.5rem] object-cover"
             />
           </div>
-          <div className="mt-12 divide-y divide-[#D7E1DA] border-y border-[#D7E1DA]">
+          <div className="mt-12 divide-y divide-[var(--theme-border,#D7E1DA)] [html.dark_&]:divide-white/10 border-y border-[var(--theme-border,#D7E1DA)] [html.dark_&]:border-white/10">
             {[
               [
                 "Before touring",
@@ -782,22 +782,22 @@ export function KeyStartRealty() {
                 key={title}
                 className="group grid gap-5 py-7 md:grid-cols-[4rem_1fr_1fr_auto] md:items-center"
               >
-                <span className="text-3xl font-black tracking-[-0.06em] text-[#D5DED7]">
+                <span className="text-3xl font-black tracking-[-0.06em] text-[var(--theme-border,#D5DED7)] [html.dark_&]:text-white/20">
                   0{index + 1}
                 </span>
                 <div>
-                  <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[#9BAD83]">
+                  <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#9BAD83)]">
                     {tag}
                   </p>
-                  <h3 className="mt-2 text-xl font-black text-[#15344B]">
+                  <h3 className="mt-2 text-xl font-black text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white">
                     {title}
                   </h3>
                 </div>
-                <p className="text-sm leading-7 text-[#66747A]">{text}</p>
+                <p className="text-sm leading-7 text-[var(--theme-text-secondary,#66747A)] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">{text}</p>
                 <a
                   href="#contact"
                   aria-label={`Read ${title}`}
-                  className="grid h-11 w-11 place-items-center rounded-full border border-[#D7E1DA] text-[#3F7355] transition group-hover:bg-[#3F7355] group-hover:text-white"
+                  className="grid h-11 w-11 place-items-center rounded-full border border-[var(--theme-border,#D7E1DA)] [html.dark_&]:border-white/20 text-[var(--theme-accent-primary,#3F7355)] [html.dark_&]:text-white transition group-hover:bg-[var(--theme-accent-primary,#3F7355)] group-hover:text-white"
                 >
                   <ArrowRight className="h-4 w-4" />
                 </a>
@@ -807,9 +807,9 @@ export function KeyStartRealty() {
         </div>
       </section>
 
-      <section className="bg-[#F3F7F4] px-5 py-20 lg:px-10 lg:py-24">
+      <section className="bg-[var(--theme-bg-surface,#F3F7F4)] [html.dark_&]:bg-[var(--theme-bg-base,#0c1a24)] px-5 py-20 lg:px-10 lg:py-24 transition-colors duration-300">
         <div className="mx-auto max-w-[90rem]">
-          <div className="grid gap-px overflow-hidden rounded-[2rem] bg-[#D7E1DA] md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px overflow-hidden rounded-[2rem] bg-[var(--theme-border,#D7E1DA)] [html.dark_&]:bg-white/10 md:grid-cols-2 lg:grid-cols-4">
             {[
               [MessageCircleMore, "Plain-Language Guidance"],
               [ShieldCheck, "Practical Search Advice"],
@@ -818,9 +818,9 @@ export function KeyStartRealty() {
             ].map(([Icon, title]) => {
               const ValueIcon = Icon as typeof ShieldCheck;
               return (
-                <article key={title as string} className="bg-white p-7">
-                  <ValueIcon className="h-6 w-6 text-[#3F7355]" />
-                  <h3 className="mt-7 font-black text-[#15344B]">
+                <article key={title as string} className="bg-white [html.dark_&]:bg-[var(--theme-bg-card,#142938)] p-7">
+                  <ValueIcon className="h-6 w-6 text-[var(--theme-accent-primary,#3F7355)]" />
+                  <h3 className="mt-7 font-black text-[var(--theme-text-primary,#15344B)] [html.dark_&]:text-white">
                     {title as string}
                   </h3>
                 </article>
@@ -832,17 +832,17 @@ export function KeyStartRealty() {
 
       <section
         id="contact"
-        className="relative bg-[#15344B] px-5 py-28 text-white lg:px-10 lg:py-36"
+        className="relative bg-[var(--theme-bg-dark,#15344B)] px-5 py-28 text-white lg:px-10 lg:py-36 transition-colors duration-300"
       >
         <img
           src={ctaImage}
           alt="Warm first home ready for new buyers"
           className="absolute inset-0 h-full w-full object-cover opacity-24"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#15344B] via-[#15344B]/90 to-[#15344B]/35" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--theme-bg-dark,#15344B)] via-[var(--theme-bg-dark,#15344B)]/90 to-[var(--theme-bg-dark,#15344B)]/35" />
         <div className="relative mx-auto max-w-[90rem]">
           <div className="max-w-4xl">
-            <p className="text-[0.66rem] font-black uppercase tracking-[0.24em] text-[#B7C7A1]">
+            <p className="text-[0.66rem] font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#B7C7A1)]">
               Your first step starts here
             </p>
             <h2 className="mt-5 text-[clamp(3.5rem,7vw,7.2rem)] font-black leading-[0.84] tracking-[-0.075em]">
@@ -854,7 +854,7 @@ export function KeyStartRealty() {
             </p>
             <KeyButton
               href="mailto:hello@keystartrealty.com"
-              className="mt-9 bg-[#9BAD83] text-[#15344B] shadow-none hover:bg-[#b3c39d]"
+              className="mt-9 bg-[var(--theme-accent-secondary,#9BAD83)] text-[var(--theme-text-primary,#15344B)] shadow-none hover:opacity-90"
             >
               Begin Your Buyer Journey
             </KeyButton>
@@ -862,7 +862,7 @@ export function KeyStartRealty() {
         </div>
       </section>
 
-      <footer className="bg-[#102B3F] px-5 pb-8 pt-16 text-white lg:px-10">
+      <footer className="bg-[var(--theme-bg-dark,#102B3F)] [html.dark_&]:bg-[var(--theme-bg-dark,#081b28)] px-5 pb-8 pt-16 text-white lg:px-10 transition-colors duration-300">
         <div className="mx-auto max-w-[90rem]">
           <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-[1.35fr_.65fr_.8fr_1fr]">
             <div>
@@ -876,7 +876,7 @@ export function KeyStartRealty() {
               <p className="font-black">Quick links</p>
               <div className="mt-5 grid gap-3 text-sm text-white/45">
                 {navLinks.slice(0, 4).map(([label, href]) => (
-                  <a key={label} href={href} className="hover:text-white">
+                  <a key={label} href={href} className="hover:text-white transition-colors">
                     {label}
                   </a>
                 ))}
@@ -885,19 +885,19 @@ export function KeyStartRealty() {
             <div>
               <p className="font-black">Buyer support</p>
               <div className="mt-5 grid gap-3 text-sm text-white/45">
-                <a href="#how-it-works">Budget Basics</a>
-                <a href="#homes">Home Search</a>
-                <a href="#buyer-guide">Tour Guidance</a>
-                <a href="#resources">Closing Help</a>
+                <a href="#how-it-works" className="hover:text-white transition-colors">Budget Basics</a>
+                <a href="#homes" className="hover:text-white transition-colors">Home Search</a>
+                <a href="#buyer-guide" className="hover:text-white transition-colors">Tour Guidance</a>
+                <a href="#resources" className="hover:text-white transition-colors">Closing Help</a>
               </div>
             </div>
             <div>
               <p className="font-black">Contact</p>
               <div className="mt-5 grid gap-3 text-sm text-white/45">
-                <a href="mailto:hello@keystartrealty.com">
+                <a href="mailto:hello@keystartrealty.com" className="hover:text-white transition-colors">
                   hello@keystartrealty.com
                 </a>
-                <a href="tel:2125550139">(212) 555-0139</a>
+                <a href="tel:2125550139" className="hover:text-white transition-colors">(212) 555-0139</a>
                 <span>New York, NY</span>
               </div>
             </div>

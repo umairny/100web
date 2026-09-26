@@ -478,7 +478,7 @@ export function MedicalIndex() {
                     {/* Top Device Preview Showcase Image */}
                     <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
                       <img
-                        src={imageUrl(coverImage)}
+                        src={coverImage ? (coverImage.startsWith('http') || coverImage.startsWith('/') ? coverImage : imageUrl(coverImage)) : ''}
                         alt={`${website.title} website homepage preview`}
                         loading="lazy"
                         decoding="async"

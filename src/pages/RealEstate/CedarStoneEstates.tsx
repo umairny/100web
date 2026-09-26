@@ -133,11 +133,11 @@ function CedarLogo({ light = false }: { light?: boolean }) {
   return (
     <a
       href="#home"
-      className={`inline-flex items-center gap-3 ${light ? "text-[#E9E4D8]" : "text-[#1F2D28]"}`}
+      className={`inline-flex items-center gap-3 transition-colors duration-300 ${light ? "text-[#E9E4D8]" : "text-[var(--theme-text-primary,#1F2D28)]"}`}
       aria-label="Cedar and Stone Estates home"
     >
       <span
-        className={`grid h-11 w-11 place-items-center border ${light ? "border-[#A68E72]/70 text-[#A68E72]" : "border-[#4C6252]/35 text-[#4C6252]"}`}
+        className={`grid h-11 w-11 place-items-center border transition-colors duration-300 ${light ? "border-[var(--theme-accent-secondary,#A68E72)]/70 text-[var(--theme-accent-secondary,#A68E72)]" : "border-[var(--theme-accent-primary,#4C6252)]/35 text-[var(--theme-accent-primary,#4C6252)]"}`}
       >
         <Trees className="h-5 w-5" strokeWidth={1.5} />
       </span>
@@ -146,7 +146,7 @@ function CedarLogo({ light = false }: { light?: boolean }) {
           Cedar & Stone
         </strong>
         <span
-          className={`mt-1.5 block text-[0.52rem] font-bold uppercase tracking-[0.32em] ${light ? "text-white/45" : "text-[#4C6252]"}`}
+          className={`mt-1.5 block text-[0.52rem] font-bold uppercase tracking-[0.32em] transition-colors duration-300 ${light ? "text-white/45" : "text-[var(--theme-accent-primary,#4C6252)]"}`}
         >
           Estates
         </span>
@@ -174,18 +174,18 @@ function SectionHeading({
       data-cedar-reveal
     >
       <p
-        className={`text-[0.62rem] font-bold uppercase tracking-[0.3em] ${light ? "text-[#C5AC8F]" : "text-[#4C6252]"}`}
+        className={`text-[0.62rem] font-bold uppercase tracking-[0.3em] transition-colors duration-300 ${light ? "text-[var(--theme-accent-secondary,#C5AC8F)]" : "text-[var(--theme-accent-primary,#4C6252)]"}`}
       >
         {eyebrow}
       </p>
       <h2
-        className={`cedar-serif mt-5 text-[clamp(2.8rem,5.5vw,5.5rem)] font-normal leading-[0.96] tracking-[-0.035em] ${light ? "text-[#E9E4D8]" : "text-[#1F2D28]"}`}
+        className={`cedar-serif mt-5 text-[clamp(2.8rem,5.5vw,5.5rem)] font-normal leading-[0.96] tracking-[-0.035em] transition-colors duration-300 ${light ? "text-[#E9E4D8]" : "text-[var(--theme-text-primary,#1F2D28)]"}`}
       >
         {title}
       </h2>
       {text && (
         <p
-          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg ${centered ? "mx-auto" : ""} ${light ? "text-white/58" : "text-[#2E3A35]/65"}`}
+          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg transition-colors duration-300 ${centered ? "mx-auto" : ""} ${light ? "text-white/58" : "text-[var(--theme-text-secondary,#2E3A35)]/65"}`}
         >
           {text}
         </p>
@@ -204,10 +204,12 @@ function CedarButton({
   variant?: "primary" | "outline" | "taupe";
 }) {
   const styles = {
-    primary: "bg-[#4C6252] text-white hover:bg-[#1F2D28]",
+    primary:
+      "bg-[var(--theme-accent-primary,#4C6252)] text-[var(--theme-accent-contrast,#ffffff)] hover:bg-[var(--theme-bg-dark,#1F2D28)]",
     outline:
-      "border border-[#E9E4D8]/45 text-[#E9E4D8] hover:border-[#A68E72] hover:bg-[#A68E72]",
-    taupe: "bg-[#A68E72] text-[#1F2D28] hover:bg-[#E9E4D8]",
+      "border border-[#E9E4D8]/45 text-[#E9E4D8] hover:border-[var(--theme-accent-secondary,#A68E72)] hover:bg-[var(--theme-accent-secondary,#A68E72)] hover:text-[var(--theme-bg-dark,#1F2D28)]",
+    taupe:
+      "bg-[var(--theme-accent-secondary,#A68E72)] text-[var(--theme-bg-dark,#1F2D28)] hover:bg-[var(--theme-bg-base,#E9E4D8)] hover:text-[var(--theme-text-primary,#1F2D28)]",
   };
   return (
     <a
@@ -254,8 +256,8 @@ export function CedarStoneEstates() {
   }, []);
 
   return (
-    <main className="cedar-site overflow-hidden bg-[#E9E4D8] text-[#2E3A35]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#1F2D28]/10 bg-[#E9E4D8]/94 backdrop-blur-xl">
+    <main className="cedar-site overflow-hidden bg-[var(--theme-bg-base,#E9E4D8)] text-[var(--theme-text-primary,#2E3A35)] transition-colors duration-300">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--theme-border,#1F2D28)]/10 bg-[var(--theme-bg-base,#E9E4D8)]/94 backdrop-blur-xl transition-all duration-300">
         <div className="mx-auto flex h-20 max-w-[92rem] items-center justify-between px-5 sm:px-8 lg:px-12">
           <CedarLogo />
           <nav
@@ -270,7 +272,7 @@ export function CedarStoneEstates() {
                   href={link.href}
                   aria-current={active ? "page" : undefined}
                   onClick={() => setActiveSection(link.href.slice(1))}
-                  className={`border-b py-2 text-[0.66rem] font-bold uppercase tracking-[0.14em] transition ${active ? "active border-[#4C6252] text-[#4C6252]" : "border-transparent text-[#1F2D28] hover:text-[#4C6252]"}`}
+                  className={`border-b py-2 text-[0.66rem] font-bold uppercase tracking-[0.14em] transition-colors duration-300 ${active ? "active border-[var(--theme-accent-primary,#4C6252)] text-[var(--theme-accent-primary,#4C6252)]" : "border-transparent text-[var(--theme-text-primary,#1F2D28)] hover:text-[var(--theme-accent-primary,#4C6252)]"}`}
                 >
                   {link.label}
                 </a>
@@ -280,14 +282,14 @@ export function CedarStoneEstates() {
           <div className="flex items-center gap-3">
             <a
               href="#estates"
-              className="hidden bg-[#4C6252] px-5 py-3 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#1F2D28] sm:inline-flex"
+              className="hidden bg-[var(--theme-accent-primary,#4C6252)] px-5 py-3 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[var(--theme-accent-contrast,#ffffff)] transition hover:bg-[var(--theme-bg-dark,#1F2D28)] sm:inline-flex"
             >
               View Properties
             </a>
             <button
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
-              className="grid h-11 w-11 place-items-center border border-[#1F2D28]/20 text-[#1F2D28] lg:hidden"
+              className="grid h-11 w-11 place-items-center border border-[var(--theme-border,#1F2D28)]/20 text-[var(--theme-text-primary,#1F2D28)] lg:hidden transition-colors"
               aria-label="Toggle navigation"
               aria-expanded={menuOpen}
             >
@@ -301,7 +303,7 @@ export function CedarStoneEstates() {
         </div>
         {menuOpen && (
           <nav
-            className="border-t border-[#1F2D28]/10 bg-[#E9E4D8] px-5 py-4 lg:hidden"
+            className="border-t border-[var(--theme-border,#1F2D28)]/10 bg-[var(--theme-bg-base,#E9E4D8)] px-5 py-4 lg:hidden transition-colors duration-300"
             aria-label="Mobile navigation"
           >
             <div className="mx-auto grid max-w-[92rem]">
@@ -316,7 +318,7 @@ export function CedarStoneEstates() {
                       setMenuOpen(false);
                     }}
                     aria-current={active ? "page" : undefined}
-                    className={`border-b border-[#1F2D28]/10 px-3 py-4 text-xs font-bold uppercase tracking-[0.12em] ${active ? "active bg-[#4C6252]/10 text-[#4C6252]" : "text-[#1F2D28]"}`}
+                    className={`border-b border-[var(--theme-border,#1F2D28)]/10 px-3 py-4 text-xs font-bold uppercase tracking-[0.12em] transition-colors ${active ? "active bg-[var(--theme-accent-primary,#4C6252)]/10 text-[var(--theme-accent-primary,#4C6252)]" : "text-[var(--theme-text-primary,#1F2D28)]"}`}
                   >
                     {link.label}
                   </a>
@@ -341,13 +343,13 @@ export function CedarStoneEstates() {
         </div>
         <div className="relative mx-auto flex min-h-[820px] max-w-[92rem] items-center px-5 py-20 sm:px-8 lg:min-h-[880px] lg:px-12">
           <div className="max-w-5xl text-[#E9E4D8]" data-cedar-reveal>
-            <p className="flex items-center gap-4 text-[0.62rem] font-bold uppercase tracking-[0.34em] text-[#C5AC8F]">
-              <span className="h-px w-12 bg-[#A68E72]" />
+            <p className="flex items-center gap-4 text-[0.62rem] font-bold uppercase tracking-[0.34em] text-[var(--theme-accent-secondary,#C5AC8F)]">
+              <span className="h-px w-12 bg-[var(--theme-accent-secondary,#A68E72)]" />
               Rural estates · Private acreage
             </p>
             <h1 className="cedar-serif mt-7 max-w-5xl text-[clamp(4rem,7.8vw,8rem)] font-normal leading-[0.86] tracking-[-0.05em]">
               Private Estates Rooted in Land, Craft, and{" "}
-              <em className="text-[#C5AC8F]">Lasting Value</em>
+              <em className="text-[var(--theme-accent-secondary,#C5AC8F)]">Lasting Value</em>
             </h1>
             <p className="mt-8 max-w-2xl text-base leading-8 text-white/68 md:text-lg">
               Cedar & Stone Estates presents rural luxury homes and refined
@@ -362,7 +364,7 @@ export function CedarStoneEstates() {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 right-0 hidden bg-[#E9E4D8]/95 lg:grid lg:grid-cols-3">
+        <div className="absolute bottom-0 right-0 hidden bg-[var(--theme-bg-base,#E9E4D8)]/95 lg:grid lg:grid-cols-3 transition-colors duration-300">
           {[
             [KeyRound, "Private Rural", "Estates"],
             [LandPlot, "Luxury", "Acreage"],
@@ -372,15 +374,15 @@ export function CedarStoneEstates() {
             return (
               <div
                 key={String(bottom)}
-                className="flex min-w-[190px] items-center gap-4 border-l border-[#1F2D28]/10 px-6 py-5 text-[#1F2D28]"
+                className="flex min-w-[190px] items-center gap-4 border-l border-[var(--theme-border,#1F2D28)]/10 px-6 py-5 text-[var(--theme-text-primary,#1F2D28)]"
               >
                 <InfoIcon
-                  className="h-5 w-5 text-[#4C6252]"
+                  className="h-5 w-5 text-[var(--theme-accent-primary,#4C6252)]"
                   strokeWidth={1.5}
                 />
                 <span>
                   <b className="block text-xs">{String(top)}</b>
-                  <small className="text-[0.62rem] text-[#2E3A35]/55">
+                  <small className="text-[0.62rem] text-[var(--theme-text-secondary,#2E3A35)]/55">
                     {String(bottom)}
                   </small>
                 </span>
@@ -390,7 +392,7 @@ export function CedarStoneEstates() {
         </div>
       </section>
 
-      <section className="px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section className="px-5 py-24 sm:px-8 md:py-32 lg:px-12 bg-[var(--theme-bg-base,#E9E4D8)] transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <SectionHeading
             eyebrow="Our focus"
@@ -402,7 +404,7 @@ export function CedarStoneEstates() {
             {focusCards.map((card, index) => (
               <article
                 key={card.title}
-                className="group border border-[#1F2D28]/10 bg-[#F4F1EA] p-3 transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(31,45,40,0.1)]"
+                className="group border border-[var(--theme-border,#1F2D28)]/10 bg-[var(--theme-bg-surface,#F4F1EA)] p-3 transition duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(31,45,40,0.1)]"
                 data-cedar-reveal
                 style={{ transitionDelay: `${index * 70}ms` }}
               >
@@ -414,18 +416,18 @@ export function CedarStoneEstates() {
                   />
                 </div>
                 <div className="p-5 pb-7">
-                  <span className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[#4C6252]">
+                  <span className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[var(--theme-accent-primary,#4C6252)]">
                     {card.badge}
                   </span>
-                  <h3 className="cedar-serif mt-4 text-3xl text-[#1F2D28]">
+                  <h3 className="cedar-serif mt-4 text-3xl text-[var(--theme-text-primary,#1F2D28)]">
                     {card.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-[#2E3A35]/65">
+                  <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#2E3A35)]/65">
                     {card.text}
                   </p>
                   <a
                     href={card.href}
-                    className="mt-6 inline-flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#4C6252]"
+                    className="mt-6 inline-flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--theme-accent-primary,#4C6252)] hover:underline"
                   >
                     Learn More{" "}
                     <ChevronRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -439,7 +441,7 @@ export function CedarStoneEstates() {
 
       <section
         id="estates"
-        className="bg-[#D8D0C2] px-5 py-24 sm:px-8 md:py-32 lg:px-12"
+        className="bg-[var(--theme-bg-surface,#D8D0C2)] [html.dark_&]:bg-[var(--theme-bg-surface,#15201b)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[92rem]">
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
@@ -450,7 +452,7 @@ export function CedarStoneEstates() {
             />
             <a
               href="#contact"
-              className="w-fit border-b border-[#4C6252] pb-2 text-[0.65rem] font-bold uppercase tracking-[0.15em] text-[#4C6252]"
+              className="w-fit border-b border-[var(--theme-accent-primary,#4C6252)] pb-2 text-[0.65rem] font-bold uppercase tracking-[0.15em] text-[var(--theme-accent-primary,#4C6252)] hover:opacity-85 transition"
             >
               Request the private collection
             </a>
@@ -459,7 +461,7 @@ export function CedarStoneEstates() {
             {properties.map((property, index) => (
               <article
                 key={property.title}
-                className="group bg-[#E9E4D8] p-3 shadow-[0_18px_50px_rgba(31,45,40,0.08)] transition duration-500 hover:-translate-y-1"
+                className="group bg-[var(--theme-bg-card,#E9E4D8)] p-3 shadow-[0_18px_50px_rgba(31,45,40,0.08)] transition duration-500 hover:-translate-y-1"
                 data-cedar-reveal
                 style={{ transitionDelay: `${index * 70}ms` }}
               >
@@ -469,35 +471,35 @@ export function CedarStoneEstates() {
                     alt={property.title}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-4 top-4 bg-[#1F2D28]/90 px-3 py-2 text-[0.55rem] font-bold uppercase tracking-[0.18em] text-[#E9E4D8]">
+                  <span className="absolute left-4 top-4 bg-[var(--theme-bg-dark,#1F2D28)]/90 px-3 py-2 text-[0.55rem] font-bold uppercase tracking-[0.18em] text-[#E9E4D8]">
                     {property.badge}
                   </span>
                 </div>
                 <div className="p-5 pb-6">
-                  <p className="flex items-center gap-2 text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#4C6252]">
+                  <p className="flex items-center gap-2 text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[var(--theme-accent-primary,#4C6252)]">
                     <MapPin className="h-3.5 w-3.5" />
                     {property.location}
                   </p>
-                  <h3 className="cedar-serif mt-4 text-3xl text-[#1F2D28]">
+                  <h3 className="cedar-serif mt-4 text-3xl text-[var(--theme-text-primary,#1F2D28)]">
                     {property.title}
                   </h3>
-                  <div className="mt-6 grid grid-cols-2 border-y border-[#1F2D28]/12 py-4 text-xs">
+                  <div className="mt-6 grid grid-cols-2 border-y border-[var(--theme-border,#1F2D28)]/12 py-4 text-xs">
                     <div>
-                      <small className="block uppercase tracking-[0.14em] text-[#2E3A35]/50">
+                      <small className="block uppercase tracking-[0.14em] text-[var(--theme-text-secondary,#2E3A35)]/50">
                         Type
                       </small>
-                      <b className="mt-2 block font-medium">{property.type}</b>
+                      <b className="mt-2 block font-medium text-[var(--theme-text-primary,#1F2D28)]">{property.type}</b>
                     </div>
-                    <div className="border-l border-[#1F2D28]/12 pl-5">
-                      <small className="block uppercase tracking-[0.14em] text-[#2E3A35]/50">
+                    <div className="border-l border-[var(--theme-border,#1F2D28)]/12 pl-5">
+                      <small className="block uppercase tracking-[0.14em] text-[var(--theme-text-secondary,#2E3A35)]/50">
                         Land
                       </small>
-                      <b className="mt-2 block font-medium">{property.size}</b>
+                      <b className="mt-2 block font-medium text-[var(--theme-text-primary,#1F2D28)]">{property.size}</b>
                     </div>
                   </div>
                   <a
                     href="#contact"
-                    className="mt-6 inline-flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#1F2D28]"
+                    className="mt-6 inline-flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--theme-text-primary,#1F2D28)] hover:text-[var(--theme-accent-primary,#4C6252)] transition-colors"
                   >
                     View Details{" "}
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -509,7 +511,7 @@ export function CedarStoneEstates() {
         </div>
       </section>
 
-      <section id="craftsmanship" className="bg-[#1F2D28] text-[#E9E4D8]">
+      <section id="craftsmanship" className="bg-[var(--theme-bg-dark,#1F2D28)] text-[#E9E4D8] transition-colors duration-300">
         <div className="grid lg:grid-cols-2">
           <div className="min-h-[560px] lg:min-h-[760px]" data-cedar-reveal>
             <img
@@ -541,13 +543,13 @@ export function CedarStoneEstates() {
                       key={String(text)}
                       className="flex items-center gap-5 border-t border-white/10 py-5"
                     >
-                      <span className="grid h-10 w-10 place-items-center border border-[#A68E72]/45 text-[#C5AC8F]">
+                      <span className="grid h-10 w-10 place-items-center border border-[var(--theme-accent-secondary,#A68E72)]/45 text-[var(--theme-accent-secondary,#C5AC8F)]">
                         <FeatureIcon className="h-5 w-5" strokeWidth={1.5} />
                       </span>
                       <span className="text-sm font-medium">
                         {String(text)}
                       </span>
-                      <span className="ml-auto text-xs text-[#A68E72]">
+                      <span className="ml-auto text-xs text-[var(--theme-accent-secondary,#A68E72)]">
                         0{index + 1}
                       </span>
                     </div>
@@ -561,7 +563,7 @@ export function CedarStoneEstates() {
 
       <section
         id="lifestyle"
-        className="bg-[#F4F1EA] px-5 py-24 sm:px-8 md:py-32 lg:px-12"
+        className="bg-[var(--theme-bg-surface,#F4F1EA)] [html.dark_&]:bg-[var(--theme-bg-surface,#182621)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[90rem]">
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
@@ -589,18 +591,18 @@ export function CedarStoneEstates() {
               return (
                 <article
                   key={String(title)}
-                  className="group border border-[#1F2D28]/10 bg-[#E9E4D8] p-7 transition hover:border-[#4C6252]"
+                  className="group border border-[var(--theme-border,#1F2D28)]/10 bg-[var(--theme-bg-card,#E9E4D8)] p-7 transition hover:border-[var(--theme-accent-primary,#4C6252)]"
                   data-cedar-reveal
                   style={{ transitionDelay: `${index * 60}ms` }}
                 >
                   <LifeIcon
-                    className="h-6 w-6 text-[#4C6252]"
+                    className="h-6 w-6 text-[var(--theme-accent-primary,#4C6252)]"
                     strokeWidth={1.4}
                   />
-                  <span className="mt-14 block text-[0.55rem] uppercase tracking-[0.2em] text-[#A68E72]">
+                  <span className="mt-14 block text-[0.55rem] uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#A68E72)]">
                     0{index + 1}
                   </span>
-                  <h3 className="cedar-serif mt-3 text-3xl text-[#1F2D28]">
+                  <h3 className="cedar-serif mt-3 text-3xl text-[var(--theme-text-primary,#1F2D28)]">
                     {String(title)}
                   </h3>
                 </article>
@@ -610,28 +612,28 @@ export function CedarStoneEstates() {
         </div>
       </section>
 
-      <section className="border-y border-[#1F2D28]/10 px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section className="border-y border-[var(--theme-border,#1F2D28)]/10 bg-[var(--theme-bg-base,#E9E4D8)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <SectionHeading
             eyebrow="The Cedar & Stone standard"
             title="Why Cedar & Stone Estates"
             centered
           />
-          <div className="mt-14 grid gap-px overflow-hidden bg-[#1F2D28]/12 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-px overflow-hidden bg-[var(--theme-border,#1F2D28)]/12 md:grid-cols-2 lg:grid-cols-4">
             {values.map(([number, title, text], index) => (
               <article
                 key={title}
-                className="min-h-[300px] bg-[#E9E4D8] p-7"
+                className="min-h-[300px] bg-[var(--theme-bg-card,#E9E4D8)] p-7"
                 data-cedar-reveal
                 style={{ transitionDelay: `${index * 60}ms` }}
               >
-                <span className="cedar-serif text-4xl text-[#A68E72]">
+                <span className="cedar-serif text-4xl text-[var(--theme-accent-secondary,#A68E72)]">
                   {number}
                 </span>
-                <h3 className="cedar-serif mt-16 text-2xl text-[#1F2D28]">
+                <h3 className="cedar-serif mt-16 text-2xl text-[var(--theme-text-primary,#1F2D28)]">
                   {title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-[#2E3A35]/62">
+                <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#2E3A35)]/62">
                   {text}
                 </p>
               </article>
@@ -642,10 +644,10 @@ export function CedarStoneEstates() {
 
       <section
         id="acreage"
-        className="relative overflow-hidden bg-[#4C6252] px-5 py-24 text-[#E9E4D8] sm:px-8 md:py-32 lg:px-12"
+        className="relative overflow-hidden bg-[var(--theme-accent-primary,#4C6252)] px-5 py-24 text-[#E9E4D8] sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
-        <div className="absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full border border-[#C5AC8F]/10" />
-        <div className="absolute -right-20 -top-20 h-[22rem] w-[22rem] rounded-full border border-[#C5AC8F]/10" />
+        <div className="absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full border border-[var(--theme-accent-secondary,#C5AC8F)]/10" />
+        <div className="absolute -right-20 -top-20 h-[22rem] w-[22rem] rounded-full border border-[var(--theme-accent-secondary,#C5AC8F)]/10" />
         <div className="relative mx-auto max-w-[92rem]">
           <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <SectionHeading
@@ -672,7 +674,7 @@ export function CedarStoneEstates() {
                     <strong className="cedar-serif block text-xl font-normal text-[#E9E4D8]">
                       {value}
                     </strong>
-                    <span className="mt-1 block text-[0.54rem] font-bold uppercase tracking-[0.16em] text-[#C5AC8F]">
+                    <span className="mt-1 block text-[0.54rem] font-bold uppercase tracking-[0.16em] text-[var(--theme-accent-secondary,#C5AC8F)]">
                       {label}
                     </span>
                   </div>
@@ -713,12 +715,12 @@ export function CedarStoneEstates() {
                   alt={title}
                   className="absolute inset-0 h-full w-full object-cover transition duration-1000 group-hover:scale-[1.035]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1F2D28] via-[#1F2D28]/30 to-black/5" />
-                <span className="absolute left-6 top-6 grid h-10 w-10 place-items-center border border-white/35 bg-[#1F2D28]/25 text-[0.6rem] font-bold text-white backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--theme-bg-dark,#1F2D28)] via-[var(--theme-bg-dark,#1F2D28)]/30 to-black/5" />
+                <span className="absolute left-6 top-6 grid h-10 w-10 place-items-center border border-white/35 bg-[var(--theme-bg-dark,#1F2D28)]/25 text-[0.6rem] font-bold text-white backdrop-blur-sm">
                   0{index + 1}
                 </span>
                 <div className="absolute inset-x-0 bottom-0 p-7 sm:p-8">
-                  <p className="text-[0.56rem] font-bold uppercase tracking-[0.24em] text-[#C5AC8F]">
+                  <p className="text-[0.56rem] font-bold uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#C5AC8F)]">
                     {label}
                   </p>
                   <h3
@@ -732,7 +734,7 @@ export function CedarStoneEstates() {
                     </p>
                     <a
                       href="#contact"
-                      className="grid h-11 w-11 shrink-0 place-items-center border border-white/35 text-white transition group-hover:border-[#C5AC8F] group-hover:bg-[#A68E72] group-hover:text-[#1F2D28]"
+                      className="grid h-11 w-11 shrink-0 place-items-center border border-white/35 text-white transition group-hover:border-[var(--theme-accent-secondary,#C5AC8F)] group-hover:bg-[var(--theme-accent-secondary,#A68E72)] group-hover:text-[var(--theme-bg-dark,#1F2D28)]"
                       aria-label={`Explore ${title}`}
                     >
                       <ArrowRight className="h-4 w-4" />
@@ -745,7 +747,7 @@ export function CedarStoneEstates() {
         </div>
       </section>
 
-      <section className="bg-[#F4F1EA] px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section className="bg-[var(--theme-bg-surface,#F4F1EA)] [html.dark_&]:bg-[var(--theme-bg-surface,#182621)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <SectionHeading
             eyebrow="Journal"
@@ -756,22 +758,22 @@ export function CedarStoneEstates() {
             {journal.map(([label, title, text], index) => (
               <article
                 key={title}
-                className="group flex min-h-[330px] flex-col border-t border-[#A68E72] bg-[#E9E4D8] p-7 transition hover:-translate-y-1 hover:shadow-lg"
+                className="group flex min-h-[330px] flex-col border-t border-[var(--theme-accent-secondary,#A68E72)] bg-[var(--theme-bg-card,#E9E4D8)] p-7 transition hover:-translate-y-1 hover:shadow-lg"
                 data-cedar-reveal
                 style={{ transitionDelay: `${index * 60}ms` }}
               >
-                <span className="text-[0.58rem] font-bold uppercase tracking-[0.2em] text-[#4C6252]">
+                <span className="text-[0.58rem] font-bold uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#4C6252)]">
                   {label}
                 </span>
-                <h3 className="cedar-serif mt-7 text-3xl leading-tight text-[#1F2D28]">
+                <h3 className="cedar-serif mt-7 text-3xl leading-tight text-[var(--theme-text-primary,#1F2D28)]">
                   {title}
                 </h3>
-                <p className="mt-5 text-sm leading-7 text-[#2E3A35]/62">
+                <p className="mt-5 text-sm leading-7 text-[var(--theme-text-secondary,#2E3A35)]/62">
                   {text}
                 </p>
                 <a
                   href="#contact"
-                  className="mt-auto inline-flex items-center gap-2 pt-7 text-[0.64rem] font-bold uppercase tracking-[0.14em] text-[#4C6252]"
+                  className="mt-auto inline-flex items-center gap-2 pt-7 text-[0.64rem] font-bold uppercase tracking-[0.14em] text-[var(--theme-accent-primary,#4C6252)] hover:underline"
                 >
                   Read More{" "}
                   <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -795,7 +797,7 @@ export function CedarStoneEstates() {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(31,45,40,0.96),rgba(31,45,40,0.76),rgba(31,45,40,0.3))]" />
         </div>
         <div className="relative mx-auto max-w-[88rem]" data-cedar-reveal>
-          <p className="text-[0.62rem] font-bold uppercase tracking-[0.3em] text-[#C5AC8F]">
+          <p className="text-[0.62rem] font-bold uppercase tracking-[0.3em] text-[var(--theme-accent-secondary,#C5AC8F)]">
             A more considered search
           </p>
           <h2 className="cedar-serif mt-6 max-w-4xl text-[clamp(3.2rem,6.5vw,6.5rem)] font-normal leading-[0.92] tracking-[-0.04em]">
@@ -816,7 +818,7 @@ export function CedarStoneEstates() {
         </div>
       </section>
 
-      <footer className="bg-[#17231f] px-5 py-14 text-[#E9E4D8] sm:px-8 lg:px-12">
+      <footer className="bg-[var(--theme-bg-dark,#17231f)] px-5 py-14 text-[#E9E4D8] sm:px-8 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <div className="grid gap-12 border-b border-white/10 pb-12 md:grid-cols-[1.3fr_0.7fr_0.8fr_1fr]">
             <div>
@@ -827,7 +829,7 @@ export function CedarStoneEstates() {
               </p>
             </div>
             <div>
-              <p className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[#C5AC8F]">
+              <p className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[var(--theme-accent-secondary,#C5AC8F)]">
                 Quick links
               </p>
               <div className="mt-5 grid gap-3">
@@ -843,28 +845,28 @@ export function CedarStoneEstates() {
               </div>
             </div>
             <div>
-              <p className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[#C5AC8F]">
+              <p className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[var(--theme-accent-secondary,#C5AC8F)]">
                 Properties
               </p>
               <div className="mt-5 grid gap-3 text-sm text-white/48">
-                <a href="#estates">Private Estates</a>
-                <a href="#acreage">Luxury Acreage</a>
-                <a href="#craftsmanship">Heritage Homes</a>
-                <a href="#acreage">Private Retreats</a>
+                <a href="#estates" className="hover:text-white transition-colors">Private Estates</a>
+                <a href="#acreage" className="hover:text-white transition-colors">Luxury Acreage</a>
+                <a href="#craftsmanship" className="hover:text-white transition-colors">Heritage Homes</a>
+                <a href="#acreage" className="hover:text-white transition-colors">Private Retreats</a>
               </div>
             </div>
             <div>
-              <p className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[#C5AC8F]">
+              <p className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[var(--theme-accent-secondary,#C5AC8F)]">
                 Contact
               </p>
               <div className="mt-5 grid gap-3 text-sm text-white/48">
                 <a
                   href="mailto:hello@cedarandstoneestates.com"
-                  className="break-all hover:text-white"
+                  className="break-all hover:text-white transition-colors"
                 >
                   hello@cedarandstoneestates.com
                 </a>
-                <a href="tel:+12125550172" className="hover:text-white">
+                <a href="tel:+12125550172" className="hover:text-white transition-colors">
                   (212) 555-0172
                 </a>
                 <span>New York, NY</span>

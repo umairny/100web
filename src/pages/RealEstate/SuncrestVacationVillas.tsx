@@ -104,10 +104,10 @@ function SuncrestButton({
   className?: string;
 }) {
   const style = outline
-    ? "border border-[#1595A3]/30 bg-white text-[#103F4A] hover:border-[#1595A3]"
+    ? "border border-[var(--theme-accent-primary,#1595A3)]/30 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#102830)] text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)] hover:border-[var(--theme-accent-primary,#1595A3)]"
     : gold
-      ? "bg-[#E8B94A] text-[#103F4A] hover:bg-[#f0c963]"
-      : "bg-[#1595A3] text-white hover:bg-[#117f8b]";
+      ? "bg-[var(--theme-accent-secondary,#E8B94A)] text-[#103F4A] hover:bg-[#f0c963] [html.dark_&]:text-[#0a1b20]"
+      : "bg-[var(--theme-accent-primary,#1595A3)] text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90";
   return (
     <a
       href={href}
@@ -134,17 +134,17 @@ function SuncrestHeading({
 }) {
   return (
     <div className={center ? "mx-auto max-w-4xl text-center" : "max-w-3xl"}>
-      <p className="text-[0.67rem] font-black uppercase tracking-[0.25em] text-[#1595A3]">
+      <p className="text-[0.67rem] font-black uppercase tracking-[0.25em] text-[var(--theme-accent-primary,#1595A3)]">
         {label}
       </p>
       <h2
-        className={`mt-4 text-[clamp(2.5rem,5.3vw,5.3rem)] font-semibold leading-[0.95] tracking-[-0.055em] ${light ? "text-[#F7F1E3]" : "text-[#103F4A]"}`}
+        className={`mt-4 text-[clamp(2.5rem,5.3vw,5.3rem)] font-semibold leading-[0.95] tracking-[-0.055em] transition-colors duration-300 ${light ? "text-[#F7F1E3]" : "text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]"}`}
       >
         {title}
       </h2>
       {text && (
         <p
-          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg ${center ? "mx-auto" : ""} ${light ? "text-white/65" : "text-[#557074]"}`}
+          className={`mt-6 max-w-2xl text-base leading-8 transition-colors duration-300 md:text-lg ${center ? "mx-auto" : ""} ${light ? "text-white/65" : "text-[#557074] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]"}`}
         >
           {text}
         </p>
@@ -157,19 +157,19 @@ function SuncrestLogo({ light = false }: { light?: boolean }) {
   return (
     <a
       href="#home"
-      className={`flex items-center gap-3 ${light ? "text-white" : "text-[#103F4A]"}`}
+      className={`flex items-center gap-3 transition-colors duration-300 ${light ? "text-white" : "text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]"}`}
       aria-label="Suncrest Vacation Villas home"
     >
-      <span className="relative grid h-11 w-11 place-items-center rounded-full bg-[#1595A3] text-white">
+      <span className="relative grid h-11 w-11 place-items-center rounded-full bg-[var(--theme-accent-primary,#1595A3)] text-white">
         <Sun className="h-5 w-5" />
-        <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-[#E8B94A]" />
+        <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white [html.dark_&]:border-slate-900 bg-[var(--theme-accent-secondary,#E8B94A)]" />
       </span>
       <span>
         <strong className="block text-base font-black leading-none tracking-[-0.03em]">
           Suncrest
         </strong>
         <span
-          className={`mt-1 block text-[0.54rem] font-bold uppercase tracking-[0.2em] ${light ? "text-white/55" : "text-[#688084]"}`}
+          className={`mt-1 block text-[0.54rem] font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${light ? "text-white/55" : "text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]"}`}
         >
           Vacation Villas
         </span>
@@ -180,6 +180,7 @@ function SuncrestLogo({ light = false }: { light?: boolean }) {
 
 export function SuncrestVacationVillas() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -203,24 +204,88 @@ export function SuncrestVacationVillas() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [menuOpen]);
 
+  // Scrollspy for active section
+  useEffect(() => {
+    let frame = 0;
+    const updateActiveSection = () => {
+      const scrollY = window.scrollY;
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollable > 0 && scrollY >= scrollable - 70) {
+        setActiveSection("contact");
+        return;
+      }
+
+      if (scrollY < 80) {
+        setActiveSection("");
+        return;
+      }
+
+      const marker = Math.min(220, Math.max(100, window.innerHeight * 0.28));
+      const sectionIds = [
+        "villas",
+        "destinations",
+        "investments",
+        "experiences",
+        "contact",
+      ];
+      let current = "";
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= marker && rect.bottom > 80) {
+          current = id;
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
-    <main className="suncrest-site w-full max-w-full overflow-x-hidden bg-[#F7F1E3] text-[#243C40] selection:bg-[#E8B94A] selection:text-[#103F4A]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#EADFCB] bg-[#FFFDF8]/95 backdrop-blur-xl">
+    <main className="suncrest-site w-full max-w-full overflow-x-hidden bg-[#F7F1E3] [html.dark_&]:bg-[var(--theme-bg-base,#0a1b20)] text-[#243C40] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)] selection:bg-[var(--theme-accent-secondary,#E8B94A)] selection:text-[#103F4A] transition-colors duration-300">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#EADFCB] [html.dark_&]:border-white/10 bg-[#FFFDF8]/95 [html.dark_&]:bg-[var(--theme-bg-surface,#0c2228)]/95 backdrop-blur-xl transition-colors duration-300">
         <div className="mx-auto flex h-[4.75rem] max-w-[92rem] items-center justify-between px-5 lg:px-10">
           <SuncrestLogo />
           <nav
             className="hidden items-center gap-8 lg:flex"
             aria-label="Suncrest navigation"
           >
-            {navLinks.map(([label, href]) => (
-              <a
-                key={label}
-                href={href}
-                className="text-sm font-bold text-[#557074] transition hover:text-[#1595A3]"
-              >
-                {label}
-              </a>
-            ))}
+            {navLinks.map(([label, href]) => {
+              const sectionId = href.replace("#", "");
+              const isActive = activeSection === sectionId;
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  className={`text-sm font-bold transition-colors duration-200 ${
+                    isActive
+                      ? "text-[var(--theme-accent-primary,#1595A3)] [html.dark_&]:text-[var(--theme-accent-primary,#1595A3)]"
+                      : "text-[#557074] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] hover:text-[var(--theme-accent-primary,#1595A3)] [html.dark_&]:hover:text-[var(--theme-accent-primary,#1595A3)]"
+                  }`}
+                >
+                  {label}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Desktop-Only Explore Villas Button (Isolated from mobile viewports) */}
@@ -235,7 +300,7 @@ export function SuncrestVacationVillas() {
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(!menuOpen)}
-            className="grid h-11 w-11 place-items-center rounded-full border border-[#D7E1DF] text-[#103F4A] lg:hidden transition active:scale-95 hover:border-[#1595A3]"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[#D7E1DF] [html.dark_&]:border-white/15 text-[#103F4A] [html.dark_&]:text-white lg:hidden transition active:scale-95 hover:border-[var(--theme-accent-primary,#1595A3)]"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -253,17 +318,17 @@ export function SuncrestVacationVillas() {
               onClick={() => setMenuOpen(false)}
               aria-hidden="true"
             />
-            <nav className="fixed inset-x-0 top-[4.75rem] z-50 border-b border-[#EADFCB] bg-[#FFFDF8]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+            <nav className="fixed inset-x-0 top-[4.75rem] z-50 border-b border-[#EADFCB] [html.dark_&]:border-white/10 bg-[#FFFDF8]/98 [html.dark_&]:bg-[var(--theme-bg-surface,#0c2228)]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
               <div className="space-y-1">
                 {navLinks.map(([label, href]) => (
                   <a
                     key={label}
                     href={href}
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-between rounded-xl px-4 py-3 font-bold text-[#486367] transition hover:bg-[#F7F1E3] hover:text-[#1595A3]"
+                    className="flex items-center justify-between rounded-xl px-4 py-3 font-bold text-[#486367] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] transition hover:bg-[#F7F1E3] [html.dark_&]:hover:bg-white/5 hover:text-[var(--theme-accent-primary,#1595A3)]"
                   >
                     <span>{label}</span>
-                    <span className="text-xs text-[#1595A3]">→</span>
+                    <span className="text-xs text-[var(--theme-accent-primary,#1595A3)]">→</span>
                   </a>
                 ))}
               </div>
@@ -282,11 +347,11 @@ export function SuncrestVacationVillas() {
         <div className="relative mx-auto flex min-h-[47.25rem] max-w-[92rem] items-center px-5 py-16 lg:px-10">
           <div className="max-w-4xl text-white">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.22em] backdrop-blur">
-              <Sun className="h-4 w-4 text-[#E8B94A]" /> Vacation property
+              <Sun className="h-4 w-4 text-[var(--theme-accent-secondary,#E8B94A)]" /> Vacation property
             </p>
             <h1 className="mt-7 text-[clamp(2.4rem,7.8vw,8.5rem)] font-semibold leading-[0.84] tracking-[-0.075em]">
               Own the Stay.{" "}
-              <span className="text-[#F4C65B]">Enjoy the Destination.</span>
+              <span className="text-[var(--theme-accent-secondary,#F4C65B)]">Enjoy the Destination.</span>
             </h1>
             <p className="mt-8 max-w-2xl text-base sm:text-lg leading-relaxed text-white/78">
               Suncrest Vacation Villas connects buyers and investors with
@@ -298,14 +363,14 @@ export function SuncrestVacationVillas() {
               <SuncrestButton
                 href="#investments"
                 outline
-                className="border-white/40 bg-white/10 text-white hover:border-white hover:bg-white/15"
+                className="border-white/40 bg-white/10 text-white hover:border-white hover:bg-white/15 [html.dark_&]:bg-white/10 [html.dark_&]:text-white"
               >
                 View Investment Paths
               </SuncrestButton>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 right-0 hidden grid-cols-3 bg-[#FFFDF8]/95 shadow-2xl backdrop-blur lg:grid">
+        <div className="absolute bottom-0 right-0 hidden grid-cols-3 bg-[#FFFDF8]/95 [html.dark_&]:bg-[var(--theme-bg-card,#102830)]/95 shadow-2xl backdrop-blur lg:grid border-t border-[#EADFCB] [html.dark_&]:border-white/10">
           {[
             ["Holiday Villas", Palmtree],
             ["Resort Investments", Building2],
@@ -315,12 +380,12 @@ export function SuncrestVacationVillas() {
             return (
               <div
                 key={label as string}
-                className="flex min-w-52 items-center gap-3 border-l border-[#EADFCB] px-5 py-5"
+                className="flex min-w-52 items-center gap-3 border-l border-[#EADFCB] [html.dark_&]:border-white/10 px-5 py-5"
               >
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-[#DCE8E8] text-[#1595A3]">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-[#DCE8E8] [html.dark_&]:bg-white/10 text-[var(--theme-accent-primary,#1595A3)]">
                   <InfoIcon className="h-5 w-5" />
                 </span>
-                <p className="max-w-28 text-xs font-black leading-5 text-[#103F4A]">
+                <p className="max-w-28 text-xs font-black leading-5 text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]">
                   {label as string}
                 </p>
               </div>
@@ -330,26 +395,26 @@ export function SuncrestVacationVillas() {
       </section>
 
       <section className="relative z-10 px-5 lg:px-10">
-        <div className="mx-auto -mt-8 grid max-w-5xl gap-3 rounded-[1.5rem] border border-[#EADFCB] bg-white p-4 shadow-[0_22px_60px_rgba(16,63,74,.13)] md:grid-cols-[1fr_1fr_1fr_auto]">
-          <label className="rounded-xl bg-[#F7F1E3] px-4 py-3 text-[0.62rem] font-black uppercase tracking-[0.16em] text-[#688084]">
+        <div className="mx-auto -mt-8 grid max-w-5xl gap-3 rounded-[1.5rem] border border-[#EADFCB] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#102830)] p-4 shadow-[0_22px_60px_rgba(16,63,74,.13)] [html.dark_&]:shadow-black/40 md:grid-cols-[1fr_1fr_1fr_auto]">
+          <label className="rounded-xl bg-[#F7F1E3] [html.dark_&]:bg-white/5 px-4 py-3 text-[0.62rem] font-black uppercase tracking-[0.16em] text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
             Destination
-            <select className="mt-1.5 w-full bg-transparent text-sm font-bold normal-case tracking-normal text-[#103F4A] outline-none">
+            <select className="mt-1.5 w-full bg-transparent text-sm font-bold normal-case tracking-normal text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)] [html.dark_&]:bg-[#102830] outline-none">
               <option>Coastal escapes</option>
               <option>Island retreats</option>
               <option>Resort communities</option>
             </select>
           </label>
-          <label className="rounded-xl bg-[#F7F1E3] px-4 py-3 text-[0.62rem] font-black uppercase tracking-[0.16em] text-[#688084]">
+          <label className="rounded-xl bg-[#F7F1E3] [html.dark_&]:bg-white/5 px-4 py-3 text-[0.62rem] font-black uppercase tracking-[0.16em] text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
             Property Type
-            <select className="mt-1.5 w-full bg-transparent text-sm font-bold normal-case tracking-normal text-[#103F4A] outline-none">
+            <select className="mt-1.5 w-full bg-transparent text-sm font-bold normal-case tracking-normal text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)] [html.dark_&]:bg-[#102830] outline-none">
               <option>All villas</option>
               <option>Beach villa</option>
               <option>Resort villa</option>
             </select>
           </label>
-          <label className="rounded-xl bg-[#F7F1E3] px-4 py-3 text-[0.62rem] font-black uppercase tracking-[0.16em] text-[#688084]">
+          <label className="rounded-xl bg-[#F7F1E3] [html.dark_&]:bg-white/5 px-4 py-3 text-[0.62rem] font-black uppercase tracking-[0.16em] text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
             Ownership Goal
-            <select className="mt-1.5 w-full bg-transparent text-sm font-bold normal-case tracking-normal text-[#103F4A] outline-none">
+            <select className="mt-1.5 w-full bg-transparent text-sm font-bold normal-case tracking-normal text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)] [html.dark_&]:bg-[#102830] outline-none">
               <option>Lifestyle & stays</option>
               <option>Rental appeal</option>
               <option>Mixed use</option>
@@ -357,7 +422,7 @@ export function SuncrestVacationVillas() {
           </label>
           <a
             href="#villas"
-            className="inline-flex min-h-16 items-center justify-center gap-2 rounded-xl bg-[#1595A3] px-6 text-sm font-black text-white"
+            className="inline-flex min-h-16 items-center justify-center gap-2 rounded-xl bg-[var(--theme-accent-primary,#1595A3)] px-6 text-sm font-black text-[var(--theme-accent-contrast,#ffffff)] hover:opacity-90 transition"
           >
             <Search className="h-4 w-4" />
             Discover
@@ -376,7 +441,7 @@ export function SuncrestVacationVillas() {
             {discoveryCards.map((card) => (
               <article
                 key={card.title}
-                className="suncrest-card group overflow-hidden rounded-[1.75rem] border border-[#EADFCB] bg-white"
+                className="suncrest-card group overflow-hidden rounded-[1.75rem] border border-[#EADFCB] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#102830)]"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
@@ -386,18 +451,18 @@ export function SuncrestVacationVillas() {
                   />
                 </div>
                 <div className="p-7">
-                  <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#E2A924]">
+                  <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#E2A924)]">
                     {card.tag}
                   </p>
-                  <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-[#103F4A]">
+                  <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]">
                     {card.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[#688084]">
+                  <p className="mt-3 text-sm leading-7 text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                     {card.text}
                   </p>
                   <a
                     href="#villas"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#1595A3]"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[var(--theme-accent-primary,#1595A3)] hover:opacity-80 transition"
                   >
                     Explore <ArrowRight className="h-4 w-4" />
                   </a>
@@ -410,7 +475,7 @@ export function SuncrestVacationVillas() {
 
       <section
         id="villas"
-        className="bg-[#DCE8E8]/70 px-5 py-24 lg:px-10 lg:py-32"
+        className="bg-[#DCE8E8]/70 [html.dark_&]:bg-[var(--theme-bg-surface,#0c2228)]/70 px-5 py-24 lg:px-10 lg:py-32"
       >
         <div className="mx-auto max-w-[92rem]">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
@@ -418,7 +483,7 @@ export function SuncrestVacationVillas() {
               label="Featured villas"
               title="Featured Vacation Villas"
             />
-            <p className="max-w-md text-sm leading-7 text-[#607A7E]">
+            <p className="max-w-md text-sm leading-7 text-[#607A7E] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
               A curated selection of resort and destination homes for personal
               escapes, guest stays, and considered ownership goals.
             </p>
@@ -427,7 +492,7 @@ export function SuncrestVacationVillas() {
             {villas.map((villa) => (
               <article
                 key={villa.title}
-                className="suncrest-card group overflow-hidden rounded-[1.75rem] border border-white bg-white"
+                className="suncrest-card group overflow-hidden rounded-[1.75rem] border border-white [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#102830)]"
               >
                 <div className="relative aspect-[16/11] overflow-hidden">
                   <img
@@ -435,34 +500,34 @@ export function SuncrestVacationVillas() {
                     alt={`${villa.title} vacation property`}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-4 top-4 rounded-full bg-[#E8B94A] px-3 py-1.5 text-[0.62rem] font-black uppercase tracking-[0.14em] text-[#103F4A]">
+                  <span className="absolute left-4 top-4 rounded-full bg-[var(--theme-accent-secondary,#E8B94A)] px-3 py-1.5 text-[0.62rem] font-black uppercase tracking-[0.14em] text-[#103F4A]">
                     {villa.badge}
                   </span>
                 </div>
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-[0.6rem] font-black uppercase tracking-[0.17em] text-[#1595A3]">
+                      <p className="text-[0.6rem] font-black uppercase tracking-[0.17em] text-[var(--theme-accent-primary,#1595A3)]">
                         {villa.type}
                       </p>
-                      <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-[#103F4A]">
+                      <h3 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]">
                         {villa.title}
                       </h3>
                     </div>
-                    <p className="shrink-0 text-sm font-black text-[#103F4A]">
+                    <p className="shrink-0 text-sm font-black text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]">
                       {villa.price}
                     </p>
                   </div>
-                  <p className="mt-3 flex items-center gap-1.5 text-sm text-[#688084]">
-                    <MapPin className="h-4 w-4 text-[#E2A924]" />
+                  <p className="mt-3 flex items-center gap-1.5 text-sm text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
+                    <MapPin className="h-4 w-4 text-[var(--theme-accent-secondary,#E2A924)]" />
                     {villa.location}
                   </p>
-                  <p className="mt-4 text-sm leading-7 text-[#688084]">
+                  <p className="mt-4 text-sm leading-7 text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                     {villa.text}
                   </p>
                   <a
                     href="#contact"
-                    className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#103F4A] px-5 py-3 text-sm font-black text-white transition hover:bg-[#1595A3]"
+                    className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#103F4A] [html.dark_&]:bg-[var(--theme-accent-primary,#1595A3)] px-5 py-3 text-sm font-black text-white transition hover:bg-[var(--theme-accent-primary,#1595A3)] [html.dark_&]:hover:opacity-90"
                   >
                     View Villa <ArrowRight className="h-4 w-4" />
                   </a>
@@ -482,11 +547,11 @@ export function SuncrestVacationVillas() {
               className="min-h-[38rem] w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#103F4A]/60 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 rounded-2xl bg-white/92 p-5 backdrop-blur">
-              <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[#1595A3]">
+            <div className="absolute bottom-6 left-6 rounded-2xl bg-white/92 [html.dark_&]:bg-[#102830]/92 p-5 backdrop-blur">
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#1595A3)]">
                 Destination living
               </p>
-              <p className="mt-1 font-semibold text-[#103F4A]">
+              <p className="mt-1 font-semibold text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]">
                 More room for the moments that matter.
               </p>
             </div>
@@ -524,13 +589,13 @@ export function SuncrestVacationVillas() {
                 return (
                   <article
                     key={title as string}
-                    className="rounded-2xl border border-[#EADFCB] bg-white p-5"
+                    className="rounded-2xl border border-[#EADFCB] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#102830)] p-5"
                   >
-                    <LifestyleIcon className="h-5 w-5 text-[#1595A3]" />
-                    <h3 className="mt-4 font-black text-[#103F4A]">
+                    <LifestyleIcon className="h-5 w-5 text-[var(--theme-accent-primary,#1595A3)]" />
+                    <h3 className="mt-4 font-black text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]">
                       {title as string}
                     </h3>
-                    <p className="mt-2 text-sm leading-6 text-[#688084]">
+                    <p className="mt-2 text-sm leading-6 text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">
                       {text as string}
                     </p>
                   </article>
@@ -543,14 +608,14 @@ export function SuncrestVacationVillas() {
 
       <section
         id="investments"
-        className="relative bg-[#103F4A] px-5 py-24 text-white lg:px-10 lg:py-32"
+        className="relative bg-[#103F4A] [html.dark_&]:bg-[var(--theme-bg-dark,#07171c)] px-5 py-24 text-white lg:px-10 lg:py-32"
       >
         <img
           src={investmentImage}
           alt="Suncrest resort investment property"
           className="absolute inset-0 h-full w-full object-cover opacity-15"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#103F4A] via-[#103F4A]/95 to-[#103F4A]/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#103F4A] [html.dark_&]:from-[var(--theme-bg-dark,#07171c)] via-[#103F4A]/95 [html.dark_&]:via-[var(--theme-bg-dark,#07171c)]/95 to-[#103F4A]/70 [html.dark_&]:to-[var(--theme-bg-dark,#07171c)]/70" />
         <div className="relative mx-auto max-w-[92rem]">
           <SuncrestHeading
             label="Resort investments"
@@ -587,7 +652,7 @@ export function SuncrestVacationVillas() {
                   key={title as string}
                   className="rounded-2xl border border-white/12 bg-white/[0.06] p-6 backdrop-blur"
                 >
-                  <span className="grid h-11 w-11 place-items-center rounded-full bg-[#E8B94A] text-[#103F4A]">
+                  <span className="grid h-11 w-11 place-items-center rounded-full bg-[var(--theme-accent-secondary,#E8B94A)] text-[#103F4A]">
                     <InvestIcon className="h-5 w-5" />
                   </span>
                   <h3 className="mt-7 text-xl font-semibold">
@@ -607,7 +672,7 @@ export function SuncrestVacationVillas() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-24 lg:px-10 lg:py-32">
+      <section className="bg-white [html.dark_&]:bg-[var(--theme-bg-base,#0a1b20)] px-5 py-24 lg:px-10 lg:py-32">
         <div className="mx-auto max-w-[92rem]">
           <SuncrestHeading
             label="How it works"
@@ -639,15 +704,15 @@ export function SuncrestVacationVillas() {
             ].map(([number, title, text]) => (
               <article
                 key={number}
-                className="rounded-[1.5rem] border border-[#EADFCB] bg-[#FFFDF8] p-7"
+                className="rounded-[1.5rem] border border-[#EADFCB] [html.dark_&]:border-white/10 bg-[#FFFDF8] [html.dark_&]:bg-[var(--theme-bg-card,#102830)] p-7"
               >
-                <span className="grid h-12 w-12 place-items-center rounded-full bg-[#E8B94A] text-sm font-black text-[#103F4A]">
+                <span className="grid h-12 w-12 place-items-center rounded-full bg-[var(--theme-accent-secondary,#E8B94A)] text-sm font-black text-[#103F4A]">
                   {number}
                 </span>
-                <h3 className="mt-7 text-xl font-semibold text-[#103F4A]">
+                <h3 className="mt-7 text-xl font-semibold text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[#688084]">{text}</p>
+                <p className="mt-3 text-sm leading-7 text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">{text}</p>
               </article>
             ))}
           </div>
@@ -655,7 +720,7 @@ export function SuncrestVacationVillas() {
       </section>
 
       <section className="px-5 py-24 lg:px-10 lg:py-32">
-        <div className="mx-auto grid max-w-[92rem] overflow-hidden rounded-[2rem] bg-[#1595A3] lg:grid-cols-2">
+        <div className="mx-auto grid max-w-[92rem] overflow-hidden rounded-[2rem] bg-[var(--theme-accent-primary,#1595A3)] lg:grid-cols-2">
           <img
             src={experienceImage}
             alt="Guest-ready interior and outdoor living at a Suncrest villa"
@@ -663,7 +728,7 @@ export function SuncrestVacationVillas() {
           />
           <div className="flex items-center p-8 text-white md:p-12 lg:p-16">
             <div>
-              <p className="text-[0.67rem] font-black uppercase tracking-[0.25em] text-[#F4C65B]">
+              <p className="text-[0.67rem] font-black uppercase tracking-[0.25em] text-[var(--theme-accent-secondary,#F4C65B)]">
                 Villa experience
               </p>
               <h2 className="mt-4 text-[clamp(2.7rem,5vw,5rem)] font-semibold leading-[0.95] tracking-[-0.055em]">
@@ -684,7 +749,7 @@ export function SuncrestVacationVillas() {
                     key={item}
                     className="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3 font-bold"
                   >
-                    <Check className="h-5 w-5 rounded-full bg-[#E8B94A] p-1 text-[#103F4A]" />
+                    <Check className="h-5 w-5 rounded-full bg-[var(--theme-accent-secondary,#E8B94A)] p-1 text-[#103F4A]" />
                     {item}
                   </div>
                 ))}
@@ -696,7 +761,7 @@ export function SuncrestVacationVillas() {
 
       <section
         id="destinations"
-        className="bg-[#DCE8E8]/65 px-5 py-24 lg:px-10 lg:py-32"
+        className="bg-[#DCE8E8]/65 [html.dark_&]:bg-[var(--theme-bg-surface,#0c2228)]/65 px-5 py-24 lg:px-10 lg:py-32"
       >
         <div className="mx-auto max-w-[92rem]">
           <SuncrestHeading
@@ -739,7 +804,7 @@ export function SuncrestVacationVillas() {
                   <p className="mt-3 text-sm leading-7 text-white/70">{text}</p>
                   <a
                     href="#contact"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#F4C65B]"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[var(--theme-accent-secondary,#F4C65B)]"
                   >
                     View Destination <ArrowRight className="h-4 w-4" />
                   </a>
@@ -776,18 +841,18 @@ export function SuncrestVacationVillas() {
             ].map(([tag, title, text]) => (
               <article
                 key={title}
-                className="suncrest-card rounded-[1.5rem] border border-[#EADFCB] bg-white p-7"
+                className="suncrest-card rounded-[1.5rem] border border-[#EADFCB] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#102830)] p-7"
               >
-                <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#E2A924]">
+                <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-secondary,#E2A924)]">
                   {tag}
                 </p>
-                <h3 className="mt-4 text-2xl font-semibold leading-tight tracking-[-0.04em] text-[#103F4A]">
+                <h3 className="mt-4 text-2xl font-semibold leading-tight tracking-[-0.04em] text-[#103F4A] [html.dark_&]:text-[var(--theme-text-primary,#F7F1E3)]">
                   {title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-[#688084]">{text}</p>
+                <p className="mt-4 text-sm leading-7 text-[#688084] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]">{text}</p>
                 <a
                   href="#contact"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[#1595A3]"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[var(--theme-accent-primary,#1595A3)] hover:opacity-80 transition"
                 >
                   Read Guide <ArrowRight className="h-4 w-4" />
                 </a>
@@ -799,17 +864,17 @@ export function SuncrestVacationVillas() {
 
       <section
         id="contact"
-        className="relative bg-[#103F4A] px-5 py-28 text-white lg:px-10 lg:py-36"
+        className="relative bg-[#103F4A] [html.dark_&]:bg-[var(--theme-bg-dark,#07171c)] px-5 py-28 text-white lg:px-10 lg:py-36"
       >
         <img
           src={ctaImage}
           alt="Suncrest villa at a poolside sunset"
           className="absolute inset-0 h-full w-full object-cover opacity-35"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#103F4A] via-[#103F4A]/88 to-[#103F4A]/35" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#103F4A] [html.dark_&]:from-[var(--theme-bg-dark,#07171c)] via-[#103F4A]/88 [html.dark_&]:via-[var(--theme-bg-dark,#07171c)]/88 to-[#103F4A]/35 [html.dark_&]:to-[var(--theme-bg-dark,#07171c)]/35" />
         <div className="relative mx-auto max-w-[92rem]">
           <div className="max-w-4xl">
-            <p className="text-[0.67rem] font-black uppercase tracking-[0.25em] text-[#F4C65B]">
+            <p className="text-[0.67rem] font-black uppercase tracking-[0.25em] text-[var(--theme-accent-secondary,#F4C65B)]">
               Your next escape
             </p>
             <h2 className="mt-5 text-[clamp(3.3rem,7vw,7rem)] font-semibold leading-[0.88] tracking-[-0.065em]">
@@ -827,7 +892,7 @@ export function SuncrestVacationVillas() {
         </div>
       </section>
 
-      <footer className="bg-[#0B333C] px-5 pb-8 pt-16 text-white lg:px-10">
+      <footer className="bg-[#0B333C] [html.dark_&]:bg-[var(--theme-bg-dark,#051013)] px-5 pb-8 pt-16 text-white lg:px-10">
         <div className="mx-auto max-w-[92rem]">
           <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-[1.35fr_.65fr_.8fr_1fr]">
             <div>
@@ -841,7 +906,7 @@ export function SuncrestVacationVillas() {
               <p className="font-black">Quick links</p>
               <div className="mt-5 grid gap-3 text-sm text-white/48">
                 {navLinks.slice(0, 4).map(([label, href]) => (
-                  <a key={label} href={href} className="hover:text-white">
+                  <a key={label} href={href} className="hover:text-white transition">
                     {label}
                   </a>
                 ))}
@@ -850,19 +915,19 @@ export function SuncrestVacationVillas() {
             <div>
               <p className="font-black">Property categories</p>
               <div className="mt-5 grid gap-3 text-sm text-white/48">
-                <a href="#villas">Beach Villas</a>
-                <a href="#villas">Resort Homes</a>
-                <a href="#destinations">Island Retreats</a>
-                <a href="#investments">Income Potential</a>
+                <a href="#villas" className="hover:text-white transition">Beach Villas</a>
+                <a href="#villas" className="hover:text-white transition">Resort Homes</a>
+                <a href="#destinations" className="hover:text-white transition">Island Retreats</a>
+                <a href="#investments" className="hover:text-white transition">Income Potential</a>
               </div>
             </div>
             <div>
               <p className="font-black">Contact</p>
               <div className="mt-5 grid gap-3 text-sm text-white/48">
-                <a href="mailto:hello@suncrestvillas.com">
+                <a href="mailto:hello@suncrestvillas.com" className="hover:text-white transition">
                   hello@suncrestvillas.com
                 </a>
-                <a href="tel:2125550184">(212) 555-0184</a>
+                <a href="tel:2125550184" className="hover:text-white transition">(212) 555-0184</a>
                 <span>New York, NY</span>
               </div>
             </div>

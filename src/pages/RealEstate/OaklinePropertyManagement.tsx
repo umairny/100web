@@ -118,7 +118,7 @@ function OakButton({
   return (
     <a
       href={href}
-      className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-extrabold transition duration-300 hover:-translate-y-0.5 ${secondary ? "border border-[#BFCFC9] bg-white text-[#16324A] hover:border-[#3D7657]" : "bg-[#3D7657] text-white shadow-[0_12px_28px_rgba(61,118,87,.2)] hover:bg-[#326549]"} ${className}`}
+      className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-extrabold transition duration-300 hover:-translate-y-0.5 ${secondary ? "border border-[#BFCFC9] [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#13282c)] text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] hover:border-[var(--theme-accent-primary,#3D7657)] hover:text-[var(--theme-accent-primary,#3D7657)]" : "bg-[var(--theme-accent-primary,#3D7657)] text-[var(--theme-accent-contrast,#ffffff)] shadow-[0_12px_28px_rgba(61,118,87,.2)] hover:opacity-90"} ${className}`}
     >
       {children}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -141,17 +141,17 @@ function OakHeading({
 }) {
   return (
     <div className={center ? "mx-auto max-w-4xl text-center" : "max-w-3xl"}>
-      <p className="text-[0.66rem] font-black uppercase tracking-[0.24em] text-[#3D7657]">
+      <p className="text-[0.66rem] font-black uppercase tracking-[0.24em] text-[var(--theme-accent-primary,#3D7657)]">
         {label}
       </p>
       <h2
-        className={`mt-4 text-[clamp(2.35rem,5vw,4.8rem)] font-black leading-[0.96] tracking-[-0.055em] ${light ? "text-white" : "text-[#16324A]"}`}
+        className={`mt-4 text-[clamp(2.35rem,5vw,4.8rem)] font-black leading-[0.96] tracking-[-0.055em] transition-colors duration-300 ${light ? "text-white" : "text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)]"}`}
       >
         {title}
       </h2>
       {text && (
         <p
-          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg ${center ? "mx-auto" : ""} ${light ? "text-white/65" : "text-[#607078]"}`}
+          className={`mt-6 max-w-2xl text-base leading-8 transition-colors duration-300 md:text-lg ${center ? "mx-auto" : ""} ${light ? "text-white/65" : "text-[#607078] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]"}`}
         >
           {text}
         </p>
@@ -164,10 +164,10 @@ function OakLogo({ light = false }: { light?: boolean }) {
   return (
     <a
       href="#home"
-      className={`flex items-center gap-3 ${light ? "text-white" : "text-[#16324A]"}`}
+      className={`flex items-center gap-3 transition-colors duration-300 ${light ? "text-white" : "text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)]"}`}
       aria-label="Oakline Property Management home"
     >
-      <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#3D7657] text-white">
+      <span className="grid h-11 w-11 place-items-center rounded-xl bg-[var(--theme-accent-primary,#3D7657)] text-white">
         <Home className="h-5 w-5" />
       </span>
       <span>
@@ -175,7 +175,7 @@ function OakLogo({ light = false }: { light?: boolean }) {
           Oakline
         </strong>
         <span
-          className={`mt-1 block text-[0.53rem] font-bold uppercase tracking-[0.18em] ${light ? "text-white/50" : "text-[#6D7E78]"}`}
+          className={`mt-1 block text-[0.53rem] font-bold uppercase tracking-[0.18em] transition-colors duration-300 ${light ? "text-white/50" : "text-[#6D7E78] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)]"}`}
         >
           Property Management
         </span>
@@ -267,8 +267,8 @@ export function OaklinePropertyManagement() {
   }, []);
 
   return (
-    <main className="oakline-site w-full max-w-full overflow-x-hidden bg-[#F2F7F5] text-[#334047] selection:bg-[#8FA377] selection:text-white">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#D9E2E0] bg-white/95 backdrop-blur-xl">
+    <main className="oakline-site w-full max-w-full overflow-x-hidden bg-[var(--theme-bg-base,#F2F7F5)] [html.dark_&]:bg-[var(--theme-bg-base,#0a1719)] text-[var(--theme-text-primary,#334047)] [html.dark_&]:text-[var(--theme-text-primary,#e2e8f0)] selection:bg-[var(--theme-accent-secondary,#8FA377)] selection:text-white transition-colors duration-300">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--theme-border,#D9E2E0)]/10 [html.dark_&]:border-white/10 bg-white/95 [html.dark_&]:bg-[var(--theme-bg-base,#0a1719)]/95 backdrop-blur-xl transition-colors duration-300">
         <div className="mx-auto flex h-[4.5rem] max-w-[90rem] items-center justify-between px-5 lg:px-10">
           <OakLogo />
           <nav
@@ -284,8 +284,8 @@ export function OaklinePropertyManagement() {
                   aria-current={isActive ? "location" : undefined}
                   className={`rounded-full px-4 py-2 text-sm font-bold transition ${
                     isActive
-                      ? "oakline-nav-active bg-[#E8F0EC] text-[#3D7657]"
-                      : "text-[#5D6C72] hover:bg-[#F2F7F5] hover:text-[#3D7657]"
+                      ? "oakline-nav-active bg-[#E8F0EC] [html.dark_&]:bg-[var(--theme-accent-primary,#3D7657)]/20 text-[var(--theme-accent-primary,#3D7657)]"
+                      : "text-[#5D6C72] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] hover:bg-[#F2F7F5] [html.dark_&]:hover:bg-white/5 hover:text-[var(--theme-accent-primary,#3D7657)] [html.dark_&]:hover:text-white"
                   }`}
                 >
                   {label}
@@ -306,7 +306,7 @@ export function OaklinePropertyManagement() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-11 w-11 place-items-center rounded-xl border border-[#D9E2E0] text-[#16324A] lg:hidden transition active:scale-95 hover:border-[#3D7657]"
+            className="grid h-11 w-11 place-items-center rounded-xl border border-[#D9E2E0] [html.dark_&]:border-white/15 text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] lg:hidden transition active:scale-95 hover:border-[var(--theme-accent-primary,#3D7657)]"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -324,7 +324,7 @@ export function OaklinePropertyManagement() {
               onClick={() => setMenuOpen(false)}
               aria-hidden="true"
             />
-            <nav className="fixed inset-x-0 top-[4.5rem] z-50 border-b border-[#D9E2E0] bg-white/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+            <nav className="fixed inset-x-0 top-[4.5rem] z-50 border-b border-[#D9E2E0] [html.dark_&]:border-white/10 bg-white/98 [html.dark_&]:bg-[var(--theme-bg-base,#0a1719)]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
               <div className="space-y-1">
                 {navLinks.map(([label, href]) => {
                   const isActive = activeSection === href.slice(1);
@@ -336,12 +336,12 @@ export function OaklinePropertyManagement() {
                       onClick={() => setMenuOpen(false)}
                       className={`flex items-center justify-between rounded-xl px-4 py-3 font-bold transition ${
                         isActive
-                          ? "oakline-nav-active bg-[#E8F0EC] text-[#3D7657] font-extrabold"
-                          : "text-[#536369] hover:bg-[#F2F7F5] hover:text-[#3D7657]"
+                          ? "oakline-nav-active bg-[#E8F0EC] [html.dark_&]:bg-[var(--theme-accent-primary,#3D7657)]/20 text-[var(--theme-accent-primary,#3D7657)] font-extrabold"
+                          : "text-[#536369] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] hover:bg-[#F2F7F5] [html.dark_&]:hover:bg-white/5 hover:text-[var(--theme-accent-primary,#3D7657)]"
                       }`}
                     >
                       <span>{label}</span>
-                      <span className="text-xs text-[#3D7657]">→</span>
+                      <span className="text-xs text-[var(--theme-accent-primary,#3D7657)]">→</span>
                     </a>
                   );
                 })}
@@ -353,19 +353,19 @@ export function OaklinePropertyManagement() {
 
       <section id="home" className="relative pt-[4.5rem]">
         <div className="mx-auto grid min-h-[47rem] max-w-[100rem] lg:grid-cols-[.9fr_1.1fr]">
-          <div className="relative flex items-center bg-[#F2F7F5] px-5 py-20 lg:px-12 xl:px-20">
-            <div className="absolute left-0 top-24 h-48 w-2 rounded-r-full bg-[#8FA377]" />
+          <div className="relative flex items-center bg-[var(--theme-bg-base,#F2F7F5)] [html.dark_&]:bg-[var(--theme-bg-base,#0a1719)] px-5 py-20 lg:px-12 xl:px-20 transition-colors duration-300">
+            <div className="absolute left-0 top-24 h-48 w-2 rounded-r-full bg-[var(--theme-accent-secondary,#8FA377)]" />
             <div>
-              <p className="inline-flex items-center gap-2 rounded-full border border-[#CAD9D4] bg-white px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-[#3D7657]">
+              <p className="inline-flex items-center gap-2 rounded-full border border-[#CAD9D4] [html.dark_&]:border-white/15 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#13282c)] px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#3D7657)] transition-colors duration-300">
                 <ShieldCheck className="h-4 w-4" /> Property management
               </p>
-              <h1 className="mt-7 max-w-3xl text-[clamp(2.35rem,6.2vw,6.5rem)] font-black leading-[0.9] tracking-[-0.07em] text-[#16324A]">
+              <h1 className="mt-7 max-w-3xl text-[clamp(2.35rem,6.2vw,6.5rem)] font-black leading-[0.9] tracking-[-0.07em] text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">
                 Calm, Clear Property Management{" "}
-                <span className="text-[#3D7657]">
+                <span className="text-[var(--theme-accent-primary,#3D7657)]">
                   for Landlords and Tenants
                 </span>
               </h1>
-              <p className="mt-7 max-w-xl text-base sm:text-lg leading-relaxed text-[#607078]">
+              <p className="mt-7 max-w-xl text-base sm:text-lg leading-relaxed text-[#607078] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] transition-colors duration-300">
                 Oakline Property Management helps landlords protect their
                 properties and tenants feel supported through responsive
                 service, organized operations, and transparent communication.
@@ -385,19 +385,19 @@ export function OaklinePropertyManagement() {
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#16324A]/35 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-5 right-5 rounded-2xl border border-white/50 bg-white/92 p-5 shadow-2xl backdrop-blur md:left-8 md:right-auto md:w-80">
+            <div className="absolute bottom-6 left-5 right-5 rounded-2xl border border-white/50 [html.dark_&]:border-white/10 bg-white/92 [html.dark_&]:bg-[var(--theme-bg-card,#13282c)]/95 p-5 shadow-2xl backdrop-blur transition-colors duration-300 md:left-8 md:right-auto md:w-80">
               <div className="flex items-center justify-between">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#E8F0EC] text-[#3D7657]">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#E8F0EC] [html.dark_&]:bg-[var(--theme-accent-primary,#3D7657)]/20 text-[var(--theme-accent-primary,#3D7657)]">
                   <MailCheck className="h-5 w-5" />
                 </span>
-                <span className="rounded-full bg-[#DDE8D4] px-3 py-1 text-[0.6rem] font-black uppercase tracking-[0.14em] text-[#3D7657]">
+                <span className="rounded-full bg-[#DDE8D4] [html.dark_&]:bg-[var(--theme-accent-secondary,#8FA377)]/20 px-3 py-1 text-[0.6rem] font-black uppercase tracking-[0.14em] text-[var(--theme-accent-primary,#3D7657)] [html.dark_&]:text-[var(--theme-accent-secondary,#8FA377)]">
                   Service focused
                 </span>
               </div>
-              <h2 className="mt-5 text-xl font-black text-[#16324A]">
+              <h2 className="mt-5 text-xl font-black text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">
                 Clear updates, without the chase.
               </h2>
-              <p className="mt-2 text-sm leading-6 text-[#607078]">
+              <p className="mt-2 text-sm leading-6 text-[#607078] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] transition-colors duration-300">
                 Organized requests, documented follow-up, and practical next
                 steps.
               </p>
@@ -406,7 +406,7 @@ export function OaklinePropertyManagement() {
         </div>
 
         {/* Responsive Features Ribbon with Mobile Overlap Protection */}
-        <div className="relative z-10 mx-auto -mt-6 sm:-mt-0 sm:-translate-y-1/2 grid max-w-[90rem] grid-cols-1 overflow-hidden rounded-2xl border border-[#D9E2E0] bg-white shadow-xl sm:grid-cols-3">
+        <div className="relative z-10 mx-auto -mt-6 sm:-mt-0 sm:-translate-y-1/2 grid max-w-[90rem] grid-cols-1 overflow-hidden rounded-2xl border border-[#D9E2E0] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#13282c)] shadow-xl transition-colors duration-300 sm:grid-cols-3">
           {[
             [Wrench, "Responsive Maintenance"],
             [ClipboardCheck, "Transparent Operations"],
@@ -416,10 +416,10 @@ export function OaklinePropertyManagement() {
             return (
               <div
                 key={label as string}
-                className="flex items-center gap-3 border-b border-[#D9E2E0] px-5 py-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"
+                className="flex items-center gap-3 border-b border-[#D9E2E0] [html.dark_&]:border-white/10 px-5 py-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"
               >
-                <InfoIcon className="h-5 w-5 text-[#3D7657]" />
-                <span className="text-sm font-black text-[#16324A]">
+                <InfoIcon className="h-5 w-5 text-[var(--theme-accent-primary,#3D7657)]" />
+                <span className="text-sm font-black text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">
                   {label as string}
                 </span>
               </div>
@@ -439,7 +439,7 @@ export function OaklinePropertyManagement() {
             {supportCards.map((card) => (
               <article
                 key={card.title}
-                className="oak-card group overflow-hidden rounded-[1.5rem] border border-[#D9E2E0] bg-white"
+                className="oak-card group overflow-hidden rounded-[1.5rem] border border-[#D9E2E0] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#13282c)] transition-colors duration-300"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
@@ -449,18 +449,18 @@ export function OaklinePropertyManagement() {
                   />
                 </div>
                 <div className="p-7">
-                  <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[#8FA377]">
+                  <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#8FA377)]">
                     {card.label}
                   </p>
-                  <h3 className="mt-3 text-2xl font-black tracking-[-0.04em] text-[#16324A]">
+                  <h3 className="mt-3 text-2xl font-black tracking-[-0.04em] text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">
                     {card.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[#64747A]">
+                  <p className="mt-3 text-sm leading-7 text-[#64747A] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] transition-colors duration-300">
                     {card.text}
                   </p>
                   <a
                     href={card.href}
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#3D7657]"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[var(--theme-accent-primary,#3D7657)]"
                   >
                     Learn More <ArrowRight className="h-4 w-4" />
                   </a>
@@ -473,7 +473,7 @@ export function OaklinePropertyManagement() {
 
       <section
         id="services"
-        className="border-y border-[#D9E2E0] bg-white px-5 py-24 lg:px-10 lg:py-32"
+        className="border-y border-[#D9E2E0] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-base,#0a1719)] px-5 py-24 lg:px-10 lg:py-32 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[90rem]">
           <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
@@ -494,13 +494,13 @@ export function OaklinePropertyManagement() {
             {services.map(({ icon: Icon, title, text }) => (
               <article
                 key={title}
-                className="oak-card rounded-2xl border border-[#D9E2E0] bg-[#F8FBFA] p-6"
+                className="oak-card rounded-2xl border border-[#D9E2E0] [html.dark_&]:border-white/10 bg-[#F8FBFA] [html.dark_&]:bg-[var(--theme-bg-card,#13282c)] p-6 transition-colors duration-300"
               >
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#E8F0EC] text-[#3D7657]">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#E8F0EC] [html.dark_&]:bg-[var(--theme-accent-primary,#3D7657)]/20 text-[var(--theme-accent-primary,#3D7657)]">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-5 font-black text-[#16324A]">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#68787E]">{text}</p>
+                <h3 className="mt-5 font-black text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#68787E] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] transition-colors duration-300">{text}</p>
               </article>
             ))}
           </div>
@@ -508,7 +508,7 @@ export function OaklinePropertyManagement() {
       </section>
 
       <section id="landlords" className="px-5 py-24 lg:px-10 lg:py-32">
-        <div className="mx-auto grid max-w-[90rem] overflow-hidden rounded-[2rem] bg-[#16324A] lg:grid-cols-2">
+        <div className="mx-auto grid max-w-[90rem] overflow-hidden rounded-[2rem] bg-[#16324A] [html.dark_&]:bg-[var(--theme-bg-dark,#0a1b24)] transition-colors duration-300 lg:grid-cols-2">
           <div className="flex items-center p-8 text-white md:p-12 lg:p-16">
             <div>
               <OakHeading
@@ -528,7 +528,7 @@ export function OaklinePropertyManagement() {
                     key={item}
                     className="flex items-center gap-3 rounded-xl bg-white/[0.07] px-4 py-3 text-sm font-bold"
                   >
-                    <Check className="h-5 w-5 rounded-full bg-[#8FA377] p-1" />
+                    <Check className="h-5 w-5 rounded-full bg-[var(--theme-accent-secondary,#8FA377)] p-1 text-white" />
                     {item}
                   </div>
                 ))}
@@ -548,7 +548,7 @@ export function OaklinePropertyManagement() {
 
       <section
         id="tenants"
-        className="bg-[#E8F0EC] px-5 py-24 lg:px-10 lg:py-32"
+        className="bg-[#E8F0EC] [html.dark_&]:bg-[var(--theme-bg-surface,#0f2226)] px-5 py-24 lg:px-10 lg:py-32 transition-colors duration-300"
       >
         <div className="mx-auto grid max-w-[90rem] gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
           <div className="relative overflow-hidden rounded-[2rem]">
@@ -557,11 +557,11 @@ export function OaklinePropertyManagement() {
               alt="Comfortable tenant experience in an Oakline managed home"
               className="min-h-[35rem] w-full object-cover"
             />
-            <div className="absolute bottom-6 left-6 rounded-2xl bg-white/92 p-5 shadow-xl backdrop-blur">
-              <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[#3D7657]">
+            <div className="absolute bottom-6 left-6 rounded-2xl bg-white/92 [html.dark_&]:bg-[var(--theme-bg-card,#13282c)]/95 p-5 shadow-xl backdrop-blur transition-colors duration-300">
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-primary,#3D7657)]">
                 Tenant support
               </p>
-              <p className="mt-1 font-black text-[#16324A]">
+              <p className="mt-1 font-black text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">
                 Helpful answers. Practical next steps.
               </p>
             </div>
@@ -594,16 +594,16 @@ export function OaklinePropertyManagement() {
                 return (
                   <article
                     key={title as string}
-                    className="flex gap-4 rounded-2xl border border-white bg-white p-5"
+                    className="flex gap-4 rounded-2xl border border-white [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#13282c)] p-5 transition-colors duration-300"
                   >
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#E8F0EC] text-[#3D7657]">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-[#E8F0EC] [html.dark_&]:bg-[var(--theme-accent-primary,#3D7657)]/20 text-[var(--theme-accent-primary,#3D7657)]">
                       <SupportIcon className="h-5 w-5" />
                     </span>
                     <div>
-                      <h3 className="font-black text-[#16324A]">
+                      <h3 className="font-black text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">
                         {title as string}
                       </h3>
-                      <p className="mt-1 text-sm leading-6 text-[#68787E]">
+                      <p className="mt-1 text-sm leading-6 text-[#68787E] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] transition-colors duration-300">
                         {text as string}
                       </p>
                     </div>
@@ -655,15 +655,15 @@ export function OaklinePropertyManagement() {
               ].map(([number, title, text]) => (
                 <article
                   key={number}
-                  className="rounded-[1.5rem] border border-[#D9E2E0] bg-white p-7"
+                  className="rounded-[1.5rem] border border-[#D9E2E0] [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#13282c)] p-7 transition-colors duration-300"
                 >
-                  <span className="grid h-11 w-11 place-items-center rounded-full bg-[#8FA377] text-sm font-black text-white">
+                  <span className="grid h-11 w-11 place-items-center rounded-full bg-[var(--theme-accent-secondary,#8FA377)] text-sm font-black text-white">
                     {number}
                   </span>
-                  <h3 className="mt-6 text-xl font-black text-[#16324A]">
+                  <h3 className="mt-6 text-xl font-black text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">
                     {title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[#68787E]">
+                  <p className="mt-3 text-sm leading-7 text-[#68787E] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] transition-colors duration-300">
                     {text}
                   </p>
                 </article>
@@ -673,7 +673,7 @@ export function OaklinePropertyManagement() {
         </div>
       </section>
 
-      <section className="relative bg-[#16324A] px-5 py-24 text-white lg:px-10 lg:py-32">
+      <section className="relative bg-[#16324A] [html.dark_&]:bg-[var(--theme-bg-dark,#0a1b24)] px-5 py-24 text-white lg:px-10 lg:py-32 transition-colors duration-300">
         <img
           src={operationsImage}
           alt="Transparent property management operations"
@@ -715,7 +715,7 @@ export function OaklinePropertyManagement() {
                   key={title as string}
                   className="rounded-2xl border border-white/12 bg-white/[0.055] p-6 backdrop-blur"
                 >
-                  <ValueIcon className="h-6 w-6 text-[#AFC39A]" />
+                  <ValueIcon className="h-6 w-6 text-[var(--theme-accent-secondary,#AFC39A)]" />
                   <h3 className="mt-8 text-xl font-black">{title as string}</h3>
                   <p className="mt-3 text-sm leading-7 text-white/55">
                     {text as string}
@@ -729,7 +729,7 @@ export function OaklinePropertyManagement() {
 
       <section
         id="property-types"
-        className="bg-white px-5 py-24 lg:px-10 lg:py-32"
+        className="bg-white [html.dark_&]:bg-[var(--theme-bg-base,#0a1719)] px-5 py-24 lg:px-10 lg:py-32 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[90rem]">
           <OakHeading
@@ -762,7 +762,7 @@ export function OaklinePropertyManagement() {
             ].map(([image, title, text]) => (
               <article
                 key={title}
-                className="oak-card group overflow-hidden rounded-[1.5rem] border border-[#D9E2E0] bg-[#F8FBFA]"
+                className="oak-card group overflow-hidden rounded-[1.5rem] border border-[#D9E2E0] [html.dark_&]:border-white/10 bg-[#F8FBFA] [html.dark_&]:bg-[var(--theme-bg-card,#13282c)] transition-colors duration-300"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
@@ -772,8 +772,8 @@ export function OaklinePropertyManagement() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-black text-[#16324A]">{title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#68787E]">
+                  <h3 className="text-xl font-black text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">{title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#68787E] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] transition-colors duration-300">
                     {text}
                   </p>
                 </div>
@@ -783,7 +783,7 @@ export function OaklinePropertyManagement() {
         </div>
       </section>
 
-      <section className="border-y border-[#D9E2E0] bg-[#E8F0EC] px-5 py-24 lg:px-10 lg:py-32">
+      <section className="border-y border-[#D9E2E0] [html.dark_&]:border-white/10 bg-[#E8F0EC] [html.dark_&]:bg-[var(--theme-bg-surface,#0f2226)] px-5 py-24 lg:px-10 lg:py-32 transition-colors duration-300">
         <div className="mx-auto max-w-[90rem]">
           <OakHeading
             label="Resources"
@@ -809,18 +809,18 @@ export function OaklinePropertyManagement() {
             ].map(([tag, title, text]) => (
               <article
                 key={title}
-                className="oak-card rounded-[1.5rem] border border-white bg-white p-7"
+                className="oak-card rounded-[1.5rem] border border-white [html.dark_&]:border-white/10 bg-white [html.dark_&]:bg-[var(--theme-bg-card,#13282c)] p-7 transition-colors duration-300"
               >
-                <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[#8FA377]">
+                <p className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-[var(--theme-accent-secondary,#8FA377)]">
                   {tag}
                 </p>
-                <h3 className="mt-4 text-2xl font-black leading-tight tracking-[-0.04em] text-[#16324A]">
+                <h3 className="mt-4 text-2xl font-black leading-tight tracking-[-0.04em] text-[#16324A] [html.dark_&]:text-[var(--theme-text-primary,#F2F7F5)] transition-colors duration-300">
                   {title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-[#68787E]">{text}</p>
+                <p className="mt-4 text-sm leading-7 text-[#68787E] [html.dark_&]:text-[var(--theme-text-secondary,#94a3b8)] transition-colors duration-300">{text}</p>
                 <a
                   href="#contact"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[#3D7657]"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[var(--theme-accent-primary,#3D7657)]"
                 >
                   Read Guide <ArrowRight className="h-4 w-4" />
                 </a>
@@ -832,17 +832,17 @@ export function OaklinePropertyManagement() {
 
       <section
         id="contact"
-        className="relative bg-[#16324A] px-5 py-28 text-white lg:px-10 lg:py-36"
+        className="relative bg-[#16324A] [html.dark_&]:bg-[var(--theme-bg-dark,#0a1b24)] px-5 py-28 text-white lg:px-10 lg:py-36 transition-colors duration-300"
       >
         <img
           src={ctaImage}
           alt="Well-managed Oakline residential property"
           className="absolute inset-0 h-full w-full object-cover opacity-22"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#16324A] via-[#16324A]/92 to-[#16324A]/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#16324A] [html.dark_&]:from-[var(--theme-bg-dark,#0a1b24)] via-[#16324A]/92 [html.dark_&]:via-[var(--theme-bg-dark,#0a1b24)]/92 to-[#16324A]/50" />
         <div className="relative mx-auto max-w-[90rem]">
           <div className="max-w-4xl">
-            <p className="text-[0.66rem] font-black uppercase tracking-[0.24em] text-[#AFC39A]">
+            <p className="text-[0.66rem] font-black uppercase tracking-[0.24em] text-[var(--theme-accent-secondary,#AFC39A)]">
               Let’s simplify the day to day
             </p>
             <h2 className="mt-5 text-[clamp(3rem,6.8vw,6.5rem)] font-black leading-[0.9] tracking-[-0.065em]">
@@ -860,7 +860,7 @@ export function OaklinePropertyManagement() {
         </div>
       </section>
 
-      <footer className="bg-[#10283B] px-5 pb-8 pt-16 text-white lg:px-10">
+      <footer className="bg-[#10283B] [html.dark_&]:bg-[#07131a] px-5 pb-8 pt-16 text-white lg:px-10 transition-colors duration-300">
         <div className="mx-auto max-w-[90rem]">
           <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-[1.35fr_.65fr_.8fr_1fr]">
             <div>

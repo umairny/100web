@@ -126,7 +126,7 @@ function SectionEyebrow({
     <div
       className={`flex items-center gap-3 text-[0.68rem] font-bold uppercase tracking-[0.24em] ${light ? "text-white/62" : "text-[#6e6863]"}`}
     >
-      <span className="h-[2px] w-9 bg-[#ef3434]" />
+      <span className="h-[2px] w-9 bg-[var(--theme-accent-primary,#ef3434)]" />
       {children}
     </div>
   );
@@ -177,12 +177,12 @@ export function UrbanBiteKitchen() {
   };
 
   return (
-    <main className="urbanbite-site min-h-screen overflow-x-clip bg-[#0b0b0c] text-white">
+    <main className="urbanbite-site min-h-screen overflow-x-clip bg-[var(--theme-bg-base,#0b0b0c)] text-[var(--theme-text-primary,#ffffff)] transition-colors duration-300">
       <nav
         aria-label="UrbanBite navigation"
         className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-500 ${
           scrolled
-            ? "border-white/10 bg-[#0b0b0c]/95 shadow-2xl shadow-black/30 backdrop-blur-xl"
+            ? "border-white/10 bg-[var(--theme-bg-base,#0b0b0c)]/95 shadow-2xl shadow-black/30 backdrop-blur-xl"
             : "border-transparent bg-black/30 backdrop-blur-sm"
         }`}
       >
@@ -194,11 +194,11 @@ export function UrbanBiteKitchen() {
             className="group flex items-center gap-3"
             onClick={() => setMenuOpen(false)}
           >
-            <span className="grid h-11 w-11 place-items-center rounded-[0.8rem] bg-[#ef3434] text-white shadow-[0_0_30px_rgba(239,52,52,0.3)] transition-transform group-hover:rotate-3 group-hover:scale-105">
+            <span className="grid h-11 w-11 place-items-center rounded-[0.8rem] bg-[var(--theme-accent-primary,#ef3434)] text-[var(--theme-accent-contrast,#ffffff)] shadow-[0_0_30px_rgba(239,52,52,0.3)] transition-transform group-hover:rotate-3 group-hover:scale-105">
               <FlameIcon />
             </span>
             <span>
-              <span className="block text-[1.05rem] font-black uppercase leading-none tracking-[-0.02em]">
+              <span className="block text-[1.05rem] font-black uppercase leading-none tracking-[-0.02em] text-[var(--theme-text-primary,#ffffff)]">
                 UrbanBite
               </span>
               <span className="mt-1 block text-[0.55rem] font-bold uppercase tracking-[0.32em] text-white/45">
@@ -215,14 +215,14 @@ export function UrbanBiteKitchen() {
                 className="group relative py-3 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white/68 transition hover:text-white"
               >
                 {label}
-                <span className="absolute inset-x-0 bottom-1 h-px origin-left scale-x-0 bg-[#ef3434] transition-transform duration-300 group-hover:scale-x-100" />
+                <span className="absolute inset-x-0 bottom-1 h-px origin-left scale-x-0 bg-[var(--theme-accent-primary,#ef3434)] transition-transform duration-300 group-hover:scale-x-100" />
               </a>
             ))}
           </div>
 
           <a
             href="#reservations"
-            className="hidden items-center gap-2 rounded-full bg-[#ef3434] px-5 py-3 text-[0.7rem] font-black uppercase tracking-[0.14em] shadow-[0_10px_30px_rgba(239,52,52,0.2)] transition hover:-translate-y-0.5 hover:bg-[#ff4848] md:inline-flex"
+            className="hidden items-center gap-2 rounded-full bg-[var(--theme-accent-primary,#ef3434)] px-5 py-3 text-[0.7rem] font-black uppercase tracking-[0.14em] text-[var(--theme-accent-contrast,#ffffff)] shadow-[0_10px_30px_rgba(239,52,52,0.2)] transition hover:-translate-y-0.5 hover:opacity-90 md:inline-flex"
           >
             Book a table <ArrowIcon />
           </a>
@@ -249,7 +249,7 @@ export function UrbanBiteKitchen() {
         </div>
 
         <div
-          className={`overflow-hidden border-t border-white/10 bg-[#111112] transition-all duration-500 md:hidden ${menuOpen ? "max-h-[30rem] opacity-100" : "max-h-0 border-transparent opacity-0"}`}
+          className={`overflow-hidden border-t border-white/10 bg-[var(--theme-bg-dark,#111112)] transition-all duration-500 md:hidden ${menuOpen ? "max-h-[30rem] opacity-100" : "max-h-0 border-transparent opacity-0"}`}
         >
           <div className="grid gap-1 px-5 py-5">
             {navLinks.map(([label, href]) => (
@@ -260,13 +260,13 @@ export function UrbanBiteKitchen() {
                 className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold text-white/70 transition hover:bg-white/5 hover:text-white"
               >
                 {label}
-                <span className="text-[#ef3434]">→</span>
+                <span className="text-[var(--theme-accent-primary,#ef3434)]">→</span>
               </a>
             ))}
             <a
               href="#reservations"
               onClick={() => setMenuOpen(false)}
-              className="mt-2 rounded-xl bg-[#ef3434] px-4 py-3 text-center text-sm font-black uppercase tracking-[0.12em]"
+              className="mt-2 rounded-xl bg-[var(--theme-accent-primary,#ef3434)] px-4 py-3 text-center text-sm font-black uppercase tracking-[0.12em] text-[var(--theme-accent-contrast,#ffffff)]"
             >
               Book a table
             </a>
@@ -284,8 +284,8 @@ export function UrbanBiteKitchen() {
           className="absolute inset-0 -z-30 h-full w-full object-cover object-[62%_center]"
         />
         <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(7,7,8,0.98)_0%,rgba(7,7,8,0.88)_35%,rgba(7,7,8,0.28)_72%,rgba(7,7,8,0.55)_100%)]" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,#0b0b0c_0%,transparent_24%,rgba(0,0,0,0.15)_100%)]" />
-        <div className="absolute -left-40 top-20 -z-10 h-[38rem] w-[38rem] rounded-full bg-[#ef3434]/10 blur-[120px]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,var(--theme-bg-base,#0b0b0c)_0%,transparent_24%,rgba(0,0,0,0.15)_100%)]" />
+        <div className="absolute -left-40 top-20 -z-10 h-[38rem] w-[38rem] rounded-full bg-[var(--theme-accent-primary,#ef3434)]/10 blur-[120px]" />
 
         <div className="mx-auto w-full max-w-[1400px] px-5 pb-16 sm:px-8 lg:px-12 lg:pb-12">
           <div className="max-w-[760px]" data-urban-reveal>
@@ -295,7 +295,7 @@ export function UrbanBiteKitchen() {
             <h1 className="mt-7 text-[clamp(3.7rem,8vw,7.8rem)] font-black uppercase leading-[0.84] tracking-[-0.065em]">
               Bold flavor.
               <br />
-              <span className="text-[#ef3434]">Urban fire.</span>
+              <span className="text-[var(--theme-accent-primary,#ef3434)]">Urban fire.</span>
             </h1>
             <p className="mt-7 max-w-xl text-base leading-7 text-white/64 sm:text-lg sm:leading-8">
               A modern grill kitchen serving smoky steaks, handcrafted burgers,
@@ -304,7 +304,7 @@ export function UrbanBiteKitchen() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#menu"
-                className="inline-flex items-center justify-center gap-3 rounded-full bg-[#ef3434] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] shadow-[0_14px_40px_rgba(239,52,52,0.25)] transition hover:-translate-y-1 hover:bg-[#ff4949]"
+                className="inline-flex items-center justify-center gap-3 rounded-full bg-[var(--theme-accent-primary,#ef3434)] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-[var(--theme-accent-contrast,#ffffff)] shadow-[0_14px_40px_rgba(239,52,52,0.25)] transition hover:-translate-y-1 hover:opacity-90"
               >
                 View menu <ArrowIcon />
               </a>
@@ -319,7 +319,7 @@ export function UrbanBiteKitchen() {
 
           <div className="mt-14 flex max-w-[760px] flex-wrap items-center gap-x-9 gap-y-4 border-t border-white/14 pt-6 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/46 lg:mt-20">
             <span className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#ef3434]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--theme-accent-primary,#ef3434)]" />
               Open daily
             </span>
             <span>Lunch · Dinner · Late nights</span>
@@ -332,7 +332,7 @@ export function UrbanBiteKitchen() {
           data-urban-reveal
         >
           <div className="flex items-center gap-4">
-            <div className="grid h-12 w-12 place-items-center rounded-full border border-[#ef3434]/50 text-[#ef3434]">
+            <div className="grid h-12 w-12 place-items-center rounded-full border border-[var(--theme-accent-primary,#ef3434)]/50 text-[var(--theme-accent-primary,#ef3434)]">
               <FlameIcon />
             </div>
             <div>
@@ -347,7 +347,7 @@ export function UrbanBiteKitchen() {
 
       <section
         id="menu"
-        className="bg-[#f5f2ee] py-20 text-[#141414] sm:py-24 lg:py-28"
+        className="bg-[var(--theme-bg-surface,#f5f2ee)] py-20 text-[var(--theme-text-primary,#141414)] sm:py-24 lg:py-28"
       >
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div
@@ -360,7 +360,7 @@ export function UrbanBiteKitchen() {
                 Featured plates
               </h2>
             </div>
-            <p className="max-w-md text-sm leading-7 text-[#77716c]">
+            <p className="max-w-md text-sm leading-7 text-[var(--theme-text-secondary,#77716c)]">
               Big heat, honest ingredients, and a menu built to turn an ordinary
               night into something worth remembering.
             </p>
@@ -372,7 +372,7 @@ export function UrbanBiteKitchen() {
                 key={item.title}
                 data-urban-reveal
                 style={{ transitionDelay: `${index * 70}ms` }}
-                className="group overflow-hidden rounded-[1.35rem] border border-black/[0.07] bg-white shadow-[0_18px_55px_rgba(31,24,20,0.09)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_26px_70px_rgba(31,24,20,0.16)]"
+                className="group overflow-hidden rounded-[1.35rem] border border-[var(--theme-border,#e5e0d8)]/60 bg-[var(--theme-bg-card,#ffffff)] shadow-[0_18px_55px_rgba(31,24,20,0.09)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_26px_70px_rgba(31,24,20,0.16)]"
               >
                 <div className="relative aspect-[1.15] overflow-hidden bg-[#ddd7d0]">
                   <img
@@ -386,24 +386,24 @@ export function UrbanBiteKitchen() {
                 </div>
                 <div className="relative min-h-[190px] p-5 pb-6">
                   <div className="flex items-start justify-between gap-4">
-                    <h3 className="text-xl font-black tracking-[-0.025em]">
+                    <h3 className="text-xl font-black tracking-[-0.025em] text-[var(--theme-text-primary,#141414)]">
                       {item.title}
                     </h3>
-                    <span className="text-lg font-black text-[#ef3434]">
+                    <span className="text-lg font-black text-[var(--theme-accent-primary,#ef3434)]">
                       {item.price}
                     </span>
                   </div>
-                  <p className="mt-3 pr-2 text-sm leading-6 text-[#77716c]">
+                  <p className="mt-3 pr-2 text-sm leading-6 text-[var(--theme-text-secondary,#77716c)]">
                     {item.description}
                   </p>
                   <button
                     type="button"
                     aria-label={`Add ${item.title} to order`}
-                    className="absolute bottom-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-[#ef3434] text-white shadow-lg shadow-red-500/20 transition group-hover:rotate-90 group-hover:scale-110"
+                    className="absolute bottom-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-[var(--theme-accent-primary,#ef3434)] text-[var(--theme-accent-contrast,#ffffff)] shadow-lg shadow-red-500/20 transition group-hover:rotate-90 group-hover:scale-110"
                   >
                     <PlusIcon />
                   </button>
-                  <span className="absolute bottom-8 left-5 h-[2px] w-8 bg-[#ef3434]" />
+                  <span className="absolute bottom-8 left-5 h-[2px] w-8 bg-[var(--theme-accent-primary,#ef3434)]" />
                 </div>
               </article>
             ))}
@@ -413,7 +413,7 @@ export function UrbanBiteKitchen() {
 
       <section
         id="reservations"
-        className="relative bg-[#111112] py-20 sm:py-24 lg:py-28"
+        className="relative bg-[var(--theme-bg-dark,#111112)] py-20 sm:py-24 lg:py-28"
       >
         <div className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_60%_50%,rgba(239,52,52,0.08),transparent_55%)]" />
         <div className="relative mx-auto grid max-w-[1400px] gap-10 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16 lg:px-12">
@@ -426,14 +426,14 @@ export function UrbanBiteKitchen() {
               />
               <div className="absolute inset-0 rounded-[1.5rem] bg-gradient-to-t from-black/45 via-transparent to-transparent" />
             </div>
-            <div className="absolute -bottom-5 left-5 right-5 flex items-center justify-between rounded-2xl border border-white/10 bg-[#0b0b0c]/90 p-5 shadow-2xl backdrop-blur sm:left-auto sm:right-5 sm:w-72">
+            <div className="absolute -bottom-5 left-5 right-5 flex items-center justify-between rounded-2xl border border-white/10 bg-[var(--theme-bg-base,#0b0b0c)]/90 p-5 shadow-2xl backdrop-blur sm:left-auto sm:right-5 sm:w-72">
               <div>
                 <p className="text-2xl font-black">4.9</p>
                 <p className="text-[0.62rem] uppercase tracking-[0.18em] text-white/45">
                   Guest rating
                 </p>
               </div>
-              <div className="text-sm tracking-[0.12em] text-[#ef3434]">
+              <div className="text-sm tracking-[0.12em] text-[var(--theme-accent-primary,#ef3434)]">
                 ★★★★★
               </div>
             </div>
@@ -460,7 +460,7 @@ export function UrbanBiteKitchen() {
                   name="name"
                   type="text"
                   placeholder="Your name"
-                  className="h-14 rounded-xl border border-white/12 bg-white/[0.045] px-4 text-sm normal-case tracking-normal text-white outline-none transition placeholder:text-white/24 focus:border-[#ef3434] focus:bg-white/[0.07]"
+                  className="h-14 rounded-xl border border-white/12 bg-white/[0.045] px-4 text-sm normal-case tracking-normal text-white outline-none transition placeholder:text-white/24 focus:border-[var(--theme-accent-primary,#ef3434)] focus:bg-white/[0.07]"
                 />
               </label>
               <label className="grid gap-2 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-white/45">
@@ -469,7 +469,7 @@ export function UrbanBiteKitchen() {
                   required
                   name="date"
                   type="date"
-                  className="urban-date h-14 rounded-xl border border-white/12 bg-white/[0.045] px-4 text-sm normal-case tracking-normal text-white outline-none transition focus:border-[#ef3434] focus:bg-white/[0.07]"
+                  className="urban-date h-14 rounded-xl border border-white/12 bg-white/[0.045] px-4 text-sm normal-case tracking-normal text-white outline-none transition focus:border-[var(--theme-accent-primary,#ef3434)] focus:bg-white/[0.07]"
                 />
               </label>
               <label className="grid gap-2 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-white/45">
@@ -478,7 +478,7 @@ export function UrbanBiteKitchen() {
                   required
                   name="time"
                   defaultValue=""
-                  className="h-14 rounded-xl border border-white/12 bg-[#171718] px-4 text-sm normal-case tracking-normal text-white outline-none transition focus:border-[#ef3434]"
+                  className="h-14 rounded-xl border border-white/12 bg-[#171718] px-4 text-sm normal-case tracking-normal text-white outline-none transition focus:border-[var(--theme-accent-primary,#ef3434)]"
                 >
                   <option value="" disabled>
                     Select time
@@ -496,7 +496,7 @@ export function UrbanBiteKitchen() {
                   required
                   name="guests"
                   defaultValue="2 guests"
-                  className="h-14 rounded-xl border border-white/12 bg-[#171718] px-4 text-sm normal-case tracking-normal text-white outline-none transition focus:border-[#ef3434]"
+                  className="h-14 rounded-xl border border-white/12 bg-[#171718] px-4 text-sm normal-case tracking-normal text-white outline-none transition focus:border-[var(--theme-accent-primary,#ef3434)]"
                 >
                   <option>1 guest</option>
                   <option>2 guests</option>
@@ -510,13 +510,13 @@ export function UrbanBiteKitchen() {
               </label>
               <button
                 type="submit"
-                className="mt-2 inline-flex h-14 items-center justify-center gap-3 rounded-xl bg-[#ef3434] text-xs font-black uppercase tracking-[0.15em] shadow-[0_14px_40px_rgba(239,52,52,0.2)] transition hover:-translate-y-1 hover:bg-[#ff4848] sm:col-span-2"
+                className="mt-2 inline-flex h-14 items-center justify-center gap-3 rounded-xl bg-[var(--theme-accent-primary,#ef3434)] text-xs font-black uppercase tracking-[0.15em] text-[var(--theme-accent-contrast,#ffffff)] shadow-[0_14px_40px_rgba(239,52,52,0.2)] transition hover:-translate-y-1 hover:opacity-90 sm:col-span-2"
               >
                 Confirm reservation <ArrowIcon />
               </button>
               <p
                 aria-live="polite"
-                className={`text-center text-sm text-[#ff6969] transition sm:col-span-2 ${submitted ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"}`}
+                className={`text-center text-sm text-[var(--theme-accent-primary,#ff6969)] transition sm:col-span-2 ${submitted ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"}`}
               >
                 Thanks — your table request is on its way. We’ll confirm
                 shortly.
@@ -528,7 +528,7 @@ export function UrbanBiteKitchen() {
 
       <section
         id="about"
-        className="border-y border-white/[0.07] bg-[#0b0b0c] py-20 sm:py-24 lg:py-28"
+        className="border-y border-white/[0.07] bg-[var(--theme-bg-base,#0b0b0c)] py-20 sm:py-24 lg:py-28"
       >
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:px-12">
           <div data-urban-reveal>
@@ -536,7 +536,7 @@ export function UrbanBiteKitchen() {
             <h2 className="mt-5 max-w-4xl text-4xl font-black uppercase leading-[0.98] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
               City energy.
               <br />
-              <span className="text-[#ef3434]">Made over fire.</span>
+              <span className="text-[var(--theme-accent-primary,#ef3434)]">Made over fire.</span>
             </h2>
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/56">
               UrbanBite Kitchen blends fire, flavor, and modern city dining.
@@ -553,13 +553,13 @@ export function UrbanBiteKitchen() {
                 key={label}
                 className="group flex items-center gap-5 border-b border-white/12 py-5 transition hover:pl-2"
               >
-                <span className="text-xs font-black text-[#ef3434]">
+                <span className="text-xs font-black text-[var(--theme-accent-primary,#ef3434)]">
                   {number}
                 </span>
                 <span className="font-bold text-white/78 group-hover:text-white">
                   {label}
                 </span>
-                <span className="ml-auto text-white/25 transition group-hover:translate-x-1 group-hover:text-[#ef3434]">
+                <span className="ml-auto text-white/25 transition group-hover:translate-x-1 group-hover:text-[var(--theme-accent-primary,#ef3434)]">
                   →
                 </span>
               </div>
@@ -570,7 +570,7 @@ export function UrbanBiteKitchen() {
 
       <section
         id="gallery"
-        className="bg-[#f5f2ee] py-20 text-[#141414] sm:py-24 lg:py-28"
+        className="bg-[var(--theme-bg-surface,#f5f2ee)] py-20 text-[var(--theme-text-primary,#141414)] sm:py-24 lg:py-28"
       >
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div
@@ -585,7 +585,7 @@ export function UrbanBiteKitchen() {
             </div>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.15em] text-[#ef3434]"
+              className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.15em] text-[var(--theme-accent-primary,#ef3434)]"
             >
               Follow the kitchen <ArrowIcon />
             </a>
@@ -627,7 +627,7 @@ export function UrbanBiteKitchen() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#ef3434] py-16 sm:py-20">
+      <section className="relative overflow-hidden bg-[var(--theme-accent-primary,#ef3434)] py-16 sm:py-20 text-[var(--theme-accent-contrast,#ffffff)]">
         <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(90deg,#000_1px,transparent_1px),linear-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]" />
         <div
           className="relative mx-auto flex max-w-[1400px] flex-col justify-between gap-7 px-5 sm:px-8 md:flex-row md:items-center lg:px-12"
@@ -643,7 +643,7 @@ export function UrbanBiteKitchen() {
           </div>
           <a
             href="#reservations"
-            className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#0b0b0c] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-white transition hover:-translate-y-1 hover:bg-[#202022]"
+            className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[var(--theme-bg-dark,#0b0b0c)] px-7 py-4 text-xs font-black uppercase tracking-[0.15em] text-white transition hover:-translate-y-1 hover:opacity-90"
           >
             Book your night <ArrowIcon />
           </a>
@@ -652,13 +652,13 @@ export function UrbanBiteKitchen() {
 
       <footer
         id="contact"
-        className="bg-[#0b0b0c] pb-10 pt-16 text-white sm:pt-20"
+        className="bg-[var(--theme-bg-base,#0b0b0c)] pb-10 pt-16 text-white sm:pt-20"
       >
         <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
           <div className="grid gap-10 border-b border-white/10 pb-12 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.8fr_0.8fr]">
             <div>
               <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#ef3434]">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[var(--theme-accent-primary,#ef3434)] text-[var(--theme-accent-contrast,#ffffff)]">
                   <FlameIcon />
                 </span>
                 <div>
@@ -674,7 +674,7 @@ export function UrbanBiteKitchen() {
               </p>
             </div>
             <div>
-              <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[#ef3434]">
+              <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#ef3434)]">
                 Visit
               </p>
               <p className="mt-4 text-sm leading-7 text-white/55">
@@ -686,7 +686,7 @@ export function UrbanBiteKitchen() {
               </p>
             </div>
             <div>
-              <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[#ef3434]">
+              <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#ef3434)]">
                 Hours
               </p>
               <p className="mt-4 text-sm leading-7 text-white/55">
@@ -698,7 +698,7 @@ export function UrbanBiteKitchen() {
               </p>
             </div>
             <div>
-              <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[#ef3434]">
+              <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[var(--theme-accent-primary,#ef3434)]">
                 Quick links
               </p>
               <div className="mt-4 grid gap-2 text-sm text-white/55">

@@ -135,9 +135,9 @@ function Eyebrow({
 }) {
   return (
     <p
-      className={`flex items-center gap-3 text-[0.66rem] font-black uppercase tracking-[0.24em] ${light ? "text-[#f4c96e]" : "text-[#a8652d]"}`}
+      className={`flex items-center gap-3 text-[0.66rem] font-black uppercase tracking-[0.24em] ${light ? "text-[var(--theme-accent-primary,#f4c96e)]" : "text-[var(--theme-accent-primary,#a8652d)]"}`}
     >
-      <span className={`h-px w-9 ${light ? "bg-[#f4c96e]" : "bg-[#b87336]"}`} />
+      <span className={`h-px w-9 ${light ? "bg-[var(--theme-accent-primary,#f4c96e)]" : "bg-[var(--theme-accent-primary,#b87336)]"}`} />
       {children}
     </p>
   );
@@ -152,7 +152,7 @@ export function GoldenCrustBakery() {
   };
 
   return (
-    <main className="brand-motion motion-goldencrust overflow-hidden bg-[#fbf5e9] text-[#2d1a11]">
+    <main className="brand-motion motion-goldencrust overflow-hidden bg-[var(--theme-bg-base,#fbf5e9)] text-[var(--theme-text-primary,#2d1a11)] transition-colors duration-300">
       <SubWebsiteNav
         brand="Golden Crust"
         links={[
@@ -164,19 +164,19 @@ export function GoldenCrustBakery() {
         ]}
         ctaLabel="Order Online"
         ctaHref="#menu"
-        className="border-b border-[#e7d8bd] bg-[#fbf5e9]/95 shadow-sm shadow-[#4b2816]/5"
-        brandClassName="font-black uppercase tracking-[0.12em] text-[#342016]"
-        linkClassName="rounded-full px-3 py-2 text-[#755039] transition hover:bg-[#f1e3c9] hover:text-[#2d1a11]"
+        className="border-b border-[var(--theme-border,#e7d8bd)] bg-[var(--theme-bg-base,#fbf5e9)]/95 shadow-sm shadow-[#4b2816]/5 backdrop-blur-md"
+        brandClassName="font-black uppercase tracking-[0.12em] text-[var(--theme-text-primary,#342016)]"
+        linkClassName="rounded-full px-3 py-2 text-[var(--theme-text-secondary,#755039)] transition hover:bg-[var(--theme-accent-primary,#f2bd52)]/15 hover:text-[var(--theme-text-primary,#2d1a11)]"
         activeLinkClassName="golden-nav-active"
-        ctaClassName="bg-[#342016] text-white shadow-lg shadow-[#342016]/15 hover:bg-[#b87336]"
+        ctaClassName="bg-[var(--theme-accent-primary,#342016)] text-[var(--theme-accent-contrast,#ffffff)] shadow-lg shadow-[#342016]/15 hover:opacity-90 transition"
         activeCtaClassName="golden-nav-cta-active"
-        menuButtonClassName="border-[#dbc29b] text-[#342016] hover:bg-[#f1e3c9]"
-        mobilePanelClassName="border border-[#e7d8bd] bg-[#fbf5e9]"
+        menuButtonClassName="border-[var(--theme-border,#dbc29b)] text-[var(--theme-text-primary,#342016)] hover:bg-[var(--theme-accent-primary,#f2bd52)]/10"
+        mobilePanelClassName="border border-[var(--theme-border,#e7d8bd)] bg-[var(--theme-bg-card,#fbf5e9)]"
       />
 
       <section
         id="home"
-        className="relative isolate min-h-[820px] overflow-hidden bg-[#2d1a11] pt-14 text-white lg:min-h-[880px]"
+        className="relative isolate min-h-[820px] overflow-hidden bg-[var(--theme-bg-dark,#2d1a11)] pt-14 text-white lg:min-h-[880px]"
       >
         <img
           src={bakeryImages.hero}
@@ -198,7 +198,7 @@ export function GoldenCrustBakery() {
             <h1 className="mt-6 text-[clamp(3.8rem,8vw,7.7rem)] font-black leading-[0.84] tracking-[-0.07em]">
               Your daily
               <br />
-              dose of <span className="text-[#f2bd52]">golden.</span>
+              dose of <span className="text-[var(--theme-accent-primary,#f2bd52)]">golden.</span>
             </h1>
             <p className="mt-7 max-w-xl text-base leading-8 text-white/65 sm:text-lg">
               Small-batch sourdough, buttery layers, joyful cakes and really
@@ -207,7 +207,7 @@ export function GoldenCrustBakery() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#menu"
-                className="inline-flex items-center justify-center gap-3 rounded-full bg-[#f2bd52] px-7 py-4 text-xs font-black uppercase tracking-[0.14em] text-[#2d1a11] shadow-[0_16px_45px_rgba(242,189,82,0.2)] transition hover:-translate-y-1 hover:bg-[#ffd06e]"
+                className="inline-flex items-center justify-center gap-3 rounded-full bg-[var(--theme-accent-primary,#f2bd52)] px-7 py-4 text-xs font-black uppercase tracking-[0.14em] text-[var(--theme-accent-contrast,#2d1a11)] shadow-[0_16px_45px_rgba(242,189,82,0.2)] transition hover:-translate-y-1 hover:opacity-90"
               >
                 Explore the menu <ArrowIcon />
               </a>
@@ -229,7 +229,7 @@ export function GoldenCrustBakery() {
                   key={label}
                   className="border-r border-white/14 px-3 first:pl-0 last:border-0 sm:px-6"
                 >
-                  <p className="text-lg font-black text-[#f2bd52] sm:text-2xl">
+                  <p className="text-lg font-black text-[var(--theme-accent-primary,#f2bd52)] sm:text-2xl">
                     {value}
                   </p>
                   <p className="mt-1 text-[0.55rem] font-bold uppercase tracking-[0.15em] text-white/42 sm:text-[0.62rem]">
@@ -241,9 +241,9 @@ export function GoldenCrustBakery() {
           </div>
         </Container>
 
-        <div className="absolute bottom-10 right-8 hidden w-64 rounded-[1.5rem] border border-white/15 bg-[#24140d]/80 p-5 shadow-2xl backdrop-blur-xl xl:block">
+        <div className="absolute bottom-10 right-8 hidden w-64 rounded-[1.5rem] border border-white/15 bg-[var(--theme-bg-dark,#24140d)]/80 p-5 shadow-2xl backdrop-blur-xl xl:block">
           <div className="flex items-center gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-[#f2bd52] text-[#2d1a11]">
+            <span className="grid h-11 w-11 place-items-center rounded-full bg-[var(--theme-accent-primary,#f2bd52)] text-[var(--theme-accent-contrast,#2d1a11)]">
               <WheatMark />
             </span>
             <div>
@@ -256,7 +256,7 @@ export function GoldenCrustBakery() {
         </div>
       </section>
 
-      <div className="border-y border-[#dfcda9] bg-[#f2bd52] py-3 text-[#2d1a11]">
+      <div className="border-y border-[var(--theme-border,#dfcda9)] bg-[var(--theme-accent-primary,#f2bd52)] py-3 text-[var(--theme-accent-contrast,#2d1a11)]">
         <div className="flex min-w-max justify-center gap-8 px-5 text-[0.62rem] font-black uppercase tracking-[0.2em] sm:gap-14">
           {[
             "Baked this morning",
@@ -266,29 +266,29 @@ export function GoldenCrustBakery() {
           ].map((item) => (
             <span key={item} className="flex items-center gap-8 sm:gap-14">
               {item}
-              <span className="text-[#8b5129]">✦</span>
+              <span className="opacity-70">✦</span>
             </span>
           ))}
         </div>
       </div>
 
-      <section id="menu" className="bg-[#fbf5e9] py-20 sm:py-24 lg:py-28">
+      <section id="menu" className="bg-[var(--theme-bg-base,#fbf5e9)] py-20 sm:py-24 lg:py-28">
         <Container>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <Eyebrow>Today at the counter</Eyebrow>
-              <h2 className="mt-5 text-4xl font-black leading-[0.93] tracking-[-0.05em] sm:text-6xl">
+              <h2 className="mt-5 text-4xl font-black leading-[0.93] tracking-[-0.05em] text-[var(--theme-text-primary,#2d1a11)] sm:text-6xl">
                 Fresh favorites,
                 <br />
                 still warm.
               </h2>
             </div>
             <div className="max-w-md md:text-right">
-              <p className="text-sm leading-7 text-[#816550]">
+              <p className="text-sm leading-7 text-[var(--theme-text-secondary,#816550)]">
                 Our counter changes with the season. These are the beloved
                 regulars we make every single day.
               </p>
-              <p className="mt-3 text-xs font-bold text-[#a8652d]">
+              <p className="mt-3 text-xs font-bold text-[var(--theme-accent-primary,#a8652d)]">
                 Pickup ready in 20–30 minutes
               </p>
             </div>
@@ -298,35 +298,35 @@ export function GoldenCrustBakery() {
             {menuItems.map((item) => (
               <article
                 key={item.name}
-                className="golden-menu-card group overflow-hidden rounded-[1.6rem] border border-[#e7d7bc] bg-[#fffdf8] shadow-[0_16px_50px_rgba(64,36,19,0.07)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_24px_65px_rgba(64,36,19,0.13)]"
+                className="golden-menu-card group overflow-hidden rounded-[1.6rem] border border-[var(--theme-border,#e7d7bc)] bg-[var(--theme-bg-card,#fffdf8)] shadow-[0_16px_50px_rgba(64,36,19,0.07)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_24px_65px_rgba(64,36,19,0.13)]"
               >
-                <div className="golden-food-placeholder relative aspect-[1.35] overflow-hidden bg-[#ead8b6]">
+                <div className="golden-food-placeholder relative aspect-[1.35] overflow-hidden bg-[var(--theme-accent-primary,#ead8b6)]/20">
                   <img
                     src={item.image}
                     alt={item.alt}
                     loading="lazy"
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-4 top-4 rounded-full bg-[#fffaf0]/90 px-3 py-2 text-[0.56rem] font-black uppercase tracking-[0.16em] text-[#704327] shadow-sm backdrop-blur">
+                  <span className="absolute left-4 top-4 rounded-full bg-[var(--theme-bg-card,#fffaf0)]/90 px-3 py-2 text-[0.56rem] font-black uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#704327)] shadow-sm backdrop-blur">
                     {item.badge}
                   </span>
                 </div>
                 <div className="p-5 sm:p-6">
                   <div className="flex items-start justify-between gap-4">
-                    <h3 className="text-2xl font-black tracking-[-0.025em]">
+                    <h3 className="text-2xl font-black tracking-[-0.025em] text-[var(--theme-text-primary,#2d1a11)]">
                       {item.name}
                     </h3>
-                    <span className="shrink-0 text-lg font-black text-[#a8652d]">
+                    <span className="shrink-0 text-lg font-black text-[var(--theme-accent-primary,#a8652d)]">
                       {item.price}
                     </span>
                   </div>
-                  <p className="mt-3 min-h-12 text-sm leading-6 text-[#816550]">
+                  <p className="mt-3 min-h-12 text-sm leading-6 text-[var(--theme-text-secondary,#816550)]">
                     {item.desc}
                   </p>
                   <button
                     type="button"
                     onClick={() => addToOrder(item.name)}
-                    className="mt-5 flex w-full items-center justify-between rounded-full border border-[#d8c3a1] px-5 py-3 text-xs font-black uppercase tracking-[0.12em] transition hover:border-[#342016] hover:bg-[#342016] hover:text-white"
+                    className="mt-5 flex w-full items-center justify-between rounded-full border border-[var(--theme-border,#d8c3a1)] px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-[var(--theme-text-primary,#2d1a11)] transition hover:border-[var(--theme-accent-primary,#342016)] hover:bg-[var(--theme-accent-primary,#342016)] hover:text-[var(--theme-accent-contrast,#ffffff)]"
                   >
                     Add to order <span className="text-lg leading-none">+</span>
                   </button>
@@ -337,7 +337,7 @@ export function GoldenCrustBakery() {
         </Container>
       </section>
 
-      <section id="bakery" className="bg-[#efe2ca] py-20 sm:py-24 lg:py-28">
+      <section id="bakery" className="bg-[var(--theme-bg-surface,#efe2ca)] py-20 sm:py-24 lg:py-28">
         <Container className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-20">
           <div className="relative pb-8 pr-0 sm:pr-10">
             <img
@@ -350,9 +350,9 @@ export function GoldenCrustBakery() {
               src={bakeryImages.displayCounter}
               alt="Counter filled with Golden Crust pastries"
               loading="lazy"
-              className="absolute -bottom-2 right-0 hidden aspect-square w-[42%] rounded-[1.3rem] border-[6px] border-[#efe2ca] object-cover shadow-xl sm:block"
+              className="absolute -bottom-2 right-0 hidden aspect-square w-[42%] rounded-[1.3rem] border-[6px] border-[var(--theme-bg-surface,#efe2ca)] object-cover shadow-xl sm:block"
             />
-            <div className="absolute -left-3 bottom-16 rounded-xl bg-[#f2bd52] px-4 py-3 text-[#2d1a11] shadow-lg sm:left-5">
+            <div className="absolute -left-3 bottom-16 rounded-xl bg-[var(--theme-accent-primary,#f2bd52)] px-4 py-3 text-[var(--theme-accent-contrast,#2d1a11)] shadow-lg sm:left-5">
               <p className="text-2xl font-black">Since ’98</p>
               <p className="text-[0.55rem] font-black uppercase tracking-[0.16em]">
                 Old Market mornings
@@ -361,19 +361,19 @@ export function GoldenCrustBakery() {
           </div>
           <div>
             <Eyebrow>Our bakery</Eyebrow>
-            <h2 className="mt-5 text-4xl font-black leading-[0.95] tracking-[-0.05em] sm:text-6xl">
+            <h2 className="mt-5 text-4xl font-black leading-[0.95] tracking-[-0.05em] text-[var(--theme-text-primary,#2d1a11)] sm:text-6xl">
               The good stuff takes time.
             </h2>
-            <p className="mt-6 text-base leading-8 text-[#755a47]">
+            <p className="mt-6 text-base leading-8 text-[var(--theme-text-secondary,#755a47)]">
               Before the city wakes, our ovens are already humming. We fold,
               proof and bake in small batches, using techniques that reward
               patience and ingredients we can name.
             </p>
-            <p className="mt-4 text-base leading-8 text-[#755a47]">
+            <p className="mt-4 text-base leading-8 text-[var(--theme-text-secondary,#755a47)]">
               Come for the bread. Stay for the warm light, a window seat and the
               very real possibility of a second pastry.
             </p>
-            <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-[#cfb992] pt-7">
+            <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-[var(--theme-border,#cfb992)] pt-7">
               {[
                 "Small-batch daily",
                 "Naturally leavened",
@@ -382,9 +382,9 @@ export function GoldenCrustBakery() {
               ].map((item) => (
                 <p
                   key={item}
-                  className="flex items-center gap-3 text-sm font-bold"
+                  className="flex items-center gap-3 text-sm font-bold text-[var(--theme-text-primary,#2d1a11)]"
                 >
-                  <span className="h-2 w-2 rounded-full bg-[#b87336]" />
+                  <span className="h-2 w-2 rounded-full bg-[var(--theme-accent-primary,#b87336)]" />
                   {item}
                 </p>
               ))}
@@ -395,7 +395,7 @@ export function GoldenCrustBakery() {
 
       <section
         id="rewards"
-        className="relative overflow-hidden bg-[#2d1a11] py-20 text-white sm:py-24 lg:py-28"
+        className="relative overflow-hidden bg-[var(--theme-bg-dark,#2d1a11)] py-20 text-white sm:py-24 lg:py-28"
       >
         <img
           src={bakeryImages.benefitsBg}
@@ -415,8 +415,8 @@ export function GoldenCrustBakery() {
             </div>
             <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[1.2rem] bg-white/10 sm:grid-cols-4">
               {benefits.map(([value, label]) => (
-                <div key={label} className="bg-[#392117]/80 p-5">
-                  <p className="text-3xl font-black text-[#f2bd52]">{value}</p>
+                <div key={label} className="bg-[var(--theme-bg-dark,#392117)]/80 p-5">
+                  <p className="text-3xl font-black text-[var(--theme-accent-primary,#f2bd52)]">{value}</p>
                   <p className="mt-2 text-xs leading-5 text-white/50">
                     {label}
                   </p>
@@ -430,9 +430,9 @@ export function GoldenCrustBakery() {
             {rewards.map(([number, title, text]) => (
               <article
                 key={number}
-                className="relative rounded-[1.4rem] border border-white/10 bg-white/[0.045] p-6 backdrop-blur transition hover:-translate-y-1 hover:border-[#f2bd52]/40 hover:bg-white/[0.07]"
+                className="relative rounded-[1.4rem] border border-white/10 bg-white/[0.045] p-6 backdrop-blur transition hover:-translate-y-1 hover:border-[var(--theme-accent-primary,#f2bd52)]/40 hover:bg-white/[0.07]"
               >
-                <span className="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-[#f2bd52]/35 bg-[#2d1a11] text-sm font-black text-[#f2bd52]">
+                <span className="relative z-10 grid h-14 w-14 place-items-center rounded-full border border-[var(--theme-accent-primary,#f2bd52)]/35 bg-[var(--theme-bg-dark,#2d1a11)] text-sm font-black text-[var(--theme-accent-primary,#f2bd52)]">
                   {number}
                 </span>
                 <h3 className="mt-8 text-2xl font-black">{title}</h3>
@@ -443,27 +443,27 @@ export function GoldenCrustBakery() {
 
           <div
             id="join"
-            className="golden-feature-card mt-14 grid overflow-hidden rounded-[1.8rem] bg-[#f2bd52] text-[#2d1a11] shadow-2xl shadow-black/20 lg:grid-cols-[1fr_0.82fr]"
+            className="golden-feature-card mt-14 grid overflow-hidden rounded-[1.8rem] bg-[var(--theme-accent-primary,#f2bd52)] text-[var(--theme-accent-contrast,#2d1a11)] shadow-2xl shadow-black/20 lg:grid-cols-[1fr_0.82fr]"
           >
             <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-14">
-              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#815021]">
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.2em] opacity-80">
                 A warm welcome
               </p>
               <h3 className="mt-4 text-4xl font-black leading-[0.95] tracking-[-0.045em] sm:text-5xl">
                 Your first pastry is on us.
               </h3>
-              <p className="mt-5 max-w-xl text-sm leading-7 text-[#684019]">
+              <p className="mt-5 max-w-xl text-sm leading-7 opacity-90">
                 Join Golden Rewards today and unlock a complimentary pastry
                 after your first purchase.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[#2d1a11] px-7 py-4 text-xs font-black uppercase tracking-[0.13em] text-white transition hover:-translate-y-1 hover:bg-[#4b2b1c]"
+                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[var(--theme-bg-dark,#2d1a11)] px-7 py-4 text-xs font-black uppercase tracking-[0.13em] text-white transition hover:-translate-y-1 hover:opacity-90"
                 >
                   Join for free <ArrowIcon />
                 </button>
-                <p className="self-center text-xs font-bold text-[#815021]">
+                <p className="self-center text-xs font-bold opacity-80">
                   No fee. Just better mornings.
                 </p>
               </div>
@@ -475,8 +475,8 @@ export function GoldenCrustBakery() {
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#f2bd52]/30 to-transparent lg:bg-gradient-to-r" />
-              <span className="absolute right-5 top-5 rounded-full bg-[#fffaf0]/90 px-4 py-2 text-[0.58rem] font-black uppercase tracking-[0.16em] backdrop-blur">
+              <div className="absolute inset-0 bg-gradient-to-r from-[var(--theme-accent-primary,#f2bd52)]/30 to-transparent lg:bg-gradient-to-r" />
+              <span className="absolute right-5 top-5 rounded-full bg-[var(--theme-bg-card,#fffaf0)]/90 px-4 py-2 text-[0.58rem] font-black uppercase tracking-[0.16em] backdrop-blur">
                 Welcome reward
               </span>
             </div>
@@ -494,9 +494,9 @@ export function GoldenCrustBakery() {
           loading="lazy"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-[#2d1a11]/78" />
+        <div className="absolute inset-0 -z-10 bg-[var(--theme-bg-dark,#2d1a11)]/78" />
         <Container className="text-center">
-          <p className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#f2bd52] text-[#2d1a11]">
+          <p className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[var(--theme-accent-primary,#f2bd52)] text-[var(--theme-accent-contrast,#2d1a11)]">
             <WheatMark />
           </p>
           <h2 className="mx-auto mt-7 max-w-3xl text-4xl font-black leading-[0.94] tracking-[-0.05em] sm:text-6xl">
@@ -510,7 +510,7 @@ export function GoldenCrustBakery() {
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <a
               href="#menu"
-              className="inline-flex items-center justify-center gap-3 rounded-full bg-[#f2bd52] px-7 py-4 text-xs font-black uppercase tracking-[0.14em] text-[#2d1a11] transition hover:-translate-y-1 hover:bg-[#ffd06e]"
+              className="inline-flex items-center justify-center gap-3 rounded-full bg-[var(--theme-accent-primary,#f2bd52)] px-7 py-4 text-xs font-black uppercase tracking-[0.14em] text-[var(--theme-accent-contrast,#2d1a11)] transition hover:-translate-y-1 hover:opacity-90"
             >
               Order for pickup <ArrowIcon />
             </a>
@@ -524,48 +524,48 @@ export function GoldenCrustBakery() {
         </Container>
       </section>
 
-      <footer className="bg-[#fbf5e9] py-12">
+      <footer className="bg-[var(--theme-bg-base,#fbf5e9)] py-12 text-[var(--theme-text-primary,#2d1a11)]">
         <Container>
-          <div className="grid gap-10 border-b border-[#dfcdae] pb-10 sm:grid-cols-2 lg:grid-cols-[1.25fr_0.75fr_0.75fr_0.75fr]">
+          <div className="grid gap-10 border-b border-[var(--theme-border,#dfcdae)] pb-10 sm:grid-cols-2 lg:grid-cols-[1.25fr_0.75fr_0.75fr_0.75fr]">
             <div>
               <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-[#342016] text-[#f2bd52]">
+                <span className="grid h-11 w-11 place-items-center rounded-full bg-[var(--theme-accent-primary,#342016)] text-[var(--theme-accent-contrast,#f2bd52)]">
                   <WheatMark />
                 </span>
                 <div>
-                  <p className="font-black uppercase tracking-[0.08em]">
+                  <p className="font-black uppercase tracking-[0.08em] text-[var(--theme-text-primary,#2d1a11)]">
                     Golden Crust
                   </p>
-                  <p className="text-[0.55rem] font-bold uppercase tracking-[0.24em] text-[#9c7659]">
+                  <p className="text-[0.55rem] font-bold uppercase tracking-[0.24em] text-[var(--theme-text-muted,#9c7659)]">
                     Bakery &amp; Coffee
                   </p>
                 </div>
               </div>
-              <p className="mt-5 max-w-sm text-sm leading-7 text-[#816550]">
+              <p className="mt-5 max-w-sm text-sm leading-7 text-[var(--theme-text-secondary,#816550)]">
                 Slow bread, flaky mornings and neighborhood warmth since 1998.
               </p>
             </div>
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-[#a8652d]">
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#a8652d)]">
                 Explore
               </p>
-              <div className="mt-4 grid gap-2 text-sm text-[#755a47]">
-                <a href="#menu" className="hover:text-[#2d1a11]">
+              <div className="mt-4 grid gap-2 text-sm text-[var(--theme-text-secondary,#755a47)]">
+                <a href="#menu" className="hover:text-[var(--theme-text-primary,#2d1a11)]">
                   Menu
                 </a>
-                <a href="#bakery" className="hover:text-[#2d1a11]">
+                <a href="#bakery" className="hover:text-[var(--theme-text-primary,#2d1a11)]">
                   Our bakery
                 </a>
-                <a href="#rewards" className="hover:text-[#2d1a11]">
+                <a href="#rewards" className="hover:text-[var(--theme-text-primary,#2d1a11)]">
                   Rewards
                 </a>
               </div>
             </div>
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-[#a8652d]">
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#a8652d)]">
                 Visit
               </p>
-              <p className="mt-4 text-sm leading-7 text-[#755a47]">
+              <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#755a47)]">
                 88 Brioche Lane
                 <br />
                 Old Market District
@@ -574,10 +574,10 @@ export function GoldenCrustBakery() {
               </p>
             </div>
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-[#a8652d]">
+              <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--theme-accent-primary,#a8652d)]">
                 Say hello
               </p>
-              <p className="mt-4 text-sm leading-7 text-[#755a47]">
+              <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#755a47)]">
                 hello@goldencrust.test
                 <br />
                 (555) 014-2020
@@ -589,11 +589,11 @@ export function GoldenCrustBakery() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-between gap-3 pt-7 text-xs text-[#9a7d66] sm:flex-row">
+          <div className="flex flex-col justify-between gap-3 pt-7 text-xs text-[var(--theme-text-muted,#9a7d66)] sm:flex-row">
             <p>© 2026 Golden Crust Bakery. Baked with care.</p>
             <Link
               to="/restaurant"
-              className="font-bold transition hover:text-[#2d1a11]"
+              className="font-bold transition hover:text-[var(--theme-text-primary,#2d1a11)]"
             >
               ← Restaurant collection
             </Link>
@@ -603,7 +603,7 @@ export function GoldenCrustBakery() {
 
       <div
         aria-live="polite"
-        className={`fixed bottom-6 right-6 z-[70] rounded-full bg-[#342016] px-5 py-3 text-sm font-bold text-white shadow-2xl transition duration-300 ${addedItem ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}
+        className={`fixed bottom-6 right-6 z-[70] rounded-full bg-[var(--theme-accent-primary,#342016)] px-5 py-3 text-sm font-bold text-[var(--theme-accent-contrast,#ffffff)] shadow-2xl transition duration-300 ${addedItem ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}
       >
         {addedItem ? `${addedItem} added to your order` : ""}
       </div>

@@ -152,12 +152,12 @@ function ApexMark({ light = false }: { light?: boolean }) {
   return (
     <a
       href="#home"
-      className={`flex items-center gap-3 ${light ? "text-[#F4F6F8]" : "text-[#101722]"}`}
+      className={`flex items-center gap-3 transition-colors duration-300 ${light ? "text-[#F4F6F8]" : "text-[var(--theme-text-primary,#101722)]"}`}
     >
       <span
-        className={`grid h-10 w-10 place-items-center border ${light ? "border-[#7A2948]" : "border-[#7A2948]/60"}`}
+        className={`grid h-10 w-10 place-items-center border transition-colors duration-300 ${light ? "border-[var(--theme-accent-primary,#7A2948)]" : "border-[var(--theme-accent-primary,#7A2948)]/60"}`}
       >
-        <span className="apex-serif text-xl leading-none text-[#7A2948]">
+        <span className="apex-serif text-xl leading-none text-[var(--theme-accent-primary,#7A2948)]">
           A
         </span>
       </span>
@@ -166,7 +166,7 @@ function ApexMark({ light = false }: { light?: boolean }) {
           Apex Commercial
         </span>
         <span
-          className={`mt-1.5 block text-[0.58rem] font-semibold uppercase tracking-[0.36em] ${light ? "text-[#F4F6F8]" : "text-[#1C2736]"}`}
+          className={`mt-1.5 block text-[0.58rem] font-semibold uppercase tracking-[0.36em] transition-colors duration-300 ${light ? "text-[#F4F6F8]" : "text-[var(--theme-text-secondary,#1C2736)]"}`}
         >
           Realty
         </span>
@@ -194,19 +194,19 @@ function SectionTitle({
       data-apex-reveal
     >
       <div
-        className={`mb-5 flex items-center gap-3 text-[0.68rem] font-bold uppercase tracking-[0.28em] ${centered ? "justify-center" : ""} text-[#7A2948]`}
+        className={`mb-5 flex items-center gap-3 text-[0.68rem] font-bold uppercase tracking-[0.28em] ${centered ? "justify-center" : ""} text-[var(--theme-accent-primary,#7A2948)]`}
       >
-        <span className="h-px w-9 bg-[#7A2948]" />
+        <span className="h-px w-9 bg-[var(--theme-accent-primary,#7A2948)]" />
         {label}
       </div>
       <h2
-        className={`apex-serif text-[clamp(2.6rem,5vw,4.9rem)] leading-[0.98] tracking-[-0.035em] ${light ? "text-[#F4F6F8]" : "text-[#101722]"}`}
+        className={`apex-serif text-[clamp(2.6rem,5vw,4.9rem)] leading-[0.98] tracking-[-0.035em] transition-colors duration-300 ${light ? "text-[#F4F6F8]" : "text-[var(--theme-text-primary,#101722)]"}`}
       >
         {title}
       </h2>
       {body && (
         <p
-          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg ${centered ? "mx-auto" : ""} ${light ? "text-[#F4F6F8]" : "text-[#1C2736]"}`}
+          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg transition-colors duration-300 ${centered ? "mx-auto" : ""} ${light ? "text-[#F4F6F8]/85" : "text-[var(--theme-text-secondary,#1C2736)]/75"}`}
         >
           {body}
         </p>
@@ -225,10 +225,12 @@ function ApexButton({
   variant?: "copper" | "dark" | "outline";
 }) {
   const styles = {
-    copper: "bg-[#7A2948] text-white hover:bg-[#101722]",
-    dark: "bg-[#101722] text-white hover:bg-[#7A2948]",
+    copper:
+      "bg-[var(--theme-accent-primary,#7A2948)] text-[var(--theme-accent-contrast,#ffffff)] hover:bg-[var(--theme-bg-dark,#101722)]",
+    dark:
+      "bg-[var(--theme-bg-dark,#101722)] text-[var(--theme-accent-contrast,#ffffff)] hover:bg-[var(--theme-accent-primary,#7A2948)]",
     outline:
-      "border border-[#F4F6F8]/35 text-[#F4F6F8] hover:border-[#7A2948] hover:bg-[#7A2948]",
+      "border border-[#F4F6F8]/35 text-[#F4F6F8] hover:border-[var(--theme-accent-primary,#7A2948)] hover:bg-[var(--theme-accent-primary,#7A2948)] hover:text-[var(--theme-accent-contrast,#ffffff)]",
   };
   return (
     <a
@@ -267,9 +269,9 @@ export function ApexCommercialRealty() {
   }, []);
 
   return (
-    <main className="apex-site overflow-hidden bg-[#F4F6F8] text-[#1C2736]">
+    <main className="apex-site overflow-hidden bg-[var(--theme-bg-base,#F4F6F8)] text-[var(--theme-text-primary,#1C2736)] transition-colors duration-300">
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled || menuOpen ? "border-b border-black/10 bg-[#F4F6F8]/95 shadow-[0_10px_30px_rgba(16,23,34,0.08)] backdrop-blur-xl" : "bg-[#F4F6F8]/90 backdrop-blur-md"}`}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled || menuOpen ? "border-b border-[var(--theme-border,rgba(0,0,0,0.1))] bg-[var(--theme-bg-base,#F4F6F8)]/95 shadow-[0_10px_30px_rgba(16,23,34,0.08)] backdrop-blur-xl" : "bg-[var(--theme-bg-base,#F4F6F8)]/90 backdrop-blur-md"}`}
       >
         <div className="mx-auto flex h-20 max-w-[92rem] items-center justify-between px-5 sm:px-8 lg:px-12">
           <ApexMark />
@@ -281,7 +283,7 @@ export function ApexCommercialRealty() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-[0.72rem] font-bold uppercase tracking-[0.12em] text-[#1C2736] transition hover:text-[#7A2948]"
+                className="text-[0.72rem] font-bold uppercase tracking-[0.12em] text-[var(--theme-text-secondary,#1C2736)] transition hover:text-[var(--theme-accent-primary,#7A2948)]"
               >
                 {link.label}
               </a>
@@ -289,7 +291,7 @@ export function ApexCommercialRealty() {
           </nav>
           <a
             href="#properties"
-            className="hidden bg-[#101722] px-5 py-3 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#7A2948] sm:inline-flex"
+            className="hidden bg-[var(--theme-bg-dark,#101722)] px-5 py-3 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--theme-accent-contrast,#ffffff)] transition hover:bg-[var(--theme-accent-primary,#7A2948)] sm:inline-flex"
           >
             View Opportunities
           </a>
@@ -298,7 +300,7 @@ export function ApexCommercialRealty() {
             onClick={() => setMenuOpen((open) => !open)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-11 w-11 place-items-center border border-[#101722]/20 lg:hidden"
+            className="grid h-11 w-11 place-items-center border border-[var(--theme-border,#101722)]/20 text-[var(--theme-text-primary,#101722)] lg:hidden transition-colors"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -309,7 +311,7 @@ export function ApexCommercialRealty() {
         </div>
         {menuOpen && (
           <nav
-            className="border-t border-black/10 bg-[#F4F6F8] px-5 py-5 lg:hidden"
+            className="border-t border-[var(--theme-border,rgba(0,0,0,0.1))] bg-[var(--theme-bg-base,#F4F6F8)] px-5 py-5 lg:hidden transition-colors duration-300"
             aria-label="Mobile navigation"
           >
             <div className="mx-auto grid max-w-[92rem]">
@@ -318,7 +320,7 @@ export function ApexCommercialRealty() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="border-b border-black/8 px-3 py-4 text-sm font-bold uppercase tracking-[0.1em]"
+                  className="border-b border-[var(--theme-border,rgba(0,0,0,0.08))] px-3 py-4 text-sm font-bold uppercase tracking-[0.1em] text-[var(--theme-text-primary,#1C2736)] hover:text-[var(--theme-accent-primary,#7A2948)] transition-colors"
                 >
                   {link.label}
                 </a>
@@ -326,7 +328,7 @@ export function ApexCommercialRealty() {
               <a
                 href="#properties"
                 onClick={() => setMenuOpen(false)}
-                className="mt-4 bg-[#101722] px-5 py-4 text-center text-xs font-bold uppercase tracking-[0.12em] text-white sm:hidden"
+                className="mt-4 bg-[var(--theme-bg-dark,#101722)] px-5 py-4 text-center text-xs font-bold uppercase tracking-[0.12em] text-[var(--theme-accent-contrast,#ffffff)] sm:hidden hover:bg-[var(--theme-accent-primary,#7A2948)] transition-colors"
               >
                 View Opportunities
               </a>
@@ -349,8 +351,8 @@ export function ApexCommercialRealty() {
         </div>
         <div className="relative mx-auto flex min-h-[770px] max-w-[92rem] items-center px-5 py-20 sm:px-8 lg:min-h-[850px] lg:px-12">
           <div className="max-w-4xl text-[#F4F6F8]">
-            <p className="mb-7 flex items-center gap-4 text-[0.68rem] font-bold uppercase tracking-[0.3em] text-[#7A2948]">
-              <span className="h-px w-12 bg-[#7A2948]" />
+            <p className="mb-7 flex items-center gap-4 text-[0.68rem] font-bold uppercase tracking-[0.3em] text-[var(--theme-accent-primary,#7A2948)]">
+              <span className="h-px w-12 bg-[var(--theme-accent-primary,#7A2948)]" />
               Commercial advisory
             </p>
             <h1 className="apex-serif max-w-4xl text-[clamp(3.7rem,7.2vw,7.3rem)] leading-[0.9] tracking-[-0.045em]">
@@ -371,7 +373,7 @@ export function ApexCommercialRealty() {
               </ApexButton>
             </div>
           </div>
-          <div className="absolute bottom-0 right-0 hidden bg-[#1C2736]/95 lg:grid lg:grid-cols-3">
+          <div className="absolute bottom-0 right-0 hidden bg-[var(--theme-bg-dark,#1C2736)]/95 lg:grid lg:grid-cols-3 transition-colors duration-300">
             {[
               ["$1.2B+", "Transaction Volume"],
               ["340+", "Properties Advised"],
@@ -391,7 +393,7 @@ export function ApexCommercialRealty() {
         </div>
       </section>
 
-      <section className="px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section className="px-5 py-24 sm:px-8 md:py-32 lg:px-12 bg-[var(--theme-bg-base,#F4F6F8)] transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <SectionTitle
             label="Specialized expertise"
@@ -402,7 +404,7 @@ export function ApexCommercialRealty() {
             {categories.map((category, index) => (
               <article
                 key={category.title}
-                className="group border border-[#1C2736]/15 bg-[#F4F6F8] p-3 transition duration-300 hover:-translate-y-1 hover:border-[#7A2948]"
+                className="group border border-[var(--theme-border,#1C2736)]/15 bg-[var(--theme-bg-card,#F4F6F8)] p-3 transition duration-300 hover:-translate-y-1 hover:border-[var(--theme-accent-primary,#7A2948)]"
                 data-apex-reveal
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
@@ -414,18 +416,18 @@ export function ApexCommercialRealty() {
                   />
                 </div>
                 <div className="p-5 pb-7">
-                  <p className="text-[0.62rem] font-bold uppercase tracking-[0.23em] text-[#7A2948]">
+                  <p className="text-[0.62rem] font-bold uppercase tracking-[0.23em] text-[var(--theme-accent-primary,#7A2948)]">
                     {category.label}
                   </p>
-                  <h3 className="apex-serif mt-5 text-3xl text-[#101722]">
+                  <h3 className="apex-serif mt-5 text-3xl text-[var(--theme-text-primary,#101722)]">
                     {category.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-[#1C2736]/70">
+                  <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#1C2736)]/70">
                     {category.text}
                   </p>
                   <a
                     href="#contact"
-                    className="mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[#7A2948]"
+                    className="mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--theme-accent-primary,#7A2948)] hover:underline"
                   >
                     Discuss requirements{" "}
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
@@ -439,7 +441,7 @@ export function ApexCommercialRealty() {
 
       <section
         id="properties"
-        className="bg-[#1C2736]/[0.06] px-5 py-24 sm:px-8 md:py-32 lg:px-12"
+        className="bg-[var(--theme-bg-surface,#1C2736)]/[0.06] [html.dark_&]:bg-[var(--theme-bg-surface,#111827)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300"
       >
         <div className="mx-auto max-w-[92rem]">
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
@@ -450,7 +452,7 @@ export function ApexCommercialRealty() {
             />
             <a
               href="#contact"
-              className="inline-flex w-fit items-center gap-2 border-b border-[#101722]/30 pb-2 text-xs font-bold uppercase tracking-[0.14em]"
+              className="inline-flex w-fit items-center gap-2 border-b border-[var(--theme-border,#101722)]/30 pb-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--theme-text-primary,#101722)] hover:text-[var(--theme-accent-primary,#7A2948)] transition-colors"
             >
               View all opportunities <ArrowUpRight className="h-4 w-4" />
             </a>
@@ -459,7 +461,7 @@ export function ApexCommercialRealty() {
             {opportunities.map((property, index) => (
               <article
                 key={property.title}
-                className="group bg-[#F4F6F8] shadow-[0_18px_50px_rgba(16,23,34,0.08)] transition duration-300 hover:-translate-y-1"
+                className="group bg-[var(--theme-bg-card,#F4F6F8)] shadow-[0_18px_50px_rgba(16,23,34,0.08)] transition duration-300 hover:-translate-y-1"
                 data-apex-reveal
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
@@ -469,39 +471,39 @@ export function ApexCommercialRealty() {
                     alt={property.title}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-5 top-5 bg-[#1C2736] px-3 py-2 text-[0.58rem] font-bold uppercase tracking-[0.2em] text-white">
+                  <span className="absolute left-5 top-5 bg-[var(--theme-bg-dark,#1C2736)] px-3 py-2 text-[0.58rem] font-bold uppercase tracking-[0.2em] text-[var(--theme-accent-contrast,#ffffff)]">
                     {property.tag}
                   </span>
                 </div>
                 <div className="p-7">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#7A2948]">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--theme-accent-primary,#7A2948)]">
                     <MapPin className="h-3.5 w-3.5" />
                     {property.location}
                   </p>
-                  <h3 className="apex-serif mt-4 text-[1.9rem] leading-tight text-[#101722]">
+                  <h3 className="apex-serif mt-4 text-[1.9rem] leading-tight text-[var(--theme-text-primary,#101722)]">
                     {property.title}
                   </h3>
-                  <div className="mt-6 grid grid-cols-2 border-y border-[#1C2736]/15 py-4 text-xs">
+                  <div className="mt-6 grid grid-cols-2 border-y border-[var(--theme-border,#1C2736)]/15 py-4 text-xs">
                     <div>
-                      <span className="block text-[0.55rem] font-bold uppercase tracking-[0.16em] text-[#1C2736]/55">
+                      <span className="block text-[0.55rem] font-bold uppercase tracking-[0.16em] text-[var(--theme-text-secondary,#1C2736)]/55">
                         Type
                       </span>
-                      <span className="mt-2 block font-semibold">
+                      <span className="mt-2 block font-semibold text-[var(--theme-text-primary,#101722)]">
                         {property.type}
                       </span>
                     </div>
-                    <div className="border-l border-[#1C2736]/15 pl-5">
-                      <span className="block text-[0.55rem] font-bold uppercase tracking-[0.16em] text-[#1C2736]/55">
+                    <div className="border-l border-[var(--theme-border,#1C2736)]/15 pl-5">
+                      <span className="block text-[0.55rem] font-bold uppercase tracking-[0.16em] text-[var(--theme-text-secondary,#1C2736)]/55">
                         Size
                       </span>
-                      <span className="mt-2 block font-semibold">
+                      <span className="mt-2 block font-semibold text-[var(--theme-text-primary,#101722)]">
                         {property.size}
                       </span>
                     </div>
                   </div>
                   <a
                     href="#contact"
-                    className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[#101722]"
+                    className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--theme-text-primary,#101722)] hover:text-[var(--theme-accent-primary,#7A2948)] transition-colors"
                   >
                     View Details{" "}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -513,7 +515,7 @@ export function ApexCommercialRealty() {
         </div>
       </section>
 
-      <section id="insights" className="bg-[#1C2736] text-[#F4F6F8]">
+      <section id="insights" className="bg-[var(--theme-bg-dark,#1C2736)] text-[#F4F6F8] transition-colors duration-300">
         <div className="grid lg:grid-cols-2">
           <div className="min-h-[520px] lg:min-h-[720px]" data-apex-reveal>
             <img
@@ -543,11 +545,11 @@ export function ApexCommercialRealty() {
                     key={item}
                     className="flex items-center gap-5 border-t border-white/12 py-5"
                   >
-                    <span className="grid h-9 w-9 place-items-center bg-[#7A2948]/25 text-[#F4F6F8]">
+                    <span className="grid h-9 w-9 place-items-center bg-[var(--theme-accent-primary,#7A2948)]/25 text-[#F4F6F8]">
                       <Check className="h-4 w-4" />
                     </span>
                     <span className="text-sm font-semibold">{item}</span>
-                    <span className="ml-auto text-xs text-[#7A2948]">
+                    <span className="ml-auto text-xs text-[var(--theme-accent-primary,#7A2948)]">
                       0{index + 1}
                     </span>
                   </div>
@@ -558,28 +560,28 @@ export function ApexCommercialRealty() {
         </div>
       </section>
 
-      <section id="services" className="px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section id="services" className="px-5 py-24 sm:px-8 md:py-32 lg:px-12 bg-[var(--theme-bg-base,#F4F6F8)] transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <SectionTitle
             label="Integrated services"
             title="Commercial Advisory, End to End"
             body="Specialist representation and market insight across the full commercial property lifecycle."
           />
-          <div className="mt-14 grid border-l border-t border-[#1C2736]/15 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid border-l border-t border-[var(--theme-border,#1C2736)]/15 sm:grid-cols-2 lg:grid-cols-3">
             {services.map(({ icon: Icon, title, text }, index) => (
               <article
                 key={title}
-                className="group border-b border-r border-[#1C2736]/15 p-7 transition hover:bg-[#1C2736]/[0.06] sm:p-9"
+                className="group border-b border-r border-[var(--theme-border,#1C2736)]/15 p-7 transition hover:bg-[var(--theme-bg-surface,#1C2736)]/[0.06] [html.dark_&]:hover:bg-[var(--theme-bg-surface,#111827)] sm:p-9"
                 data-apex-reveal
                 style={{ transitionDelay: `${(index % 3) * 70}ms` }}
               >
-                <span className="grid h-11 w-11 place-items-center border border-[#7A2948]/50 text-[#7A2948] transition group-hover:bg-[#7A2948] group-hover:text-white">
+                <span className="grid h-11 w-11 place-items-center border border-[var(--theme-accent-primary,#7A2948)]/50 text-[var(--theme-accent-primary,#7A2948)] transition group-hover:bg-[var(--theme-accent-primary,#7A2948)] group-hover:text-[var(--theme-accent-contrast,#ffffff)]">
                   <Icon className="h-5 w-5" strokeWidth={1.5} />
                 </span>
-                <h3 className="apex-serif mt-7 text-2xl text-[#101722]">
+                <h3 className="apex-serif mt-7 text-2xl text-[var(--theme-text-primary,#101722)]">
                   {title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-[#1C2736]/70">
+                <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#1C2736)]/70">
                   {text}
                 </p>
               </article>
@@ -588,7 +590,7 @@ export function ApexCommercialRealty() {
         </div>
       </section>
 
-      <section className="border-y border-[#1C2736]/15 bg-[#1C2736]/[0.06] px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section className="border-y border-[var(--theme-border,#1C2736)]/15 bg-[var(--theme-bg-surface,#1C2736)]/[0.06] [html.dark_&]:bg-[var(--theme-bg-surface,#111827)] px-5 py-24 sm:px-8 md:py-32 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <SectionTitle
             label="Why Apex"
@@ -599,17 +601,17 @@ export function ApexCommercialRealty() {
             {values.map((value, index) => (
               <article
                 key={value.title}
-                className="group min-h-[270px] border border-[#1C2736]/15 bg-[#F4F6F8] p-7 transition hover:border-[#7A2948] hover:shadow-[0_18px_40px_rgba(16,23,34,0.08)]"
+                className="group min-h-[270px] border border-[var(--theme-border,#1C2736)]/15 bg-[var(--theme-bg-card,#F4F6F8)] p-7 transition hover:border-[var(--theme-accent-primary,#7A2948)] hover:shadow-[0_18px_40px_rgba(16,23,34,0.08)]"
                 data-apex-reveal
                 style={{ transitionDelay: `${index * 70}ms` }}
               >
-                <span className="apex-serif text-4xl text-[#7A2948]">
+                <span className="apex-serif text-4xl text-[var(--theme-accent-primary,#7A2948)]">
                   {value.number}
                 </span>
-                <h3 className="apex-serif mt-14 text-2xl text-[#101722]">
+                <h3 className="apex-serif mt-14 text-2xl text-[var(--theme-text-primary,#101722)]">
                   {value.title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-[#1C2736]/70">
+                <p className="mt-4 text-sm leading-7 text-[var(--theme-text-secondary,#1C2736)]/70">
                   {value.text}
                 </p>
               </article>
@@ -618,14 +620,14 @@ export function ApexCommercialRealty() {
         </div>
       </section>
 
-      <section id="markets" className="px-5 py-24 sm:px-8 md:py-32 lg:px-12">
+      <section id="markets" className="px-5 py-24 sm:px-8 md:py-32 lg:px-12 bg-[var(--theme-bg-base,#F4F6F8)] transition-colors duration-300">
         <div className="mx-auto max-w-[92rem]">
           <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
             <SectionTitle
               label="Coastal commercial"
               title="Coastal Properties with Commercial Potential"
             />
-            <p className="max-w-2xl text-base leading-8 text-[#1C2736]/70 lg:justify-self-end">
+            <p className="max-w-2xl text-base leading-8 text-[var(--theme-text-secondary,#1C2736)]/70 lg:justify-self-end">
               We advise on waterfront mixed-use assets, boutique hospitality
               spaces, adaptive retail properties, and commercial opportunities
               positioned in premium coastal markets.
@@ -645,8 +647,8 @@ export function ApexCommercialRealty() {
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#101722] via-[#101722]/80 to-transparent p-7 pt-24 text-white">
-                  <p className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[#7A2948]">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[var(--theme-bg-dark,#101722)] via-[var(--theme-bg-dark,#101722)]/80 to-transparent p-7 pt-24 text-white">
+                  <p className="text-[0.58rem] font-bold uppercase tracking-[0.22em] text-[var(--theme-accent-primary,#7A2948)]">
                     {asset.label}
                   </p>
                   <h3 className="apex-serif mt-3 text-3xl">{asset.title}</h3>
@@ -670,7 +672,7 @@ export function ApexCommercialRealty() {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,23,34,0.96),rgba(16,23,34,0.78),rgba(16,23,34,0.48))]" />
         </div>
         <div className="relative mx-auto max-w-[88rem]" data-apex-reveal>
-          <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-[#7A2948]">
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-[var(--theme-accent-primary,#7A2948)]">
             Begin a conversation
           </p>
           <h2 className="apex-serif mt-6 max-w-4xl text-[clamp(3rem,6vw,6rem)] leading-[0.95] tracking-[-0.04em]">
@@ -688,7 +690,7 @@ export function ApexCommercialRealty() {
         </div>
       </section>
 
-      <footer className="bg-[#101722] px-5 py-14 text-[#F4F6F8] sm:px-8 lg:px-12">
+      <footer className="bg-[var(--theme-bg-dark,#101722)] px-5 py-14 text-[#F4F6F8] sm:px-8 lg:px-12 transition-colors duration-300">
         <div className="mx-auto max-w-[88rem]">
           <div className="grid gap-12 border-b border-white/10 pb-12 md:grid-cols-[1.2fr_0.7fr_0.8fr_1fr]">
             <div>
@@ -699,7 +701,7 @@ export function ApexCommercialRealty() {
               </p>
             </div>
             <div>
-              <p className="text-[0.6rem] font-bold uppercase tracking-[0.22em] text-[#7A2948]">
+              <p className="text-[0.6rem] font-bold uppercase tracking-[0.22em] text-[var(--theme-accent-primary,#7A2948)]">
                 Quick Links
               </p>
               <div className="mt-5 grid gap-3">
@@ -707,7 +709,7 @@ export function ApexCommercialRealty() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-sm text-white/55 hover:text-white"
+                    className="text-sm text-white/55 hover:text-white transition-colors"
                   >
                     {link.label}
                   </a>
@@ -715,7 +717,7 @@ export function ApexCommercialRealty() {
               </div>
             </div>
             <div>
-              <p className="text-[0.6rem] font-bold uppercase tracking-[0.22em] text-[#7A2948]">
+              <p className="text-[0.6rem] font-bold uppercase tracking-[0.22em] text-[var(--theme-accent-primary,#7A2948)]">
                 Services
               </p>
               <div className="mt-5 grid gap-3 text-sm text-white/55">
@@ -726,18 +728,18 @@ export function ApexCommercialRealty() {
               </div>
             </div>
             <div>
-              <p className="text-[0.6rem] font-bold uppercase tracking-[0.22em] text-[#7A2948]">
+              <p className="text-[0.6rem] font-bold uppercase tracking-[0.22em] text-[var(--theme-accent-primary,#7A2948)]">
                 Contact
               </p>
               <div className="mt-5 grid gap-3 text-sm text-white/55">
                 <span>New York, NY</span>
                 <a
                   href="mailto:info@apexcommercialrealty.com"
-                  className="break-all hover:text-white"
+                  className="break-all hover:text-white transition-colors"
                 >
                   info@apexcommercialrealty.com
                 </a>
-                <a href="tel:+12125550188" className="hover:text-white">
+                <a href="tel:+12125550188" className="hover:text-white transition-colors">
                   (212) 555-0188
                 </a>
               </div>

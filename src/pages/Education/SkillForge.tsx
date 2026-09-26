@@ -538,10 +538,10 @@ export function SkillForge() {
 
   // ROI Computations
   const multiplier = calcTrack === "Full-Stack & AI" ? 1.48 : calcTrack === "Cloud DevOps" ? 1.52 : calcTrack === "Product & UX" ? 1.44 : 1.42;
+  const tuitionCost = calcTrack === "Full-Stack & AI" ? 11500 : calcTrack === "Cloud DevOps" ? 12000 : calcTrack === "Product & UX" ? 10500 : 11000;
   const projectedSalary = Math.round(currentSalary * multiplier);
   const salaryIncrease = projectedSalary - currentSalary;
-  const tuitionCost = 3450;
-  const paybackMonths = Math.max(1, ((tuitionCost / (salaryIncrease / 12))).toFixed(1));
+  const paybackMonths = Math.max(1, Number((tuitionCost / (salaryIncrease / 12)).toFixed(1)));
 
   // Filtered Programs
   const filteredPrograms = programsData.filter((p) => {
