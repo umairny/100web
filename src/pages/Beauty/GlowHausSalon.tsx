@@ -207,6 +207,350 @@ function Button({
   );
 }
 
+const glowThemeCss = `
+  :root {
+    --glow-accent: #ad5e68;
+    --glow-accent-hover: #914a54;
+    --glow-accent-sec: #d9959b;
+    --glow-accent-soft: rgba(173, 94, 104, 0.12);
+    --glow-accent-glow: rgba(173, 94, 104, 0.35);
+    --glow-bg-base: #fffaf6;
+    --glow-bg-surface: #ffffff;
+    --glow-bg-card: #fffaf7;
+    --glow-bg-card-subtle: #f7eee8;
+    --glow-text-primary: #272020;
+    --glow-text-muted: #6e5d57;
+    --glow-border: #eadfd8;
+    --glow-nav-bg: rgba(255, 250, 246, 0.95);
+  }
+
+  /* ------------------------------------------------------------ */
+  /* THEME PRESET ADAPTATIONS                                     */
+  /* ------------------------------------------------------------ */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) {
+    --glow-accent: var(--theme-accent-primary, #ad5e68) !important;
+    --glow-accent-hover: var(--theme-accent-hover, #914a54) !important;
+    --glow-accent-sec: var(--theme-accent-secondary, #d9959b) !important;
+    --glow-accent-soft: color-mix(in srgb, var(--glow-accent) 14%, transparent) !important;
+    --glow-accent-glow: var(--theme-accent-glow, rgba(173, 94, 104, 0.35)) !important;
+    --glow-border: var(--theme-border, color-mix(in srgb, var(--glow-accent) 30%, transparent)) !important;
+  }
+
+  [data-theme-preset="emerald"] .glowhaus-site,
+  [data-theme-preset="emerald"] {
+    --glow-accent: #10B981 !important;
+    --glow-accent-hover: #059669 !important;
+    --glow-accent-sec: #34D399 !important;
+    --glow-accent-soft: rgba(16, 185, 129, 0.14) !important;
+    --glow-accent-glow: rgba(16, 185, 129, 0.45) !important;
+    --glow-border: rgba(16, 185, 129, 0.35) !important;
+  }
+  [data-theme-preset="ocean"] .glowhaus-site,
+  [data-theme-preset="ocean"],
+  [data-theme-preset="azure"] .glowhaus-site,
+  [data-theme-preset="azure"] {
+    --glow-accent: #0284C7 !important;
+    --glow-accent-hover: #0369A1 !important;
+    --glow-accent-sec: #38BDF8 !important;
+    --glow-accent-soft: rgba(2, 132, 199, 0.14) !important;
+    --glow-accent-glow: rgba(2, 132, 199, 0.45) !important;
+    --glow-border: rgba(2, 132, 199, 0.35) !important;
+  }
+  [data-theme-preset="sunset"] .glowhaus-site,
+  [data-theme-preset="sunset"] {
+    --glow-accent: #EA580C !important;
+    --glow-accent-hover: #C2410C !important;
+    --glow-accent-sec: #FB923C !important;
+    --glow-accent-soft: rgba(234, 88, 12, 0.14) !important;
+    --glow-accent-glow: rgba(234, 88, 12, 0.45) !important;
+    --glow-border: rgba(234, 88, 12, 0.35) !important;
+  }
+  [data-theme-preset="purple"] .glowhaus-site,
+  [data-theme-preset="purple"],
+  [data-theme-preset="amethyst"] .glowhaus-site,
+  [data-theme-preset="amethyst"],
+  [data-theme-preset="royal"] .glowhaus-site,
+  [data-theme-preset="royal"] {
+    --glow-accent: #9333EA !important;
+    --glow-accent-hover: #7E22CE !important;
+    --glow-accent-sec: #C084FC !important;
+    --glow-accent-soft: rgba(147, 51, 234, 0.14) !important;
+    --glow-accent-glow: rgba(147, 51, 234, 0.45) !important;
+    --glow-border: rgba(147, 51, 234, 0.35) !important;
+  }
+  [data-theme-preset="amber"] .glowhaus-site,
+  [data-theme-preset="amber"],
+  [data-theme-preset="golden"] .glowhaus-site,
+  [data-theme-preset="golden"] {
+    --glow-accent: #D97706 !important;
+    --glow-accent-hover: #B45309 !important;
+    --glow-accent-sec: #FBBF24 !important;
+    --glow-accent-soft: rgba(217, 119, 6, 0.14) !important;
+    --glow-accent-glow: rgba(217, 119, 6, 0.45) !important;
+    --glow-border: rgba(217, 119, 6, 0.35) !important;
+  }
+  [data-theme-preset="cyberpunk"] .glowhaus-site,
+  [data-theme-preset="cyberpunk"] {
+    --glow-accent: #06B6D4 !important;
+    --glow-accent-hover: #0891B2 !important;
+    --glow-accent-sec: #A855F7 !important;
+    --glow-accent-soft: rgba(6, 182, 212, 0.14) !important;
+    --glow-accent-glow: rgba(6, 182, 212, 0.45) !important;
+    --glow-border: rgba(6, 182, 212, 0.35) !important;
+  }
+  [data-theme-preset="terracotta"] .glowhaus-site,
+  [data-theme-preset="terracotta"] {
+    --glow-accent: #EA580C !important;
+    --glow-accent-hover: #C2410C !important;
+    --glow-accent-sec: #0D9488 !important;
+    --glow-accent-soft: rgba(234, 88, 12, 0.14) !important;
+    --glow-accent-glow: rgba(234, 88, 12, 0.45) !important;
+    --glow-border: rgba(234, 88, 12, 0.35) !important;
+  }
+  [data-theme-preset="obsidian"] .glowhaus-site,
+  [data-theme-preset="obsidian"] {
+    --glow-accent: #475569 !important;
+    --glow-accent-hover: #334155 !important;
+    --glow-accent-sec: #64748B !important;
+    --glow-accent-soft: rgba(71, 85, 105, 0.14) !important;
+    --glow-accent-glow: rgba(71, 85, 105, 0.45) !important;
+    --glow-border: rgba(71, 85, 105, 0.35) !important;
+  }
+
+  /* Universal solid icon box prevention */
+  .glowhaus-site svg:not(.fill-current):not([class*="fill-"]) {
+    fill: none !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* ACTIVE THEME PRESET OVERRIDES (Non-Original Presets)        */
+  /* ------------------------------------------------------------ */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#ad5e68]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#a75561]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#ae5e68]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#a8525e]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#ac5e68]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#8e4d4f]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#9f5760]"] {
+    color: var(--glow-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#bd7375]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#c47578]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#c67576]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#d9959b]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#e4aaa2]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="text-[#e6a7a8]"] {
+    color: var(--glow-accent-sec) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="bg-[#ad5e68]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="bg-[#a85d66]"] {
+    background-color: var(--glow-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="border-[#ad5e68]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="border-[#ae5e68]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="border-[#c98e85]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="border-[#e0ada8]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="border-[#e0c8bf]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="border-[#ddb4ab]"] {
+    border-color: var(--glow-border) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="bg-[#ae5e68]"] {
+    background-color: var(--glow-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="bg-[#d7ad9d]"] {
+    background-color: var(--glow-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="hover:bg-[#914a54]"]:hover {
+    background-color: var(--glow-accent-hover) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="hover:text-[#ae5e68]"]:hover,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="hover:text-[#a8525e]"]:hover {
+    color: var(--glow-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site [class*="bg-[#f7e9e5]"] {
+    background-color: var(--glow-accent-soft) !important;
+    color: var(--glow-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site span.bg-\[\#ad5e68\].animate-pulse {
+    background-color: var(--glow-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site a[class*="shadow-[#ad5e68]"] {
+    box-shadow: 0 10px 25px var(--glow-accent-glow) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .glowhaus-site #book > div {
+    background: linear-gradient(135deg, var(--glow-accent), color-mix(in srgb, var(--glow-accent) 75%, black)) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* DARK MOOD                                                    */
+  /* ------------------------------------------------------------ */
+  html.dark .glowhaus-site,
+  body.dark .glowhaus-site,
+  [data-theme-mood="dark"] .glowhaus-site,
+  :root[data-theme-mood="dark"] .glowhaus-site,
+  :root[data-theme-active="true"][data-theme-mood="dark"] .glowhaus-site,
+  :root.dark .glowhaus-site {
+    --glow-bg-base: #0f0c0d !important;
+    --glow-bg-surface: #181316 !important;
+    --glow-bg-card: #1c1619 !important;
+    --glow-bg-card-subtle: #241b1f !important;
+    --glow-text-primary: #fbf5f2 !important;
+    --glow-text-muted: #b8a8a2 !important;
+    --glow-border: rgba(255, 255, 255, 0.1) !important;
+    --glow-nav-bg: rgba(15, 12, 13, 0.95) !important;
+  }
+
+  html.dark .glowhaus-site,
+  body.dark .glowhaus-site,
+  [data-theme-mood="dark"] .glowhaus-site {
+    background-color: var(--glow-bg-base) !important;
+    color: var(--glow-text-primary) !important;
+  }
+
+  /* Text Overrides in Dark Mood */
+  html.dark .glowhaus-site [class*="text-[#272020]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#272020]"],
+  html.dark .glowhaus-site [class*="text-[#3a302c]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#3a302c]"],
+  html.dark .glowhaus-site [class*="text-[#282222]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#282222]"] {
+    color: var(--glow-text-primary) !important;
+  }
+
+  html.dark .glowhaus-site [class*="text-[#5c504c]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#5c504c]"],
+  html.dark .glowhaus-site [class*="text-[#6e5d57]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#6e5d57]"],
+  html.dark .glowhaus-site [class*="text-[#7d6c66]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#7d6c66]"],
+  html.dark .glowhaus-site [class*="text-[#4d4440]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#4d4440]"],
+  html.dark .glowhaus-site [class*="text-[#5d514d]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#5d514d]"],
+  html.dark .glowhaus-site [class*="text-[#524844]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#524844]"],
+  html.dark .glowhaus-site [class*="text-[#655954]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#655954]"],
+  html.dark .glowhaus-site [class*="text-[#5f5450]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#5f5450]"],
+  html.dark .glowhaus-site [class*="text-[#857570]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="text-[#857570]"] {
+    color: var(--glow-text-muted) !important;
+  }
+
+  /* Section backgrounds in Dark Mood */
+  html.dark .glowhaus-site [class*="bg-[#fffaf6]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="bg-[#fffaf6]"] {
+    background-color: var(--glow-bg-base) !important;
+  }
+
+  html.dark .glowhaus-site [class*="bg-[#f7eee8]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="bg-[#f7eee8]"],
+  html.dark .glowhaus-site [class*="bg-[#fdf8f4]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="bg-[#fdf8f4]"],
+  html.dark .glowhaus-site [class*="bg-[#f9f3ef]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="bg-[#f9f3ef]"] {
+    background-color: #140f12 !important;
+  }
+
+  /* Cards in Dark Mood */
+  html.dark .glowhaus-site [class*="bg-white"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="bg-white"],
+  html.dark .glowhaus-site [class*="bg-[#fffaf7]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="bg-[#fffaf7]"],
+  html.dark .glowhaus-site [class*="bg-[#fbf5f0]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="bg-[#fbf5f0]"],
+  html.dark .glowhaus-site [class*="bg-[#fcf8f5]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="bg-[#fcf8f5]"] {
+    background-color: var(--glow-bg-card, #1c1619) !important;
+    border-color: rgba(255, 255, 255, 0.09) !important;
+  }
+
+  /* Service floating icon badge */
+  html.dark .glowhaus-site [class*="bg-[#fff9f6]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="bg-[#fff9f6]"] {
+    background-color: #241b1f !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* Borders in Dark Mood */
+  html.dark .glowhaus-site [class*="border-[#dec9c0]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="border-[#dec9c0]"],
+  html.dark .glowhaus-site [class*="border-[#eadfd8]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="border-[#eadfd8]"],
+  html.dark .glowhaus-site [class*="border-[#eaded7]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="border-[#eaded7]"],
+  html.dark .glowhaus-site [class*="border-[#f0e4dc]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="border-[#f0e4dc]"],
+  html.dark .glowhaus-site [class*="border-[#e7d9d2]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="border-[#e7d9d2]"],
+  html.dark .glowhaus-site [class*="border-[#e9d9d2]"],
+  [data-theme-mood="dark"] .glowhaus-site [class*="border-[#e9d9d2]"] {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Fixed Header in Dark Mood */
+  html.dark .glowhaus-site header,
+  [data-theme-mood="dark"] .glowhaus-site header {
+    background-color: var(--glow-nav-bg, rgba(15, 12, 13, 0.95)) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Mobile menu in Dark Mood */
+  html.dark .glowhaus-site #glowhaus-mobile-menu,
+  [data-theme-mood="dark"] .glowhaus-site #glowhaus-mobile-menu {
+    background-color: rgba(15, 12, 13, 0.98) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .glowhaus-site #glowhaus-mobile-menu [class*="bg-white/90"],
+  [data-theme-mood="dark"] .glowhaus-site #glowhaus-mobile-menu [class*="bg-white/90"] {
+    background-color: #1a1417 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Footer in Dark Mood */
+  html.dark .glowhaus-site footer,
+  [data-theme-mood="dark"] .glowhaus-site footer {
+    background-color: #0b090a !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Inputs in Dark Mood */
+  html.dark .glowhaus-site input,
+  [data-theme-mood="dark"] .glowhaus-site input {
+    background-color: #1a1417 !important;
+    color: #fbf5f2 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* CUSTOM BACKGROUND MODE                                       */
+  /* ------------------------------------------------------------ */
+  [data-theme-bg-mode="custom"] .glowhaus-site,
+  [data-theme-bg-mode="custom"] {
+    --glow-bg-base: var(--theme-bg-base, #fffaf6) !important;
+    --glow-bg-surface: var(--theme-bg-surface, #ffffff) !important;
+    --glow-bg-card: var(--theme-bg-card, #fffaf7) !important;
+    --glow-bg-card-subtle: var(--theme-bg-card-hover, #f7eee8) !important;
+  }
+  [data-theme-bg-mode="custom"] .glowhaus-site {
+    background-color: var(--glow-bg-base) !important;
+  }
+`;
+
 export function GlowHausSalon() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -338,6 +682,7 @@ export function GlowHausSalon() {
 
   return (
     <main className="glowhaus-site bg-[#fffaf6] text-[#272020] [font-family:Arial,sans-serif] pt-[74px] w-full max-w-full overflow-x-hidden">
+      <style>{glowThemeCss}</style>
       <header
         className={`fixed inset-x-0 top-0 z-50 w-full max-w-full border-b bg-[#fffaf6]/95 backdrop-blur-xl transition-all duration-300 ${
           isScrolled

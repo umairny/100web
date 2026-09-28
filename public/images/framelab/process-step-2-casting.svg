@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141519"/>
+      <stop offset="100%" stop-color="#090a0d"/>
+    </linearGradient>
+    <linearGradient id="accentGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e5dfd3"/>
+      <stop offset="100%" stop-color="#c5b8a5"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="300" rx="16" fill="url(#bgGrad2)"/>
+
+  <!-- Subtle Architecture / Studio Set grid -->
+  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="300"/>
+    <line x1="200" y1="0" x2="200" y2="300"/>
+    <line x1="300" y1="0" x2="300" y2="300"/>
+    <line x1="0" y1="100" x2="400" y2="100"/>
+    <line x1="0" y1="200" x2="400" y2="200"/>
+  </g>
+
+  <!-- Background Wardrobe Rail Vector -->
+  <line x1="40" y1="45" x2="360" y2="45" stroke="#333842" stroke-width="4" stroke-linecap="round"/>
+  <line x1="70" y1="45" x2="70" y2="260" stroke="#252830" stroke-width="3"/>
+  <line x1="330" y1="45" x2="330" y2="260" stroke="#252830" stroke-width="3"/>
+
+  <!-- Garment Hangers -->
+  <g stroke="#555d6e" stroke-width="2" fill="none">
+    <path d="M120 48 L135 65 L105 65 Z"/>
+    <path d="M170 48 L185 65 L155 65 Z"/>
+    <path d="M220 48 L235 65 L205 65 Z"/>
+    <path d="M270 48 L285 65 L255 65 Z"/>
+  </g>
+
+  <!-- Hanging Garment Silhouettes -->
+  <rect x="98" y="66" width="34" height="120" rx="4" fill="#181a20" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="148" y="66" width="34" height="135" rx="4" fill="#20222a" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="198" y="66" width="34" height="110" rx="4" fill="#16181f" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="248" y="66" width="34" height="145" rx="4" fill="#232630" stroke="rgba(255,255,255,0.1)"/>
+
+  <!-- Foreground: 2 Talent Polaroids Pinned with Tape -->
+  <!-- Polaroid 1 -->
+  <g transform="translate(90, 85) rotate(-6)">
+    <!-- Tape -->
+    <rect x="35" y="-10" width="30" height="14" rx="2" fill="rgba(229,223,211,0.4)" transform="rotate(3 50 -3)"/>
+    <!-- Photo Body -->
+    <rect width="100" height="125" rx="4" fill="#f8f6f0" filter="drop-shadow(0 14px 28px rgba(0,0,0,0.7))"/>
+    <!-- Dark photo area -->
+    <rect x="8" y="8" width="84" height="84" rx="2" fill="#0d0e12"/>
+    <!-- Model Portrait Silhouette -->
+    <circle cx="50" cy="40" r="16" fill="url(#accentGrad2)"/>
+    <path d="M30 84 C30 62 70 62 70 84 Z" fill="url(#accentGrad2)"/>
+    <!-- Handwritten text -->
+    <text x="12" y="106" fill="#181716" font-family="Cinzel, serif" font-size="8" font-weight="bold">TALENT A // PARIS</text>
+    <text x="12" y="117" fill="#68635c" font-family="monospace" font-size="6">HEIGHT: 180CM // LOOK 01</text>
+  </g>
+
+  <!-- Polaroid 2 -->
+  <g transform="translate(205, 95) rotate(7)">
+    <!-- Tape -->
+    <rect x="35" y="-10" width="30" height="14" rx="2" fill="rgba(229,223,211,0.4)" transform="rotate(-4 50 -3)"/>
+    <!-- Photo Body -->
+    <rect width="100" height="125" rx="4" fill="#f8f6f0" filter="drop-shadow(0 16px 32px rgba(0,0,0,0.8))"/>
+    <!-- Dark photo area -->
+    <rect x="8" y="8" width="84" height="84" rx="2" fill="#0d0e12"/>
+    <!-- Model Portrait Silhouette -->
+    <circle cx="50" cy="38" r="15" fill="#c5b8a5"/>
+    <path d="M28 84 C28 60 72 60 72 84 Z" fill="#c5b8a5"/>
+    <!-- Handwritten text -->
+    <text x="12" y="106" fill="#181716" font-family="Cinzel, serif" font-size="8" font-weight="bold">TALENT B // SOHO</text>
+    <text x="12" y="117" fill="#68635c" font-family="monospace" font-size="6">LOOKBOOK EDITORIAL</text>
+  </g>
+
+  <!-- Step Badge Overlay -->
+  <g transform="translate(26, 246)">
+    <rect width="116" height="28" rx="14" fill="rgba(0,0,0,0.7)" stroke="rgba(229,223,211,0.3)" stroke-width="1"/>
+    <circle cx="16" cy="14" r="5" fill="#e5dfd3"/>
+    <text x="28" y="18" fill="#e5dfd3" font-family="monospace" font-size="9" font-weight="bold" letter-spacing="1.5">PHASE 02 // CASTING</text>
+  </g>
+</svg>

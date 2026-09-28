@@ -1433,6 +1433,292 @@ const css = `
     --muted: #6d5f65;
     --line: rgba(196, 115, 133, 0.2);
     --shadow: 0 24px 70px rgba(78, 38, 49, 0.08);
+    --cardBg: #ffffff;
+    --cardBgSubtle: #fbf2f4;
+    --navBg: rgba(253, 251, 250, 0.92);
+    --navScrolledBg: rgba(253, 251, 250, 0.98);
+    --heroGrad1: rgba(245, 228, 231, 0.55);
+    --heroGrad2: rgba(240, 224, 214, 0.5);
+    --pageGrad1: #fdfbfb;
+    --pageGrad2: #faf6f6;
+    --pageGrad3: #f9f2f2;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* THEME PRESET ADAPTATIONS & ACTIVE OVERRIDES                 */
+  /* ------------------------------------------------------------ */
+  [data-theme-active="true"] .bloomPage,
+  [data-theme-active="true"] {
+    --coral: var(--theme-accent-primary, #c47385) !important;
+    --coral-dark: var(--theme-accent-hover, #8d4457) !important;
+    --gold: var(--theme-accent-secondary, #c9a063) !important;
+  }
+
+  [data-theme-preset="emerald"] .bloomPage,
+  [data-theme-preset="emerald"] {
+    --coral: #059669 !important;
+    --coral-dark: #065f46 !important;
+    --gold: #d97706 !important;
+    --blush: rgba(5, 150, 105, 0.15) !important;
+    --blush-soft: rgba(5, 150, 105, 0.08) !important;
+  }
+  [data-theme-preset="ocean"] .bloomPage,
+  [data-theme-preset="ocean"],
+  [data-theme-preset="azure"] .bloomPage,
+  [data-theme-preset="azure"] {
+    --coral: #2563eb !important;
+    --coral-dark: #1d4ed8 !important;
+    --gold: #00f2fe !important;
+    --blush: rgba(37, 99, 235, 0.15) !important;
+    --blush-soft: rgba(37, 99, 235, 0.08) !important;
+  }
+  [data-theme-preset="sunset"] .bloomPage,
+  [data-theme-preset="sunset"] {
+    --coral: #f43f5e !important;
+    --coral-dark: #be123c !important;
+    --gold: #f59e0b !important;
+    --blush: rgba(244, 63, 94, 0.15) !important;
+    --blush-soft: rgba(244, 63, 94, 0.08) !important;
+  }
+  [data-theme-preset="purple"] .bloomPage,
+  [data-theme-preset="purple"],
+  [data-theme-preset="amethyst"] .bloomPage,
+  [data-theme-preset="amethyst"],
+  [data-theme-preset="royal"] .bloomPage,
+  [data-theme-preset="royal"] {
+    --coral: #7c3aed !important;
+    --coral-dark: #5b21b6 !important;
+    --gold: #ec4899 !important;
+    --blush: rgba(124, 58, 237, 0.15) !important;
+    --blush-soft: rgba(124, 58, 237, 0.08) !important;
+  }
+  [data-theme-preset="amber"] .bloomPage,
+  [data-theme-preset="amber"],
+  [data-theme-preset="golden"] .bloomPage,
+  [data-theme-preset="golden"] {
+    --coral: #ca8a04 !important;
+    --coral-dark: #a16207 !important;
+    --gold: #b45309 !important;
+    --blush: rgba(202, 138, 4, 0.15) !important;
+    --blush-soft: rgba(202, 138, 4, 0.08) !important;
+  }
+  [data-theme-preset="cyberpunk"] .bloomPage,
+  [data-theme-preset="cyberpunk"] {
+    --coral: #06b6d4 !important;
+    --coral-dark: #0891b2 !important;
+    --gold: #a855f7 !important;
+    --blush: rgba(6, 182, 212, 0.15) !important;
+    --blush-soft: rgba(6, 182, 212, 0.08) !important;
+  }
+  [data-theme-preset="terracotta"] .bloomPage,
+  [data-theme-preset="terracotta"] {
+    --coral: #ea580c !important;
+    --coral-dark: #c2410c !important;
+    --gold: #0d9488 !important;
+    --blush: rgba(234, 88, 12, 0.15) !important;
+    --blush-soft: rgba(234, 88, 12, 0.08) !important;
+  }
+  [data-theme-preset="obsidian"] .bloomPage,
+  [data-theme-preset="obsidian"] {
+    --coral: #334155 !important;
+    --coral-dark: #1e293b !important;
+    --gold: #64748b !important;
+    --blush: rgba(51, 65, 85, 0.15) !important;
+    --blush-soft: rgba(51, 65, 85, 0.08) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* LIGHT MOOD                                                   */
+  /* ------------------------------------------------------------ */
+  html.light .bloomPage,
+  body.light .bloomPage,
+  [data-theme-mood="light"] .bloomPage,
+  :root[data-theme-mood="light"] .bloomPage,
+  :root[data-theme-active="true"][data-theme-mood="light"] .bloomPage,
+  :root.light .bloomPage,
+  html.light,
+  body.light,
+  [data-theme-mood="light"],
+  :root[data-theme-mood="light"],
+  :root[data-theme-active="true"][data-theme-mood="light"],
+  :root.light {
+    --cream: #faf6f3 !important;
+    --ivory: #ffffff !important;
+    --blush: #f5e4e7 !important;
+    --blush-soft: #fbf2f4 !important;
+    --ink: #2e2428 !important;
+    --muted: #6d5f65 !important;
+    --line: rgba(196, 115, 133, 0.2) !important;
+    --shadow: 0 24px 70px rgba(78, 38, 49, 0.08) !important;
+    --cardBg: #ffffff !important;
+    --cardBgSubtle: #fbf2f4 !important;
+    --navBg: rgba(253, 251, 250, 0.92) !important;
+    --navScrolledBg: rgba(253, 251, 250, 0.98) !important;
+    --heroGrad1: rgba(245, 228, 231, 0.55) !important;
+    --heroGrad2: rgba(240, 224, 214, 0.5) !important;
+    --pageGrad1: #fdfbfb !important;
+    --pageGrad2: #faf6f6 !important;
+    --pageGrad3: #f9f2f2 !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* DARK MOOD - HAUTE COUTURE BRIDAL NOCTURNE                   */
+  /* ------------------------------------------------------------ */
+  html.dark .bloomPage,
+  body.dark .bloomPage,
+  [data-theme-mood="dark"] .bloomPage,
+  :root[data-theme-mood="dark"] .bloomPage,
+  :root[data-theme-active="true"][data-theme-mood="dark"] .bloomPage,
+  :root.dark .bloomPage,
+  html.dark,
+  body.dark,
+  [data-theme-mood="dark"],
+  :root[data-theme-mood="dark"],
+  :root[data-theme-active="true"][data-theme-mood="dark"],
+  :root.dark {
+    --cream: #120d10 !important;
+    --ivory: #1c151a !important;
+    --blush: rgba(196, 115, 133, 0.24) !important;
+    --blush-soft: rgba(196, 115, 133, 0.12) !important;
+    --ink: #fdf7f8 !important;
+    --muted: #b8a6ad !important;
+    --line: rgba(255, 255, 255, 0.12) !important;
+    --shadow: 0 24px 70px rgba(0, 0, 0, 0.45) !important;
+    --cardBg: #1c141a !important;
+    --cardBgSubtle: #251b22 !important;
+    --navBg: rgba(18, 13, 16, 0.94) !important;
+    --navScrolledBg: rgba(18, 13, 16, 0.98) !important;
+    --heroGrad1: rgba(196, 115, 133, 0.16) !important;
+    --heroGrad2: rgba(201, 160, 99, 0.12) !important;
+    --pageGrad1: #120d10 !important;
+    --pageGrad2: #161014 !important;
+    --pageGrad3: #100b0e !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* CUSTOM BACKGROUND MODE                                       */
+  /* ------------------------------------------------------------ */
+  [data-theme-bg-mode="custom"] .bloomPage,
+  [data-theme-bg-mode="custom"] {
+    --cream: var(--theme-bg-surface, #faf6f3) !important;
+    --ivory: var(--theme-bg-card, #ffffff) !important;
+    --cardBg: var(--theme-bg-card, #ffffff) !important;
+    --cardBgSubtle: var(--theme-bg-surface, #fbf2f4) !important;
+    --navBg: var(--theme-bg-base, #faf6f3) !important;
+    --navScrolledBg: var(--theme-bg-surface, #faf6f3) !important;
+    --pageGrad1: var(--theme-bg-base, #fdfbfb) !important;
+    --pageGrad2: var(--theme-bg-base, #faf6f6) !important;
+    --pageGrad3: var(--theme-bg-base, #f9f2f2) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* DARK MOOD COMPONENT ADAPTATIONS                              */
+  /* ------------------------------------------------------------ */
+  html.dark .navLinks,
+  [data-theme-mood="dark"] .navLinks {
+    background: rgba(28, 20, 26, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  html.dark .backToHub,
+  [data-theme-mood="dark"] .backToHub,
+  html.dark .menuButton,
+  [data-theme-mood="dark"] .menuButton,
+  html.dark .mobileCloseBtn,
+  [data-theme-mood="dark"] .mobileCloseBtn,
+  html.dark .modalClose,
+  [data-theme-mood="dark"] .modalClose {
+    background: var(--cardBg) !important;
+    color: var(--coral) !important;
+    border-color: var(--line) !important;
+  }
+  html.dark .serviceBar,
+  [data-theme-mood="dark"] .serviceBar,
+  html.dark .filterBtn,
+  [data-theme-mood="dark"] .filterBtn,
+  html.dark .lookbookModal,
+  [data-theme-mood="dark"] .lookbookModal,
+  html.dark .calculatorCard,
+  [data-theme-mood="dark"] .calculatorCard,
+  html.dark .packageCard,
+  [data-theme-mood="dark"] .packageCard,
+  html.dark .artistNote,
+  [data-theme-mood="dark"] .artistNote,
+  html.dark .artistCard,
+  [data-theme-mood="dark"] .artistCard,
+  html.dark .reviewCards,
+  [data-theme-mood="dark"] .reviewCards,
+  html.dark .bookingModal,
+  [data-theme-mood="dark"] .bookingModal {
+    background: var(--cardBg) !important;
+    border-color: var(--line) !important;
+    color: var(--ink) !important;
+  }
+  html.dark .calcChoiceBtn,
+  [data-theme-mood="dark"] .calcChoiceBtn,
+  html.dark .checkboxCard,
+  [data-theme-mood="dark"] .checkboxCard,
+  html.dark .stepIcon,
+  [data-theme-mood="dark"] .stepIcon {
+    background: var(--cardBgSubtle) !important;
+    border-color: var(--line) !important;
+    color: var(--ink) !important;
+  }
+  html.dark .calcSummary,
+  [data-theme-mood="dark"] .calcSummary,
+  html.dark .availability,
+  [data-theme-mood="dark"] .availability {
+    background: linear-gradient(145deg, #20171d, #161014) !important;
+    border-color: var(--line) !important;
+  }
+  html.dark .stepper button,
+  [data-theme-mood="dark"] .stepper button,
+  html.dark .reviewControls button,
+  [data-theme-mood="dark"] .reviewControls button {
+    background: var(--cardBg) !important;
+    border-color: var(--line) !important;
+    color: var(--coral) !important;
+  }
+  html.dark .bookingForm input,
+  html.dark .bookingForm select,
+  html.dark .bookingForm textarea,
+  html.dark .subscribe input,
+  [data-theme-mood="dark"] .bookingForm input,
+  [data-theme-mood="dark"] .bookingForm select,
+  [data-theme-mood="dark"] .bookingForm textarea,
+  [data-theme-mood="dark"] .subscribe input {
+    background: var(--cardBgSubtle) !important;
+    border-color: var(--line) !important;
+    color: var(--ink) !important;
+  }
+  html.dark .btnOutline,
+  [data-theme-mood="dark"] .btnOutline {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #fdf7f8 !important;
+    border-color: var(--line) !important;
+  }
+  html.dark .windowFrame,
+  [data-theme-mood="dark"] .windowFrame {
+    background: rgba(28, 20, 26, 0.75) !important;
+    border-color: var(--gold) !important;
+  }
+  html.dark .award,
+  [data-theme-mood="dark"] .award {
+    background: linear-gradient(145deg, #221820 0%, #1a1218 100%) !important;
+  }
+  html.dark .awardInnerRing,
+  [data-theme-mood="dark"] .awardInnerRing {
+    background: radial-gradient(circle, rgba(32, 23, 30, 0.96) 45%, rgba(22, 15, 20, 0.88) 100%) !important;
+  }
+  html.dark .awardBrand,
+  html.dark .awardTitle,
+  [data-theme-mood="dark"] .awardBrand,
+  [data-theme-mood="dark"] .awardTitle {
+    color: #fdf7f8 !important;
+  }
+  html.dark .flowerCard,
+  [data-theme-mood="dark"] .flowerCard {
+    background: var(--cardBgSubtle) !important;
+    border-color: var(--line) !important;
   }
 
   * { box-sizing: border-box; }
@@ -1443,9 +1729,9 @@ const css = `
     min-height: 100vh;
     color: var(--ink);
     background:
-      radial-gradient(circle at 0 10%, rgba(245, 228, 231, 0.55), transparent 22rem),
-      radial-gradient(circle at 100% 12%, rgba(240, 224, 214, 0.5), transparent 24rem),
-      linear-gradient(180deg, #fdfbfb 0%, #faf6f6 45%, #f9f2f2 100%);
+      radial-gradient(circle at 0 10%, var(--heroGrad1, rgba(245, 228, 231, 0.55)), transparent 22rem),
+      radial-gradient(circle at 100% 12%, var(--heroGrad2, rgba(240, 224, 214, 0.5)), transparent 24rem),
+      linear-gradient(180deg, var(--pageGrad1, #fdfbfb) 0%, var(--pageGrad2, #faf6f6) 45%, var(--pageGrad3, #f9f2f2) 100%);
     font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
     overflow-x: clip;
     isolation: isolate;
@@ -1482,14 +1768,14 @@ const css = `
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(253, 251, 250, 0.92);
+    background: var(--navBg, rgba(253, 251, 250, 0.92));
     border-bottom: 1px solid rgba(201, 160, 99, 0.22);
     box-shadow: 0 4px 20px rgba(78, 38, 49, 0.04);
     backdrop-filter: blur(16px);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .navWrap.scrolled {
-    background: rgba(253, 251, 250, 0.98);
+    background: var(--navScrolledBg, rgba(253, 251, 250, 0.98));
     box-shadow: 0 10px 30px rgba(78, 38, 49, 0.08);
     border-bottom-color: rgba(201, 160, 99, 0.35);
   }
@@ -1586,7 +1872,7 @@ const css = `
     padding: 8px 14px;
     border-radius: 99px;
     border: 1px solid rgba(201, 160, 99, 0.35);
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--cardBg, rgba(255, 255, 255, 0.85));
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -1629,7 +1915,7 @@ const css = `
     place-items: center;
     border: 1px solid rgba(201, 160, 99, 0.35);
     border-radius: 50%;
-    background: white;
+    background: var(--cardBg, white);
     color: var(--coral-dark);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -1684,7 +1970,7 @@ const css = `
     height: 28px;
     border-radius: 50%;
     border: 1px solid var(--line);
-    background: white;
+    background: var(--cardBg, white);
     color: var(--coral-dark);
     display: grid;
     place-items: center;
@@ -1748,8 +2034,8 @@ const css = `
   }
 
   .bookTop:hover, .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(196, 115, 133, 0.32); background: var(--coral-dark); }
-  .btnOutline:hover { background: white; box-shadow: 0 12px 26px rgba(78, 38, 49, 0.08); color: var(--coral); }
-  .btnOutline { background: rgba(255,255,255,0.7); color: var(--coral-dark); border: 1px solid rgba(201, 160, 99, 0.45); box-shadow: none; }
+  .btnOutline:hover { background: var(--cardBg, white); box-shadow: 0 12px 26px rgba(78, 38, 49, 0.08); color: var(--coral); }
+  .btnOutline { background: var(--cardBgSubtle, rgba(255,255,255,0.7)); color: var(--coral-dark); border: 1px solid rgba(201, 160, 99, 0.45); box-shadow: none; }
   .whiteBtn { background: white !important; color: var(--coral-dark) !important; border-color: white !important; }
 
   /* Hero Section */
@@ -1837,7 +2123,7 @@ const css = `
     padding: 9px;
     border: 2px solid var(--gold);
     border-radius: 999px 999px 24px 24px;
-    background: rgba(255, 255, 255, 0.65);
+    background: var(--cardBgSubtle, rgba(255, 255, 255, 0.65));
     box-shadow: 0 24px 64px rgba(78, 38, 49, 0.12);
     backdrop-filter: blur(10px);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -2039,7 +2325,7 @@ const css = `
   }
 
   /* Services Bar */
-  .serviceBar { margin-top: 40px; position: relative; z-index: 5; display: grid; grid-template-columns: repeat(4, 1fr); background: rgba(255, 255, 255, 0.96); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); backdrop-filter: blur(12px); }
+  .serviceBar { margin-top: 40px; position: relative; z-index: 5; display: grid; grid-template-columns: repeat(4, 1fr); background: var(--cardBg, rgba(255, 255, 255, 0.96)); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); backdrop-filter: blur(12px); }
   .serviceItem { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: 16px; padding: 26px 28px; border-right: 1px solid var(--line); }
   .serviceItem:last-child { border-right: 0; }
   .serviceIcon { color: var(--coral); padding-top: 2px; }
@@ -2054,7 +2340,7 @@ const css = `
   .gallery { display: grid; grid-template-columns: 280px 1fr; gap: 42px; align-items: start; padding: 78px 0 42px; }
   .sectionIntro p:not(.eyebrow) { margin: 16px 0; font-size: 0.95rem; }
   .lookbookFilter { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
-  .filterBtn { text-align: left; padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px; background: white; color: var(--ink); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+  .filterBtn { text-align: left; padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--cardBg, white); color: var(--ink); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all .2s; }
   .filterBtn.active { background: var(--coral); color: white; border-color: var(--coral); box-shadow: 0 4px 12px rgba(196,115,133,0.25); }
 
   .galleryGrid { display: grid; grid-template-columns: 1.05fr .8fr 1.05fr .75fr; grid-auto-rows: 155px; gap: 14px; }
@@ -2070,7 +2356,7 @@ const css = `
   .galleryGrid .wide { grid-column: span 1; grid-row: span 2; }
 
   /* Lookbook Modal Lightbox */
-  .lookbookModal { position: relative; width: min(840px, 94vw); max-height: 90vh; overflow-y: auto; background: white; border-radius: 16px; border: 1px solid var(--line); box-shadow: 0 35px 100px rgba(46,36,40,0.3); }
+  .lookbookModal { position: relative; width: min(840px, 94vw); max-height: 90vh; overflow-y: auto; background: var(--cardBg, white); border-radius: 16px; border: 1px solid var(--line); box-shadow: 0 35px 100px rgba(46,36,40,0.3); }
   .lookbookModalContent { display: grid; grid-template-columns: 1.1fr 1fr; }
   .lookbookModalImg img { width: 100%; height: 100%; min-height: 380px; object-fit: cover; }
   .lookbookModalDetails { padding: 36px; display: flex; flex-direction: column; justify-content: center; }
@@ -2092,7 +2378,7 @@ const css = `
 
   /* Interactive Party Estimator (Calculator) */
   .calculatorSection { padding: 40px 0 80px; }
-  .calculatorCard { background: white; border: 1px solid var(--line); border-radius: 20px; padding: 42px; box-shadow: var(--shadow); }
+  .calculatorCard { background: var(--cardBg, white); border: 1px solid var(--line); border-radius: 20px; padding: 42px; box-shadow: var(--shadow); }
   .calcHeader { max-width: 680px; margin-bottom: 32px; }
   .calcHeader p { font-size: 0.95rem; margin-top: 8px; }
   .calcGrid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: start; }
@@ -2102,13 +2388,13 @@ const css = `
   .calcLabel { display: block; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink); margin-bottom: 8px; }
   .calcSub { font-size: 0.78rem; color: var(--muted); margin: 0; }
   .calcPills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
-  .calcChoiceBtn { border: 1px solid var(--line); background: var(--cream); border-radius: 8px; padding: 10px; text-align: center; cursor: pointer; transition: all .2s; }
+  .calcChoiceBtn { border: 1px solid var(--line); background: var(--cream); color: var(--ink); border-radius: 8px; padding: 10px; text-align: center; cursor: pointer; transition: all .2s; }
   .calcChoiceBtn.active { background: var(--coral); color: white; border-color: var(--coral); box-shadow: 0 4px 14px rgba(196,115,133,0.25); }
   .choiceTitle { display: block; font-size: 0.75rem; font-weight: 800; }
   .choicePrice { display: block; font-size: 0.85rem; font-family: Georgia, serif; font-weight: 700; margin-top: 2px; }
   .stepperRow { display: flex; justify-content: space-between; align-items: center; }
   .stepper { display: flex; align-items: center; gap: 12px; background: var(--blush-soft); border: 1px solid var(--line); border-radius: 99px; padding: 4px 10px; }
-  .stepper button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: white; color: var(--coral-dark); cursor: pointer; display: grid; place-items: center; }
+  .stepper button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--cardBg, white); color: var(--coral-dark); cursor: pointer; display: grid; place-items: center; }
   .stepperVal { font-weight: 800; font-size: 0.95rem; width: 20px; text-align: center; }
   .checkboxGrid { display: grid; gap: 10px; margin-top: 10px; }
   .checkboxCard { display: flex; align-items: center; gap: 12px; background: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: 12px; cursor: pointer; }
@@ -2116,7 +2402,7 @@ const css = `
   .checkTitle { display: block; font-size: 0.82rem; font-weight: 700; color: var(--ink); }
   .checkSub { display: block; font-size: 0.72rem; color: var(--muted); }
 
-  .calcSummary { background: linear-gradient(145deg, #faedf0, #fdfbf9); border: 1px solid var(--line); border-radius: 16px; padding: 32px; box-shadow: 0 12px 30px rgba(78,38,49,0.06); }
+  .calcSummary { background: var(--cardBgSubtle, linear-gradient(145deg, #faedf0, #fdfbf9)); border: 1px solid var(--line); border-radius: 16px; padding: 32px; box-shadow: 0 12px 30px rgba(78,38,49,0.06); }
   .summaryEyebrow { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); display: block; }
   .summaryTotal { display: flex; align-items: baseline; gap: 2px; margin: 6px 0; }
   .dollarSign { font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: var(--coral-dark); }
@@ -2129,7 +2415,7 @@ const css = `
   /* Packages */
   .packages { padding: 16px 0 70px; }
   .packageCards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
-  .packageCard, .addons { position: relative; text-align: center; padding: 34px 22px; background: rgba(255,255,255,.95); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 18px 42px rgba(70,45,32,.08); display: flex; flex-direction: column; justify-content: space-between; }
+  .packageCard, .addons { position: relative; text-align: center; padding: 34px 22px; background: var(--cardBg, rgba(255,255,255,.95)); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 18px 42px rgba(70,45,32,.08); display: flex; flex-direction: column; justify-content: space-between; }
   .packageCard.featured { border: 2px solid var(--coral); transform: translateY(-10px); box-shadow: 0 24px 50px rgba(196,115,133,0.18); }
   .badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--coral); color: white; padding: 6px 20px; border-radius: 99px; text-transform: uppercase; letter-spacing: .12em; font-size: .68rem; font-weight: 800; }
   .packageIcon { color: var(--gold); font-size: 2rem; margin-bottom: 6px; }
@@ -2157,7 +2443,7 @@ const css = `
   /* Artists */
   .artists { display: grid; grid-template-columns: 1fr .95fr repeat(3, .82fr) .7fr; gap: 16px; align-items: stretch; padding: 10px 0 50px; }
   .artistLead { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; border-radius: 0 16px 0 0; min-height: 250px; }
-  .artistNote, .artistCard, .greenQuote { background: rgba(255, 255, 255, .94); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 28px rgba(50, 30, 38, .06); padding: 22px; }
+  .artistNote, .artistCard, .greenQuote { background: var(--cardBg, rgba(255, 255, 255, .94)); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 28px rgba(50, 30, 38, .06); padding: 22px; }
   .artistNote h2 { font-size: 2.2rem; }
   .artistNote small { display: block; color: var(--muted); margin-top: 4px; font-size: 0.8rem; }
   .artistCard { text-align: center; padding: 0 0 20px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
@@ -2171,7 +2457,7 @@ const css = `
   .reviews { display: grid; grid-template-columns: 260px 1fr 180px; gap: 30px; align-items: center; padding: 10px 0 54px; }
   .overallRating { margin-top: 14px; font-size: 0.82rem; font-weight: 700; color: var(--ink); }
   .starRow { color: var(--gold); display: block; font-size: 1.2rem; margin-bottom: 2px; }
-  .reviewCards { display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(255, 255, 255, .95); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 12px; overflow: hidden; }
+  .reviewCards { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--cardBg, rgba(255, 255, 255, .95)); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 12px; overflow: hidden; }
   .reviewCard { padding: 30px; border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; }
   .reviewCard:last-child { border-right: 0; }
   .quote { color: var(--coral); font-family: Georgia, serif; font-size: 3.8rem; height: 30px; line-height: 1; }
@@ -2184,7 +2470,7 @@ const css = `
 
   /* Planning & FAQ */
   .planning { display: grid; grid-template-columns: .92fr 1.08fr; gap: 60px; align-items: start; padding: 20px 0 78px; }
-  .availability { padding: 42px; border-radius: 180px 16px 16px 16px; background: linear-gradient(145deg, #faedf0, #fdfbf9 62%); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .availability { padding: 42px; border-radius: 180px 16px 16px 16px; background: var(--cardBgSubtle, linear-gradient(145deg, #faedf0, #fdfbf9 62%)); border: 1px solid var(--line); box-shadow: var(--shadow); }
   .availability h2 { font-size: clamp(2.2rem, 3.8vw, 3.2rem); margin: 10px 0 16px; }
   .availabilityMeta { display: flex; flex-wrap: wrap; gap: 16px; margin: 22px 0 28px; }
   .availabilityMeta span { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-size: .85rem; font-weight: 700; }
@@ -2215,17 +2501,17 @@ const css = `
   .instaGrid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; }
   .subscribe { display: grid; gap: 10px; }
   .subscribe label { font-size: .78rem; font-weight: 700; color: var(--muted); }
-  .subscribe input { width: 100%; padding: 12px 14px; border: 1px solid var(--line); background: white; border-radius: 4px; font-size: 0.85rem; }
+  .subscribe input { width: 100%; padding: 12px 14px; border: 1px solid var(--line); background: var(--cardBg, white); color: var(--ink); border-radius: 4px; font-size: 0.85rem; }
   .subscribe button { background: var(--gold); color: white; border: 0; border-radius: 4px; padding: 12px 14px; text-transform: uppercase; font-weight: 800; letter-spacing: .08em; font-size: 0.74rem; cursor: pointer; }
 
   /* Booking Modal */
   .modalBackdrop { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 22px; background: rgba(46, 36, 40, 0.65); backdrop-filter: blur(12px); }
-  .bookingModal { position: relative; width: min(720px, 100%); max-height: calc(100vh - 44px); overflow-y: auto; padding: 42px; border: 1px solid var(--line); border-radius: 18px; background: var(--ivory); box-shadow: 0 35px 100px rgba(46, 36, 40, 0.28); }
-  .modalClose { position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--coral-dark); font-size: 1.4rem; display: grid; place-items: center; cursor: pointer; }
+  .bookingModal { position: relative; width: min(720px, 100%); max-height: calc(100vh - 44px); overflow-y: auto; padding: 42px; border: 1px solid var(--line); border-radius: 18px; background: var(--cardBg, var(--ivory)); color: var(--ink); box-shadow: 0 35px 100px rgba(46, 36, 40, 0.28); }
+  .modalClose { position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; background: var(--cardBg, white); color: var(--coral-dark); font-size: 1.4rem; display: grid; place-items: center; cursor: pointer; }
   .modalIntro { font-size: 0.9rem; color: var(--muted); margin: 6px 0 20px; }
   .bookingForm { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
   .bookingForm label { display: grid; gap: 6px; color: var(--ink); font-size: .78rem; font-weight: 700; }
-  .bookingForm input, .bookingForm select, .bookingForm textarea { width: 100%; min-width: 0; padding: 12px 13px; border: 1px solid var(--line); border-radius: 6px; background: white; color: var(--ink); font-size: 0.85rem; }
+  .bookingForm input, .bookingForm select, .bookingForm textarea { width: 100%; min-width: 0; padding: 12px 13px; border: 1px solid var(--line); border-radius: 6px; background: var(--cardBg, white); color: var(--ink); font-size: 0.85rem; }
   .fullField { grid-column: 1 / -1; }
 
   /* Confirmation Screen in Modal */
@@ -2295,7 +2581,7 @@ const css = `
     .reviewCard { display: none; }
     .reviewCard.active { display: block; }
     .reviewControls { display: flex; align-items: center; justify-content: center; gap: 18px; padding: 14px; }
-    .reviewControls button { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--coral-dark); cursor: pointer; display: grid; place-items: center; }
+    .reviewControls button { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; background: var(--cardBg, white); color: var(--coral-dark); cursor: pointer; display: grid; place-items: center; }
     .availability { padding: 32px 20px; border-radius: 80px 14px 14px 14px; }
     .bookingModal { padding: 30px 18px; }
     .bookingForm { grid-template-columns: 1fr; }

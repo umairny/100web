@@ -247,6 +247,580 @@ function scrollToSectionId(id: string) {
   window.history.replaceState(null, "", `#${id}`);
 }
 
+const pureglowThemeCss = `
+  :root {
+    --pureglow-accent: #ef8d84;
+    --pureglow-accent-hover: #df756e;
+    --pureglow-accent-sec: #ed7e79;
+    --pureglow-accent-soft: rgba(239, 141, 132, 0.14);
+    --pureglow-accent-glow: rgba(239, 141, 132, 0.35);
+    --pureglow-bg-base: #fffdfa;
+    --pureglow-bg-surface: #ffffff;
+    --pureglow-bg-card: #ffffff;
+    --pureglow-bg-card-subtle: #fffaf6;
+    --pureglow-text-primary: #143f3d;
+    --pureglow-text-muted: #536360;
+    --pureglow-border: #efddd4;
+    --pureglow-nav-bg: rgba(255, 255, 255, 0.95);
+  }
+
+  /* ------------------------------------------------------------ */
+  /* POLISHED MICRO-INTERACTIONS & ELEVATIONS                     */
+  /* ------------------------------------------------------------ */
+  .pureglow-site article,
+  .pureglow-site blockquote {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s ease,
+                border-color 0.35s ease,
+                background-color 0.3s ease;
+  }
+  .pureglow-site header {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* THEME PRESET ADAPTATIONS                                     */
+  /* ------------------------------------------------------------ */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) {
+    --pureglow-accent: var(--theme-accent-primary, #ef8d84) !important;
+    --pureglow-accent-hover: var(--theme-accent-hover, #df756e) !important;
+    --pureglow-accent-sec: var(--theme-accent-secondary, #ed7e79) !important;
+    --pureglow-accent-soft: color-mix(in srgb, var(--pureglow-accent) 14%, transparent) !important;
+    --pureglow-accent-glow: var(--theme-accent-glow, rgba(239, 141, 132, 0.35)) !important;
+    --pureglow-border: var(--theme-border, color-mix(in srgb, var(--pureglow-accent) 30%, transparent)) !important;
+  }
+
+  [data-theme-preset="emerald"] .pureglow-site,
+  [data-theme-preset="emerald"] {
+    --pureglow-accent: #10B981 !important;
+    --pureglow-accent-hover: #059669 !important;
+    --pureglow-accent-sec: #34D399 !important;
+    --pureglow-accent-soft: rgba(16, 185, 129, 0.14) !important;
+    --pureglow-accent-glow: rgba(16, 185, 129, 0.45) !important;
+    --pureglow-border: rgba(16, 185, 129, 0.35) !important;
+  }
+  [data-theme-preset="ocean"] .pureglow-site,
+  [data-theme-preset="ocean"],
+  [data-theme-preset="azure"] .pureglow-site,
+  [data-theme-preset="azure"] {
+    --pureglow-accent: #0284C7 !important;
+    --pureglow-accent-hover: #0369A1 !important;
+    --pureglow-accent-sec: #38BDF8 !important;
+    --pureglow-accent-soft: rgba(2, 132, 199, 0.14) !important;
+    --pureglow-accent-glow: rgba(2, 132, 199, 0.45) !important;
+    --pureglow-border: rgba(2, 132, 199, 0.35) !important;
+  }
+  [data-theme-preset="sunset"] .pureglow-site,
+  [data-theme-preset="sunset"] {
+    --pureglow-accent: #EA580C !important;
+    --pureglow-accent-hover: #C2410C !important;
+    --pureglow-accent-sec: #FB923C !important;
+    --pureglow-accent-soft: rgba(234, 88, 12, 0.14) !important;
+    --pureglow-accent-glow: rgba(234, 88, 12, 0.45) !important;
+    --pureglow-border: rgba(234, 88, 12, 0.35) !important;
+  }
+  [data-theme-preset="purple"] .pureglow-site,
+  [data-theme-preset="purple"],
+  [data-theme-preset="amethyst"] .pureglow-site,
+  [data-theme-preset="amethyst"],
+  [data-theme-preset="royal"] .pureglow-site,
+  [data-theme-preset="royal"] {
+    --pureglow-accent: #9333EA !important;
+    --pureglow-accent-hover: #7E22CE !important;
+    --pureglow-accent-sec: #C084FC !important;
+    --pureglow-accent-soft: rgba(147, 51, 234, 0.14) !important;
+    --pureglow-accent-glow: rgba(147, 51, 234, 0.45) !important;
+    --pureglow-border: rgba(147, 51, 234, 0.35) !important;
+  }
+  [data-theme-preset="amber"] .pureglow-site,
+  [data-theme-preset="amber"],
+  [data-theme-preset="golden"] .pureglow-site,
+  [data-theme-preset="golden"] {
+    --pureglow-accent: #D97706 !important;
+    --pureglow-accent-hover: #B45309 !important;
+    --pureglow-accent-sec: #FBBF24 !important;
+    --pureglow-accent-soft: rgba(217, 119, 6, 0.14) !important;
+    --pureglow-accent-glow: rgba(217, 119, 6, 0.45) !important;
+    --pureglow-border: rgba(217, 119, 6, 0.35) !important;
+  }
+  [data-theme-preset="cyberpunk"] .pureglow-site,
+  [data-theme-preset="cyberpunk"] {
+    --pureglow-accent: #06B6D4 !important;
+    --pureglow-accent-hover: #0891B2 !important;
+    --pureglow-accent-sec: #A855F7 !important;
+    --pureglow-accent-soft: rgba(6, 182, 212, 0.14) !important;
+    --pureglow-accent-glow: rgba(6, 182, 212, 0.45) !important;
+    --pureglow-border: rgba(6, 182, 212, 0.35) !important;
+  }
+  [data-theme-preset="terracotta"] .pureglow-site,
+  [data-theme-preset="terracotta"] {
+    --pureglow-accent: #EA580C !important;
+    --pureglow-accent-hover: #C2410C !important;
+    --pureglow-accent-sec: #0D9488 !important;
+    --pureglow-accent-soft: rgba(234, 88, 12, 0.14) !important;
+    --pureglow-accent-glow: rgba(234, 88, 12, 0.45) !important;
+    --pureglow-border: rgba(234, 88, 12, 0.35) !important;
+  }
+  [data-theme-preset="obsidian"] .pureglow-site,
+  [data-theme-preset="obsidian"] {
+    --pureglow-accent: #475569 !important;
+    --pureglow-accent-hover: #334155 !important;
+    --pureglow-accent-sec: #64748B !important;
+    --pureglow-accent-soft: rgba(71, 85, 105, 0.14) !important;
+    --pureglow-accent-glow: rgba(71, 85, 105, 0.45) !important;
+    --pureglow-border: rgba(71, 85, 105, 0.35) !important;
+  }
+
+  /* Universal solid icon box prevention */
+  .pureglow-site svg:not(.fill-current):not([class*="fill-"]) {
+    fill: none !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* HEADER & NAV BAR LINKS PROTECTION                            */
+  /* ------------------------------------------------------------ */
+  .pureglow-site header nav:not(#pureglow-mobile-menu) a {
+    background-color: transparent !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site header nav:not(#pureglow-mobile-menu) a {
+    background-color: transparent !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site header nav:not(#pureglow-mobile-menu) a.active {
+    color: var(--pureglow-accent) !important;
+    background-color: transparent !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site header nav:not(#pureglow-mobile-menu) a:hover {
+    color: var(--pureglow-accent) !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="after:bg-[#ed8d84]"]::after {
+    background-color: var(--pureglow-accent) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* ACTIVE THEME PRESET OVERRIDES (Non-Original Presets)        */
+  /* ------------------------------------------------------------ */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="text-[#ef8d84]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="text-[#ed8d84]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="text-[#df756e]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="text-[#ef9188]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="text-[#f2a39d]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="text-[#f3aa9d]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="text-[#f3a49e]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="text-[#d2756d]"] {
+    color: var(--pureglow-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site .eyebrow {
+    color: var(--pureglow-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="hover:text-[#ef8d84]"]:hover,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="hover:text-[#ed8d84]"]:hover {
+    color: var(--pureglow-accent) !important;
+  }
+
+  /* Buttons & Gradients */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="from-[#ef9b8f]"] {
+    background: linear-gradient(to right, var(--pureglow-accent), var(--pureglow-accent-sec)) !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="shadow-[#ef8d86]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="shadow-[#ef8d84]"] {
+    box-shadow: 0 10px 25px var(--pureglow-accent-glow) !important;
+  }
+
+  /* Solid Accent Elements */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site a[class*="bg-[#ef8d84]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site button[class*="bg-[#ef8d84]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site button[class*="bg-[#ed8d84]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site span.bg-\[\#ef8d84\],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site span.bg-\[\#f2a39d\],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site span.bg-\[\#f3aa9d\] {
+    background-color: var(--pureglow-accent) !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site span.bg-\[\#719792\] {
+    background-color: var(--pureglow-accent-sec) !important;
+  }
+
+  /* Soft badge/accent backgrounds */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="bg-[#fff5f2]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="bg-[#fff1ed]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="bg-[#fdebe7]"] {
+    background-color: var(--pureglow-accent-soft) !important;
+  }
+
+  /* Borders */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="border-[#ed8d84]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="border-[#ef8d84]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="hover:border-[#ed8d84]"]:hover,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site [class*="hover:border-[#ef8d84]"]:hover {
+    border-color: var(--pureglow-accent) !important;
+  }
+
+  /* Selection */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site::selection,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .pureglow-site *::selection {
+    background-color: var(--pureglow-accent) !important;
+    color: #ffffff !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* DARK MOOD (Luxurious, High-Contrast & Harmonious)           */
+  /* ------------------------------------------------------------ */
+  html.dark .pureglow-site,
+  body.dark .pureglow-site,
+  [data-theme-mood="dark"] .pureglow-site,
+  :root[data-theme-mood="dark"] .pureglow-site,
+  :root[data-theme-active="true"][data-theme-mood="dark"] .pureglow-site,
+  :root.dark .pureglow-site {
+    --pureglow-bg-base: #0f1413 !important;
+    --pureglow-bg-surface: #151c1b !important;
+    --pureglow-bg-card: #182220 !important;
+    --pureglow-bg-card-subtle: #1c2725 !important;
+    --pureglow-text-primary: #f5faf8 !important;
+    --pureglow-text-muted: #9cb1ad !important;
+    --pureglow-border: rgba(255, 255, 255, 0.1) !important;
+    --pureglow-nav-bg: rgba(15, 20, 19, 0.95) !important;
+  }
+
+  html.dark .pureglow-site,
+  body.dark .pureglow-site,
+  [data-theme-mood="dark"] .pureglow-site {
+    background-color: var(--pureglow-bg-base) !important;
+    color: var(--pureglow-text-primary) !important;
+  }
+
+  /* Headings & Section Titles in Dark Mood */
+  html.dark .pureglow-site .section-title,
+  [data-theme-mood="dark"] .pureglow-site .section-title,
+  html.dark .pureglow-site h1,
+  [data-theme-mood="dark"] .pureglow-site h1,
+  html.dark .pureglow-site h2,
+  [data-theme-mood="dark"] .pureglow-site h2,
+  html.dark .pureglow-site h3,
+  [data-theme-mood="dark"] .pureglow-site h3 {
+    color: var(--pureglow-text-primary, #f5faf8) !important;
+  }
+
+  /* Eyebrows in Dark Mood */
+  html.dark .pureglow-site .eyebrow,
+  [data-theme-mood="dark"] .pureglow-site .eyebrow {
+    color: #e5b38f !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) html.dark .pureglow-site .eyebrow,
+  [data-theme-active="true"]:not([data-theme-preset="original"])[data-theme-mood="dark"] .pureglow-site .eyebrow {
+    color: var(--pureglow-accent) !important;
+  }
+
+  /* Primary Text Overrides in Dark Mood */
+  html.dark .pureglow-site [class*="text-[#143f3d]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#143f3d]"],
+  html.dark .pureglow-site [class*="text-[#114745]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#114745]"],
+  html.dark .pureglow-site [class*="text-[#174d4a]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#174d4a]"],
+  html.dark .pureglow-site [class*="text-[#133f3d]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#133f3d]"],
+  html.dark .pureglow-site [class*="text-[#203d3b]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#203d3b]"] {
+    color: var(--pureglow-text-primary) !important;
+  }
+
+  /* Muted Text Overrides in Dark Mood */
+  html.dark .pureglow-site [class*="text-[#405754]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#405754]"],
+  html.dark .pureglow-site [class*="text-[#4e6562]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#4e6562]"],
+  html.dark .pureglow-site [class*="text-[#536360]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#536360]"],
+  html.dark .pureglow-site [class*="text-[#5b6967]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#5b6967]"],
+  html.dark .pureglow-site [class*="text-[#657370]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#657370]"],
+  html.dark .pureglow-site [class*="text-[#5c6e6b]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#5c6e6b]"],
+  html.dark .pureglow-site [class*="text-[#60706d]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#60706d]"],
+  html.dark .pureglow-site [class*="text-[#66726f]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#66726f]"],
+  html.dark .pureglow-site [class*="text-[#6e7d7a]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#6e7d7a]"],
+  html.dark .pureglow-site [class*="text-[#718481]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#718481]"],
+  html.dark .pureglow-site [class*="text-[#5e6e6b]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#5e6e6b]"],
+  html.dark .pureglow-site [class*="text-[#5d6d69]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#5d6d69]"],
+  html.dark .pureglow-site [class*="text-[#87928f]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#87928f]"],
+  html.dark .pureglow-site [class*="text-[#38504d]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#38504d]"] {
+    color: var(--pureglow-text-muted) !important;
+  }
+
+  /* Warm Champagne/Gold Accents in Dark Mood (boosted contrast) */
+  html.dark .pureglow-site [class*="text-[#8e6044]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#8e6044]"],
+  html.dark .pureglow-site [class*="text-[#b6774b]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#b6774b]"],
+  html.dark .pureglow-site [class*="text-[#a96b42]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#a96b42]"],
+  html.dark .pureglow-site [class*="text-[#c27b49]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#c27b49]"],
+  html.dark .pureglow-site [class*="text-[#c3824b]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#c3824b]"],
+  html.dark .pureglow-site [class*="text-[#cb844e]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#cb844e]"],
+  html.dark .pureglow-site [class*="text-[#d4864c]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#d4864c]"],
+  html.dark .pureglow-site [class*="text-[#d58a51]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#d58a51]"],
+  html.dark .pureglow-site [class*="text-[#d08350]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#d08350]"],
+  html.dark .pureglow-site [class*="text-[#9a6848]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#9a6848]"],
+  html.dark .pureglow-site [class*="text-[#b87949]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#b87949]"] {
+    color: #e5b38f !important;
+  }
+
+  /* Hero Nocturnal Aura in Dark Mood */
+  html.dark .pureglow-site #home,
+  [data-theme-mood="dark"] .pureglow-site #home {
+    background-color: #0e1413 !important;
+  }
+  html.dark .pureglow-site #home > div:first-child,
+  [data-theme-mood="dark"] .pureglow-site #home > div:first-child {
+    background: radial-gradient(circle at 17% 32%, rgba(255, 255, 255, 0.03), transparent 35%),
+                radial-gradient(circle at 82% 20%, color-mix(in srgb, var(--pureglow-accent) 12%, transparent), transparent 30%),
+                linear-gradient(110deg, #0d1211 0%, #111716 52%, #141c1a 100%) !important;
+  }
+  html.dark .pureglow-site [class*="bg-[#f5d8cc]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="bg-[#f5d8cc]"] {
+    background-color: #172421 !important;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Glassmorphic floating badges in Hero */
+  html.dark .pureglow-site [class*="bg-white/80"],
+  [data-theme-mood="dark"] .pureglow-site [class*="bg-white/80"],
+  html.dark .pureglow-site [class*="bg-white/85"],
+  [data-theme-mood="dark"] .pureglow-site [class*="bg-white/85"],
+  html.dark .pureglow-site [class*="bg-white/90"],
+  [data-theme-mood="dark"] .pureglow-site [class*="bg-white/90"] {
+    background-color: rgba(24, 34, 32, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #f5faf8 !important;
+  }
+
+  /* Section Backgrounds in Dark Mood */
+  html.dark .pureglow-site [class*="bg-[#fffdfa]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="bg-[#fffdfa]"] {
+    background-color: var(--pureglow-bg-base) !important;
+  }
+  html.dark .pureglow-site [class*="bg-[#fffaf6]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="bg-[#fffaf6]"] {
+    background-color: #131b19 !important;
+  }
+  html.dark .pureglow-site [class*="bg-[#fff7ed]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="bg-[#fff7ed]"] {
+    background-color: #151e1c !important;
+    border-color: rgba(255, 255, 255, 0.09) !important;
+  }
+
+  /* Cards in Dark Mood */
+  html.dark .pureglow-site article,
+  [data-theme-mood="dark"] .pureglow-site article,
+  html.dark .pureglow-site blockquote,
+  [data-theme-mood="dark"] .pureglow-site blockquote,
+  html.dark .pureglow-site [class*="bg-white"],
+  [data-theme-mood="dark"] .pureglow-site [class*="bg-white"] {
+    background-color: var(--pureglow-bg-card, #182220) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* 4 Pillars Strip and Step Circles in Dark Mood */
+  html.dark .pureglow-site span.border-\[\#e7c8aa\],
+  [data-theme-mood="dark"] .pureglow-site span.border-\[\#e7c8aa\] {
+    background-color: #1c2725 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #e5b38f !important;
+  }
+  html.dark .pureglow-site span.bg-\[\#f5d5c8\],
+  [data-theme-mood="dark"] .pureglow-site span.bg-\[\#f5d5c8\] {
+    background-color: #273633 !important;
+    color: #f5faf8 !important;
+  }
+
+  /* Carousel Next/Prev Controls in Testimonials */
+  html.dark .pureglow-site button.border-\[\#dfb579\],
+  [data-theme-mood="dark"] .pureglow-site button.border-\[\#dfb579\] {
+    background-color: #1c2725 !important;
+    color: #e5b38f !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+  }
+  html.dark .pureglow-site button.border-\[\#dfb579\]:hover,
+  [data-theme-mood="dark"] .pureglow-site button.border-\[\#dfb579\]:hover {
+    background-color: #e5b38f !important;
+    color: #0f1413 !important;
+  }
+
+  /* Contact Section in Dark Mood */
+  html.dark .pureglow-site #contact > div > div:first-child,
+  [data-theme-mood="dark"] .pureglow-site #contact > div > div:first-child {
+    background-color: #122422 !important;
+  }
+  html.dark .pureglow-site #contact div.bg-gradient-to-t,
+  [data-theme-mood="dark"] .pureglow-site #contact div.bg-gradient-to-t {
+    background: linear-gradient(to top, #0f1c1a, rgba(18, 36, 34, 0.88), rgba(18, 36, 34, 0.65)) !important;
+  }
+
+  /* Booking Form Card in Dark Mood */
+  html.dark .pureglow-site #contact > div > div:last-child,
+  [data-theme-mood="dark"] .pureglow-site #contact > div > div:last-child {
+    background-color: #151e1c !important;
+    border-color: rgba(255, 255, 255, 0.09) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Form Inputs & Selects in Dark Mood */
+  html.dark .pureglow-site input,
+  [data-theme-mood="dark"] .pureglow-site input,
+  html.dark .pureglow-site select,
+  [data-theme-mood="dark"] .pureglow-site select {
+    background-color: #1c2725 !important;
+    color: #f5faf8 !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  }
+  html.dark .pureglow-site input::placeholder,
+  [data-theme-mood="dark"] .pureglow-site input::placeholder {
+    color: #7d938f !important;
+  }
+  html.dark .pureglow-site select option,
+  [data-theme-mood="dark"] .pureglow-site select option {
+    background-color: #1a2321 !important;
+    color: #f5faf8 !important;
+  }
+
+  /* Confirmed Booking Card in Dark Mood */
+  html.dark .pureglow-site [class*="bg-[#e8f5f3]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="bg-[#e8f5f3]"] {
+    background-color: #16332f !important;
+    color: #5eead4 !important;
+    border-color: rgba(94, 234, 212, 0.3) !important;
+  }
+  html.dark .pureglow-site [class*="text-[#2f6d67]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="text-[#2f6d67]"] {
+    color: #5eead4 !important;
+  }
+
+  /* Borders in Dark Mood */
+  html.dark .pureglow-site [class*="border-[#efdcd2]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#efdcd2]"],
+  html.dark .pureglow-site [class*="border-[#eed6cb]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#eed6cb]"],
+  html.dark .pureglow-site [class*="border-[#ebd4c6]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#ebd4c6]"],
+  html.dark .pureglow-site [class*="border-[#e9d8ce]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#e9d8ce]"],
+  html.dark .pureglow-site [class*="border-[#f1e2da]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#f1e2da]"],
+  html.dark .pureglow-site [class*="border-[#efddd4]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#efddd4]"],
+  html.dark .pureglow-site [class*="border-[#f5e9e3]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#f5e9e3]"],
+  html.dark .pureglow-site [class*="border-[#f0e5df]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#f0e5df]"],
+  html.dark .pureglow-site [class*="border-[#fae2cb]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#fae2cb]"],
+  html.dark .pureglow-site [class*="border-[#f3e3d6]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#f3e3d6]"],
+  html.dark .pureglow-site [class*="border-[#f7eae0]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#f7eae0]"],
+  html.dark .pureglow-site [class*="border-[#ecdcd3]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#ecdcd3]"],
+  html.dark .pureglow-site [class*="border-[#dfcdc3]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#dfcdc3]"],
+  html.dark .pureglow-site [class*="border-[#ebd6cb]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#ebd6cb]"],
+  html.dark .pureglow-site [class*="border-[#eadcd4]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#eadcd4]"],
+  html.dark .pureglow-site [class*="border-[#eee1d9]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#eee1d9]"],
+  html.dark .pureglow-site [class*="border-[#f0e4dd]"],
+  [data-theme-mood="dark"] .pureglow-site [class*="border-[#f0e4dd]"] {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Fixed Header in Dark Mood */
+  html.dark .pureglow-site header,
+  [data-theme-mood="dark"] .pureglow-site header {
+    background-color: var(--pureglow-nav-bg, rgba(15, 20, 19, 0.95)) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Mobile Drawer in Dark Mood */
+  html.dark .pureglow-site #pureglow-mobile-menu,
+  [data-theme-mood="dark"] .pureglow-site #pureglow-mobile-menu {
+    background-color: rgba(15, 20, 19, 0.98) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .pureglow-site #pureglow-mobile-menu a,
+  [data-theme-mood="dark"] .pureglow-site #pureglow-mobile-menu a {
+    color: #e2edea !important;
+  }
+  html.dark .pureglow-site #pureglow-mobile-menu a:hover,
+  [data-theme-mood="dark"] .pureglow-site #pureglow-mobile-menu a:hover {
+    background-color: #202a28 !important;
+  }
+
+  /* Footer in Dark Mood */
+  html.dark .pureglow-site footer,
+  [data-theme-mood="dark"] .pureglow-site footer {
+    background-color: #0b0f0e !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .pureglow-site footer form,
+  [data-theme-mood="dark"] .pureglow-site footer form {
+    background-color: #17211f !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  /* Decorative Leaf Sketch Opacity Tuning in Dark Mood */
+  html.dark .pureglow-site svg[class*="text-[#668b73]/60"],
+  [data-theme-mood="dark"] .pureglow-site svg[class*="text-[#668b73]/60"],
+  html.dark .pureglow-site svg[class*="text-[#e8b574]/50"],
+  [data-theme-mood="dark"] .pureglow-site svg[class*="text-[#e8b574]/50"],
+  html.dark .pureglow-site svg[class*="text-[#d7aa59]/35"],
+  [data-theme-mood="dark"] .pureglow-site svg[class*="text-[#d7aa59]/35"] {
+    opacity: 0.3 !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* CUSTOM BACKGROUND MODE                                       */
+  /* ------------------------------------------------------------ */
+  [data-theme-bg-mode="custom"] .pureglow-site,
+  [data-theme-bg-mode="custom"] {
+    --pureglow-bg-base: var(--theme-bg-base, #fffdfa) !important;
+    --pureglow-bg-surface: var(--theme-bg-surface, #ffffff) !important;
+    --pureglow-bg-card: var(--theme-bg-card, #ffffff) !important;
+    --pureglow-bg-card-subtle: var(--theme-bg-card-hover, #fffaf6) !important;
+  }
+  [data-theme-bg-mode="custom"] .pureglow-site {
+    background-color: var(--pureglow-bg-base) !important;
+  }
+  [data-theme-bg-mode="custom"] .pureglow-site [class*="bg-[#fffdfa]"] {
+    background-color: var(--pureglow-bg-base) !important;
+  }
+  [data-theme-bg-mode="custom"] .pureglow-site [class*="bg-white"] {
+    background-color: var(--pureglow-bg-card) !important;
+  }
+  [data-theme-bg-mode="custom"] .pureglow-site [class*="bg-[#fffaf6]"] {
+    background-color: var(--pureglow-bg-card-subtle) !important;
+  }
+`;
+
 export function PureGlowAesthetics() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
@@ -354,6 +928,7 @@ export function PureGlowAesthetics() {
 
   return (
     <main className="pureglow-site min-h-screen w-full max-w-full overflow-x-hidden bg-[#fffdfa] pt-[76px] text-[#143f3d] selection:bg-[#ef8d84] selection:text-white">
+      <style>{pureglowThemeCss}</style>
       {/* Top Fixed Header */}
       <header
         className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${

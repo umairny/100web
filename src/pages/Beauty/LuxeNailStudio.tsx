@@ -228,6 +228,390 @@ function SectionTitle({ children }: { children: ReactNode }) {
   );
 }
 
+const luxeThemeCss = `
+  :root {
+    --luxe-accent: #b47522;
+    --luxe-accent-hover: #9a651b;
+    --luxe-accent-sec: #d09943;
+    --luxe-accent-soft: rgba(180, 117, 34, 0.12);
+    --luxe-accent-glow: rgba(180, 117, 34, 0.35);
+    --luxe-bg-base: #fffdf9;
+    --luxe-bg-surface: #fffdfa;
+    --luxe-bg-card: #ffffff;
+    --luxe-bg-card-subtle: #f8f2e9;
+    --luxe-text-primary: #34251f;
+    --luxe-text-muted: #5e514b;
+    --luxe-border: #eadfce;
+    --luxe-nav-bg: rgba(255, 253, 250, 0.95);
+  }
+
+  /* ------------------------------------------------------------ */
+  /* THEME PRESET ADAPTATIONS                                     */
+  /* ------------------------------------------------------------ */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) {
+    --luxe-accent: var(--theme-accent-primary, #b47522) !important;
+    --luxe-accent-hover: var(--theme-accent-hover, #9a651b) !important;
+    --luxe-accent-sec: var(--theme-accent-secondary, #d09943) !important;
+    --luxe-accent-soft: color-mix(in srgb, var(--luxe-accent) 14%, transparent) !important;
+    --luxe-accent-glow: var(--theme-accent-glow, rgba(180, 117, 34, 0.35)) !important;
+    --luxe-border: var(--theme-border, color-mix(in srgb, var(--luxe-accent) 30%, transparent)) !important;
+  }
+
+  [data-theme-preset="emerald"] .luxe-site,
+  [data-theme-preset="emerald"] {
+    --luxe-accent: #10B981 !important;
+    --luxe-accent-hover: #059669 !important;
+    --luxe-accent-sec: #34D399 !important;
+    --luxe-accent-soft: rgba(16, 185, 129, 0.14) !important;
+    --luxe-accent-glow: rgba(16, 185, 129, 0.45) !important;
+    --luxe-border: rgba(16, 185, 129, 0.35) !important;
+  }
+  [data-theme-preset="ocean"] .luxe-site,
+  [data-theme-preset="ocean"],
+  [data-theme-preset="azure"] .luxe-site,
+  [data-theme-preset="azure"] {
+    --luxe-accent: #0284C7 !important;
+    --luxe-accent-hover: #0369A1 !important;
+    --luxe-accent-sec: #38BDF8 !important;
+    --luxe-accent-soft: rgba(2, 132, 199, 0.14) !important;
+    --luxe-accent-glow: rgba(2, 132, 199, 0.45) !important;
+    --luxe-border: rgba(2, 132, 199, 0.35) !important;
+  }
+  [data-theme-preset="sunset"] .luxe-site,
+  [data-theme-preset="sunset"] {
+    --luxe-accent: #EA580C !important;
+    --luxe-accent-hover: #C2410C !important;
+    --luxe-accent-sec: #FB923C !important;
+    --luxe-accent-soft: rgba(234, 88, 12, 0.14) !important;
+    --luxe-accent-glow: rgba(234, 88, 12, 0.45) !important;
+    --luxe-border: rgba(234, 88, 12, 0.35) !important;
+  }
+  [data-theme-preset="purple"] .luxe-site,
+  [data-theme-preset="purple"],
+  [data-theme-preset="amethyst"] .luxe-site,
+  [data-theme-preset="amethyst"],
+  [data-theme-preset="royal"] .luxe-site,
+  [data-theme-preset="royal"] {
+    --luxe-accent: #9333EA !important;
+    --luxe-accent-hover: #7E22CE !important;
+    --luxe-accent-sec: #C084FC !important;
+    --luxe-accent-soft: rgba(147, 51, 234, 0.14) !important;
+    --luxe-accent-glow: rgba(147, 51, 234, 0.45) !important;
+    --luxe-border: rgba(147, 51, 234, 0.35) !important;
+  }
+  [data-theme-preset="amber"] .luxe-site,
+  [data-theme-preset="amber"],
+  [data-theme-preset="golden"] .luxe-site,
+  [data-theme-preset="golden"] {
+    --luxe-accent: #D97706 !important;
+    --luxe-accent-hover: #B45309 !important;
+    --luxe-accent-sec: #FBBF24 !important;
+    --luxe-accent-soft: rgba(217, 119, 6, 0.14) !important;
+    --luxe-accent-glow: rgba(217, 119, 6, 0.45) !important;
+    --luxe-border: rgba(217, 119, 6, 0.35) !important;
+  }
+  [data-theme-preset="cyberpunk"] .luxe-site,
+  [data-theme-preset="cyberpunk"] {
+    --luxe-accent: #06B6D4 !important;
+    --luxe-accent-hover: #0891B2 !important;
+    --luxe-accent-sec: #A855F7 !important;
+    --luxe-accent-soft: rgba(6, 182, 212, 0.14) !important;
+    --luxe-accent-glow: rgba(6, 182, 212, 0.45) !important;
+    --luxe-border: rgba(6, 182, 212, 0.35) !important;
+  }
+  [data-theme-preset="terracotta"] .luxe-site,
+  [data-theme-preset="terracotta"] {
+    --luxe-accent: #EA580C !important;
+    --luxe-accent-hover: #C2410C !important;
+    --luxe-accent-sec: #0D9488 !important;
+    --luxe-accent-soft: rgba(234, 88, 12, 0.14) !important;
+    --luxe-accent-glow: rgba(234, 88, 12, 0.45) !important;
+    --luxe-border: rgba(234, 88, 12, 0.35) !important;
+  }
+  [data-theme-preset="obsidian"] .luxe-site,
+  [data-theme-preset="obsidian"] {
+    --luxe-accent: #475569 !important;
+    --luxe-accent-hover: #334155 !important;
+    --luxe-accent-sec: #64748B !important;
+    --luxe-accent-soft: rgba(71, 85, 105, 0.14) !important;
+    --luxe-accent-glow: rgba(71, 85, 105, 0.45) !important;
+    --luxe-border: rgba(71, 85, 105, 0.35) !important;
+  }
+
+  /* Universal solid icon box prevention */
+  .luxe-site svg:not(.fill-current):not([class*="fill-"]) {
+    fill: none !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* ACTIVE THEME PRESET OVERRIDES (Non-Original Presets)        */
+  /* ------------------------------------------------------------ */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#b47522]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#b87820]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#bd7b27]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site .active[class*="text-[#a96c1d]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#b57724]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#b77723]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#b87929]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#bf7e23]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#bf7c25]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#ad7024]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#a66b28]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#c08227]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#95642d]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#9d6b32]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#c88b3e]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#c98835]"],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#ce8d69]"] {
+    color: var(--luxe-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="text-[#c99a58]"] {
+    color: var(--luxe-accent-sec) !important;
+  }
+
+  /* Nav link underline & navbar links transparent protection */
+  .luxe-site header nav:not(#luxe-mobile-menu) a {
+    background-color: transparent !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site header nav:not(#luxe-mobile-menu) a {
+    background-color: transparent !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site header nav:not(#luxe-mobile-menu) a.active {
+    color: var(--luxe-accent) !important;
+    background-color: transparent !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site header nav:not(#luxe-mobile-menu) a:hover {
+    color: var(--luxe-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="after:bg-[#bd7b27]"]::after {
+    background-color: var(--luxe-accent) !important;
+  }
+
+  /* Buttons & Gradients */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="from-[#b87820]"] {
+    background: linear-gradient(to right, var(--luxe-accent), var(--luxe-accent-sec)) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="shadow-[#9a651b]"] {
+    box-shadow: 0 10px 25px var(--luxe-accent-glow) !important;
+  }
+
+  /* Button outline hover & active */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="hover:border-[#bd7a20]"]:hover {
+    border-color: var(--luxe-accent) !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="hover:text-[#a86c1d]"]:hover,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="hover:text-[#b47522]"]:hover,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="hover:text-[#a86d22]"]:hover {
+    color: var(--luxe-accent-hover) !important;
+  }
+
+  /* Borders & accents */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="border-[#bd7b27]"] {
+    border-color: var(--luxe-accent) !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site button[class*="bg-[#bd7b27]"] {
+    background-color: var(--luxe-accent) !important;
+  }
+
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="hover:border-[#d3a76b]"]:hover {
+    border-color: var(--luxe-accent) !important;
+  }
+
+  /* Section divider lines */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site span.bg-\[\#d8b277\],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site span.bg-\[\#c68a3d\],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site span.bg-\[\#c8934d\],
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site span.bg-\[\#e3d5c4\] {
+    background-color: var(--luxe-accent) !important;
+  }
+
+  /* Mobile active link background */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .luxe-site [class*="bg-[#f5eadb]"] {
+    background-color: var(--luxe-accent-soft) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* DARK MOOD                                                    */
+  /* ------------------------------------------------------------ */
+  html.dark .luxe-site,
+  body.dark .luxe-site,
+  [data-theme-mood="dark"] .luxe-site,
+  :root[data-theme-mood="dark"] .luxe-site,
+  :root[data-theme-active="true"][data-theme-mood="dark"] .luxe-site,
+  :root.dark .luxe-site {
+    --luxe-bg-base: #100c0a !important;
+    --luxe-bg-surface: #181310 !important;
+    --luxe-bg-card: #1e1915 !important;
+    --luxe-bg-card-subtle: #251e19 !important;
+    --luxe-text-primary: #fbf6f0 !important;
+    --luxe-text-muted: #bcaea7 !important;
+    --luxe-border: rgba(255, 255, 255, 0.1) !important;
+    --luxe-nav-bg: rgba(16, 12, 10, 0.95) !important;
+  }
+
+  html.dark .luxe-site,
+  body.dark .luxe-site,
+  [data-theme-mood="dark"] .luxe-site {
+    background-color: var(--luxe-bg-base) !important;
+    color: var(--luxe-text-primary) !important;
+  }
+
+  /* Text Overrides in Dark Mood */
+  html.dark .luxe-site [class*="text-[#34251f]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#34251f]"],
+  html.dark .luxe-site [class*="text-[#3f2d25]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#3f2d25]"],
+  html.dark .luxe-site [class*="text-[#4d3a31]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#4d3a31]"] {
+    color: var(--luxe-text-primary) !important;
+  }
+
+  html.dark .luxe-site [class*="text-[#51453f]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#51453f]"],
+  html.dark .luxe-site [class*="text-[#524640]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#524640]"],
+  html.dark .luxe-site [class*="text-[#50443e]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#50443e]"],
+  html.dark .luxe-site [class*="text-[#5e514b]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#5e514b]"],
+  html.dark .luxe-site [class*="text-[#5f524b]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#5f524b]"],
+  html.dark .luxe-site [class*="text-[#61534d]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#61534d]"],
+  html.dark .luxe-site [class*="text-[#64564f]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#64564f]"],
+  html.dark .luxe-site [class*="text-[#5f514b]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#5f514b]"],
+  html.dark .luxe-site [class*="text-[#77675e]"],
+  [data-theme-mood="dark"] .luxe-site [class*="text-[#77675e]"] {
+    color: var(--luxe-text-muted) !important;
+  }
+
+  /* Base & Section Backgrounds in Dark Mood */
+  html.dark .luxe-site [class*="bg-[#fffdf9]"],
+  [data-theme-mood="dark"] .luxe-site [class*="bg-[#fffdf9]"] {
+    background-color: var(--luxe-bg-base) !important;
+  }
+
+  html.dark .luxe-site [class*="bg-[#f8f2e9]"],
+  [data-theme-mood="dark"] .luxe-site [class*="bg-[#f8f2e9]"] {
+    background-color: #140f0c !important;
+  }
+
+  /* Cards in Dark Mood */
+  html.dark .luxe-site [class*="bg-white"],
+  [data-theme-mood="dark"] .luxe-site [class*="bg-white"],
+  html.dark .luxe-site [class*="bg-[#fffdfa]"],
+  [data-theme-mood="dark"] .luxe-site [class*="bg-[#fffdfa]"],
+  html.dark .luxe-site [class*="bg-[#fffaf4]"],
+  [data-theme-mood="dark"] .luxe-site [class*="bg-[#fffaf4]"] {
+    background-color: var(--luxe-bg-card, #1e1915) !important;
+    border-color: rgba(255, 255, 255, 0.09) !important;
+  }
+
+  /* Booking section in Dark Mood */
+  html.dark .luxe-site #booking > div,
+  [data-theme-mood="dark"] .luxe-site #booking > div {
+    background-color: #1c1511 !important;
+  }
+  html.dark .luxe-site #booking div.bg-gradient-to-r,
+  [data-theme-mood="dark"] .luxe-site #booking div.bg-gradient-to-r {
+    background: linear-gradient(to right, transparent, rgba(28, 21, 17, 0.95), #1c1511) !important;
+  }
+
+  /* Borders in Dark Mood */
+  html.dark .luxe-site [class*="border-[#e5d7c6]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#e5d7c6]"],
+  html.dark .luxe-site [class*="border-[#dcc7aa]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#dcc7aa]"],
+  html.dark .luxe-site [class*="border-[#eadfce]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#eadfce]"],
+  html.dark .luxe-site [class*="border-[#e9ddce]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#e9ddce]"],
+  html.dark .luxe-site [class*="border-[#e8ddce]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#e8ddce]"],
+  html.dark .luxe-site [class*="border-[#e3d5c4]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#e3d5c4]"],
+  html.dark .luxe-site [class*="border-[#e1cfae]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#e1cfae]"],
+  html.dark .luxe-site [class*="border-[#d7c1a7]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#d7c1a7]"],
+  html.dark .luxe-site [class*="border-[#e3d4c0]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#e3d4c0]"],
+  html.dark .luxe-site [class*="border-[#e5d8c8]"],
+  [data-theme-mood="dark"] .luxe-site [class*="border-[#e5d8c8]"] {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Fixed Header in Dark Mood */
+  html.dark .luxe-site header,
+  [data-theme-mood="dark"] .luxe-site header {
+    background-color: var(--luxe-nav-bg, rgba(16, 12, 10, 0.95)) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Mobile menu in Dark Mood */
+  html.dark .luxe-site #luxe-mobile-menu,
+  [data-theme-mood="dark"] .luxe-site #luxe-mobile-menu {
+    background-color: rgba(16, 12, 10, 0.98) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .luxe-site #luxe-mobile-menu a,
+  [data-theme-mood="dark"] .luxe-site #luxe-mobile-menu a {
+    color: #e5d9d3 !important;
+  }
+  html.dark .luxe-site #luxe-mobile-menu a:hover,
+  [data-theme-mood="dark"] .luxe-site #luxe-mobile-menu a:hover {
+    background-color: #241d18 !important;
+  }
+
+  /* Footer in Dark Mood */
+  html.dark .luxe-site footer,
+  [data-theme-mood="dark"] .luxe-site footer {
+    background-color: #0c0908 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Inputs in Dark Mood */
+  html.dark .luxe-site input,
+  [data-theme-mood="dark"] .luxe-site input {
+    background-color: #1e1915 !important;
+    color: #fbf6f0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* CUSTOM BACKGROUND MODE                                       */
+  /* ------------------------------------------------------------ */
+  [data-theme-bg-mode="custom"] .luxe-site,
+  [data-theme-bg-mode="custom"] {
+    --luxe-bg-base: var(--theme-bg-base, #fffdf9) !important;
+    --luxe-bg-surface: var(--theme-bg-surface, #fffdfa) !important;
+    --luxe-bg-card: var(--theme-bg-card, #ffffff) !important;
+    --luxe-bg-card-subtle: var(--theme-bg-card-hover, #f8f2e9) !important;
+  }
+  [data-theme-bg-mode="custom"] .luxe-site {
+    background-color: var(--luxe-bg-base) !important;
+  }
+  [data-theme-bg-mode="custom"] .luxe-site [class*="bg-[#fffdf9]"] {
+    background-color: var(--luxe-bg-base) !important;
+  }
+  [data-theme-bg-mode="custom"] .luxe-site [class*="bg-[#fffdfa]"] {
+    background-color: var(--luxe-bg-surface) !important;
+  }
+  [data-theme-bg-mode="custom"] .luxe-site [class*="bg-white"] {
+    background-color: var(--luxe-bg-card) !important;
+  }
+  [data-theme-bg-mode="custom"] .luxe-site [class*="bg-[#f8f2e9]"] {
+    background-color: var(--luxe-bg-card-subtle) !important;
+  }
+`;
+
 export function LuxeNailStudio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -307,6 +691,7 @@ export function LuxeNailStudio() {
 
   return (
     <main className="luxe-site brand-motion motion-luxenail bg-[#fffdf9] text-[#34251f] [font-family:Arial,sans-serif] pt-[72px] w-full max-w-full overflow-x-hidden">
+      <style>{luxeThemeCss}</style>
       <header
         className={`fixed inset-x-0 top-0 z-50 w-full max-w-full border-b bg-[#fffdfa]/95 backdrop-blur-xl transition duration-300 ${scrolled ? "border-[#e5d7c6] shadow-[0_8px_30px_rgba(74,47,29,0.10)]" : "border-transparent"}`}
       >

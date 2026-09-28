@@ -28,8 +28,8 @@ export const portfolioWebsites: WebsiteDesign[] = [
     slug: "axiom-labs",
     image: "/images/axiom/quantum-payments.webp",
     colors: {
-      primary: "#040812",
-      secondary: "#082f49",
+      primary: "#22d3ee",
+      secondary: "#0ea5e9",
       accent: "#22d3ee",
       dark: "#030712",
     },
@@ -128,12 +128,12 @@ export const portfolioWebsites: WebsiteDesign[] = [
     shortDescription:
       "Crafting narratives through editorial photography: positioning, vision, execution, selected magazine covers for Vogue and ELLE, 4-step production timeline, and credible outcomes",
     slug: "framelab-photo",
-    image: "/images/framelab/hero-studio-shoot.webp",
+    image: "/images/framelab/hero-studio-shoot.jpg",
     colors: {
-      primary: "#0c0d0e",
-      secondary: "#7a7874",
-      accent: "#ffffff",
-      dark: "#0a0b0d",
+      primary: "#e5dfd3",
+      secondary: "#c5b8a5",
+      accent: "#e5dfd3",
+      dark: "#08090a",
     },
     status: "completed",
   },
@@ -145,7 +145,7 @@ export const portfolioWebsites: WebsiteDesign[] = [
     shortDescription:
       "Growing product value from the root up: strategic product design & user experience for ambitious teams, ecosystem thinking, and the Cedar Method",
     slug: "cedar-ux-consultant",
-    image: "/images/cedar/hero-cedar-tree.webp",
+    image: "/images/cedar/hero-cedar-bonsai.jpg",
     colors: {
       primary: "#1e3226",
       secondary: "#faf7f0",

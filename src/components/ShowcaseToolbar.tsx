@@ -574,9 +574,9 @@ export function ShowcaseToolbar({
           title={`Switch to ${effectiveMood === 'dark' ? 'Light' : 'Dark'} Mode (M)`}
         >
           {effectiveMood === 'dark' ? (
-            <Moon className="h-3.5 w-3.5 text-amber-300 fill-amber-300/40" />
+            <Moon className="h-3.5 w-3.5 text-amber-300" strokeWidth={2.2} />
           ) : (
-            <Sun className="h-3.5 w-3.5 text-amber-600 fill-amber-500/30" />
+            <Sun className="h-3.5 w-3.5 text-amber-600" strokeWidth={2.2} />
           )}
           <span className="hidden md:inline capitalize">{effectiveMood}</span>
           <kbd className="hidden xl:inline rounded border border-current/20 bg-black/5 px-1 text-[9px] font-mono opacity-60">
@@ -992,9 +992,9 @@ export function ShowcaseToolbar({
             <div className="mt-2.5 flex items-center justify-between p-2 rounded-xl bg-amber-50/50 border border-amber-100 shrink-0">
               <div className="flex items-center gap-1.5 text-[11px] font-bold text-amber-950">
                 {effectiveMood === 'dark' ? (
-                  <Moon className="h-3.5 w-3.5 text-amber-600 fill-amber-500/30" />
+                  <Moon className="h-3.5 w-3.5 text-amber-600" strokeWidth={2} />
                 ) : (
-                  <Sun className="h-3.5 w-3.5 text-amber-600 fill-amber-500/30" />
+                  <Sun className="h-3.5 w-3.5 text-amber-600" strokeWidth={2} />
                 )}
                 <span>Theme Mood:</span>
                 <span className="text-[10px] text-amber-800/80 font-normal hidden sm:inline">

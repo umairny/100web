@@ -117,7 +117,11 @@ function ForgeButton({
   return (
     <a
       href={href}
-      className={`group inline-flex min-h-12 items-center justify-center gap-3 rounded-lg px-6 text-xs font-black uppercase tracking-[0.15em] transition duration-300 hover:-translate-y-0.5 ${outline ? "border border-white/30 bg-white/[0.04] text-white hover:border-[#F05A28] hover:text-[#FF7444]" : "bg-[#F05A28] text-white shadow-[0_14px_38px_rgba(240,90,40,.25)] hover:bg-[#ff7040]"} ${className}`}
+      className={`group inline-flex min-h-12 items-center justify-center gap-3 rounded-lg px-6 text-xs font-black uppercase tracking-[0.15em] transition duration-300 hover:-translate-y-0.5 ${
+        outline
+          ? "pulseforge-btn-outline border border-white/30 bg-white/[0.04] text-white hover:border-[#F05A28] hover:text-[#FF7444]"
+          : "pulseforge-btn-solid bg-[#F05A28] text-white shadow-[0_14px_38px_rgba(240,90,40,.25)] hover:bg-[#ff7040]"
+      } ${className}`}
     >
       {children}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -138,17 +142,21 @@ function ForgeHeading({
 }) {
   return (
     <div className="max-w-4xl">
-      <p className="flex items-center gap-3 text-[0.64rem] font-black uppercase tracking-[0.25em] text-[#F05A28] before:h-px before:w-8 before:bg-[#F05A28]">
+      <p className="pulseforge-heading-eyebrow flex items-center gap-3 text-[0.64rem] font-black uppercase tracking-[0.25em] text-[#F05A28] before:h-px before:w-8 before:bg-[#F05A28]">
         {eyebrow}
       </p>
       <h2
-        className={`mt-5 text-[clamp(2.1rem,5vw,5.8rem)] font-black uppercase leading-[0.88] tracking-[-0.065em] ${light ? "text-white" : "text-[#111318]"}`}
+        className={`pulseforge-heading-title mt-5 text-[clamp(2.1rem,5vw,5.8rem)] font-black uppercase leading-[0.88] tracking-[-0.065em] ${
+          light ? "pulseforge-title-light text-white" : "pulseforge-title-dark text-[#111318]"
+        }`}
       >
         {title}
       </h2>
       {text && (
         <p
-          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg ${light ? "text-white/58" : "text-[#656B74]"}`}
+          className={`pulseforge-heading-text mt-6 max-w-2xl text-base leading-8 md:text-lg ${
+            light ? "pulseforge-body-light text-white/58" : "pulseforge-body-dark text-[#656B74]"
+          }`}
         >
           {text}
         </p>
@@ -161,18 +169,18 @@ function ForgeLogo() {
   return (
     <a
       href="#home"
-      className="flex items-center gap-3 text-white"
+      className="pulseforge-logo flex items-center gap-3 text-white"
       aria-label="PulseForge Fitness home"
     >
-      <span className="relative grid h-10 w-10 place-items-center rounded-lg bg-[#F05A28]">
+      <span className="pulseforge-logo-box relative grid h-10 w-10 place-items-center rounded-lg bg-[#F05A28] text-white">
         <Flame className="h-5 w-5 fill-current" />
         <span className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-[#0B0D10] bg-white" />
       </span>
       <span>
-        <strong className="block text-sm font-black uppercase leading-none tracking-[0.03em]">
+        <strong className="pulseforge-logo-brand block text-sm font-black uppercase leading-none tracking-[0.03em]">
           PulseForge
         </strong>
-        <span className="mt-1 block text-[0.5rem] font-black uppercase tracking-[0.25em] text-white/45">
+        <span className="pulseforge-logo-sub mt-1 block text-[0.5rem] font-black uppercase tracking-[0.25em] text-white/45">
           Fitness Coaching
         </span>
       </span>
@@ -264,7 +272,329 @@ export function PulseForgeFitness() {
 
   return (
     <main className="pulseforge-premium w-full max-w-full overflow-x-hidden bg-[#ECEEF1] text-[#111318] selection:bg-[#F05A28] selection:text-white">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0B0D10]/95 text-white backdrop-blur-xl">
+      <style>{`
+        .pulseforge-premium {
+          /* Core Brand Theme Tokens */
+          --forge-accent: #F05A28;
+          --forge-accent-hover: #ff7040;
+          --forge-accent-sec: #FF7444;
+          --forge-accent-glow: rgba(240, 90, 40, 0.28);
+          --forge-contrast: #FFFFFF;
+
+          /* Surfaces - High-Intensity Performance Slate Default */
+          --forge-bg-base: #ECEEF1;
+          --forge-bg-card: #FFFFFF;
+          --forge-bg-card-alt: #F5F6F7;
+          --forge-bg-dark: #111318;
+          --forge-bg-darker: #0B0D10;
+          --forge-bg-footer: #08090B;
+
+          /* Text & Line Tokens */
+          --forge-text-primary: #111318;
+          --forge-text-muted: #656B74;
+          --forge-text-faint: #8A919B;
+          --forge-border: #CFD3D8;
+          --forge-border-subtle: rgba(17, 19, 24, 0.08);
+
+          /* Header */
+          --forge-header-bg: rgba(11, 13, 16, 0.95);
+          --forge-header-border: rgba(255, 255, 255, 0.10);
+          --forge-header-text: #FFFFFF;
+          --forge-header-link: rgba(255, 255, 255, 0.60);
+          --forge-header-hover: #FFFFFF;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* DYNAMIC THEME PRESET ADAPTATION                              */
+        /* ------------------------------------------------------------ */
+        [data-theme-preset]:not([data-theme-preset="original"]) .pulseforge-premium,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .pulseforge-premium {
+          --forge-accent: var(--theme-accent-primary, #F05A28) !important;
+          --forge-accent-hover: var(--theme-accent-primary-hover, #ff7040) !important;
+          --forge-accent-sec: var(--theme-accent-secondary, #FF7444) !important;
+          --forge-accent-glow: var(--theme-accent-glow, rgba(240, 90, 40, 0.28)) !important;
+          --forge-contrast: var(--theme-accent-contrast, #FFFFFF) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* LIGHT MOOD - CLEAN PERFORMANCE ATHLETIC STUDIO              */
+        /* ------------------------------------------------------------ */
+        [data-theme-mood="light"] .pulseforge-premium,
+        :root.light .pulseforge-premium,
+        html.light .pulseforge-premium {
+          --forge-bg-base: #F0F2F5 !important;
+          --forge-bg-card: #FFFFFF !important;
+          --forge-bg-card-alt: #F8F9FA !important;
+          --forge-bg-dark: #FFFFFF !important;
+          --forge-bg-darker: #0B0D10 !important;
+          --forge-bg-footer: #08090B !important;
+
+          --forge-text-primary: #111318 !important;
+          --forge-text-muted: #525862 !important;
+          --forge-text-faint: #78808D !important;
+          --forge-border: #D8DCE2 !important;
+          --forge-border-subtle: rgba(0, 0, 0, 0.08) !important;
+
+          --forge-header-bg: rgba(255, 255, 255, 0.95) !important;
+          --forge-header-border: rgba(0, 0, 0, 0.10) !important;
+          --forge-header-text: #111318 !important;
+          --forge-header-link: #525862 !important;
+          --forge-header-hover: #111318 !important;
+
+          background-color: var(--forge-bg-base) !important;
+          color: var(--forge-text-primary) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* DARK MOOD - DEEP TITANIUM & FORGED CHARCOAL                 */
+        /* ------------------------------------------------------------ */
+        html.dark .pulseforge-premium,
+        body.dark .pulseforge-premium,
+        [data-theme-mood="dark"] .pulseforge-premium,
+        :root[data-theme-mood="dark"] .pulseforge-premium,
+        :root[data-theme-active="true"][data-theme-mood="dark"] .pulseforge-premium,
+        :root.dark .pulseforge-premium {
+          --forge-bg-base: #0B0D10 !important;
+          --forge-bg-card: #15181F !important;
+          --forge-bg-card-alt: #1A1E26 !important;
+          --forge-bg-dark: #111318 !important;
+          --forge-bg-darker: #07080A !important;
+          --forge-bg-footer: #050608 !important;
+
+          --forge-text-primary: #F0F2F6 !important;
+          --forge-text-muted: #959CA8 !important;
+          --forge-text-faint: #68717E !important;
+          --forge-border: rgba(255, 255, 255, 0.12) !important;
+          --forge-border-subtle: rgba(255, 255, 255, 0.08) !important;
+
+          --forge-header-bg: rgba(11, 13, 16, 0.95) !important;
+          --forge-header-border: rgba(255, 255, 255, 0.10) !important;
+          --forge-header-text: #FFFFFF !important;
+          --forge-header-link: rgba(255, 255, 255, 0.60) !important;
+          --forge-header-hover: #FFFFFF !important;
+
+          background-color: var(--forge-bg-base) !important;
+          color: var(--forge-text-primary) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* CUSTOM BACKGROUND MODE                                       */
+        /* ------------------------------------------------------------ */
+        [data-theme-bg-mode="custom"] .pulseforge-premium {
+          --forge-bg-base: var(--theme-bg-base, #0B0D10) !important;
+          --forge-bg-card: var(--theme-bg-card, #15181F) !important;
+          --forge-bg-card-alt: var(--theme-bg-surface, #1A1E26) !important;
+          --forge-bg-dark: var(--theme-bg-surface, #111318) !important;
+          --forge-bg-footer: var(--theme-bg-base, #050608) !important;
+          --forge-text-primary: var(--theme-text-primary, #F0F2F6) !important;
+          --forge-text-muted: var(--theme-text-secondary, #959CA8) !important;
+          --forge-border: var(--theme-border, rgba(255, 255, 255, 0.12)) !important;
+          background-color: var(--forge-bg-base) !important;
+          color: var(--forge-text-primary) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* SECTION & COMPONENT THEME HOOKS                              */
+        /* ------------------------------------------------------------ */
+
+        /* Buttons */
+        .pulseforge-premium .pulseforge-btn-solid {
+          background-color: var(--forge-accent) !important;
+          color: var(--forge-contrast) !important;
+          box-shadow: 0 14px 38px var(--forge-accent-glow) !important;
+        }
+        .pulseforge-premium .pulseforge-btn-solid:hover {
+          background-color: var(--forge-accent-hover) !important;
+          color: var(--forge-contrast) !important;
+        }
+        .pulseforge-premium .pulseforge-btn-outline {
+          border-color: rgba(255, 255, 255, 0.3) !important;
+          color: #FFFFFF !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-btn-outline,
+        :root.light .pulseforge-premium .pulseforge-btn-outline {
+          border-color: var(--forge-border) !important;
+          color: #111318 !important;
+          background-color: var(--forge-bg-card) !important;
+        }
+        .pulseforge-premium .pulseforge-btn-outline:hover {
+          border-color: var(--forge-accent) !important;
+          color: var(--forge-accent) !important;
+        }
+
+        /* Header & Nav */
+        .pulseforge-premium .pulseforge-header {
+          background-color: var(--forge-header-bg) !important;
+          border-color: var(--forge-header-border) !important;
+        }
+        .pulseforge-premium .pulseforge-logo-brand {
+          color: var(--forge-header-text) !important;
+        }
+        .pulseforge-premium .pulseforge-logo-sub {
+          color: var(--forge-header-link) !important;
+        }
+        .pulseforge-premium .pulseforge-logo-box {
+          background-color: var(--forge-accent) !important;
+        }
+        .pulseforge-premium .pulseforge-nav-link {
+          color: var(--forge-header-link) !important;
+        }
+        .pulseforge-premium .pulseforge-nav-link:hover {
+          background-color: rgba(125, 125, 125, 0.08) !important;
+          color: var(--forge-header-hover) !important;
+        }
+        .pulseforge-premium .pulseforge-nav-active {
+          background-color: rgba(240, 90, 40, 0.14) !important;
+          color: var(--forge-accent) !important;
+        }
+        .pulseforge-premium .pulseforge-menu-btn {
+          border-color: var(--forge-header-border) !important;
+          color: var(--forge-header-text) !important;
+        }
+        .pulseforge-premium .pulseforge-mobile-menu {
+          background-color: var(--forge-header-bg) !important;
+          border-color: var(--forge-header-border) !important;
+        }
+
+        /* Headings & Text */
+        .pulseforge-premium .pulseforge-heading-eyebrow {
+          color: var(--forge-accent) !important;
+        }
+        .pulseforge-premium .pulseforge-heading-eyebrow::before {
+          background-color: var(--forge-accent) !important;
+        }
+        .pulseforge-premium .pulseforge-title-dark {
+          color: var(--forge-text-primary) !important;
+        }
+        .pulseforge-premium .pulseforge-body-dark {
+          color: var(--forge-text-muted) !important;
+        }
+
+        /* Programs Section */
+        .pulseforge-premium .pulseforge-section-programs {
+          background-color: var(--forge-bg-base) !important;
+        }
+        .pulseforge-premium .pulseforge-program-card {
+          background-color: var(--forge-bg-card) !important;
+          border-color: var(--forge-border) !important;
+        }
+        .pulseforge-premium .pulseforge-program-title {
+          color: var(--forge-text-primary) !important;
+        }
+        .pulseforge-premium .pulseforge-program-desc {
+          color: var(--forge-text-muted) !important;
+        }
+        .pulseforge-premium .pulseforge-program-tag {
+          background-color: var(--forge-bg-card-alt) !important;
+          color: var(--forge-text-muted) !important;
+        }
+        .pulseforge-premium .pulseforge-program-link {
+          color: var(--forge-accent) !important;
+        }
+
+        /* Coaching Process Section (Light Mode Adapt) */
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-section-coaching,
+        :root.light .pulseforge-premium .pulseforge-section-coaching {
+          background-color: var(--forge-bg-card-alt) !important;
+          color: var(--forge-text-primary) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-section-coaching .pulseforge-title-light {
+          color: var(--forge-text-primary) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-section-coaching .pulseforge-body-light {
+          color: var(--forge-text-muted) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-coaching-step {
+          border-color: var(--forge-border) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-coaching-step h3 {
+          color: var(--forge-text-primary) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-coaching-step p {
+          color: var(--forge-text-muted) !important;
+        }
+
+        /* Results Section */
+        .pulseforge-premium .pulseforge-section-results {
+          background-color: var(--forge-bg-card) !important;
+        }
+        .pulseforge-premium .pulseforge-result-card {
+          background-color: var(--forge-bg-card-alt) !important;
+          border-color: var(--forge-border) !important;
+          color: var(--forge-text-primary) !important;
+        }
+
+        /* Membership Section */
+        .pulseforge-premium .pulseforge-section-membership {
+          background-color: var(--forge-bg-base) !important;
+        }
+        .pulseforge-premium .pulseforge-plan-card {
+          background-color: var(--forge-bg-card) !important;
+          border-color: var(--forge-border) !important;
+          color: var(--forge-text-primary) !important;
+        }
+        .pulseforge-premium .pulseforge-plan-popular {
+          border-color: var(--forge-accent) !important;
+          background-color: var(--forge-bg-dark) !important;
+          color: #FFFFFF !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-plan-popular {
+          background-color: #0B0D10 !important;
+          color: #FFFFFF !important;
+        }
+
+        /* Testimonials Section */
+        .pulseforge-premium .pulseforge-section-testimonials {
+          background-color: var(--forge-bg-dark) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-section-testimonials {
+          background-color: var(--forge-bg-base) !important;
+          color: var(--forge-text-primary) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-section-testimonials .pulseforge-title-light {
+          color: var(--forge-text-primary) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-section-testimonials .pulseforge-body-light {
+          color: var(--forge-text-muted) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-testi-card {
+          background-color: var(--forge-bg-card) !important;
+          border-color: var(--forge-border) !important;
+          color: var(--forge-text-primary) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-testi-quote {
+          color: var(--forge-text-primary) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-testi-name {
+          color: var(--forge-text-primary) !important;
+        }
+
+        /* Footer */
+        .pulseforge-premium .pulseforge-footer {
+          background-color: var(--forge-bg-footer) !important;
+          border-color: rgba(255, 255, 255, 0.10) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-footer {
+          background-color: #FFFFFF !important;
+          border-color: var(--forge-border) !important;
+          color: var(--forge-text-primary) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-footer-link {
+          color: var(--forge-text-muted) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-footer-link:hover {
+          color: var(--forge-accent) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-footer-social {
+          border-color: var(--forge-border) !important;
+          color: var(--forge-text-muted) !important;
+        }
+        [data-theme-mood="light"] .pulseforge-premium .pulseforge-footer-social:hover {
+          border-color: var(--forge-accent) !important;
+          color: var(--forge-accent) !important;
+        }
+      `}</style>
+      <header className="pulseforge-header fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0B0D10]/95 text-white backdrop-blur-xl">
         <div className="mx-auto flex h-[4.5rem] max-w-[94rem] items-center justify-between px-5 lg:px-10">
           <ForgeLogo />
           <nav
@@ -278,7 +608,7 @@ export function PulseForgeFitness() {
                   key={label}
                   href={href}
                   aria-current={active ? "location" : undefined}
-                  className={`rounded-lg px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.13em] transition ${active ? "pulseforge-nav-active bg-white/10 text-[#FF7444]" : "text-white/55 hover:bg-white/[0.06] hover:text-white"}`}
+                  className={`rounded-lg px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.13em] transition ${active ? "pulseforge-nav-active bg-white/10 text-[#FF7444]" : "pulseforge-nav-link text-white/55 hover:bg-white/[0.06] hover:text-white"}`}
                 >
                   {label}
                 </a>
@@ -296,7 +626,7 @@ export function PulseForgeFitness() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
             aria-label="Toggle navigation"
-            className="grid h-11 w-11 place-items-center rounded-lg border border-white/15 text-white transition active:scale-95 hover:border-[#F05A28] lg:hidden"
+            className="pulseforge-menu-btn grid h-11 w-11 place-items-center rounded-lg border border-white/15 text-white transition active:scale-95 hover:border-[#F05A28] lg:hidden"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -313,7 +643,7 @@ export function PulseForgeFitness() {
               onClick={() => setMenuOpen(false)}
               aria-hidden="true"
             />
-            <nav className="fixed inset-x-0 top-[4.5rem] z-50 border-b border-white/10 bg-[#0B0D10]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+            <nav className="pulseforge-mobile-menu fixed inset-x-0 top-[4.5rem] z-50 border-b border-white/10 bg-[#0B0D10]/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
               <div className="space-y-1">
                 {navLinks.map(([label, href]) => {
                   const active = activeSection === href.slice(1);
@@ -326,7 +656,7 @@ export function PulseForgeFitness() {
                       className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-black uppercase tracking-[0.14em] transition ${
                         active
                           ? "pulseforge-nav-active bg-white/10 text-[#FF7444] font-black"
-                          : "text-white/65 hover:bg-white/[0.06] hover:text-white"
+                          : "pulseforge-nav-link text-white/65 hover:bg-white/[0.06] hover:text-white"
                       }`}
                     >
                       <span>{label}</span>
@@ -408,7 +738,7 @@ export function PulseForgeFitness() {
         </div>
       </section>
 
-      <section id="programs" className="px-5 py-24 lg:px-10 lg:py-32">
+      <section id="programs" className="pulseforge-section-programs px-5 py-24 lg:px-10 lg:py-32">
         <div className="mx-auto max-w-[94rem]">
           <div className="grid gap-8 lg:grid-cols-[.85fr_1.15fr] lg:items-end">
             <ForgeHeading
@@ -426,7 +756,7 @@ export function PulseForgeFitness() {
               ({ image, icon: Icon, number, title, text, tags }) => (
                 <article
                   key={title}
-                  className="forge-card group overflow-hidden rounded-2xl border border-[#CFD3D8] bg-white"
+                  className="pulseforge-program-card group overflow-hidden rounded-2xl border border-[#CFD3D8] bg-white shadow-sm transition duration-300 hover:-translate-y-1"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img
@@ -443,17 +773,17 @@ export function PulseForgeFitness() {
                     </span>
                   </div>
                   <div className="p-7">
-                    <h3 className="text-3xl font-black uppercase leading-none tracking-[-0.05em]">
+                    <h3 className="pulseforge-program-title text-3xl font-black uppercase leading-none tracking-[-0.05em]">
                       {title}
                     </h3>
-                    <p className="mt-4 text-sm leading-7 text-[#656B74]">
+                    <p className="pulseforge-program-desc mt-4 text-sm leading-7 text-[#656B74]">
                       {text}
                     </p>
                     <div className="mt-5 flex flex-wrap gap-2">
                       {tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full bg-[#ECEEF1] px-3 py-1.5 text-[0.6rem] font-black uppercase tracking-[0.12em] text-[#4D535B]"
+                          className="pulseforge-program-tag rounded-full bg-[#ECEEF1] px-3 py-1.5 text-[0.6rem] font-black uppercase tracking-[0.12em] text-[#4D535B]"
                         >
                           {tag}
                         </span>
@@ -461,7 +791,7 @@ export function PulseForgeFitness() {
                     </div>
                     <a
                       href="#contact"
-                      className="mt-7 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-[#D94718]"
+                      className="pulseforge-program-link mt-7 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-[#D94718]"
                     >
                       Learn More <MoveUpRight className="h-4 w-4" />
                     </a>
@@ -475,7 +805,7 @@ export function PulseForgeFitness() {
 
       <section
         id="coaching"
-        className="bg-[#111318] px-5 py-24 text-white lg:px-10 lg:py-32"
+        className="pulseforge-section-coaching bg-[#111318] px-5 py-24 text-white lg:px-10 lg:py-32"
       >
         <div className="mx-auto grid max-w-[94rem] gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
           <div>
@@ -510,7 +840,7 @@ export function PulseForgeFitness() {
               ].map(([number, title, text]) => (
                 <article
                   key={number}
-                  className="group grid gap-3 border-t border-white/12 py-5 sm:grid-cols-[3rem_.4fr_1fr] sm:items-center"
+                  className="pulseforge-coaching-step group grid gap-3 border-t border-white/12 py-5 sm:grid-cols-[3rem_.4fr_1fr] sm:items-center"
                 >
                   <span className="text-sm font-black text-[#F05A28]">
                     {number}
@@ -547,7 +877,7 @@ export function PulseForgeFitness() {
         </div>
       </section>
 
-      <section id="results" className="bg-white">
+      <section id="results" className="pulseforge-section-results bg-white">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-[38rem]">
             <img
@@ -584,7 +914,7 @@ export function PulseForgeFitness() {
                   return (
                     <div
                       key={label as string}
-                      className="flex items-center gap-3 rounded-xl border border-[#D8DBDF] bg-[#F5F6F7] p-4"
+                      className="pulseforge-result-card flex items-center gap-3 rounded-xl border border-[#D8DBDF] bg-[#F5F6F7] p-4"
                     >
                       <ResultIcon className="h-5 w-5 text-[#F05A28]" />
                       <span className="font-black">{label as string}</span>
@@ -599,7 +929,7 @@ export function PulseForgeFitness() {
 
       <section
         id="membership"
-        className="relative bg-[#ECEEF1] px-5 py-24 lg:px-10 lg:py-32"
+        className="pulseforge-section-membership relative bg-[#ECEEF1] px-5 py-24 lg:px-10 lg:py-32"
       >
         <img
           src={membershipImage}
@@ -622,7 +952,7 @@ export function PulseForgeFitness() {
             {memberships.map((plan) => (
               <article
                 key={plan.name}
-                className={`relative flex flex-col rounded-2xl border p-7 ${plan.popular ? "border-[#F05A28] bg-[#111318] text-white shadow-[0_25px_65px_rgba(17,19,24,.24)] lg:-translate-y-4" : "border-[#CFD3D8] bg-white"}`}
+                className={`pulseforge-plan-card relative flex flex-col rounded-2xl border p-7 ${plan.popular ? "pulseforge-plan-popular border-[#F05A28] bg-[#111318] text-white shadow-[0_25px_65px_rgba(17,19,24,.24)] lg:-translate-y-4" : "border-[#CFD3D8] bg-white"}`}
               >
                 {plan.popular && (
                   <span className="absolute right-5 top-5 rounded-full bg-[#F05A28] px-3 py-1.5 text-[0.58rem] font-black uppercase tracking-[0.14em] text-white">
@@ -667,7 +997,7 @@ export function PulseForgeFitness() {
                 </div>
                 <a
                   href="#contact"
-                  className={`mt-8 inline-flex min-h-12 items-center justify-center rounded-lg px-5 text-xs font-black uppercase tracking-[0.14em] transition ${plan.popular ? "bg-[#F05A28] text-white hover:bg-[#ff7040]" : "bg-[#111318] text-white hover:bg-[#F05A28]"}`}
+                  className={`mt-8 inline-flex min-h-12 items-center justify-center rounded-lg px-5 text-xs font-black uppercase tracking-[0.14em] transition ${plan.popular ? "pulseforge-btn-solid bg-[#F05A28] text-white hover:bg-[#ff7040]" : "bg-[#111318] text-white hover:bg-[#F05A28]"}`}
                 >
                   Choose {plan.name}
                 </a>
@@ -677,7 +1007,7 @@ export function PulseForgeFitness() {
         </div>
       </section>
 
-      <section className="bg-[#111318] px-5 py-24 text-white lg:px-10 lg:py-32">
+      <section className="pulseforge-section-testimonials bg-[#111318] px-5 py-24 text-white lg:px-10 lg:py-32">
         <div className="mx-auto max-w-[94rem]">
           <ForgeHeading
             eyebrow="Member experience"
@@ -702,7 +1032,7 @@ export function PulseForgeFitness() {
             ].map(([name, quote], index) => (
               <blockquote
                 key={name}
-                className="rounded-2xl border border-white/12 bg-white/[0.045] p-7"
+                className="pulseforge-testi-card rounded-2xl border border-white/12 bg-white/[0.045] p-7"
               >
                 <div className="flex gap-1">
                   {Array.from({ length: 5 }).map((_, star) => (
@@ -712,7 +1042,7 @@ export function PulseForgeFitness() {
                     />
                   ))}
                 </div>
-                <p className="mt-8 text-lg leading-8 text-white/75">
+                <p className="pulseforge-testi-quote mt-8 text-lg leading-8 text-white/75">
                   “{quote}”
                 </p>
                 <footer className="mt-8 flex items-center gap-3 border-t border-white/10 pt-5">
@@ -720,7 +1050,7 @@ export function PulseForgeFitness() {
                     0{index + 1}
                   </span>
                   <div>
-                    <p className="font-black">{name}</p>
+                    <p className="pulseforge-testi-name font-black">{name}</p>
                     <p className="text-xs text-white/35">PulseForge member</p>
                   </div>
                 </footer>
@@ -732,7 +1062,7 @@ export function PulseForgeFitness() {
 
       <section
         id="contact"
-        className="relative bg-[#0B0D10] px-5 py-28 text-white lg:px-10 lg:py-36"
+        className="pulseforge-section-cta relative bg-[#0B0D10] px-5 py-28 text-white lg:px-10 lg:py-36"
       >
         <img
           src={ctaImage}
@@ -762,7 +1092,7 @@ export function PulseForgeFitness() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 bg-[#08090B] px-5 pb-8 pt-14 text-white lg:px-10">
+      <footer className="pulseforge-footer border-t border-white/10 bg-[#08090B] px-5 pb-8 pt-14 text-white lg:px-10">
         <div className="mx-auto max-w-[94rem]">
           <div className="flex flex-col justify-between gap-10 border-b border-white/10 pb-10 lg:flex-row lg:items-start">
             <div>
@@ -782,7 +1112,7 @@ export function PulseForgeFitness() {
                   <a
                     key={label}
                     href={href}
-                    className="text-xs font-black uppercase tracking-[0.14em] text-white/50 hover:text-white"
+                    className="pulseforge-footer-link text-xs font-black uppercase tracking-[0.14em] text-white/50 hover:text-white"
                   >
                     {label}
                   </a>
@@ -798,7 +1128,7 @@ export function PulseForgeFitness() {
                     key={social}
                     href="#contact"
                     aria-label={`${social} social placeholder`}
-                    className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-[0.6rem] font-black hover:border-[#F05A28] hover:text-[#FF7444]"
+                    className="pulseforge-footer-social grid h-10 w-10 place-items-center rounded-full border border-white/15 text-[0.6rem] font-black hover:border-[#F05A28] hover:text-[#FF7444]"
                   >
                     {social}
                   </a>

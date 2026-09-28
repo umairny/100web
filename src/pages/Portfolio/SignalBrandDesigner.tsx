@@ -29,7 +29,6 @@ import {
   TrendingUp,
   Zap,
 } from "lucide-react";
-import "./SignalBrandDesigner.css";
 
 interface CaseStudyModalProps {
   isOpen: boolean;
@@ -59,14 +58,14 @@ function CaseStudyModal({ isOpen, onClose, study }: CaseStudyModalProps) {
       >
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 rounded-full border border-slate-700 bg-slate-900/80 p-2 text-slate-300 hover:text-white hover:border-sky-400 transition-colors z-10"
+          className="signal-capsule-btn absolute top-5 right-5 p-2 rounded-full z-10"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="mb-6 pr-8">
-          <span className="inline-block px-3 py-1 text-xs font-mono font-semibold uppercase tracking-wider text-sky-400 bg-sky-950/60 border border-sky-800/60 rounded-full mb-2">
+          <span className="signal-capsule-badge px-3 py-1 text-xs font-semibold mb-2">
             {study.tag}
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold text-white signal-display">
@@ -137,7 +136,7 @@ function CaseStudyModal({ isOpen, onClose, study }: CaseStudyModalProps) {
         <div className="mt-8 pt-4 border-t border-slate-800 flex justify-end">
           <button
             onClick={onClose}
-            className="px-6 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm transition-all shadow-[0_0_20px_rgba(56,189,248,0.4)]"
+            className="signal-capsule-btn signal-capsule-btn-active px-6 py-2.5 rounded-full font-bold text-sm tracking-wide"
           >
             Close Overview
           </button>
@@ -334,7 +333,740 @@ export function SignalBrandDesigner() {
   ];
 
   return (
-    <div className="signal-container min-h-screen bg-[#030712] text-slate-100 selection:bg-sky-500/30 selection:text-sky-200">
+    <div className="signal-container min-h-screen selection:bg-sky-500/30 selection:text-sky-200">
+      {/* ======================================================================= */}
+      {/* EMBEDDED DESIGN TOKENS & THEME RULES (NO EXTERNAL CSS FILE)            */}
+      {/* ======================================================================= */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+        /* ============================================================ */
+        /* SIGNAL DESIGN TOKENS — Default: Cyber Cyan Dark Studio       */
+        /* ============================================================ */
+        .signal-container {
+          --signal-accent:         var(--theme-accent-primary,       #38bdf8);
+          --signal-accent-hover:   var(--theme-accent-primary-hover, #0284c7);
+          --signal-accent-glow:    var(--theme-accent-glow,          rgba(56, 189, 248, 0.4));
+          --signal-accent-sec:     var(--theme-accent-secondary,     #60a5fa);
+
+          --signal-bg:             var(--theme-bg-base,    #030712);
+          --signal-surface:        var(--theme-bg-surface, #060c18);
+          --signal-card:           var(--theme-bg-card,    #0a1122);
+          --signal-card2:          var(--theme-bg-card,    #0d152a);
+
+          --signal-text:           var(--theme-text-primary,   #f3f4f6);
+          --signal-text-muted:     var(--theme-text-muted,     #94a3b8);
+          --signal-text-dim:       var(--theme-text-secondary, #64748b);
+
+          --signal-border:         var(--theme-border, rgba(51, 65, 85, 0.6));
+          --signal-border-dim:     var(--theme-border, rgba(30, 41, 59, 0.6));
+
+          --signal-nav-bg:         rgba(3, 7, 18, 0.88);
+          --signal-nav-border:     rgba(51, 65, 85, 0.6);
+
+          --signal-input-bg:       rgba(11, 19, 36, 0.8);
+          --signal-input-border:   rgba(51, 65, 85, 0.8);
+
+          background-color: var(--signal-bg);
+          color: var(--signal-text);
+          font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          overflow-x: clip;
+          position: relative;
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ===== LIGHT MOOD overrides ===== */
+        html.light .signal-container,
+        body.light .signal-container,
+        [data-theme-mood="light"] .signal-container,
+        :root[data-theme-mood="light"] .signal-container,
+        :root[data-theme-active="true"][data-theme-mood="light"] .signal-container,
+        :root.light .signal-container {
+          --signal-bg:             var(--theme-bg-base,    #f8fafc);
+          --signal-surface:        var(--theme-bg-surface, #f1f5f9);
+          --signal-card:           var(--theme-bg-card,    #ffffff);
+          --signal-card2:          var(--theme-bg-card,    #f8fafc);
+
+          --signal-text:           var(--theme-text-primary,   #0f172a);
+          --signal-text-muted:     var(--theme-text-muted,     #334155);
+          --signal-text-dim:       var(--theme-text-secondary, #64748b);
+
+          --signal-border:         var(--theme-border, rgba(203, 213, 225, 0.8));
+          --signal-border-dim:     var(--theme-border, rgba(226, 232, 240, 0.8));
+
+          --signal-nav-bg:         rgba(248, 250, 252, 0.94);
+          --signal-nav-border:     rgba(203, 213, 225, 0.8);
+
+          --signal-input-bg:       #ffffff;
+          --signal-input-border:   rgba(203, 213, 225, 0.9);
+        }
+
+        /* ===== DARK MOOD (explicit) ===== */
+        html.dark .signal-container,
+        body.dark .signal-container,
+        [data-theme-mood="dark"] .signal-container,
+        :root[data-theme-mood="dark"] .signal-container,
+        :root[data-theme-active="true"][data-theme-mood="dark"] .signal-container,
+        :root.dark .signal-container {
+          --signal-bg:             var(--theme-bg-base,    #030712);
+          --signal-surface:        var(--theme-bg-surface, #060c18);
+          --signal-card:           var(--theme-bg-card,    #0a1122);
+          --signal-card2:          var(--theme-bg-card,    #0d152a);
+
+          --signal-text:           var(--theme-text-primary,   #f3f4f6);
+          --signal-text-muted:     var(--theme-text-muted,     #94a3b8);
+          --signal-text-dim:       var(--theme-text-secondary, #64748b);
+
+          --signal-border:         var(--theme-border, rgba(51, 65, 85, 0.6));
+          --signal-border-dim:     var(--theme-border, rgba(30, 41, 59, 0.6));
+
+          --signal-nav-bg:         rgba(3, 7, 18, 0.88);
+          --signal-nav-border:     rgba(51, 65, 85, 0.6);
+
+          --signal-input-bg:       rgba(11, 19, 36, 0.8);
+          --signal-input-border:   rgba(51, 65, 85, 0.8);
+        }
+
+        /* ===== Non-original preset: use theme accent ===== */
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container {
+          --signal-accent:       var(--theme-accent-primary) !important;
+          --signal-accent-hover: var(--theme-accent-primary-hover) !important;
+          --signal-accent-glow:  var(--theme-accent-glow) !important;
+          --signal-accent-sec:   var(--theme-accent-secondary) !important;
+        }
+
+        /* Primary buttons & badges re-color with active theme preset */
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .bg-sky-500,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .bg-sky-500,
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .bg-sky-600,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .bg-sky-600 {
+          background-color: var(--signal-accent) !important;
+          color: #ffffff !important;
+        }
+
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container [class*="hover:bg-sky-400"]:hover,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container [class*="hover:bg-sky-400"]:hover {
+          background-color: var(--signal-accent-hover) !important;
+        }
+
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .text-sky-400,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .text-sky-400,
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .text-sky-300,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .text-sky-300,
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .text-cyan-400,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .text-cyan-400,
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .text-cyan-300,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .text-cyan-300 {
+          color: var(--signal-accent) !important;
+        }
+
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .border-sky-500,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .border-sky-500,
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container [class*="border-sky-500/"],
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container [class*="border-sky-500/"] {
+          border-color: var(--signal-accent) !important;
+        }
+
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .signal-eq-1,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .signal-eq-1,
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .signal-eq-2,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .signal-eq-2,
+        [data-theme-preset]:not([data-theme-preset="original"]) .signal-container .signal-eq-3,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .signal-container .signal-eq-3 {
+          background-color: var(--signal-accent) !important;
+        }
+
+        .signal-navbar-sticky {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 50;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          background-color: var(--signal-nav-bg);
+          border-bottom: 1px solid var(--signal-nav-border);
+          transition: all 0.3s ease;
+        }
+
+        .signal-display {
+          font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          letter-spacing: -0.02em;
+        }
+
+        /* Glowing text and boxes */
+        .signal-text-glow {
+          text-shadow: 0 0 24px var(--signal-accent-glow), 0 0 48px rgba(37, 99, 235, 0.2);
+        }
+
+        .signal-text-glow-violet {
+          text-shadow: 0 0 24px rgba(168, 85, 247, 0.4), 0 0 48px rgba(99, 102, 241, 0.2);
+        }
+
+        .signal-card-glow {
+          box-shadow: 0 0 30px -5px var(--signal-accent-glow), 0 0 10px -2px rgba(34, 211, 238, 0.15);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .signal-card-glow:hover {
+          box-shadow: 0 0 45px -5px var(--signal-accent-glow), 0 0 18px -2px rgba(34, 211, 238, 0.35);
+        }
+
+        .signal-card-glow-orange {
+          box-shadow: 0 0 30px -5px rgba(249, 115, 22, 0.12), 0 0 10px -2px rgba(249, 115, 22, 0.15);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .signal-card-glow-orange:hover {
+          box-shadow: 0 0 45px -5px rgba(249, 115, 22, 0.25), 0 0 18px -2px rgba(249, 115, 22, 0.35);
+        }
+
+        .signal-card-glow-violet {
+          box-shadow: 0 0 30px -5px rgba(168, 85, 247, 0.12), 0 0 10px -2px rgba(99, 102, 241, 0.15);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .signal-card-glow-violet:hover {
+          box-shadow: 0 0 45px -5px rgba(168, 85, 247, 0.25), 0 0 18px -2px rgba(99, 102, 241, 0.35);
+        }
+
+        /* Form input styling */
+        .signal-input {
+          background: var(--signal-input-bg);
+          border: 1px solid var(--signal-input-border);
+          color: var(--signal-text);
+          transition: all 0.25s ease;
+        }
+
+        .signal-input:focus {
+          background: var(--signal-card);
+          border-color: var(--signal-accent);
+          box-shadow: 0 0 20px -2px var(--signal-accent-glow);
+          outline: none;
+        }
+
+        /* Waveform pulse animation */
+        @keyframes signal-wave-pulse {
+          0%, 100% {
+            opacity: 0.75;
+            filter: drop-shadow(0 0 10px var(--signal-accent));
+          }
+          50% {
+            opacity: 1;
+            filter: drop-shadow(0 0 24px var(--signal-accent));
+          }
+        }
+
+        .signal-wave-glow {
+          animation: signal-wave-pulse 3s infinite ease-in-out;
+        }
+
+        /* Frequency oscillation equalizers */
+        @keyframes eq-pulse-1 {
+          0%, 100% { height: 6px; }
+          50% { height: 26px; }
+        }
+
+        @keyframes eq-pulse-2 {
+          0%, 100% { height: 22px; }
+          50% { height: 10px; }
+        }
+
+        @keyframes eq-pulse-3 {
+          0%, 100% { height: 12px; }
+          50% { height: 28px; }
+        }
+
+        .signal-eq-1 { animation: eq-pulse-1 0.8s ease-in-out infinite; }
+        .signal-eq-2 { animation: eq-pulse-2 1.1s ease-in-out infinite; }
+        .signal-eq-3 { animation: eq-pulse-3 0.9s ease-in-out infinite; }
+
+        /* Process node animated connecting path */
+        @keyframes signal-dash {
+          to {
+            stroke-dashoffset: -40;
+          }
+        }
+
+        .signal-animated-path {
+          stroke-dasharray: 6 6;
+          animation: signal-dash 1.8s linear infinite;
+        }
+
+        /* Modal animation */
+        @keyframes signal-modal-in {
+          from { opacity: 0; transform: scale(0.97); }
+          to { opacity: 1; transform: scale(1); }
+        }
+
+        .signal-modal-animate {
+          animation: signal-modal-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Custom range slider styling */
+        .signal-range-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          height: 6px;
+          background: var(--signal-surface);
+          border-radius: 9999px;
+          outline: none;
+        }
+
+        .signal-range-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: var(--signal-accent);
+          cursor: pointer;
+          box-shadow: 0 0 10px var(--signal-accent-glow);
+          border: 2px solid #ffffff;
+          transition: transform 0.15s ease;
+        }
+
+        .signal-range-slider::-webkit-slider-thumb:hover {
+          transform: scale(1.2);
+        }
+
+        /* Custom smooth scrollbar */
+        .signal-custom-scroll::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+
+        .signal-custom-scroll::-webkit-scrollbar-track {
+          background: var(--signal-surface);
+        }
+
+        .signal-custom-scroll::-webkit-scrollbar-thumb {
+          background: var(--signal-border);
+          border-radius: 4px;
+        }
+
+        .signal-custom-scroll::-webkit-scrollbar-thumb:hover {
+          background: var(--signal-accent);
+        }
+
+        /* ============================================================ */
+        /* LIGHT MOOD: TEXT & BACKGROUND INVERSION OVERRIDES            */
+        /* ============================================================ */
+        html.light .signal-container,
+        body.light .signal-container,
+        [data-theme-mood="light"] .signal-container,
+        :root[data-theme-mood="light"] .signal-container,
+        :root[data-theme-active="true"][data-theme-mood="light"] .signal-container,
+        :root.light .signal-container {
+          background-color: var(--signal-bg) !important;
+          color: var(--signal-text) !important;
+        }
+
+        /* Override hardcoded text colors in light mode */
+        html.light .signal-container .text-white,
+        body.light .signal-container .text-white,
+        [data-theme-mood="light"] .signal-container .text-white,
+        :root[data-theme-mood="light"] .signal-container .text-white,
+        :root.light .signal-container .text-white {
+          color: var(--signal-text) !important;
+        }
+
+        html.light .signal-container .text-slate-100,
+        html.light .signal-container .text-slate-200,
+        html.light .signal-container .text-slate-300,
+        html.light .signal-container .text-gray-100,
+        html.light .signal-container .text-gray-200,
+        html.light .signal-container .text-gray-300,
+        html.light .signal-container .text-zinc-100,
+        html.light .signal-container .text-zinc-200,
+        html.light .signal-container .text-zinc-300,
+        body.light .signal-container .text-slate-100,
+        body.light .signal-container .text-slate-200,
+        body.light .signal-container .text-slate-300,
+        [data-theme-mood="light"] .signal-container .text-slate-100,
+        [data-theme-mood="light"] .signal-container .text-slate-200,
+        [data-theme-mood="light"] .signal-container .text-slate-300,
+        [data-theme-mood="light"] .signal-container .text-gray-100,
+        [data-theme-mood="light"] .signal-container .text-gray-200,
+        [data-theme-mood="light"] .signal-container .text-gray-300,
+        :root.light .signal-container .text-slate-100,
+        :root.light .signal-container .text-slate-200,
+        :root.light .signal-container .text-slate-300 {
+          color: var(--signal-text-muted) !important;
+        }
+
+        html.light .signal-container .text-slate-400,
+        html.light .signal-container .text-slate-500,
+        html.light .signal-container .text-gray-400,
+        html.light .signal-container .text-gray-500,
+        html.light .signal-container .text-zinc-400,
+        html.light .signal-container .text-zinc-500,
+        body.light .signal-container .text-slate-400,
+        body.light .signal-container .text-slate-500,
+        [data-theme-mood="light"] .signal-container .text-slate-400,
+        [data-theme-mood="light"] .signal-container .text-slate-500,
+        [data-theme-mood="light"] .signal-container .text-gray-400,
+        [data-theme-mood="light"] .signal-container .text-gray-500,
+        :root.light .signal-container .text-slate-400,
+        :root.light .signal-container .text-slate-500 {
+          color: var(--signal-text-dim) !important;
+        }
+
+        /* Keep brand/accent text clear and deep in light mode */
+        html.light .signal-container .text-sky-400,
+        [data-theme-mood="light"] .signal-container .text-sky-400,
+        :root.light .signal-container .text-sky-400 {
+          color: #0284c7 !important;
+        }
+
+        html.light .signal-container .text-sky-300,
+        [data-theme-mood="light"] .signal-container .text-sky-300,
+        :root.light .signal-container .text-sky-300 {
+          color: #0369a1 !important;
+        }
+
+        html.light .signal-container .text-cyan-400,
+        [data-theme-mood="light"] .signal-container .text-cyan-400,
+        :root.light .signal-container .text-cyan-400 {
+          color: #0891b2 !important;
+        }
+
+        html.light .signal-container .text-cyan-300,
+        [data-theme-mood="light"] .signal-container .text-cyan-300,
+        :root.light .signal-container .text-cyan-300 {
+          color: #0e7490 !important;
+        }
+
+        html.light .signal-container .text-amber-400,
+        [data-theme-mood="light"] .signal-container .text-amber-400,
+        :root.light .signal-container .text-amber-400 {
+          color: #d97706 !important;
+        }
+
+        html.light .signal-container .text-amber-300,
+        [data-theme-mood="light"] .signal-container .text-amber-300,
+        :root.light .signal-container .text-amber-300 {
+          color: #b45309 !important;
+        }
+
+        html.light .signal-container .text-violet-400,
+        [data-theme-mood="light"] .signal-container .text-violet-400,
+        :root.light .signal-container .text-violet-400 {
+          color: #7c3aed !important;
+        }
+
+        html.light .signal-container .text-violet-300,
+        [data-theme-mood="light"] .signal-container .text-violet-300,
+        :root.light .signal-container .text-violet-300 {
+          color: #6d28d9 !important;
+        }
+
+        /* Calm down glow on light background for readability */
+        html.light .signal-container .signal-text-glow,
+        [data-theme-mood="light"] .signal-container .signal-text-glow {
+          text-shadow: none !important;
+          color: var(--signal-accent) !important;
+        }
+
+        html.light .signal-container .signal-text-glow-violet,
+        [data-theme-mood="light"] .signal-container .signal-text-glow-violet {
+          text-shadow: none !important;
+          color: #7c3aed !important;
+        }
+
+        html.light .signal-container .signal-card-glow,
+        html.light .signal-container .signal-card-glow-orange,
+        html.light .signal-container .signal-card-glow-violet,
+        [data-theme-mood="light"] .signal-container .signal-card-glow,
+        [data-theme-mood="light"] .signal-container .signal-card-glow-orange,
+        [data-theme-mood="light"] .signal-container .signal-card-glow-violet {
+          box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 0 1px 1px var(--signal-border) !important;
+        }
+
+        html.light .signal-container .signal-card-glow:hover,
+        [data-theme-mood="light"] .signal-container .signal-card-glow:hover {
+          box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--signal-accent) !important;
+        }
+
+        /* Keep button text white for solid colored buttons */
+        html.light .signal-container button[class*="bg-sky-500"],
+        html.light .signal-container button[class*="bg-sky-600"],
+        html.light .signal-container a[class*="bg-sky-500"],
+        html.light .signal-container a[class*="bg-sky-600"],
+        html.light .signal-container a[class*="bg-blue-600"],
+        html.light .signal-container [class*="bg-sky-500"].text-white,
+        html.light .signal-container [class*="bg-sky-600"].text-white,
+        html.light .signal-container [class*="bg-blue-600"].text-white,
+        html.light .signal-container [class*="bg-sky-500"] span,
+        html.light .signal-container [class*="bg-sky-600"] span,
+        html.light .signal-container [class*="bg-amber-500"] span,
+        html.light .signal-container [class*="bg-violet-500"] span,
+        [data-theme-mood="light"] .signal-container button[class*="bg-sky-500"],
+        [data-theme-mood="light"] .signal-container button[class*="bg-sky-600"],
+        [data-theme-mood="light"] .signal-container a[class*="bg-sky-500"],
+        [data-theme-mood="light"] .signal-container a[class*="bg-sky-600"],
+        [data-theme-mood="light"] .signal-container a[class*="bg-blue-600"],
+        [data-theme-mood="light"] .signal-container [class*="bg-sky-500"].text-white,
+        [data-theme-mood="light"] .signal-container [class*="bg-sky-600"].text-white,
+        [data-theme-mood="light"] .signal-container [class*="bg-blue-600"].text-white,
+        [data-theme-mood="light"] .signal-container [class*="bg-sky-500"] span,
+        [data-theme-mood="light"] .signal-container [class*="bg-sky-600"] span,
+        [data-theme-mood="light"] .signal-container [class*="bg-amber-500"] span,
+        [data-theme-mood="light"] .signal-container [class*="bg-violet-500"] span {
+          color: #ffffff !important;
+        }
+
+        /* Hero Primary Action CTA in Light Mood */
+        html.light .signal-container a[href="#work"][class*="border-white"],
+        :root.light .signal-container a[href="#work"][class*="border-white"],
+        :root[data-theme-mood="light"] .signal-container a[href="#work"][class*="border-white"],
+        [data-theme-mood="light"] .signal-container a[href="#work"][class*="border-white"] {
+          background-color: var(--signal-accent) !important;
+          border-color: var(--signal-accent) !important;
+          color: #ffffff !important;
+          box-shadow: 0 4px 14px -2px var(--signal-accent-glow) !important;
+        }
+
+        html.light .signal-container a[href="#work"][class*="border-white"]:hover,
+        :root.light .signal-container a[href="#work"][class*="border-white"]:hover,
+        :root[data-theme-mood="light"] .signal-container a[href="#work"][class*="border-white"]:hover,
+        [data-theme-mood="light"] .signal-container a[href="#work"][class*="border-white"]:hover {
+          background-color: var(--signal-accent-hover) !important;
+          border-color: var(--signal-accent-hover) !important;
+          color: #ffffff !important;
+        }
+
+        /* Contact Form Submit Button in Light Mood */
+        html.light .signal-container button[type="submit"].bg-white,
+        :root.light .signal-container button[type="submit"].bg-white,
+        :root[data-theme-mood="light"] .signal-container button[type="submit"].bg-white,
+        [data-theme-mood="light"] .signal-container button[type="submit"].bg-white {
+          background-color: var(--signal-accent) !important;
+          color: #ffffff !important;
+          box-shadow: 0 4px 14px -2px var(--signal-accent-glow) !important;
+        }
+
+        html.light .signal-container button[type="submit"].bg-white:hover,
+        :root.light .signal-container button[type="submit"].bg-white:hover,
+        :root[data-theme-mood="light"] .signal-container button[type="submit"].bg-white:hover,
+        [data-theme-mood="light"] .signal-container button[type="submit"].bg-white:hover {
+          background-color: var(--signal-accent-hover) !important;
+          color: #ffffff !important;
+        }
+
+        /* Backgrounds: convert dark cards, containers & gradients into light card backgrounds */
+        html.light .signal-container [class*="bg-[#0"],
+        html.light .signal-container [class*="bg-[#1"],
+        html.light .signal-container .bg-slate-900,
+        html.light .signal-container .bg-slate-950,
+        [data-theme-mood="light"] .signal-container [class*="bg-[#0"],
+        [data-theme-mood="light"] .signal-container [class*="bg-[#1"],
+        [data-theme-mood="light"] .signal-container .bg-slate-900,
+        [data-theme-mood="light"] .signal-container .bg-slate-950 {
+          background: var(--signal-card) !important;
+          background-image: none !important;
+        }
+
+        html.light .signal-container [class*="bg-slate-900/"],
+        html.light .signal-container [class*="bg-slate-950/"],
+        [data-theme-mood="light"] .signal-container [class*="bg-slate-900/"],
+        [data-theme-mood="light"] .signal-container [class*="bg-slate-950/"] {
+          background: var(--signal-surface) !important;
+          background-image: none !important;
+        }
+
+        /* Section backgrounds in light mode */
+        html.light .signal-container section[class*="bg-[#"],
+        [data-theme-mood="light"] .signal-container section[class*="bg-[#"] {
+          background-color: var(--signal-surface) !important;
+        }
+
+        html.light .signal-container footer,
+        [data-theme-mood="light"] .signal-container footer {
+          background-color: var(--signal-surface) !important;
+          border-top-color: var(--signal-border) !important;
+        }
+
+        /* Soft pastel pill badge backgrounds */
+        html.light .signal-container [class*="bg-sky-950"],
+        [data-theme-mood="light"] .signal-container [class*="bg-sky-950"] {
+          background-color: rgba(2, 132, 199, 0.1) !important;
+        }
+
+        html.light .signal-container [class*="bg-cyan-950"],
+        [data-theme-mood="light"] .signal-container [class*="bg-cyan-950"] {
+          background-color: rgba(6, 182, 212, 0.1) !important;
+        }
+
+        html.light .signal-container [class*="bg-amber-950"],
+        [data-theme-mood="light"] .signal-container [class*="bg-amber-950"] {
+          background-color: rgba(245, 158, 11, 0.12) !important;
+        }
+
+        html.light .signal-container [class*="bg-violet-950"],
+        [data-theme-mood="light"] .signal-container [class*="bg-violet-950"] {
+          background-color: rgba(139, 92, 246, 0.12) !important;
+        }
+
+        /* Light borders */
+        html.light .signal-container [class*="border-slate-"],
+        html.light .signal-container [class*="border-sky-900"],
+        html.light .signal-container [class*="border-sky-800"],
+        html.light .signal-container [class*="border-cyan-800"],
+        html.light .signal-container [class*="border-cyan-900"],
+        html.light .signal-container [class*="border-amber-800"],
+        html.light .signal-container [class*="border-amber-900"],
+        html.light .signal-container [class*="border-violet-800"],
+        html.light .signal-container [class*="border-violet-900"],
+        [data-theme-mood="light"] .signal-container [class*="border-slate-"],
+        [data-theme-mood="light"] .signal-container [class*="border-sky-900"],
+        [data-theme-mood="light"] .signal-container [class*="border-sky-800"],
+        [data-theme-mood="light"] .signal-container [class*="border-cyan-800"],
+        [data-theme-mood="light"] .signal-container [class*="border-cyan-900"],
+        [data-theme-mood="light"] .signal-container [class*="border-amber-800"],
+        [data-theme-mood="light"] .signal-container [class*="border-amber-900"],
+        [data-theme-mood="light"] .signal-container [class*="border-violet-800"],
+        [data-theme-mood="light"] .signal-container [class*="border-violet-900"] {
+          border-color: var(--signal-border) !important;
+        }
+
+        /* Light inputs & selects */
+        html.light .signal-container input,
+        html.light .signal-container textarea,
+        html.light .signal-container select,
+        [data-theme-mood="light"] .signal-container input,
+        [data-theme-mood="light"] .signal-container textarea,
+        [data-theme-mood="light"] .signal-container select {
+          background-color: var(--signal-input-bg) !important;
+          border-color: var(--signal-input-border) !important;
+          color: var(--signal-text) !important;
+        }
+
+        html.light .signal-container select option,
+        [data-theme-mood="light"] .signal-container select option {
+          background-color: #ffffff !important;
+          color: #0f172a !important;
+        }
+
+        /* ============================================================ */
+        /* CAPSULES & BUTTONS SYSTEM (LIGHT & DARK ADAPTIVE)            */
+        /* ============================================================ */
+        .signal-capsule-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          border-radius: 9999px;
+          background: rgba(14, 165, 233, 0.12);
+          border: 1px solid rgba(56, 189, 248, 0.35);
+          color: var(--signal-accent, #38bdf8);
+          font-family: 'JetBrains Mono', monospace;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .signal-capsule-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          border-radius: 9999px;
+          background: rgba(15, 23, 42, 0.75);
+          border: 1px solid rgba(51, 65, 85, 0.75);
+          color: #94a3b8;
+          font-family: 'JetBrains Mono', monospace;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: pointer;
+        }
+
+        .signal-capsule-btn:hover {
+          border-color: var(--signal-accent, #38bdf8);
+          color: #ffffff;
+          transform: translateY(-1px);
+        }
+
+        .signal-capsule-btn-active {
+          background: var(--signal-accent, #38bdf8) !important;
+          border-color: var(--signal-accent, #38bdf8) !important;
+          color: #030712 !important;
+          font-weight: 700 !important;
+          box-shadow: 0 0 16px -2px var(--signal-accent-glow), 0 2px 8px rgba(0,0,0,0.3) !important;
+        }
+
+        /* Light Mood adaptions for capsules & small boxes */
+        html.light .signal-container .signal-capsule-badge,
+        :root.light .signal-container .signal-capsule-badge,
+        :root[data-theme-mood="light"] .signal-container .signal-capsule-badge,
+        [data-theme-mood="light"] .signal-container .signal-capsule-badge {
+          background: #eff6ff !important;
+          border: 1px solid #bae6fd !important;
+          color: #0284c7 !important;
+          box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08) !important;
+        }
+
+        html.light .signal-container .signal-capsule-btn,
+        :root.light .signal-container .signal-capsule-btn,
+        :root[data-theme-mood="light"] .signal-container .signal-capsule-btn,
+        [data-theme-mood="light"] .signal-container .signal-capsule-btn {
+          background: #ffffff !important;
+          border: 1px solid #cbd5e1 !important;
+          color: #334155 !important;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        html.light .signal-container .signal-capsule-btn:hover,
+        :root.light .signal-container .signal-capsule-btn:hover,
+        :root[data-theme-mood="light"] .signal-container .signal-capsule-btn:hover,
+        [data-theme-mood="light"] .signal-container .signal-capsule-btn:hover {
+          background: #f8fafc !important;
+          border-color: var(--signal-accent, #0284c7) !important;
+          color: #0f172a !important;
+        }
+
+        html.light .signal-container .signal-capsule-btn-active,
+        :root.light .signal-container .signal-capsule-btn-active,
+        :root[data-theme-mood="light"] .signal-container .signal-capsule-btn-active,
+        [data-theme-mood="light"] .signal-container .signal-capsule-btn-active {
+          background: var(--signal-accent, #0284c7) !important;
+          border-color: var(--signal-accent, #0284c7) !important;
+          color: #ffffff !important;
+          box-shadow: 0 2px 10px rgba(2, 132, 199, 0.3) !important;
+        }
+
+        /* Explicit Dark Mood adaptions to ensure clean transition back */
+        html.dark .signal-container .signal-capsule-badge,
+        :root.dark .signal-container .signal-capsule-badge,
+        :root[data-theme-mood="dark"] .signal-container .signal-capsule-badge,
+        [data-theme-mood="dark"] .signal-container .signal-capsule-badge {
+          background: rgba(14, 165, 233, 0.12) !important;
+          border: 1px solid rgba(56, 189, 248, 0.35) !important;
+          color: var(--signal-accent, #38bdf8) !important;
+        }
+
+        html.dark .signal-container .signal-capsule-btn,
+        :root.dark .signal-container .signal-capsule-btn,
+        :root[data-theme-mood="dark"] .signal-container .signal-capsule-btn,
+        [data-theme-mood="dark"] .signal-container .signal-capsule-btn {
+          background: rgba(15, 23, 42, 0.75) !important;
+          border: 1px solid rgba(51, 65, 85, 0.75) !important;
+          color: #94a3b8 !important;
+        }
+
+        html.dark .signal-container .signal-capsule-btn:hover,
+        :root.dark .signal-container .signal-capsule-btn:hover,
+        :root[data-theme-mood="dark"] .signal-container .signal-capsule-btn:hover,
+        [data-theme-mood="dark"] .signal-container .signal-capsule-btn:hover {
+          border-color: var(--signal-accent, #38bdf8) !important;
+          color: #ffffff !important;
+        }
+
+        html.dark .signal-container .signal-capsule-btn-active,
+        :root.dark .signal-container .signal-capsule-btn-active,
+        :root[data-theme-mood="dark"] .signal-container .signal-capsule-btn-active,
+        [data-theme-mood="dark"] .signal-container .signal-capsule-btn-active {
+          background: var(--signal-accent, #38bdf8) !important;
+          border-color: var(--signal-accent, #38bdf8) !important;
+          color: #030712 !important;
+        }
+      `}</style>
       {/* Background Ambience & Glows */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute top-[-10%] left-[20%] w-[550px] h-[550px] rounded-full bg-sky-600/10 blur-[140px]" />
@@ -409,7 +1141,7 @@ export function SignalBrandDesigner() {
           <div className="hidden md:flex items-center gap-4">
             <a
               href="#inquire"
-              className="px-5 py-2 rounded-full border border-slate-700 bg-slate-900/80 hover:border-sky-400 hover:text-white hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] text-xs font-mono font-semibold uppercase tracking-wider text-slate-200 transition-all"
+              className="signal-capsule-btn px-5 py-2 text-xs font-mono font-semibold uppercase tracking-wider text-slate-200 hover:text-white transition-all"
             >
               LET'S TALK
             </a>
@@ -474,7 +1206,7 @@ export function SignalBrandDesigner() {
               <a
                 href="#inquire"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-center w-full py-2.5 rounded-full border border-sky-500/50 bg-sky-500/10 text-sky-300 font-bold"
+                className="signal-capsule-btn signal-capsule-btn-active block text-center w-full py-2.5 font-bold"
               >
                 LET'S TALK
               </a>
@@ -492,7 +1224,7 @@ export function SignalBrandDesigner() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Copy */}
             <div className="lg:col-span-7 space-y-6 text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-sky-500/30 bg-sky-950/40 text-xs font-mono text-sky-400">
+              <div className="signal-capsule-badge px-3 py-1 text-xs font-mono">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
                 <span>ACCEPTING Q3/Q4 BRAND COMMISSIONS</span>
               </div>
@@ -520,7 +1252,7 @@ export function SignalBrandDesigner() {
 
                 <a
                   href="#audit"
-                  className="px-6 py-3 rounded-full border border-slate-800 hover:border-sky-500/50 font-mono text-xs font-semibold uppercase tracking-wider text-slate-400 hover:text-sky-300 transition-all flex items-center gap-2"
+                  className="signal-capsule-btn px-6 py-3 font-mono text-xs font-semibold uppercase tracking-wider transition-all flex items-center gap-2"
                 >
                   <SlidersHorizontal className="w-3.5 h-3.5 text-sky-400" />
                   <span>Run Brand Audit</span>
@@ -550,15 +1282,15 @@ export function SignalBrandDesigner() {
                     {/* Secondary harmonic wave */}
                     <path
                       d="M 0 80 L 50 80 L 85 75 L 110 95 L 135 65 L 160 100 L 185 55 L 210 105 L 235 65 L 260 90 L 290 75 L 340 80 L 400 80"
-                      stroke="#0284c7"
+                      stroke="var(--signal-accent-sec, #0284c7)"
                       strokeWidth="1.5"
                       strokeOpacity="0.4"
                       strokeLinecap="round"
                     />
                     {/* Peak Nodes */}
-                    <circle cx="190" cy={15 - (frequency - 140) * 0.2} r="4.5" fill="#38bdf8" />
-                    <circle cx="170" cy="145" r="3.5" fill="#0284c7" />
-                    <circle cx="210" cy={140 + (frequency - 140) * 0.2} r="3.5" fill="#38bdf8" />
+                    <circle cx="190" cy={15 - (frequency - 140) * 0.2} r="4.5" fill="var(--signal-accent, #38bdf8)" />
+                    <circle cx="170" cy="145" r="3.5" fill="var(--signal-accent-hover, #0284c7)" />
+                    <circle cx="210" cy={140 + (frequency - 140) * 0.2} r="3.5" fill="var(--signal-accent, #38bdf8)" />
                     <defs>
                       <linearGradient
                         id="signalWaveGrad"
@@ -568,11 +1300,11 @@ export function SignalBrandDesigner() {
                         y2="80"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop offset="0%" stopColor="#0369a1" stopOpacity="0.3" />
-                        <stop offset="35%" stopColor="#0ea5e9" />
-                        <stop offset="50%" stopColor="#38bdf8" />
-                        <stop offset="65%" stopColor="#0ea5e9" />
-                        <stop offset="100%" stopColor="#0369a1" stopOpacity="0.3" />
+                        <stop offset="0%" stopColor="var(--signal-accent-hover, #0369a1)" stopOpacity="0.3" />
+                        <stop offset="35%" stopColor="var(--signal-accent, #0ea5e9)" />
+                        <stop offset="50%" stopColor="var(--signal-accent, #38bdf8)" />
+                        <stop offset="65%" stopColor="var(--signal-accent, #0ea5e9)" />
+                        <stop offset="100%" stopColor="var(--signal-accent-hover, #0369a1)" stopOpacity="0.3" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -706,32 +1438,26 @@ export function SignalBrandDesigner() {
               </h2>
             </div>
 
-            {/* Category Filter Pills */}
+            {/* Category Filter Capsules */}
             <div className="flex flex-wrap gap-2 text-xs font-mono">
-              <button
-                onClick={() => setActiveCategory("all")}
-                className={`px-3.5 py-1.5 rounded-full transition-all ${activeCategory === "all" ? "bg-sky-500 text-slate-950 font-bold shadow-[0_0_12px_rgba(56,189,248,0.5)]" : "bg-slate-900 text-slate-400 hover:text-white border border-slate-800"}`}
-              >
-                All Systems (3)
-              </button>
-              <button
-                onClick={() => setActiveCategory("fintech")}
-                className={`px-3.5 py-1.5 rounded-full transition-all ${activeCategory === "fintech" ? "bg-sky-500 text-slate-950 font-bold shadow-[0_0_12px_rgba(56,189,248,0.5)]" : "bg-slate-900 text-slate-400 hover:text-white border border-slate-800"}`}
-              >
-                FinTech &amp; SaaS
-              </button>
-              <button
-                onClick={() => setActiveCategory("lifestyle")}
-                className={`px-3.5 py-1.5 rounded-full transition-all ${activeCategory === "lifestyle" ? "bg-sky-500 text-slate-950 font-bold shadow-[0_0_12px_rgba(56,189,248,0.5)]" : "bg-slate-900 text-slate-400 hover:text-white border border-slate-800"}`}
-              >
-                Lifestyle &amp; Retail
-              </button>
-              <button
-                onClick={() => setActiveCategory("ai")}
-                className={`px-3.5 py-1.5 rounded-full transition-all ${activeCategory === "ai" ? "bg-sky-500 text-slate-950 font-bold shadow-[0_0_12px_rgba(56,189,248,0.5)]" : "bg-slate-900 text-slate-400 hover:text-white border border-slate-800"}`}
-              >
-                Deep Tech &amp; AI
-              </button>
+              {([
+                { id: "all", label: "All Systems (3)" },
+                { id: "fintech", label: "FinTech & SaaS" },
+                { id: "lifestyle", label: "Lifestyle & Retail" },
+                { id: "ai", label: "Deep Tech & AI" },
+              ] as const).map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`px-4 py-2 text-xs font-mono tracking-wider transition-all ${
+                    activeCategory === cat.id
+                      ? "signal-capsule-btn signal-capsule-btn-active"
+                      : "signal-capsule-btn"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -755,31 +1481,25 @@ export function SignalBrandDesigner() {
                   </div>
 
                   {/* Interactive Sub-tab switcher for Quantum Leap */}
-                  <div className="flex gap-1.5 pb-3 overflow-x-auto text-[11px] font-mono">
-                    <button
-                      onClick={() => setQuantumActiveTab("beforeAfter")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${quantumActiveTab === "beforeAfter" ? "bg-sky-500/20 text-sky-300 border border-sky-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Evolution
-                    </button>
-                    <button
-                      onClick={() => setQuantumActiveTab("dashboard")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${quantumActiveTab === "dashboard" ? "bg-sky-500/20 text-sky-300 border border-sky-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Web App UI
-                    </button>
-                    <button
-                      onClick={() => setQuantumActiveTab("tokens")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${quantumActiveTab === "tokens" ? "bg-sky-500/20 text-sky-300 border border-sky-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Design Tokens
-                    </button>
-                    <button
-                      onClick={() => setQuantumActiveTab("stationery")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${quantumActiveTab === "stationery" ? "bg-sky-500/20 text-sky-300 border border-sky-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Investor Deck
-                    </button>
+                  <div className="flex gap-2 pb-3 overflow-x-auto text-[11px] font-mono">
+                    {([
+                      { id: "beforeAfter", label: "Evolution" },
+                      { id: "dashboard", label: "Web App UI" },
+                      { id: "tokens", label: "Design Tokens" },
+                      { id: "stationery", label: "Investor Deck" },
+                    ] as const).map((tab) => (
+                      <button
+                        key={tab.id}
+                        onClick={() => setQuantumActiveTab(tab.id)}
+                        className={`px-3 py-1.5 rounded-lg transition-all ${
+                          quantumActiveTab === tab.id
+                            ? "signal-capsule-btn signal-capsule-btn-active"
+                            : "signal-capsule-btn"
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
                   </div>
 
                   {/* Dynamic Image Display Based on Tab */}
@@ -853,7 +1573,7 @@ export function SignalBrandDesigner() {
 
                   <button
                     onClick={openQuantumLeap}
-                    className="mt-5 w-full py-2.5 rounded-xl border border-sky-500/30 bg-sky-950/20 hover:bg-sky-500/20 text-sky-300 font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                    className="signal-capsule-btn mt-5 w-full py-2.5 rounded-xl justify-center font-bold text-xs uppercase tracking-wider transition-all"
                   >
                     <span>Explore Full Case Study</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -881,31 +1601,25 @@ export function SignalBrandDesigner() {
                   </div>
 
                   {/* Interactive Sub-tab switcher for Aurora Home */}
-                  <div className="flex gap-1.5 pb-3 overflow-x-auto text-[11px] font-mono">
-                    <button
-                      onClick={() => setAuroraActiveTab("palette")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${auroraActiveTab === "palette" ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Palette &amp; Pattern
-                    </button>
-                    <button
-                      onClick={() => setAuroraActiveTab("typography")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${auroraActiveTab === "typography" ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Typography
-                    </button>
-                    <button
-                      onClick={() => setAuroraActiveTab("book")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${auroraActiveTab === "book" ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Brand Book
-                    </button>
-                    <button
-                      onClick={() => setAuroraActiveTab("physical")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${auroraActiveTab === "physical" ? "bg-amber-500/20 text-amber-300 border border-amber-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Storefront &amp; Packaging
-                    </button>
+                  <div className="flex gap-2 pb-3 overflow-x-auto text-[11px] font-mono">
+                    {([
+                      { id: "palette", label: "Palette & Pattern" },
+                      { id: "typography", label: "Typography" },
+                      { id: "book", label: "Brand Book" },
+                      { id: "physical", label: "Storefront & Packaging" },
+                    ] as const).map((tab) => (
+                      <button
+                        key={tab.id}
+                        onClick={() => setAuroraActiveTab(tab.id)}
+                        className={`px-3 py-1.5 rounded-lg transition-all ${
+                          auroraActiveTab === tab.id
+                            ? "signal-capsule-btn signal-capsule-btn-active"
+                            : "signal-capsule-btn"
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
                   </div>
 
                   {/* Dynamic Image Display Based on Tab */}
@@ -987,7 +1701,7 @@ export function SignalBrandDesigner() {
 
                   <button
                     onClick={openAuroraHome}
-                    className="mt-5 w-full py-2.5 rounded-xl border border-sky-500/30 bg-sky-950/20 hover:bg-sky-500/20 text-sky-300 font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                    className="signal-capsule-btn mt-5 w-full py-2.5 rounded-xl justify-center font-bold text-xs uppercase tracking-wider transition-all"
                   >
                     <span>Explore Full Case Study</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -1015,19 +1729,23 @@ export function SignalBrandDesigner() {
                   </div>
 
                   {/* Interactive Sub-tab switcher for Synapse AI */}
-                  <div className="flex gap-1.5 pb-3 overflow-x-auto text-[11px] font-mono">
-                    <button
-                      onClick={() => setSynapseActiveTab("identity")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${synapseActiveTab === "identity" ? "bg-violet-500/20 text-violet-300 border border-violet-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Neural Hexagon Identity &amp; Observability UI
-                    </button>
-                    <button
-                      onClick={() => setSynapseActiveTab("hardware")}
-                      className={`px-2.5 py-1 rounded-md transition-colors ${synapseActiveTab === "hardware" ? "bg-violet-500/20 text-violet-300 border border-violet-500/40" : "text-slate-400 hover:text-white"}`}
-                    >
-                      Server Faceplate Hardware &amp; Keycard App
-                    </button>
+                  <div className="flex gap-2 pb-3 overflow-x-auto text-[11px] font-mono">
+                    {([
+                      { id: "identity", label: "Neural Hexagon Identity & Observability UI" },
+                      { id: "hardware", label: "Server Faceplate Hardware & Keycard App" },
+                    ] as const).map((tab) => (
+                      <button
+                        key={tab.id}
+                        onClick={() => setSynapseActiveTab(tab.id)}
+                        className={`px-3 py-1.5 rounded-lg transition-all ${
+                          synapseActiveTab === tab.id
+                            ? "signal-capsule-btn signal-capsule-btn-active"
+                            : "signal-capsule-btn"
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
                   </div>
 
                   {/* Dynamic Image Display Based on Tab */}
@@ -1085,7 +1803,7 @@ export function SignalBrandDesigner() {
 
                   <button
                     onClick={openSynapseAi}
-                    className="px-6 py-2.5 rounded-xl border border-violet-500/30 bg-violet-950/20 hover:bg-violet-500/20 text-violet-300 font-mono text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shrink-0"
+                    className="signal-capsule-btn px-6 py-2.5 rounded-xl justify-center font-bold text-xs uppercase tracking-wider transition-all shrink-0"
                   >
                     <span>Explore Full Case Study</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -1295,91 +2013,82 @@ export function SignalBrandDesigner() {
             <div className="space-y-6">
               {/* Question 1: Stage */}
               <div>
-                <label className="text-xs font-mono uppercase tracking-wider text-slate-300 block mb-2">
+                <label className="text-xs font-mono uppercase tracking-wider text-slate-300 block mb-2 font-semibold">
                   01 // Stage of Company Growth
                 </label>
-                <div className="grid grid-cols-3 gap-2 text-xs font-mono">
-                  <button
-                    type="button"
-                    onClick={() => setAuditStage("seed")}
-                    className={`py-2.5 px-3 rounded-lg border text-center transition-all ${auditStage === "seed" ? "border-sky-400 bg-sky-500/20 text-white font-bold" : "border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white"}`}
-                  >
-                    Seed / Stealth
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAuditStage("growth")}
-                    className={`py-2.5 px-3 rounded-lg border text-center transition-all ${auditStage === "growth" ? "border-sky-400 bg-sky-500/20 text-white font-bold" : "border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white"}`}
-                  >
-                    Series A-B Growth
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAuditStage("enterprise")}
-                    className={`py-2.5 px-3 rounded-lg border text-center transition-all ${auditStage === "enterprise" ? "border-sky-400 bg-sky-500/20 text-white font-bold" : "border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white"}`}
-                  >
-                    Global Enterprise
-                  </button>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
+                  {([
+                    { id: "seed", label: "Seed / Stealth" },
+                    { id: "growth", label: "Series A-B Growth" },
+                    { id: "enterprise", label: "Global Enterprise" },
+                  ] as const).map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setAuditStage(opt.id)}
+                      className={`py-2.5 px-3 rounded-lg border text-center transition-all ${
+                        auditStage === opt.id
+                          ? "signal-capsule-btn signal-capsule-btn-active justify-center font-bold"
+                          : "signal-capsule-btn justify-center"
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
               {/* Question 2: Touchpoints */}
               <div>
-                <label className="text-xs font-mono uppercase tracking-wider text-slate-300 block mb-2">
+                <label className="text-xs font-mono uppercase tracking-wider text-slate-300 block mb-2 font-semibold">
                   02 // Primary Brand Touchpoints
                 </label>
-                <div className="grid grid-cols-3 gap-2 text-xs font-mono">
-                  <button
-                    type="button"
-                    onClick={() => setAuditTouchpoints("digital")}
-                    className={`py-2.5 px-3 rounded-lg border text-center transition-all ${auditTouchpoints === "digital" ? "border-cyan-400 bg-cyan-500/20 text-white font-bold" : "border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white"}`}
-                  >
-                    Pure Digital / Web App
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAuditTouchpoints("physical")}
-                    className={`py-2.5 px-3 rounded-lg border text-center transition-all ${auditTouchpoints === "physical" ? "border-cyan-400 bg-cyan-500/20 text-white font-bold" : "border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white"}`}
-                  >
-                    Packaging &amp; Retail
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAuditTouchpoints("hybrid")}
-                    className={`py-2.5 px-3 rounded-lg border text-center transition-all ${auditTouchpoints === "hybrid" ? "border-cyan-400 bg-cyan-500/20 text-white font-bold" : "border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white"}`}
-                  >
-                    Hybrid Hardware + Cloud
-                  </button>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
+                  {([
+                    { id: "digital", label: "Pure Digital / Web App" },
+                    { id: "physical", label: "Packaging & Retail" },
+                    { id: "hybrid", label: "Hybrid Hardware + Cloud" },
+                  ] as const).map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setAuditTouchpoints(opt.id)}
+                      className={`py-2.5 px-3 rounded-lg border text-center transition-all ${
+                        auditTouchpoints === opt.id
+                          ? "signal-capsule-btn signal-capsule-btn-active justify-center font-bold"
+                          : "signal-capsule-btn justify-center"
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
               {/* Question 3: Current Consistency */}
               <div>
-                <label className="text-xs font-mono uppercase tracking-wider text-slate-300 block mb-2">
+                <label className="text-xs font-mono uppercase tracking-wider text-slate-300 block mb-2 font-semibold">
                   03 // Current Design Asset Consistency
                 </label>
-                <div className="grid grid-cols-3 gap-2 text-xs font-mono">
-                  <button
-                    type="button"
-                    onClick={() => setAuditConsistency("fragmented")}
-                    className={`py-2.5 px-3 rounded-lg border text-center transition-all ${auditConsistency === "fragmented" ? "border-amber-400 bg-amber-500/20 text-white font-bold" : "border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white"}`}
-                  >
-                    Fragmented / Outdated
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAuditConsistency("moderate")}
-                    className={`py-2.5 px-3 rounded-lg border text-center transition-all ${auditConsistency === "moderate" ? "border-amber-400 bg-amber-500/20 text-white font-bold" : "border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white"}`}
-                  >
-                    Partial Guidelines
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAuditConsistency("standardized")}
-                    className={`py-2.5 px-3 rounded-lg border text-center transition-all ${auditConsistency === "standardized" ? "border-amber-400 bg-amber-500/20 text-white font-bold" : "border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white"}`}
-                  >
-                    Ready for Full System
-                  </button>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
+                  {([
+                    { id: "fragmented", label: "Fragmented / Outdated" },
+                    { id: "moderate", label: "Partial Guidelines" },
+                    { id: "standardized", label: "Ready for Full System" },
+                  ] as const).map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setAuditConsistency(opt.id)}
+                      className={`py-2.5 px-3 rounded-lg border text-center transition-all ${
+                        auditConsistency === opt.id
+                          ? "signal-capsule-btn signal-capsule-btn-active justify-center font-bold"
+                          : "signal-capsule-btn justify-center"
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1447,12 +2156,16 @@ export function SignalBrandDesigner() {
           </div>
 
           {/* Testimonial Switcher Tabs */}
-          <div className="flex justify-center gap-2 mb-6">
+          <div className="flex justify-center gap-2 mb-6 flex-wrap">
             {testimonials.map((t, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveTestimonial(idx as 0 | 1 | 2)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-mono transition-all ${activeTestimonial === idx ? "border-sky-400 bg-sky-500/20 text-white font-bold" : "border-slate-800 text-slate-400 hover:text-white"}`}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono transition-all ${
+                  activeTestimonial === idx
+                    ? "signal-capsule-btn signal-capsule-btn-active font-bold"
+                    : "signal-capsule-btn"
+                }`}
               >
                 <img
                   src={t.image}
@@ -1562,7 +2275,7 @@ export function SignalBrandDesigner() {
                       message: "",
                     });
                   }}
-                  className="mt-5 px-5 py-2 rounded-full border border-sky-500/40 text-sky-300 text-xs font-mono font-semibold hover:bg-sky-500/20 transition-colors"
+                  className="signal-capsule-btn signal-capsule-btn-active mt-5 px-6 py-2.5 text-xs font-mono font-bold tracking-wider cursor-pointer"
                 >
                   Send Another Inquiry
                 </button>

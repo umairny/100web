@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141519"/>
+      <stop offset="100%" stop-color="#090a0d"/>
+    </linearGradient>
+    <linearGradient id="accentGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e5dfd3"/>
+      <stop offset="100%" stop-color="#c5b8a5"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1e24"/>
+      <stop offset="100%" stop-color="#121317"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="400" height="300" rx="16" fill="url(#bgGrad1)"/>
+  
+  <!-- Subtle Grid Pattern -->
+  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+    <line x1="50" y1="0" x2="50" y2="300"/>
+    <line x1="150" y1="0" x2="150" y2="300"/>
+    <line x1="250" y1="0" x2="250" y2="300"/>
+    <line x1="350" y1="0" x2="350" y2="300"/>
+    <line x1="0" y1="75" x2="400" y2="75"/>
+    <line x1="0" y1="150" x2="400" y2="150"/>
+    <line x1="0" y1="225" x2="400" y2="225"/>
+  </g>
+
+  <!-- Moodboard Cards & Swatches Composition -->
+  <!-- Card 1: Contact Sheet / Film Strip -->
+  <g transform="translate(60, 40) rotate(-4)">
+    <rect width="130" height="170" rx="8" fill="url(#cardGrad1)" stroke="rgba(229,223,211,0.25)" stroke-width="1.5" filter="drop-shadow(0 12px 24px rgba(0,0,0,0.5))"/>
+    <!-- Film sprocket holes -->
+    <g fill="rgba(255,255,255,0.15)">
+      <rect x="8" y="10" width="8" height="6" rx="1"/>
+      <rect x="8" y="24" width="8" height="6" rx="1"/>
+      <rect x="8" y="38" width="8" height="6" rx="1"/>
+      <rect x="8" y="52" width="8" height="6" rx="1"/>
+      <rect x="8" y="66" width="8" height="6" rx="1"/>
+      <rect x="8" y="80" width="8" height="6" rx="1"/>
+      <rect x="8" y="94" width="8" height="6" rx="1"/>
+      <rect x="8" y="108" width="8" height="6" rx="1"/>
+      <rect x="8" y="122" width="8" height="6" rx="1"/>
+      <rect x="8" y="136" width="8" height="6" rx="1"/>
+      <rect x="8" y="150" width="8" height="6" rx="1"/>
+    </g>
+    <!-- Photo frames -->
+    <rect x="24" y="12" width="94" height="68" rx="4" fill="#0c0d10" stroke="rgba(255,255,255,0.1)"/>
+    <circle cx="71" cy="46" r="18" fill="none" stroke="rgba(229,223,211,0.4)" stroke-width="1.5"/>
+    <line x1="71" y1="24" x2="71" y2="68" stroke="rgba(229,223,211,0.2)" stroke-width="1"/>
+    <line x1="49" y1="46" x2="93" y2="46" stroke="rgba(229,223,211,0.2)" stroke-width="1"/>
+    
+    <rect x="24" y="88" width="94" height="68" rx="4" fill="#0c0d10" stroke="rgba(255,255,255,0.1)"/>
+    <!-- Red Grease Pencil Circle Approval Mark -->
+    <ellipse cx="71" cy="122" rx="34" ry="24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="160 10" transform="rotate(-6 71 122)"/>
+  </g>
+
+  <!-- Card 2: Creative Moodboard Layout -->
+  <g transform="translate(180, 55) rotate(5)">
+    <rect width="150" height="190" rx="10" fill="#181a20" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" filter="drop-shadow(0 16px 30px rgba(0,0,0,0.6))"/>
+    
+    <!-- Moodboard header text -->
+    <text x="18" y="28" fill="#e5dfd3" font-family="Cinzel, serif" font-size="10" font-weight="bold" letter-spacing="2">PARIS HAUTE S/S</text>
+    <text x="18" y="42" fill="#9da3af" font-family="monospace" font-size="7" letter-spacing="1">COLOR PALETTE &amp; FORM</text>
+    
+    <!-- Hero Mood Image placeholder -->
+    <rect x="18" y="52" width="114" height="76" rx="6" fill="#0a0b0e"/>
+    <path d="M26 112 Q60 65 90 95 T126 70" fill="none" stroke="url(#accentGrad1)" stroke-width="2"/>
+    <circle cx="85" cy="78" r="12" fill="rgba(229,223,211,0.2)"/>
+
+    <!-- Color Swatches Strip -->
+    <g transform="translate(18, 140)">
+      <rect x="0" y="0" width="24" height="18" rx="3" fill="#e5dfd3"/>
+      <rect x="30" y="0" width="24" height="18" rx="3" fill="#c5b8a5"/>
+      <rect x="60" y="0" width="24" height="18" rx="3" fill="#68635c"/>
+      <rect x="90" y="0" width="24" height="18" rx="3" fill="#181716" stroke="rgba(255,255,255,0.2)"/>
+    </g>
+
+    <!-- Swatch labels -->
+    <text x="18" y="174" fill="#9da3af" font-family="monospace" font-size="6.5">PANTONE 11-0601 // SILK</text>
+  </g>
+
+  <!-- Step Badge Overlay -->
+  <g transform="translate(26, 246)">
+    <rect width="110" height="28" rx="14" fill="rgba(0,0,0,0.7)" stroke="rgba(229,223,211,0.3)" stroke-width="1"/>
+    <circle cx="16" cy="14" r="5" fill="#e5dfd3"/>
+    <text x="28" y="18" fill="#e5dfd3" font-family="monospace" font-size="9" font-weight="bold" letter-spacing="1.5">PHASE 01 // RESEARCH</text>
+  </g>
+</svg>

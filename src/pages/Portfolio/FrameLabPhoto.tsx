@@ -19,7 +19,6 @@ import {
   MapPin,
   Send,
 } from "lucide-react";
-import "./FrameLabPhoto.css";
 
 // -----------------------------------------------------------------------------
 // Social Icons (Inline SVGs to prevent lucide-react version mismatch)
@@ -76,42 +75,42 @@ function LightboxModal({ project, onClose, onPrev, onNext }: LightboxModalProps)
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-5xl max-h-[92vh] overflow-y-auto framelab-scrollbar rounded-3xl border border-white/10 bg-[#121316] text-white p-5 sm:p-8 shadow-2xl text-left framelab-modal-anim relative"
+        className="w-full max-w-5xl max-h-[92vh] overflow-y-auto framelab-scrollbar rounded-3xl border border-[var(--fl-border)] bg-[var(--fl-surface)] text-[var(--fl-text)] p-5 sm:p-8 shadow-2xl text-left framelab-modal-anim relative"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Controls */}
-        <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+        <div className="flex items-center justify-between pb-4 border-b border-[var(--fl-border)] mb-6">
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-400 font-bold bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
+            <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[var(--fl-text-muted)] font-bold bg-[var(--fl-card)] px-2.5 py-1 rounded-full border border-[var(--fl-border)]">
               {project.category} // {project.year}
             </span>
-            <span className="text-xs font-mono text-slate-400">
-              Client: <strong className="text-white">{project.publication}</strong>
+            <span className="text-xs font-mono text-[var(--fl-text-muted)]">
+              Client: <strong className="text-[var(--fl-text)]">{project.publication}</strong>
             </span>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={onPrev}
-              className="p-2 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white transition-colors cursor-pointer border border-white/10"
+              className="p-2 rounded-full bg-[var(--fl-card)] hover:bg-[var(--fl-card-hover)] text-[var(--fl-text-muted)] hover:text-[var(--fl-text)] transition-colors cursor-pointer border border-[var(--fl-border)]"
               aria-label="Previous project"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={onNext}
-              className="p-2 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white transition-colors cursor-pointer border border-white/10"
+              className="p-2 rounded-full bg-[var(--fl-card)] hover:bg-[var(--fl-card-hover)] text-[var(--fl-text-muted)] hover:text-[var(--fl-text)] transition-colors cursor-pointer border border-[var(--fl-border)]"
               aria-label="Next project"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-white/5 hover:bg-red-500/20 text-slate-300 hover:text-red-400 transition-colors cursor-pointer border border-white/10 ml-2"
+              className="p-2 rounded-full bg-[var(--fl-card)] hover:bg-red-500/20 text-[var(--fl-text-muted)] hover:text-red-400 transition-colors cursor-pointer border border-[var(--fl-border)] ml-2"
               aria-label="Close modal"
             >
               <X className="w-4 h-4" />
@@ -122,7 +121,7 @@ function LightboxModal({ project, onClose, onPrev, onNext }: LightboxModalProps)
         {/* Modal Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Image Preview */}
-          <div className="lg:col-span-7 rounded-2xl overflow-hidden bg-black/40 border border-white/10 shadow-lg">
+          <div className="lg:col-span-7 rounded-2xl overflow-hidden bg-black/40 border border-[var(--fl-border)] shadow-lg">
             <img
               src={project.image}
               alt={project.title}
@@ -133,57 +132,57 @@ function LightboxModal({ project, onClose, onPrev, onNext }: LightboxModalProps)
           {/* Right Column: Editorial Notes & Metadata */}
           <div className="lg:col-span-5 space-y-6">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold framelab-serif leading-tight text-white mb-2">
+              <h2 className="text-2xl sm:text-3xl font-bold framelab-serif leading-tight text-[var(--fl-text)] mb-2">
                 {project.title}
               </h2>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[var(--fl-text-muted)] leading-relaxed font-light">
                 {project.narrative}
               </p>
             </div>
 
             {/* Technical Camera Specifications */}
-            <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-2 text-xs font-mono">
-              <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold border-b border-white/5 pb-1 flex items-center gap-1.5">
-                <Camera className="w-3 h-3 text-slate-300" />
+            <div className="p-4 rounded-xl bg-[var(--fl-card)] border border-[var(--fl-border)] space-y-2 text-xs font-mono">
+              <div className="text-[10px] uppercase tracking-widest text-[var(--fl-text-muted)] font-bold border-b border-[var(--fl-border)] pb-1 flex items-center gap-1.5">
+                <Camera className="w-3 h-3 text-[var(--fl-accent)]" />
                 Technical Capture Suite
               </div>
-              <div className="grid grid-cols-2 gap-2 text-slate-300 pt-1">
+              <div className="grid grid-cols-2 gap-2 text-[var(--fl-text)] pt-1">
                 <div>
-                  <span className="text-slate-500 block text-[9px] uppercase">Camera</span>
+                  <span className="text-[var(--fl-text-muted)] block text-[9px] uppercase">Camera</span>
                   <span>{project.specs.camera}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[9px] uppercase">Optics</span>
+                  <span className="text-[var(--fl-text-muted)] block text-[9px] uppercase">Optics</span>
                   <span>{project.specs.lens}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[9px] uppercase">Lighting</span>
+                  <span className="text-[var(--fl-text-muted)] block text-[9px] uppercase">Lighting</span>
                   <span>{project.specs.lighting}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[9px] uppercase">Location</span>
+                  <span className="text-[var(--fl-text-muted)] block text-[9px] uppercase">Location</span>
                   <span>{project.specs.location}</span>
                 </div>
               </div>
             </div>
 
             {/* Production Team Credits */}
-            <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-2 text-xs font-mono">
-              <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold border-b border-white/5 pb-1 flex items-center gap-1.5">
-                <Film className="w-3 h-3 text-slate-300" />
+            <div className="p-4 rounded-xl bg-[var(--fl-card)] border border-[var(--fl-border)] space-y-2 text-xs font-mono">
+              <div className="text-[10px] uppercase tracking-widest text-[var(--fl-text-muted)] font-bold border-b border-[var(--fl-border)] pb-1 flex items-center gap-1.5">
+                <Film className="w-3 h-3 text-[var(--fl-accent)]" />
                 Production Credits
               </div>
-              <div className="grid grid-cols-2 gap-2 text-slate-300 pt-1">
+              <div className="grid grid-cols-2 gap-2 text-[var(--fl-text)] pt-1">
                 <div>
-                  <span className="text-slate-500 block text-[9px] uppercase">Art Direction</span>
+                  <span className="text-[var(--fl-text-muted)] block text-[9px] uppercase">Art Direction</span>
                   <span>{project.credits.artDirector}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[9px] uppercase">Fashion Stylist</span>
+                  <span className="text-[var(--fl-text-muted)] block text-[9px] uppercase">Fashion Stylist</span>
                   <span>{project.credits.stylist}</span>
                 </div>
                 <div className="col-span-2">
-                  <span className="text-slate-500 block text-[9px] uppercase">Talent</span>
+                  <span className="text-[var(--fl-text-muted)] block text-[9px] uppercase">Talent</span>
                   <span>{project.credits.model}</span>
                 </div>
               </div>
@@ -196,7 +195,7 @@ function LightboxModal({ project, onClose, onPrev, onNext }: LightboxModalProps)
                 const el = document.getElementById("inquire");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="w-full py-3 rounded-xl bg-white text-black hover:bg-slate-200 font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer shadow-md text-center"
+              className="framelab-btn-primary w-full py-3 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer shadow-md text-center"
             >
               Inquire About Similar Campaign
             </button>
@@ -255,7 +254,7 @@ export function FrameLabPhoto() {
       publication: "Vogue France",
       year: "2024",
       category: "Covers",
-      image: "/images/framelab/work-vogue-naomi.webp",
+      image: "/images/framelab/work-vogue-naomi.jpg",
       specs: {
         camera: "Hasselblad H6D-100c",
         lens: "HC 80mm f/2.2",
@@ -276,7 +275,7 @@ export function FrameLabPhoto() {
       publication: "Harper's Bazaar",
       year: "2024",
       category: "Editorial",
-      image: "/images/framelab/work-harpers-urban.webp",
+      image: "/images/framelab/work-harpers-urban.jpg",
       specs: {
         camera: "Leica S3 Medium Format",
         lens: "Summarit-S 70mm f/2.5 ASPH",
@@ -385,65 +384,78 @@ export function FrameLabPhoto() {
           (p) => p.category.toLowerCase() === selectedCategory.toLowerCase()
         );
 
-  // The Process Steps
+  // The Process Steps with Bespoke Production Graphics
   const processSteps = [
     {
-      title: "RESEARCH & CONCEPT",
-      image: "/images/framelab/process-step-1.webp",
-      summary: "Editorial photography portfolio for custom editorial/commercial concept & portfolio.",
+      stepNum: "01",
+      title: "CONCEPT & VISUAL DIRECTION",
+      image: "/images/framelab/process-step-1-research.svg",
+      summary: "Archival moodboard curation, lighting schema drafting, and narrative treatment.",
       details:
-        "Deep visual research, moodboard curation, cultural alignment, and lighting schema drafting tailored to the publication's seasonal editorial directive.",
+        "Deep cultural and visual research tailored to seasonal editorial directives. We draft precise lighting schematics, moodboards, color swatches, and narrative arcs before touching a shutter.",
       deliverable: "Creative Direction Deck & Moodboard",
-      turnaround: "5 Business Days",
+      turnaround: "3-5 Business Days",
     },
     {
-      title: "PLANNING & CASTING",
-      image: "/images/framelab/process-step-2.webp",
-      summary: "Editorial photography portfolio & locations, casting & direction.",
+      stepNum: "02",
+      title: "TALENT CASTING & SET DESIGN",
+      image: "/images/framelab/process-step-2-casting.svg",
+      summary: "Tier-one agency casting, architectural scouting, wardrobe pulling, and call sheets.",
       details:
-        "Sourcing tier-one agency talent, securing architectural shoot locations, negotiating permits, and coordinating with hair, makeup, and wardrobe departments.",
+        "Securing editorial agency talent, architectural scouting across Paris, Milan, and New York, location permits, and close coordination with wardrobe and makeup stylists.",
       deliverable: "Call Sheets, Location Permits & Talent Book",
-      turnaround: "3-7 Days",
+      turnaround: "4-7 Days",
     },
     {
-      title: "PRODUCTION & DIRECTION",
-      image: "/images/framelab/process-step-3.webp",
-      summary: "Editorial photography portfolio high-end & cinematic.",
+      stepNum: "03",
+      title: "MEDIUM-FORMAT PRODUCTION",
+      image: "/images/framelab/process-step-3-production.svg",
+      summary: "Live tethered 100MP Hasselblad capture with calibrated studio octaboxes and digital tech.",
       details:
-        "Full-day or multi-day medium-format capture on stage or on location with live Capture One tethering, digital tech monitoring, and precise art direction.",
+        "Full-day medium-format studio or on-location capture. Live tethered Capture One Pro review stations allow clients and editors to approve framing and grading in real-time.",
       deliverable: "Raw Capture One Session (1,500+ Frames)",
       turnaround: "1-3 Shoot Days",
     },
     {
-      title: "POST & DELIVERY",
-      image: "/images/framelab/process-step-4.webp",
-      summary: "Post & delivery was with concise retouched photo pack & delivery suite.",
+      stepNum: "04",
+      title: "MASTER RETOUCH & DELIVERY",
+      image: "/images/framelab/process-step-4-delivery.svg",
+      summary: "Frequency separation, master color grading, CMYK pre-flight, and archival TIFFs.",
       details:
-        "High-end non-destructive frequency separation, master color grading, magazine CMYK pre-flight profiles, and secure client cloud gallery delivery.",
+        "Non-destructive frequency separation, analog grain emulation, CMYK prepress calibration, and secure private cloud gallery delivery ready for publication.",
       deliverable: "Master Hi-Res TIFFs & Web-Ready Archives",
-      turnaround: "7-10 Days",
+      turnaround: "5-7 Days",
     },
   ];
 
-  // Credible Outcomes Testimonials Data
+  // Credible Outcomes Testimonials Data with Custom Editorial Spread Graphics
   const testimonials = [
     {
-      quote: "FrameLab Photo elevates every story they touch.",
+      quote: "FrameLab Photo elevates every story they touch. Their medium-format mastery turns couture into timeless art.",
       editor: "Alicia W.",
       title: "Editor-in-Chief, Global Editorial",
       magazine: "VOGUE & ELLE COLLABORATION",
+      spreadImage: "/images/framelab/spread-vogue-editorial.svg",
+      spreadTitle: "THE SILK MONOLOGUE // VOGUE PARIS SPREAD",
+      specs: "Hasselblad H6D-100c · Broncolor Para 222 · Silk Couture",
     },
     {
-      quote: "Unrivaled cinematic mastery, precision lighting, and authentic emotional resonance.",
+      quote: "Unrivaled cinematic mastery, precision architectural lighting, and authentic emotional resonance.",
       editor: "Marcus Vance",
       title: "Creative Director, Conde Nast",
       magazine: "GQ STYLE AWARDS 2024",
+      spreadImage: "/images/framelab/spread-gq-menswear.svg",
+      spreadTitle: "THE MODERN PROTAGONIST // GQ STYLE AWARDS",
+      specs: "Zeiss 80mm f/2.8 · Ambient Raking Light · SoHo Greene St",
     },
     {
       quote: "Their medium-format imagery transforms standard fashion spreads into permanent cultural archives.",
       editor: "Helena Berg",
       title: "Executive Director of Photography",
       magazine: "MONOCLE QUARTERLY",
+      spreadImage: "/images/framelab/spread-monocle-culture.svg",
+      spreadTitle: "ARCHITECTURAL PROPORTIONS // MONOCLE REPORT",
+      specs: "Phase One IQ4 150MP · Schneider 55mm · Milan Atelier",
     },
   ];
 
@@ -479,6 +491,22 @@ export function FrameLabPhoto() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Keyboard shortcut listener: Cmd/Ctrl+K to search, Esc to close
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      } else if (e.key === "Escape") {
+        setSearchOpen(false);
+        setActiveProjectIndex(null);
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const scrollToSection = (id: string) => {
     setActiveSection(id);
     setMobileMenuOpen(false);
@@ -499,7 +527,257 @@ export function FrameLabPhoto() {
   };
 
   return (
-    <div className="framelab-container min-h-screen selection:bg-white selection:text-black">
+    <div className="framelab-container min-h-screen selection:bg-[var(--fl-accent)] selection:text-[var(--fl-bg)]">
+      {/* ======================================================================= */}
+      {/* EMBEDDED DESIGN TOKENS & RESPONSIVE THEME RULES                         */}
+      {/* ======================================================================= */}
+      <style>{`
+        /* ================= FRAMELAB DESIGN TOKENS ================= */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+        .framelab-container {
+          /* Default Base: Original Editorial Haute Couture Dark Palette */
+          --fl-bg: var(--theme-bg-base, #08090a);
+          --fl-surface: var(--theme-bg-surface, #111215);
+          --fl-card: var(--theme-bg-card, #16171c);
+          --fl-card-hover: var(--theme-bg-card-hover, #1e2027);
+          --fl-accent: var(--theme-accent-primary, #e5dfd3);
+          --fl-accent-secondary: var(--theme-accent-secondary, #c5b8a5);
+          --fl-accent-glow: var(--theme-accent-glow, rgba(229, 223, 211, 0.22));
+          --fl-accent-gradient: var(--theme-accent-gradient, linear-gradient(135deg, #f5f2eb 0%, #c5b8a5 100%));
+          --fl-text: var(--theme-text-primary, #f7f6f4);
+          --fl-text-muted: var(--theme-text-muted, #9da3af);
+          --fl-border: var(--theme-border, rgba(255, 255, 255, 0.08));
+          --fl-header-bg: color-mix(in srgb, var(--fl-bg) 85%, transparent);
+          --fl-process-bg: color-mix(in srgb, var(--fl-surface) 90%, var(--fl-accent) 10%);
+          --fl-inquire-bg: var(--fl-surface);
+          --fl-input-bg: rgba(255, 255, 255, 0.04);
+
+          background-color: var(--fl-bg);
+          color: var(--fl-text);
+          font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          overflow-x: hidden;
+          position: relative;
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light Mode Adaptive Tokens */
+        html.light .framelab-container,
+        body.light .framelab-container,
+        [data-theme-mood="light"] .framelab-container,
+        :root[data-theme-mood="light"] .framelab-container,
+        :root[data-theme-active="true"][data-theme-mood="light"] .framelab-container,
+        :root.light .framelab-container {
+          --fl-bg: var(--theme-bg-base, #faf8f5);
+          --fl-surface: var(--theme-bg-surface, #ffffff);
+          --fl-card: var(--theme-bg-card, #ffffff);
+          --fl-card-hover: var(--theme-bg-card-hover, #f3f0ea);
+          --fl-accent: var(--theme-accent-primary, #181716);
+          --fl-accent-secondary: var(--theme-accent-secondary, #5e5750);
+          --fl-accent-glow: var(--theme-accent-glow, rgba(24, 23, 22, 0.15));
+          --fl-accent-gradient: var(--theme-accent-gradient, linear-gradient(135deg, #181716 0%, #3e3a36 100%));
+          --fl-text: var(--theme-text-primary, #181716);
+          --fl-text-muted: var(--theme-text-muted, #68635c);
+          --fl-border: var(--theme-border, rgba(0, 0, 0, 0.09));
+          --fl-header-bg: color-mix(in srgb, var(--fl-bg) 88%, transparent);
+          --fl-process-bg: #f4f0e8;
+          --fl-inquire-bg: #ede8df;
+          --fl-input-bg: #ffffff;
+        }
+
+        /* Dark Mode Explicit Tokens when theme active */
+        html.dark .framelab-container,
+        body.dark .framelab-container,
+        [data-theme-mood="dark"] .framelab-container,
+        :root[data-theme-mood="dark"] .framelab-container,
+        :root[data-theme-active="true"][data-theme-mood="dark"] .framelab-container,
+        :root.dark .framelab-container {
+          --fl-bg: var(--theme-bg-base, #08090a);
+          --fl-surface: var(--theme-bg-surface, #111215);
+          --fl-card: var(--theme-bg-card, #16171c);
+          --fl-card-hover: var(--theme-bg-card-hover, #1e2027);
+          --fl-accent: var(--theme-accent-primary, #e5dfd3);
+          --fl-accent-secondary: var(--theme-accent-secondary, #c5b8a5);
+          --fl-accent-glow: var(--theme-accent-glow, rgba(229, 223, 211, 0.22));
+          --fl-accent-gradient: var(--theme-accent-gradient, linear-gradient(135deg, #f5f2eb 0%, #c5b8a5 100%));
+          --fl-text: var(--theme-text-primary, #f7f6f4);
+          --fl-text-muted: var(--theme-text-muted, #9da3af);
+          --fl-border: var(--theme-border, rgba(255, 255, 255, 0.08));
+          --fl-header-bg: color-mix(in srgb, var(--fl-bg) 86%, transparent);
+          --fl-process-bg: color-mix(in srgb, var(--fl-surface) 90%, var(--fl-accent) 10%);
+          --fl-inquire-bg: var(--fl-surface);
+          --fl-input-bg: rgba(255, 255, 255, 0.04);
+        }
+
+        /* Original Preset: High-Fashion Monochromatic & Cashmere Perfection */
+        [data-theme-preset="original"][data-theme-mood="light"] .framelab-container,
+        html.light[data-theme-preset="original"] .framelab-container,
+        html.light:not([data-theme-preset]) .framelab-container,
+        :root:not([data-theme-preset])[data-theme-mood="light"] .framelab-container {
+          --fl-accent: #181716 !important;
+          --fl-accent-secondary: #5e5750 !important;
+          --fl-accent-glow: rgba(24, 23, 22, 0.15) !important;
+          --fl-accent-gradient: linear-gradient(135deg, #181716 0%, #3e3a36 100%) !important;
+        }
+
+        [data-theme-preset="original"][data-theme-mood="dark"] .framelab-container,
+        html.dark[data-theme-preset="original"] .framelab-container,
+        html.dark:not([data-theme-preset]) .framelab-container,
+        :root:not([data-theme-preset])[data-theme-mood="dark"] .framelab-container {
+          --fl-accent: #e5dfd3 !important;
+          --fl-accent-secondary: #c5b8a5 !important;
+          --fl-accent-glow: rgba(229, 223, 211, 0.22) !important;
+          --fl-accent-gradient: linear-gradient(135deg, #f5f2eb 0%, #c5b8a5 100%) !important;
+        }
+
+        /* Non-Original Theme Preset Override (Ensures preset primary color illuminates buttons, borders, tabs) */
+        [data-theme-preset]:not([data-theme-preset="original"]) .framelab-container,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .framelab-container {
+          --fl-accent: var(--theme-accent-primary) !important;
+          --fl-accent-secondary: var(--theme-accent-secondary) !important;
+          --fl-accent-glow: var(--theme-accent-glow) !important;
+          --fl-accent-gradient: var(--theme-accent-gradient) !important;
+        }
+
+        /* Editorial Typography */
+        .framelab-serif {
+          font-family: 'Playfair Display', Georgia, serif;
+          letter-spacing: -0.01em;
+        }
+
+        .framelab-cinzel {
+          font-family: 'Cinzel', serif;
+          letter-spacing: 0.08em;
+        }
+
+        /* Sticky Navigation Bar */
+        .framelab-navbar-sticky {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 50;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          background-color: var(--fl-header-bg);
+          border-bottom: 1px solid var(--fl-border);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .framelab-navbar-scrolled {
+          box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Project Card Hover and Zoom */
+        .framelab-project-card {
+          position: relative;
+          background-color: var(--fl-card);
+          border: 1px solid var(--fl-border);
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+        }
+
+        .framelab-project-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+          border-color: var(--fl-accent);
+        }
+
+        .framelab-img-zoom {
+          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .framelab-project-card:hover .framelab-img-zoom {
+          transform: scale(1.05);
+        }
+
+        /* Buttons */
+        .framelab-btn-primary {
+          background: var(--fl-accent);
+          color: var(--fl-bg) !important;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          box-shadow: 0 4px 20px var(--fl-accent-glow);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        [data-theme-preset]:not([data-theme-preset="original"]) .framelab-btn-primary {
+          background: var(--fl-accent-gradient);
+          color: #ffffff !important;
+        }
+        html.light [data-theme-preset="original"] .framelab-btn-primary,
+        html.light:not([data-theme-preset]) .framelab-btn-primary,
+        [data-theme-mood="light"] [data-theme-preset="original"] .framelab-btn-primary {
+          color: #ffffff !important;
+          background: #181716 !important;
+        }
+        html.dark [data-theme-preset="original"] .framelab-btn-primary,
+        html.dark:not([data-theme-preset]) .framelab-btn-primary,
+        :not([data-theme-mood="light"]) [data-theme-preset="original"] .framelab-btn-primary {
+          color: #08090a !important;
+          background: #e5dfd3 !important;
+        }
+        .framelab-btn-primary:hover {
+          transform: translateY(-2px);
+          filter: brightness(1.08);
+          box-shadow: 0 8px 25px var(--fl-accent-glow);
+        }
+
+        /* Modal Animations */
+        .framelab-modal-anim {
+          animation: framelabModalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes framelabModalFadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0.96) translateY(12px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        /* Custom Scrollbar for Lightbox */
+        .framelab-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .framelab-scrollbar::-webkit-scrollbar-track {
+          background: var(--fl-bg);
+        }
+        .framelab-scrollbar::-webkit-scrollbar-thumb {
+          background: var(--fl-border);
+          border-radius: 9999px;
+        }
+        .framelab-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: var(--fl-accent);
+        }
+
+        /* Light Mode Global Cascades */
+        html.light .framelab-container .text-white,
+        [data-theme-mood="light"] .framelab-container .text-white {
+          color: var(--fl-text) !important;
+        }
+
+        html.light .framelab-container .text-slate-200,
+        html.light .framelab-container .text-slate-300,
+        html.light .framelab-container .text-slate-400,
+        [data-theme-mood="light"] .framelab-container .text-slate-200,
+        [data-theme-mood="light"] .framelab-container .text-slate-300,
+        [data-theme-mood="light"] .framelab-container .text-slate-400 {
+          color: var(--fl-text-muted) !important;
+        }
+
+        /* Publisher logos dark/light auto-filter */
+        html.dark .framelab-publisher-logo,
+        :root:not([data-theme-mood="light"]) .framelab-publisher-logo {
+          filter: brightness(0) invert(1) opacity(0.85);
+        }
+        html.light .framelab-publisher-logo,
+        [data-theme-mood="light"] .framelab-publisher-logo {
+          filter: brightness(0) opacity(0.75);
+        }
+      `}</style>
+
       {/* Lightbox Case Study Modal */}
       <LightboxModal
         project={activeProjectIndex !== null ? projects[activeProjectIndex] : null}
@@ -519,36 +797,42 @@ export function FrameLabPhoto() {
       {/* Quick Search Overlay Modal */}
       {searchOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-black/80 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-24 px-4 bg-black/80 backdrop-blur-md"
           onClick={() => setSearchOpen(false)}
         >
           <div
-            className="w-full max-w-xl rounded-2xl bg-[#18191c] border border-white/10 p-6 shadow-2xl text-left framelab-modal-anim"
+            className="w-full max-w-xl rounded-2xl bg-[var(--fl-card)] border border-[var(--fl-border)] p-6 shadow-2xl text-left framelab-modal-anim"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-slate-400">
-                Search Archive &amp; Editorial Tearsheets
-              </span>
+            <div className="flex items-center justify-between pb-3 border-b border-[var(--fl-border)] mb-4">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono uppercase tracking-widest text-[var(--fl-text-muted)] font-bold">
+                  Editorial Archive
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[var(--fl-surface)] border border-[var(--fl-border)] text-[var(--fl-text-muted)]">
+                  ESC to close
+                </span>
+              </div>
               <button
                 onClick={() => setSearchOpen(false)}
-                className="text-slate-400 hover:text-white"
+                className="text-[var(--fl-text-muted)] hover:text-[var(--fl-text)] cursor-pointer"
+                aria-label="Close search"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
             <div className="relative">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
+              <Search className="w-4 h-4 text-[var(--fl-text-muted)] absolute left-3 top-3.5" />
               <input
                 type="text"
                 autoFocus
-                placeholder="Search by publication, model, camera, or year..."
+                placeholder="Search by publication, title, or category (e.g. Vogue, Covers)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-white/30"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[var(--fl-input-bg)] border border-[var(--fl-border)] text-sm text-[var(--fl-text)] placeholder-[var(--fl-text-muted)] focus:outline-none focus:border-[var(--fl-accent)] shadow-sm"
               />
             </div>
-            <div className="mt-4 max-h-60 overflow-y-auto space-y-2">
+            <div className="mt-4 max-h-72 overflow-y-auto framelab-scrollbar space-y-2">
               {projects
                 .filter(
                   (p) =>
@@ -563,26 +847,36 @@ export function FrameLabPhoto() {
                       setSearchOpen(false);
                       setActiveProjectIndex(idx);
                     }}
-                    className="p-3 rounded-lg bg-white/[0.02] hover:bg-white/10 flex items-center justify-between cursor-pointer transition-colors border border-transparent hover:border-white/10"
+                    className="p-3 rounded-xl bg-[var(--fl-surface)] hover:bg-[var(--fl-card-hover)] flex items-center justify-between cursor-pointer transition-colors border border-transparent hover:border-[var(--fl-border)]"
                   >
                     <div className="flex items-center gap-3">
                       <img
                         src={p.image}
                         alt={p.title}
-                        className="w-10 h-10 rounded object-cover"
+                        className="w-11 h-11 rounded-lg object-cover"
                       />
                       <div>
-                        <div className="text-xs font-bold text-white">{p.title}</div>
-                        <div className="text-[10px] font-mono text-slate-400">
+                        <div className="text-xs font-bold text-[var(--fl-text)]">{p.title}</div>
+                        <div className="text-[10px] font-mono text-[var(--fl-text-muted)]">
                           {p.publication} // {p.year}
                         </div>
                       </div>
                     </div>
-                    <span className="text-[10px] font-mono uppercase text-slate-400">
-                      View Project &rarr;
+                    <span className="text-[10px] font-mono uppercase text-[var(--fl-accent)] font-semibold flex items-center gap-1">
+                      View Tearsheet &rarr;
                     </span>
                   </div>
                 ))}
+              {projects.filter(
+                (p) =>
+                  p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                  p.publication.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                  p.category.toLowerCase().includes(searchQuery.toLowerCase())
+              ).length === 0 && (
+                <div className="py-8 text-center text-xs font-mono text-[var(--fl-text-muted)]">
+                  No editorial tearsheets match &quot;{searchQuery}&quot;
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -604,10 +898,10 @@ export function FrameLabPhoto() {
             className="flex items-center gap-2 group cursor-pointer select-none"
           >
             <div className="flex flex-col text-left leading-none">
-              <span className="text-xs sm:text-sm font-black tracking-[0.2em] text-white uppercase group-hover:text-slate-200 transition-colors">
+              <span className="text-xs sm:text-sm font-black tracking-[0.2em] text-[var(--fl-text)] uppercase group-hover:opacity-80 transition-opacity">
                 FRAME LAB
               </span>
-              <span className="text-[9px] font-mono tracking-[0.35em] text-slate-400 uppercase mt-0.5 font-semibold">
+              <span className="text-[9px] font-mono tracking-[0.35em] text-[var(--fl-text-muted)] uppercase mt-0.5 font-semibold">
                 PHOTO
               </span>
             </div>
@@ -616,7 +910,7 @@ export function FrameLabPhoto() {
           {/* Desktop Navigation */}
           <nav
             aria-label="Main Navigation"
-            className="hidden md:flex items-center gap-8 text-[11px] font-mono font-bold tracking-[0.2em] text-slate-300"
+            className="hidden md:flex items-center gap-7 text-[11px] font-mono font-bold tracking-[0.2em] text-[var(--fl-text-muted)]"
           >
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
@@ -626,25 +920,34 @@ export function FrameLabPhoto() {
                   onClick={() => scrollToSection(item.id)}
                   className={`transition-colors uppercase tracking-widest cursor-pointer relative py-1 ${
                     isActive
-                      ? "text-white font-extrabold"
-                      : "text-slate-400 hover:text-white"
+                      ? "text-[var(--fl-text)] font-extrabold"
+                      : "text-[var(--fl-text-muted)] hover:text-[var(--fl-text)]"
                   }`}
                 >
                   {item.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-white" />
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[var(--fl-accent)]" />
                   )}
                 </button>
               );
             })}
 
-            {/* Quick Search Icon */}
+            {/* Quick Search Icon with Ctrl+K shortcut indicator */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="p-1.5 rounded-full hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--fl-card)] border border-[var(--fl-border)] text-[var(--fl-text-muted)] hover:text-[var(--fl-text)] transition-colors cursor-pointer text-[10px]"
               aria-label="Search editorial catalog"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-3.5 h-3.5" />
+              <span className="hidden lg:inline text-[9px] opacity-70">⌘K</span>
+            </button>
+
+            {/* Quick Inquire Button */}
+            <button
+              onClick={() => scrollToSection("inquire")}
+              className="framelab-btn-primary px-4 py-1.5 rounded-full text-[10px] font-mono uppercase tracking-widest cursor-pointer ml-1"
+            >
+              INQUIRE
             </button>
           </nav>
 
@@ -652,14 +955,14 @@ export function FrameLabPhoto() {
           <div className="md:hidden flex items-center gap-2">
             <button
               onClick={() => setSearchOpen(true)}
-              className="p-2 text-slate-400 hover:text-white"
+              className="p-2 text-[var(--fl-text-muted)] hover:text-[var(--fl-text)] cursor-pointer"
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg border border-white/10 text-slate-300 hover:text-white"
+              className="p-2 rounded-lg border border-[var(--fl-border)] text-[var(--fl-text-muted)] hover:text-[var(--fl-text)] cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -669,7 +972,7 @@ export function FrameLabPhoto() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-b border-white/10 bg-[#121316]/95 backdrop-blur-xl px-6 py-5 space-y-3 text-xs font-mono uppercase tracking-wider text-left framelab-modal-anim shadow-2xl">
+          <div className="md:hidden border-b border-[var(--fl-border)] bg-[var(--fl-surface)] px-6 py-5 space-y-3 text-xs font-mono uppercase tracking-wider text-left framelab-modal-anim shadow-2xl">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -678,12 +981,12 @@ export function FrameLabPhoto() {
                   onClick={() => scrollToSection(item.id)}
                   className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-left transition-all ${
                     isActive
-                      ? "bg-white text-black font-bold"
-                      : "text-slate-300 hover:bg-white/5"
+                      ? "bg-[var(--fl-accent)] text-[var(--fl-bg)] font-bold"
+                      : "text-[var(--fl-text)] hover:bg-[var(--fl-card-hover)]"
                   }`}
                 >
                   <span>{item.label}</span>
-                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-black" />}
+                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[var(--fl-bg)]" />}
                 </button>
               );
             })}
@@ -697,12 +1000,17 @@ export function FrameLabPhoto() {
       {/* ======================================================================= */}
       {/* HERO SECTION                                                            */}
       {/* ======================================================================= */}
-      <section className="relative z-10 py-12 sm:py-20 lg:py-24 overflow-hidden border-b border-white/5">
+      <section className="relative z-10 py-12 sm:py-20 lg:py-24 overflow-hidden border-b border-[var(--fl-border)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Headline & Action */}
             <div className="lg:col-span-6 text-left space-y-5 z-20">
-              <h1 className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold text-white framelab-serif leading-[1.08] tracking-tight uppercase">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--fl-border)] bg-[var(--fl-card)] text-[10px] font-mono tracking-widest text-[var(--fl-accent)] uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--fl-accent)] animate-pulse" />
+                PARIS // MILAN // NEW YORK ATELIER
+              </div>
+
+              <h1 className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold text-[var(--fl-text)] framelab-serif leading-[1.08] tracking-tight uppercase">
                 CRAFTING NARRATIVES
                 <br />
                 THROUGH EDITORIAL
@@ -710,25 +1018,47 @@ export function FrameLabPhoto() {
                 PHOTOGRAPHY
               </h1>
 
-              <p className="text-xs sm:text-sm font-mono tracking-[0.25em] text-slate-400 uppercase font-semibold">
+              <p className="text-xs sm:text-sm font-mono tracking-[0.25em] text-[var(--fl-text-muted)] uppercase font-semibold">
                 POSITIONING, VISION, EXECUTION
               </p>
 
-              <div className="pt-3">
+              <div className="pt-2 flex flex-wrap items-center gap-4">
                 <button
                   onClick={() => scrollToSection("work")}
-                  className="px-7 py-3 rounded-full border border-white/40 bg-white/5 hover:bg-white hover:text-black text-white font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-lg cursor-pointer"
+                  className="framelab-btn-primary px-7 py-3 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-lg cursor-pointer"
                 >
                   EXPLORE WORK
                 </button>
+                <button
+                  onClick={() => scrollToSection("inquire")}
+                  className="px-6 py-3 rounded-full font-mono text-xs font-bold uppercase tracking-wider border border-[var(--fl-border)] hover:border-[var(--fl-accent)] text-[var(--fl-text)] hover:bg-[var(--fl-card-hover)] transition-all cursor-pointer"
+                >
+                  START INQUIRY
+                </button>
+              </div>
+
+              {/* Editorial Studio Credentials Strip */}
+              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[var(--fl-border)] text-left font-mono">
+                <div>
+                  <div className="text-xl sm:text-2xl font-bold text-[var(--fl-text)] font-sans">14+</div>
+                  <div className="text-[10px] text-[var(--fl-text-muted)] uppercase tracking-wider">Vogue Covers</div>
+                </div>
+                <div>
+                  <div className="text-xl sm:text-2xl font-bold text-[var(--fl-text)] font-sans">100MP</div>
+                  <div className="text-[10px] text-[var(--fl-text-muted)] uppercase tracking-wider">Medium Format</div>
+                </div>
+                <div>
+                  <div className="text-xl sm:text-2xl font-bold text-[var(--fl-text)] font-sans">24h</div>
+                  <div className="text-[10px] text-[var(--fl-text-muted)] uppercase tracking-wider">Executive Turn</div>
+                </div>
               </div>
             </div>
 
             {/* Right Studio Shoot Photo Composition */}
             <div className="lg:col-span-6 relative flex items-center justify-center">
-              <div className="relative w-full max-w-lg aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+              <div className="relative w-full max-w-lg aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-[var(--fl-border)] group">
                 <img
-                  src="/images/framelab/hero-studio-shoot.webp"
+                  src="/images/framelab/hero-studio-shoot.jpg"
                   alt="FrameLab Photo Studio Shoot Production"
                   className="w-full h-full object-cover framelab-img-zoom brightness-95 group-hover:brightness-105"
                 />
@@ -738,7 +1068,7 @@ export function FrameLabPhoto() {
                     STUDIO 01 // PARIS FASHION WEEK
                   </span>
                   <span className="bg-black/60 backdrop-blur px-2.5 py-1 rounded-full border border-white/10">
-                    MEDIUM FORMAT DIGITAL
+                    HASSELBLAD H6D-100c
                   </span>
                 </div>
               </div>
@@ -752,54 +1082,54 @@ export function FrameLabPhoto() {
       {/* ======================================================================= */}
       <section
         id="positioning"
-        className="relative z-10 py-16 sm:py-24 bg-[#101114] border-b border-white/5"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--fl-bg)] border-b border-[var(--fl-border)]"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-[0.25em] text-white uppercase framelab-serif mb-12 sm:mb-16">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-[0.25em] text-[var(--fl-text)] uppercase framelab-serif mb-12 sm:mb-16">
             POSITIONING
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
             {/* Left Card: OUR PHILOSOPHY */}
-            <div className="md:col-span-5 p-8 sm:p-10 rounded-3xl bg-[#16171b] border border-white/10 text-left flex flex-col justify-between shadow-xl">
+            <div className="md:col-span-5 p-8 sm:p-10 rounded-3xl bg-[var(--fl-card)] border border-[var(--fl-border)] text-left flex flex-col justify-between shadow-xl">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-slate-400 font-bold block mb-4">
+                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[var(--fl-text-muted)] font-bold block mb-4">
                   01 // FOUNDATION
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold framelab-serif uppercase tracking-wider text-white mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold framelab-serif uppercase tracking-wider text-[var(--fl-text)] mb-6">
                   OUR PHILOSOPHY
                 </h3>
 
-                <ul className="space-y-5 text-sm sm:text-base font-light text-slate-200">
+                <ul className="space-y-5 text-sm sm:text-base font-light text-[var(--fl-text)]">
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white mt-2 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--fl-accent)] mt-2 shrink-0" />
                     <div>
-                      <strong className="block font-semibold text-white">
+                      <strong className="block font-semibold text-[var(--fl-text)]">
                         Intentional Storytelling
                       </strong>
-                      <span className="text-xs text-slate-400 font-normal">
+                      <span className="text-xs text-[var(--fl-text-muted)] font-normal">
                         Every frame serves an overarching cultural and emotional narrative arc.
                       </span>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white mt-2 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--fl-accent)] mt-2 shrink-0" />
                     <div>
-                      <strong className="block font-semibold text-white">
+                      <strong className="block font-semibold text-[var(--fl-text)]">
                         Cultural Relevance
                       </strong>
-                      <span className="text-xs text-slate-400 font-normal">
+                      <span className="text-xs text-[var(--fl-text-muted)] font-normal">
                         Aligning contemporary aesthetic zeitgeist with timeless cinematic craft.
                       </span>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white mt-2 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--fl-accent)] mt-2 shrink-0" />
                     <div>
-                      <strong className="block font-semibold text-white">
+                      <strong className="block font-semibold text-[var(--fl-text)]">
                         Technical Excellence
                       </strong>
-                      <span className="text-xs text-slate-400 font-normal">
+                      <span className="text-xs text-[var(--fl-text-muted)] font-normal">
                         Mastery of lighting ratios, color science, and medium format resolution.
                       </span>
                     </div>
@@ -807,17 +1137,17 @@ export function FrameLabPhoto() {
                 </ul>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <div className="pt-6 mt-6 border-t border-[var(--fl-border)] flex items-center justify-between text-[11px] font-mono text-[var(--fl-text-muted)]">
                 <span>ESTABLISHED 2018</span>
-                <span className="text-white">HAUTE COUTURE SPEC</span>
+                <span className="text-[var(--fl-text)] font-semibold">HAUTE COUTURE SPEC</span>
               </div>
             </div>
 
             {/* Right Card: VISUAL IDENTITY with Photo Backdrop */}
-            <div className="md:col-span-7 relative rounded-3xl overflow-hidden border border-white/10 p-8 sm:p-10 text-left flex flex-col justify-between shadow-xl min-h-[340px] group">
+            <div className="md:col-span-7 relative rounded-3xl overflow-hidden border border-[var(--fl-border)] p-8 sm:p-10 text-left flex flex-col justify-between shadow-xl min-h-[340px] group">
               {/* Background Image with overlay */}
               <img
-                src="/images/framelab/positioning-visual-identity.webp"
+                src="/images/framelab/positioning-visual-identity.jpg"
                 alt="Visual Identity in Editorial Photography"
                 className="absolute inset-0 w-full h-full object-cover framelab-img-zoom brightness-40 group-hover:brightness-50"
               />
@@ -870,7 +1200,7 @@ export function FrameLabPhoto() {
 
               <div className="relative z-10 pt-6 mt-6 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-300">
                 <span>PARIS / MILAN / NEW YORK</span>
-                <span className="text-white">COUTURE PROTOCOLS &rarr;</span>
+                <span className="text-white font-semibold">COUTURE PROTOCOLS &rarr;</span>
               </div>
             </div>
           </div>
@@ -882,38 +1212,59 @@ export function FrameLabPhoto() {
       {/* ======================================================================= */}
       <section
         id="work"
-        className="relative z-10 py-16 sm:py-24 bg-[#0a0b0d] border-b border-white/5"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--fl-surface)] border-b border-[var(--fl-border)]"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-[0.25em] text-white uppercase framelab-serif mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-[0.25em] text-[var(--fl-text)] uppercase framelab-serif mb-6">
             SELECTED WORK
           </h2>
 
           {/* Category Filter Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
             {[
-              { id: "all", label: "ALL WORKS" },
-              { id: "covers", label: "MAGAZINE COVERS" },
-              { id: "editorial", label: "EDITORIAL" },
-              { id: "motion", label: "MOTION & STAGE" },
+              { id: "all", label: "ALL WORKS", count: projects.length },
+              {
+                id: "covers",
+                label: "MAGAZINE COVERS",
+                count: projects.filter((p) => p.category === "covers").length,
+              },
+              {
+                id: "editorial",
+                label: "EDITORIAL",
+                count: projects.filter((p) => p.category === "editorial").length,
+              },
+              {
+                id: "motion",
+                label: "MOTION & STAGE",
+                count: projects.filter((p) => p.category === "motion").length,
+              },
             ].map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all cursor-pointer border ${
+                className={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all cursor-pointer border flex items-center gap-1.5 ${
                   selectedCategory === cat.id
-                    ? "bg-white text-black font-bold border-white"
-                    : "bg-white/5 text-slate-400 border-white/10 hover:border-white/30 hover:text-white"
+                    ? "bg-[var(--fl-accent)] text-[var(--fl-bg)] font-bold border-[var(--fl-accent)] shadow-md"
+                    : "bg-[var(--fl-card)] text-[var(--fl-text-muted)] border-[var(--fl-border)] hover:border-[var(--fl-accent)] hover:text-[var(--fl-text)]"
                 }`}
               >
-                {cat.label}
+                <span>{cat.label}</span>
+                <span
+                  className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold ${
+                    selectedCategory === cat.id
+                      ? "bg-black/20 text-current"
+                      : "bg-[var(--fl-surface)] text-[var(--fl-text-muted)] border border-[var(--fl-border)]"
+                  }`}
+                >
+                  {cat.count}
+                </span>
               </button>
             ))}
           </div>
 
-          {/* Projects 3-Column Grid matching the reference image */}
+          {/* Projects 3-Column Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredProjects.map((project, idx) => (
+            {filteredProjects.map((project) => (
               <div
                 key={project.id}
                 onClick={() =>
@@ -921,7 +1272,7 @@ export function FrameLabPhoto() {
                     projects.findIndex((p) => p.id === project.id)
                   )
                 }
-                className="group framelab-project-card rounded-2xl overflow-hidden bg-[#141518] border border-white/10 text-left cursor-pointer flex flex-col justify-between"
+                className="group framelab-project-card rounded-2xl overflow-hidden bg-[var(--fl-card)] border border-[var(--fl-border)] text-left cursor-pointer flex flex-col justify-between transition-all"
               >
                 {/* Photo Preview Container */}
                 <div className="relative aspect-[4/5] overflow-hidden bg-black/40">
@@ -939,19 +1290,19 @@ export function FrameLabPhoto() {
                 </div>
 
                 {/* Card Meta & Title */}
-                <div className="p-4 sm:p-5 border-t border-white/10 space-y-2 bg-[#121316]">
-                  <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                <div className="p-4 sm:p-5 border-t border-[var(--fl-border)] space-y-2 bg-[var(--fl-card)]">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-[var(--fl-text-muted)]">
                     <span className="uppercase tracking-widest">{project.publication}</span>
                     <span>{project.year}</span>
                   </div>
 
-                  <h3 className="text-sm sm:text-base font-bold text-white framelab-serif tracking-wide uppercase group-hover:text-slate-200 transition-colors">
+                  <h3 className="text-sm sm:text-base font-bold text-[var(--fl-text)] framelab-serif tracking-wide uppercase group-hover:text-[var(--fl-accent)] transition-colors">
                     {project.title}
                   </h3>
 
-                  <div className="pt-2 flex items-center justify-between border-t border-white/5 text-[10px] font-mono">
-                    <span className="text-slate-500">Editorial projects</span>
-                    <span className="text-slate-300 group-hover:text-white flex items-center gap-1 font-bold">
+                  <div className="pt-2 flex items-center justify-between border-t border-[var(--fl-border)] text-[10px] font-mono">
+                    <span className="text-[var(--fl-text-muted)]">Editorial projects</span>
+                    <span className="text-[var(--fl-text)] group-hover:text-[var(--fl-accent)] flex items-center gap-1 font-bold">
                       View Project &rarr;
                     </span>
                   </div>
@@ -967,14 +1318,22 @@ export function FrameLabPhoto() {
       {/* ======================================================================= */}
       <section
         id="process"
-        className="relative z-10 py-16 sm:py-24 bg-[#7a7874] text-white border-y border-white/10"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--fl-process-bg)] text-[var(--fl-text)] border-y border-[var(--fl-border)]"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-[0.25em] text-white uppercase framelab-serif mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--fl-border)] bg-[var(--fl-card)] text-[10px] font-mono tracking-widest text-[var(--fl-accent)] uppercase mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--fl-accent)] animate-pulse" />
+            END-TO-END EDITORIAL PROTOCOL
+          </div>
+
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-[0.25em] text-[var(--fl-text)] uppercase framelab-serif mb-4">
             THE PROCESS
           </h2>
+          <p className="text-xs sm:text-sm font-mono tracking-wider text-[var(--fl-text-muted)] uppercase max-w-xl mx-auto mb-12 sm:mb-16">
+            From initial narrative moodboards to master CMYK archival delivery.
+          </p>
 
-          {/* 4 Connected Step Nodes */}
+          {/* 4 Connected Step Cards with Rich Production Graphics */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
             {processSteps.map((step, idx) => {
               const isSelected = activeProcessStep === idx;
@@ -982,59 +1341,104 @@ export function FrameLabPhoto() {
                 <div
                   key={idx}
                   onClick={() => setActiveProcessStep(idx)}
-                  className={`p-6 rounded-2xl transition-all cursor-pointer text-center flex flex-col items-center justify-between border ${
+                  className={`p-4 sm:p-5 rounded-2xl transition-all duration-300 cursor-pointer text-left flex flex-col justify-between border ${
                     isSelected
-                      ? "bg-black/30 border-white shadow-xl scale-102"
-                      : "bg-black/15 border-white/20 hover:border-white/50"
+                      ? "bg-[var(--fl-card)] border-[var(--fl-accent)] shadow-2xl scale-[1.02] ring-1 ring-[var(--fl-accent)]/30"
+                      : "bg-[var(--fl-card)]/80 border-[var(--fl-border)] hover:border-[var(--fl-accent)]/50 hover:bg-[var(--fl-card)]"
                   }`}
                 >
-                  <div className="flex flex-col items-center">
-                    {/* Circle Icon matching reference image */}
-                    <div className="w-16 h-16 rounded-full overflow-hidden mb-4 border border-white/30 shadow-md p-1 bg-black/40">
+                  <div>
+                    {/* Graphic Preview Container */}
+                    <div className="relative aspect-[16/11] rounded-xl overflow-hidden mb-4 border border-[var(--fl-border)] bg-black/40 group">
                       <img
                         src={step.image}
                         alt={step.title}
-                        className="w-full h-full object-contain hover:scale-110 transition-transform"
+                        className="w-full h-full object-cover framelab-img-zoom"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                      
+                      {/* Step Number Badge */}
+                      <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur border border-white/10 text-[9px] font-mono text-[var(--fl-accent)] font-bold">
+                        STEP {step.stepNum}
+                      </div>
+
+                      {/* Active Indicator Pulse */}
+                      {isSelected && (
+                        <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[var(--fl-accent)] text-[var(--fl-bg)] text-[9px] font-mono font-bold">
+                          ACTIVE
+                        </div>
+                      )}
                     </div>
 
-                    <h3 className="text-xs sm:text-sm font-bold tracking-wider uppercase framelab-serif mb-2 text-white">
+                    <h3 className="text-xs sm:text-sm font-bold tracking-wider uppercase framelab-serif mb-1.5 text-[var(--fl-text)]">
                       {step.title}
                     </h3>
 
-                    <p className="text-[11px] font-normal leading-relaxed text-slate-200">
+                    <p className="text-[11px] font-normal leading-relaxed text-[var(--fl-text-muted)]">
                       {step.summary}
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-white/10 text-[10px] font-mono tracking-widest text-slate-300">
-                    STEP 0{idx + 1}
+                  <div className="mt-4 pt-3 border-t border-[var(--fl-border)] flex items-center justify-between text-[10px] font-mono text-[var(--fl-text-muted)]">
+                    <span>{step.turnaround}</span>
+                    <span className="text-[var(--fl-text)] font-semibold flex items-center gap-1">
+                      Details &rarr;
+                    </span>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Active Phase Deep-Dive Card */}
-          <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-black/40 border border-white/20 max-w-3xl mx-auto text-left shadow-2xl framelab-modal-anim">
-            <div className="flex items-center justify-between mb-3 text-xs font-mono">
-              <span className="uppercase tracking-widest text-white font-bold">
-                PHASE 0{activeProcessStep + 1} // {processSteps[activeProcessStep].title}
-              </span>
-              <span className="text-slate-300">
-                Timeline: {processSteps[activeProcessStep].turnaround}
-              </span>
-            </div>
+          {/* Active Phase Deep-Dive Showcase Box */}
+          <div className="mt-10 p-6 sm:p-8 rounded-3xl bg-[var(--fl-card)] border border-[var(--fl-border)] max-w-4xl mx-auto text-left shadow-2xl framelab-modal-anim">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center">
+              {/* Left: Graphic Highlight */}
+              <div className="md:col-span-5 rounded-2xl overflow-hidden border border-[var(--fl-border)] bg-black/50 aspect-[4/3] relative shadow-lg">
+                <img
+                  src={processSteps[activeProcessStep].image}
+                  alt={processSteps[activeProcessStep].title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-slate-200">
+                  <span className="bg-black/70 backdrop-blur px-2.5 py-1 rounded-full border border-white/10">
+                    STAGE // 0{activeProcessStep + 1}
+                  </span>
+                  <span className="bg-black/70 backdrop-blur px-2.5 py-1 rounded-full border border-white/10">
+                    {processSteps[activeProcessStep].turnaround}
+                  </span>
+                </div>
+              </div>
 
-            <p className="text-sm text-slate-200 leading-relaxed font-light mb-4">
-              {processSteps[activeProcessStep].details}
-            </p>
+              {/* Right: Phase Details & Deliverables */}
+              <div className="md:col-span-7 space-y-4">
+                <div className="flex items-center justify-between border-b border-[var(--fl-border)] pb-3">
+                  <span className="text-xs font-mono uppercase tracking-widest text-[var(--fl-accent)] font-bold">
+                    PHASE 0{activeProcessStep + 1} // PROTOCOL SPEC
+                  </span>
+                  <span className="text-xs font-mono text-[var(--fl-text-muted)]">
+                    Target Turnaround: <strong className="text-[var(--fl-text)]">{processSteps[activeProcessStep].turnaround}</strong>
+                  </span>
+                </div>
 
-            <div className="pt-3 border-t border-white/15 flex items-center justify-between text-xs font-mono text-slate-300">
-              <span className="font-bold text-white">Milestone Output:</span>
-              <span className="text-white">
-                {processSteps[activeProcessStep].deliverable}
-              </span>
+                <h3 className="text-lg sm:text-xl font-bold framelab-serif uppercase tracking-wide text-[var(--fl-text)]">
+                  {processSteps[activeProcessStep].title}
+                </h3>
+
+                <p className="text-xs sm:text-sm text-[var(--fl-text)] leading-relaxed font-light">
+                  {processSteps[activeProcessStep].details}
+                </p>
+
+                <div className="p-3.5 rounded-xl bg-[var(--fl-surface)] border border-[var(--fl-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono">
+                  <span className="text-[var(--fl-text-muted)] uppercase text-[10px] tracking-wider">
+                    Milestone Deliverable:
+                  </span>
+                  <span className="text-[var(--fl-accent)] font-bold">
+                    {processSteps[activeProcessStep].deliverable}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1045,101 +1449,157 @@ export function FrameLabPhoto() {
       {/* ======================================================================= */}
       <section
         id="credentials"
-        className="relative z-10 py-16 sm:py-24 bg-[#0a0b0d] border-b border-white/5"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--fl-bg)] border-b border-[var(--fl-border)]"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-[0.25em] text-white uppercase framelab-serif mb-12 sm:mb-16">
-            CREDIBLE OUTCOMES
-          </h2>
-
-          {/* Publisher Logos Row */}
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 opacity-80 mb-16 px-4">
-            <img
-              src="/images/framelab/logo-vogue.webp"
-              alt="Vogue"
-              className="h-6 sm:h-7 w-auto object-contain hover:opacity-100 hover:scale-105 transition-all cursor-pointer"
-            />
-            <img
-              src="/images/framelab/logo-gq.webp"
-              alt="GQ"
-              className="h-6 sm:h-7 w-auto object-contain hover:opacity-100 hover:scale-105 transition-all cursor-pointer"
-            />
-            <img
-              src="/images/framelab/logo-elle.webp"
-              alt="ELLE"
-              className="h-6 sm:h-7 w-auto object-contain hover:opacity-100 hover:scale-105 transition-all cursor-pointer"
-            />
-            <img
-              src="/images/framelab/logo-w.webp"
-              alt="W Magazine"
-              className="h-6 sm:h-7 w-auto object-contain hover:opacity-100 hover:scale-105 transition-all cursor-pointer"
-            />
-            <img
-              src="/images/framelab/logo-monocle.webp"
-              alt="Monocle"
-              className="h-5 sm:h-6 w-auto object-contain hover:opacity-100 hover:scale-105 transition-all cursor-pointer"
-            />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--fl-border)] bg-[var(--fl-card)] text-[10px] font-mono tracking-widest text-[var(--fl-accent)] uppercase mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--fl-accent)] animate-pulse" />
+            GLOBAL EDITORIAL REPUTATION
           </div>
 
-          {/* Top Testimonial Callout */}
-          <div className="max-w-2xl mx-auto mb-14 text-center space-y-2">
-            <p className="text-xl sm:text-2xl md:text-3xl font-bold framelab-serif italic text-white leading-snug">
-              "{testimonials[activeTestimonialIndex].quote}"
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-[0.25em] text-[var(--fl-text)] uppercase framelab-serif mb-4">
+            CREDIBLE OUTCOMES
+          </h2>
+          <p className="text-xs sm:text-sm font-mono tracking-wider text-[var(--fl-text-muted)] uppercase max-w-xl mx-auto mb-12 sm:mb-16">
+            Featured tear sheets, magazine cover critique, and client accolades.
+          </p>
+
+          {/* Interactive Publisher Logos Row */}
+          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 mb-14 px-4">
+            {[
+              { src: "/images/framelab/logo-vogue.webp", alt: "Vogue", index: 0 },
+              { src: "/images/framelab/logo-gq.webp", alt: "GQ", index: 1 },
+              { src: "/images/framelab/logo-monocle.webp", alt: "Monocle", index: 2 },
+              { src: "/images/framelab/logo-elle.webp", alt: "ELLE", index: 0 },
+              { src: "/images/framelab/logo-w.webp", alt: "W Magazine", index: 1 },
+            ].map((pub, idx) => (
+              <img
+                key={idx}
+                src={pub.src}
+                alt={pub.alt}
+                onClick={() => setActiveTestimonialIndex(pub.index)}
+                className={`h-6 sm:h-7 w-auto object-contain framelab-publisher-logo cursor-pointer transition-all ${
+                  activeTestimonialIndex === pub.index
+                    ? "scale-110 drop-shadow-md"
+                    : "opacity-60 hover:opacity-100"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Top Testimonial Quote Callout */}
+          <div className="max-w-3xl mx-auto mb-12 text-center space-y-3">
+            <p className="text-xl sm:text-2xl md:text-3xl font-bold framelab-serif italic text-[var(--fl-text)] leading-snug">
+              &quot;{testimonials[activeTestimonialIndex].quote}&quot;
             </p>
-            <p className="text-xs font-mono uppercase tracking-widest text-slate-400">
+            <p className="text-xs font-mono uppercase tracking-widest text-[var(--fl-text-muted)]">
               — {testimonials[activeTestimonialIndex].editor}, {testimonials[activeTestimonialIndex].title}
             </p>
           </div>
 
           {/* Magazine Spread Interactive Showcase Box */}
-          <div className="max-w-4xl mx-auto rounded-3xl bg-[#131418] border border-white/10 p-6 sm:p-10 shadow-2xl text-left">
+          <div className="max-w-4xl mx-auto rounded-3xl bg-[var(--fl-card)] border border-[var(--fl-border)] p-6 sm:p-10 shadow-2xl text-left framelab-modal-anim">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-              {/* Left: Magazine Editor Critique */}
-              <div className="md:col-span-6 space-y-4">
-                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-400 font-bold block">
-                  FEATURED TEARSHEET // SPREAD ANALYSIS
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold framelab-serif leading-snug text-white">
-                  "{testimonials[activeTestimonialIndex].quote}"
+              {/* Left: Magazine Editor Critique & Metadata */}
+              <div className="md:col-span-5 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-[var(--fl-text-muted)] font-bold">
+                    TEARSHEET ANALYSIS
+                  </span>
+                  <span className="text-[10px] font-mono text-[var(--fl-accent)] font-bold px-2 py-0.5 rounded-full bg-[var(--fl-surface)] border border-[var(--fl-border)]">
+                    0{activeTestimonialIndex + 1} / 0{testimonials.length}
+                  </span>
+                </div>
+
+                <h3 className="text-lg sm:text-xl font-bold framelab-serif leading-snug text-[var(--fl-text)]">
+                  &quot;{testimonials[activeTestimonialIndex].quote}&quot;
                 </h3>
-                <div className="pt-2">
-                  <div className="text-xs font-mono font-bold text-white uppercase">
+
+                <div className="pt-2 border-t border-[var(--fl-border)] space-y-1">
+                  <div className="text-xs font-mono font-bold text-[var(--fl-text)] uppercase">
                     — {testimonials[activeTestimonialIndex].editor}
                   </div>
-                  <div className="text-[11px] font-mono text-slate-400">
+                  <div className="text-[11px] font-mono text-[var(--fl-text-muted)]">
                     {testimonials[activeTestimonialIndex].title}
                   </div>
-                  <div className="text-[10px] font-mono text-slate-500 mt-1 uppercase">
+                  <div className="text-[10px] font-mono text-[var(--fl-accent)] uppercase font-semibold">
                     {testimonials[activeTestimonialIndex].magazine}
                   </div>
                 </div>
 
-                {/* Switcher Dots */}
-                <div className="flex items-center gap-2 pt-2">
-                  {testimonials.map((_, idx) => (
+                {/* Technical Capture Specs for this spread */}
+                <div className="p-3 rounded-xl bg-[var(--fl-surface)] border border-[var(--fl-border)] space-y-1">
+                  <div className="text-[9px] font-mono text-[var(--fl-text-muted)] uppercase tracking-wider">
+                    Spread Technical Parameters:
+                  </div>
+                  <div className="text-[11px] font-mono text-[var(--fl-text)] font-medium">
+                    {testimonials[activeTestimonialIndex].specs}
+                  </div>
+                </div>
+
+                {/* Switcher Navigation Dots & Controls */}
+                <div className="flex items-center justify-between pt-2">
+                  <div className="flex items-center gap-2">
+                    {testimonials.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveTestimonialIndex(idx)}
+                        className={`h-2 rounded-full transition-all cursor-pointer ${
+                          activeTestimonialIndex === idx
+                            ? "w-8 bg-[var(--fl-accent)]"
+                            : "w-2 bg-[var(--fl-border)] hover:bg-[var(--fl-text-muted)]"
+                        }`}
+                        aria-label={`Testimonial ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-2">
                     <button
-                      key={idx}
-                      onClick={() => setActiveTestimonialIndex(idx)}
-                      className={`h-2 rounded-full transition-all cursor-pointer ${
-                        activeTestimonialIndex === idx
-                          ? "w-8 bg-white"
-                          : "w-2 bg-white/20 hover:bg-white/40"
-                      }`}
-                      aria-label={`Testimonial ${idx + 1}`}
-                    />
-                  ))}
+                      onClick={() =>
+                        setActiveTestimonialIndex(
+                          (prev) => (prev - 1 + testimonials.length) % testimonials.length
+                        )
+                      }
+                      className="p-2 rounded-full border border-[var(--fl-border)] bg-[var(--fl-surface)] hover:bg-[var(--fl-card-hover)] text-[var(--fl-text-muted)] hover:text-[var(--fl-text)] cursor-pointer transition-colors"
+                      aria-label="Previous tearsheet"
+                    >
+                      <ChevronLeft className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() =>
+                        setActiveTestimonialIndex(
+                          (prev) => (prev + 1) % testimonials.length
+                        )
+                      }
+                      className="p-2 rounded-full border border-[var(--fl-border)] bg-[var(--fl-surface)] hover:bg-[var(--fl-card-hover)] text-[var(--fl-text-muted)] hover:text-[var(--fl-text)] cursor-pointer transition-colors"
+                      aria-label="Next tearsheet"
+                    >
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              {/* Right: Magazine Spread Mockup with Pagination Arrow */}
-              <div className="md:col-span-6 relative flex items-center justify-center group">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-black/40">
+              {/* Right: Double-Page Magazine Spread Graphic Showcase */}
+              <div className="md:col-span-7 relative flex items-center justify-center group">
+                <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-[var(--fl-border)] bg-black/40">
                   <img
-                    src="/images/framelab/magazine-spread-1.webp"
-                    alt="Editorial Print Magazine Spread"
+                    src={testimonials[activeTestimonialIndex].spreadImage}
+                    alt={testimonials[activeTestimonialIndex].spreadTitle}
                     className="w-full h-auto object-cover framelab-img-zoom"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                  
+                  {/* Floating Spread Title Bar */}
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-slate-200">
+                    <span className="bg-black/70 backdrop-blur px-2.5 py-1 rounded-full border border-white/10 font-bold">
+                      {testimonials[activeTestimonialIndex].spreadTitle}
+                    </span>
+                    <span className="bg-black/70 backdrop-blur px-2.5 py-1 rounded-full border border-white/10 hidden sm:inline">
+                      PRINT TEARSHEET
+                    </span>
+                  </div>
                 </div>
 
                 {/* Right Arrow next trigger */}
@@ -1149,7 +1609,7 @@ export function FrameLabPhoto() {
                       (prev) => (prev + 1) % testimonials.length
                     )
                   }
-                  className="absolute -right-3 sm:-right-4 p-2.5 rounded-full bg-white text-black hover:bg-slate-200 shadow-xl transition-transform hover:scale-110 cursor-pointer"
+                  className="absolute -right-3 sm:-right-4 p-2.5 rounded-full bg-[var(--fl-accent)] text-[var(--fl-bg)] hover:opacity-90 shadow-xl transition-transform hover:scale-110 cursor-pointer z-10"
                   aria-label="Next editorial critique"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -1165,29 +1625,29 @@ export function FrameLabPhoto() {
       {/* ======================================================================= */}
       <section
         id="inquire"
-        className="relative z-10 py-16 sm:py-24 bg-[#f6f5f2] text-slate-900 border-t border-slate-300"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--fl-inquire-bg)] text-[var(--fl-text)] border-t border-[var(--fl-border)]"
       >
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-xs font-mono uppercase tracking-[0.25em] text-slate-500 font-bold block mb-2">
+          <span className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--fl-text-muted)] font-bold block mb-2">
             CONFIDENT INQUIRY PATH
           </span>
 
-          <h2 className="text-2xl sm:text-4xl font-extrabold framelab-serif uppercase tracking-wider mb-2 text-slate-900">
+          <h2 className="text-2xl sm:text-4xl font-extrabold framelab-serif uppercase tracking-wider mb-2 text-[var(--fl-text)]">
             COLLABORATE
           </h2>
 
-          <p className="text-xs sm:text-sm font-mono tracking-[0.25em] text-slate-600 uppercase font-semibold mb-10">
+          <p className="text-xs sm:text-sm font-mono tracking-[0.25em] text-[var(--fl-text-muted)] uppercase font-semibold mb-10">
             BRING YOUR VISION TO LIFE
           </p>
 
           {/* Inquiry Form */}
           {formSubmitted ? (
-            <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200 shadow-xl space-y-4 framelab-modal-anim">
-              <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-              <h3 className="text-2xl font-bold framelab-serif text-slate-900">
+            <div className="p-8 sm:p-12 rounded-3xl bg-[var(--fl-card)] border border-[var(--fl-border)] shadow-xl space-y-4 framelab-modal-anim">
+              <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
+              <h3 className="text-2xl font-bold framelab-serif text-[var(--fl-text)]">
                 Inquiry Received
               </h3>
-              <p className="text-xs font-mono text-slate-600 max-w-md mx-auto">
+              <p className="text-xs font-mono text-[var(--fl-text-muted)] max-w-md mx-auto">
                 Thank you, {formData.name || "partner"}. We have received your creative brief for {formData.projectType} and our studio executive will respond to {formData.email} within 24 hours.
               </p>
               <button
@@ -1200,7 +1660,7 @@ export function FrameLabPhoto() {
                     message: "",
                   });
                 }}
-                className="mt-4 px-6 py-2 rounded-full bg-slate-900 text-white font-mono text-xs font-bold uppercase hover:bg-black cursor-pointer"
+                className="mt-4 px-6 py-2 rounded-full framelab-btn-primary font-mono text-xs font-bold uppercase cursor-pointer"
               >
                 Submit Another Request
               </button>
@@ -1219,7 +1679,7 @@ export function FrameLabPhoto() {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full rounded-lg bg-white border border-slate-300 px-4 py-3 text-xs placeholder-slate-400 text-slate-900 focus:outline-none focus:border-slate-700 shadow-sm"
+                  className="w-full rounded-xl bg-[var(--fl-input-bg)] border border-[var(--fl-border)] px-4 py-3 text-xs placeholder-[var(--fl-text-muted)] text-[var(--fl-text)] focus:outline-none focus:border-[var(--fl-accent)] shadow-sm"
                 />
               </div>
 
@@ -1232,19 +1692,44 @@ export function FrameLabPhoto() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full rounded-lg bg-white border border-slate-300 px-4 py-3 text-xs placeholder-slate-400 text-slate-900 focus:outline-none focus:border-slate-700 shadow-sm"
+                  className="w-full rounded-xl bg-[var(--fl-input-bg)] border border-[var(--fl-border)] px-4 py-3 text-xs placeholder-[var(--fl-text-muted)] text-[var(--fl-text)] focus:outline-none focus:border-[var(--fl-accent)] shadow-sm"
                 />
               </div>
 
-              <div>
+              {/* Quick Project Type selector chips */}
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-mono uppercase tracking-wider text-[var(--fl-text-muted)] block">
+                  Select Project Scope
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    "Editorial Cover & Spread",
+                    "Lookbook & Campaign",
+                    "Haute Couture Runway",
+                    "Art Direction & Licensing",
+                  ].map((type) => (
+                    <button
+                      type="button"
+                      key={type}
+                      onClick={() => setFormData({ ...formData, projectType: type })}
+                      className={`px-3 py-1 rounded-lg text-[10px] font-mono uppercase tracking-wider transition-all cursor-pointer border ${
+                        formData.projectType === type
+                          ? "bg-[var(--fl-accent)] text-[var(--fl-bg)] font-bold border-[var(--fl-accent)] shadow-sm"
+                          : "bg-[var(--fl-card)] text-[var(--fl-text-muted)] border-[var(--fl-border)] hover:border-[var(--fl-accent)] hover:text-[var(--fl-text)]"
+                      }`}
+                    >
+                      {type}
+                    </button>
+                  ))}
+                </div>
                 <input
                   type="text"
-                  placeholder="Project Type (e.g. Editorial Cover, Lookbook, Campaign)"
+                  placeholder="Or enter custom scope..."
                   value={formData.projectType}
                   onChange={(e) =>
                     setFormData({ ...formData, projectType: e.target.value })
                   }
-                  className="w-full rounded-lg bg-white border border-slate-300 px-4 py-3 text-xs placeholder-slate-400 text-slate-900 focus:outline-none focus:border-slate-700 shadow-sm"
+                  className="w-full mt-2 rounded-xl bg-[var(--fl-input-bg)] border border-[var(--fl-border)] px-4 py-2.5 text-xs placeholder-[var(--fl-text-muted)] text-[var(--fl-text)] focus:outline-none focus:border-[var(--fl-accent)] shadow-sm"
                 />
               </div>
 
@@ -1252,12 +1737,12 @@ export function FrameLabPhoto() {
                 <textarea
                   rows={4}
                   required
-                  placeholder="Message"
+                  placeholder="Creative Brief, Target Timeline, Location (Paris/NYC/Milan/On-Location)..."
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
-                  className="w-full rounded-lg bg-white border border-slate-300 px-4 py-3 text-xs placeholder-slate-400 text-slate-900 focus:outline-none focus:border-slate-700 shadow-sm resize-none"
+                  className="w-full rounded-xl bg-[var(--fl-input-bg)] border border-[var(--fl-border)] px-4 py-3 text-xs placeholder-[var(--fl-text-muted)] text-[var(--fl-text)] focus:outline-none focus:border-[var(--fl-accent)] shadow-sm resize-none"
                 />
               </div>
 
@@ -1265,12 +1750,12 @@ export function FrameLabPhoto() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-lg bg-[#0c0d0e] hover:bg-black text-white font-mono text-xs font-bold uppercase tracking-widest transition-all duration-200 shadow-md hover:shadow-xl cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-xl framelab-btn-primary font-mono text-xs font-bold uppercase tracking-widest transition-all duration-200 shadow-md hover:shadow-xl cursor-pointer flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
-                    <span>PROCESSING...</span>
+                    <span>PROCESSING BRIEF...</span>
                   ) : (
-                    <span>SEND INQUIRY</span>
+                    <span>TRANSMIT EDITORIAL BRIEF &rarr;</span>
                   )}
                 </button>
               </div>
@@ -1282,18 +1767,18 @@ export function FrameLabPhoto() {
       {/* ======================================================================= */}
       {/* FOOTER                                                                  */}
       {/* ======================================================================= */}
-      <footer className="py-8 bg-[#0a0a0c] text-slate-400 text-xs font-mono border-t border-white/10">
+      <footer className="py-8 bg-[var(--fl-surface)] text-[var(--fl-text-muted)] text-xs font-mono border-t border-[var(--fl-border)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-slate-400">
-            &copy; 2024 FrameLab Photo
+          <div className="text-[var(--fl-text-muted)]">
+            &copy; 2024 FrameLab Photo Atelier. Paris // Milan // New York.
           </div>
 
-          <div className="flex items-center gap-5 text-slate-400">
+          <div className="flex items-center gap-5 text-[var(--fl-text-muted)]">
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-white transition-colors"
+              className="hover:text-[var(--fl-text)] transition-colors"
               aria-label="Instagram"
             >
               <InstagramIcon className="w-4 h-4" />
@@ -1302,15 +1787,18 @@ export function FrameLabPhoto() {
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-white transition-colors"
+              className="hover:text-[var(--fl-text)] transition-colors"
               aria-label="LinkedIn"
             >
               <LinkedInIcon className="w-4 h-4" />
             </a>
-          </div>
 
-          <div className="text-slate-500">
-            Copyright FrameLab Photo
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="ml-3 px-3 py-1 rounded-full border border-[var(--fl-border)] hover:border-[var(--fl-accent)] text-[10px] uppercase tracking-widest text-[var(--fl-text-muted)] hover:text-[var(--fl-text)] transition-all cursor-pointer"
+            >
+              Top &uarr;
+            </button>
           </div>
         </div>
       </footer>

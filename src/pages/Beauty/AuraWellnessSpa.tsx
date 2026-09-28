@@ -1611,6 +1611,277 @@ const css = `
     --muted: #66726b;
     --line: #dcd6c8;
     --lineDark: rgba(255, 255, 255, 0.12);
+    --cardBg: #ffffff;
+    --cardBgSubtle: #f7f4ed;
+    --heroBg: linear-gradient(135deg, #071e17 0%, #0d2c22 60%, #09231b 100%);
+    --navBg: rgba(9, 35, 27, 0.96);
+  }
+
+  /* ------------------------------------------------------------ */
+  /* THEME PRESET ADAPTATIONS & ACTIVE OVERRIDES                 */
+  /* ------------------------------------------------------------ */
+  [data-theme-active="true"] .auraPage,
+  [data-theme-active="true"] {
+    --copper: var(--theme-accent-primary, #b76743) !important;
+    --copperHover: var(--theme-accent-hover, #cb7650) !important;
+    --gold: var(--theme-accent-secondary, #c5a069) !important;
+    --goldSoft: var(--theme-accent-secondary, #d8b88a) !important;
+  }
+
+  [data-theme-preset="emerald"] .auraPage,
+  [data-theme-preset="emerald"] {
+    --copper: #059669 !important;
+    --copperHover: #10b981 !important;
+    --gold: #34d399 !important;
+    --goldSoft: #6ee7b7 !important;
+  }
+  [data-theme-preset="ocean"] .auraPage,
+  [data-theme-preset="ocean"],
+  [data-theme-preset="azure"] .auraPage,
+  [data-theme-preset="azure"] {
+    --copper: #2563eb !important;
+    --copperHover: #3b82f6 !important;
+    --gold: #00f2fe !important;
+    --goldSoft: #38bdf8 !important;
+  }
+  [data-theme-preset="sunset"] .auraPage,
+  [data-theme-preset="sunset"] {
+    --copper: #f43f5e !important;
+    --copperHover: #fb7185 !important;
+    --gold: #f59e0b !important;
+    --goldSoft: #fbbf24 !important;
+  }
+  [data-theme-preset="purple"] .auraPage,
+  [data-theme-preset="purple"],
+  [data-theme-preset="amethyst"] .auraPage,
+  [data-theme-preset="amethyst"],
+  [data-theme-preset="royal"] .auraPage,
+  [data-theme-preset="royal"] {
+    --copper: #7c3aed !important;
+    --copperHover: #8b5cf6 !important;
+    --gold: #ec4899 !important;
+    --goldSoft: #f472b6 !important;
+  }
+  [data-theme-preset="amber"] .auraPage,
+  [data-theme-preset="amber"],
+  [data-theme-preset="golden"] .auraPage,
+  [data-theme-preset="golden"] {
+    --copper: #ca8a04 !important;
+    --copperHover: #eab308 !important;
+    --gold: #b45309 !important;
+    --goldSoft: #fde68a !important;
+  }
+  [data-theme-preset="cyberpunk"] .auraPage,
+  [data-theme-preset="cyberpunk"] {
+    --copper: #06b6d4 !important;
+    --copperHover: #22d3ee !important;
+    --gold: #a855f7 !important;
+    --goldSoft: #c084fc !important;
+  }
+  [data-theme-preset="terracotta"] .auraPage,
+  [data-theme-preset="terracotta"] {
+    --copper: #ea580c !important;
+    --copperHover: #f97316 !important;
+    --gold: #0d9488 !important;
+    --goldSoft: #2dd4bf !important;
+  }
+  [data-theme-preset="obsidian"] .auraPage,
+  [data-theme-preset="obsidian"] {
+    --copper: #334155 !important;
+    --copperHover: #475569 !important;
+    --gold: #64748b !important;
+    --goldSoft: #94a3b8 !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* LIGHT MOOD                                                   */
+  /* ------------------------------------------------------------ */
+  html.light .auraPage,
+  body.light .auraPage,
+  [data-theme-mood="light"] .auraPage,
+  :root[data-theme-mood="light"] .auraPage,
+  :root[data-theme-active="true"][data-theme-mood="light"] .auraPage,
+  :root.light .auraPage,
+  html.light,
+  body.light,
+  [data-theme-mood="light"],
+  :root[data-theme-mood="light"],
+  :root[data-theme-active="true"][data-theme-mood="light"],
+  :root.light {
+    --forest: #09231b !important;
+    --forest2: #0f3328 !important;
+    --forestLight: #164234 !important;
+    --cream: #f7f4ed !important;
+    --paper: #faf8f2 !important;
+    --sand: #ece7db !important;
+    --ink: #141f1a !important;
+    --muted: #66726b !important;
+    --line: #dcd6c8 !important;
+    --lineDark: rgba(255, 255, 255, 0.12) !important;
+    --cardBg: #ffffff !important;
+    --cardBgSubtle: #f7f4ed !important;
+    --heroBg: linear-gradient(135deg, #071e17 0%, #0d2c22 60%, #09231b 100%) !important;
+    --navBg: rgba(9, 35, 27, 0.96) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* DARK MOOD - TRANQUIL NOCTURNAL SANCTUARY                    */
+  /* ------------------------------------------------------------ */
+  html.dark .auraPage,
+  body.dark .auraPage,
+  [data-theme-mood="dark"] .auraPage,
+  :root[data-theme-mood="dark"] .auraPage,
+  :root[data-theme-active="true"][data-theme-mood="dark"] .auraPage,
+  :root.dark .auraPage,
+  html.dark,
+  body.dark,
+  [data-theme-mood="dark"],
+  :root[data-theme-mood="dark"],
+  :root[data-theme-active="true"][data-theme-mood="dark"],
+  :root.dark {
+    --forest: #05140f !important;
+    --forest2: #092018 !important;
+    --forestLight: #0e2d23 !important;
+    --cream: #0c1c16 !important;
+    --paper: #071510 !important;
+    --sand: #11261e !important;
+    --ink: #f0f5f2 !important;
+    --muted: #95aaa0 !important;
+    --line: rgba(255, 255, 255, 0.12) !important;
+    --lineDark: rgba(255, 255, 255, 0.15) !important;
+    --cardBg: #0e221b !important;
+    --cardBgSubtle: #122a22 !important;
+    --heroBg: linear-gradient(135deg, #030d0a 0%, #061812 60%, #04100c 100%) !important;
+    --navBg: rgba(5, 18, 14, 0.96) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* CUSTOM BACKGROUND MODE                                       */
+  /* ------------------------------------------------------------ */
+  [data-theme-bg-mode="custom"] .auraPage,
+  [data-theme-bg-mode="custom"] {
+    --paper: var(--theme-bg-base, #faf8f2) !important;
+    --cardBg: var(--theme-bg-card, #ffffff) !important;
+    --cream: var(--theme-bg-surface, #f7f4ed) !important;
+    --sand: var(--theme-bg-surface, #ece7db) !important;
+  }
+
+  /* ------------------------------------------------------------ */
+  /* DARK MOOD COMPONENT ADAPTATIONS                              */
+  /* ------------------------------------------------------------ */
+  html.dark .ritualCard,
+  [data-theme-mood="dark"] .ritualCard,
+  html.dark .journeyCard,
+  [data-theme-mood="dark"] .journeyCard,
+  html.dark .membershipCard,
+  [data-theme-mood="dark"] .membershipCard,
+  html.dark .productCard,
+  [data-theme-mood="dark"] .productCard,
+  html.dark .faqCard,
+  [data-theme-mood="dark"] .faqCard,
+  html.dark .reviewCard,
+  [data-theme-mood="dark"] .reviewCard,
+  html.dark .guideGrid article,
+  [data-theme-mood="dark"] .guideGrid article,
+  html.dark .auraModal,
+  [data-theme-mood="dark"] .auraModal,
+  html.dark .ritualDetailDialog,
+  [data-theme-mood="dark"] .ritualDetailDialog,
+  html.dark .cartDrawer,
+  [data-theme-mood="dark"] .cartDrawer {
+    background: var(--cardBg) !important;
+    border-color: var(--line) !important;
+    color: var(--ink) !important;
+  }
+
+  html.dark .filterTab,
+  [data-theme-mood="dark"] .filterTab,
+  html.dark .carouselBtn,
+  [data-theme-mood="dark"] .carouselBtn,
+  html.dark .modalClose,
+  [data-theme-mood="dark"] .modalClose,
+  html.dark .timePill,
+  [data-theme-mood="dark"] .timePill {
+    background: var(--cardBgSubtle) !important;
+    border-color: var(--line) !important;
+    color: var(--ink) !important;
+  }
+
+  html.dark .filterTab.active,
+  [data-theme-mood="dark"] .filterTab.active,
+  html.dark .timePill.active,
+  [data-theme-mood="dark"] .timePill.active {
+    background: var(--copper) !important;
+    color: white !important;
+    border-color: var(--copper) !important;
+  }
+
+  html.dark .auraModal input,
+  html.dark .auraModal select,
+  html.dark .auraModal textarea,
+  [data-theme-mood="dark"] .auraModal input,
+  [data-theme-mood="dark"] .auraModal select,
+  [data-theme-mood="dark"] .auraModal textarea {
+    background: var(--paper) !important;
+    border-color: var(--line) !important;
+    color: var(--ink) !important;
+  }
+
+  html.dark .prodPhoto,
+  [data-theme-mood="dark"] .prodPhoto,
+  html.dark .modalGuarantee,
+  [data-theme-mood="dark"] .modalGuarantee {
+    background: var(--sand) !important;
+    color: var(--muted) !important;
+  }
+
+  html.dark .addToBagBtn,
+  [data-theme-mood="dark"] .addToBagBtn {
+    border-color: var(--gold) !important;
+    color: var(--goldSoft) !important;
+  }
+  html.dark .addToBagBtn:hover,
+  [data-theme-mood="dark"] .addToBagBtn:hover {
+    background: var(--gold) !important;
+    color: #04100c !important;
+  }
+
+  html.dark .heroFloatingCard,
+  [data-theme-mood="dark"] .heroFloatingCard {
+    background: rgba(14, 34, 27, 0.94) !important;
+    color: var(--ink) !important;
+    border-left: 3px solid var(--copper) !important;
+  }
+  html.dark .heroFloatingCard p,
+  [data-theme-mood="dark"] .heroFloatingCard p {
+    color: var(--ink) !important;
+  }
+  html.dark .heroFloatingCard cite,
+  [data-theme-mood="dark"] .heroFloatingCard cite {
+    color: var(--muted) !important;
+  }
+
+  html.dark .reviewQuote,
+  [data-theme-mood="dark"] .reviewQuote,
+  html.dark .faqQuestionBtn,
+  [data-theme-mood="dark"] .faqQuestionBtn,
+  html.dark .cardPrice b,
+  [data-theme-mood="dark"] .cardPrice b,
+  html.dark .prodTop h4,
+  [data-theme-mood="dark"] .prodTop h4 {
+    color: var(--ink) !important;
+  }
+
+  html.dark .perksList li,
+  [data-theme-mood="dark"] .perksList li,
+  html.dark .scentVal,
+  [data-theme-mood="dark"] .scentVal {
+    color: var(--muted) !important;
+  }
+
+  html.dark .textLink,
+  [data-theme-mood="dark"] .textLink {
+    color: var(--goldSoft) !important;
   }
 
   * { box-sizing: border-box; }
@@ -1703,7 +1974,7 @@ const css = `
   .outlineBtn:hover {
     border-color: var(--copper);
     color: var(--copper);
-    background: #fff;
+    background: var(--cardBg, #fff);
   }
   .outlineBtn.white {
     border-color: rgba(255, 255, 255, 0.4);
@@ -1806,7 +2077,7 @@ const css = `
     gap: clamp(16px, 2vw, 28px);
     min-height: 88px;
     padding: 0 max(28px, calc((100vw - 1380px) / 2));
-    background: rgba(9, 35, 27, 0.96);
+    background: var(--navBg, rgba(9, 35, 27, 0.96));
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: white;
     backdrop-filter: blur(16px);
@@ -1941,7 +2212,7 @@ const css = `
     display: grid;
     grid-template-columns: 48% 52%;
     min-height: 740px;
-    background: linear-gradient(135deg, #071e17 0%, #0d2c22 60%, #09231b 100%);
+    background: var(--heroBg, linear-gradient(135deg, #071e17 0%, #0d2c22 60%, #09231b 100%));
     color: white;
     overflow: hidden;
   }
@@ -2318,7 +2589,7 @@ const css = `
   .ritualCard {
     display: flex;
     flex-direction: column;
-    background: white;
+    background: var(--cardBg, white);
     border: 1px solid var(--line);
     border-radius: 8px;
     overflow: hidden;
@@ -2417,7 +2688,7 @@ const css = `
     margin-bottom: 2px;
   }
   .scentVal {
-    color: #43524b;
+    color: var(--muted);
     font-style: italic;
   }
 
@@ -2478,7 +2749,7 @@ const css = `
   .philosophy {
     display: grid;
     grid-template-columns: 38% 30% 32%;
-    background: #ede8dc;
+    background: var(--sand, #ede8dc);
     border-bottom: 1px solid var(--line);
     padding: 0;
   }
@@ -2584,7 +2855,7 @@ const css = `
   .journeyCard {
     position: relative;
     padding: 32px;
-    background: white;
+    background: var(--cardBg, white);
     border: 1px solid var(--line);
     border-radius: 8px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
@@ -2738,7 +3009,7 @@ const css = `
   /* MEMBERSHIPS & RETREATS                                        */
   /* ------------------------------------------------------------- */
   .membershipSection {
-    background: #f4efe4;
+    background: var(--cream, #f4efe4);
     border-bottom: 1px solid var(--line);
   }
   .membershipGrid {
@@ -2751,7 +3022,7 @@ const css = `
   .membershipCard {
     position: relative;
     padding: 48px 44px;
-    background: white;
+    background: var(--cardBg, white);
     border: 1px solid var(--line);
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
@@ -2821,7 +3092,7 @@ const css = `
   }
   .perksList li {
     font-size: 0.88rem;
-    color: #38453f;
+    color: var(--muted);
     line-height: 1.5;
   }
 
@@ -2843,7 +3114,7 @@ const css = `
   .productCard {
     display: flex;
     flex-direction: column;
-    background: white;
+    background: var(--cardBg, white);
     border: 1px solid var(--line);
     border-radius: 8px;
     overflow: hidden;
@@ -2857,7 +3128,7 @@ const css = `
   .prodPhoto {
     position: relative;
     height: 180px;
-    background: #f6f3eb;
+    background: var(--sand, #f6f3eb);
   }
   .prodPhoto img {
     width: 100%;
@@ -2936,7 +3207,7 @@ const css = `
   /* FAQ ACCORDION                                                 */
   /* ------------------------------------------------------------- */
   .faqSection {
-    background: #f7f3ea;
+    background: var(--cream, #f7f3ea);
     border-bottom: 1px solid var(--line);
   }
   .faqAccordion {
@@ -2947,7 +3218,7 @@ const css = `
     gap: 12px;
   }
   .faqCard {
-    background: white;
+    background: var(--cardBg, white);
     border: 1px solid var(--line);
     border-radius: 6px;
     overflow: hidden;
@@ -3011,7 +3282,7 @@ const css = `
     place-items: center;
     border: 1px solid var(--line);
     border-radius: 50%;
-    background: white;
+    background: var(--cardBg, white);
     color: var(--ink);
     font-size: 1.1rem;
     cursor: pointer;
@@ -3035,7 +3306,7 @@ const css = `
     display: none;
     margin: 0;
     padding: 38px 44px;
-    background: white;
+    background: var(--cardBg, white);
     border: 1px solid var(--line);
     border-left: 4px solid var(--gold);
     border-radius: 8px;
@@ -3059,7 +3330,7 @@ const css = `
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.55rem;
     line-height: 1.5;
-    color: #172b22;
+    color: var(--ink);
     margin: 0 0 20px;
   }
   .reviewCard footer {
@@ -3238,7 +3509,7 @@ const css = `
     place-items: center;
     border: 1px solid var(--line);
     border-radius: 50%;
-    background: white;
+    background: var(--cardBg, white);
     font-size: 1.4rem;
     cursor: pointer;
     transition: all 0.2s;
@@ -3272,7 +3543,7 @@ const css = `
     width: 100%;
     padding: 12px 14px;
     border: 1px solid var(--line);
-    background: white;
+    background: var(--cardBg, white);
     border-radius: 4px;
     font-family: inherit;
     font-size: 0.92rem;
@@ -3299,7 +3570,7 @@ const css = `
   .timePill {
     padding: 8px 14px;
     border: 1px solid var(--line);
-    background: white;
+    background: var(--cardBg, white);
     border-radius: 4px;
     font-size: 0.76rem;
     font-weight: 600;
@@ -3320,7 +3591,7 @@ const css = `
     padding: 12px 16px;
     border-radius: 4px;
     font-size: 0.82rem;
-    color: #404f47;
+    color: var(--muted);
   }
 
   .auraSuccess {
@@ -3370,7 +3641,7 @@ const css = `
   }
   .guideGrid article {
     padding: 20px;
-    background: white;
+    background: var(--cardBg, white);
     border: 1px solid var(--line);
     border-radius: 6px;
   }

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 480" width="100%" height="100%">
+  <defs>
+    <filter id="spreadShadowGQ" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="rgba(0,0,0,0.65)"/>
+    </filter>
+    <linearGradient id="pageFoldGQ" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#dad7ce"/>
+      <stop offset="47%" stop-color="#f8f6f0"/>
+      <stop offset="50%" stop-color="#b0aaa0"/>
+      <stop offset="53%" stop-color="#f8f6f0"/>
+      <stop offset="100%" stop-color="#dad7ce"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="700" height="480" rx="16" fill="#0d0e12"/>
+
+  <!-- Studio Surface Grid -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="0" y1="120" x2="700" y2="120"/>
+    <line x1="0" y1="240" x2="700" y2="240"/>
+    <line x1="0" y1="360" x2="700" y2="360"/>
+    <line x1="350" y1="0" x2="350" y2="480"/>
+  </g>
+
+  <!-- Open Magazine Double-Page Spread -->
+  <g transform="translate(45, 30)" filter="url(#spreadShadowGQ)">
+    <rect x="0" y="0" width="610" height="420" rx="6" fill="url(#pageFoldGQ)"/>
+    <rect x="5" y="5" width="298" height="410" fill="#f4f1eb"/>
+    <rect x="307" y="5" width="298" height="410" fill="#f4f1eb"/>
+
+    <!-- Spine Crease -->
+    <line x1="305" y1="0" x2="305" y2="420" stroke="#948e82" stroke-width="1.5" opacity="0.6"/>
+
+    <!-- ================= LEFT PAGE: SOHO STREET PHOTOGRAPHY ================= -->
+    <g transform="translate(25, 20)">
+      <rect x="0" y="0" width="265" height="375" rx="3" fill="#14161b" stroke="#181716" stroke-width="1.5"/>
+
+      <!-- Architectural Cast-Iron SoHo Column Vectors -->
+      <line x1="35" y1="0" x2="35" y2="375" stroke="#252934" stroke-width="8"/>
+      <line x1="230" y1="0" x2="230" y2="375" stroke="#252934" stroke-width="8"/>
+      
+      <!-- Backlit Street Silhouette -->
+      <polygon points="60,375 110,60 170,60 215,375" fill="rgba(229,223,211,0.08)"/>
+
+      <!-- Model Figure: Tailored Trench Silhouette -->
+      <ellipse cx="140" cy="90" rx="18" ry="24" fill="#e5dfd3"/>
+      <!-- Fedora Hat Silhouette -->
+      <ellipse cx="140" cy="74" rx="26" ry="6" fill="#181716"/>
+      <path d="M125 74 Q140 58 155 74 Z" fill="#181716"/>
+
+      <!-- Double-Breasted Trench Coat -->
+      <path d="M115 114 L95 290 L185 290 L165 114 Z" fill="#20222a"/>
+      <!-- Lapels -->
+      <polygon points="122,114 140,165 130,114" fill="#e5dfd3" opacity="0.9"/>
+      <polygon points="158,114 140,165 150,114" fill="#e5dfd3" opacity="0.9"/>
+      <!-- Houndstooth Pattern Accent Line -->
+      <line x1="140" y1="165" x2="140" y2="290" stroke="#e5dfd3" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+      <!-- Overlay Tag -->
+      <rect x="15" y="325" width="235" height="35" rx="2" fill="rgba(0,0,0,0.75)"/>
+      <text x="25" y="340" fill="#e5dfd3" font-family="Cinzel, serif" font-size="7.5" font-weight="bold">SO-HO COLD CASTLE // LOOK 07</text>
+      <text x="25" y="352" fill="#9da3af" font-family="monospace" font-size="6">1/500s · ZEISS 80MM F/2.8 · TRI-X TONE</text>
+
+      <text x="15" y="386" fill="#9da3af" font-family="monospace" font-size="8">P. 88</text>
+    </g>
+
+    <!-- ================= RIGHT PAGE: GQ STYLE TYPOGRAPHY ================= -->
+    <g transform="translate(330, 30)">
+      <text x="0" y="16" fill="#181716" font-family="Cinzel, serif" font-size="12" font-weight="900" letter-spacing="4">GQ STYLE AWARDS</text>
+      <text x="180" y="16" fill="#68635c" font-family="monospace" font-size="8">NEW YORK // 2024</text>
+      <line x1="0" y1="25" x2="250" y2="25" stroke="#181716" stroke-width="1.5"/>
+
+      <!-- Big Headline -->
+      <text x="0" y="65" fill="#181716" font-family="Playfair Display, Georgia, serif" font-size="30" font-weight="900">THE MODERN</text>
+      <text x="0" y="96" fill="#181716" font-family="Playfair Display, Georgia, serif" font-size="30" font-weight="900" font-style="italic">PROTAGONIST</text>
+
+      <text x="0" y="122" fill="#68635c" font-family="Cinzel, serif" font-size="9" font-weight="bold" letter-spacing="2">PHOTOGRAPHY BY FRAMELAB PHOTO</text>
+
+      <!-- Critique Quote Box -->
+      <g transform="translate(0, 142)">
+        <rect x="0" y="0" width="248" height="74" fill="#eae5dc" rx="4"/>
+        <line x1="0" y1="0" x2="0" y2="74" stroke="#181716" stroke-width="3"/>
+        <text x="14" y="24" fill="#181716" font-family="Playfair Display, serif" font-size="11.5" font-style="italic">"Unrivaled cinematic mastery,</text>
+        <text x="14" y="42" fill="#181716" font-family="Playfair Display, serif" font-size="11.5" font-style="italic">precision architectural lighting,</text>
+        <text x="14" y="60" fill="#181716" font-family="Playfair Display, serif" font-size="11.5" font-style="italic">and emotional resonance."</text>
+      </g>
+
+      <!-- Text Columns -->
+      <g transform="translate(0, 236)" fill="#68635c" font-family="serif" font-size="6.5" opacity="0.85">
+        <text x="0" y="0">FrameLab captures urban tailoring with</text>
+        <text x="0" y="10">monumental sculptural clarity. Using subtle</text>
+        <text x="0" y="20">ambient balance and medium-format optics,</text>
+        <text x="0" y="30">every fabric fold conveys gravitas.</text>
+
+        <text x="130" y="0">Selected as Featured Fashion Series</text>
+        <text x="130" y="10">at the GQ Style Awards 2024.</text>
+        <text x="130" y="20">Location: Greene St, SoHo New York.</text>
+        <text x="130" y="30">Talent: British Fashion Council.</text>
+      </g>
+
+      <text x="235" y="375" fill="#9da3af" font-family="monospace" font-size="8">89</text>
+    </g>
+  </g>
+</svg>

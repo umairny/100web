@@ -559,14 +559,22 @@ export function getStoredCustomColor(pathname?: string, scope?: ThemeScope): str
 function findSiteByPathname(pathname?: string): WebsiteDesign | null {
   if (!pathname) return null
   const cleanPath = pathname.toLowerCase()
+  const normalize = (s: string) => s.toLowerCase().replace(/[-_\s/]/g, '')
+  const cleanNorm = normalize(cleanPath)
+
   const found = allWebsites.find((site) => {
     const catPath = site.category.toLowerCase().replace(/\s+/g, '-')
+    const slugNorm = normalize(site.slug)
     return (
       cleanPath === `/${catPath}/${site.slug}` ||
       cleanPath.startsWith(`/${catPath}/${site.slug}/`) ||
       cleanPath === `/${site.slug}` ||
       cleanPath.startsWith(`/${site.slug}/`) ||
-      cleanPath.includes(site.slug)
+      cleanPath.includes(site.slug) ||
+      cleanNorm === slugNorm ||
+      cleanNorm.endsWith(slugNorm) ||
+      slugNorm.endsWith(cleanNorm) ||
+      cleanNorm.includes(slugNorm)
     )
   })
   return found || null
@@ -662,12 +670,27 @@ export function applyThemeVariables(
     const site = findSiteByPathname(
       pathname || (typeof window !== 'undefined' ? window.location.pathname : '')
     )
-    primary = site?.colors?.primary || '#caa56f'
-    secondary = site?.colors?.accent || '#b88755'
-    dark = site?.colors?.dark || '#18120c'
+    let sitePrimary = site?.colors?.primary || '#06b6d4'
+    let siteSecondary = site?.colors?.accent || site?.colors?.secondary || '#0ea5e9'
+    let siteDark = site?.colors?.dark || '#030712'
+
+    // If site primary is near black/dark bg (<0.20 lightness) and accent is vivid, swap them so accent is primary
+    if (site?.colors?.primary && site?.colors?.accent) {
+      const { l: primL } = hexToHsl(site.colors.primary)
+      const { l: accL } = hexToHsl(site.colors.accent)
+      if (primL < 0.20 && accL > 0.30) {
+        sitePrimary = site.colors.accent
+        siteSecondary = site.colors.secondary && hexToHsl(site.colors.secondary).l > 0.25 ? site.colors.secondary : adjustBrightness(sitePrimary, -14)
+        siteDark = site.colors.primary
+      }
+    }
+
+    primary = sitePrimary
+    secondary = siteSecondary
+    dark = siteDark
     light = site?.colors?.secondary || '#ffffff'
     glow = hexToRgba(primary, 0.35)
-    bgDark = site?.colors?.dark || '#18120c'
+    bgDark = siteDark
     bgSurface = adjustBrightness(bgDark, 8)
     bgCard = adjustBrightness(bgDark, 14)
     bgCardHover = adjustBrightness(bgDark, 20)
@@ -748,7 +771,7 @@ export function applyThemeVariables(
     finalBorder = 'rgba(0, 0, 0, 0.08)'
   }
 
-  const isMoodActive = mood === 'dark'
+  const isMoodActive = mood === 'dark' || mood === 'light'
   const hasThemeOverride = !isOriginal || bgMode === 'custom' || isMoodActive
 
   // Set root custom properties & attributes on each document root
@@ -961,12 +984,14 @@ export function applyThemeVariables(
     ${
       sitePrimaryClean && !isOriginal
         ? `
-      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="[#${sitePrimaryClean}]"],
-      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="[#${sitePrimaryClean.toUpperCase()}]"] {
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="border-[#${sitePrimaryClean}]"],
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="border-[#${sitePrimaryClean.toUpperCase()}]"] {
         border-color: ${primary} !important;
       }
-      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas button[class*="[#${sitePrimaryClean}]"],
-      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas a[class*="[#${sitePrimaryClean}]"],
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas button[class*="bg-[#${sitePrimaryClean}]"],
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas button[class*="bg-[#${sitePrimaryClean.toUpperCase()}]"],
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas a[class*="bg-[#${sitePrimaryClean}]"],
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas a[class*="bg-[#${sitePrimaryClean.toUpperCase()}]"],
       [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="bg-[#${sitePrimaryClean}]"],
       [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="bg-[#${sitePrimaryClean.toUpperCase()}]"] {
         background-color: ${primary} !important;
@@ -982,10 +1007,14 @@ export function applyThemeVariables(
     ${
       siteAccentClean && !isOriginal
         ? `
-      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="[#${siteAccentClean}]"],
-      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="[#${siteAccentClean.toUpperCase()}]"] {
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="border-[#${siteAccentClean}]"],
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="border-[#${siteAccentClean.toUpperCase()}]"] {
         border-color: ${secondary} !important;
       }
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas button[class*="bg-[#${siteAccentClean}]"],
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas button[class*="bg-[#${siteAccentClean.toUpperCase()}]"],
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas a[class*="bg-[#${siteAccentClean}]"],
+      [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas a[class*="bg-[#${siteAccentClean.toUpperCase()}]"],
       [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="bg-[#${siteAccentClean}]"],
       [data-theme-preset]:not([data-theme-preset="original"]) .demo-canvas [class*="bg-[#${siteAccentClean.toUpperCase()}]"] {
         background-color: ${secondary} !important;

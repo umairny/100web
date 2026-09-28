@@ -155,7 +155,11 @@ function PeakButton({
   return (
     <a
       href={href}
-      className={`group inline-flex min-h-12 items-center justify-center gap-3 rounded-[1.15rem] px-6 text-xs font-black uppercase tracking-[0.15em] transition duration-300 hover:-translate-y-0.5 ${outline ? "border border-[#0B2A4A]/20 bg-white text-[#0B2A4A] hover:border-[#17A7E8] hover:text-[#17A7E8]" : "bg-[#FF7A3D] text-white shadow-[0_16px_35px_rgba(255,122,61,.28)] hover:bg-[#f46527]"} ${className}`}
+      className={`group inline-flex min-h-12 items-center justify-center gap-3 rounded-[1.15rem] px-6 text-xs font-black uppercase tracking-[0.15em] transition duration-300 hover:-translate-y-0.5 ${
+        outline
+          ? "peakrun-btn-outline border border-[#0B2A4A]/20 bg-white text-[#0B2A4A] hover:border-[#17A7E8] hover:text-[#17A7E8]"
+          : "peakrun-btn-solid bg-[#FF7A3D] text-white shadow-[0_16px_35px_rgba(255,122,61,.28)] hover:bg-[#f46527]"
+      } ${className}`}
     >
       {children}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -177,19 +181,25 @@ function PeakHeading({
   return (
     <div className="max-w-4xl">
       <p
-        className={`inline-flex items-center gap-2 rounded-[1rem] px-4 py-2 text-[0.62rem] font-black uppercase tracking-[0.2em] ${light ? "bg-white/10 text-[#8EDBFF]" : "bg-[#E7F6FD] text-[#117DB0]"}`}
+        className={`peakrun-heading-pill inline-flex items-center gap-2 rounded-[1rem] px-4 py-2 text-[0.62rem] font-black uppercase tracking-[0.2em] ${
+          light ? "bg-white/10 text-[#8EDBFF]" : "bg-[#E7F6FD] text-[#117DB0]"
+        }`}
       >
         <Route className="h-4 w-4" />
         {label}
       </p>
       <h2
-        className={`mt-5 text-[clamp(2.15rem,5.5vw,6.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.055em] ${light ? "text-white" : "text-[#102033]"}`}
+        className={`peakrun-heading-title mt-5 text-[clamp(2.15rem,5.5vw,6.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.055em] ${
+          light ? "peakrun-title-light text-white" : "peakrun-title-dark text-[#102033]"
+        }`}
       >
         {title}
       </h2>
       {text && (
         <p
-          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg ${light ? "text-white/62" : "text-[#56677A]"}`}
+          className={`peakrun-heading-text mt-6 max-w-2xl text-base leading-8 md:text-lg ${
+            light ? "peakrun-body-light text-white/62" : "peakrun-body-dark text-[#56677A]"
+          }`}
         >
           {text}
         </p>
@@ -202,17 +212,17 @@ function PeakLogo() {
   return (
     <a
       href="#home"
-      className="flex items-center gap-3 text-[#102033]"
+      className="peakrun-logo flex items-center gap-3 text-[#102033]"
       aria-label="PeakRun Coaching home"
     >
-      <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#0B2A4A] text-[#8EDBFF] shadow-lg shadow-[#0B2A4A]/15">
+      <span className="peakrun-logo-box grid h-11 w-11 place-items-center rounded-2xl bg-[#0B2A4A] text-[#8EDBFF] shadow-lg shadow-[#0B2A4A]/15">
         <Footprints className="h-5 w-5" />
       </span>
       <span>
-        <strong className="block text-base font-black uppercase leading-none tracking-[-0.03em]">
+        <strong className="peakrun-logo-brand block text-base font-black uppercase leading-none tracking-[-0.03em]">
           PeakRun
         </strong>
-        <span className="mt-1 block text-[0.55rem] font-black uppercase tracking-[0.22em] text-[#678]">
+        <span className="peakrun-logo-sub mt-1 block text-[0.55rem] font-black uppercase tracking-[0.22em] text-[#678]">
           Coaching
         </span>
       </span>
@@ -304,7 +314,347 @@ export function PeakRunCoaching() {
 
   return (
     <main className="peakrun-site w-full max-w-full overflow-x-hidden bg-[#F5F8FB] text-[#102033] selection:bg-[#FFB06B] selection:text-[#102033]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-[#0B2A4A]/10 bg-white/92 backdrop-blur-xl">
+      <style>{`
+        .peakrun-site {
+          /* Core Brand Theme Tokens */
+          --peak-accent: #FF7A3D;
+          --peak-accent-hover: #f46527;
+          --peak-accent-sec: #117DB0;
+          --peak-accent-sec-hover: #0d638c;
+          --peak-accent-glow: rgba(255, 122, 61, 0.28);
+          --peak-contrast: #FFFFFF;
+          --peak-cyan: #8EDBFF;
+          --peak-amber: #FFB06B;
+
+          /* Surfaces - Athletic Runner Light Default */
+          --peak-bg-base: #F5F8FB;
+          --peak-bg-hero: #F5F8FB;
+          --peak-bg-card: #FFFFFF;
+          --peak-bg-card-alt: #EAF4FA;
+          --peak-bg-navy: #0B2A4A;
+          --peak-bg-dark-hero: #071B33;
+          --peak-bg-footer: #FFFFFF;
+
+          /* Text Tokens */
+          --peak-text-primary: #102033;
+          --peak-text-muted: #56677A;
+          --peak-text-faint: #6B7886;
+          --peak-border: #DDE7EF;
+          --peak-border-subtle: rgba(11, 42, 74, 0.10);
+
+          /* Header */
+          --peak-header-bg: rgba(255, 255, 255, 0.94);
+          --peak-header-border: rgba(11, 42, 74, 0.10);
+          --peak-header-text: #102033;
+          --peak-header-link: #5D6C7E;
+          --peak-header-hover: #0B2A4A;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* DYNAMIC THEME PRESET ADAPTATION                              */
+        /* ------------------------------------------------------------ */
+        [data-theme-preset]:not([data-theme-preset="original"]) .peakrun-site,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .peakrun-site {
+          --peak-accent: var(--theme-accent-primary, #FF7A3D) !important;
+          --peak-accent-hover: var(--theme-accent-primary-hover, #f46527) !important;
+          --peak-accent-sec: var(--theme-accent-secondary, #117DB0) !important;
+          --peak-accent-sec-hover: var(--theme-accent-secondary-hover, #0d638c) !important;
+          --peak-accent-glow: var(--theme-accent-glow, rgba(255, 122, 61, 0.28)) !important;
+          --peak-contrast: var(--theme-accent-contrast, #FFFFFF) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* LIGHT MOOD - CRISP HIGH-CONTRAST ATHLETIC DAY RUN           */
+        /* ------------------------------------------------------------ */
+        [data-theme-mood="light"] .peakrun-site,
+        :root.light .peakrun-site,
+        html.light .peakrun-site {
+          --peak-bg-base: #F5F8FB !important;
+          --peak-bg-hero: #F5F8FB !important;
+          --peak-bg-card: #FFFFFF !important;
+          --peak-bg-card-alt: #EAF4FA !important;
+          --peak-bg-navy: #0B2A4A !important;
+          --peak-bg-dark-hero: #071B33 !important;
+          --peak-bg-footer: #FFFFFF !important;
+
+          --peak-text-primary: #102033 !important;
+          --peak-text-muted: #56677A !important;
+          --peak-text-faint: #6B7886 !important;
+          --peak-border: #DDE7EF !important;
+          --peak-border-subtle: rgba(11, 42, 74, 0.08) !important;
+
+          --peak-header-bg: rgba(255, 255, 255, 0.95) !important;
+          --peak-header-border: rgba(11, 42, 74, 0.10) !important;
+          --peak-header-text: #102033 !important;
+          --peak-header-link: #5D6C7E !important;
+          --peak-header-hover: #0B2A4A !important;
+
+          background-color: var(--peak-bg-base) !important;
+          color: var(--peak-text-primary) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* DARK MOOD - NOCTURNAL RUNNER OBSIDIAN & MIDNIGHT NAVY       */
+        /* ------------------------------------------------------------ */
+        html.dark .peakrun-site,
+        body.dark .peakrun-site,
+        [data-theme-mood="dark"] .peakrun-site,
+        :root[data-theme-mood="dark"] .peakrun-site,
+        :root[data-theme-active="true"][data-theme-mood="dark"] .peakrun-site,
+        :root.dark .peakrun-site {
+          --peak-bg-base: #07111D !important;
+          --peak-bg-hero: #07111D !important;
+          --peak-bg-card: #0F1D2E !important;
+          --peak-bg-card-alt: #0B1726 !important;
+          --peak-bg-navy: #13243A !important;
+          --peak-bg-dark-hero: #050E18 !important;
+          --peak-bg-footer: #050B12 !important;
+
+          --peak-text-primary: #F0F6FC !important;
+          --peak-text-muted: #95A5B8 !important;
+          --peak-text-faint: #6A7D92 !important;
+          --peak-border: rgba(255, 255, 255, 0.12) !important;
+          --peak-border-subtle: rgba(255, 255, 255, 0.08) !important;
+
+          --peak-header-bg: rgba(7, 17, 29, 0.95) !important;
+          --peak-header-border: rgba(255, 255, 255, 0.10) !important;
+          --peak-header-text: #FFFFFF !important;
+          --peak-header-link: rgba(255, 255, 255, 0.65) !important;
+          --peak-header-hover: #FFFFFF !important;
+
+          background-color: var(--peak-bg-base) !important;
+          color: var(--peak-text-primary) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* CUSTOM BACKGROUND MODE                                       */
+        /* ------------------------------------------------------------ */
+        [data-theme-bg-mode="custom"] .peakrun-site {
+          --peak-bg-base: var(--theme-bg-base, #07111D) !important;
+          --peak-bg-hero: var(--theme-bg-base, #07111D) !important;
+          --peak-bg-card: var(--theme-bg-card, #0F1D2E) !important;
+          --peak-bg-card-alt: var(--theme-bg-surface, #0B1726) !important;
+          --peak-bg-navy: var(--theme-bg-surface, #13243A) !important;
+          --peak-bg-dark-hero: var(--theme-bg-base, #050E18) !important;
+          --peak-bg-footer: var(--theme-bg-base, #050B12) !important;
+
+          --peak-text-primary: var(--theme-text-primary, #F0F6FC) !important;
+          --peak-text-muted: var(--theme-text-secondary, #95A5B8) !important;
+          --peak-border: var(--theme-border, rgba(255, 255, 255, 0.12)) !important;
+          background-color: var(--peak-bg-base) !important;
+          color: var(--peak-text-primary) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* SECTION & COMPONENT THEME HOOKS                              */
+        /* ------------------------------------------------------------ */
+
+        /* Buttons */
+        .peakrun-site .peakrun-btn-solid {
+          background-color: var(--peak-accent) !important;
+          color: var(--peak-contrast) !important;
+          box-shadow: 0 16px 35px var(--peak-accent-glow) !important;
+        }
+        .peakrun-site .peakrun-btn-solid:hover {
+          background-color: var(--peak-accent-hover) !important;
+          color: var(--peak-contrast) !important;
+        }
+        .peakrun-site .peakrun-btn-outline {
+          border-color: var(--peak-border) !important;
+          background-color: var(--peak-bg-card) !important;
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-btn-outline:hover {
+          border-color: var(--peak-accent-sec) !important;
+          color: var(--peak-accent-sec) !important;
+        }
+
+        /* Header & Nav */
+        .peakrun-site .peakrun-header {
+          background-color: var(--peak-header-bg) !important;
+          border-color: var(--peak-header-border) !important;
+        }
+        .peakrun-site .peakrun-logo-brand {
+          color: var(--peak-header-text) !important;
+        }
+        .peakrun-site .peakrun-logo-sub {
+          color: var(--peak-header-link) !important;
+        }
+        .peakrun-site .peakrun-logo-box {
+          background-color: var(--peak-bg-navy) !important;
+          color: var(--peak-cyan) !important;
+        }
+        .peakrun-site .peakrun-nav-link {
+          color: var(--peak-header-link) !important;
+        }
+        .peakrun-site .peakrun-nav-link:hover {
+          background-color: rgba(125, 125, 125, 0.08) !important;
+          color: var(--peak-header-hover) !important;
+        }
+        .peakrun-site .peakrun-nav-active {
+          background-color: rgba(17, 125, 176, 0.14) !important;
+          color: var(--peak-accent-sec) !important;
+        }
+        .peakrun-site .peakrun-menu-btn {
+          border-color: var(--peak-border) !important;
+          color: var(--peak-header-text) !important;
+        }
+        .peakrun-site .peakrun-mobile-menu {
+          background-color: var(--peak-header-bg) !important;
+          border-color: var(--peak-header-border) !important;
+        }
+
+        /* Headings & Text */
+        .peakrun-site .peakrun-title-dark {
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-body-dark {
+          color: var(--peak-text-muted) !important;
+        }
+
+        /* Hero Card */
+        .peakrun-site .peakrun-hero-card {
+          background-color: var(--peak-bg-card) !important;
+          border-color: var(--peak-border) !important;
+        }
+        .peakrun-site .peakrun-hero-chip {
+          background-color: var(--peak-bg-base) !important;
+          border-color: var(--peak-border) !important;
+          color: var(--peak-text-muted) !important;
+        }
+        .peakrun-site .peakrun-hero-desc {
+          color: var(--peak-text-muted) !important;
+        }
+        .peakrun-site .peakrun-hero-title {
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-hero-stat-card {
+          background-color: var(--peak-bg-card) !important;
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-hero-stat-val {
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-hero-stat-label {
+          color: var(--peak-text-muted) !important;
+        }
+
+        /* Plans Section */
+        .peakrun-site .peakrun-section-plans {
+          background-color: var(--peak-bg-base) !important;
+        }
+        .peakrun-site .peakrun-plan-card {
+          background-color: var(--peak-bg-card) !important;
+          border-color: var(--peak-border) !important;
+        }
+        .peakrun-site .peakrun-plan-title {
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-plan-desc {
+          color: var(--peak-text-muted) !important;
+        }
+        .peakrun-site .peakrun-plan-link {
+          color: var(--peak-accent-sec) !important;
+        }
+
+        /* Coaching Process Section */
+        .peakrun-site .peakrun-section-coaching {
+          background-color: var(--peak-bg-card-alt) !important;
+        }
+        .peakrun-site .peakrun-step-card {
+          background-color: var(--peak-bg-card) !important;
+          border-color: var(--peak-border) !important;
+        }
+        .peakrun-site .peakrun-step-title {
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-step-desc {
+          color: var(--peak-text-muted) !important;
+        }
+        .peakrun-site .peakrun-step-num {
+          background-color: var(--peak-bg-navy) !important;
+          color: var(--peak-cyan) !important;
+        }
+
+        /* Results / Tracking */
+        .peakrun-site .peakrun-section-results {
+          background-color: var(--peak-bg-base) !important;
+        }
+        .peakrun-site .peakrun-stat-card {
+          background-color: var(--peak-bg-card) !important;
+          border-color: var(--peak-border) !important;
+        }
+        .peakrun-site .peakrun-stat-val {
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-stat-label {
+          color: var(--peak-text-muted) !important;
+        }
+        .peakrun-site .peakrun-progress-box {
+          background-color: var(--peak-bg-card) !important;
+          border-color: var(--peak-border) !important;
+        }
+        .peakrun-site .peakrun-progress-subcard {
+          background-color: var(--peak-bg-card-alt) !important;
+        }
+
+        /* Packages Section */
+        .peakrun-site .peakrun-section-packages {
+          background-color: var(--peak-bg-card-alt) !important;
+        }
+        .peakrun-site .peakrun-pkg-card {
+          background-color: var(--peak-bg-card) !important;
+          border-color: var(--peak-border) !important;
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-pkg-popular {
+          border-color: var(--peak-accent) !important;
+          background-color: var(--peak-bg-navy) !important;
+          color: #FFFFFF !important;
+        }
+
+        /* Testimonials Section */
+        .peakrun-site .peakrun-section-testimonials {
+          background-color: var(--peak-bg-base) !important;
+        }
+        .peakrun-site .peakrun-testi-card {
+          background-color: var(--peak-bg-card) !important;
+          border-color: var(--peak-border) !important;
+        }
+        .peakrun-site .peakrun-testi-title {
+          color: var(--peak-text-primary) !important;
+        }
+        .peakrun-site .peakrun-testi-desc {
+          color: var(--peak-text-muted) !important;
+        }
+        .peakrun-site .peakrun-testi-name {
+          color: var(--peak-accent-sec) !important;
+        }
+
+        /* Footer */
+        .peakrun-site .peakrun-footer {
+          background-color: var(--peak-bg-footer) !important;
+          border-color: var(--peak-border) !important;
+        }
+        .peakrun-site .peakrun-footer-border {
+          border-color: var(--peak-border) !important;
+        }
+        .peakrun-site .peakrun-footer-link {
+          color: var(--peak-text-muted) !important;
+        }
+        .peakrun-site .peakrun-footer-link:hover {
+          color: var(--peak-accent-sec) !important;
+        }
+        .peakrun-site .peakrun-social-btn {
+          border-color: var(--peak-border) !important;
+          color: var(--peak-text-muted) !important;
+        }
+        .peakrun-site .peakrun-social-btn:hover {
+          border-color: var(--peak-accent-sec) !important;
+          color: var(--peak-accent-sec) !important;
+        }
+      `}</style>
+      <header className="peakrun-header fixed inset-x-0 top-0 z-50 border-b border-[#0B2A4A]/10 bg-white/92 backdrop-blur-xl">
         <div className="mx-auto flex h-[4.75rem] max-w-[96rem] items-center justify-between px-5 lg:px-10">
           <PeakLogo />
           <nav
@@ -318,7 +668,7 @@ export function PeakRunCoaching() {
                   key={label}
                   href={href}
                   aria-current={active ? "location" : undefined}
-                  className={`rounded-full px-4 py-2 text-[0.68rem] font-black uppercase tracking-[0.14em] transition ${active ? "peakrun-nav-active bg-[#E7F6FD] text-[#117DB0]" : "text-[#5D6C7E] hover:bg-[#F0F6FA] hover:text-[#0B2A4A]"}`}
+                  className={`rounded-full px-4 py-2 text-[0.68rem] font-black uppercase tracking-[0.14em] transition ${active ? "peakrun-nav-active bg-[#E7F6FD] text-[#117DB0]" : "peakrun-nav-link text-[#5D6C7E] hover:bg-[#F0F6FA] hover:text-[#0B2A4A]"}`}
                 >
                   {label}
                 </a>
@@ -336,7 +686,7 @@ export function PeakRunCoaching() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
-            className="grid h-11 w-11 place-items-center rounded-full border border-[#0B2A4A]/15 text-[#102033] transition active:scale-95 hover:border-[#117DB0] lg:hidden"
+            className="peakrun-menu-btn grid h-11 w-11 place-items-center rounded-full border border-[#0B2A4A]/15 text-[#102033] transition active:scale-95 hover:border-[#117DB0] lg:hidden"
           >
             {menuOpen ? (
               <X className="h-5 w-5" />
@@ -353,7 +703,7 @@ export function PeakRunCoaching() {
               onClick={() => setMenuOpen(false)}
               aria-hidden="true"
             />
-            <nav className="fixed inset-x-0 top-[4.75rem] z-50 border-b border-[#0B2A4A]/10 bg-white/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
+            <nav className="peakrun-mobile-menu fixed inset-x-0 top-[4.75rem] z-50 border-b border-[#0B2A4A]/10 bg-white/98 px-5 py-5 shadow-2xl backdrop-blur-2xl lg:hidden">
               <div className="space-y-1">
                 {navLinks.map(([label, href]) => {
                   const active = activeSection === href.slice(1);
@@ -366,7 +716,7 @@ export function PeakRunCoaching() {
                       className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-black uppercase tracking-[0.1em] transition ${
                         active
                           ? "peakrun-nav-active bg-[#E7F6FD] text-[#117DB0] font-black"
-                          : "text-[#5D6C7E] hover:bg-[#F0F6FA] hover:text-[#0B2A4A]"
+                          : "peakrun-nav-link text-[#5D6C7E] hover:bg-[#F0F6FA] hover:text-[#0B2A4A]"
                       }`}
                     >
                       <span>{label}</span>
@@ -382,17 +732,17 @@ export function PeakRunCoaching() {
 
       <section
         id="home"
-        className="relative isolate overflow-hidden bg-[#F5F8FB] pt-[4.75rem] text-[#102033]"
+        className="peakrun-section-hero relative isolate overflow-hidden bg-[#F5F8FB] pt-[4.75rem] text-[#102033]"
       >
         <img
           src={abstractImage}
           alt=""
           className="absolute inset-0 h-full w-full object-cover opacity-[0.16] mix-blend-multiply"
         />
-        <div className="absolute inset-x-0 top-0 h-[30rem] bg-[linear-gradient(135deg,#E7F6FD_0%,#FFF4EA_52%,#F5F8FB_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-[30rem] bg-[linear-gradient(135deg,#E7F6FD_0%,#FFF4EA_52%,#F5F8FB_100%)] opacity-80" />
         <div className="absolute right-[8%] top-36 h-72 w-72 rounded-full bg-[#17A7E8]/20 blur-3xl" />
         <div className="relative mx-auto grid min-h-[calc(100vh-4.75rem)] max-w-[100rem] gap-6 px-5 py-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-0 lg:px-10 lg:py-16 xl:px-14">
-          <div className="relative z-10 flex flex-col justify-between rounded-[2rem] border border-[#D7E6F0] bg-white/88 p-6 shadow-2xl shadow-[#0B2A4A]/8 backdrop-blur md:p-9 lg:rounded-r-none lg:border-r-0">
+          <div className="peakrun-hero-card relative z-10 flex flex-col justify-between rounded-[2rem] border border-[#D7E6F0] bg-white/88 p-6 shadow-2xl shadow-[#0B2A4A]/8 backdrop-blur md:p-9 lg:rounded-r-none lg:border-r-0">
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-[0.9rem] bg-[#0B2A4A] px-4 py-2 text-[0.62rem] font-black uppercase tracking-[0.2em] text-[#8EDBFF]">
                 PeakRun Coaching
@@ -406,10 +756,10 @@ export function PeakRunCoaching() {
                 <Zap className="h-4 w-4 text-[#FF7A3D]" /> Morning miles,
                 measured progress
               </p>
-              <h1 className="mt-7 max-w-4xl text-[clamp(2.35rem,7.5vw,8.8rem)] font-bold uppercase leading-[0.88] tracking-[-0.07em]">
+              <h1 className="peakrun-hero-title mt-7 max-w-4xl text-[clamp(2.35rem,7.5vw,8.8rem)] font-bold uppercase leading-[0.88] tracking-[-0.07em]">
                 Train Smarter. Run Stronger. Race Ready.
               </h1>
-              <p className="mt-7 max-w-2xl text-lg leading-8 text-[#56677A] md:text-xl">
+              <p className="peakrun-hero-desc mt-7 max-w-2xl text-lg leading-8 text-[#56677A] md:text-xl">
                 Structured running plans and coaching support for runners who
                 want clear workouts, better pacing, and confidence from first
                 mile to finish line.
@@ -430,7 +780,7 @@ export function PeakRunCoaching() {
               ].map((chip) => (
                 <span
                   key={chip}
-                  className="rounded-[1rem] border border-[#D7E6F0] bg-[#F5F8FB] px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#4F6175]"
+                  className="peakrun-hero-chip rounded-[1rem] border border-[#D7E6F0] bg-[#F5F8FB] px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#4F6175]"
                 >
                   {chip}
                 </span>
@@ -474,12 +824,12 @@ export function PeakRunCoaching() {
                   ].map(([value, label]) => (
                     <div
                       key={label}
-                      className="rounded-[1.2rem] bg-white p-4 text-[#102033]"
+                      className="peakrun-hero-stat-card rounded-[1.2rem] bg-white p-4 text-[#102033]"
                     >
-                      <p className="text-2xl font-semibold tracking-[-0.05em]">
+                      <p className="peakrun-hero-stat-val text-2xl font-semibold tracking-[-0.05em]">
                         {value}
                       </p>
-                      <p className="mt-1 text-[0.55rem] font-black uppercase tracking-[0.15em] text-[#6B7886]">
+                      <p className="peakrun-hero-stat-label mt-1 text-[0.55rem] font-black uppercase tracking-[0.15em] text-[#6B7886]">
                         {label}
                       </p>
                     </div>
@@ -491,7 +841,7 @@ export function PeakRunCoaching() {
         </div>
       </section>
 
-      <section id="plans" className="px-5 py-24 lg:px-10 lg:py-32">
+      <section id="plans" className="peakrun-section-plans px-5 py-24 lg:px-10 lg:py-32">
         <div className="mx-auto max-w-[96rem]">
           <PeakHeading
             label="Running plans"
@@ -502,7 +852,7 @@ export function PeakRunCoaching() {
             {planCards.map((plan) => (
               <article
                 key={plan.title}
-                className="group overflow-hidden rounded-[2rem] border border-[#DDE7EF] bg-white shadow-sm transition duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#0B2A4A]/10"
+                className="peakrun-plan-card group overflow-hidden rounded-[2rem] border border-[#DDE7EF] bg-white shadow-sm transition duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#0B2A4A]/10"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
@@ -510,20 +860,20 @@ export function PeakRunCoaching() {
                     alt={`${plan.title} training`}
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-4 top-4 rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-black uppercase tracking-[0.15em] text-[#117DB0]">
+                  <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[0.58rem] font-black uppercase tracking-[0.15em] text-[#117DB0] shadow-sm">
                     {plan.tag}
                   </span>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-black uppercase tracking-[-0.04em]">
+                  <h3 className="peakrun-plan-title text-2xl font-black uppercase tracking-[-0.04em]">
                     {plan.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-7 text-[#627184]">
+                  <p className="peakrun-plan-desc mt-3 text-sm leading-7 text-[#627184]">
                     {plan.text}
                   </p>
                   <a
                     href="#contact"
-                    className="mt-6 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-[#117DB0]"
+                    className="peakrun-plan-link mt-6 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-[#117DB0]"
                   >
                     Explore Plan <ArrowRight className="h-4 w-4" />
                   </a>
@@ -536,7 +886,7 @@ export function PeakRunCoaching() {
 
       <section
         id="coaching"
-        className="bg-[#EAF4FA] px-5 py-24 lg:px-10 lg:py-32"
+        className="peakrun-section-coaching bg-[#EAF4FA] px-5 py-24 lg:px-10 lg:py-32"
       >
         <div className="mx-auto grid max-w-[96rem] gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
           <div>
@@ -555,16 +905,16 @@ export function PeakRunCoaching() {
             {processSteps.map(([number, title, text]) => (
               <article
                 key={title}
-                className="grid gap-5 rounded-[2rem] border border-white bg-white/75 p-6 shadow-sm backdrop-blur md:grid-cols-[5rem_1fr]"
+                className="peakrun-step-card grid gap-5 rounded-[2rem] border border-white bg-white/75 p-6 shadow-sm backdrop-blur md:grid-cols-[5rem_1fr]"
               >
-                <span className="grid h-16 w-16 place-items-center rounded-2xl bg-[#0B2A4A] text-xl font-black text-[#8EDBFF]">
+                <span className="peakrun-step-num grid h-16 w-16 place-items-center rounded-2xl bg-[#0B2A4A] text-xl font-black text-[#8EDBFF]">
                   {number}
                 </span>
                 <div>
-                  <h3 className="text-3xl font-black uppercase tracking-[-0.055em]">
+                  <h3 className="peakrun-step-title text-3xl font-black uppercase tracking-[-0.055em]">
                     {title}
                   </h3>
-                  <p className="mt-2 text-sm leading-7 text-[#627184]">
+                  <p className="peakrun-step-desc mt-2 text-sm leading-7 text-[#627184]">
                     {text}
                   </p>
                 </div>
@@ -576,7 +926,7 @@ export function PeakRunCoaching() {
 
       <section
         id="races"
-        className="bg-[#071B33] px-5 py-24 text-white lg:px-10 lg:py-32"
+        className="peakrun-section-races bg-[#071B33] px-5 py-24 text-white lg:px-10 lg:py-32"
       >
         <div className="mx-auto grid max-w-[96rem] gap-12 lg:grid-cols-[1.08fr_.92fr] lg:items-center">
           <div className="relative overflow-hidden rounded-[2.5rem]">
@@ -621,7 +971,7 @@ export function PeakRunCoaching() {
         </div>
       </section>
 
-      <section id="results" className="px-5 py-24 lg:px-10 lg:py-32">
+      <section id="results" className="peakrun-section-results px-5 py-24 lg:px-10 lg:py-32">
         <div className="mx-auto grid max-w-[96rem] gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
           <div>
             <PeakHeading
@@ -633,27 +983,27 @@ export function PeakRunCoaching() {
               {progressStats.map(([label, value, note]) => (
                 <div
                   key={label}
-                  className="rounded-[2rem] border border-[#DDE7EF] bg-white p-6"
+                  className="peakrun-stat-card rounded-[2rem] border border-[#DDE7EF] bg-white p-6"
                 >
                   <BarChart3 className="h-5 w-5 text-[#17A7E8]" />
-                  <p className="mt-6 text-[0.6rem] font-black uppercase tracking-[0.18em] text-[#6B7886]">
+                  <p className="peakrun-stat-label mt-6 text-[0.6rem] font-black uppercase tracking-[0.18em] text-[#6B7886]">
                     {label}
                   </p>
-                  <p className="mt-2 text-4xl font-black tracking-[-0.06em]">
+                  <p className="peakrun-stat-val mt-2 text-4xl font-black tracking-[-0.06em]">
                     {value}
                   </p>
-                  <p className="mt-2 text-sm text-[#6B7886]">{note}</p>
+                  <p className="peakrun-stat-label mt-2 text-sm text-[#6B7886]">{note}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="rounded-[2.5rem] border border-[#DDE7EF] bg-white p-5 shadow-2xl shadow-[#0B2A4A]/10">
+          <div className="peakrun-progress-box rounded-[2.5rem] border border-[#DDE7EF] bg-white p-5 shadow-2xl shadow-[#0B2A4A]/10">
             <img
               src={progressImage}
               alt="Abstract running progress dashboard"
               className="rounded-[1.8rem] object-cover"
             />
-            <div className="mt-5 rounded-[1.8rem] bg-[#F5F8FB] p-5">
+            <div className="peakrun-progress-subcard mt-5 rounded-[1.8rem] bg-[#F5F8FB] p-5">
               <div className="flex items-center justify-between">
                 <p className="text-xs font-black uppercase tracking-[0.16em] text-[#117DB0]">
                   Training load
@@ -674,7 +1024,7 @@ export function PeakRunCoaching() {
         </div>
       </section>
 
-      <section className="bg-[#EAF4FA] px-5 py-24 lg:px-10 lg:py-32">
+      <section className="peakrun-section-packages bg-[#EAF4FA] px-5 py-24 lg:px-10 lg:py-32">
         <div className="mx-auto max-w-[96rem]">
           <PeakHeading
             label="Packages"
@@ -685,7 +1035,7 @@ export function PeakRunCoaching() {
             {packages.map((plan) => (
               <article
                 key={plan.name}
-                className={`relative flex flex-col rounded-[2rem] border p-7 shadow-sm ${plan.popular ? "border-[#FF7A3D] bg-[#0B2A4A] text-white shadow-2xl shadow-[#0B2A4A]/20 lg:-translate-y-4" : "border-[#DDE7EF] bg-white"}`}
+                className={`peakrun-pkg-card relative flex flex-col rounded-[2rem] border p-7 shadow-sm ${plan.popular ? "peakrun-pkg-popular border-[#FF7A3D] bg-[#0B2A4A] text-white shadow-2xl shadow-[#0B2A4A]/20 lg:-translate-y-4" : "border-[#DDE7EF] bg-white"}`}
               >
                 {plan.popular && (
                   <span className="absolute right-6 top-6 rounded-full bg-[#FF7A3D] px-3 py-1.5 text-[0.58rem] font-black uppercase tracking-[0.14em] text-white">
@@ -741,7 +1091,7 @@ export function PeakRunCoaching() {
         </div>
       </section>
 
-      <section className="px-5 py-24 lg:px-10 lg:py-32">
+      <section className="peakrun-section-testimonials px-5 py-24 lg:px-10 lg:py-32">
         <div className="mx-auto grid max-w-[96rem] gap-12 lg:grid-cols-[.7fr_1.3fr] lg:items-center">
           <div>
             <img
@@ -759,16 +1109,16 @@ export function PeakRunCoaching() {
               {testimonials.map(([title, quote, name]) => (
                 <blockquote
                   key={title}
-                  className="rounded-[2rem] border border-[#DDE7EF] bg-white p-6"
+                  className="peakrun-testi-card rounded-[2rem] border border-[#DDE7EF] bg-white p-6"
                 >
                   <Star className="h-5 w-5 fill-[#FFB06B] text-[#FFB06B]" />
-                  <h3 className="mt-5 text-xl font-black uppercase tracking-[-0.04em]">
+                  <h3 className="peakrun-testi-title mt-5 text-xl font-black uppercase tracking-[-0.04em]">
                     {title}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-[#627184]">
+                  <p className="peakrun-testi-desc mt-4 text-sm leading-7 text-[#627184]">
                     {quote}
                   </p>
-                  <footer className="mt-6 text-xs font-black uppercase tracking-[0.14em] text-[#117DB0]">
+                  <footer className="peakrun-testi-name mt-6 text-xs font-black uppercase tracking-[0.14em] text-[#117DB0]">
                     {name}
                   </footer>
                 </blockquote>
@@ -780,7 +1130,7 @@ export function PeakRunCoaching() {
 
       <section
         id="contact"
-        className="relative overflow-hidden bg-[#071B33] px-5 py-28 text-white lg:px-10 lg:py-36"
+        className="peakrun-section-cta relative overflow-hidden bg-[#071B33] px-5 py-28 text-white lg:px-10 lg:py-36"
       >
         <img
           src={ctaImage}
@@ -807,9 +1157,9 @@ export function PeakRunCoaching() {
         </div>
       </section>
 
-      <footer className="bg-white px-5 pb-8 pt-14 lg:px-10">
+      <footer className="peakrun-footer bg-white px-5 pb-8 pt-14 lg:px-10">
         <div className="mx-auto max-w-[96rem]">
-          <div className="flex flex-col justify-between gap-10 border-b border-[#DDE7EF] pb-10 lg:flex-row lg:items-start">
+          <div className="peakrun-footer-border flex flex-col justify-between gap-10 border-b border-[#DDE7EF] pb-10 lg:flex-row lg:items-start">
             <div>
               <PeakLogo />
               <p className="mt-5 max-w-sm text-sm leading-7 text-[#627184]">
@@ -821,7 +1171,7 @@ export function PeakRunCoaching() {
                 <a
                   key={label}
                   href={href}
-                  className="text-xs font-black uppercase tracking-[0.13em] text-[#607085] hover:text-[#117DB0]"
+                  className="peakrun-footer-link text-xs font-black uppercase tracking-[0.13em] text-[#607085] hover:text-[#117DB0]"
                 >
                   {label}
                 </a>
@@ -837,7 +1187,7 @@ export function PeakRunCoaching() {
                     key={social}
                     href="#contact"
                     aria-label={`${social} social placeholder`}
-                    className="grid h-10 w-10 place-items-center rounded-full border border-[#DDE7EF] text-[0.6rem] font-black text-[#607085] hover:border-[#17A7E8] hover:text-[#117DB0]"
+                    className="peakrun-social-btn grid h-10 w-10 place-items-center rounded-full border border-[#DDE7EF] text-[0.6rem] font-black text-[#607085] hover:border-[#17A7E8] hover:text-[#117DB0]"
                   >
                     {social}
                   </a>

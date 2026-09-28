@@ -1164,6 +1164,528 @@ export default function SilkStyleHair() {
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,600&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap');
   :root{--silk:#151515;--paper:#f8f6f3;--warm:#ede9e5;--muted:#66615d;--gold:#b38c55;--line:#d8d3ce}
+
+  /* ============================================================ */
+  /* THEME PRESET ADAPTATIONS                                     */
+  /* ============================================================ */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .silkPage,
+  [data-theme-active="true"]:not([data-theme-preset="original"]) {
+    --gold: var(--theme-accent-primary, #b38c55) !important;
+    --gold-sec: var(--theme-accent-secondary, #c8a370) !important;
+    --gold-glow: var(--theme-accent-glow, rgba(179, 140, 85, 0.4)) !important;
+    --gold-hover: var(--theme-accent-primary-hover, #9c7846) !important;
+  }
+
+  [data-theme-preset="emerald"] .silkPage,
+  [data-theme-preset="emerald"] {
+    --gold: #10B981 !important;
+    --gold-sec: #34D399 !important;
+    --gold-glow: rgba(16, 185, 129, 0.45) !important;
+    --gold-hover: #059669 !important;
+  }
+
+  [data-theme-preset="ocean"] .silkPage,
+  [data-theme-preset="ocean"],
+  [data-theme-preset="azure"] .silkPage,
+  [data-theme-preset="azure"] {
+    --gold: #0284C7 !important;
+    --gold-sec: #38BDF8 !important;
+    --gold-glow: rgba(2, 132, 199, 0.45) !important;
+    --gold-hover: #0369A1 !important;
+  }
+
+  [data-theme-preset="sunset"] .silkPage,
+  [data-theme-preset="sunset"] {
+    --gold: #EA580C !important;
+    --gold-sec: #FB923C !important;
+    --gold-glow: rgba(234, 88, 12, 0.45) !important;
+    --gold-hover: #C2410C !important;
+  }
+
+  [data-theme-preset="purple"] .silkPage,
+  [data-theme-preset="purple"],
+  [data-theme-preset="amethyst"] .silkPage,
+  [data-theme-preset="amethyst"],
+  [data-theme-preset="royal"] .silkPage,
+  [data-theme-preset="royal"] {
+    --gold: #9333EA !important;
+    --gold-sec: #C084FC !important;
+    --gold-glow: rgba(147, 51, 234, 0.45) !important;
+    --gold-hover: #7E22CE !important;
+  }
+
+  [data-theme-preset="amber"] .silkPage,
+  [data-theme-preset="amber"],
+  [data-theme-preset="golden"] .silkPage,
+  [data-theme-preset="golden"] {
+    --gold: #D97706 !important;
+    --gold-sec: #FBBF24 !important;
+    --gold-glow: rgba(217, 119, 6, 0.45) !important;
+    --gold-hover: #B45309 !important;
+  }
+
+  [data-theme-preset="cyberpunk"] .silkPage,
+  [data-theme-preset="cyberpunk"] {
+    --gold: #06B6D4 !important;
+    --gold-sec: #A855F7 !important;
+    --gold-glow: rgba(6, 182, 212, 0.45) !important;
+    --gold-hover: #0891B2 !important;
+  }
+
+  [data-theme-preset="terracotta"] .silkPage,
+  [data-theme-preset="terracotta"] {
+    --gold: #EA580C !important;
+    --gold-sec: #0D9488 !important;
+    --gold-glow: rgba(234, 88, 12, 0.45) !important;
+    --gold-hover: #C2410C !important;
+  }
+
+  [data-theme-preset="obsidian"] .silkPage,
+  [data-theme-preset="obsidian"] {
+    --gold: #64748B !important;
+    --gold-sec: #94A3B8 !important;
+    --gold-glow: rgba(100, 116, 139, 0.45) !important;
+    --gold-hover: #475569 !important;
+  }
+
+  /* Universal icon box prevention */
+  .silkPage svg:not(.fill-current):not([class*="fill-"]) {
+    fill: none !important;
+  }
+
+  /* Navbar Link Box Prevention */
+  .silkPage .desktopNav a,
+  .silkNav .desktopNav a,
+  [data-theme-active="true"] .desktopNav a,
+  [data-theme-preset] .desktopNav a {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .silkPage .desktopNav a:hover,
+  .silkNav .desktopNav a:hover,
+  [data-theme-active="true"] .desktopNav a:hover,
+  [data-theme-preset] .desktopNav a:hover {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--gold) !important;
+  }
+  .silkPage .desktopNav a.active,
+  .silkNav .desktopNav a.active,
+  [data-theme-active="true"] .desktopNav a.active,
+  [data-theme-preset] .desktopNav a.active {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--gold) !important;
+  }
+
+  /* Active preset button enhancement */
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .silkPage .darkButton {
+    background: linear-gradient(135deg, var(--gold), var(--gold-sec, #c8a370)) !important;
+    border-color: transparent !important;
+    box-shadow: 0 8px 22px var(--gold-glow, rgba(179, 140, 85, 0.4)) !important;
+    color: #ffffff !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .silkPage .darkButton:hover {
+    transform: translateY(-2px) !important;
+    filter: brightness(1.08) !important;
+    box-shadow: 0 12px 28px var(--gold-glow, rgba(179, 140, 85, 0.5)) !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .silkPage .outlineDark:hover {
+    border-color: var(--gold) !important;
+    color: var(--gold) !important;
+    background: transparent !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .silkPage .transformTab.active {
+    background: var(--gold) !important;
+    color: #ffffff !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .silkPage .timeSlotPill.active {
+    background: var(--gold) !important;
+    border-color: var(--gold) !important;
+    color: #ffffff !important;
+  }
+  [data-theme-active="true"]:not([data-theme-preset="original"]) .silkPage .productReserveBtn:hover {
+    background: var(--gold) !important;
+    border-color: var(--gold) !important;
+    color: #ffffff !important;
+  }
+
+  /* ============================================================ */
+  /* DARK MOOD PALETTE (Haute Couture Noir)                      */
+  /* ============================================================ */
+  html.dark .silkPage,
+  body.dark .silkPage,
+  [data-theme-mood="dark"] .silkPage,
+  :root[data-theme-mood="dark"] .silkPage,
+  :root[data-theme-active="true"][data-theme-mood="dark"] .silkPage,
+  :root.dark .silkPage {
+    --silk: #f5f3ef !important;
+    --paper: #121212 !important;
+    --warm: #1a1a1a !important;
+    --muted: #a8a49e !important;
+    --line: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  html.dark .silkPage,
+  body.dark .silkPage,
+  [data-theme-mood="dark"] .silkPage {
+    background-color: var(--paper) !important;
+    color: var(--silk) !important;
+  }
+
+  /* Nav in Dark Mood */
+  html.dark .silkPage .silkNav,
+  [data-theme-mood="dark"] .silkPage .silkNav {
+    background: rgba(18, 18, 18, 0.95) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6) !important;
+  }
+  html.dark .silkPage .desktopNav a,
+  [data-theme-mood="dark"] .silkPage .desktopNav a {
+    color: #e5e3df !important;
+    background: transparent !important;
+  }
+  html.dark .silkPage .desktopNav a:hover,
+  [data-theme-mood="dark"] .silkPage .desktopNav a:hover,
+  html.dark .silkPage .desktopNav a.active,
+  [data-theme-mood="dark"] .silkPage .desktopNav a.active {
+    color: var(--gold) !important;
+    background: transparent !important;
+  }
+  html.dark .silkPage .silkLogo,
+  [data-theme-mood="dark"] .silkPage .silkLogo,
+  html.dark .silkPage .logoScript,
+  [data-theme-mood="dark"] .silkPage .logoScript {
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .silkMenu,
+  [data-theme-mood="dark"] .silkPage .silkMenu {
+    background: #202020 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .mobileNav,
+  [data-theme-mood="dark"] .silkPage .mobileNav {
+    background: #181818 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7) !important;
+  }
+  html.dark .silkPage .mobileNav a,
+  [data-theme-mood="dark"] .silkPage .mobileNav a {
+    color: #e5e3df !important;
+  }
+  html.dark .silkPage .mobileNav a.active,
+  [data-theme-mood="dark"] .silkPage .mobileNav a.active {
+    background: #252525 !important;
+    color: var(--gold) !important;
+  }
+
+  /* Hero & Availability in Dark Mood */
+  html.dark .silkPage .availabilityPill,
+  [data-theme-mood="dark"] .silkPage .availabilityPill {
+    background: rgba(30, 30, 30, 0.88) !important;
+    border-color: rgba(179, 140, 85, 0.35) !important;
+    color: #f5f3ef !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+  }
+  html.dark .silkPage .scrollCue,
+  [data-theme-mood="dark"] .silkPage .scrollCue {
+    color: #a8a49e !important;
+  }
+  html.dark .silkPage .scrollCue:hover,
+  [data-theme-mood="dark"] .silkPage .scrollCue:hover {
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .featuredCard,
+  [data-theme-mood="dark"] .silkPage .featuredCard {
+    background: rgba(24, 24, 24, 0.94) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-left: 3px solid var(--gold) !important;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5) !important;
+  }
+  html.dark .silkPage .featuredTag,
+  [data-theme-mood="dark"] .silkPage .featuredTag {
+    background: rgba(179, 140, 85, 0.18) !important;
+  }
+
+  /* Services Strip in Dark Mood */
+  html.dark .silkPage .serviceStrip,
+  [data-theme-mood="dark"] .silkPage .serviceStrip {
+    background: #141414 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .silkPage .serviceIntro,
+  [data-theme-mood="dark"] .silkPage .serviceIntro {
+    background: #181818 !important;
+  }
+  html.dark .silkPage .serviceStrip article,
+  [data-theme-mood="dark"] .silkPage .serviceStrip article {
+    background: #161616 !important;
+    border-right-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .silkPage .serviceStrip article:hover,
+  [data-theme-mood="dark"] .silkPage .serviceStrip article:hover {
+    background: #1c1c1c !important;
+  }
+  html.dark .silkPage .serviceStrip .serviceIdeal,
+  [data-theme-mood="dark"] .silkPage .serviceStrip .serviceIdeal {
+    color: #e5e3df !important;
+  }
+  html.dark .silkPage .serviceNumber,
+  [data-theme-mood="dark"] .silkPage .serviceNumber {
+    color: #7a7672 !important;
+  }
+  html.dark .silkPage .serviceIcon,
+  [data-theme-mood="dark"] .silkPage .serviceIcon {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: var(--gold) !important;
+  }
+  html.dark .silkPage .serviceMeta,
+  [data-theme-mood="dark"] .silkPage .serviceMeta {
+    color: #c7c4c1 !important;
+  }
+  html.dark .silkPage .serviceMeta span+span,
+  [data-theme-mood="dark"] .silkPage .serviceMeta span+span {
+    border-left-color: rgba(255, 255, 255, 0.15) !important;
+  }
+  html.dark .silkPage .serviceStrip article>button,
+  [data-theme-mood="dark"] .silkPage .serviceStrip article>button {
+    color: #f5f3ef !important;
+    border-block-color: rgba(255, 255, 255, 0.2) !important;
+  }
+  html.dark .silkPage .servicePromise,
+  [data-theme-mood="dark"] .silkPage .servicePromise {
+    background: #0f0f0f !important;
+  }
+
+  /* Transformations in Dark Mood */
+  html.dark .silkPage .transformationsSection,
+  [data-theme-mood="dark"] .silkPage .transformationsSection {
+    background: #141414 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .silkPage .transformTabs,
+  [data-theme-mood="dark"] .silkPage .transformTabs {
+    background: #202020 !important;
+  }
+  html.dark .silkPage .transformTab,
+  [data-theme-mood="dark"] .silkPage .transformTab {
+    color: #a8a49e !important;
+  }
+  html.dark .silkPage .transformTab.active,
+  [data-theme-mood="dark"] .silkPage .transformTab.active {
+    background: #333333 !important;
+    color: #ffffff !important;
+  }
+  html.dark .silkPage .transformationDetails,
+  [data-theme-mood="dark"] .silkPage .transformationDetails {
+    background: #181818 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    border-left-color: var(--gold) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  }
+  html.dark .silkPage .comparisonHandle,
+  [data-theme-mood="dark"] .silkPage .comparisonHandle {
+    background: #181818 !important;
+  }
+
+  /* Stylists in Dark Mood */
+  html.dark .silkPage .stylistsSection,
+  [data-theme-mood="dark"] .silkPage .stylistsSection {
+    background: #141414 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .silkPage .stylistCard,
+  [data-theme-mood="dark"] .silkPage .stylistCard {
+    background: #181818 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  }
+  html.dark .silkPage .specialtyPill,
+  [data-theme-mood="dark"] .silkPage .specialtyPill {
+    background: #252525 !important;
+    color: #dedbd5 !important;
+  }
+  html.dark .silkPage .stylistBookBtn,
+  [data-theme-mood="dark"] .silkPage .stylistBookBtn {
+    color: #f5f3ef !important;
+    border-color: #f5f3ef !important;
+  }
+
+  /* Products in Dark Mood */
+  html.dark .silkPage .productsSection,
+  [data-theme-mood="dark"] .silkPage .productsSection {
+    background: #141414 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .silkPage .productCard,
+  [data-theme-mood="dark"] .silkPage .productCard {
+    background: #181818 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  }
+  html.dark .silkPage .productImageWrap,
+  [data-theme-mood="dark"] .silkPage .productImageWrap {
+    background: #1e1e1e !important;
+  }
+  html.dark .silkPage .botanicalPill,
+  [data-theme-mood="dark"] .silkPage .botanicalPill {
+    background: #252525 !important;
+    color: #dedbd5 !important;
+  }
+  html.dark .silkPage .productReserveBtn,
+  [data-theme-mood="dark"] .silkPage .productReserveBtn {
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .productReserveBtn:hover,
+  [data-theme-mood="dark"] .silkPage .productReserveBtn:hover {
+    background: #282828 !important;
+    color: #ffffff !important;
+  }
+
+  /* Testimonials & FAQ & Journal in Dark Mood */
+  html.dark .silkPage .testimonials,
+  [data-theme-mood="dark"] .silkPage .testimonials {
+    background: #121212 !important;
+  }
+  html.dark .silkPage .testimonials blockquote,
+  [data-theme-mood="dark"] .silkPage .testimonials blockquote {
+    background: #181818 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .silkPage .faqSection,
+  [data-theme-mood="dark"] .silkPage .faqSection {
+    background: #141414 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .silkPage .faqItem,
+  [data-theme-mood="dark"] .silkPage .faqItem {
+    background: #181818 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  html.dark .silkPage .faqQuestion,
+  [data-theme-mood="dark"] .silkPage .faqQuestion {
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .faqItem.open,
+  [data-theme-mood="dark"] .silkPage .faqItem.open {
+    border-color: var(--gold) !important;
+  }
+  html.dark .silkPage .journal,
+  [data-theme-mood="dark"] .silkPage .journal {
+    background: #141414 !important;
+  }
+  html.dark .silkPage .journal article,
+  [data-theme-mood="dark"] .silkPage .journal article {
+    background: #181818 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* CTA & Footer in Dark Mood */
+  html.dark .silkPage .blackCta,
+  [data-theme-mood="dark"] .silkPage .blackCta {
+    background: #0d0d0d !important;
+    border-block: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .silkPage .silkFooter,
+  [data-theme-mood="dark"] .silkPage .silkFooter {
+    background: #0d0d0d !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .silkPage .footerSocial,
+  [data-theme-mood="dark"] .silkPage .footerSocial {
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .silkFooter a:hover,
+  [data-theme-mood="dark"] .silkPage .silkFooter a:hover {
+    color: #f5f3ef !important;
+  }
+
+  /* Modal in Dark Mood */
+  html.dark .silkPage .silkModal,
+  [data-theme-mood="dark"] .silkPage .silkModal {
+    background: #181818 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .modalClose,
+  [data-theme-mood="dark"] .silkPage .modalClose {
+    background: #242424 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .silkModal input,
+  html.dark .silkPage .silkModal select,
+  html.dark .silkPage .silkModal textarea,
+  [data-theme-mood="dark"] .silkPage .silkModal input,
+  [data-theme-mood="dark"] .silkPage .silkModal select,
+  [data-theme-mood="dark"] .silkPage .silkModal textarea {
+    background: #222222 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .timeSlotPill,
+  [data-theme-mood="dark"] .silkPage .timeSlotPill {
+    background: #242424 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #dedbd5 !important;
+  }
+  html.dark .silkPage .modalDisclaimer,
+  [data-theme-mood="dark"] .silkPage .modalDisclaimer {
+    background: #202020 !important;
+    color: #a8a49e !important;
+  }
+  html.dark .silkPage .modalProductNotice,
+  [data-theme-mood="dark"] .silkPage .modalProductNotice {
+    background: rgba(179, 140, 85, 0.12) !important;
+    border-color: rgba(179, 140, 85, 0.3) !important;
+    color: #f5f3ef !important;
+  }
+  html.dark .silkPage .lineButton,
+  [data-theme-mood="dark"] .silkPage .lineButton {
+    color: #f5f3ef !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+  }
+  html.dark .silkPage .lineButton:hover,
+  [data-theme-mood="dark"] .silkPage .lineButton:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark .silkPage .textLink,
+  [data-theme-mood="dark"] .silkPage .textLink {
+    color: #f5f3ef !important;
+  }
+
+  /* ============================================================ */
+  /* CUSTOM BACKGROUND MODE                                       */
+  /* ============================================================ */
+  [data-theme-bg-mode="custom"] .silkPage {
+    --paper: var(--theme-bg-base) !important;
+    --warm: var(--theme-bg-card-hover) !important;
+    background-color: var(--theme-bg-base) !important;
+  }
+  [data-theme-bg-mode="custom"] .silkPage .serviceStrip,
+  [data-theme-bg-mode="custom"] .silkPage .serviceIntro,
+  [data-theme-bg-mode="custom"] .silkPage .transformationsSection,
+  [data-theme-bg-mode="custom"] .silkPage .stylistsSection,
+  [data-theme-bg-mode="custom"] .silkPage .productsSection,
+  [data-theme-bg-mode="custom"] .silkPage .faqSection,
+  [data-theme-bg-mode="custom"] .silkPage .journal {
+    background-color: var(--theme-bg-surface, var(--theme-bg-base)) !important;
+  }
+  [data-theme-bg-mode="custom"] .silkPage .featuredCard,
+  [data-theme-bg-mode="custom"] .silkPage .transformationDetails,
+  [data-theme-bg-mode="custom"] .silkPage .stylistCard,
+  [data-theme-bg-mode="custom"] .silkPage .productCard,
+  [data-theme-bg-mode="custom"] .silkPage .faqItem,
+  [data-theme-bg-mode="custom"] .silkPage .journal article,
+  [data-theme-bg-mode="custom"] .silkPage .testimonials blockquote,
+  [data-theme-bg-mode="custom"] .silkPage .silkModal {
+    background-color: var(--theme-bg-card, var(--theme-bg-base)) !important;
+  }
+
   *{box-sizing:border-box}.silkPage{min-height:100vh;background:var(--paper);color:var(--silk);font-family:"Avenir Next",Avenir,"Segoe UI",sans-serif;overflow-x:clip}.silkPage section[id]{scroll-margin-top:92px}.silkPage button,.silkPage input,.silkPage select,.silkPage textarea{font:inherit}.silkPage a:focus-visible,.silkPage button:focus-visible,.silkPage input:focus-visible,.silkPage select:focus-visible,.silkPage textarea:focus-visible{outline:3px solid rgba(179,140,85,.55);outline-offset:3px}
   .silkLogo{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;line-height:0.88;color:var(--silk);transition:transform .25s ease}
   .silkLogo:hover{transform:scale(1.02)}

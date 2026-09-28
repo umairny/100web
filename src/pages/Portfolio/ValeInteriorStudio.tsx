@@ -26,7 +26,6 @@ import {
   Copy,
   ExternalLink,
 } from "lucide-react";
-import "./ValeInteriorStudio.css";
 
 interface ProjectCaseStudy {
   id: string;
@@ -278,7 +277,479 @@ export function ValeInteriorStudio() {
   };
 
   return (
-    <div className="vale-container min-h-screen bg-[#fcfbf9] text-[#292524] selection:bg-[#525b44]/20 selection:text-[#38402f]">
+    <div className="vale-container min-h-screen bg-[#fcfbf9] text-[#292524] selection:bg-[var(--vale-accent)]/20 selection:text-[var(--vale-accent)]">
+      {/* ======================================================================= */}
+      {/* THEME & DESIGN SYSTEM STYLES                                            */}
+      {/* Automatically binds to ThemeSelector & light/dark mode variables        */}
+      {/* ======================================================================= */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+        /* ============================================================ */
+        /* VALE INTERIOR STUDIO TOKENS & THEME SELECTOR ENGINE          */
+        /* Default: Warm Luxury Organic Sanctuary                       */
+        /* ============================================================ */
+        .vale-container {
+          --vale-bg:             var(--theme-bg-base,    #fcfbf9);
+          --vale-surface:        var(--theme-bg-surface, #ffffff);
+          --vale-card:           var(--theme-bg-card,    #ffffff);
+          --vale-card-hover:     var(--theme-bg-card-hover, #f8f6f0);
+          --vale-glass:          rgba(255, 255, 255, 0.90);
+
+          --vale-text:           var(--theme-text-primary,   #292524);
+          --vale-text-muted:     var(--theme-text-muted,     #57534e);
+          --vale-text-dim:       var(--theme-text-secondary, #78716c);
+
+          --vale-border:         var(--theme-border, #e9e4d9);
+          --vale-border-subtle:  #d5cec2;
+
+          --vale-accent:         var(--theme-accent-primary,       #525b44);
+          --vale-accent-hover:   var(--theme-accent-primary-hover, #434b37);
+          --vale-accent-glow:    var(--theme-accent-glow,          rgba(82, 91, 68, 0.25));
+          --vale-accent-sec:     var(--theme-accent-secondary,     #856b54);
+          --vale-contrast:       var(--theme-accent-contrast,      #ffffff);
+
+          --vale-nav-bg:         rgba(252, 251, 249, 0.95);
+
+          background-color: var(--vale-bg);
+          color: var(--vale-text);
+          font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          overflow-x: hidden;
+          position: relative;
+          transition: background-color 0.25s ease, color 0.25s ease;
+        }
+
+        /* ===== DARK MOOD OVERRIDES ===== */
+        html.dark .vale-container,
+        body.dark .vale-container,
+        [data-theme-mood="dark"] .vale-container,
+        :root[data-theme-mood="dark"] .vale-container,
+        :root[data-theme-active="true"][data-theme-mood="dark"] .vale-container,
+        :root.dark .vale-container {
+          --vale-bg:             var(--theme-bg-base,    #1c1917);
+          --vale-surface:        var(--theme-bg-surface, #24201d);
+          --vale-card:           var(--theme-bg-card,    #2c2724);
+          --vale-card-hover:     var(--theme-bg-card-hover, #38322e);
+          --vale-glass:          rgba(44, 39, 36, 0.88);
+
+          --vale-text:           var(--theme-text-primary,   #f5f1e8);
+          --vale-text-muted:     var(--theme-text-muted,     #d6cfc4);
+          --vale-text-dim:       var(--theme-text-secondary, #a89f91);
+
+          --vale-border:         var(--theme-border, rgba(255, 255, 255, 0.12));
+          --vale-border-subtle:  rgba(255, 255, 255, 0.08);
+
+          --vale-accent:         var(--theme-accent-primary,       #8a9a73);
+          --vale-accent-hover:   var(--theme-accent-primary-hover, #9fb087);
+          --vale-accent-glow:    var(--theme-accent-glow,          rgba(138, 154, 115, 0.35));
+          --vale-accent-sec:     var(--theme-accent-secondary,     #d8b26e);
+          --vale-contrast:       var(--theme-accent-contrast,      #1c1917);
+
+          --vale-nav-bg:         rgba(28, 25, 23, 0.94);
+        }
+
+        /* ===== LIGHT MOOD OVERRIDES ===== */
+        html.light .vale-container,
+        body.light .vale-container,
+        [data-theme-mood="light"] .vale-container,
+        :root[data-theme-mood="light"] .vale-container,
+        :root[data-theme-active="true"][data-theme-mood="light"] .vale-container,
+        :root.light .vale-container {
+          --vale-bg:             var(--theme-bg-base,    #fcfbf9);
+          --vale-surface:        var(--theme-bg-surface, #ffffff);
+          --vale-card:           var(--theme-bg-card,    #ffffff);
+          --vale-card-hover:     var(--theme-bg-card-hover, #f8f6f0);
+          --vale-glass:          rgba(255, 255, 255, 0.90);
+
+          --vale-text:           var(--theme-text-primary,   #292524);
+          --vale-text-muted:     var(--theme-text-muted,     #57534e);
+          --vale-text-dim:       var(--theme-text-secondary, #78716c);
+
+          --vale-border:         var(--theme-border, #e9e4d9);
+          --vale-border-subtle:  #d5cec2;
+
+          --vale-accent:         var(--theme-accent-primary,       #525b44);
+          --vale-accent-hover:   var(--theme-accent-primary-hover, #434b37);
+          --vale-accent-glow:    var(--theme-accent-glow,          rgba(82, 91, 68, 0.25));
+          --vale-accent-sec:     var(--theme-accent-secondary,     #856b54);
+          --vale-contrast:       var(--theme-accent-contrast,      #ffffff);
+
+          --vale-nav-bg:         rgba(252, 251, 249, 0.95);
+        }
+
+        /* ===== DYNAMIC RECOLORING: THEME PRESETS (THEME SELECTOR) ===== */
+        [data-theme-preset]:not([data-theme-preset="original"]) .vale-container,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .vale-container {
+          --vale-accent:       var(--theme-accent-primary) !important;
+          --vale-accent-hover: var(--theme-accent-primary-hover) !important;
+          --vale-accent-glow:  var(--theme-accent-glow) !important;
+          --vale-accent-sec:   var(--theme-accent-secondary) !important;
+          --vale-contrast:     var(--theme-accent-contrast, #ffffff) !important;
+        }
+
+        /* Dynamic Preset Re-coloring for hardcoded Tailwind elements */
+        [data-theme-preset]:not([data-theme-preset="original"]) .vale-container [class*="bg-[#525b44]"],
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .vale-container [class*="bg-[#525b44]"],
+        [data-theme-preset]:not([data-theme-preset="original"]) .vale-container [class*="bg-[#444c37]"],
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .vale-container [class*="bg-[#444c37]"],
+        [data-theme-preset]:not([data-theme-preset="original"]) .vale-container [class*="bg-[#475138]"],
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .vale-container [class*="bg-[#475138]"] {
+          background-color: var(--vale-accent) !important;
+          color: #ffffff !important;
+        }
+
+        [data-theme-preset]:not([data-theme-preset="original"]) .vale-container [class*="hover:bg-[#434b37]"]:hover,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .vale-container [class*="hover:bg-[#434b37]"]:hover,
+        [data-theme-preset]:not([data-theme-preset="original"]) .vale-container [class*="hover:bg-[#373e2d]"]:hover,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .vale-container [class*="hover:bg-[#373e2d]"]:hover {
+          background-color: var(--vale-accent-hover) !important;
+        }
+
+        [data-theme-preset]:not([data-theme-preset="original"]) .vale-container [class*="text-[#525b44]"],
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .vale-container [class*="text-[#525b44]"],
+        [data-theme-preset]:not([data-theme-preset="original"]) .vale-container [class*="hover:text-[#525b44]"]:hover,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .vale-container [class*="hover:text-[#525b44]"]:hover {
+          color: var(--vale-accent) !important;
+        }
+
+        [data-theme-preset]:not([data-theme-preset="original"]) .vale-container [class*="border-[#525b44]"],
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .vale-container [class*="border-[#525b44]"] {
+          border-color: var(--vale-accent) !important;
+        }
+
+        /* ===== BUTTON & INTERACTIVE ELEMENTS GEOMETRY PROTECTION ===== */
+        .vale-container button.rounded-full,
+        .vale-container a.rounded-full,
+        .vale-container .rounded-full {
+          border-radius: 9999px !important;
+        }
+        .vale-container button.rounded-lg,
+        .vale-container .rounded-lg {
+          border-radius: 0.5rem !important;
+        }
+        .vale-container button.rounded-xl,
+        .vale-container .rounded-xl {
+          border-radius: 0.75rem !important;
+        }
+        .vale-container button.rounded-2xl,
+        .vale-container .rounded-2xl {
+          border-radius: 1rem !important;
+        }
+
+        /* Primary Action Buttons */
+        .vale-container .vale-btn-primary {
+          background-color: var(--vale-accent) !important;
+          color: #ffffff !important;
+          border-radius: 9999px !important;
+          border: none !important;
+          box-shadow: 0 4px 14px var(--vale-accent-glow) !important;
+          transition: all 0.2s ease !important;
+        }
+        .vale-container .vale-btn-primary:hover {
+          background-color: var(--vale-accent-hover) !important;
+          color: #ffffff !important;
+        }
+
+        /* Form Submit Button */
+        .vale-container .vale-btn-submit {
+          background-color: var(--vale-accent) !important;
+          color: #ffffff !important;
+          border-radius: 0.5rem !important;
+          border: none !important;
+          box-shadow: 0 4px 14px var(--vale-accent-glow) !important;
+          transition: all 0.2s ease !important;
+        }
+        .vale-container .vale-btn-submit:hover:not(:disabled) {
+          background-color: var(--vale-accent-hover) !important;
+          color: #ffffff !important;
+        }
+
+        /* Hero Light Button - Always High-Contrast White Pill */
+        .vale-container .vale-btn-hero-light {
+          background-color: #ffffff !important;
+          color: #1c1917 !important;
+          border-radius: 9999px !important;
+          border: none !important;
+          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35) !important;
+        }
+        .vale-container .vale-btn-hero-light:hover {
+          background-color: #f5f5f4 !important;
+          color: #0c0a09 !important;
+        }
+
+        /* Navigation Buttons - Never solid background blocks */
+        .vale-container nav button,
+        .vale-container .vale-nav-btn {
+          background: transparent !important;
+          background-color: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+        .vale-container nav button:hover,
+        .vale-container .vale-nav-btn:hover {
+          background: transparent !important;
+          background-color: transparent !important;
+          color: var(--vale-accent) !important;
+        }
+
+        /* Text Buttons (Case Study, Phone, Email, Brief) - Never background blocks */
+        .vale-container button.vale-text-btn,
+        .vale-container .vale-text-btn {
+          background: transparent !important;
+          background-color: transparent !important;
+          box-shadow: none !important;
+        }
+
+        /* Carousel Navigation Buttons */
+        .vale-container .vale-carousel-btn {
+          background-color: var(--vale-surface) !important;
+          color: var(--vale-text-dim) !important;
+          border: 1px solid var(--vale-border) !important;
+          border-radius: 9999px !important;
+          transition: all 0.2s ease !important;
+        }
+        .vale-container .vale-carousel-btn:hover {
+          color: var(--vale-text) !important;
+          border-color: var(--vale-accent) !important;
+          background-color: var(--vale-card-hover) !important;
+        }
+
+        /* Inquiry Form Project Type Chips */
+        .vale-container .vale-chip-selected {
+          border: 1.5px solid var(--vale-accent) !important;
+          background-color: var(--vale-surface) !important;
+          color: var(--vale-text) !important;
+          border-radius: 0.5rem !important;
+          box-shadow: 0 1px 4px var(--vale-accent-glow) !important;
+        }
+        .vale-container .vale-chip-unselected {
+          border: 1px solid var(--vale-border) !important;
+          background-color: rgba(255, 255, 255, 0.45) !important;
+          color: var(--vale-accent) !important;
+          border-radius: 0.5rem !important;
+        }
+        html.dark .vale-container .vale-chip-unselected,
+        [data-theme-mood="dark"] .vale-container .vale-chip-unselected {
+          background-color: rgba(0, 0, 0, 0.25) !important;
+        }
+        .vale-container .vale-chip-unselected:hover {
+          background-color: var(--vale-surface) !important;
+          border-color: var(--vale-accent) !important;
+        }
+
+        /* Testimonial Active / Inactive Dots */
+        .vale-container .vale-dot-active {
+          background-color: var(--vale-accent) !important;
+          border-radius: 9999px !important;
+        }
+        .vale-container .vale-dot-inactive {
+          background-color: var(--vale-border-subtle) !important;
+          border-radius: 9999px !important;
+        }
+        .vale-container .vale-dot-inactive:hover {
+          background-color: var(--vale-text-dim) !important;
+        }
+
+        /* Consultation Modal Slot Buttons */
+        .vale-container .vale-slot-btn {
+          background-color: var(--vale-surface) !important;
+          border: 1px solid var(--vale-border) !important;
+          color: var(--vale-text) !important;
+          border-radius: 0.75rem !important;
+          transition: all 0.15s ease !important;
+        }
+        .vale-container .vale-slot-btn:hover {
+          border-color: var(--vale-accent) !important;
+          background-color: var(--vale-card-hover) !important;
+        }
+
+        /* ===== DARK MOOD HARDCODED CLASS OVERRIDES ===== */
+        html.dark .vale-container [class*="bg-[#fcfbf9]"],
+        [data-theme-mood="dark"] .vale-container [class*="bg-[#fcfbf9]"],
+        :root.dark .vale-container [class*="bg-[#fcfbf9]"] {
+          background-color: var(--vale-bg) !important;
+        }
+
+        html.dark .vale-container [class*="bg-white"]:not(.vale-btn-hero-light):not(.vale-chip-selected),
+        [data-theme-mood="dark"] .vale-container [class*="bg-white"]:not(.vale-btn-hero-light):not(.vale-chip-selected),
+        :root.dark .vale-container [class*="bg-white"]:not(.vale-btn-hero-light):not(.vale-chip-selected) {
+          background-color: var(--vale-card) !important;
+        }
+
+        html.dark .vale-container [class*="bg-[#f4efe4]"],
+        [data-theme-mood="dark"] .vale-container [class*="bg-[#f4efe4]"],
+        :root.dark .vale-container [class*="bg-[#f4efe4]"] {
+          background-color: var(--vale-card-hover) !important;
+          color: var(--vale-text) !important;
+        }
+
+        html.dark .vale-container [class*="bg-[#f0ebd9]"],
+        [data-theme-mood="dark"] .vale-container [class*="bg-[#f0ebd9]"],
+        html.dark .vale-container [class*="bg-[#eef1e6]"],
+        [data-theme-mood="dark"] .vale-container [class*="bg-[#eef1e6]"],
+        html.dark .vale-container [class*="bg-[#f2ede4]"],
+        [data-theme-mood="dark"] .vale-container [class*="bg-[#f2ede4]"] {
+          background-color: var(--vale-card-hover) !important;
+        }
+
+        html.dark .vale-container [class*="text-[#1c1917]"],
+        [data-theme-mood="dark"] .vale-container [class*="text-[#1c1917]"],
+        html.dark .vale-container [class*="text-[#292524]"],
+        [data-theme-mood="dark"] .vale-container [class*="text-[#292524]"],
+        html.dark .vale-container [class*="text-[#44403c]"],
+        [data-theme-mood="dark"] .vale-container [class*="text-[#44403c]"] {
+          color: var(--vale-text) !important;
+        }
+
+        html.dark .vale-container [class*="text-[#78716c]"],
+        [data-theme-mood="dark"] .vale-container [class*="text-[#78716c]"],
+        html.dark .vale-container [class*="text-[#a8a29e]"],
+        [data-theme-mood="dark"] .vale-container [class*="text-[#a8a29e]"] {
+          color: var(--vale-text-dim) !important;
+        }
+
+        html.dark .vale-container [class*="border-[#e9e4d9]"],
+        [data-theme-mood="dark"] .vale-container [class*="border-[#e9e4d9]"],
+        html.dark .vale-container [class*="border-[#d5cec2]"],
+        [data-theme-mood="dark"] .vale-container [class*="border-[#d5cec2]"],
+        html.dark .vale-container [class*="border-[#c5beaf]"],
+        [data-theme-mood="dark"] .vale-container [class*="border-[#c5beaf]"],
+        html.dark .vale-container [class*="border-[#ede8df]"],
+        [data-theme-mood="dark"] .vale-container [class*="border-[#ede8df]"],
+        html.dark .vale-container [class*="border-[#d6cebe]"],
+        [data-theme-mood="dark"] .vale-container [class*="border-[#d6cebe]"] {
+          border-color: var(--vale-border) !important;
+        }
+
+        /* ===== TYPOGRAPHY & CARDS (ORIGINAL STYLES PRESERVED) ===== */
+        .vale-serif {
+          font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+        }
+
+        .vale-card-shadow {
+          box-shadow: 0 10px 30px -10px rgba(68, 57, 45, 0.08), 0 4px 12px -4px rgba(68, 57, 45, 0.04);
+        }
+
+        .vale-card-shadow-lg {
+          box-shadow: 0 24px 48px -12px rgba(68, 57, 45, 0.12), 0 8px 20px -6px rgba(68, 57, 45, 0.06);
+        }
+
+        .vale-card-shadow-xl {
+          box-shadow: 0 32px 64px -16px rgba(56, 45, 32, 0.18), 0 12px 28px -8px rgba(56, 45, 32, 0.08);
+        }
+
+        .vale-glass-card {
+          background: var(--vale-glass);
+          backdrop-filter: blur(14px);
+          border: 1px solid var(--vale-border);
+        }
+
+        /* Custom Scrollbars */
+        .vale-carousel-track::-webkit-scrollbar {
+          height: 4px;
+        }
+
+        .vale-carousel-track::-webkit-scrollbar-track {
+          background: var(--vale-border);
+          border-radius: 9999px;
+        }
+
+        .vale-carousel-track::-webkit-scrollbar-thumb {
+          background: var(--vale-text-dim);
+          border-radius: 9999px;
+        }
+
+        .vale-carousel-track::-webkit-scrollbar-thumb:hover {
+          background: var(--vale-accent);
+        }
+
+        /* Form input styling */
+        .vale-input {
+          background: var(--vale-card);
+          border: 1px solid var(--vale-border);
+          color: var(--vale-text);
+          transition: all 0.2s ease;
+        }
+
+        .vale-input::placeholder {
+          color: var(--vale-text-dim);
+          opacity: 0.7;
+        }
+
+        .vale-input:focus {
+          background: var(--vale-surface);
+          border-color: var(--vale-accent);
+          box-shadow: 0 0 0 3px var(--vale-accent-glow);
+          outline: none;
+        }
+
+        /* Range slider styling */
+        .vale-range-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          height: 4px;
+          background: var(--vale-border);
+          border-radius: 9999px;
+          outline: none;
+        }
+
+        .vale-range-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: var(--vale-accent);
+          cursor: pointer;
+          border: 2px solid #ffffff;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+          transition: transform 0.15s ease;
+        }
+
+        .vale-range-slider::-webkit-slider-thumb:hover {
+          transform: scale(1.2);
+        }
+
+        .vale-range-slider::-moz-range-thumb {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: var(--vale-accent);
+          cursor: pointer;
+          border: 2px solid #ffffff;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+        }
+
+        /* Animations */
+        @keyframes vale-fade-in {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .vale-animate-in {
+          animation: vale-fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes vale-dash {
+          to {
+            stroke-dashoffset: -32;
+          }
+        }
+
+        .vale-animated-arc {
+          stroke-dasharray: 6 6;
+          animation: vale-dash 2s linear infinite;
+        }
+
+        /* Smooth Image Scale on Hover */
+        .vale-zoom-image {
+          transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .group:hover .vale-zoom-image {
+          transform: scale(1.05);
+        }
+      `}</style>
       {/* ========================================================================= */}
       {/* HEADER / NAVIGATION BAR                                                  */}
       {/* ========================================================================= */}
@@ -301,25 +772,25 @@ export function ValeInteriorStudio() {
           <nav className="hidden items-center space-x-8 md:flex text-xs font-semibold tracking-[0.2em] uppercase text-[#44403c]">
             <button
               onClick={() => scrollToSection("work")}
-              className="transition-colors hover:text-[#525b44]"
+              className="vale-nav-btn transition-colors hover:text-[#525b44]"
             >
               WORK
             </button>
             <button
               onClick={() => scrollToSection("process")}
-              className="transition-colors hover:text-[#525b44]"
+              className="vale-nav-btn transition-colors hover:text-[#525b44]"
             >
               PROCESS
             </button>
             <button
               onClick={() => scrollToSection("outcomes")}
-              className="transition-colors hover:text-[#525b44]"
+              className="vale-nav-btn transition-colors hover:text-[#525b44]"
             >
               OUTCOMES
             </button>
             <button
               onClick={() => scrollToSection("inquire")}
-              className="transition-colors hover:text-[#525b44]"
+              className="vale-nav-btn transition-colors hover:text-[#525b44]"
             >
               INQUIRE
             </button>
@@ -329,7 +800,7 @@ export function ValeInteriorStudio() {
           <div className="hidden md:flex items-center gap-3">
             <button
               onClick={() => setConsultationModalOpen(true)}
-              className="rounded-full bg-[#525b44] hover:bg-[#434b37] px-5 py-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase text-white shadow-sm transition-all duration-200 hover:shadow-md hover:scale-[1.02]"
+              className="vale-btn-primary rounded-full bg-[#525b44] hover:bg-[#434b37] px-5 py-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase text-white shadow-sm transition-all duration-200 hover:shadow-md hover:scale-[1.02]"
             >
               FREE CONSULTATION
             </button>
@@ -339,7 +810,7 @@ export function ValeInteriorStudio() {
           <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={() => setConsultationModalOpen(true)}
-              className="rounded-full bg-[#525b44] px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white"
+              className="vale-btn-primary rounded-full bg-[#525b44] px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white"
             >
               CONSULT
             </button>
@@ -359,25 +830,25 @@ export function ValeInteriorStudio() {
             <div className="flex flex-col space-y-4 text-sm font-semibold tracking-[0.2em] uppercase text-[#44403c]">
               <button
                 onClick={() => scrollToSection("work")}
-                className="text-left hover:text-[#525b44]"
+                className="vale-nav-btn text-left hover:text-[#525b44]"
               >
                 WORK
               </button>
               <button
                 onClick={() => scrollToSection("process")}
-                className="text-left hover:text-[#525b44]"
+                className="vale-nav-btn text-left hover:text-[#525b44]"
               >
                 PROCESS
               </button>
               <button
                 onClick={() => scrollToSection("outcomes")}
-                className="text-left hover:text-[#525b44]"
+                className="vale-nav-btn text-left hover:text-[#525b44]"
               >
                 OUTCOMES
               </button>
               <button
                 onClick={() => scrollToSection("inquire")}
-                className="text-left hover:text-[#525b44]"
+                className="vale-nav-btn text-left hover:text-[#525b44]"
               >
                 INQUIRE
               </button>
@@ -430,7 +901,7 @@ export function ValeInteriorStudio() {
               <div className="mt-8 flex flex-col sm:flex-row items-center gap-3">
                 <button
                   onClick={() => scrollToSection("work")}
-                  className="rounded-full bg-white text-[#1c1917] px-7 py-3 text-xs font-semibold tracking-[0.2em] uppercase shadow-lg transition-all hover:bg-stone-200"
+                  className="vale-btn-hero-light rounded-full bg-white text-[#1c1917] px-7 py-3 text-xs font-semibold tracking-[0.2em] uppercase shadow-lg transition-all hover:bg-stone-200"
                 >
                   Explore Selected Work &darr;
                 </button>
@@ -509,14 +980,14 @@ export function ValeInteriorStudio() {
               <div className="flex sm:hidden justify-center items-center gap-3 mt-4">
                 <button
                   onClick={() => scrollCarousel(positioningCarouselRef, "left")}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[#d6cebe] bg-white text-[#78716c]"
+                  className="vale-carousel-btn flex h-8 w-8 items-center justify-center rounded-full border border-[#d6cebe] bg-white text-[#78716c]"
                   aria-label="Previous card"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => scrollCarousel(positioningCarouselRef, "right")}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[#d6cebe] bg-white text-[#78716c]"
+                  className="vale-carousel-btn flex h-8 w-8 items-center justify-center rounded-full border border-[#d6cebe] bg-white text-[#78716c]"
                   aria-label="Next card"
                 >
                   <ChevronRight className="h-4 w-4" />
@@ -579,7 +1050,7 @@ export function ValeInteriorStudio() {
                         e.stopPropagation();
                         setActiveProject(project);
                       }}
-                      className="mt-2.5 inline-block text-[11px] font-bold tracking-[0.2em] uppercase text-[#1c1917] underline decoration-[#a89f91] underline-offset-4 hover:text-[#525b44] hover:decoration-[#525b44] transition-colors"
+                      className="vale-text-btn mt-2.5 inline-block text-[11px] font-bold tracking-[0.2em] uppercase text-[#1c1917] underline decoration-[#a89f91] underline-offset-4 hover:text-[#525b44] hover:decoration-[#525b44] transition-colors"
                     >
                       VIEW CASE STUDY
                     </button>
@@ -633,14 +1104,14 @@ export function ValeInteriorStudio() {
               <button
                 onClick={() => scrollCarousel(galleryCarouselRef, "left")}
                 aria-label="Previous photos"
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#d6cebe] bg-white text-[#78716c] shadow-md hover:text-[#1c1917] transition-all"
+                className="vale-carousel-btn absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#d6cebe] bg-white text-[#78716c] shadow-md hover:text-[#1c1917] transition-all"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 onClick={() => scrollCarousel(galleryCarouselRef, "right")}
                 aria-label="Next photos"
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#d6cebe] bg-white text-[#78716c] shadow-md hover:text-[#1c1917] transition-all"
+                className="vale-carousel-btn absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#d6cebe] bg-white text-[#78716c] shadow-md hover:text-[#1c1917] transition-all"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -780,8 +1251,8 @@ export function ValeInteriorStudio() {
                       aria-label={`Testimonial ${i + 1}`}
                       className={`h-2 rounded-full transition-all ${
                         testimonialIdx === i
-                          ? "w-8 bg-[#525b44]"
-                          : "w-2 bg-[#d6cebe] hover:bg-[#a89f91]"
+                          ? "w-8 vale-dot-active bg-[#525b44]"
+                          : "w-2 vale-dot-inactive bg-[#d6cebe] hover:bg-[#a89f91]"
                       }`}
                     />
                   ))}
@@ -922,8 +1393,8 @@ export function ValeInteriorStudio() {
                           onClick={() => setSelectedProjectType(t)}
                           className={`p-2.5 rounded-lg border text-left font-medium transition-all ${
                             selectedProjectType === t
-                              ? "border-[#444c37] bg-white text-[#1c1917] font-bold shadow-sm"
-                              : "border-[#c5cdbc] bg-white/60 text-[#525b44] hover:bg-white"
+                              ? "vale-chip-selected border-[#444c37] bg-white text-[#1c1917] font-bold shadow-sm"
+                              : "vale-chip-unselected border-[#c5cdbc] bg-white/60 text-[#525b44] hover:bg-white"
                           }`}
                         >
                           {t}
@@ -967,7 +1438,7 @@ export function ValeInteriorStudio() {
                     <button
                       type="submit"
                       disabled={formSubmitting}
-                      className="w-full rounded-lg bg-[#444c37] hover:bg-[#373e2d] py-3.5 text-xs font-semibold tracking-[0.2em] uppercase text-white shadow-md transition-all duration-200 hover:shadow-lg disabled:opacity-50"
+                      className="vale-btn-submit w-full rounded-lg bg-[#444c37] hover:bg-[#373e2d] py-3.5 text-xs font-semibold tracking-[0.2em] uppercase text-white shadow-md transition-all duration-200 hover:shadow-lg disabled:opacity-50"
                     >
                       {formSubmitting ? "PREPARING CONSULTATION..." : "LET'S CREATE YOUR SANCTUARY"}
                     </button>
@@ -1011,7 +1482,7 @@ export function ValeInteriorStudio() {
               <div className="pt-1 flex items-center justify-center gap-3">
                 <button
                   onClick={handleCopyPhone}
-                  className="font-mono text-[#525b44] font-medium hover:underline flex items-center gap-1"
+                  className="vale-text-btn font-mono text-[#525b44] font-medium hover:underline flex items-center gap-1"
                 >
                   <span>Tel: 415-551-0199</span>
                   {copiedPhone && <Check className="h-3 w-3 text-emerald-600" />}
@@ -1019,7 +1490,7 @@ export function ValeInteriorStudio() {
                 <span>•</span>
                 <button
                   onClick={handleCopyEmail}
-                  className="font-mono text-[#525b44] font-medium hover:underline flex items-center gap-1"
+                  className="vale-text-btn font-mono text-[#525b44] font-medium hover:underline flex items-center gap-1"
                 >
                   <span>studio@valeinteriors.com</span>
                   {copiedEmail && <Check className="h-3 w-3 text-emerald-600" />}
@@ -1145,7 +1616,7 @@ export function ValeInteriorStudio() {
                   setActiveProject(null);
                   scrollToSection("inquire");
                 }}
-                className="rounded-full bg-[#525b44] hover:bg-[#434b37] px-6 py-2.5 text-xs font-semibold tracking-wider uppercase text-white transition-all"
+                className="vale-btn-primary rounded-full bg-[#525b44] hover:bg-[#434b37] px-6 py-2.5 text-xs font-semibold tracking-wider uppercase text-white transition-all"
               >
                 Inquire About Similar Architecture
               </button>
@@ -1233,7 +1704,7 @@ export function ValeInteriorStudio() {
                     alert(`Consultation booked for ${slot}. Our studio coordinator will send the calendar invitation.`);
                     setConsultationModalOpen(false);
                   }}
-                  className="w-full p-3 rounded-xl border border-[#d6cebe] bg-white hover:border-[#525b44] hover:bg-[#f4efe4] text-xs font-semibold text-[#44403c] flex items-center justify-between transition-all"
+                  className="vale-slot-btn w-full p-3 rounded-xl border border-[#d6cebe] bg-white hover:border-[#525b44] hover:bg-[#f4efe4] text-xs font-semibold text-[#44403c] flex items-center justify-between transition-all"
                 >
                   <span>{slot}</span>
                   <ArrowRight className="h-4 w-4 text-[#525b44]" />
@@ -1247,7 +1718,7 @@ export function ValeInteriorStudio() {
                   setConsultationModalOpen(false);
                   scrollToSection("inquire");
                 }}
-                className="text-xs text-[#525b44] font-semibold hover:underline"
+                className="vale-text-btn text-xs text-[#525b44] font-semibold hover:underline"
               >
                 Or submit a detailed written brief &rarr;
               </button>

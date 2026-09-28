@@ -34,7 +34,7 @@ import {
   Box,
   Compass,
 } from "lucide-react";
-import "./MotionDeskStudio.css";
+
 
 // -----------------------------------------------------------------------------
 // Interactive Video Showreel Modal
@@ -675,7 +675,453 @@ export function MotionDeskStudio() {
   };
 
   return (
-    <div className="motiondesk-container min-h-screen bg-[#ffffff] text-slate-900 selection:bg-blue-600 selection:text-white">
+    <div className="motiondesk-container min-h-screen selection:bg-[var(--md-accent)] selection:text-white">
+      {/* ======================================================================= */}
+      {/* EMBEDDED DESIGN TOKENS & THEME RULES (NO EXTERNAL CSS FILE)            */}
+      {/* ======================================================================= */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+        /* ============================================================ */
+        /* MOTIONDESK DESIGN TOKENS — Default: Original Dark Studio     */
+        /* ============================================================ */
+        .motiondesk-container {
+          /* Original brand: deep navy dark studio — accent electric blue */
+          --md-bg:           var(--theme-bg-base,    #07090f);
+          --md-surface:      var(--theme-bg-surface, #0d1117);
+          --md-card:         var(--theme-bg-card,    #0f1520);
+          --md-card-hover:   var(--theme-bg-card-hover, #151e2e);
+
+          --md-accent:         var(--theme-accent-primary,       #2563eb);
+          --md-accent-hover:   var(--theme-accent-primary-hover, #1d4ed8);
+          --md-accent-glow:    var(--theme-accent-glow,          rgba(37,99,235,0.45));
+          --md-accent-sec:     var(--theme-accent-secondary,     #38bdf8);
+          --md-accent-grad:    var(--theme-accent-gradient, linear-gradient(135deg, #2563eb, #38bdf8));
+
+          --md-text:        var(--theme-text-primary,   #f1f5f9);
+          --md-text-muted:  var(--theme-text-muted,     #64748b);
+          --md-border:      var(--theme-border,         rgba(255,255,255,0.07));
+
+          /* Sections that are always dark (hero, disciplines, tokens, contact) */
+          --md-dark-bg:      #07090f;
+          --md-dark-surface: #0d1117;
+          --md-dark-card:    #0f1520;
+          --md-dark-border:  rgba(255,255,255,0.07);
+          --md-dark-text:    #f1f5f9;
+          --md-dark-muted:   #64748b;
+
+          /* Sections that are light by default but flip in dark mode */
+          --md-light-bg:     var(--theme-bg-base,    #ffffff);
+          --md-light-surface:var(--theme-bg-surface, #f8fafc);
+          --md-light-card:   var(--theme-bg-card,    #ffffff);
+          --md-light-border: var(--theme-border,     rgba(0,0,0,0.08));
+          --md-light-text:   var(--theme-text-primary, #0f172a);
+          --md-light-muted:  var(--theme-text-muted,   #64748b);
+
+          /* Nav */
+          --md-nav-bg:      rgba(7, 9, 15, 0.82);
+          --md-nav-bg-scroll: rgba(5, 8, 15, 0.95);
+          --md-nav-border:  rgba(255,255,255,0.07);
+          --md-nav-border-scroll: rgba(37,99,235,0.2);
+
+          /* Code block */
+          --md-code-bg:   #030712;
+          --md-code-border: #1e293b;
+
+          background-color: var(--md-bg);
+          color: var(--md-text);
+          font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          overflow-x: clip;
+          position: relative;
+          scroll-behavior: smooth;
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ===== LIGHT MOOD: flip light sections to use theme-bg variables ===== */
+        html.light .motiondesk-container,
+        body.light .motiondesk-container,
+        [data-theme-mood="light"] .motiondesk-container,
+        :root[data-theme-mood="light"] .motiondesk-container,
+        :root[data-theme-active="true"][data-theme-mood="light"] .motiondesk-container,
+        :root.light .motiondesk-container {
+          --md-bg:          var(--theme-bg-base,    #f8fafc);
+          --md-surface:     var(--theme-bg-surface, #ffffff);
+          --md-card:        var(--theme-bg-card,    #ffffff);
+          --md-card-hover:  var(--theme-bg-card-hover, #f1f5f9);
+
+          --md-text:       var(--theme-text-primary, #0f172a);
+          --md-text-muted: var(--theme-text-muted,   #64748b);
+          --md-border:     var(--theme-border,       rgba(0,0,0,0.08));
+
+          --md-light-bg:      var(--theme-bg-base,    #f8fafc);
+          --md-light-surface: var(--theme-bg-surface, #ffffff);
+          --md-light-card:    var(--theme-bg-card,    #ffffff);
+          --md-light-border:  var(--theme-border,     rgba(0,0,0,0.08));
+          --md-light-text:    var(--theme-text-primary, #0f172a);
+          --md-light-muted:   var(--theme-text-muted,   #64748b);
+
+          --md-nav-bg:       rgba(248,250,252, 0.88);
+          --md-nav-bg-scroll: rgba(255,255,255, 0.97);
+          --md-nav-border:   rgba(0,0,0,0.08);
+          --md-nav-border-scroll: rgba(37,99,235,0.2);
+        }
+
+        /* ===== DARK MOOD (explicit) ===== */
+        html.dark .motiondesk-container,
+        body.dark .motiondesk-container,
+        [data-theme-mood="dark"] .motiondesk-container,
+        :root[data-theme-mood="dark"] .motiondesk-container,
+        :root[data-theme-active="true"][data-theme-mood="dark"] .motiondesk-container,
+        :root.dark .motiondesk-container {
+          --md-bg:          var(--theme-bg-base,    #07090f);
+          --md-surface:     var(--theme-bg-surface, #0d1117);
+          --md-card:        var(--theme-bg-card,    #0f1520);
+          --md-card-hover:  var(--theme-bg-card-hover, #151e2e);
+
+          --md-text:       var(--theme-text-primary, #f1f5f9);
+          --md-text-muted: var(--theme-text-muted,   #64748b);
+          --md-border:     var(--theme-border,       rgba(255,255,255,0.07));
+
+          --md-light-bg:      var(--theme-bg-base,    #07090f);
+          --md-light-surface: var(--theme-bg-surface, #0d1117);
+          --md-light-card:    var(--theme-bg-card,    #0f1520);
+          --md-light-border:  var(--theme-border,     rgba(255,255,255,0.07));
+          --md-light-text:    var(--theme-text-primary, #f1f5f9);
+          --md-light-muted:   var(--theme-text-muted,   #64748b);
+
+          --md-nav-bg:       rgba(7, 9, 15, 0.82);
+          --md-nav-bg-scroll: rgba(5, 8, 15, 0.95);
+          --md-nav-border:   rgba(255,255,255,0.07);
+          --md-nav-border-scroll: rgba(37,99,235,0.2);
+        }
+
+        /* ===== Non-original preset: use theme accent ===== */
+        [data-theme-preset]:not([data-theme-preset="original"]) .motiondesk-container,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .motiondesk-container {
+          --md-accent:       var(--theme-accent-primary) !important;
+          --md-accent-hover: var(--theme-accent-primary-hover) !important;
+          --md-accent-glow:  var(--theme-accent-glow) !important;
+          --md-accent-sec:   var(--theme-accent-secondary) !important;
+          --md-accent-grad:  var(--theme-accent-gradient) !important;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .motiondesk-display {
+          font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          letter-spacing: -0.02em;
+        }
+
+        .motiondesk-mono {
+          font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .motiondesk-nav-sticky {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 50;
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          background-color: var(--md-nav-bg);
+          border-bottom: 1px solid var(--md-nav-border);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .motiondesk-nav-scrolled {
+          background-color: var(--md-nav-bg-scroll);
+          border-bottom-color: var(--md-nav-border-scroll);
+          box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
+        }
+
+        .motiondesk-nav-active {
+          background-color: var(--md-accent) !important;
+          color: #ffffff !important;
+          font-weight: 600 !important;
+          box-shadow: 0 0 16px var(--md-accent-glow);
+        }
+
+        /* ===== PLAY BUTTON PULSE ===== */
+        @keyframes motiondesk-pulse-ring {
+          0%   { transform: scale(0.95); box-shadow: 0 0 0 0 var(--md-accent-glow); }
+          70%  { transform: scale(1.05); box-shadow: 0 0 0 18px rgba(37,99,235,0); }
+          100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+        }
+
+        .motiondesk-play-pulse {
+          animation: motiondesk-pulse-ring 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        /* ===== HERO FLOAT ANIMATION ===== */
+        @keyframes motiondesk-float {
+          0%, 100% { transform: translateY(0px) scale(1.05); }
+          50%       { transform: translateY(-8px) scale(1.06); }
+        }
+
+        .motiondesk-float-anim {
+          animation: motiondesk-float 6s ease-in-out infinite;
+        }
+
+        /* ===== CARDS ===== */
+        .motiondesk-card {
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .motiondesk-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px -15px rgba(0,0,0,0.3), 0 0 25px -5px var(--md-accent-glow);
+        }
+
+        /* ===== MODAL ANIMATION ===== */
+        @keyframes motiondesk-modal-in {
+          from { opacity: 0; transform: scale(0.96) translateY(8px); }
+          to   { opacity: 1; transform: scale(1)   translateY(0); }
+        }
+
+        .motiondesk-modal-anim {
+          animation: motiondesk-modal-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* ===== HIDE SCROLLBAR (carousel strip) ===== */
+        .motiondesk-hide-scrollbar::-webkit-scrollbar { display: none; }
+        .motiondesk-hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ===== BENTO CARDS (dark disciplines section) ===== */
+        .motiondesk-bento-card {
+          background: var(--md-dark-card);
+          border: 1px solid var(--md-dark-border);
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .motiondesk-bento-card:hover {
+          border-color: color-mix(in srgb, var(--md-accent) 45%, transparent);
+          box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5), 0 0 25px -5px var(--md-accent-glow);
+          transform: translateY(-3px);
+        }
+
+        /* ===== CODE BOX ===== */
+        .motiondesk-code-box {
+          background: var(--md-code-bg);
+          border: 1px solid var(--md-code-border);
+          font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ===== GLASS DARK ===== */
+        .motiondesk-glass-dark {
+          background: rgba(13, 17, 28, 0.85);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* ===== LIGHT-SECTION ADAPTIVE OVERRIDES ===== */
+        /* In light mode, white/slate sections adapt to use theme bg tokens */
+        html.light .motiondesk-light-section,
+        [data-theme-mood="light"] .motiondesk-light-section,
+        :root.light .motiondesk-light-section {
+          background-color: var(--md-light-bg) !important;
+          color: var(--md-light-text) !important;
+        }
+
+        html.light .motiondesk-light-card,
+        [data-theme-mood="light"] .motiondesk-light-card {
+          background-color: var(--md-light-card) !important;
+          border-color: var(--md-light-border) !important;
+          color: var(--md-light-text) !important;
+        }
+
+        html.dark .motiondesk-light-section,
+        [data-theme-mood="dark"] .motiondesk-light-section,
+        :root.dark .motiondesk-light-section {
+          background-color: var(--md-card) !important;
+          color: var(--md-text) !important;
+        }
+
+        html.dark .motiondesk-light-card,
+        [data-theme-mood="dark"] .motiondesk-light-card {
+          background-color: var(--md-card) !important;
+          border-color: var(--md-border) !important;
+          color: var(--md-text) !important;
+        }
+
+        /* Accent button adaptive */
+        .motiondesk-btn-accent {
+          background-color: var(--md-accent);
+          color: #ffffff;
+          box-shadow: 0 0 18px var(--md-accent-glow);
+          transition: all 0.25s ease;
+        }
+        .motiondesk-btn-accent:hover {
+          background-color: var(--md-accent-hover);
+          box-shadow: 0 0 28px var(--md-accent-glow);
+        }
+
+        /* ===== LIGHT MODE NAV LINK TEXT ===== */
+        /* In light mode, nav pill items need to be visible on a light background */
+        html.light .motiondesk-nav-pill,
+        [data-theme-mood="light"] .motiondesk-nav-pill,
+        :root.light .motiondesk-nav-pill {
+          background-color: rgba(241,245,249,0.8);
+          border-color: rgba(0,0,0,0.08);
+        }
+
+        /* Waveform bars use accent color */
+        .motiondesk-waveform-bar {
+          background: linear-gradient(to top, var(--md-accent), var(--md-accent-sec));
+          border-radius: 2px;
+        }
+
+        /* FAQ accordion - adapt to light theme */
+        html.light .motiondesk-faq-item,
+        [data-theme-mood="light"] .motiondesk-faq-item {
+          background-color: var(--md-light-surface);
+          border-color: var(--md-light-border);
+          color: var(--md-light-text);
+        }
+
+        html.dark .motiondesk-faq-item,
+        [data-theme-mood="dark"] .motiondesk-faq-item {
+          background-color: var(--md-card);
+          border-color: var(--md-border);
+          color: var(--md-text);
+        }
+
+        /* ============================================================ */
+        /* LIGHT MOOD: TEXT & BACKGROUND INVERSION OVERRIDES            */
+        /* ============================================================ */
+        html.light .motiondesk-container,
+        body.light .motiondesk-container,
+        [data-theme-mood="light"] .motiondesk-container,
+        :root[data-theme-mood="light"] .motiondesk-container,
+        :root[data-theme-active="true"][data-theme-mood="light"] .motiondesk-container,
+        :root.light .motiondesk-container {
+          background-color: var(--md-bg) !important;
+          color: var(--md-text) !important;
+        }
+
+        /* Override hardcoded text colors in light mode */
+        html.light .motiondesk-container .text-white,
+        body.light .motiondesk-container .text-white,
+        [data-theme-mood="light"] .motiondesk-container .text-white,
+        :root[data-theme-mood="light"] .motiondesk-container .text-white,
+        :root.light .motiondesk-container .text-white {
+          color: var(--md-text) !important;
+        }
+
+        html.light .motiondesk-container .text-slate-100,
+        html.light .motiondesk-container .text-slate-200,
+        html.light .motiondesk-container .text-slate-300,
+        html.light .motiondesk-container .text-gray-100,
+        html.light .motiondesk-container .text-gray-200,
+        html.light .motiondesk-container .text-gray-300,
+        html.light .motiondesk-container .text-zinc-100,
+        html.light .motiondesk-container .text-zinc-200,
+        html.light .motiondesk-container .text-zinc-300,
+        body.light .motiondesk-container .text-slate-100,
+        body.light .motiondesk-container .text-slate-200,
+        body.light .motiondesk-container .text-slate-300,
+        [data-theme-mood="light"] .motiondesk-container .text-slate-100,
+        [data-theme-mood="light"] .motiondesk-container .text-slate-200,
+        [data-theme-mood="light"] .motiondesk-container .text-slate-300,
+        [data-theme-mood="light"] .motiondesk-container .text-gray-100,
+        [data-theme-mood="light"] .motiondesk-container .text-gray-200,
+        [data-theme-mood="light"] .motiondesk-container .text-gray-300,
+        :root.light .motiondesk-container .text-slate-100,
+        :root.light .motiondesk-container .text-slate-200,
+        :root.light .motiondesk-container .text-slate-300 {
+          color: var(--md-text-muted) !important;
+        }
+
+        html.light .motiondesk-container .text-slate-400,
+        html.light .motiondesk-container .text-slate-500,
+        html.light .motiondesk-container .text-gray-400,
+        html.light .motiondesk-container .text-gray-500,
+        html.light .motiondesk-container .text-zinc-400,
+        html.light .motiondesk-container .text-zinc-500,
+        body.light .motiondesk-container .text-slate-400,
+        body.light .motiondesk-container .text-slate-500,
+        [data-theme-mood="light"] .motiondesk-container .text-slate-400,
+        [data-theme-mood="light"] .motiondesk-container .text-slate-500,
+        [data-theme-mood="light"] .motiondesk-container .text-gray-400,
+        [data-theme-mood="light"] .motiondesk-container .text-gray-500,
+        :root.light .motiondesk-container .text-slate-400,
+        :root.light .motiondesk-container .text-slate-500 {
+          color: var(--md-text-muted) !important;
+        }
+
+        /* Keep button text white for solid colored buttons */
+        html.light .motiondesk-container button.bg-blue-600,
+        html.light .motiondesk-container a.bg-blue-600,
+        html.light .motiondesk-container a.bg-\[\#2563eb\],
+        html.light .motiondesk-container .bg-blue-600,
+        html.light .motiondesk-container .bg-\[\#2563eb\],
+        html.light .motiondesk-container .bg-blue-600 .text-white,
+        html.light .motiondesk-container .bg-\[\#2563eb\] .text-white,
+        html.light .motiondesk-container .bg-blue-600 span,
+        html.light .motiondesk-container .bg-\[\#2563eb\] span,
+        [data-theme-mood="light"] .motiondesk-container button.bg-blue-600,
+        [data-theme-mood="light"] .motiondesk-container a.bg-blue-600,
+        [data-theme-mood="light"] .motiondesk-container a.bg-\[\#2563eb\],
+        [data-theme-mood="light"] .motiondesk-container .bg-blue-600,
+        [data-theme-mood="light"] .motiondesk-container .bg-\[\#2563eb\],
+        [data-theme-mood="light"] .motiondesk-container .bg-blue-600 .text-white,
+        [data-theme-mood="light"] .motiondesk-container .bg-\[\#2563eb\] .text-white,
+        [data-theme-mood="light"] .motiondesk-container .bg-blue-600 span,
+        [data-theme-mood="light"] .motiondesk-container .bg-\[\#2563eb\] span {
+          color: #ffffff !important;
+        }
+
+        /* Backgrounds: convert dark hardcoded sections/cards to light in light mode */
+        html.light .motiondesk-container .bg-\[\#060810\],
+        html.light .motiondesk-container .bg-\[\#07090f\],
+        html.light .motiondesk-container .bg-\[\#0d1117\],
+        html.light .motiondesk-container .bg-\[\#0f1520\],
+        html.light .motiondesk-container .bg-\[\#070b14\],
+        html.light .motiondesk-container .bg-slate-900,
+        html.light .motiondesk-container .bg-slate-950,
+        [data-theme-mood="light"] .motiondesk-container .bg-\[\#060810\],
+        [data-theme-mood="light"] .motiondesk-container .bg-\[\#07090f\],
+        [data-theme-mood="light"] .motiondesk-container .bg-\[\#0d1117\],
+        [data-theme-mood="light"] .motiondesk-container .bg-\[\#0f1520\],
+        [data-theme-mood="light"] .motiondesk-container .bg-\[\#070b14\],
+        [data-theme-mood="light"] .motiondesk-container .bg-slate-900,
+        [data-theme-mood="light"] .motiondesk-container .bg-slate-950 {
+          background-color: var(--md-card) !important;
+        }
+
+        html.light .motiondesk-container .bg-slate-900\/80,
+        html.light .motiondesk-container .bg-slate-900\/60,
+        html.light .motiondesk-container .bg-slate-900\/50,
+        html.light .motiondesk-container .bg-slate-900\/40,
+        html.light .motiondesk-container .bg-slate-950\/80,
+        html.light .motiondesk-container .bg-slate-950\/60,
+        [data-theme-mood="light"] .motiondesk-container .bg-slate-900\/80,
+        [data-theme-mood="light"] .motiondesk-container .bg-slate-900\/60,
+        [data-theme-mood="light"] .motiondesk-container .bg-slate-900\/50,
+        [data-theme-mood="light"] .motiondesk-container .bg-slate-900\/40,
+        [data-theme-mood="light"] .motiondesk-container .bg-slate-950\/80,
+        [data-theme-mood="light"] .motiondesk-container .bg-slate-950\/60 {
+          background-color: var(--md-surface) !important;
+        }
+
+        /* Light borders */
+        html.light .motiondesk-container .border-slate-800,
+        html.light .motiondesk-container .border-slate-700,
+        html.light .motiondesk-container .border-slate-800\/80,
+        html.light .motiondesk-container .border-slate-800\/60,
+        html.light .motiondesk-container .border-slate-800\/50,
+        [data-theme-mood="light"] .motiondesk-container .border-slate-800,
+        [data-theme-mood="light"] .motiondesk-container .border-slate-700,
+        [data-theme-mood="light"] .motiondesk-container .border-slate-800\/80,
+        [data-theme-mood="light"] .motiondesk-container .border-slate-800\/60,
+        [data-theme-mood="light"] .motiondesk-container .border-slate-800\/50 {
+          border-color: var(--md-border) !important;
+        }
+      `}</style>
+
       {/* Showreel Video Modal */}
       <ShowreelModal
         isOpen={showreelOpen}
@@ -893,14 +1339,14 @@ export function MotionDeskStudio() {
       {/* ======================================================================= */}
       {/* SELECTED WORK SECTION                                                   */}
       {/* ======================================================================= */}
-      <section id="work" className="relative z-10 pt-12 pb-24 bg-[#ffffff]">
+      <section id="work" className="relative z-10 pt-12 pb-24 motiondesk-light-section">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
           {/* Section Header */}
           <div className="mb-8">
             <span className="text-xs font-bold font-mono uppercase tracking-[0.2em] text-blue-600 block mb-1">
               MOTIONDESIGN
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight motiondesk-display uppercase">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--md-light-text)] tracking-tight motiondesk-display uppercase">
               SELECTED WORK
             </h2>
           </div>
@@ -1156,14 +1602,14 @@ export function MotionDeskStudio() {
       {/* ======================================================================= */}
       {/* [NEW SECTION] CRAFT & 3D TOPOLOGY BREAKDOWN SLIDER                     */}
       {/* ======================================================================= */}
-      <section id="craft" className="relative z-10 py-16 sm:py-24 bg-[#ffffff]">
+      <section id="craft" className="relative z-10 py-16 sm:py-24 motiondesk-light-section">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
               <span className="text-xs font-bold font-mono uppercase tracking-[0.2em] text-blue-600 block mb-1">
                 TECHNICAL FIDELITY
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight motiondesk-display uppercase">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--md-light-text)] tracking-tight motiondesk-display uppercase">
                 FROM CLAY TOPOLOGY TO RAYTRACED MASTER
               </h2>
             </div>
@@ -1277,14 +1723,14 @@ export function MotionDeskStudio() {
       {/* ======================================================================= */}
       {/* OUR PROCESS SECTION                                                     */}
       {/* ======================================================================= */}
-      <section id="process" className="relative z-10 py-16 sm:py-24 bg-[#ffffff] border-t border-slate-100">
+      <section id="process" className="relative z-10 py-16 sm:py-24 motiondesk-light-section border-t border-[var(--md-light-border)]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
           {/* Section Header */}
           <div className="mb-14">
             <span className="text-xs font-bold font-mono uppercase tracking-[0.2em] text-blue-600 block mb-1">
               OUR PROCESS
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight motiondesk-display uppercase">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--md-light-text)] tracking-tight motiondesk-display uppercase">
               OUR PROCESS
             </h2>
           </div>
@@ -1464,9 +1910,9 @@ export function MotionDeskStudio() {
       {/* ======================================================================= */}
       {/* [NEW SECTION] BESPOKE SOUND DESIGN & SPATIAL MASTERING                  */}
       {/* ======================================================================= */}
-      <section className="relative z-10 py-16 sm:py-24 bg-[#ffffff]">
+      <section className="relative z-10 py-16 sm:py-24 motiondesk-light-section">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-10 shadow-sm overflow-hidden">
+          <div className="rounded-3xl border border-[var(--md-light-border)] bg-[var(--md-light-surface)] p-6 sm:p-10 shadow-sm overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-6 space-y-4">
                 <span className="text-xs font-bold font-mono uppercase tracking-[0.2em] text-blue-600 block">
@@ -1598,14 +2044,14 @@ export function MotionDeskStudio() {
       {/* ======================================================================= */}
       {/* CREDIBLE OUTCOMES SECTION                                               */}
       {/* ======================================================================= */}
-      <section id="outcomes" className="relative z-10 py-16 sm:py-24 bg-[#ffffff] border-t border-slate-100">
+      <section id="outcomes" className="relative z-10 py-16 sm:py-24 motiondesk-light-section border-t border-[var(--md-light-border)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
           {/* Section Header */}
           <div className="mb-12">
             <span className="text-xs font-bold font-mono uppercase tracking-[0.2em] text-blue-600 block mb-1">
               CREDIBLE OUTCOMES
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight motiondesk-display uppercase">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--md-light-text)] tracking-tight motiondesk-display uppercase">
               CREDIBLE OUTCOMES
             </h2>
           </div>
@@ -1613,7 +2059,7 @@ export function MotionDeskStudio() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left: 4x4 Grid of Client Logos */}
             <div className="lg:col-span-6">
-              <div className="p-3 sm:p-4 rounded-3xl border border-slate-200 bg-slate-50 shadow-sm">
+              <div className="p-3 sm:p-4 rounded-3xl border border-[var(--md-light-border)] bg-[var(--md-light-surface)] shadow-sm">
                 <div className="grid grid-cols-4 gap-2.5 sm:gap-3">
                   {[
                     "Google",
@@ -1653,12 +2099,12 @@ export function MotionDeskStudio() {
                 “
               </div>
 
-              <blockquote className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 motiondesk-display leading-snug">
+              <blockquote className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--md-light-text)] motiondesk-display leading-snug">
                 "{testimonials[activeTestimonialIndex].quote}"
               </blockquote>
 
               <div className="pt-2">
-                <div className="text-sm font-bold text-slate-900">
+                <div className="text-sm font-bold text-[var(--md-light-text)]">
                   — {testimonials[activeTestimonialIndex].author}
                 </div>
                 <div className="text-xs font-mono text-slate-500 mt-0.5">
@@ -1706,15 +2152,15 @@ export function MotionDeskStudio() {
       {/* ======================================================================= */}
       {/* [NEW SECTION] INTERACTIVE PROJECT SCOPE & BUDGET ESTIMATOR              */}
       {/* ======================================================================= */}
-      <section id="estimator" className="relative z-10 py-16 sm:py-24 bg-slate-50 border-t border-slate-200">
+      <section id="estimator" className="relative z-10 py-16 sm:py-24 bg-[var(--md-light-surface)] border-t border-[var(--md-light-border)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <div className="rounded-3xl border border-blue-500/30 bg-white p-6 sm:p-10 shadow-lg">
+          <div className="rounded-3xl border border-[var(--md-accent)]/30 bg-[var(--md-light-card)] p-6 sm:p-10 shadow-lg">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100">
               <div>
                 <span className="text-xs font-bold font-mono uppercase tracking-[0.2em] text-blue-600 block mb-1">
                   SCOPE PLANNER
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 motiondesk-display uppercase">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-[var(--md-light-text)] motiondesk-display uppercase">
                   ESTIMATE YOUR PROJECT COMMISSION
                 </h3>
               </div>
@@ -1864,13 +2310,13 @@ export function MotionDeskStudio() {
       {/* ======================================================================= */}
       {/* [NEW SECTION] FREQUENTLY ASKED QUESTIONS (FAQ)                          */}
       {/* ======================================================================= */}
-      <section className="relative z-10 py-16 sm:py-24 bg-[#ffffff]">
+      <section className="relative z-10 py-16 sm:py-24 motiondesk-light-section">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
           <div className="mb-12 text-center">
             <span className="text-xs font-bold font-mono uppercase tracking-[0.2em] text-blue-600 block mb-1">
               QUESTIONS &amp; LOGISTICS
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight motiondesk-display uppercase">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--md-light-text)] tracking-tight motiondesk-display uppercase">
               FREQUENTLY ASKED QUESTIONS
             </h2>
           </div>
@@ -1881,11 +2327,11 @@ export function MotionDeskStudio() {
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 overflow-hidden transition-all"
+                  className="motiondesk-faq-item rounded-2xl border border-slate-200 bg-slate-50 overflow-hidden transition-all"
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-900 cursor-pointer"
+                    className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-[var(--md-light-text)] cursor-pointer"
                   >
                     <span>{faq.q}</span>
                     <ChevronDown

@@ -159,8 +159,8 @@ function ResetButton({
       href={href}
       className={`group inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-6 text-xs font-bold uppercase tracking-[0.16em] transition duration-300 hover:-translate-y-0.5 ${
         outline
-          ? "border border-[#23313B]/14 bg-white/55 text-[#23313B] hover:border-[#75B7A6] hover:bg-white"
-          : "bg-[#23313B] text-white shadow-[0_18px_44px_rgba(35,49,59,.18)] hover:bg-[#324552]"
+          ? "reset-btn-outline border border-[#23313B]/14 bg-white/55 text-[#23313B] hover:border-[#75B7A6] hover:bg-white"
+          : "reset-btn-solid bg-[#23313B] text-white shadow-[0_18px_44px_rgba(35,49,59,.18)] hover:bg-[#324552]"
       } ${className}`}
     >
       {children}
@@ -183,19 +183,25 @@ function SectionHeading({
   return (
     <div className="max-w-4xl">
       <p
-        className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.22em] ${light ? "border-white/18 bg-white/10 text-white/70" : "border-[#C9D3D6] bg-white/60 text-[#6A7A7E]"}`}
+        className={`reset-heading-pill inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.22em] ${
+          light ? "border-white/18 bg-white/10 text-white/70" : "border-[#C9D3D6] bg-white/60 text-[#6A7A7E]"
+        }`}
       >
         <Waves className="h-3.5 w-3.5 text-[#6EAFA0]" />
         {label}
       </p>
       <h2
-        className={`mt-5 text-[clamp(2.15rem,5.5vw,6.8rem)] font-semibold leading-[0.96] tracking-[-0.065em] ${light ? "text-white" : "text-[#23313B]"}`}
+        className={`reset-heading-title mt-5 text-[clamp(2.15rem,5.5vw,6.8rem)] font-semibold leading-[0.96] tracking-[-0.065em] ${
+          light ? "reset-title-light text-white" : "reset-title-dark text-[#23313B]"
+        }`}
       >
         {title}
       </h2>
       {text && (
         <p
-          className={`mt-6 max-w-2xl text-base leading-8 md:text-lg ${light ? "text-white/62" : "text-[#607075]"}`}
+          className={`reset-heading-text mt-6 max-w-2xl text-base leading-8 md:text-lg ${
+            light ? "reset-body-light text-white/62" : "reset-body-dark text-[#607075]"
+          }`}
         >
           {text}
         </p>
@@ -283,30 +289,378 @@ export function ResetRecoveryClub() {
 
   return (
     <main className="reset-recovery-site w-full max-w-full overflow-x-hidden bg-[#F6F8F7] text-[#23313B]">
-      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_18%_14%,rgba(117,183,166,.22),transparent_30%),radial-gradient(circle_at_85%_18%,rgba(125,195,210,.2),transparent_30%),linear-gradient(180deg,#F6F8F7,#EAF1F2)]" />
+      <style>{`
+        .reset-recovery-site {
+          /* Core Brand Theme Tokens */
+          --reset-accent: #75B7A6;
+          --reset-accent-hover: #64A897;
+          --reset-accent-sec: #2F6E62;
+          --reset-accent-glow: rgba(117, 183, 166, 0.28);
+          --reset-contrast: #FFFFFF;
+          --reset-cyan: #7DC3D2;
+          --reset-sand: #DDEBE8;
+
+          /* Surfaces - Nordic Spa-Tech Light Default */
+          --reset-bg-base: #F6F8F7;
+          --reset-bg-card: rgba(255, 255, 255, 0.65);
+          --reset-bg-card-alt: #EAF1F2;
+          --reset-bg-dark: #23313B;
+          --reset-bg-dark-hover: #324552;
+
+          /* Text & Line Tokens */
+          --reset-text-primary: #23313B;
+          --reset-text-muted: #607075;
+          --reset-text-faint: #809095;
+          --reset-border: #C9D3D6;
+          --reset-border-subtle: rgba(255, 255, 255, 0.70);
+
+          /* Header */
+          --reset-header-bg: rgba(255, 255, 255, 0.62);
+          --reset-header-border: rgba(255, 255, 255, 0.70);
+          --reset-header-text: #23313B;
+          --reset-header-link: #6A7A7E;
+          --reset-header-hover: #23313B;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* DYNAMIC THEME PRESET ADAPTATION                              */
+        /* ------------------------------------------------------------ */
+        [data-theme-preset]:not([data-theme-preset="original"]) .reset-recovery-site,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .reset-recovery-site {
+          --reset-accent: var(--theme-accent-primary, #75B7A6) !important;
+          --reset-accent-hover: var(--theme-accent-primary-hover, #64A897) !important;
+          --reset-accent-sec: var(--theme-accent-secondary, #2F6E62) !important;
+          --reset-accent-glow: var(--theme-accent-glow, rgba(117, 183, 166, 0.28)) !important;
+          --reset-contrast: var(--theme-accent-contrast, #FFFFFF) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* LIGHT MOOD - SERENE SPA RECOVERY SANCTUARY                   */
+        /* ------------------------------------------------------------ */
+        [data-theme-mood="light"] .reset-recovery-site,
+        :root.light .reset-recovery-site,
+        html.light .reset-recovery-site {
+          --reset-bg-base: #F4F7F6 !important;
+          --reset-bg-card: rgba(255, 255, 255, 0.85) !important;
+          --reset-bg-card-alt: #E8F0F1 !important;
+          --reset-bg-dark: #23313B !important;
+          --reset-bg-dark-hover: #324552 !important;
+
+          --reset-text-primary: #1C2830 !important;
+          --reset-text-muted: #536368 !important;
+          --reset-text-faint: #75868B !important;
+          --reset-border: #C4D0D3 !important;
+          --reset-border-subtle: rgba(255, 255, 255, 0.85) !important;
+
+          --reset-header-bg: rgba(255, 255, 255, 0.82) !important;
+          --reset-header-border: rgba(255, 255, 255, 0.90) !important;
+          --reset-header-text: #1C2830 !important;
+          --reset-header-link: #536368 !important;
+          --reset-header-hover: #1C2830 !important;
+
+          background-color: var(--reset-bg-base) !important;
+          color: var(--reset-text-primary) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* DARK MOOD - DEEP NOCTURNAL RESTORATION SPA                   */
+        /* ------------------------------------------------------------ */
+        html.dark .reset-recovery-site,
+        body.dark .reset-recovery-site,
+        [data-theme-mood="dark"] .reset-recovery-site,
+        :root[data-theme-mood="dark"] .reset-recovery-site,
+        :root[data-theme-active="true"][data-theme-mood="dark"] .reset-recovery-site,
+        :root.dark .reset-recovery-site {
+          --reset-bg-base: #0B1115 !important;
+          --reset-bg-card: rgba(18, 27, 33, 0.82) !important;
+          --reset-bg-card-alt: #10191F !important;
+          --reset-bg-dark: #192730 !important;
+          --reset-bg-dark-hover: #21333E !important;
+
+          --reset-text-primary: #F0F6F7 !important;
+          --reset-text-muted: #95A9AF !important;
+          --reset-text-faint: #6D8288 !important;
+          --reset-border: rgba(255, 255, 255, 0.14) !important;
+          --reset-border-subtle: rgba(255, 255, 255, 0.08) !important;
+
+          --reset-header-bg: rgba(11, 17, 21, 0.88) !important;
+          --reset-header-border: rgba(255, 255, 255, 0.12) !important;
+          --reset-header-text: #FFFFFF !important;
+          --reset-header-link: rgba(255, 255, 255, 0.65) !important;
+          --reset-header-hover: #FFFFFF !important;
+
+          background-color: var(--reset-bg-base) !important;
+          color: var(--reset-text-primary) !important;
+        }
+
+        /* Ambient dark backdrop gradient */
+        html.dark .reset-recovery-site .reset-ambient-bg,
+        [data-theme-mood="dark"] .reset-recovery-site .reset-ambient-bg,
+        :root.dark .reset-recovery-site .reset-ambient-bg {
+          background: radial-gradient(circle at 18% 14%, rgba(117,183,166,0.12), transparent 35%),
+                      radial-gradient(circle at 85% 18%, rgba(125,195,210,0.10), transparent 35%),
+                      linear-gradient(180deg, #0B1115, #080D10) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* CUSTOM BACKGROUND MODE                                       */
+        /* ------------------------------------------------------------ */
+        [data-theme-bg-mode="custom"] .reset-recovery-site {
+          --reset-bg-base: var(--theme-bg-base, #0B1115) !important;
+          --reset-bg-card: var(--theme-bg-card, rgba(18, 27, 33, 0.82)) !important;
+          --reset-bg-card-alt: var(--theme-bg-surface, #10191F) !important;
+          --reset-bg-dark: var(--theme-bg-surface, #192730) !important;
+          --reset-text-primary: var(--theme-text-primary, #F0F6F7) !important;
+          --reset-text-muted: var(--theme-text-secondary, #95A9AF) !important;
+          --reset-border: var(--theme-border, rgba(255, 255, 255, 0.12)) !important;
+          background-color: var(--reset-bg-base) !important;
+          color: var(--reset-text-primary) !important;
+        }
+
+        /* ------------------------------------------------------------ */
+        /* SECTION & COMPONENT THEME HOOKS                              */
+        /* ------------------------------------------------------------ */
+
+        /* Buttons */
+        .reset-recovery-site .reset-btn-solid {
+          background-color: var(--reset-bg-dark) !important;
+          color: #FFFFFF !important;
+          box-shadow: 0 18px 44px var(--reset-accent-glow) !important;
+        }
+        [data-theme-mood="light"] .reset-recovery-site .reset-btn-solid,
+        :root.light .reset-recovery-site .reset-btn-solid {
+          background-color: var(--reset-bg-dark) !important;
+          color: #FFFFFF !important;
+        }
+        [data-theme-mood="dark"] .reset-recovery-site .reset-btn-solid,
+        :root.dark .reset-recovery-site .reset-btn-solid {
+          background-color: var(--reset-accent) !important;
+          color: #0B1115 !important;
+        }
+        .reset-recovery-site .reset-btn-solid:hover {
+          background-color: var(--reset-bg-dark-hover) !important;
+        }
+        [data-theme-mood="dark"] .reset-recovery-site .reset-btn-solid:hover,
+        :root.dark .reset-recovery-site .reset-btn-solid:hover {
+          background-color: var(--reset-accent-hover) !important;
+        }
+        .reset-recovery-site .reset-btn-outline {
+          border-color: var(--reset-border) !important;
+          color: var(--reset-text-primary) !important;
+          background-color: var(--reset-bg-card) !important;
+        }
+        .reset-recovery-site .reset-btn-outline:hover {
+          border-color: var(--reset-accent) !important;
+          color: var(--reset-accent-sec) !important;
+        }
+        [data-theme-mood="dark"] .reset-recovery-site .reset-btn-outline:hover,
+        :root.dark .reset-recovery-site .reset-btn-outline:hover {
+          border-color: var(--reset-accent) !important;
+          color: var(--reset-accent) !important;
+        }
+
+        /* Header & Nav */
+        .reset-recovery-site .reset-header-wrap {
+          background-color: var(--reset-header-bg) !important;
+          border-color: var(--reset-header-border) !important;
+        }
+        .reset-recovery-site .reset-nav-box {
+          background-color: rgba(255, 255, 255, 0.08) !important;
+          border-color: var(--reset-border) !important;
+        }
+        .reset-recovery-site .reset-logo-brand {
+          color: var(--reset-header-text) !important;
+        }
+        .reset-recovery-site .reset-logo-sub {
+          color: var(--reset-header-link) !important;
+        }
+        .reset-recovery-site .reset-logo-icon {
+          background-color: rgba(117, 183, 166, 0.20) !important;
+          color: var(--reset-accent-sec) !important;
+        }
+        [data-theme-mood="dark"] .reset-recovery-site .reset-logo-icon,
+        :root.dark .reset-recovery-site .reset-logo-icon {
+          color: var(--reset-accent) !important;
+        }
+        .reset-recovery-site .reset-nav-link {
+          color: var(--reset-header-link) !important;
+        }
+        .reset-recovery-site .reset-nav-link:hover {
+          color: var(--reset-header-hover) !important;
+        }
+        .reset-recovery-site .reset-nav-active {
+          background-color: var(--reset-accent) !important;
+          color: #FFFFFF !important;
+        }
+        [data-theme-mood="dark"] .reset-recovery-site .reset-nav-active,
+        :root.dark .reset-recovery-site .reset-nav-active {
+          color: #0B1115 !important;
+        }
+        .reset-recovery-site .reset-header-cta {
+          background-color: var(--reset-accent) !important;
+          color: #FFFFFF !important;
+        }
+        [data-theme-mood="dark"] .reset-recovery-site .reset-header-cta,
+        :root.dark .reset-recovery-site .reset-header-cta {
+          color: #0B1115 !important;
+        }
+        .reset-recovery-site .reset-header-cta:hover {
+          background-color: var(--reset-accent-hover) !important;
+        }
+        .reset-recovery-site .reset-menu-btn {
+          border-color: var(--reset-border) !important;
+          color: var(--reset-header-text) !important;
+        }
+        .reset-recovery-site .reset-mobile-menu {
+          background-color: var(--reset-header-bg) !important;
+          border-color: var(--reset-header-border) !important;
+        }
+
+        /* Headings */
+        .reset-recovery-site .reset-title-dark {
+          color: var(--reset-text-primary) !important;
+        }
+        .reset-recovery-site .reset-body-dark {
+          color: var(--reset-text-muted) !important;
+        }
+
+        /* Hero */
+        .reset-recovery-site .reset-hero-card {
+          background-color: var(--reset-bg-card) !important;
+          border-color: var(--reset-border-subtle) !important;
+        }
+        .reset-recovery-site .reset-hero-title {
+          color: var(--reset-text-primary) !important;
+        }
+        .reset-recovery-site .reset-hero-desc {
+          color: var(--reset-text-muted) !important;
+        }
+        .reset-recovery-site .reset-hero-stat {
+          background-color: var(--reset-bg-card) !important;
+          border-color: var(--reset-border) !important;
+        }
+
+        /* Services */
+        .reset-recovery-site .reset-section-services {
+          background-color: transparent !important;
+        }
+        .reset-recovery-site .reset-service-card {
+          background-color: var(--reset-bg-card) !important;
+          border-color: var(--reset-border-subtle) !important;
+        }
+        .reset-recovery-site .reset-service-title {
+          color: var(--reset-text-primary) !important;
+        }
+        .reset-recovery-site .reset-service-desc {
+          color: var(--reset-text-muted) !important;
+        }
+
+        /* Club & Method */
+        .reset-recovery-site .reset-section-club {
+          background-color: var(--reset-bg-card-alt) !important;
+        }
+        .reset-recovery-site .reset-method-box {
+          background-color: var(--reset-bg-card) !important;
+          border-color: var(--reset-border-subtle) !important;
+        }
+        .reset-recovery-site .reset-method-step {
+          background-color: var(--reset-bg-card-alt) !important;
+          border-color: var(--reset-border) !important;
+        }
+        .reset-recovery-site .reset-method-title {
+          color: var(--reset-text-primary) !important;
+        }
+        .reset-recovery-site .reset-method-desc {
+          color: var(--reset-text-muted) !important;
+        }
+
+        /* Mobility */
+        .reset-recovery-site .reset-section-mobility {
+          background-color: var(--reset-bg-card-alt) !important;
+        }
+        .reset-recovery-site .reset-mobility-card {
+          background-color: var(--reset-bg-card) !important;
+          border-color: var(--reset-border-subtle) !important;
+        }
+
+        /* Journal */
+        .reset-recovery-site .reset-section-journal {
+          background-color: var(--reset-bg-card-alt) !important;
+        }
+        .reset-recovery-site .reset-journal-card {
+          background-color: var(--reset-bg-card) !important;
+          border-color: var(--reset-border-subtle) !important;
+        }
+        .reset-recovery-site .reset-journal-title {
+          color: var(--reset-text-primary) !important;
+        }
+        .reset-recovery-site .reset-journal-desc {
+          color: var(--reset-text-muted) !important;
+        }
+
+        /* Membership */
+        .reset-recovery-site .reset-plan-card {
+          background-color: var(--reset-bg-card) !important;
+          border-color: var(--reset-border-subtle) !important;
+        }
+        .reset-recovery-site .reset-plan-popular {
+          border-color: var(--reset-accent) !important;
+          background-color: var(--reset-bg-dark) !important;
+          color: #FFFFFF !important;
+        }
+
+        /* Results & Testimonials */
+        .reset-recovery-site .reset-section-results {
+          background-color: var(--reset-bg-card-alt) !important;
+        }
+        .reset-recovery-site .reset-testi-card {
+          background-color: var(--reset-bg-card) !important;
+          border-color: var(--reset-border) !important;
+        }
+
+        /* Contact & Footer */
+        .reset-recovery-site .reset-contact-card {
+          background-color: var(--reset-bg-card) !important;
+          border-color: var(--reset-border-subtle) !important;
+        }
+        .reset-recovery-site .reset-footer {
+          border-color: var(--reset-border) !important;
+        }
+        .reset-recovery-site .reset-footer-link {
+          color: var(--reset-text-muted) !important;
+        }
+        .reset-recovery-site .reset-footer-link:hover {
+          color: var(--reset-accent-sec) !important;
+        }
+        [data-theme-mood="dark"] .reset-recovery-site .reset-footer-link:hover,
+        :root.dark .reset-recovery-site .reset-footer-link:hover {
+          color: var(--reset-accent) !important;
+        }
+      `}</style>
+      <div className="reset-ambient-bg pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_18%_14%,rgba(117,183,166,.22),transparent_30%),radial-gradient(circle_at_85%_18%,rgba(125,195,210,.2),transparent_30%),linear-gradient(180deg,#F6F8F7,#EAF1F2)] opacity-85" />
 
       <header className="fixed inset-x-0 top-4 z-50 px-4">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/70 bg-white/62 px-4 py-3 shadow-[0_20px_65px_rgba(35,49,59,.12)] ring-1 ring-[#C9D3D6]/60 backdrop-blur-2xl">
+        <div className="reset-header-wrap mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/70 bg-white/62 px-4 py-3 shadow-[0_20px_65px_rgba(35,49,59,.12)] ring-1 ring-[#C9D3D6]/60 backdrop-blur-2xl">
           <a
             href="#home"
             className="flex items-center gap-3 rounded-full py-1 pr-3 transition hover:bg-white/55"
             aria-label="Reset Recovery Club home"
           >
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-[#DDEBE8] text-[#2F6E62]">
+            <span className="reset-logo-icon grid h-11 w-11 place-items-center rounded-full bg-[#DDEBE8] text-[#2F6E62]">
               <Leaf className="h-5 w-5" />
             </span>
             <span>
-              <span className="block text-sm font-semibold tracking-[-0.02em]">
+              <span className="reset-logo-brand block text-sm font-semibold tracking-[-0.02em]">
                 Reset Recovery Club
               </span>
-              <span className="mt-0.5 hidden text-[0.56rem] font-bold uppercase tracking-[0.2em] text-[#809095] sm:block">
+              <span className="reset-logo-sub mt-0.5 hidden text-[0.56rem] font-bold uppercase tracking-[0.2em] text-[#809095] sm:block">
                 Spa-tech recovery
               </span>
             </span>
           </a>
 
           <nav
-            className="hidden rounded-full border border-[#C9D3D6]/70 bg-white/58 p-1 lg:flex"
+            className="reset-nav-box hidden rounded-full border border-[#C9D3D6]/70 bg-white/58 p-1 lg:flex"
             aria-label="Reset navigation"
           >
             {navLinks.map(([label, href]) => {
@@ -316,7 +670,7 @@ export function ResetRecoveryClub() {
                   key={label}
                   href={href}
                   aria-current={active ? "location" : undefined}
-                  className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] transition ${active ? "active bg-[#23313B] text-white shadow-sm" : "text-[#6A7A7E] hover:bg-white hover:text-[#23313B]"}`}
+                  className={`reset-nav-link rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] transition ${active ? "reset-nav-active active bg-[#23313B] text-white shadow-sm" : "text-[#6A7A7E] hover:bg-white hover:text-[#23313B]"}`}
                 >
                   {label}
                 </a>
@@ -327,7 +681,7 @@ export function ResetRecoveryClub() {
           <div className="hidden lg:block">
             <a
               href="#contact"
-              className="rounded-full bg-[#75B7A6] px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white shadow-[0_14px_32px_rgba(117,183,166,.28)] transition hover:-translate-y-0.5 hover:bg-[#64A897]"
+              className="reset-header-cta rounded-full bg-[#75B7A6] px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white shadow-[0_14px_32px_rgba(117,183,166,.28)] transition hover:-translate-y-0.5 hover:bg-[#64A897]"
             >
               Book A Reset
             </a>
@@ -335,7 +689,7 @@ export function ResetRecoveryClub() {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="grid h-11 w-11 place-items-center rounded-full border border-[#C9D3D6] bg-white/70 lg:hidden"
+            className="reset-menu-btn grid h-11 w-11 place-items-center rounded-full border border-[#C9D3D6] bg-white/70 lg:hidden"
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
@@ -403,10 +757,10 @@ export function ResetRecoveryClub() {
               </span>
             </div>
 
-            <h1 className="mt-8 max-w-5xl text-[clamp(2.4rem,7.5vw,8.2rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-[#23313B]">
+            <h1 className="reset-hero-title mt-8 max-w-5xl text-[clamp(2.4rem,7.5vw,8.2rem)] font-semibold leading-[0.96] tracking-[-0.05em] text-[#23313B]">
               Recovery that feels quiet, guided, and easy to repeat.
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#607075]">
+            <p className="reset-hero-desc mt-7 max-w-2xl text-lg leading-8 text-[#607075]">
               Reset Recovery Club blends assisted stretching, mobility work,
               compression sessions, and breath-led restoration inside a calm
               club built for better daily movement.
@@ -427,7 +781,7 @@ export function ResetRecoveryClub() {
               ].map(([value, label]) => (
                 <div
                   key={label}
-                  className="rounded-[1.4rem] border border-[#C9D3D6]/70 bg-[#F6F8F7]/90 p-4"
+                  className="reset-hero-stat rounded-[1.4rem] border border-[#C9D3D6]/70 bg-[#F6F8F7]/90 p-4"
                 >
                   <p className="text-3xl font-semibold leading-none text-[#23313B]">
                     {value}
@@ -560,7 +914,7 @@ export function ResetRecoveryClub() {
       </section>
       <section
         id="services"
-        className="relative z-10 scroll-mt-28 px-5 py-24 lg:px-10 lg:py-32"
+        className="reset-section-services relative z-10 scroll-mt-28 px-5 py-24 lg:px-10 lg:py-32"
       >
         <div className="mx-auto grid max-w-[94rem] gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
           <div className="sticky top-28">
@@ -574,7 +928,7 @@ export function ResetRecoveryClub() {
             {services.map((service, index) => (
               <article
                 key={service.title}
-                className="group grid overflow-hidden rounded-[2.2rem] border border-white/70 bg-white/58 p-3 shadow-sm backdrop-blur transition duration-500 hover:-translate-y-1 hover:shadow-2xl sm:grid-cols-[14rem_1fr]"
+                className="reset-service-card group grid overflow-hidden rounded-[2.2rem] border border-white/70 bg-white/58 p-3 shadow-sm backdrop-blur transition duration-500 hover:-translate-y-1 hover:shadow-2xl sm:grid-cols-[14rem_1fr]"
               >
                 <div className="relative min-h-64 overflow-hidden rounded-[1.7rem] sm:min-h-0">
                   <img
@@ -592,10 +946,10 @@ export function ResetRecoveryClub() {
                     <p className="text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#75B7A6]">
                       Treatment {String(index + 1).padStart(2, "0")}
                     </p>
-                    <h3 className="mt-5 text-3xl font-semibold tracking-[-0.06em]">
+                    <h3 className="reset-service-title mt-5 text-3xl font-semibold tracking-[-0.06em]">
                       {service.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-7 text-[#607075]">
+                    <p className="reset-service-desc mt-3 text-sm leading-7 text-[#607075]">
                       {service.text}
                     </p>
                   </div>
@@ -614,7 +968,7 @@ export function ResetRecoveryClub() {
 
       <section
         id="club"
-        className="relative z-10 scroll-mt-28 bg-[#EAF1F2] px-5 py-24 lg:px-10 lg:py-32"
+        className="reset-section-club relative z-10 scroll-mt-28 bg-[#EAF1F2] px-5 py-24 lg:px-10 lg:py-32"
       >
         <div className="mx-auto grid max-w-[94rem] gap-12 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
           <div className="relative min-h-[42rem] overflow-hidden rounded-[3rem] border border-white bg-white/45 p-3 shadow-xl">
@@ -660,16 +1014,16 @@ export function ResetRecoveryClub() {
 
       <section
         id="method"
-        className="relative z-10 scroll-mt-28 px-5 py-24 lg:px-10 lg:py-32"
+        className="reset-section-method relative z-10 scroll-mt-28 px-5 py-24 lg:px-10 lg:py-32"
       >
         <div className="mx-auto max-w-[94rem]">
           <SectionHeading label="Treatment pathway" title="The Reset Method" />
-          <div className="mt-12 rounded-[2.5rem] border border-white/70 bg-white/48 p-4 shadow-sm backdrop-blur">
+          <div className="reset-method-box mt-12 rounded-[2.5rem] border border-white/70 bg-white/48 p-4 shadow-sm backdrop-blur">
             <div className="grid gap-4 lg:grid-cols-4">
               {methodSteps.map(([title, text], index) => (
                 <article
                   key={title}
-                  className="relative rounded-[2rem] border border-[#C9D3D6]/70 bg-[#F8FAF9] p-6"
+                  className="reset-method-step relative rounded-[2rem] border border-[#C9D3D6]/70 bg-[#F8FAF9] p-6"
                 >
                   {index < methodSteps.length - 1 && (
                     <span className="absolute right-[-1.2rem] top-1/2 hidden h-px w-8 bg-[#AFC5C4] lg:block" />
@@ -677,10 +1031,10 @@ export function ResetRecoveryClub() {
                   <span className="grid h-14 w-14 place-items-center rounded-full bg-[#DDEBE8] text-sm font-bold text-[#2F6E62]">
                     0{index + 1}
                   </span>
-                  <h3 className="mt-10 text-3xl font-semibold tracking-[-0.055em]">
+                  <h3 className="reset-method-title mt-10 text-3xl font-semibold tracking-[-0.055em]">
                     {title}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-[#607075]">
+                  <p className="reset-method-desc mt-4 text-sm leading-7 text-[#607075]">
                     {text}
                   </p>
                 </article>
@@ -690,7 +1044,7 @@ export function ResetRecoveryClub() {
         </div>
       </section>
 
-      <section className="relative z-10 bg-[#EAF1F2] px-5 py-16 sm:py-20 lg:px-10 lg:py-32">
+      <section className="reset-section-mobility relative z-10 bg-[#EAF1F2] px-5 py-16 sm:py-20 lg:px-10 lg:py-32">
         <div className="mx-auto grid max-w-[94rem] gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-12">
           <div>
             <SectionHeading
@@ -715,7 +1069,7 @@ export function ResetRecoveryClub() {
               ].map(({ title, desc }, index) => (
                 <div
                   key={title}
-                  className="rounded-[1.6rem] border border-white/80 bg-white/70 p-5 shadow-xs transition duration-300 hover:-translate-y-0.5 hover:bg-white sm:p-6"
+                  className="reset-mobility-card rounded-[1.6rem] border border-white/80 bg-white/70 p-5 shadow-xs transition duration-300 hover:-translate-y-0.5 hover:bg-white sm:p-6"
                 >
                   <div className="flex items-center justify-between">
                     <span className="grid h-10 w-10 place-items-center rounded-full bg-[#DDEBE8] text-[#2F6E62]">
@@ -845,7 +1199,7 @@ export function ResetRecoveryClub() {
 
       <section
         id="journal"
-        className="relative z-10 scroll-mt-28 bg-[#EAF1F2] px-5 py-24 lg:px-10 lg:py-32"
+        className="reset-section-journal relative z-10 scroll-mt-28 bg-[#EAF1F2] px-5 py-24 lg:px-10 lg:py-32"
       >
         <div className="mx-auto max-w-[94rem]">
           <SectionHeading
@@ -864,15 +1218,15 @@ export function ResetRecoveryClub() {
               {journal.map(([title, text], index) => (
                 <article
                   key={title}
-                  className="rounded-[2rem] border border-white/80 bg-white/62 p-6 transition hover:-translate-y-1 hover:shadow-xl"
+                  className="reset-journal-card rounded-[2rem] border border-white/80 bg-white/62 p-6 transition hover:-translate-y-1 hover:shadow-xl"
                 >
                   <p className="text-[0.6rem] font-bold uppercase tracking-[0.18em] text-[#6EAFA0]">
                     Journal 0{index + 1}
                   </p>
-                  <h3 className="mt-5 text-3xl font-semibold leading-none tracking-[-0.055em]">
+                  <h3 className="reset-journal-title mt-5 text-3xl font-semibold leading-none tracking-[-0.055em]">
                     {title}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-[#607075]">
+                  <p className="reset-journal-desc mt-4 text-sm leading-7 text-[#607075]">
                     {text}
                   </p>
                 </article>
@@ -895,7 +1249,7 @@ export function ResetRecoveryClub() {
             {memberships.map((plan) => (
               <article
                 key={plan.name}
-                className={`rounded-[2.2rem] border p-7 ${plan.popular ? "border-[#75B7A6] bg-[#23313B] text-white shadow-[0_26px_80px_rgba(35,49,59,.2)] lg:-translate-y-4" : "border-white/80 bg-white/58"}`}
+                className={`reset-plan-card rounded-[2.2rem] border p-7 ${plan.popular ? "reset-plan-popular border-[#75B7A6] bg-[#23313B] text-white shadow-[0_26px_80px_rgba(35,49,59,.2)] lg:-translate-y-4" : "border-white/80 bg-white/58"}`}
               >
                 {plan.popular && (
                   <span className="rounded-full bg-[#75B7A6] px-4 py-2 text-[0.58rem] font-bold uppercase tracking-[0.15em] text-white">
@@ -938,7 +1292,7 @@ export function ResetRecoveryClub() {
         </div>
       </section>
 
-      <section className="relative z-10 bg-[#EAF1F2] px-5 py-24 lg:px-10 lg:py-32">
+      <section className="reset-section-results relative z-10 bg-[#EAF1F2] px-5 py-24 lg:px-10 lg:py-32">
         <div className="mx-auto grid max-w-[94rem] gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
           <div>
             <SectionHeading
@@ -979,7 +1333,7 @@ export function ResetRecoveryClub() {
             {testimonials.map(([quote, name]) => (
               <blockquote
                 key={name}
-                className="rounded-[2rem] border border-[#C9D3D6] bg-white/58 p-7"
+                className="reset-testi-card rounded-[2rem] border border-[#C9D3D6] bg-white/58 p-7"
               >
                 <Moon className="h-6 w-6 text-[#75B7A6]" />
                 <p className="mt-8 text-lg leading-8 text-[#4E5E64]">{quote}</p>
@@ -996,7 +1350,7 @@ export function ResetRecoveryClub() {
         id="contact"
         className="relative z-10 scroll-mt-28 px-5 py-24 lg:px-10 lg:py-32"
       >
-        <div className="mx-auto overflow-hidden rounded-[3rem] border border-white bg-white/50 shadow-[0_28px_90px_rgba(35,49,59,.13)] lg:grid lg:max-w-[94rem] lg:grid-cols-[1fr_.85fr]">
+        <div className="reset-contact-card mx-auto overflow-hidden rounded-[3rem] border border-white bg-white/50 shadow-[0_28px_90px_rgba(35,49,59,.13)] lg:grid lg:max-w-[94rem] lg:grid-cols-[1fr_.85fr]">
           <div className="p-8 sm:p-12 lg:p-16">
             <p className="inline-flex items-center gap-2 rounded-full bg-[#DDEBE8] px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[#2F6E62]">
               <TimerReset className="h-4 w-4" />
@@ -1027,7 +1381,7 @@ export function ResetRecoveryClub() {
         </div>
       </section>
 
-      <footer className="relative z-10 border-t border-[#C9D3D6] px-5 py-12 lg:px-10">
+      <footer className="reset-footer relative z-10 border-t border-[#C9D3D6] px-5 py-12 lg:px-10">
         <div className="mx-auto flex max-w-[94rem] flex-col justify-between gap-8 lg:flex-row lg:items-start">
           <div>
             <a
@@ -1045,7 +1399,7 @@ export function ResetRecoveryClub() {
               <a
                 key={label}
                 href={href}
-                className="text-xs font-bold uppercase tracking-[0.15em] text-[#607075] hover:text-[#23313B]"
+                className="reset-footer-link text-xs font-bold uppercase tracking-[0.15em] text-[#607075] hover:text-[#23313B]"
               >
                 {label}
               </a>

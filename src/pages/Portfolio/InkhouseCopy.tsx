@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   X,
@@ -13,13 +13,7 @@ import {
   FileEdit,
   GitCompare,
   PieChart,
-  DollarSign,
-  Sparkles,
-  ChevronRight,
-  Quote,
-  Send,
 } from "lucide-react";
-import "./InkhouseCopy.css";
 
 function LinkedInIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
@@ -70,21 +64,21 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md">
       <div
-        className="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-700 bg-[#162126] text-white p-6 sm:p-8 shadow-2xl text-left inkhouse-modal-anim"
+        className="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[var(--ink-border)] bg-[var(--ink-surface)] text-[var(--ink-text)] p-6 sm:p-8 shadow-2xl text-left inkhouse-modal-anim relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between pb-4 border-b border-slate-700">
+        <div className="flex items-start justify-between pb-4 border-b border-[var(--ink-border)]">
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-[#c6673f] font-bold block mb-1">
+            <span className="text-xs font-mono uppercase tracking-widest text-[var(--ink-accent)] font-bold block mb-1">
               {study.tag} // {study.client}
             </span>
-            <h3 className="text-2xl sm:text-3xl font-bold inkhouse-serif leading-tight">
+            <h3 className="text-2xl sm:text-3xl font-bold inkhouse-serif leading-tight text-[var(--ink-teal)]">
               {study.title}
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            className="p-2 rounded-xl bg-[var(--ink-card-subtle)] hover:bg-[var(--ink-card-hover)] text-[var(--ink-text-muted)] hover:text-[var(--ink-text)] transition-colors cursor-pointer border border-[var(--ink-border)]"
             aria-label="Close Case Study"
           >
             <X className="w-5 h-5" />
@@ -92,7 +86,7 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
         </div>
 
         {/* Visual Preview */}
-        <div className="my-6 rounded-2xl overflow-hidden border border-slate-700 bg-slate-950">
+        <div className="my-6 rounded-2xl overflow-hidden border border-[var(--ink-border)] bg-[var(--ink-card)]">
           <img
             src={study.image}
             alt={study.title}
@@ -105,9 +99,9 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
           {study.metrics.map((m, idx) => (
             <div
               key={idx}
-              className="p-3 rounded-xl bg-[#1d2b32] border border-slate-700 text-center"
+              className="p-3 rounded-xl bg-[var(--ink-card-subtle)] border border-[var(--ink-border)] text-center"
             >
-              <span className="text-xs sm:text-sm font-bold text-[#c6673f] block">
+              <span className="text-xs sm:text-sm font-bold text-[var(--ink-accent)] block">
                 {m}
               </span>
             </div>
@@ -116,23 +110,23 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
 
         {/* Before vs After Rewrite Teardown */}
         <div className="my-6 space-y-4">
-          <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
+          <h4 className="text-xs font-mono uppercase tracking-wider text-[var(--ink-text-muted)]">
             Psychological Copy Rewrite Teardown
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-            <div className="p-4 rounded-xl bg-rose-950/30 border border-rose-900/50">
-              <span className="font-mono text-rose-400 font-bold uppercase block mb-1.5">
+            <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30">
+              <span className="font-mono text-rose-600 dark:text-rose-400 font-bold uppercase block mb-1.5">
                 ✕ Old Generic Copy
               </span>
-              <p className="text-slate-300 leading-relaxed italic">
+              <p className="text-[var(--ink-text)] leading-relaxed italic opacity-90">
                 "{study.beforeCopy}"
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-900/50">
-              <span className="font-mono text-emerald-400 font-bold uppercase block mb-1.5">
+            <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
+              <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold uppercase block mb-1.5">
                 ✓ Inkhouse Conversion Copy
               </span>
-              <p className="text-slate-200 leading-relaxed font-medium">
+              <p className="text-[var(--ink-text)] leading-relaxed font-medium">
                 "{study.afterCopy}"
               </p>
             </div>
@@ -140,19 +134,19 @@ function CaseStudyModal({ study, onClose }: CaseStudyModalProps) {
         </div>
 
         {/* Key Strategic Breakthrough */}
-        <div className="p-4 rounded-xl bg-[#1d2b32] border border-slate-700 mb-6">
-          <span className="text-xs font-mono uppercase text-[#c6673f] font-bold block mb-1">
+        <div className="p-4 rounded-xl bg-[var(--ink-card-subtle)] border border-[var(--ink-border)] mb-6">
+          <span className="text-xs font-mono uppercase text-[var(--ink-accent)] font-bold block mb-1">
             Conversion Architecture &amp; Strategy
           </span>
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-[var(--ink-text)] leading-relaxed">
             {study.breakthrough}
           </p>
         </div>
 
-        <div className="pt-4 border-t border-slate-700 flex justify-end">
+        <div className="pt-4 border-t border-[var(--ink-border)] flex justify-end">
           <button
             onClick={onClose}
-            className="px-6 py-2.5 rounded-full bg-[#c6673f] hover:bg-[#b55832] text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            className="px-6 py-2.5 rounded-full bg-[var(--ink-accent)] hover:bg-[var(--ink-accent-hover)] text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer shadow-md"
           >
             Close Overview
           </button>
@@ -307,8 +301,8 @@ export function InkhouseCopy() {
   const processSteps = [
     {
       title: "DISCOVER & DEEP DIVE",
-      color: "#19383e",
-      textColor: "text-white",
+      bgClass: "bg-[var(--ink-teal)] text-white border-transparent",
+      descClass: "text-slate-200",
       image: "/images/inkhouse/process-card-1-2x.webp",
       icon: Microscope,
       tagline: "Uncovering Customer Truths",
@@ -317,8 +311,8 @@ export function InkhouseCopy() {
     },
     {
       title: "MAP THE CUSTOMER JOURNEY",
-      color: "#729796",
-      textColor: "text-white",
+      bgClass: "bg-[#27535b] dark:bg-[#1a383d] text-white border-transparent",
+      descClass: "text-slate-200",
       image: "/images/inkhouse/process-card-2-2x.webp",
       icon: Network,
       tagline: "Tracing Buying Mindsets",
@@ -327,9 +321,8 @@ export function InkhouseCopy() {
     },
     {
       title: "STRATEGIZE & WRITE",
-      color: "#fbf8f3",
-      textColor: "text-slate-900",
-      borderColor: "border-slate-300",
+      bgClass: "bg-[var(--ink-card)] text-[var(--ink-text)] border-[var(--ink-border)]",
+      descClass: "text-[var(--ink-text-muted)]",
       image: "/images/inkhouse/process-card-3-2x.webp",
       icon: FileEdit,
       tagline: "High-Fidelity Copywriting",
@@ -338,9 +331,8 @@ export function InkhouseCopy() {
     },
     {
       title: "TEST & OPTIMIZE",
-      color: "#ffffff",
-      textColor: "text-slate-900",
-      borderColor: "border-slate-300",
+      bgClass: "bg-[var(--ink-card-subtle)] text-[var(--ink-text)] border-[var(--ink-border)]",
+      descClass: "text-[var(--ink-text-muted)]",
       image: "/images/inkhouse/process-card-4-2x.webp",
       icon: GitCompare,
       tagline: "A/B Validation in Real Traffic",
@@ -349,9 +341,8 @@ export function InkhouseCopy() {
     },
     {
       title: "ANALYZE & REPORT",
-      color: "#e7decb",
-      textColor: "text-slate-900",
-      borderColor: "border-slate-300",
+      bgClass: "bg-[var(--ink-bg-alt)] text-[var(--ink-text)] border-[var(--ink-border)]",
+      descClass: "text-[var(--ink-text-muted)]",
       image: "/images/inkhouse/process-card-5-2x.webp",
       icon: PieChart,
       tagline: "Measurable Revenue Accounting",
@@ -437,7 +428,279 @@ export function InkhouseCopy() {
   };
 
   return (
-    <div className="inkhouse-container min-h-screen selection:bg-[#19383e] selection:text-white">
+    <div className="inkhouse-container min-h-screen selection:bg-[var(--ink-accent)] selection:text-white">
+      {/* ======================================================================= */}
+      {/* EMBEDDED DESIGN TOKENS & RESPONSIVE THEME RULES (NO EXTERNAL CSS FILE) */}
+      {/* ======================================================================= */}
+      <style>{`
+        /* ================= INKHOUSE DESIGN TOKENS ================= */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+        .inkhouse-container {
+          /* Default Base: Original Editorial Atelier Cream & Warm Terracotta */
+          --ink-bg: var(--theme-bg-base, #fbf8f3);
+          --ink-bg-alt: var(--theme-bg-surface, #f5f1e8);
+          --ink-surface: var(--theme-bg-surface, #ffffff);
+          --ink-card: var(--theme-bg-card, #ffffff);
+          --ink-card-subtle: var(--theme-bg-card-hover, #f3efe6);
+          --ink-card-hover: var(--theme-bg-card-hover, #ede7db);
+
+          --ink-work-bg: #141d22;
+          --ink-work-card: #182329;
+          --ink-work-card-hover: #1f2e36;
+          --ink-work-border: rgba(255, 255, 255, 0.1);
+          --ink-work-text: #f5f4f0;
+          --ink-work-text-muted: #94a3ab;
+
+          --ink-teal: #19383e;
+          --ink-teal-hover: #132c31;
+          --ink-accent: var(--theme-accent-primary, #c6673f);
+          --ink-accent-hover: var(--theme-accent-primary-hover, #b55832);
+          --ink-accent-secondary: var(--theme-accent-secondary, #d9825b);
+          --ink-accent-glow: var(--theme-accent-glow, rgba(198, 103, 63, 0.35));
+
+          --ink-text: var(--theme-text-primary, #1a202c);
+          --ink-text-muted: var(--theme-text-muted, #576574);
+          --ink-border: var(--theme-border, rgba(25, 56, 62, 0.12));
+
+          --ink-header-bg: rgba(251, 248, 243, 0.92);
+          --ink-header-bg-scrolled: rgba(251, 248, 243, 0.98);
+          --ink-shadow-color: rgba(25, 56, 62, 0.14);
+          --ink-shadow-color-hover: rgba(25, 56, 62, 0.22);
+          --ink-slider-track: #e2dacb;
+          --ink-input-bg: #ffffff;
+          --ink-input-text: #1a202c;
+
+          background-color: var(--ink-bg);
+          color: var(--ink-text);
+          font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          overflow-x: clip;
+          position: relative;
+          scroll-behavior: smooth;
+          transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark Mode Adaptive Tokens */
+        html.dark .inkhouse-container,
+        body.dark .inkhouse-container,
+        [data-theme-mood="dark"] .inkhouse-container,
+        :root[data-theme-mood="dark"] .inkhouse-container,
+        :root[data-theme-active="true"][data-theme-mood="dark"] .inkhouse-container,
+        :root.dark .inkhouse-container {
+          --ink-bg: var(--theme-bg-base, #0c1114);
+          --ink-bg-alt: var(--theme-bg-surface, #12191d);
+          --ink-surface: var(--theme-bg-surface, #141d22);
+          --ink-card: var(--theme-bg-card, #172328);
+          --ink-card-subtle: var(--theme-bg-card-hover, #1e2c33);
+          --ink-card-hover: var(--theme-bg-card-hover, #23343d);
+
+          --ink-work-bg: var(--theme-bg-base, #0c1114);
+          --ink-work-card: var(--theme-bg-card, #141d22);
+          --ink-work-card-hover: var(--theme-bg-card-hover, #1b262d);
+          --ink-work-border: rgba(255, 255, 255, 0.12);
+          --ink-work-text: var(--theme-text-primary, #f5f4f0);
+          --ink-work-text-muted: var(--theme-text-muted, #94a3ab);
+
+          --ink-teal: var(--theme-accent-secondary, #4fa3b0);
+          --ink-teal-hover: #67b8c5;
+          --ink-accent: var(--theme-accent-primary, #e27d53);
+          --ink-accent-hover: var(--theme-accent-primary-hover, #eb8e67);
+          --ink-accent-secondary: var(--theme-accent-secondary, #e89b7b);
+          --ink-accent-glow: var(--theme-accent-glow, rgba(226, 125, 83, 0.4));
+
+          --ink-text: var(--theme-text-primary, #f5f4f0);
+          --ink-text-muted: var(--theme-text-muted, #94a3ab);
+          --ink-border: var(--theme-border, rgba(255, 255, 255, 0.1));
+
+          --ink-header-bg: rgba(12, 17, 20, 0.88);
+          --ink-header-bg-scrolled: rgba(14, 21, 25, 0.96);
+          --ink-shadow-color: rgba(0, 0, 0, 0.45);
+          --ink-shadow-color-hover: rgba(0, 0, 0, 0.65);
+          --ink-slider-track: #26353d;
+          --ink-input-bg: #182329;
+          --ink-input-text: #f5f4f0;
+        }
+
+        /* Light Mode Explicit Tokens */
+        html.light .inkhouse-container,
+        body.light .inkhouse-container,
+        [data-theme-mood="light"] .inkhouse-container,
+        :root[data-theme-mood="light"] .inkhouse-container,
+        :root[data-theme-active="true"][data-theme-mood="light"] .inkhouse-container,
+        :root.light .inkhouse-container {
+          --ink-bg: var(--theme-bg-base, #fbf8f3);
+          --ink-bg-alt: var(--theme-bg-surface, #f5f1e8);
+          --ink-surface: var(--theme-bg-surface, #ffffff);
+          --ink-card: var(--theme-bg-card, #ffffff);
+          --ink-card-subtle: var(--theme-bg-card-hover, #f3efe6);
+          --ink-card-hover: var(--theme-bg-card-hover, #ede7db);
+
+          --ink-work-bg: #141d22;
+          --ink-work-card: #182329;
+          --ink-work-card-hover: #1f2e36;
+          --ink-work-border: rgba(255, 255, 255, 0.1);
+          --ink-work-text: #f5f4f0;
+          --ink-work-text-muted: #94a3ab;
+
+          --ink-teal: #19383e;
+          --ink-teal-hover: #132c31;
+          --ink-accent: var(--theme-accent-primary, #c6673f);
+          --ink-accent-hover: var(--theme-accent-primary-hover, #b55832);
+          --ink-accent-secondary: var(--theme-accent-secondary, #d9825b);
+          --ink-accent-glow: var(--theme-accent-glow, rgba(198, 103, 63, 0.35));
+
+          --ink-text: var(--theme-text-primary, #1a202c);
+          --ink-text-muted: var(--theme-text-muted, #576574);
+          --ink-border: var(--theme-border, rgba(25, 56, 62, 0.12));
+
+          --ink-header-bg: rgba(251, 248, 243, 0.92);
+          --ink-header-bg-scrolled: rgba(251, 248, 243, 0.98);
+          --ink-shadow-color: rgba(25, 56, 62, 0.14);
+          --ink-shadow-color-hover: rgba(25, 56, 62, 0.22);
+          --ink-slider-track: #e2dacb;
+          --ink-input-bg: #ffffff;
+          --ink-input-text: #1a202c;
+        }
+
+        /* Non-Original Theme Preset Override (Ensures preset primary illuminates brand buttons, accents, borders) */
+        [data-theme-preset]:not([data-theme-preset="original"]) .inkhouse-container,
+        [data-theme-active="true"]:not([data-theme-preset="original"]) .inkhouse-container {
+          --ink-accent: var(--theme-accent-primary) !important;
+          --ink-accent-hover: var(--theme-accent-primary-hover) !important;
+          --ink-accent-secondary: var(--theme-accent-secondary) !important;
+          --ink-accent-glow: var(--theme-accent-glow) !important;
+        }
+
+        /* Typography */
+        .inkhouse-serif {
+          font-family: 'Playfair Display', Georgia, serif;
+          letter-spacing: -0.015em;
+        }
+
+        .inkhouse-mono {
+          font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Sticky Navigation */
+        .inkhouse-navbar-sticky {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 50;
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          background-color: var(--ink-header-bg);
+          border-bottom: 1px solid var(--ink-border);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .inkhouse-navbar-scrolled {
+          background-color: var(--ink-header-bg-scrolled);
+          box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.12);
+        }
+
+        .inkhouse-nav-link {
+          color: var(--ink-text-muted);
+          font-weight: 600;
+          font-size: 0.8125rem;
+          letter-spacing: 0.05em;
+          transition: all 0.2s ease;
+          position: relative;
+        }
+
+        .inkhouse-nav-link:hover {
+          color: var(--ink-teal);
+        }
+
+        .inkhouse-nav-active {
+          color: var(--ink-teal) !important;
+          font-weight: 700 !important;
+        }
+
+        .inkhouse-nav-active::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 16px;
+          height: 2px;
+          background-color: var(--ink-accent);
+          border-radius: 9999px;
+        }
+
+        /* Process Cards with Isometric Shadows */
+        .inkhouse-process-card {
+          box-shadow: 6px 8px 0px var(--ink-shadow-color);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .inkhouse-process-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 8px 12px 0px var(--ink-shadow-color-hover);
+        }
+
+        /* Range Slider */
+        .inkhouse-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 6px;
+          background: var(--ink-slider-track);
+          border-radius: 9999px;
+          outline: none;
+        }
+
+        .inkhouse-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: var(--ink-accent);
+          cursor: pointer;
+          box-shadow: 0 0 10px var(--ink-accent-glow);
+          transition: transform 0.15s ease;
+        }
+
+        .inkhouse-slider::-webkit-slider-thumb:hover {
+          transform: scale(1.2);
+        }
+
+        /* Modal Animation */
+        @keyframes inkhouse-fade-in {
+          from {
+            opacity: 0;
+            transform: scale(0.96) translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        .inkhouse-modal-anim {
+          animation: inkhouse-fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Case Study Card Glow */
+        .inkhouse-case-card {
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .inkhouse-case-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 35px -10px var(--ink-shadow-color-hover);
+        }
+
+        /* Client logos dark adaptation */
+        html.dark .inkhouse-logo-invert,
+        [data-theme-mood="dark"] .inkhouse-logo-invert {
+          filter: brightness(0) invert(1) opacity(0.85);
+        }
+      `}</style>
+
       {/* Case Study Modal */}
       <CaseStudyModal
         study={selectedCaseStudy}
@@ -460,7 +723,7 @@ export function InkhouseCopy() {
             className="flex items-center gap-2.5 group cursor-pointer"
           >
             {/* Geometric ribbon emblem */}
-            <div className="w-8 h-8 rounded-lg bg-[#19383e] flex items-center justify-center text-white shadow-sm group-hover:bg-[#132c31] transition-colors">
+            <div className="w-8 h-8 rounded-lg bg-[var(--ink-teal)] flex items-center justify-center text-white shadow-sm group-hover:bg-[var(--ink-teal-hover)] transition-colors">
               <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
                 <path
                   d="M5 4V20M5 12H11L19 4M11 12L19 20"
@@ -472,10 +735,10 @@ export function InkhouseCopy() {
               </svg>
             </div>
             <div className="flex flex-col text-left">
-              <span className="text-sm font-black tracking-wider text-[#19383e] uppercase leading-tight">
+              <span className="text-sm font-black tracking-wider text-[var(--ink-teal)] uppercase leading-tight">
                 INKHOUSE
               </span>
-              <span className="text-[9px] font-mono tracking-[0.25em] text-[#c6673f] uppercase -mt-0.5 font-bold">
+              <span className="text-[9px] font-mono tracking-[0.25em] text-[var(--ink-accent)] uppercase -mt-0.5 font-bold">
                 COPY
               </span>
             </div>
@@ -507,7 +770,7 @@ export function InkhouseCopy() {
           <div className="hidden sm:flex items-center">
             <button
               onClick={() => scrollToSection("contact")}
-              className="px-6 py-2.5 rounded-full bg-[#c6673f] hover:bg-[#b55832] text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-[0_4px_15px_rgba(198,103,63,0.35)] hover:shadow-[0_6px_20px_rgba(198,103,63,0.5)] cursor-pointer"
+              className="px-6 py-2.5 rounded-full bg-[var(--ink-accent)] hover:bg-[var(--ink-accent-hover)] text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-[0_4px_15px_var(--ink-accent-glow)] hover:shadow-[0_6px_20px_var(--ink-accent-glow)] cursor-pointer"
             >
               LET'S TALK
             </button>
@@ -516,7 +779,7 @@ export function InkhouseCopy() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg border border-slate-300 text-slate-700 hover:text-black cursor-pointer"
+            className="md:hidden p-2 rounded-lg border border-[var(--ink-border)] text-[var(--ink-text)] hover:bg-[var(--ink-card-subtle)] cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -525,7 +788,7 @@ export function InkhouseCopy() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-b border-slate-300 bg-[#fbf8f3] px-6 py-5 space-y-3 text-sm font-mono uppercase text-left inkhouse-modal-anim shadow-lg">
+          <div className="md:hidden border-b border-[var(--ink-border)] bg-[var(--ink-bg)] px-6 py-5 space-y-3 text-sm font-mono uppercase text-left inkhouse-modal-anim shadow-lg">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -534,19 +797,19 @@ export function InkhouseCopy() {
                   onClick={() => scrollToSection(item.id)}
                   className={`w-full flex items-center justify-between px-3.5 py-2 rounded-lg text-left transition-all cursor-pointer ${
                     isActive
-                      ? "bg-[#19383e] text-white font-bold"
-                      : "text-slate-700 hover:bg-slate-200/60"
+                      ? "bg-[var(--ink-teal)] text-white font-bold"
+                      : "text-[var(--ink-text)] hover:bg-[var(--ink-card-subtle)]"
                   }`}
                 >
                   <span>{item.label}</span>
-                  {isActive && <span className="w-2 h-2 rounded-full bg-[#c6673f]" />}
+                  {isActive && <span className="w-2 h-2 rounded-full bg-[var(--ink-accent)]" />}
                 </button>
               );
             })}
-            <div className="pt-3 border-t border-slate-300">
+            <div className="pt-3 border-t border-[var(--ink-border)]">
               <button
                 onClick={() => scrollToSection("contact")}
-                className="w-full py-2.5 rounded-full bg-[#c6673f] text-white font-bold text-xs font-mono tracking-wider cursor-pointer"
+                className="w-full py-2.5 rounded-full bg-[var(--ink-accent)] hover:bg-[var(--ink-accent-hover)] text-white font-bold text-xs font-mono tracking-wider cursor-pointer shadow-md"
               >
                 LET'S TALK
               </button>
@@ -566,7 +829,7 @@ export function InkhouseCopy() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Headline & Pitch */}
             <div className="lg:col-span-7 text-left space-y-6">
-              <h1 className="text-4xl sm:text-6xl md:text-6xl lg:text-7xl font-extrabold text-[#19383e] inkhouse-serif leading-[1.08] tracking-tight">
+              <h1 className="text-4xl sm:text-6xl md:text-6xl lg:text-7xl font-extrabold text-[var(--ink-teal)] inkhouse-serif leading-[1.08] tracking-tight">
                 WORDS THAT
                 <br />
                 CONVERT.
@@ -576,14 +839,14 @@ export function InkhouseCopy() {
                 STICK.
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-700 font-normal leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg text-[var(--ink-text-muted)] font-normal leading-relaxed max-w-xl">
                 Crafting data-backed, human-centric copywriting that moves markets and builds empires.
               </p>
 
               <div className="pt-2">
                 <button
                   onClick={() => scrollToSection("work")}
-                  className="px-8 py-3.5 rounded-lg bg-[#19383e] hover:bg-[#132c31] text-white font-mono text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-xl cursor-pointer"
+                  className="px-8 py-3.5 rounded-lg bg-[var(--ink-teal)] hover:bg-[var(--ink-teal-hover)] text-white font-mono text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-xl cursor-pointer"
                 >
                   EXPLORE MY WORK
                 </button>
@@ -592,13 +855,13 @@ export function InkhouseCopy() {
 
             {/* Right Ink & Story Calligraphy Illustration */}
             <div className="lg:col-span-5 flex items-center justify-center relative">
-              <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-[#fbf8f3]">
+              <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border border-[var(--ink-border)] bg-[var(--ink-card)]">
                 <img
                   src="/images/inkhouse/hero-ink-art-hd.webp"
                   alt="Inkhouse Fluid Ink Calligraphy Artwork"
                   className="w-full h-full object-contain p-4 hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-slate-300 text-[10px] font-mono text-slate-600">
+                <div className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-[var(--ink-surface)]/90 backdrop-blur-md border border-[var(--ink-border)] text-[10px] font-mono text-[var(--ink-text-muted)] font-semibold shadow-sm">
                   EST. 2024 // INK &amp; STRATEGY
                 </div>
               </div>
@@ -612,20 +875,20 @@ export function InkhouseCopy() {
       {/* ======================================================================= */}
       <section
         id="philosophy"
-        className="relative z-10 py-16 sm:py-24 bg-[#f8f5ee] border-t border-slate-200/80"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--ink-bg-alt)] border-t border-[var(--ink-border)]"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#19383e] inkhouse-serif uppercase tracking-wider mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--ink-teal)] inkhouse-serif uppercase tracking-wider mb-12 sm:mb-16">
             POSITIONING
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
             {/* Left Column: Manifesto Text */}
-            <div className="lg:col-span-4 p-6 sm:p-8 rounded-2xl bg-white border border-slate-200 shadow-sm">
-              <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-medium">
+            <div className="lg:col-span-4 p-6 sm:p-8 rounded-2xl bg-[var(--ink-card)] border border-[var(--ink-border)] shadow-sm">
+              <p className="text-sm sm:text-base text-[var(--ink-text)] leading-relaxed font-medium">
                 I craft copy that doesn't just fill space, but compels action, ignites desire, and builds lasting customer loyalty. My approach blends deep psychological insight with rigorous data analysis.
               </p>
-              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-mono text-[#c6673f] font-bold">
+              <div className="mt-6 pt-4 border-t border-[var(--ink-border)] flex items-center gap-2 text-xs font-mono text-[var(--ink-accent)] font-bold">
                 <span>CONVERSION ARCHITECTURE</span>
                 <span>&rarr;</span>
               </div>
@@ -643,16 +906,16 @@ export function InkhouseCopy() {
                     }
                     className={`p-6 rounded-2xl border text-center transition-all cursor-pointer group ${
                       isSelected
-                        ? "bg-[#19383e] text-white border-[#19383e] shadow-lg"
-                        : "bg-white border-slate-200 hover:border-[#19383e]/50 shadow-sm"
+                        ? "bg-[var(--ink-teal)] text-white border-[var(--ink-teal)] shadow-lg"
+                        : "bg-[var(--ink-card)] border-[var(--ink-border)] hover:border-[var(--ink-accent)] shadow-sm"
                     }`}
                   >
                     {/* Illustrated Icon Badge */}
                     <div
                       className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4 transition-transform group-hover:scale-110 p-1 ${
                         isSelected
-                          ? "bg-white/20 ring-2 ring-[#c6673f]"
-                          : "bg-[#fbf8f3] border border-slate-300 shadow-sm"
+                          ? "bg-white/20 ring-2 ring-[var(--ink-accent)]"
+                          : "bg-[var(--ink-card-subtle)] border border-[var(--ink-border)] shadow-sm"
                       }`}
                     >
                       <img
@@ -664,20 +927,20 @@ export function InkhouseCopy() {
 
                     <h3
                       className={`text-sm sm:text-base font-extrabold uppercase tracking-wide inkhouse-serif mb-1 ${
-                        isSelected ? "text-white" : "text-[#19383e]"
+                        isSelected ? "text-white" : "text-[var(--ink-teal)]"
                       }`}
                     >
                       {pillar.title}
                     </h3>
                     <p
                       className={`text-xs ${
-                        isSelected ? "text-slate-300" : "text-slate-600"
+                        isSelected ? "text-slate-200" : "text-[var(--ink-text-muted)]"
                       }`}
                     >
                       {pillar.subtitle}
                     </p>
 
-                    <div className="mt-4 text-[10px] font-mono text-[#c6673f] font-bold uppercase">
+                    <div className="mt-4 text-[10px] font-mono text-[var(--ink-accent)] font-bold uppercase">
                       {isSelected ? "▲ Collapse details" : "▼ Click framework"}
                     </div>
                   </div>
@@ -688,31 +951,31 @@ export function InkhouseCopy() {
 
           {/* Expanded Pillar Framework Drawer */}
           {selectedPillar && (
-            <div className="mt-8 p-6 rounded-2xl bg-white border border-[#19383e]/30 text-left shadow-md inkhouse-modal-anim">
+            <div className="mt-8 p-6 rounded-2xl bg-[var(--ink-card)] border border-[var(--ink-border)] text-left shadow-md inkhouse-modal-anim">
               {(() => {
                 const p = pillars.find((x) => x.id === selectedPillar);
                 if (!p) return null;
                 return (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono uppercase text-[#c6673f] font-bold">
+                      <span className="text-xs font-mono uppercase text-[var(--ink-accent)] font-bold">
                         METHODOLOGY BLUEPRINT // {p.title}
                       </span>
                       <button
                         onClick={() => setSelectedPillar(null)}
-                        className="text-xs text-slate-500 hover:text-black font-mono cursor-pointer"
+                        className="text-xs text-[var(--ink-text-muted)] hover:text-[var(--ink-text)] font-mono cursor-pointer"
                       >
                         ✕ Close
                       </button>
                     </div>
-                    <p className="text-sm text-slate-800 leading-relaxed font-medium">
+                    <p className="text-sm text-[var(--ink-text)] leading-relaxed font-medium">
                       {p.framework}
                     </p>
                     <div className="flex flex-wrap gap-2 pt-2">
                       {p.bullets.map((b, i) => (
                         <span
                           key={i}
-                          className="px-3 py-1 rounded-full bg-[#fbf8f3] border border-slate-300 text-xs font-mono text-slate-700 font-bold"
+                          className="px-3 py-1 rounded-full bg-[var(--ink-card-subtle)] border border-[var(--ink-border)] text-xs font-mono text-[var(--ink-text)] font-bold"
                         >
                           ✓ {b}
                         </span>
@@ -731,10 +994,10 @@ export function InkhouseCopy() {
       {/* ======================================================================= */}
       <section
         id="work"
-        className="relative z-10 py-16 sm:py-24 bg-[#141d22] text-white"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--ink-work-bg)] text-[var(--ink-work-text)] transition-colors duration-300"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white inkhouse-serif uppercase tracking-wider mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--ink-work-text)] inkhouse-serif uppercase tracking-wider mb-12 sm:mb-16">
             SELECTED WORK
           </h2>
 
@@ -744,15 +1007,15 @@ export function InkhouseCopy() {
               <div
                 key={study.id}
                 onClick={() => setSelectedCaseStudy(study)}
-                className="rounded-2xl border border-slate-700/80 bg-[#182329] p-5 sm:p-6 flex flex-col justify-between cursor-pointer inkhouse-case-card group"
+                className="rounded-2xl border border-[var(--ink-work-border)] bg-[var(--ink-work-card)] p-5 sm:p-6 flex flex-col justify-between cursor-pointer inkhouse-case-card group hover:border-[var(--ink-accent)]"
               >
                 <div>
-                  <span className="text-xs font-mono text-slate-400 block mb-2 font-bold">
+                  <span className="text-xs font-mono text-[var(--ink-work-text-muted)] block mb-2 font-bold">
                     {study.tag}
                   </span>
 
                   {/* Visual Preview */}
-                  <div className="aspect-[4/3] rounded-xl overflow-hidden mb-5 bg-slate-950 border border-slate-800">
+                  <div className="aspect-[4/3] rounded-xl overflow-hidden mb-5 bg-black/40 border border-[var(--ink-work-border)]">
                     <img
                       src={study.image}
                       alt={study.title}
@@ -760,22 +1023,22 @@ export function InkhouseCopy() {
                     />
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-white inkhouse-serif leading-snug mb-4 group-hover:text-[#c6673f] transition-colors">
+                  <h3 className="text-base sm:text-lg font-bold text-[var(--ink-work-text)] inkhouse-serif leading-snug mb-4 group-hover:text-[var(--ink-accent)] transition-colors">
                     {study.title}
                   </h3>
 
                   {/* Metrics bullet list */}
-                  <ul className="space-y-1.5 text-xs text-slate-300 font-mono mb-6">
+                  <ul className="space-y-1.5 text-xs text-[var(--ink-work-text-muted)] font-mono mb-6">
                     {study.metrics.map((metric, idx) => (
                       <li key={idx} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#c6673f]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--ink-accent)]" />
                         <span>{metric}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs font-mono text-[#c6673f] font-bold">
+                <div className="pt-4 border-t border-[var(--ink-work-border)] flex items-center justify-between text-xs font-mono text-[var(--ink-accent)] font-bold">
                   <span>View Case Teardown</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -784,8 +1047,8 @@ export function InkhouseCopy() {
           </div>
 
           {/* Lower Horizontal Thumbnail Gallery Strip */}
-          <div className="mt-12 pt-8 border-t border-slate-800/80">
-            <div className="text-xs font-mono uppercase text-slate-400 mb-4 tracking-wider text-left">
+          <div className="mt-12 pt-8 border-t border-[var(--ink-work-border)]">
+            <div className="text-xs font-mono uppercase text-[var(--ink-work-text-muted)] mb-4 tracking-wider text-left">
               ADDITIONAL CLIENT ENGAGEMENTS &amp; SPRINT MOCKUPS:
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
@@ -793,7 +1056,7 @@ export function InkhouseCopy() {
                 <div
                   key={num}
                   onClick={() => setSelectedCaseStudy(caseStudies[num % 3])}
-                  className="aspect-[4/3] rounded-xl overflow-hidden border border-slate-700 bg-slate-900 cursor-pointer hover:border-[#c6673f] transition-all hover:scale-105"
+                  className="aspect-[4/3] rounded-xl overflow-hidden border border-[var(--ink-work-border)] bg-black/30 cursor-pointer hover:border-[var(--ink-accent)] transition-all hover:scale-105"
                 >
                   <img
                     src={`/images/inkhouse/thumb-${num}.webp`}
@@ -812,15 +1075,15 @@ export function InkhouseCopy() {
       {/* ======================================================================= */}
       <section
         id="process"
-        className="relative z-10 py-16 sm:py-24 bg-[#fbf8f3] border-t border-slate-200"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--ink-bg)] border-t border-[var(--ink-border)]"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#19383e] inkhouse-serif uppercase tracking-wider mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--ink-teal)] inkhouse-serif uppercase tracking-wider mb-8 sm:mb-12">
             THE PROCESS
           </h2>
 
           {/* Authentic Process Flow Diagram Visual */}
-          <div className="mb-10 max-w-4xl mx-auto rounded-3xl p-3 sm:p-5 bg-white/70 border border-slate-200/80 shadow-sm overflow-hidden group">
+          <div className="mb-10 max-w-4xl mx-auto rounded-3xl p-3 sm:p-5 bg-[var(--ink-card)] border border-[var(--ink-border)] shadow-sm overflow-hidden group">
             <img
               src="/images/inkhouse/process-diagram-full-2x.webp"
               alt="The 5-Step Copywriting Conversion Process Flow"
@@ -837,13 +1100,12 @@ export function InkhouseCopy() {
                   key={idx}
                   onClick={() => setActiveProcessStep(idx)}
                   className={`rounded-2xl p-4 sm:p-5 text-center flex flex-col justify-between cursor-pointer inkhouse-process-card border transition-all ${
-                    step.borderColor || "border-transparent"
-                  } ${isSelected ? "ring-2 ring-[#c6673f] scale-105" : ""}`}
-                  style={{ backgroundColor: step.color }}
+                    step.bgClass
+                  } ${isSelected ? "ring-2 ring-[var(--ink-accent)] scale-105" : ""}`}
                 >
                   <div>
                     {/* Process Step Illustration Badge */}
-                    <div className="w-full h-24 sm:h-28 mb-3 flex items-center justify-center overflow-hidden rounded-xl bg-black/5 p-1">
+                    <div className="w-full h-24 sm:h-28 mb-3 flex items-center justify-center overflow-hidden rounded-xl bg-black/5 dark:bg-white/5 p-1">
                       <img
                         src={step.image}
                         alt={step.title}
@@ -851,24 +1113,16 @@ export function InkhouseCopy() {
                       />
                     </div>
 
-                    <h3
-                      className={`text-xs sm:text-sm font-extrabold tracking-wide uppercase inkhouse-serif leading-snug mb-2 ${step.textColor}`}
-                    >
+                    <h3 className="text-xs sm:text-sm font-extrabold tracking-wide uppercase inkhouse-serif leading-snug mb-2">
                       {step.title}
                     </h3>
 
-                    <p
-                      className={`text-[11px] leading-relaxed line-clamp-3 ${
-                        step.textColor === "text-white"
-                          ? "text-slate-200"
-                          : "text-slate-600"
-                      }`}
-                    >
+                    <p className={`text-[11px] leading-relaxed line-clamp-3 ${step.descClass}`}>
                       {step.desc}
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-black/10 text-[10px] font-mono font-bold uppercase opacity-80">
+                  <div className="mt-4 pt-3 border-t border-current/15 text-[10px] font-mono font-bold uppercase opacity-85">
                     Step 0{idx + 1}
                   </div>
                 </div>
@@ -877,21 +1131,21 @@ export function InkhouseCopy() {
           </div>
 
           {/* Active Step Deep-Dive Callout */}
-          <div className="mt-10 p-6 rounded-2xl bg-white border border-slate-300 max-w-3xl mx-auto text-left shadow-sm">
+          <div className="mt-10 p-6 rounded-2xl bg-[var(--ink-card)] border border-[var(--ink-border)] max-w-3xl mx-auto text-left shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-mono text-[#c6673f] font-bold uppercase">
+              <span className="text-xs font-mono text-[var(--ink-accent)] font-bold uppercase">
                 PHASE 0{activeProcessStep + 1} DETAILS // {processSteps[activeProcessStep].tagline}
               </span>
-              <span className="text-xs font-mono text-slate-500">
+              <span className="text-xs font-mono text-[var(--ink-text-muted)]">
                 Turnaround: 3-5 Days
               </span>
             </div>
-            <p className="text-sm text-slate-800 leading-relaxed font-medium">
+            <p className="text-sm text-[var(--ink-text)] leading-relaxed font-medium">
               {processSteps[activeProcessStep].desc}
             </p>
-            <div className="mt-3 pt-3 border-t border-slate-100 flex items-center gap-2 text-xs font-mono text-slate-700">
-              <span className="font-bold text-[#19383e]">Core Artifact:</span>
-              <span>{processSteps[activeProcessStep].deliverable}</span>
+            <div className="mt-3 pt-3 border-t border-[var(--ink-border)] flex items-center gap-2 text-xs font-mono text-[var(--ink-text-muted)]">
+              <span className="font-bold text-[var(--ink-teal)]">Core Artifact:</span>
+              <span className="text-[var(--ink-text)]">{processSteps[activeProcessStep].deliverable}</span>
             </div>
           </div>
         </div>
@@ -902,15 +1156,15 @@ export function InkhouseCopy() {
       {/* ======================================================================= */}
       <section
         id="outcomes"
-        className="relative z-10 py-16 sm:py-24 bg-[#f8f5ee] border-t border-slate-200"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--ink-bg-alt)] border-t border-[var(--ink-border)]"
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#19383e] inkhouse-serif uppercase tracking-wider mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--ink-teal)] inkhouse-serif uppercase tracking-wider mb-12 sm:mb-16">
             CREDIBLE OUTCOMES
           </h2>
 
           {/* Client Logos Row */}
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 opacity-85 mb-14">
+          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 opacity-85 mb-14 inkhouse-logo-invert">
             <img
               src="/images/inkhouse/logo-shopify.webp"
               alt="Shopify"
@@ -944,10 +1198,10 @@ export function InkhouseCopy() {
           </div>
 
           {/* Featured Testimonial Quote Box */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm text-left relative max-w-4xl mx-auto">
+          <div className="rounded-3xl border border-[var(--ink-border)] bg-[var(--ink-card)] p-6 sm:p-10 shadow-sm text-left relative max-w-4xl mx-auto">
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
               {/* Circular Avatar */}
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-slate-200 border-2 border-[#19383e]/20 shrink-0">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-[var(--ink-card-subtle)] border-2 border-[var(--ink-border)] shrink-0">
                 <img
                   src={testimonials[activeTestimonial].avatar}
                   alt={testimonials[activeTestimonial].name}
@@ -957,18 +1211,18 @@ export function InkhouseCopy() {
 
               {/* Quote Content */}
               <div className="space-y-3 text-center sm:text-left flex-1">
-                <span className="text-4xl text-[#c6673f] font-serif leading-none select-none block">
+                <span className="text-4xl text-[var(--ink-accent)] font-serif leading-none select-none block">
                   “
                 </span>
-                <p className="text-lg sm:text-xl font-bold text-slate-900 inkhouse-serif leading-snug">
+                <p className="text-lg sm:text-xl font-bold text-[var(--ink-text)] inkhouse-serif leading-snug">
                   "{testimonials[activeTestimonial].quote}"
                 </p>
 
                 <div className="pt-1">
-                  <div className="text-xs font-mono font-bold text-[#19383e] tracking-wider uppercase">
+                  <div className="text-xs font-mono font-bold text-[var(--ink-teal)] tracking-wider uppercase">
                     — {testimonials[activeTestimonial].name}
                   </div>
-                  <div className="text-xs font-mono text-slate-500">
+                  <div className="text-xs font-mono text-[var(--ink-text-muted)]">
                     {testimonials[activeTestimonial].role}
                   </div>
                 </div>
@@ -976,8 +1230,8 @@ export function InkhouseCopy() {
             </div>
 
             {/* Testimonial Tabs Switcher */}
-            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span className="text-xs font-mono text-[#c6673f] font-bold">
+            <div className="mt-6 pt-4 border-t border-[var(--ink-border)] flex items-center justify-between">
+              <span className="text-xs font-mono text-[var(--ink-accent)] font-bold">
                 Impact: {testimonials[activeTestimonial].metric}
               </span>
               <div className="flex items-center gap-2">
@@ -987,8 +1241,8 @@ export function InkhouseCopy() {
                     onClick={() => setActiveTestimonial(idx)}
                     className={`h-2 rounded-full transition-all cursor-pointer ${
                       activeTestimonial === idx
-                        ? "w-8 bg-[#19383e]"
-                        : "w-2 bg-slate-300 hover:bg-slate-400"
+                        ? "w-8 bg-[var(--ink-accent)]"
+                        : "w-2 bg-[var(--ink-border)] hover:bg-[var(--ink-text-muted)]"
                     }`}
                     aria-label={`View review ${idx + 1}`}
                   />
@@ -999,20 +1253,20 @@ export function InkhouseCopy() {
 
           {/* Dual Big Metric Highlights */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-14 max-w-2xl mx-auto">
-            <div className="p-6 rounded-2xl bg-white border border-slate-200 text-center shadow-sm">
-              <div className="text-4xl sm:text-5xl font-black text-[#19383e] inkhouse-serif">
+            <div className="p-6 rounded-2xl bg-[var(--ink-card)] border border-[var(--ink-border)] text-center shadow-sm">
+              <div className="text-4xl sm:text-5xl font-black text-[var(--ink-teal)] inkhouse-serif">
                 $5M+
               </div>
-              <div className="text-xs sm:text-sm font-medium text-slate-600 mt-1">
+              <div className="text-xs sm:text-sm font-medium text-[var(--ink-text-muted)] mt-1">
                 in Generated Revenue
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white border border-slate-200 text-center shadow-sm">
-              <div className="text-4xl sm:text-5xl font-black text-[#c6673f] inkhouse-serif">
+            <div className="p-6 rounded-2xl bg-[var(--ink-card)] border border-[var(--ink-border)] text-center shadow-sm">
+              <div className="text-4xl sm:text-5xl font-black text-[var(--ink-accent)] inkhouse-serif">
                 Average 45%
               </div>
-              <div className="text-xs sm:text-sm font-medium text-slate-600 mt-1">
+              <div className="text-xs sm:text-sm font-medium text-[var(--ink-text-muted)] mt-1">
                 Increase in Conversion
               </div>
             </div>
@@ -1025,32 +1279,32 @@ export function InkhouseCopy() {
       {/* ======================================================================= */}
       <section
         id="contact"
-        className="relative z-10 py-16 sm:py-24 bg-[#fbf8f3] border-t border-slate-200"
+        className="relative z-10 py-16 sm:py-24 bg-[var(--ink-bg)] border-t border-[var(--ink-border)]"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-xs font-mono uppercase tracking-[0.25em] text-[#c6673f] font-bold block mb-2">
+          <span className="text-xs font-mono uppercase tracking-[0.25em] text-[var(--ink-accent)] font-bold block mb-2">
             CONFIDENT INQUIRY PATH
           </span>
 
-          {/* Dark Charcoal Form Card */}
-          <div className="rounded-3xl bg-[#182329] text-white p-6 sm:p-12 shadow-2xl text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white inkhouse-serif uppercase tracking-tight mb-3">
+          {/* Form Card */}
+          <div className="rounded-3xl bg-[var(--ink-work-card)] text-[var(--ink-work-text)] p-6 sm:p-12 shadow-2xl text-center border border-[var(--ink-work-border)]">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--ink-work-text)] inkhouse-serif uppercase tracking-tight mb-3">
               READY TO TURN VISITORS INTO
               <br />
               VALUABLE CUSTOMERS?
             </h2>
 
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed mb-8">
+            <p className="text-xs sm:text-sm text-[var(--ink-work-text-muted)] max-w-xl mx-auto leading-relaxed mb-8">
               Let's discuss your project. Tell me about your goals, challenges, and what you want to achieve. I'll respond within 24 hours.
             </p>
 
             {formSubmitted ? (
-              <div className="p-8 rounded-2xl bg-[#1d2b32] border border-slate-700 text-center space-y-3 inkhouse-modal-anim">
-                <CheckCircle2 className="w-12 h-12 text-[#c6673f] mx-auto" />
-                <h3 className="text-xl font-bold text-white inkhouse-serif">
+              <div className="p-8 rounded-2xl bg-[var(--ink-card-subtle)] border border-[var(--ink-border)] text-center space-y-3 inkhouse-modal-anim">
+                <CheckCircle2 className="w-12 h-12 text-[var(--ink-accent)] mx-auto" />
+                <h3 className="text-xl font-bold text-[var(--ink-text)] inkhouse-serif">
                   Inquiry Received
                 </h3>
-                <p className="text-xs font-mono text-slate-300 max-w-md mx-auto">
+                <p className="text-xs font-mono text-[var(--ink-text-muted)] max-w-md mx-auto">
                   Thank you, {formData.name || "partner"}. I have received your project details for {formData.company || "your business"} and will respond to {formData.email} within 24 hours with custom strategic recommendations.
                 </p>
                 <button
@@ -1065,7 +1319,7 @@ export function InkhouseCopy() {
                       message: "",
                     });
                   }}
-                  className="mt-4 px-6 py-2 rounded-full bg-[#c6673f] text-white font-mono text-xs font-bold uppercase cursor-pointer"
+                  className="mt-4 px-6 py-2 rounded-full bg-[var(--ink-accent)] hover:bg-[var(--ink-accent-hover)] text-white font-mono text-xs font-bold uppercase cursor-pointer transition-colors shadow-md"
                 >
                   Send Another Inquiry
                 </button>
@@ -1081,7 +1335,7 @@ export function InkhouseCopy() {
                       placeholder="Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full rounded-xl bg-white text-slate-900 px-4 py-3 text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#c6673f]"
+                      className="w-full rounded-xl bg-[var(--ink-surface)] text-[var(--ink-text)] border border-[var(--ink-border)] px-4 py-3 text-xs placeholder-[var(--ink-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ink-accent)]"
                     />
                   </div>
                   <div>
@@ -1091,7 +1345,7 @@ export function InkhouseCopy() {
                       placeholder="Email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full rounded-xl bg-white text-slate-900 px-4 py-3 text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#c6673f]"
+                      className="w-full rounded-xl bg-[var(--ink-surface)] text-[var(--ink-text)] border border-[var(--ink-border)] px-4 py-3 text-xs placeholder-[var(--ink-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ink-accent)]"
                     />
                   </div>
                 </div>
@@ -1104,7 +1358,7 @@ export function InkhouseCopy() {
                       placeholder="Company"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full rounded-xl bg-white text-slate-900 px-4 py-3 text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#c6673f]"
+                      className="w-full rounded-xl bg-[var(--ink-surface)] text-[var(--ink-text)] border border-[var(--ink-border)] px-4 py-3 text-xs placeholder-[var(--ink-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ink-accent)]"
                     />
                   </div>
                   <div>
@@ -1113,7 +1367,7 @@ export function InkhouseCopy() {
                       placeholder="Project Type (e.g. SaaS Funnel, Landing Page)"
                       value={formData.projectType}
                       onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                      className="w-full rounded-xl bg-white text-slate-900 px-4 py-3 text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#c6673f]"
+                      className="w-full rounded-xl bg-[var(--ink-surface)] text-[var(--ink-text)] border border-[var(--ink-border)] px-4 py-3 text-xs placeholder-[var(--ink-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ink-accent)]"
                     />
                   </div>
                 </div>
@@ -1124,7 +1378,7 @@ export function InkhouseCopy() {
                     <select
                       value={formData.projectType}
                       onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                      className="w-full rounded-xl bg-white text-slate-900 px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-[#c6673f] cursor-pointer"
+                      className="w-full rounded-xl bg-[var(--ink-surface)] text-[var(--ink-text)] border border-[var(--ink-border)] px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-[var(--ink-accent)] cursor-pointer"
                     >
                       <option value="Website Copy Overhaul">Website Copy Overhaul</option>
                       <option value="Email Nurture Sequences">Email Nurture Sequences</option>
@@ -1136,7 +1390,7 @@ export function InkhouseCopy() {
                     <select
                       value={formData.budgetRange}
                       onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                      className="w-full rounded-xl bg-white text-slate-900 px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-[#c6673f] cursor-pointer"
+                      className="w-full rounded-xl bg-[var(--ink-surface)] text-[var(--ink-text)] border border-[var(--ink-border)] px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-[var(--ink-accent)] cursor-pointer"
                     >
                       <option value="$5,000 - $10,000">$5,000 - $10,000</option>
                       <option value="$10,000 - $25,000">$10,000 - $25,000</option>
@@ -1148,10 +1402,10 @@ export function InkhouseCopy() {
 
                 {/* Row 4: Budget Slider & Message Textarea */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
-                  <div className="p-4 rounded-xl bg-white text-slate-900 space-y-2">
+                  <div className="p-4 rounded-xl bg-[var(--ink-surface)] text-[var(--ink-text)] border border-[var(--ink-border)] space-y-2">
                     <div className="flex justify-between items-center text-xs font-mono font-bold">
-                      <span className="text-slate-600 uppercase">Target Budget:</span>
-                      <span className="text-[#c6673f]">${budgetSlider.toLocaleString()}</span>
+                      <span className="text-[var(--ink-text-muted)] uppercase">Target Budget:</span>
+                      <span className="text-[var(--ink-accent)]">${budgetSlider.toLocaleString()}</span>
                     </div>
                     <input
                       type="range"
@@ -1163,7 +1417,7 @@ export function InkhouseCopy() {
                       className="inkhouse-slider cursor-pointer"
                       aria-label="Adjust target budget"
                     />
-                    <div className="flex justify-between text-[10px] font-mono text-slate-400">
+                    <div className="flex justify-between text-[10px] font-mono text-[var(--ink-text-muted)]">
                       <span>$3K (Sprint)</span>
                       <span>$25K (Full)</span>
                       <span>$45K+ (Enterprise)</span>
@@ -1177,7 +1431,7 @@ export function InkhouseCopy() {
                       placeholder="Message (Share your current conversion rates, target launch date, and key goals...)"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full rounded-xl bg-white text-slate-900 px-4 py-3 text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#c6673f] resize-none"
+                      className="w-full rounded-xl bg-[var(--ink-surface)] text-[var(--ink-text)] border border-[var(--ink-border)] px-4 py-3 text-xs placeholder-[var(--ink-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--ink-accent)] resize-none"
                     />
                   </div>
                 </div>
@@ -1187,7 +1441,7 @@ export function InkhouseCopy() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-xl bg-[#e7decb] hover:bg-[#ded1bc] text-slate-900 font-mono text-xs font-black uppercase tracking-widest transition-all shadow-md hover:shadow-lg cursor-pointer"
+                    className="w-full py-3.5 rounded-xl bg-[var(--ink-accent)] hover:bg-[var(--ink-accent-hover)] text-white font-mono text-xs font-black uppercase tracking-widest transition-all shadow-lg hover:shadow-xl cursor-pointer"
                   >
                     {isSubmitting ? "PROCESSING..." : "SUBMIT YOUR PROJECT INQUIRY"}
                   </button>
@@ -1201,7 +1455,7 @@ export function InkhouseCopy() {
       {/* ======================================================================= */}
       {/* FOOTER                                                                  */}
       {/* ======================================================================= */}
-      <footer className="py-10 bg-[#fbf8f3] border-t border-slate-200 text-slate-600 text-xs font-mono">
+      <footer className="py-10 bg-[var(--ink-bg)] border-t border-[var(--ink-border)] text-[var(--ink-text-muted)] text-xs font-mono">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Brand Logo */}
           <Link
@@ -1209,21 +1463,21 @@ export function InkhouseCopy() {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-2 group cursor-pointer"
           >
-            <div className="w-6 h-6 rounded bg-[#19383e] flex items-center justify-center text-white text-[10px] font-bold">
+            <div className="w-6 h-6 rounded bg-[var(--ink-teal)] flex items-center justify-center text-white text-[10px] font-bold">
               IK
             </div>
-            <div className="text-left font-black tracking-wider text-[#19383e] uppercase">
+            <div className="text-left font-black tracking-wider text-[var(--ink-teal)] uppercase">
               INKHOUSE COPY
             </div>
           </Link>
 
           {/* Social Links */}
-          <div className="flex items-center gap-5 text-slate-600">
+          <div className="flex items-center gap-5 text-[var(--ink-text-muted)]">
             <a
               href="https://linkedin.com"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-[#19383e] transition-colors"
+              className="hover:text-[var(--ink-teal)] transition-colors"
               aria-label="LinkedIn"
             >
               <LinkedInIcon className="w-4 h-4" />
@@ -1232,7 +1486,7 @@ export function InkhouseCopy() {
               href="https://twitter.com"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-[#19383e] transition-colors"
+              className="hover:text-[var(--ink-teal)] transition-colors"
               aria-label="Twitter"
             >
               <TwitterIcon className="w-4 h-4" />
@@ -1241,7 +1495,7 @@ export function InkhouseCopy() {
               href="https://instagram.com"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-[#19383e] transition-colors"
+              className="hover:text-[var(--ink-teal)] transition-colors"
               aria-label="Instagram"
             >
               <InstagramIcon className="w-4 h-4" />
@@ -1249,12 +1503,12 @@ export function InkhouseCopy() {
           </div>
 
           {/* Copyright & Disclaimer */}
-          <div className="text-slate-500">
+          <div className="text-[var(--ink-text-muted)]">
             © 2024 INKHOUSE COPY. All Rights Reserved.
           </div>
         </div>
 
-        <div className="text-center text-[10px] text-slate-400 mt-4">
+        <div className="text-center text-[10px] text-[var(--ink-text-muted)] opacity-70 mt-4">
           A smooth UX parallax effects and smooth animations.
         </div>
       </footer>
@@ -1263,4 +1517,3 @@ export function InkhouseCopy() {
 }
 
 export default InkhouseCopy;
-
