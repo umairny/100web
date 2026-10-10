@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { allWebsites, WebsiteDesign } from '../data/websites'
 import { prefetchRoute } from '../utils/routePrefetch'
@@ -137,6 +137,14 @@ export function ShowcaseToolbar({
       const nextMode: DeviceMode =
         deviceMode === 'desktop' ? 'tablet' : deviceMode === 'tablet' ? 'mobile' : 'desktop'
       onDeviceModeChange(nextMode)
+    } else if (e.key === 'Escape') {
+      if (isThemeOpen) {
+        e.preventDefault()
+        setIsThemeOpen(false)
+      } else if (isShareOpen) {
+        e.preventDefault()
+        setIsShareOpen(false)
+      }
     } else if (e.key.toLowerCase() === 't') {
       e.preventDefault()
       setIsThemeOpen((prev) => !prev)
@@ -176,8 +184,48 @@ export function ShowcaseToolbar({
   } = useThemeAccent(pathname)
 
   const [isThemeOpen, setIsThemeOpen] = useState(false)
+  const [isShareOpen, setIsShareOpen] = useState(false)
   const [themeTab, setThemeTab] = useState<'presets' | 'brand' | 'custom' | 'creator'>('presets')
   const [copiedThemeTokens, setCopiedThemeTokens] = useState(false)
+
+  const themeModalRef = useRef<HTMLDivElement>(null)
+  const themeTriggerRef = useRef<HTMLButtonElement>(null)
+  const shareModalRef = useRef<HTMLDivElement>(null)
+  const shareTriggerRef = useRef<HTMLButtonElement>(null)
+
+  // Auto-hide popovers when clicking anywhere on the screen outside
+  useEffect(() => {
+    if (!isThemeOpen && !isShareOpen) return
+
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node
+      if (isThemeOpen) {
+        if (
+          themeModalRef.current &&
+          !themeModalRef.current.contains(target) &&
+          (!themeTriggerRef.current || !themeTriggerRef.current.contains(target))
+        ) {
+          setIsThemeOpen(false)
+        }
+      }
+      if (isShareOpen) {
+        if (
+          shareModalRef.current &&
+          !shareModalRef.current.contains(target) &&
+          (!shareTriggerRef.current || !shareTriggerRef.current.contains(target))
+        ) {
+          setIsShareOpen(false)
+        }
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [isThemeOpen, isShareOpen])
 
   // Quick brand custom color picker state
   const [quickHexInput, setQuickHexInput] = useState<string>(() => customPrimary || '#6366f1')
@@ -268,6 +316,7 @@ export function ShowcaseToolbar({
       colors: creatorColors,
     })
     setThemeTab('custom')
+    setIsThemeOpen(false)
   }
 
   const handleCopyThemeTokens = () => {
@@ -293,7 +342,6 @@ export function ShowcaseToolbar({
   }
 
 
-  const [isShareOpen, setIsShareOpen] = useState(false)
   const [shareTab, setShareTab] = useState<'specs' | 'qr' | 'embed'>('specs')
   const [copiedLink, setCopiedLink] = useState(false)
   const [copiedEmbed, setCopiedEmbed] = useState(false)
@@ -535,6 +583,7 @@ export function ShowcaseToolbar({
 
         {/* Theme Accent Tuner Trigger */}
         <button
+          ref={themeTriggerRef}
           type="button"
           onClick={() => {
             setIsThemeOpen((prev) => !prev)
@@ -586,6 +635,7 @@ export function ShowcaseToolbar({
 
         {/* Share & Specs Trigger */}
         <button
+          ref={shareTriggerRef}
           type="button"
           onClick={() => {
             setIsShareOpen((prev) => !prev)
@@ -622,9 +672,21 @@ export function ShowcaseToolbar({
         </button>
       </div>
 
+      {/* Click outside backdrop for Share Popover */}
+      {isShareOpen && (
+        <div
+          className="fixed inset-0 z-[74] bg-black/10 backdrop-blur-[1px] transition-opacity animate-in fade-in duration-150 cursor-pointer pointer-events-auto"
+          onClick={() => setIsShareOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Share & Specs Modal Popover */}
       {isShareOpen && (
-        <div className="pointer-events-auto fixed bottom-20 left-1/2 -translate-x-1/2 z-[75] w-[92vw] max-w-md rounded-2xl border border-gray-200/90 bg-white/95 p-5 shadow-2xl backdrop-blur-2xl text-xs animate-in fade-in zoom-in-95 duration-150">
+        <div
+          ref={shareModalRef}
+          className="pointer-events-auto fixed bottom-20 left-1/2 -translate-x-1/2 z-[75] w-[92vw] max-w-md rounded-2xl border border-gray-200/90 bg-white/95 p-5 shadow-2xl backdrop-blur-2xl text-xs animate-in fade-in zoom-in-95 duration-150"
+        >
           <div className="flex items-start justify-between pb-3 border-b border-gray-100">
             <div>
               <div className="flex items-center gap-2">
@@ -880,9 +942,21 @@ export function ShowcaseToolbar({
         </div>
       )}
 
+      {/* Click outside backdrop for Theme Popover */}
+      {isThemeOpen && (
+        <div
+          className="fixed inset-0 z-[74] bg-black/10 backdrop-blur-[1px] transition-opacity animate-in fade-in duration-150 cursor-pointer pointer-events-auto"
+          onClick={() => setIsThemeOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Theme Accent Tuner Modal Popover */}
       {isThemeOpen && (
-        <div className="pointer-events-auto fixed bottom-20 left-1/2 -translate-x-1/2 z-[75] w-[96vw] max-w-xl rounded-2xl border border-gray-200/90 bg-white/95 p-5 shadow-2xl backdrop-blur-2xl text-xs animate-in fade-in zoom-in-95 duration-150 max-h-[85vh] flex flex-col">
+        <div
+          ref={themeModalRef}
+          className="pointer-events-auto fixed bottom-20 left-1/2 -translate-x-1/2 z-[75] w-[96vw] max-w-xl rounded-2xl border border-gray-200/90 bg-white/95 p-5 shadow-2xl backdrop-blur-2xl text-xs animate-in fade-in zoom-in-95 duration-150 max-h-[85vh] flex flex-col"
+        >
           {/* Header */}
           <div className="flex items-start justify-between pb-3 border-b border-gray-100 shrink-0">
             {themeTab === 'creator' ? (
@@ -932,7 +1006,10 @@ export function ShowcaseToolbar({
               {!isOriginal && themeTab !== 'creator' && (
                 <button
                   type="button"
-                  onClick={resetTheme}
+                  onClick={() => {
+                    resetTheme()
+                    setIsThemeOpen(false)
+                  }}
                   title="Reset to author original palette"
                   className="flex items-center gap-1 rounded-xl bg-gray-100 hover:bg-rose-50 hover:text-rose-600 px-2.5 py-1.5 text-[11px] font-bold text-gray-600 transition"
                 >
@@ -1006,7 +1083,10 @@ export function ShowcaseToolbar({
               <div className="flex items-center gap-1 bg-white p-0.5 rounded-lg border border-amber-200/80 shadow-2xs">
                 <button
                   type="button"
-                  onClick={() => setThemeMood('light')}
+                  onClick={() => {
+                    setThemeMood('light')
+                    setIsThemeOpen(false)
+                  }}
                   className={`px-2.5 py-1 rounded-md text-[10px] font-extrabold transition flex items-center gap-1 ${
                     themeMood === 'light'
                       ? 'bg-amber-500 text-white shadow-xs'
@@ -1018,7 +1098,10 @@ export function ShowcaseToolbar({
                 </button>
                 <button
                   type="button"
-                  onClick={() => setThemeMood('dark')}
+                  onClick={() => {
+                    setThemeMood('dark')
+                    setIsThemeOpen(false)
+                  }}
                   className={`px-2.5 py-1 rounded-md text-[10px] font-extrabold transition flex items-center gap-1 ${
                     themeMood === 'dark'
                       ? 'bg-slate-900 text-amber-300 shadow-xs'
@@ -1030,7 +1113,10 @@ export function ShowcaseToolbar({
                 </button>
                 <button
                   type="button"
-                  onClick={() => setThemeMood('system')}
+                  onClick={() => {
+                    setThemeMood('system')
+                    setIsThemeOpen(false)
+                  }}
                   className={`px-2 py-1 rounded-md text-[10px] font-extrabold transition flex items-center gap-1 ${
                     themeMood === 'system'
                       ? 'bg-purple-600 text-white shadow-xs'
@@ -1122,7 +1208,10 @@ export function ShowcaseToolbar({
                         <button
                           key={bg.id}
                           type="button"
-                          onClick={() => handleApplyCustomBg(bg.hex)}
+                          onClick={() => {
+                            handleApplyCustomBg(bg.hex)
+                            setIsThemeOpen(false)
+                          }}
                           title={`${bg.name} (${bg.hex})`}
                           className={`group relative flex flex-col items-center p-1 rounded-lg border transition ${
                             isSelected
@@ -1442,7 +1531,10 @@ export function ShowcaseToolbar({
                         <button
                           key={preset.id}
                           type="button"
-                          onClick={() => setPreset(preset.id)}
+                          onClick={() => {
+                            setPreset(preset.id)
+                            setIsThemeOpen(false)
+                          }}
                           className={`relative flex flex-col p-3 rounded-2xl border text-left transition group ${
                             isSelected
                               ? 'border-purple-600 bg-purple-50/70 shadow-sm ring-1 ring-purple-600'
@@ -1547,7 +1639,10 @@ export function ShowcaseToolbar({
                             <button
                               key={color.hex}
                               type="button"
-                              onClick={() => handleApplyQuickColor(color.hex)}
+                              onClick={() => {
+                                handleApplyQuickColor(color.hex)
+                                setIsThemeOpen(false)
+                              }}
                               className={`flex flex-col items-center p-2 rounded-xl border text-center transition group ${
                                 isPicked
                                   ? 'border-purple-600 bg-purple-50 ring-1 ring-purple-600'
@@ -1601,7 +1696,10 @@ export function ShowcaseToolbar({
                         />
                         <button
                           type="button"
-                          onClick={() => handleApplyQuickColor(quickHexInput)}
+                          onClick={() => {
+                            handleApplyQuickColor(quickHexInput)
+                            setIsThemeOpen(false)
+                          }}
                           className="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-[11px] transition shadow-xs"
                         >
                           Apply
@@ -1695,7 +1793,10 @@ export function ShowcaseToolbar({
                         return (
                           <div
                             key={theme.id}
-                            onClick={() => setActiveCustomTheme(theme.id)}
+                            onClick={() => {
+                              setActiveCustomTheme(theme.id)
+                              setIsThemeOpen(false)
+                            }}
                             className={`group relative flex items-center justify-between p-3 rounded-2xl border cursor-pointer transition ${
                               isSelected
                                 ? 'border-purple-600 bg-purple-50/70 shadow-xs ring-1 ring-purple-600'
